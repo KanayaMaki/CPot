@@ -2,7 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source">
-      <UniqueIdentifier>{b82bf02d-a8e4-4f76-9c97-eeac15789b2e}</UniqueIdentifier>
+      <UniqueIdentifier>{5e8784f8-0aa2-47a7-bc61-b171faec12b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Atom">
+      <UniqueIdentifier>{28db1964-4db4-46de-996a-1e1d719e68f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
