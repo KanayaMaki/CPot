@@ -33,6 +33,7 @@ using BOOL = bool;	//真偽をあらわす型
 
 using BYTE = u8;
 
+
 //ポインタの値をすべて表せる整数型の定義
 #ifdef CPOT_ON_32BIT
 using Pointer = u32;

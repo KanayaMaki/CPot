@@ -71,7 +71,7 @@ namespace cpot {
 
 
 
-#pragma region ビルドの構成によって、様々な設定を定義
+#pragma region ビルドの構成によって様々な設定を定義
 
 //デバッグビルド時
 #ifdef CPOT_ON_DEBUG
@@ -81,6 +81,7 @@ namespace cpot {
 #define CPOT_VALID_LOG	//ログを使用する
 #define CPOT_VALID_VI	//バーチャルを使用する
 
+#define CPOT_VALID_HASHSTRING_LEFT	//HashStringの文字列を残す
 
 //リリースビルド時
 #elif defined CPOT_ON_RELEASE
@@ -142,18 +143,6 @@ namespace cpot {
 
 
 #pragma endregion
-
-
-
-#pragma region deleteの定義
-
-#define CPOT_DELETE(p) if(p) { delete p; }
-#define CPOT_DELETE_ARRAY(p) if(p) { delete[] p; }
-
-#pragma endregion
-
-
-
 
 
 
