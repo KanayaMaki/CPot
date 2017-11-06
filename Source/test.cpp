@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 
-int main() {
+#include <Windows.h>
+
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArgs, int nWinMode) {
 
 	std::fstream f;
 	f.open("a.txt");

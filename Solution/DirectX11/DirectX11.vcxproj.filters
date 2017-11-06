@@ -13,4 +13,9 @@
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Atom\defines.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
