@@ -67,6 +67,12 @@ inline T Clamp(T aVal, T aMax) {
 	return Clamp(aVal, T(0), aMax);
 }
 
+template <typename T>
+inline T Clamp01(T aVal) {
+	return Clamp(aVal, T(0), T(1));
+}
+
+
 //	範囲内に制限された値を返す
 template <typename T>
 inline T ClampRange(T aVal, T aEdge1, T aEdge2) {
@@ -275,9 +281,15 @@ inline BOOL IsEqual<f32>(f32 aVal, f32 aOther) {
 inline BOOL IsZero(f32 aVal) {
 	return IsEqual(aVal, 0.0f);
 }
+inline BOOL IsZero(f64 aVal) {
+	return IsEqual(aVal, 0.0);
+}
 
 //	0でない
 inline BOOL NotZero(f32 aVal) {
+	return !IsZero(aVal);
+}
+inline BOOL NotZero(f64 aVal) {
 	return !IsZero(aVal);
 }
 
@@ -300,6 +312,10 @@ inline BOOL Not(BOOL aExp) {
 
 #pragma endregion
 
+
+
+//その他
+#pragma region Other
 
 
 //	文字列が等しいかどうか
@@ -359,6 +375,10 @@ inline void ZeroMem(void* aMem, Pointer aSize) {
 }
 
 
+#pragma endregion
+
+
+
 //補間関数
 #pragma region Tween
 
@@ -370,35 +390,19 @@ inline f32 Lerp(f32 start, f32 end, f32 now) {
 }
 
 
-//	0.0fに近いほど、線形と比べて値が小さくなるLerp
+//0.0fに近いほど、線形と比べて値が小さくなるLerp
 inline f32 EaseIn(f32 t) {
 	return t * t;
 }
 
 
-/**
-* @brief  0.0fに近いほど、線形と比べて値が大きくなる
-*
-* @param[in]  t 0.0f～1.0fの値
-*
-* @return  0.0f～1.0fの間の値
-*
-* @note
-*/
+//0.0fに近いほど、線形と比べて値が大きくなる
 inline f32 EaseOut(f32 t) {
 	return 1.0f - EaseIn(1.0f - t);
 }
 
 
-/**
-* @brief  0.0fに近いほど、また1.0fに近いほど、線形と比べて値が大きくなる
-*
-* @param[in]  t 0.0f～1.0fの値
-*
-* @return  0.0f～1.0fの間の値
-*
-* @note
-*/
+//0.0fに近いほど、また1.0fに近いほど、線形と比べて値が大きくなる
 inline f32 EaseInOut(f32 r) {
 	return (-2 * r * r * r + 3 * r * r);
 }

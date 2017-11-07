@@ -13,7 +13,9 @@
 #include "function.h"
 #include "vector.h"
 #include "quaternion.h"
+#include "matrix4x4.h"
 
 #include "hash.h"
 #include "string.h"
 #include "hashString.h"
+#include "bitflag.h"

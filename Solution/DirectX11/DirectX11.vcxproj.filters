@@ -53,5 +53,11 @@
     <ClInclude Include="..\..\Source\Atom\quaternion.h">
       <Filter>Source\Atom</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\matrix4x4.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\bitflag.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

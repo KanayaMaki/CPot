@@ -5,6 +5,8 @@
 
 #include "Atom/atom.h"
 
+using namespace cpot;
+
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArgs, int nWinMode) {
 
 	std::fstream f;
@@ -16,11 +18,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 		return 0;
 	}
 
-	cpot::Vector3 r(0.0f, 0.0f, 1.0f);
-	cpot::Quaternion q = cpot::Quaternion::FromVectorDistance(cpot::Vector3(0.0f, 0.0f, 1.0f), cpot::Vector3(1.0f, 0.0f, 1.0f));
-	r = q.Rotate(r);
-
-	f.write("kokoko", 6);
+	BitFlag b;
+	b.StandRange(0, 30);
+	f.write(b.ToString().Get(), 32);
 
 	return 0;
 }

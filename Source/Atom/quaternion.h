@@ -218,6 +218,55 @@ public:
 
 	#pragma endregion
 
+
+	//ƒwƒ‹ƒpŠÖ”
+	#pragma region Helper
+
+	friend Quaternion SLerp(const Quaternion& aFrom, const Quaternion& aTo, f32 aRate) {
+
+		f64 cosom = aFrom.v.x * aTo.v.x + aFrom.v.y * aTo.v.y +
+			aFrom.v.z * aTo.v.z + aFrom.w * aTo.w;
+
+		f32 aTo1[4];
+		if (cosom < 0.0) {
+			cosom = -cosom;
+			aTo1[0] = -aTo.v.x;
+			aTo1[1] = -aTo.v.y;
+			aTo1[2] = -aTo.v.z;
+			aTo1[3] = -aTo.w;
+		}
+		else {
+			aTo1[0] = aTo.v.x;
+			aTo1[1] = aTo.v.y;
+			aTo1[2] = aTo.v.z;
+			aTo1[3] = aTo.w;
+		}
+
+
+		f64 omega, sinom, scale0, scale1;
+
+		cosom = Clamp01(cosom);
+
+		if (NotZero(1.0 - cosom)) {
+			omega = Acosf(cosom);
+			sinom = Sinf(omega);
+			scale0 = Sinf((1.0 - aRate) * omega) / sinom;
+			scale1 = Sinf(aRate * omega) / sinom;
+		}
+		else {
+			scale0 = 1.0 - aRate;
+			scale1 = aRate;
+		}
+
+		Quaternion tRes;
+		tRes.v.x = scale0 * aFrom.v.x + scale1 * aTo1[0];
+		tRes.v.y = scale0 * aFrom.v.y + scale1 * aTo1[1];
+		tRes.v.z = scale0 * aFrom.v.z + scale1 * aTo1[2];
+		tRes.w = scale0 * aFrom.w + scale1 * aTo1[3];
+		return tRes.Normal();
+	}
+	#pragma endregion
+
 };
 
 #pragma endregion

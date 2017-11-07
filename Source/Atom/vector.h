@@ -261,6 +261,26 @@ public:
 
 	#pragma endregion
 
+
+
+	//ヘルパ関数
+	#pragma region Helper
+
+	friend Vector2 Lerp(const Vector2& aFrom, const Vector2& aTo, f32 aRate) {
+		return aFrom * (1.0f - aRate) + aTo * aRate;
+	}
+
+	//それぞれの最大の要素を選ぶ
+	friend Vector2 MaxElement(const Vector2& aVal1, const Vector2& aVal2) {
+		Vector2 tRes(Max(aVal1.x, aVal2.x), Max(aVal1.x, aVal2.y));
+		return tRes;
+	}
+	friend Vector2 MinElement(const Vector2& aVal1, const Vector2& aVal2) {
+		Vector2 tRes(Min(aVal1.x, aVal2.x), Min(aVal1.y, aVal2.y));
+		return tRes;
+	}
+
+	#pragma endregion
 };
 
 #pragma endregion
@@ -560,16 +580,6 @@ public:
 		return *this / tLen;
 	}
 
-	//それぞれの最大の要素を選ぶ
-	Vector3 MaxElement(const Vector3& aVal) const {
-		Vector3 tRes(Max(x, aVal.x), Max(y, aVal.y), Max(z, aVal.z));
-		return tRes;
-	}
-	Vector3 MinElement(const Vector3& aVal) const {
-		Vector3 tRes(Min(x, aVal.x), Min(y, aVal.y), Min(z, aVal.z));
-		return tRes;
-	}
-
 
 	//外積
 	Vector3 Cross(const Vector3& aVal) const {
@@ -637,6 +647,28 @@ public:
 	}
 
 	#pragma endregion
+
+
+	//ヘルパ関数
+	#pragma region Helper
+
+	//線形補間
+	friend Vector3 Lerp(const Vector3& aFrom, const Vector3& aTo, f32 aRate) {
+		return aFrom * (1.0f - aRate) + aTo * aRate;
+	}
+
+	//それぞれの最大の要素を選ぶ
+	friend Vector3 MaxElement(const Vector3& aVal1, const Vector3& aVal2) {
+		Vector3 tRes(Max(aVal1.x, aVal2.x), Max(aVal1.y, aVal2.y), Max(aVal1.z, aVal2.z));
+		return tRes;
+	}
+	friend Vector3 MinElement(const Vector3& aVal1, const Vector3& aVal2) {
+		Vector3 tRes(Min(aVal1.x, aVal2.x), Min(aVal1.y, aVal2.y), Min(aVal1.z, aVal2.z));
+		return tRes;
+	}
+
+	#pragma endregion
+
 };
 
 #pragma endregion
@@ -779,6 +811,10 @@ public:
 	#pragma endregion
 
 	Vector3 XYZ() const {
+		return Vector3(x, y, z);
+	}
+
+	Vector3 ToVector3() const {
 		return Vector3(x, y, z);
 	}
 
@@ -969,15 +1005,6 @@ public:
 };
 
 #pragma endregion
-
-
-
-inline Vector2 Lerp(const Vector2& aStart, const Vector2& aEnd, f32 aRate) {
-	return aStart * (1.0f - aRate) + aEnd * aRate;
-}
-inline Vector3 Lerp(const Vector3& aStart, const Vector3& aEnd, f32 aRate) {
-	return aStart * (1.0f - aRate) + aEnd * aRate;
-}
 
 
 }
