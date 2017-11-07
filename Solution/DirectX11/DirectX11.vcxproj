@@ -27,10 +27,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\test.cpp" />
-    <ClCompile Include="..\..\Source\test2.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\atom.h" />
     <ClInclude Include="..\..\Source\Atom\bitflag.h" />
     <ClInclude Include="..\..\Source\Atom\color.h" />
@@ -46,6 +42,9 @@
     <ClInclude Include="..\..\Source\Atom\transform.h" />
     <ClInclude Include="..\..\Source\Atom\typedef.h" />
     <ClInclude Include="..\..\Source\Atom\vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

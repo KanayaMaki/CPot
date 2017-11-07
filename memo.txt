@@ -1,1 +1,32 @@
 位置はPosition
+
+Windowsの初期化
+グラフィックAPIの初期化
+インプットの初期化
+サウンドの初期化
+
+Game* CreateGame() {
+	return new MyGame;
+}
+
+Game
+	virtual void Init()
+		アプリが立ち上がってすぐの段階で、画面サイズやそのほかの設定をする
+	virtual void Update()
+		アプリの更新をする
+	virtual void Render()
+		アプリの描画をする
+
+
+描画
+インプットの更新
+
+Game.Init();
+Game.Update();
+
+GameLoop：一定の間隔で呼ばれ続ける。入力の更新などを行う
+
+GameLoop
+	Input.Update
+
+	Game.DeltaTime();
