@@ -5,28 +5,50 @@ Windowsの初期化
 インプットの初期化
 サウンドの初期化
 
+WinMain
+	Game* g = CreateGame();
+	g->Setting();
+
+	Application::S().Start();
+
+
+
+WindowsGameLoop
+	void GameLoop
+		Init
+		Game.Init
+
+		while(true) {
+			Fps.Wait
+			Input.Update
+			Game.Update
+			Game.Render
+		}
+
 Game* CreateGame() {
 	return new MyGame;
 }
 
 Game
+	virtual void Setting()
+		ゲームが立ち上がってすぐの段階で、画面サイズやそのほかの設定をする
 	virtual void Init()
-		アプリが立ち上がってすぐの段階で、画面サイズやそのほかの設定をする
+		ゲームの初期化
 	virtual void Update()
-		アプリの更新をする
+		ゲームの更新をする
 	virtual void Render()
-		アプリの描画をする
+		ゲームの描画をする
+
+Setting
+	Vector2 mScreenWidth;
+	BOOL mUseCursor;
+	f32 mFps;
+	CHAR* mTitle;
+
+	
 
 
 描画
 インプットの更新
 
-Game.Init();
-Game.Update();
-
 GameLoop：一定の間隔で呼ばれ続ける。入力の更新などを行う
-
-GameLoop
-	Input.Update
-
-	Game.DeltaTime();
