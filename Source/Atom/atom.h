@@ -11,6 +11,8 @@
 
 #include "math.h"
 #include "function.h"
+#include "vector.h"
+#include "quaternion.h"
 
 #include "hash.h"
 #include "string.h"

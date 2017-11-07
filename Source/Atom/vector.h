@@ -263,10 +263,6 @@ public:
 
 };
 
-Vector2 Lerp(const Vector2& aStart, const Vector2& aEnd, f32 aRate) {
-	return aStart * (1.0f - aRate) + aEnd * aRate;
-}
-
 #pragma endregion
 
 
@@ -396,6 +392,10 @@ public:
 		return Vector2(z, z);
 	}
 
+	Vector2 ToVector2() const {
+		return Vector2(x, y);
+	}
+
 	#pragma endregion
 
 
@@ -511,10 +511,9 @@ public:
 	#pragma region Compare
 
 	BOOL operator ==(const Vector3& aVal) const {
-		//è≠ÇµÇÃåÎç∑ÇîFÇﬂÇÈ
-		if (!IsEqual(x, aVal.x, cFloatEpsilon * Max(Abs(x), Abs(aVal.x)))) return false;
-		if (!IsEqual(y, aVal.y, cFloatEpsilon * Max(Abs(y), Abs(aVal.y)))) return false;
-		if (!IsEqual(z, aVal.z, cFloatEpsilon * Max(Abs(z), Abs(aVal.z)))) return false;
+		if (!IsEqual(x, aVal.x)) return false;
+		if (!IsEqual(y, aVal.y)) return false;
+		if (!IsEqual(z, aVal.z)) return false;
 		return true;
 	}
 	BOOL operator !=(const Vector3& aVal) const {
@@ -970,6 +969,15 @@ public:
 };
 
 #pragma endregion
+
+
+
+inline Vector2 Lerp(const Vector2& aStart, const Vector2& aEnd, f32 aRate) {
+	return aStart * (1.0f - aRate) + aEnd * aRate;
+}
+inline Vector3 Lerp(const Vector3& aStart, const Vector3& aEnd, f32 aRate) {
+	return aStart * (1.0f - aRate) + aEnd * aRate;
+}
 
 
 }

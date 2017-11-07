@@ -50,5 +50,8 @@
     <ClInclude Include="..\..\Source\Atom\vector.h">
       <Filter>Source\Atom</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\quaternion.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

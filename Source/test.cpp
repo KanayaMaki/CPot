@@ -16,7 +16,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 		return 0;
 	}
 
-
+	cpot::Vector3 r(0.0f, 0.0f, 1.0f);
+	cpot::Quaternion q = cpot::Quaternion::FromVectorDistance(cpot::Vector3(0.0f, 0.0f, 1.0f), cpot::Vector3(1.0f, 0.0f, 1.0f));
+	r = q.Rotate(r);
 
 	f.write("kokoko", 6);
 

@@ -36,6 +36,7 @@
     <ClInclude Include="..\..\Source\Atom\function.h" />
     <ClInclude Include="..\..\Source\Atom\hash.h" />
     <ClInclude Include="..\..\Source\Atom\math.h" />
+    <ClInclude Include="..\..\Source\Atom\quaternion.h" />
     <ClInclude Include="..\..\Source\Atom\Standard\math.h" />
     <ClInclude Include="..\..\Source\Atom\string.h" />
     <ClInclude Include="..\..\Source\Atom\hashString.h" />

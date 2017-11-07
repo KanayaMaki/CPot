@@ -35,11 +35,11 @@ namespace cpot {
 //ラジアンからディグリーへの変換、その逆
 #pragma region Radian
 
-inline f32 ToRadian(f32 aDegree) {
+inline f32 ToRad(f32 aDegree) {
 	return aDegree / 360.0f * c2Pi;
 }
 
-inline f32 ToDegree(f32 aRadian) {
+inline f32 ToDeg(f32 aRadian) {
 	return aRadian / c2Pi * 360.0f;
 }
 
@@ -264,7 +264,7 @@ inline BOOL IsEqual(T aVal, T aOther) {
 
 template <>
 inline BOOL IsEqual<f32>(f32 aVal, f32 aOther) {
-	return IsEqual(aVal, aOther, cFloatEpsilon);
+	return IsEqual(aVal, aOther, cFloatEpsilon * Max(Abs(aVal), Abs(aOther)));
 }
 
 
