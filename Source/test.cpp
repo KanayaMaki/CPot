@@ -1,7 +1,13 @@
 #include <iostream>
 #include <fstream>
 
-int main() {
+#include <Windows.h>
+
+#include "Atom/atom.h"
+
+using namespace cpot;
+
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArgs, int nWinMode) {
 
 	std::fstream f;
 	f.open("a.txt");
@@ -12,5 +18,7 @@ int main() {
 		return 0;
 	}
 
-	f.write("kokoko", 6);
+	Color c = Color::White();
+
+	return 0;
 }

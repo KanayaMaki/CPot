@@ -2,12 +2,68 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source">
-      <UniqueIdentifier>{b82bf02d-a8e4-4f76-9c97-eeac15789b2e}</UniqueIdentifier>
+      <UniqueIdentifier>{5e8784f8-0aa2-47a7-bc61-b171faec12b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Atom">
+      <UniqueIdentifier>{28db1964-4db4-46de-996a-1e1d719e68f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Atom\Standard">
+      <UniqueIdentifier>{b90ce3f5-1a3d-4f53-b922-bfbad266a28d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\test.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\test2.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Atom\defines.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\typedef.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\function.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\string.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\hash.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\hashString.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\atom.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\math.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\Standard\math.h">
+      <Filter>Source\Atom\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\vector.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\quaternion.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\matrix4x4.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\bitflag.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\color.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\transform.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
