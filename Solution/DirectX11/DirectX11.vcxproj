@@ -33,6 +33,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\atom.h" />
     <ClInclude Include="..\..\Source\Atom\bitflag.h" />
+    <ClInclude Include="..\..\Source\Atom\color.h" />
     <ClInclude Include="..\..\Source\Atom\defines.h" />
     <ClInclude Include="..\..\Source\Atom\function.h" />
     <ClInclude Include="..\..\Source\Atom\hash.h" />

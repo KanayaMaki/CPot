@@ -19,3 +19,5 @@
 #include "string.h"
 #include "hashString.h"
 #include "bitflag.h"
+
+#include "color.h"

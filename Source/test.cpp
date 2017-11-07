@@ -18,12 +18,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 		return 0;
 	}
 
-	BitFlag b;
-	b.StandRange(0, 30);
-
-	b = ReverseEndian(b);
-
-	f.write(b.ToString().Get(), 32);
+	Color c = Color::White();
 
 	return 0;
 }
