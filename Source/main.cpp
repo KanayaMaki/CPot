@@ -1,6 +1,7 @@
+#include "./Atom/atom.h"
+
 #include <Windows.h>
 
-#include "./Atom/atom.h"
 
 using namespace cpot;
 

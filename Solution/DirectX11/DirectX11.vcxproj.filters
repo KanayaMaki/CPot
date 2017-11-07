@@ -63,9 +63,15 @@
     <ClInclude Include="..\..\Source\Usefull\singleton.h">
       <Filter>Source\Usefull</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Usefull\buffer.h">
+      <Filter>Source\Usefull</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\test.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

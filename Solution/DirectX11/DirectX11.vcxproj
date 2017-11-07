@@ -42,10 +42,12 @@
     <ClInclude Include="..\..\Source\Atom\transform.h" />
     <ClInclude Include="..\..\Source\Atom\typedef.h" />
     <ClInclude Include="..\..\Source\Atom\vector.h" />
+    <ClInclude Include="..\..\Source\Usefull\buffer.h" />
     <ClInclude Include="..\..\Source\Usefull\singleton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\Source\test.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
