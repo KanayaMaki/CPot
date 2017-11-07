@@ -375,6 +375,44 @@ inline void ZeroMem(void* aMem, Pointer aSize) {
 }
 
 
+//エンディアンを逆転させる。例：リトルエンディアンをビッグエンディアンにする
+template <typename T>
+inline T ReverseEndian(const T aVal) {
+
+	u32 lByteNum = sizeof(T);
+
+	//結果を格納する変数
+	T lRes;
+
+	const u8* lFrom = (const u8*)(&aVal);
+	u8* lTo = (u8*)(&lRes);
+
+	//バイト数が4の場合、0と3、1と2、という風になるように入れ替える
+	for (u32 i = 0; i < lByteNum; i++) {
+		lTo[i] = lFrom[lByteNum - i - 1];
+	}
+
+	return lRes;
+}
+
+//エンディアンを入れ替える（void*版、できれば上のテンプレート版を使って欲しい）
+inline void ReverseEndian(void* aVal, u32 aByteNum) {
+
+	CPOT_ASSERT(Mod(aByteNum, 2) == 0);
+	
+	//バイト数が4の場合、0と3、1と2、という風になるように入れ替える
+	for (u32 i = 0; i < aByteNum / 2; i++) {
+
+		//左側の値を保存
+		u8 tB = ((u8*)aVal)[i];
+		//左側に、右側の値を代入
+		((u8*)aVal)[i] = ((u8*)aVal)[aByteNum - i - 1];
+		//右側に、先ほど保存した左側の値を代入
+		((u8*)aVal)[aByteNum - i - 1] = tB;
+	}
+}
+
+
 #pragma endregion
 
 

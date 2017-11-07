@@ -20,6 +20,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 
 	BitFlag b;
 	b.StandRange(0, 30);
+
+	b = ReverseEndian(b);
+
 	f.write(b.ToString().Get(), 32);
 
 	return 0;
