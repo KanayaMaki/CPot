@@ -178,18 +178,45 @@ public:
 
 	#pragma endregion
 
-
-
-
 };
 
+#pragma endregion
 
+
+#pragma region ShaderMatrix4x4
+
+
+//シェーダで使用する際のMatrix
+//環境などによって、転置行列が必要だったりするのを吸収してくれる
 class ShaderMatrix4x4 {
-	Matrix4x4 m;
+public:
+	const ShaderMatrix4x4& operator=(const Matrix4x4& aM) {
+		mM = aM.T();
+		return *this;
+	}
+	operator Matrix4x4 () {
+		return mM.T();
+	}
+
+	const ShaderMatrix4x4& operator *=(const Matrix4x4& aM) {
+		Matrix4x4 lRes = (*this);
+		lRes *= aM;
+		*this = lRes;
+		return *this;
+	}
+	ShaderMatrix4x4& operator *(const Matrix4x4& aM) {
+		ShaderMatrix4x4 lRes = *this;
+		lRes *= aM;
+		return lRes;
+	}
+
+private:
+	Matrix4x4 mM;
 };
 
 
 #pragma endregion
+
 
 
 }
