@@ -15,46 +15,59 @@
 namespace cpot {
 
 
-constexpr f64 cPi = 3.1415926535897932384626;	//‰~Žü—¦
-constexpr f32 cPif = 3.1415926535f;	//32bit
-constexpr f32 cFloatEpsilon = FLT_EPSILON;
+const f32 cPi = 3.1415926535f;
+const f32 c2Pi = 2 * 3.1415926535f;
+
+const f32 cFloatEpsilon = FLT_EPSILON;
 
 
-s32 Ceilf(f32 val) {
-	return s32(std::ceilf(val));
+inline s32 Roundf(f32 aVal) {
+	return s32(std::roundf(aVal));
 }
 
-s32 Floorf(f32 val) {
-	return s32(std::floorf(val));
+inline s32 Ceilf(f32 aVal) {
+	return s32(std::ceilf(aVal));
 }
 
-f32 Modf(f32 val, f32 m) {
-	return std::fmodf(val, m);
+inline s32 Floorf(f32 aVal) {
+	return s32(std::floorf(aVal));
 }
 
-
-f32 Sinf(f32 rad) {
-	return std::sinf(rad);
-}
-
-f32 Cosf(f32 rad) {
-	return std::cosf(rad);
-}
-
-f32 Asinf(f32 rad) {
-	return std::asinf(rad);
-}
-
-f32 Acosf(f32 rad) {
-	return std::acosf(rad);
+inline f32 Modf(f32 aVal, f32 aM) {
+	return std::fmodf(aVal, aM);
 }
 
 
-f32 Sqrtf(f32 val) {
+inline f32 Sinf(f32 aRad) {
+	return std::sinf(aRad);
+}
+
+inline f32 Cosf(f32 aRad) {
+	return std::cosf(aRad);
+}
+
+inline f32 Tanf(f32 aRad) {
+	return std::tanf(aRad);
+}
+
+inline f32 Asinf(f32 aVal) {
+	return std::asinf(aVal);
+}
+
+inline f32 Acosf(f32 aVal) {
+	return std::acosf(aVal);
+}
+
+inline f32 Atanf(f32 aVal) {
+	return std::atanf(aVal);
+}
+
+
+inline f32 Sqrtf(f32 val) {
 	return std::sqrtf(val);
 }
 
-f32 Expf(f32 val) {
+inline f32 Expf(f32 val) {
 	return std::expf(val);
 }
 

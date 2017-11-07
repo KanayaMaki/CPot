@@ -36,21 +36,20 @@ namespace cpot {
 #pragma region Radian
 
 inline f32 ToRadian(f32 aDegree) {
-	return aDegree / 360.0f * (2 * cPif);
+	return aDegree / 360.0f * c2Pi;
 }
 
 inline f32 ToDegree(f32 aRadian) {
-	return aRadian / (2 * cPif) * 360.0f;
+	return aRadian / c2Pi * 360.0f;
 }
 
 #pragma endregion
 
 
 
+//	範囲内に制限された値を返す
 #pragma region Clamp
 
-
-//	範囲内に制限された値を返す
 template <typename T>
 inline T Clamp(T aVal, T aMin, T aMax) {
 	if (aVal < aMin) {
@@ -83,10 +82,10 @@ inline T ClampRange(T aVal, T aEdge1, T aEdge2) {
 #pragma endregion
 
 
-#pragma region Wrap
-
 
 //	範囲内に収まるようにループされた数
+#pragma region Wrap
+
 template <typename T>
 inline T Wrap(T aVal, T aMin, T aMax) {
 	T dist = aMax - aMin + 1;
@@ -105,22 +104,10 @@ inline T Wrap(T aVal, T aMax) {
 
 
 
-#pragma region Abs
-
-//	値の絶対値を返す
-template <typename T>
-inline T Abs(T aVal) {
-	if (aVal < T(0)) aVal *= -1;
-	return aVal;
-}
-
-#pragma endregion
-
-
-
-#pragma region Sign
 
 //	値の符号を返す
+#pragma region Sign
+
 template <typename T>
 inline s32 Sign(T aVal) {
 	if (aVal > T(0)) return 1;
@@ -141,15 +128,28 @@ inline s32 SignSafe(T aVal) {
 
 
 
+//	正規化した値を返す
 #pragma region Normal
 
-//	正規化した値を返す
 template <typename T>
 inline f32 Normal(T aVal, T aMin, T aMax) {
 	return (f32)(aVal - aMin) / (aMax - aMin);
 }
 
 #pragma endregion
+
+
+//	正規化した値を、範囲に再配置する
+#pragma region Replace
+
+inline f32 Replace(f32 aNormal, f32 aMin, f32 aMax) {
+	return aMin + (aMax - aMin) * aNormal;
+}
+
+#pragma endregion
+
+
+
 
 
 //	最小値を求める
@@ -180,6 +180,23 @@ template <typename T, typename... Rest>
 inline T Max(const T& a, const Rest&... rest) {
 	return Max(a, Max(rest...));
 }
+
+#pragma endregion
+
+
+
+//	累乗する
+#pragma region Pow
+
+template <typename T>
+inline T Pow(T aVal, u32 aTimes) {
+	T tV = T(1);
+	for (u32 i = 0; i < aTimes; i++) {
+		tV *= tVal;
+	}
+	return tV;
+}
+
 
 #pragma endregion
 

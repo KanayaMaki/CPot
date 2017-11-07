@@ -15,6 +15,9 @@
     <ClCompile Include="..\..\Source\test.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\test2.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -43,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Atom\Standard\math.h">
       <Filter>Source\Atom\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\vector.h">
+      <Filter>Source\Atom</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
