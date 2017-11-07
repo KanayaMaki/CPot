@@ -43,6 +43,7 @@
     <ClInclude Include="..\..\Source\Atom\Standard\math.h" />
     <ClInclude Include="..\..\Source\Atom\string.h" />
     <ClInclude Include="..\..\Source\Atom\hashString.h" />
+    <ClInclude Include="..\..\Source\Atom\transform.h" />
     <ClInclude Include="..\..\Source\Atom\typedef.h" />
     <ClInclude Include="..\..\Source\Atom\vector.h" />
   </ItemGroup>

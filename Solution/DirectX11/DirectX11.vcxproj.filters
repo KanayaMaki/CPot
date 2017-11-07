@@ -62,5 +62,8 @@
     <ClInclude Include="..\..\Source\Atom\color.h">
       <Filter>Source\Atom</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\transform.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
