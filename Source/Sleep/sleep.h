@@ -9,4 +9,18 @@
 namespace cpot {
 
 
+class SleepBase {
+public:
+	//指定された秒数、そのスレッドの実行を止める
+	virtual void SleepSecond(f32 aSecond) = 0;
+};
+
+
 }
+
+
+#ifdef CPOT_ON_WINDOWS
+#include "./Sleep/Windows/sleep.h"
+#elif defined CPOT_ON_ANDROID
+#include "./Sleep/Android/sleep.h"
+#endif
