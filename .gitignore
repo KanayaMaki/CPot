@@ -49,6 +49,8 @@ artifacts/
 *_p.c
 *_i.h
 *.ilk
+*.ipdb
+*.iobj
 *.meta
 *.obj
 *.pch
@@ -60,6 +62,7 @@ artifacts/
 *.tlb
 *.tli
 *.tlh
+*.tlog
 *.tmp
 *.tmp_proj
 *.log
