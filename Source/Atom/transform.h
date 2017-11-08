@@ -1,8 +1,8 @@
-//	ファイル名	:	Atom/vector.h
+//	ファイル名	:	Atom/transform.h
 //	作者		:	齊藤芳紀
 //	作成日時	:	2017/11/07
 //	更新日時	:	2017/11/07
-//	内容		:	Vector3などの実装
+//	内容		:	Transformの実装
 
 #pragma once
 
