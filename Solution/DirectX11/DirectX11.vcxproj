@@ -44,10 +44,13 @@
     <ClInclude Include="..\..\Source\Atom\vector.h" />
     <ClInclude Include="..\..\Source\Usefull\buffer.h" />
     <ClInclude Include="..\..\Source\Usefull\singleton.h" />
+    <ClInclude Include="..\..\Source\Window\Windows\cursor.h" />
+    <ClInclude Include="..\..\Source\Window\Windows\window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp" />
     <ClCompile Include="..\..\Source\test.cpp" />
+    <ClCompile Include="..\..\Source\Window\Windows\windowWindows.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

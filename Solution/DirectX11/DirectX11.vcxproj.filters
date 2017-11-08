@@ -13,6 +13,12 @@
     <Filter Include="Source\Usefull">
       <UniqueIdentifier>{4aba450b-a743-424d-b368-ab9d824475cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Window">
+      <UniqueIdentifier>{a079b5da-19aa-420e-bce7-e0d552e1db6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Window\Windows">
+      <UniqueIdentifier>{dfa6d590-b5c0-4cd2-8b84-e15656d62300}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -66,6 +72,12 @@
     <ClInclude Include="..\..\Source\Usefull\buffer.h">
       <Filter>Source\Usefull</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Window\Windows\window.h">
+      <Filter>Source\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Window\Windows\cursor.h">
+      <Filter>Source\Window\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -73,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\test.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Window\Windows\windowWindows.cpp">
+      <Filter>Source\Window\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

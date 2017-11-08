@@ -45,7 +45,11 @@ Setting
 	f32 mFps;
 	CHAR* mTitle;
 
-	
+
+Window::CreateWindow("Name", Vector2(1920.0f, 1080.0f));
+
+Window::DestroyWindow("Name");
+
 
 
 描画
