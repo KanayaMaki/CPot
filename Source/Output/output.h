@@ -39,19 +39,19 @@ public:
 		OutputStr(aStr);
 	}
 	void Output(s32 aVal) {
-		//OutputStr(ToString(aVal));
+		OutputStr(ToString(aVal));
 	}
 	void Output(u32 aVal) {
-		//OutputStr(ToString(aVal));
+		OutputStr(ToString(aVal));
 	}
 	void Output(s64 aVal) {
-		//OutputStr(ToString(aVal));
+		OutputStr(ToString(aVal));
 	}
 	void Output(u64 aVal) {
-		//OutputStr(ToString(aVal));
+		OutputStr(ToString(aVal));
 	}
 	void Output(f32 aVal) {
-		//OutputStr(ToStringf(aVal));
+		OutputStr(ToString(aVal));
 	}
 	void Output(const Buffer& aBuffer) {
 		OutputByte(aBuffer);
