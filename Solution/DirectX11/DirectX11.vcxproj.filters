@@ -95,5 +95,8 @@
     <ClCompile Include="..\..\Source\Window\Windows\windowWindows.cpp">
       <Filter>Source\Window\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Atom\Standard\stringStandard.cpp">
+      <Filter>Source\Atom\Standard</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
