@@ -19,6 +19,9 @@
     <Filter Include="Source\Window\Windows">
       <UniqueIdentifier>{dfa6d590-b5c0-4cd2-8b84-e15656d62300}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Output">
+      <UniqueIdentifier>{9256fe66-a836-41f6-94be-1141857c31bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -77,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Window\Windows\cursor.h">
       <Filter>Source\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Output\output.h">
+      <Filter>Source\Output</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
