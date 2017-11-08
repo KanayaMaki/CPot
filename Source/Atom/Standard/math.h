@@ -1,12 +1,13 @@
-//	ファイル名	:	Atom/Standard/atom.h
+//	ファイル名	:	Atom/Standard/math.h
 //	作者		:	齊藤芳紀
 //	作成日時	:	2017/11/07
 //	更新日時	:	2017/11/07
-//	内容		:	基本のtypedefを定義
+//	内容		:	数学の関数などを定義
 
 #pragma once
 
 #include <cmath>
+#include <cfloat>
 
 #include "../defines.h"
 #include "../typedef.h"
