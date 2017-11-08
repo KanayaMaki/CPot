@@ -82,6 +82,7 @@ public:
 	void SetTitle(const CHAR* aTitle);
 
 
+	//カーソルの表示・非表示
 	#pragma region Cursor
 
 public:
@@ -96,6 +97,30 @@ public:
 	}
 
 	#pragma endregion
+
+
+	//メッセージループ
+	#pragma region MessageLoop
+
+	static s32 MessageLoop() {
+
+		MSG msg;
+		while (1) {
+			if (PeekMessageA(&msg, NULL, 0, 0, PM_NOREMOVE)) {
+				if (GetMessageA(&msg, nullptr, 0, 0) == 0) {
+					break;
+				}
+				else {
+					TranslateMessage(&msg);
+					DispatchMessageA(&msg);
+				}
+			}
+		}
+		return msg.wParam;
+	}
+
+	#pragma endregion
+
 
 	#pragma endregion
 
@@ -158,9 +183,6 @@ private:
 
 class WindowManager : public Singleton<WindowManager> {
 	friend class Singleton<WindowManager>;
-
-	//	TODO 複数のウィンドウを保持して、メインウィンドウも区別できるように実装
-
 
 	//コンストラクタ
 	#pragma region Constructor
