@@ -21,5 +21,3 @@
 #include "bitflag.h"
 
 #include "color.h"
-
-#include <memory>

@@ -1,23 +1,24 @@
-#include "./Atom/atom.h"
+#include <iostream>
+#include <fstream>
 
-#include "./Usefull/buffer.h"
-#include "./Usefull/singleton.h"
+#include <Windows.h>
+
+#include "Atom/atom.h"
 
 using namespace cpot;
 
-class A : public Singleton<A> {
-	friend Singleton<A>;
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArgs, int nWinMode) {
 
-public:
-	u32 GetNum() {
-		return 3;
+	std::fstream f;
+	f.open("a.txt");
+
+	//Ç‡ÇµäJÇØÇ»Ç©Ç¡ÇΩÇÁ
+	if (!f) {
+		//ÉGÉâÅ[
+		return 0;
 	}
-};
 
+	Color c = Color::White();
 
-void TestTest() {
-
-	A::S().GetNum();
-
-	Buffer b;
+	return 0;
 }

@@ -10,15 +10,14 @@
     <Filter Include="Source\Atom\Standard">
       <UniqueIdentifier>{b90ce3f5-1a3d-4f53-b922-bfbad266a28d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Usefull">
-      <UniqueIdentifier>{4aba450b-a743-424d-b368-ab9d824475cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Window">
-      <UniqueIdentifier>{a079b5da-19aa-420e-bce7-e0d552e1db6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Window\Windows">
-      <UniqueIdentifier>{dfa6d590-b5c0-4cd2-8b84-e15656d62300}</UniqueIdentifier>
-    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\test.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\test2.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -66,28 +65,5 @@
     <ClInclude Include="..\..\Source\Atom\transform.h">
       <Filter>Source\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Usefull\singleton.h">
-      <Filter>Source\Usefull</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Usefull\buffer.h">
-      <Filter>Source\Usefull</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Window\Windows\window.h">
-      <Filter>Source\Window\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Window\Windows\cursor.h">
-      <Filter>Source\Window\Windows</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Source\main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\test.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Window\Windows\windowWindows.cpp">
-      <Filter>Source\Window\Windows</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
