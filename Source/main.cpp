@@ -18,10 +18,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 
 	windows::OutputConsoleDevice::S().Init(lWindow->GetHwnd());
 
-	windows::OutputDebugWindow out;
-	Log::S().Set(&out);
-	CPOT_LOG_ENDL("Output", 3200L);
-
 	Window::MessageLoop();
 
 	Window::Destroy(lWindow);
