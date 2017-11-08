@@ -27,7 +27,11 @@ public:
 //	VisualStudioのデバッグウィンドウに出力する、OutputBaseから派生したクラス
 class OutputDebugWindow : public OutputBase {
 private:
-	void OutputStr(const CHAR* aStr) override;
+	void OutputStr(const CHAR* aStr) override {
+
+		//	デバッグウィンドウに出力するクラスに委譲する
+		OutputDebugWindowDevice::S().Output(aStr);
+	}
 };
 
 

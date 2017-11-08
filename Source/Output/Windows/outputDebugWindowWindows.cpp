@@ -18,11 +18,6 @@ void OutputDebugWindowDevice::Output(const CHAR* aStr) {
 }
 
 
-//	デバッグウィンドウに出力するクラスに委譲する
-void OutputDebugWindow::OutputStr(const CHAR* aStr) {
-	OutputDebugWindowDevice::S().Output(aStr);
-}
-
 }
 
 

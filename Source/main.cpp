@@ -2,6 +2,10 @@
 
 #include "Window/Windows/window.h"
 
+#include "./Output/output.h"
+#include "./Output/Windows/outputDebugWindow.h"
+#include "./Output/Windows/outputConsole.h"
+
 #include <Windows.h>
 
 
@@ -11,6 +15,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 
 	Window* lWindow = Window::Create();
 	lWindow->Load(hInstance, Vector2(960.0f, 540.0f), "Game");
+
+	windows::OutputConsoleDevice::S().Init(lWindow->GetHwnd());
+
+	windows::OutputDebugWindow out;
+	Log::S().Set(&out);
+	CPOT_LOG_ENDL("Output", 3200L);
 
 	Window::MessageLoop();
 

@@ -10,23 +10,7 @@ namespace cpot {
 namespace windows {
 
 
-void OutputConsoleDevice::Final() {
-	Release();
-}
-
-void OutputConsoleDevice::Alloc() {
-	if (!IsLoaded()) {
-		Load();
-	}
-	mUserNum++;
-}
-void OutputConsoleDevice::Free() {
-	mUserNum--;
-	if (mUserNum == 0) {
-		Final();
-	}
-}
-
+#pragma region Init
 
 void OutputConsoleDevice::Load() {
 	if (IsLoaded()) {
@@ -43,6 +27,16 @@ void OutputConsoleDevice::Load() {
 		::SetForegroundWindow(mHwnd);
 	}
 }
+
+#pragma endregion
+
+
+#pragma region Final
+
+void OutputConsoleDevice::Final() {
+	Release();
+}
+
 void OutputConsoleDevice::Release() {
 	if (!IsLoaded()) {
 		return;
@@ -55,30 +49,34 @@ void OutputConsoleDevice::Release() {
 	Reset();
 }
 
+#pragma endregion
+
+
+#pragma region Operate
+
+void OutputConsoleDevice::Alloc() {
+	if (!IsLoaded()) {
+		Load();	//コンソールを取得する
+	}
+	mUserNum++;
+}
+
+void OutputConsoleDevice::Free() {
+
+	mUserNum--;
+
+	if (mUserNum == 0) {
+		Release();	//誰からも参照されていないなら、コンソールを解放する
+	}
+}
+
 void OutputConsoleDevice::Output(const CHAR* aStr) {
+
+	//標準出力すれば、コンソールに表示され
 	std::printf("%s", aStr);
 }
 
-
-OutputConsole::~OutputConsole() {
-	Release();
-}
-
-void OutputConsole::Load() {
-	if (!IsLoaded()) {
-		OutputConsoleDevice::S().Alloc();
-	}
-}
-void OutputConsole::Release() {
-	if (IsLoaded()) {
-		OutputConsoleDevice::S().Free();
-	}
-	Reset();
-}
-
-void OutputConsole::OutputStr(const CHAR* aStr) {
-	OutputConsoleDevice::S().Output(aStr);
-}
+#pragma endregion
 
 
 }

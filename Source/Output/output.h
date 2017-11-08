@@ -101,6 +101,7 @@ public:
 	}
 
 	void Reset() {
+		//デフォルトでは、ヌル出力
 		mOut = &(OutputNull::S());
 	}
 
