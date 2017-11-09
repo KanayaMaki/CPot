@@ -19,6 +19,11 @@
     <Filter Include="Source\Window\Windows">
       <UniqueIdentifier>{dfa6d590-b5c0-4cd2-8b84-e15656d62300}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Rand">
+      <UniqueIdentifier>{c7f189a8-586a-4cc9-815d-973aadf1b97c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Rand\Standard">
+      <UniqueIdentifier>{419ee489-5b98-4e12-8529-c71656087799}</UniqueIdentifier>
     <Filter Include="Source\Sleep">
       <UniqueIdentifier>{e25eea21-1b70-4a4f-8522-3cd1bd93fbe9}</UniqueIdentifier>
     </Filter>
@@ -89,6 +94,11 @@
     <ClInclude Include="..\..\Source\Window\Windows\cursor.h">
       <Filter>Source\Window\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Rand\rand.h">
+      <Filter>Source\Rand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Rand\Standard\rand.h">
+      <Filter>Source\Rand\Standard</Filter>
     <ClInclude Include="..\..\Source\Sleep\sleep.h">
       <Filter>Source\Sleep</Filter>
     </ClInclude>
@@ -114,6 +124,8 @@
     <ClCompile Include="..\..\Source\Window\Windows\windowWindows.cpp">
       <Filter>Source\Window\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Rand\Standard\randStandard.cpp">
+      <Filter>Source\Rand\Standard</Filter>
     <ClCompile Include="..\..\Source\Sleep\Windows\sleepWindows.cpp">
       <Filter>Source\Sleep\Windows</Filter>
     <ClCompile Include="..\..\Source\Atom\Standard\stringStandard.cpp">

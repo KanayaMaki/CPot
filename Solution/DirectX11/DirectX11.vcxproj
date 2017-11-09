@@ -42,6 +42,8 @@
     <ClInclude Include="..\..\Source\Atom\transform.h" />
     <ClInclude Include="..\..\Source\Atom\typedef.h" />
     <ClInclude Include="..\..\Source\Atom\vector.h" />
+    <ClInclude Include="..\..\Source\Rand\rand.h" />
+    <ClInclude Include="..\..\Source\Rand\Standard\rand.h" />
     <ClInclude Include="..\..\Source\Sleep\sleep.h" />
     <ClInclude Include="..\..\Source\Sleep\Windows\sleep.h" />
     <ClInclude Include="..\..\Source\Output\output.h" />
@@ -55,6 +57,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\Atom\Standard\stringStandard.cpp" />
     <ClCompile Include="..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\Source\Rand\Standard\randStandard.cpp" />
     <ClCompile Include="..\..\Source\Sleep\Windows\sleepWindows.cpp" />
     <ClCompile Include="..\..\Source\Output\Windows\outputConsoleWindows.cpp" />
     <ClCompile Include="..\..\Source\Output\Windows\outputDebugWindowWindows.cpp" />

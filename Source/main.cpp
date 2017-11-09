@@ -8,6 +8,8 @@
 
 #include <Windows.h>
 
+#include "Rand/rand.h"
+
 #include "Sleep/sleep.h"
 
 
@@ -18,10 +20,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 	Window* lWindow = Window::Create();
 	lWindow->Load(hInstance, Vector2(960.0f, 540.0f), "Game");
 
+	standard::Rand r;
+	r.SetSeed(100);
+
+	for (u32 i = 0; i < 100; i++) {
+		r.Next();
+	}
+  
 	cpot::Sleep sleep;
 	sleep.SleepSecond(5.0f);
   
 	windows::OutputConsoleDevice::S().Init(lWindow->GetHwnd());
+
 
 	Window::MessageLoop();
 
