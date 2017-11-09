@@ -72,6 +72,11 @@ public:
 	void SetSeed(u64 aSeed) {
 		mMt.seed(aSeed);
 		mSeed = aSeed;
+
+		//Å‰‚Í•Î‚é‚Ì‚ÅA“Ç‚İ”ò‚Î‚·
+		for (u32 i = 0; i < 100; i++) {
+			Next();
+		}
 	}
 
 	#pragma endregion
@@ -143,6 +148,11 @@ public:
 	void SetSeed(u32 aSeed) {
 		mMt.seed(aSeed);
 		mSeed = aSeed;
+
+		//Å‰‚Í•Î‚é‚Ì‚ÅA“Ç‚İ”ò‚Î‚·
+		for (u32 i = 0; i < 100; i++) {
+			Next();
+		}
 	}
 
 	#pragma endregion
