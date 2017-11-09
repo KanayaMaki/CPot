@@ -24,11 +24,13 @@
     </Filter>
     <Filter Include="Source\Rand\Standard">
       <UniqueIdentifier>{419ee489-5b98-4e12-8529-c71656087799}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source\Sleep">
       <UniqueIdentifier>{e25eea21-1b70-4a4f-8522-3cd1bd93fbe9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Sleep\Windows">
       <UniqueIdentifier>{509a026c-d2dd-4320-aba1-217cbf05f880}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source\Output">
       <UniqueIdentifier>{9256fe66-a836-41f6-94be-1141857c31bc}</UniqueIdentifier>
     </Filter>
@@ -99,11 +101,13 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Rand\Standard\rand.h">
       <Filter>Source\Rand\Standard</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Sleep\sleep.h">
       <Filter>Source\Sleep</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Sleep\Windows\sleep.h">
       <Filter>Source\Sleep\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Output\output.h">
       <Filter>Source\Output</Filter>
     </ClInclude>
@@ -126,8 +130,10 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Rand\Standard\randStandard.cpp">
       <Filter>Source\Rand\Standard</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Sleep\Windows\sleepWindows.cpp">
       <Filter>Source\Sleep\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Atom\Standard\stringStandard.cpp">
       <Filter>Source\Atom\Standard</Filter>
     </ClCompile>
