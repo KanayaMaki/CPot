@@ -21,7 +21,7 @@ TickType DeltaTick() {
 }
 
 //Œo‰ßŠÔ‚ğİ’è
-void DeltaTick(TickType aDeltaTick) {
+void SetDeltaTick(TickType aDeltaTick) {
 	gDeltaTick = aDeltaTick;
 	gDeltaTime = ToSecond(aDeltaTick);
 }

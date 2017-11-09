@@ -40,7 +40,7 @@ f32 DeltaTime();
 TickType DeltaTick();
 
 //Œo‰ßŠÔ‚ğİ’è
-void DeltaTick(TickType aDeltaTick);
+void SetDeltaTick(TickType aDeltaTick);
 
 #pragma endregion
 
