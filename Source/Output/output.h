@@ -19,9 +19,10 @@ namespace cpot {
 
 class OutputBase {
 
-public:
-	virtual ~OutputBase() {}	//仮想デストラクタ
+	//出力を行う関数
+	#pragma region Output
 
+	//可変長テンプレート
 public:
 	template <typename T, typename... Rest>
 	void Output(const T aVal, const Rest... aRest) {
@@ -34,9 +35,23 @@ public:
 		Output(aV2);
 	}
 
+
+	//引数を文字列にして、OutputStrに委譲している
 public:
 	void Output(const CHAR* aStr) {
 		OutputStr(aStr);
+	}
+	void Output(s8 aVal) {
+		OutputStr(ToString((s32)aVal));
+	}
+	void Output(u8 aVal) {
+		OutputStr(ToString((u32)aVal));
+	}
+	void Output(s16 aVal) {
+		OutputStr(ToString((s32)aVal));
+	}
+	void Output(u16 aVal) {
+		OutputStr(ToString((u32)aVal));
 	}
 	void Output(s32 aVal) {
 		OutputStr(ToString(aVal));
@@ -60,9 +75,20 @@ public:
 		OutputByte(aBuffer);
 	}
 
+	#pragma endregion
+
+
+	//派生先でオーバーライドされる
+	#pragma region Virtual
+
+public:
+	virtual ~OutputBase() {}	//仮想デストラクタ
+
 protected:
-	virtual void OutputStr(const CHAR* aStr) = 0;
-	virtual void OutputByte(const Buffer& aBuffer) {}
+	virtual void OutputStr(const CHAR* aStr) = 0;	//文字列を出力。必須
+	virtual void OutputByte(const Buffer& aBuffer) {}	//バイト列を出力。任意
+
+	#pragma endregion
 };
 
 

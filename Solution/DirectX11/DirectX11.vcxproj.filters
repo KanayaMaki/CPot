@@ -135,6 +135,9 @@
     <ClInclude Include="..\..\Source\Time\Windows\time.h">
       <Filter>Source\Time\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\test.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
