@@ -2,6 +2,10 @@
 
 #include "Window/Windows/window.h"
 
+#include "./Output/output.h"
+#include "./Output/Windows/outputDebugWindow.h"
+#include "./Output/Windows/outputConsole.h"
+
 #include <Windows.h>
 
 #include "Sleep/sleep.h"
@@ -16,6 +20,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 
 	cpot::Sleep sleep;
 	sleep.SleepSecond(5.0f);
+  
+	windows::OutputConsoleDevice::S().Init(lWindow->GetHwnd());
 
 	Window::MessageLoop();
 

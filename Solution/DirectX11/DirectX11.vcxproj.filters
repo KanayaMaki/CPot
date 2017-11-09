@@ -24,6 +24,11 @@
     </Filter>
     <Filter Include="Source\Sleep\Windows">
       <UniqueIdentifier>{509a026c-d2dd-4320-aba1-217cbf05f880}</UniqueIdentifier>
+    <Filter Include="Source\Output">
+      <UniqueIdentifier>{9256fe66-a836-41f6-94be-1141857c31bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Output\Windows">
+      <UniqueIdentifier>{15f53439-d7a4-4c01-b5bf-89fc624388c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +94,14 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Sleep\Windows\sleep.h">
       <Filter>Source\Sleep\Windows</Filter>
+    <ClInclude Include="..\..\Source\Output\output.h">
+      <Filter>Source\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Output\Windows\outputDebugWindow.h">
+      <Filter>Source\Output\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Output\Windows\outputConsole.h">
+      <Filter>Source\Output\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +116,14 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Sleep\Windows\sleepWindows.cpp">
       <Filter>Source\Sleep\Windows</Filter>
+    <ClCompile Include="..\..\Source\Atom\Standard\stringStandard.cpp">
+      <Filter>Source\Atom\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Output\Windows\outputDebugWindowWindows.cpp">
+      <Filter>Source\Output\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Output\Windows\outputConsoleWindows.cpp">
+      <Filter>Source\Output\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
