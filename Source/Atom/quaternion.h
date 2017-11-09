@@ -117,7 +117,7 @@ public:
 		f32 tLenQuad = tRes.w * tRes.w + tRes.v.x * tRes.v.x + tRes.v.y * tRes.v.y + tRes.v.z * tRes.v.z;
 
 		if (NotZero(tLenQuad)) {
-			f32 tLen = Sqrtf(tLenQuad);
+			f32 tLen = Sqrt(tLenQuad);
 			tRes.w /= tLen;
 			tRes.v /= tLen;
 		}
@@ -134,8 +134,8 @@ public:
 	static Quaternion FromAxis(const Vector3& aV, f32 aRad) {
 		Quaternion tRes;
 		f32 tHalfRad = -aRad / 2.0f;
-		tRes.w = Cosf(tHalfRad);
-		tRes.v = aV.Normal() * Sinf(tHalfRad);
+		tRes.w = Cos(tHalfRad);
+		tRes.v = aV.Normal() * Sin(tHalfRad);
 		return tRes;
 	}
 
@@ -174,7 +174,7 @@ public:
 		//	íºäpÇÃéûÇ…âÒì]ÇµÇ»Ç¢ÅBÇ®Ç©ÇµÇ¢
 		f32 lDot = lTo.Dot(lFrom);
 		lDot = Clamp(lDot, -1.0f, 1.0f);
-		f32 lAngle = Acosf(lDot);
+		f32 lAngle = Acos(lDot);
 
 		return Quaternion(lAxis, -lAngle);
 	}
@@ -248,10 +248,10 @@ public:
 		cosom = Clamp01(cosom);
 
 		if (NotZero(1.0 - cosom)) {
-			omega = Acosf(cosom);
-			sinom = Sinf(omega);
-			scale0 = Sinf((1.0 - aRate) * omega) / sinom;
-			scale1 = Sinf(aRate * omega) / sinom;
+			omega = Acos(cosom);
+			sinom = Sin(omega);
+			scale0 = Sin((1.0 - aRate) * omega) / sinom;
+			scale1 = Sin(aRate * omega) / sinom;
 		}
 		else {
 			scale0 = 1.0 - aRate;

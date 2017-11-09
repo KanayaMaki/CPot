@@ -29,6 +29,9 @@ inline T Abs(T aVal) {
 inline s32 Mod(s32 aVal, u32 aM) {
 	return aVal % aM;
 }
+inline u32 Mod(u32 aVal, u32 aM) {
+	return aVal % aM;
+}
 
 #pragma endregion
 
@@ -42,32 +45,32 @@ const f32 cFloatEpsilon;
 //*/
 
 
-s32 Roundf(f32 aVal);
+s32 Round(f32 aVal);
 
-s32 Ceilf(f32 aVal);
+s32 Ceil(f32 aVal);
 
-s32 Floorf(f32 aVal);
-
-
-f32 Modf(f32 aVal, f32 aM);
+s32 Floor(f32 aVal);
 
 
-f32 Sinf(f32 aRad);
-
-f32 Cosf(f32 aRad);
-
-f32 Tanf(f32 aRad);
-
-f32 Asinf(f32 aVal);
-
-f32 Acosf(f32 aVal);
-
-f32 Atanf(f32 aVal);
+f32 Mod(f32 aVal, f32 aM);
 
 
-f32 Sqrtf(f32 val);
+f32 Sin(f32 aRad);
 
-f32 Expf(f32 val);
+f32 Cos(f32 aRad);
+
+f32 Tan(f32 aRad);
+
+f32 Asin(f32 aVal);
+
+f32 Acos(f32 aVal);
+
+f32 Atan(f32 aVal);
+
+
+f32 Sqrt(f32 val);
+
+f32 Exp(f32 val);
 
 }
 

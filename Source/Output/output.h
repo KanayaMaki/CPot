@@ -180,12 +180,12 @@ private:
 
 #ifdef CPOT_VALID_LOG
 #define CPOT_LOG(...) \
-	Log::S().Output(__VA_ARGS__);
-#define CPOT_LOG_ENDL(...) \
 	Log::S().Output(__VA_ARGS__, "\n");
+#define CPOT_LOG_NO_ENDL(...) \
+	Log::S().Output(__VA_ARGS__);
 #else
-#define CPOT_LOG(string)
-#define CPOT_LOG_ENDL(string)
+#define CPOT_LOG(...)
+#define CPOT_LOG_NO_ENDL(...)
 #endif
 
 #pragma endregion

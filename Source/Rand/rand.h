@@ -36,21 +36,27 @@ public:
 
 	//0 <= x, x <= aMaxの乱数を生成
 	RandType Next(RandType aMax) {
+
+		//全ての数が均等に出るように、中途半端な余りならもう一度生成する
+		RandType lMaxMode = Mod(MaxValue(), aMax + 1); //中途半端な余りの大きさ
+		RandType lMaxJust = MaxValue() - lMaxMode;	//ちょうど割り切れる最大数を求める
+
 		while (true) {
+
 			RandType v = Next();
 
-			f32 l = Floorf((f64)v / (MaxValue() - 1));
-			if (l <= aMax / (MaxValue() - 1)) continue;
+			if (v >= lMaxJust) {
+				continue;	//ちょうど割り切れる最大数以上なら、もう一度計算する
+			}
 
-			return v;
+			return Mod(v, aMax + 1);
 		}
-
 	}
 
 	//aMin <= x, x <= aMaxの乱数を生成
 	RandType Next(RandType aMin, RandType aMax) {
 		CPOT_ASSERT(aMin < aMax);
-		return Next(0, aMax - aMin) + aMin;
+		return Next(aMax - aMin) + aMin;
 	}
 	f32 Nextf() {
 		return (f64)(Next()) / MaxValue();
@@ -58,7 +64,7 @@ public:
 
 	f32 Nextf(f32 aMin, f32 aMax) {
 		f32 v = Nextf();
-		return Replace(aMin, aMax, v);
+		return Replace(v, aMin, aMax);
 	}
 
 	f32 Nextf(f32 aMax) {

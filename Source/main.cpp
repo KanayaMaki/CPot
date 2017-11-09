@@ -20,18 +20,19 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 	Window* lWindow = Window::Create();
 	lWindow->Load(hInstance, Vector2(960.0f, 540.0f), "Game");
 
-	standard::Rand r;
-	r.SetSeed(100);
-
-	for (u32 i = 0; i < 100; i++) {
-		r.Next();
-	}
-  
-	cpot::Sleep sleep;
-	sleep.SleepSecond(5.0f);
-  
 	windows::OutputConsoleDevice::S().Init(lWindow->GetHwnd());
 
+	windows::OutputConsole o;
+	o.Load();
+	Log::S().Set(&o);
+
+	standard::Rand r;
+	r.SetSeed(1000);
+
+	for (u32 i = 0; i < 1000; i++) {
+		CPOT_LOG_NO_ENDL(r.Nextf(2.0f), ",");
+	}
+  
 
 	Window::MessageLoop();
 

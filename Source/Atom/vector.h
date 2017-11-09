@@ -184,7 +184,7 @@ public:
 
 	//ベクトルの長さ
 	f32 Len() const {
-		return Sqrtf(LenQuad());
+		return Sqrt(LenQuad());
 	}
 	//ベクトルの長さの二乗
 	f32 LenQuad() const {
@@ -561,7 +561,7 @@ public:
 
 	//ベクトルの長さを返す
 	f32 Len() const {
-		return Sqrtf(LenQuad());
+		return Sqrt(LenQuad());
 	}
 	//ベクトルの長さの二乗を返す
 	f32 LenQuad() const {
@@ -966,7 +966,7 @@ public:
 
 	//ベクトルの長さを返す
 	f32 Len() const {
-		return Sqrtf(LenQuad());
+		return Sqrt(LenQuad());
 	}
 	//ベクトルの長さの二乗を返す
 	f32 LenQuad() const {
