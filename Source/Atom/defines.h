@@ -130,9 +130,9 @@ namespace cpot {
 
 //—LŒø‚É‚·‚é
 #ifdef CPOT_VALID_VI
-#define CYPO_VI virtual
-#define CYPO_ZR =0
-#define CYPO_OR override
+#define CPOT_VI virtual
+#define CPOT_ZR =0
+#define CPOT_OR override
 
 //–³Œø
 #else

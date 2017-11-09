@@ -53,6 +53,9 @@ public:
 	void Output(f32 aVal) {
 		OutputStr(ToString(aVal));
 	}
+	void Output(f64 aVal) {
+		OutputStr(ToString(aVal));
+	}
 	void Output(const Buffer& aBuffer) {
 		OutputByte(aBuffer);
 	}

@@ -49,7 +49,9 @@
     <ClInclude Include="..\..\Source\Output\output.h" />
     <ClInclude Include="..\..\Source\Output\Windows\outputConsole.h" />
     <ClInclude Include="..\..\Source\Output\Windows\outputDebugWindow.h" />
+    <ClInclude Include="..\..\Source\Time\Standard\time.h" />
     <ClInclude Include="..\..\Source\Time\time.h" />
+    <ClInclude Include="..\..\Source\Time\Windows\time.h" />
     <ClInclude Include="..\..\Source\Usefull\buffer.h" />
     <ClInclude Include="..\..\Source\Usefull\singleton.h" />
     <ClInclude Include="..\..\Source\Window\Windows\cursor.h" />
@@ -64,6 +66,7 @@
     <ClCompile Include="..\..\Source\Output\Windows\outputDebugWindowWindows.cpp" />
     <ClCompile Include="..\..\Source\test.cpp" />
     <ClCompile Include="..\..\Source\Time\time.cpp" />
+    <ClCompile Include="..\..\Source\Time\Windows\timeWindows.cpp" />
     <ClCompile Include="..\..\Source\Window\Windows\windowWindows.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

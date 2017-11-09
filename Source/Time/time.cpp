@@ -12,6 +12,12 @@ namespace cpot {
 #pragma region DeltaTime
 
 
+//Œo‰ßŠÔ‚ğŠi”[‚µ‚Ä‚¨‚­•Ï”
+static const f32 cFps = 60.0f;
+static u64 gDeltaTick = cTickUnit / cFps;
+static u64 gDeltaTime = 1.0f / cFps;
+
+
 f32 DeltaTime() {
 	return gDeltaTime;
 }
@@ -26,10 +32,6 @@ void SetDeltaTick(TickType aDeltaTick) {
 	gDeltaTime = ToSecond(aDeltaTick);
 }
 
-//Œo‰ßŠÔ‚ğŠi”[‚µ‚Ä‚¨‚­•Ï”
-static const f32 cFps = 60.0f;
-static u64 gDeltaTick = cTickScale / cFps;
-static u64 gDeltaTime = 1.0f / cFps;
 
 #pragma endregion
 

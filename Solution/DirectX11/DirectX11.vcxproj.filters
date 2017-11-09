@@ -40,6 +40,12 @@
     <Filter Include="Source\Time">
       <UniqueIdentifier>{0512ce2d-f961-477b-91ef-aab504a673d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Time\Standard">
+      <UniqueIdentifier>{30663041-c606-49d9-826f-8fc5c5c7efae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Time\Windows">
+      <UniqueIdentifier>{a54ea99c-4a65-41d2-856a-ed8b0ad6c7e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -123,6 +129,12 @@
     <ClInclude Include="..\..\Source\Time\time.h">
       <Filter>Source\Time</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Time\Standard\time.h">
+      <Filter>Source\Time\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Time\Windows\time.h">
+      <Filter>Source\Time\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -151,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Time\time.cpp">
       <Filter>Source\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Time\Windows\timeWindows.cpp">
+      <Filter>Source\Time\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

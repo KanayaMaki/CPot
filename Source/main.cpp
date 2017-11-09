@@ -11,6 +11,7 @@
 #include "Rand/rand.h"
 
 #include "Sleep/sleep.h"
+#include "Time/time.h"
 
 
 using namespace cpot;
@@ -26,13 +27,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 	o.Load();
 	Log::S().Set(&o);
 
-	standard::Rand r;
-	r.SetSeed(1000);
+	Time lTime;
 
-	for (u32 i = 0; i < 1000; i++) {
-		CPOT_LOG_NO_ENDL(r.Nextf(2.0f), ",");
+	f64 lStart = lTime.GetDetail();
+	for (u32 i = 0; i < 100000; i++) {
+		lTime.GetDetail();
 	}
-  
+	CPOT_LOG(lTime.GetDetail() - lStart);
+ 
 
 	Window::MessageLoop();
 

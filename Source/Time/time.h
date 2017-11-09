@@ -14,16 +14,16 @@ namespace cpot {
 
 
 using TickType = u64;
-const TickType cTickScale = 1200000UL;	//1秒が何Tickか
+const TickType cTickUnit = 1200000UL;	//1秒が何Tickか
 
 //秒をチックに
 inline TickType ToTick(f32 aSecond) {
-	return aSecond * cTickScale;
+	return aSecond * cTickUnit;
 }
 
 //チックを秒に
 inline f32 ToSecond(TickType aTick) {
-	return (f64)aTick / cTickScale;
+	return (f64)aTick / cTickUnit;
 }
 
 
@@ -45,8 +45,13 @@ void SetDeltaTick(TickType aDeltaTick);
 #pragma endregion
 
 
+using UnixTimeType = s64;
 
-struct DateTime {
+
+//日時
+#pragma region DateTime
+
+struct DateTimeData {
 	s32 year;
 	u8 month;
 	u8 day;
@@ -55,22 +60,52 @@ struct DateTime {
 	u8 second;
 	enum CYoubi : u8 {
 		cSunday,
+		cMonday,
+		cTuesday,
+		cWednesday,
+		cThursday,
+		cFriday,
+		cSaturday,
 	} youbi;
+
 };
 
 
+class DateTime {
+
+public:
+	//現在の日時を取得する
+	DateTimeData Get();
+
+	//UnixTimeを現在の日時に変換する
+	DateTimeData ToDateTime(UnixTimeType aUnixTime);
+};
+
+
+
+#pragma endregion
+
+
+//時間を取得
+#pragma region Time
 
 class TimeBase {
 public:
+	//ユニックスタイムを取得
+	CPOT_VI UnixTimeType GetUnix() const CPOT_ZR;
 
+	//細密な時間を取得
+	CPOT_VI f64 GetDetail() const CPOT_ZR;
 };
+
+#pragma endregion
 
 
 }
 
 
 #ifdef CPOT_ON_WINDOWS
-//#include "./Time/Windows/sleep.h"
+#include "./Time/Windows/time.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Sleep/Android/sleep.h"
 #endif
