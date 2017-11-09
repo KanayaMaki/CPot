@@ -37,6 +37,9 @@
     <Filter Include="Source\Output\Windows">
       <UniqueIdentifier>{15f53439-d7a4-4c01-b5bf-89fc624388c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Time">
+      <UniqueIdentifier>{0512ce2d-f961-477b-91ef-aab504a673d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -117,6 +120,9 @@
     <ClInclude Include="..\..\Source\Output\Windows\outputConsole.h">
       <Filter>Source\Output\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Time\time.h">
+      <Filter>Source\Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -142,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Output\Windows\outputConsoleWindows.cpp">
       <Filter>Source\Output\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Time\time.cpp">
+      <Filter>Source\Time</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
