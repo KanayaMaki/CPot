@@ -12,8 +12,8 @@ void TestOutput(HWND aHwnd);
 
 #pragma region Time
 
-void TestDeltaTime();
-void TestTick();
+void TestDeltaTime();	//OK
+void TestTick();	//OK
 
 void TestDetailTime();	//OK
 void TestUnixTime();	//OK

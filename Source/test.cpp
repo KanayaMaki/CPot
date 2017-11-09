@@ -37,7 +37,16 @@ void TestOutput(HWND aHwnd) {
 #pragma region Time
 
 void TestDeltaTime() {
+	CPOT_LOG("TestDeltaTime");
 
+	CPOT_LOG("DeltaTime:", DeltaTime());
+	CPOT_LOG("DeltaTick:", (u64)DeltaTick());
+
+	CPOT_LOG("SetDeltaTime(1.0f / 30.0f)");
+	SetDeltaTime(1.0f / 30.0f);
+
+	CPOT_LOG("DeltaTime:", DeltaTime());
+	CPOT_LOG("DeltaTick:", (u64)DeltaTick());
 }
 void TestTick() {
 

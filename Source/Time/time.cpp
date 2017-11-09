@@ -15,7 +15,7 @@ namespace cpot {
 //Œo‰ßŠÔ‚ğŠi”[‚µ‚Ä‚¨‚­•Ï”
 static const f32 cFps = 60.0f;
 static u64 gDeltaTick = cTickUnit / cFps;
-static u64 gDeltaTime = 1.0f / cFps;
+static f32 gDeltaTime = 1.0f / cFps;
 
 
 f32 DeltaTime() {
@@ -30,6 +30,11 @@ TickType DeltaTick() {
 void SetDeltaTick(TickType aDeltaTick) {
 	gDeltaTick = aDeltaTick;
 	gDeltaTime = ToSecond(aDeltaTick);
+}
+//Œo‰ßŠÔ‚ğİ’è
+void SetDeltaTime(f32 aDeltaTime) {
+	gDeltaTick = ToTick(aDeltaTime);
+	gDeltaTime = aDeltaTime;
 }
 
 
