@@ -46,6 +46,12 @@
     <Filter Include="Source\Time\Windows">
       <UniqueIdentifier>{a54ea99c-4a65-41d2-856a-ed8b0ad6c7e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\List">
+      <UniqueIdentifier>{33a2007d-6ebe-41df-ae9e-1fb61644ac94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\List\Standard">
+      <UniqueIdentifier>{cf9b1076-09bf-482d-a914-93f49c17b981}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -138,6 +144,18 @@
     <ClInclude Include="..\..\Source\test.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\List\vector.h">
+      <Filter>Source\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\hashTable.h">
+      <Filter>Source\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\Standard\vector.h">
+      <Filter>Source\List\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\Standard\hashTable.h">
+      <Filter>Source\List\Standard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -169,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Time\Windows\timeWindows.cpp">
       <Filter>Source\Time\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\List\Standard\vectorStandard.cpp">
+      <Filter>Source\List\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\List\Standard\hashTableStandard.cpp">
+      <Filter>Source\List\Standard</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

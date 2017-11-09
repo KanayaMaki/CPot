@@ -22,3 +22,9 @@ void TestDateTime();	//OK
 
 #pragma endregion
 
+
+#pragma region Vector
+
+void TestVector();
+
+#pragma endregion

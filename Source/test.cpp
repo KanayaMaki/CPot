@@ -17,6 +17,8 @@
 //Time
 #include "Time/time.h"
 
+//Vector
+#include "List/vector.h"
 
 #include <Windows.h>
 
@@ -103,3 +105,31 @@ void TestDateTime() {
 
 
 
+#pragma region Vector
+
+void TestVector() {
+
+	Vector<u32> v;
+	v.PushBack(32);
+	v.PushBack(100);
+	v.PushBack(200);
+	v.PushBack(200);
+	v.PushBack(100);
+
+	for (u32 i = 0; i < v.GetSize(); i++) {
+		CPOT_LOG(v[i]);
+	}
+
+	CPOT_LOG(v.Count(100));
+
+	u32 a = v.Remove(100);
+	CPOT_LOG(a);
+
+	CPOT_LOG(v.Count(100));
+
+	for (u32 i = 0; i < v.GetSize(); i++) {
+		CPOT_LOG(v[i]);
+	}
+}
+
+#pragma endregion
