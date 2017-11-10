@@ -35,3 +35,10 @@ void TestVector();	//OK
 void TestHashTable();
 
 #pragma endregion
+
+
+#pragma region Thread
+
+void TestThread();
+
+#pragma endregion

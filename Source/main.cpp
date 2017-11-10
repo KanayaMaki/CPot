@@ -16,7 +16,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 	
 	TestOutput(lWindow->GetHwnd());
 
-	TestHashTable();
+	TestThread();
 
 	Window::MessageLoop();
 

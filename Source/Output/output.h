@@ -10,6 +10,8 @@
 #include "./Usefull/singleton.h"
 #include "./Usefull/buffer.h"
 
+#include "./Thread/mutex.h"
+
 namespace cpot {
 
 
@@ -178,7 +180,7 @@ public:
 private:
 	//文字列を出力する。OutBaseにオーバーライドで呼ばれる
 	void OutputStr(const CHAR* aStr) override {
-		//MutexLocker m(mMutex);
+		MutexLocker m(mMutex);
 		mOut->Output(aStr);
 	}
 
@@ -190,7 +192,7 @@ private:
 
 private:
 	OutputBase* mOut;
-	//Mutex mMutex;
+	Mutex mMutex;
 
 	#pragma endregion
 };
