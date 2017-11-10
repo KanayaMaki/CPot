@@ -23,10 +23,17 @@
 //HashTable
 #include "List/hashTable.h"
 
+//Thread
+#include "Thread/thread.h"
+#include "Thread/mutex.h"
+
+
 #include <Windows.h>
 
 using namespace cpot;
 
+
+#pragma region Output
 
 void TestOutput(HWND aHwnd) {
 
@@ -37,6 +44,8 @@ void TestOutput(HWND aHwnd) {
 	Log::S().Set(o);
 
 }
+
+#pragma endregion
 
 
 #pragma region Time
@@ -107,7 +116,6 @@ void TestDateTime() {
 #pragma endregion
 
 
-
 #pragma region Vector
 
 void TestVector() {
@@ -150,6 +158,35 @@ void TestHashTable() {
 	hash.Add("data4", 49);
 
 	CPOT_LOG(hash.Find("data1"));
+}
+
+#pragma endregion
+
+
+#pragma region Thread
+
+Mutex gMutex;
+
+void TestMutex(u32* aData) {
+
+	//MutexLocker lMl(gMutex);
+
+	for (u32 i = 0; i < 2; i++) {
+		CPOT_LOG(i);
+	}
+}
+
+void TestThread() {
+
+	Thread t[10];
+
+	for (u32 i = 0; i < 10; i++) {
+		t[i].Start(TestMutex, nullptr);
+	}
+
+	for (u32 i = 0; i < 10; i++) {
+		t[i].Join();
+	}
 }
 
 #pragma endregion

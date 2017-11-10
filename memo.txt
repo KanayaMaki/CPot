@@ -45,14 +45,14 @@ Setting
 	CHAR* mTitle;
 
 
-HashTable
-	T Remove(const HashTableKey& aKey)
-	T Remove(const CHAR* aKey)
-	void Clear()
+Thread t;
+t.Start(DoFunc, data);
 
-	T Find(const HashTableKey& aKey)
+//スレッドの終了を待つ
+t.Join();
 
-
+//スレッドを終了する
+t.Stop();
 
 描画
 インプットの更新

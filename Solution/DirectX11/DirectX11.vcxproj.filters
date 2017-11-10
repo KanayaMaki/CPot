@@ -58,6 +58,12 @@
     <Filter Include="Source\Resource\Windows">
       <UniqueIdentifier>{0ead0b03-883e-413a-8b41-6541c01c71f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Thread">
+      <UniqueIdentifier>{2e757ff2-9a9b-40ad-bed6-369b8b251a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Thread\Standard">
+      <UniqueIdentifier>{6db0a1a1-c4cb-445b-aff9-7d865e40aba2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -164,6 +170,21 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Resource\Windows\resource.h">
       <Filter>Source\Resource\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thread\Standard\mutex.h">
+      <Filter>Source\Thread\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thread\Standard\thread.h">
+      <Filter>Source\Thread\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thread\mutex.h">
+      <Filter>Source\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thread\mutexLocker.h">
+      <Filter>Source\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thread\thread.h">
+      <Filter>Source\Thread</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
