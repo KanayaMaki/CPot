@@ -17,11 +17,13 @@
 [Rr]eleases/
 x64/
 x86/
-Win32/
 bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+#MyAdd
+[Mm]aster/
+Win32/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -63,16 +65,18 @@ artifacts/
 *.tlb
 *.tli
 *.tlh
-*.tlog
 *.tmp
 *.tmp_proj
 *.log
 *.vspscc
 *.vssscc
 .builds
-*.pidb
 *.svclog
 *.scc
+#MyAdd
+*.tlog
+*.pidb
+
 
 # Chutzpah Test files
 _Chutzpah*
