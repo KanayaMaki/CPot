@@ -44,6 +44,7 @@ public:
 				return lVal;
 			}
 		}
+		return T(0);
 	}
 
 	//w’è‚³‚ê‚½’l‚Æ“™‚µ‚¢—v‘f‚Ìíœ

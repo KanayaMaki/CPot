@@ -48,6 +48,7 @@
     <ClInclude Include="..\..\Source\List\vector.h" />
     <ClInclude Include="..\..\Source\Rand\rand.h" />
     <ClInclude Include="..\..\Source\Rand\Standard\rand.h" />
+    <ClInclude Include="..\..\Source\Resource\Windows\resource.h" />
     <ClInclude Include="..\..\Source\Sleep\sleep.h" />
     <ClInclude Include="..\..\Source\Sleep\Windows\sleep.h" />
     <ClInclude Include="..\..\Source\Output\output.h" />
@@ -75,6 +76,12 @@
     <ClCompile Include="..\..\Source\Time\time.cpp" />
     <ClCompile Include="..\..\Source\Time\Windows\timeWindows.cpp" />
     <ClCompile Include="..\..\Source\Window\Windows\windowWindows.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\Source\Resource\Windows\Icon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Source\Resource\Windows\icon.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
