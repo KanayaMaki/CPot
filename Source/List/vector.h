@@ -17,7 +17,7 @@ class VectorBase {
 	#pragma region Add
 
 public:
-	CPOT_VI void PushBack(T aT) CPOT_ZR;
+	CPOT_VI void PushBack(const T& aT) CPOT_ZR;
 
 	#pragma endregion
 
@@ -27,10 +27,10 @@ public:
 	
 public:
 	//指定された値と等しい要素の削除（先頭から１つだけ）
-	CPOT_VI T Remove(T aT) CPOT_ZR;
+	CPOT_VI T Remove(const T& aT) CPOT_ZR;
 
 	//等しい要素の削除（全て）
-	CPOT_VI void RemoveAll(T aT) CPOT_ZR;
+	CPOT_VI void RemoveAll(const T& aT) CPOT_ZR;
 
 	//全ての要素を削除
 	CPOT_VI void Clear() CPOT_ZR;
@@ -46,7 +46,7 @@ public:
 	CPOT_VI T& operator[](u32 aIndex) CPOT_ZR;
 
 	//指定された値の要素がいくつあるか
-	CPOT_VI u32 Count(T aT) CPOT_ZR;
+	CPOT_VI u32 Count(const T& aT) const CPOT_ZR;
 
 	#pragma endregion
 
@@ -69,7 +69,7 @@ public:
 	CPOT_VI void Reserve(u32 aSize) CPOT_ZR;
 
 	//バッファの要素数を取得
-	CPOT_VI u32 GetCapacity() CPOT_ZR;
+	CPOT_VI u32 GetCapacity() const CPOT_ZR;
 
 	#pragma endregion
 

@@ -1,5 +1,5 @@
 //
-//	内容　:　RandBaseクラスの実装
+//	内容　:　HashTableBaseクラスの実装
 //
 
 #pragma once
@@ -8,135 +8,73 @@
 
 namespace cpot {
 
+using HashTableKey = HashString<32>;
 
-using RandType = u32;
-using SeedType = u32;
+//ハッシュテーブルのクラス
+template <typename T>
+class HashTableBase {
 
-
-class RandBase {
-
-	//終了処理
-	#pragma region Final
+	//要素の追加
+	#pragma region Add
 
 public:
-	//仮想デストラクタ
-	virtual ~RandBase() {}
+	// ! 同じキーがすでにある場合、追加しない
+	CPOT_VI void Add(const HashTableKey& aKey, T aValue) CPOT_ZR;
 
 	#pragma endregion
 
 
-	//乱数の生成
-	#pragma region Next
+	//要素の消去
+	#pragma region Remove
 
 public:
-	//MinValue() <= x, x <= MaxValue()の乱数を生成
-	RandType Next() {
-		return NextInner();
-	}
+	//指定されたキーを持つ要素の削除
+	CPOT_VI T Remove(const HashTableKey& aKey) CPOT_ZR;
 
-	//0 <= x, x <= aMaxの乱数を生成
-	RandType Next(RandType aMax) {
+	//指定された値と等しい要素の削除
+	CPOT_VI void Remove(T aT) CPOT_ZR;
 
-		//全ての数が均等に出るように、中途半端な余りならもう一度生成する
-		RandType lMaxMode = Mod(MaxValue(), aMax + 1); //中途半端な余りの大きさ
-		RandType lMaxJust = MaxValue() - lMaxMode;	//ちょうど割り切れる最大数を求める
-
-		while (true) {
-
-			RandType v = Next();
-
-			if (v >= lMaxJust) {
-				continue;	//ちょうど割り切れる最大数以上なら、もう一度計算する
-			}
-
-			return Mod(v, aMax + 1);
-		}
-	}
-
-	//aMin <= x, x <= aMaxの乱数を生成
-	RandType Next(RandType aMin, RandType aMax) {
-		CPOT_ASSERT(aMin < aMax);
-		return Next(aMax - aMin) + aMin;
-	}
-	f32 Nextf() {
-		return (f64)(Next()) / MaxValue();
-	}
-
-	f32 Nextf(f32 aMin, f32 aMax) {
-		f32 v = Nextf();
-		return Replace(v, aMin, aMax);
-	}
-
-	f32 Nextf(f32 aMax) {
-		return Nextf(0.0f, aMax);
-	}
+	//全ての要素を削除
+	CPOT_VI void Clear() CPOT_ZR;
 
 	#pragma endregion
 
 
-	//取得
+	//要素の取得
 	#pragma region Getter
 
 public:
-	//乱数の最大値
-	RandType MaxValue() const {
-		return MaxValueInner();
-	}
-	//乱数の最小値
-	RandType MinValue() const {
-		return MinValueInner();
-	}
+	//インデックスアクセス
+	// ! 要素がなければ、作成する
+	CPOT_VI T& operator[](const HashTableKey& aKey) CPOT_ZR;
 
-	//現在のシード値の取得
-	SeedType GetSeed() const {
-		GetSeedInner();
-	}
+	//名前で検索
+	// ! 要素がなければ0を返す
+	CPOT_VI T Find(const HashTableKey& aKey) const CPOT_ZR;
+
+	//指定されたキーを持つ要素が存在するか
+	CPOT_VI BOOL Exist(const HashTableKey& aKey) const CPOT_ZR;
 
 	#pragma endregion
 
 
-	//操作
-	#pragma region Operate
+	//要素の設定
+	#pragma region Setter
 
 public:
-	//シード値の設定
-	void SetSeed(SeedType aSeed) {
-		SetSeedInner(aSeed);
-	}
-
-	//現在のシード値でリセット
-	void Reload() {
-		SetSeed(GetSeed());
-	}
-	//シード値0でリセット
-	void Reset() {
-		SetSeed(SeedType(0));
-	}
+	CPOT_VI void Set(const HashTableKey& aKey, const T& aValue) CPOT_ZR;
 
 	#pragma endregion
 
 
-	//派生先でオーバーライドする必要のある関数
-	#pragma region Virtual
+	//配列の要素数
+	#pragma region Size
 
-protected:
-	//乱数を生成する関数。派生先で実装する必要がある
-	virtual RandType NextInner() = 0;
-
-	//乱数の最大値
-	virtual RandType MaxValueInner() const = 0;
-	//乱数の最小値
-	virtual RandType MinValueInner() const = 0;
-
-	//現在のシード値の取得
-	virtual SeedType GetSeedInner() const = 0;
-
-	//シード値を設定
-	virtual void SetSeedInner(SeedType aSeed) = 0;
-
+public:
+	//現在の要素数の取得
+	CPOT_VI u32 GetSize() const CPOT_ZR;
 
 	#pragma endregion
-
 };
 
 
@@ -144,5 +82,5 @@ protected:
 
 
 #ifdef CPOT_ON_WINDOWS
-#include "./Standard/rand.h"
+#include "./List/Standard/hashTable.h"
 #endif

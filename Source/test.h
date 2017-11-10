@@ -25,6 +25,13 @@ void TestDateTime();	//OK
 
 #pragma region Vector
 
-void TestVector();
+void TestVector();	//OK
+
+#pragma endregion
+
+
+#pragma region HashTable
+
+void TestHashTable();
 
 #pragma endregion

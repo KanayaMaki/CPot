@@ -65,8 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Atom\Standard\stringStandard.cpp" />
-    <ClCompile Include="..\..\Source\List\Standard\hashTableStandard.cpp" />
-    <ClCompile Include="..\..\Source\List\Standard\vectorStandard.cpp" />
     <ClCompile Include="..\..\Source\main.cpp" />
     <ClCompile Include="..\..\Source\Rand\Standard\randStandard.cpp" />
     <ClCompile Include="..\..\Source\Sleep\Windows\sleepWindows.cpp" />

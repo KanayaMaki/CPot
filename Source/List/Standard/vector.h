@@ -24,7 +24,7 @@ class Vector : public VectorBase<T> {
 	#pragma region Add
 
 public:
-	void PushBack(T aT) CPOT_OR {
+	void PushBack(const T& aT) CPOT_OR {
 		mVector.push_back(aT);
 	}
 
@@ -36,7 +36,7 @@ public:
 
 public:
 	//指定された値と等しい要素の削除（１つだけ）
-	T Remove(T aT) CPOT_OR {
+	T Remove(const T& aT) CPOT_OR {
 		for (auto it = mVector.begin(); it != mVector.end(); it++) {
 			if (*it == aT) {
 				T lVal = *it;
@@ -48,7 +48,7 @@ public:
 	}
 
 	//指定された値と等しい要素の削除
-	void RemoveAll(T aT) CPOT_OR {
+	void RemoveAll(const T& aT) CPOT_OR {
 		mVector.erase(std::remove(mVector.begin(), mVector.end(), aT), mVector.end());
 	}
 
@@ -71,7 +71,7 @@ public:
 	}
 
 	//指定された値の要素がいくつあるか
-	u32 Count(T aT) CPOT_OR {
+	u32 Count(const T& aT) const CPOT_OR {
 		u32 lCount = 0;
 		for (auto it = mVector.begin(); it != mVector.end(); it++) {
 			if (*it == aT) {
@@ -106,7 +106,7 @@ public:
 	}
 
 	//バッファの要素数を取得
-	u32 GetCapacity() CPOT_OR {
+	u32 GetCapacity() const CPOT_OR {
 		return mVector.capacity();
 	}
 

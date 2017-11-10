@@ -5,228 +5,107 @@
 #pragma once
 
 #include "./Atom/atom.h"
-#include "./Rand/rand.h"
+#include "./List/hashTable.h"
 
-#include <random>
+#include <map>
 
 namespace cpot {
 
 namespace standard {
 
-#undef max
-#undef min
 
+//ハッシュテーブルのクラス
+template <typename T>
+class HashTable : public HashTableBase<T> {
 
-//64bitの乱数を生成するデバイス
-class Rand64Device {
-
-	//初期化
-	#pragma region Init
+	//要素の追加
+	#pragma region Add
 
 public:
-	Rand64Device() {
-		Reset();
-	}
-
-	void Reload() {
-		SetSeed(mSeed);
-	}
-	void Reset() {
-		SetSeed(0);
+	// ! 同じキーがすでにある場合、追加しない
+	void Add(const HashTableKey& aKey, T aValue) CPOT_OR {
+		mList.insert(std::make_pair(aKey, aValue));
 	}
 
 	#pragma endregion
 
 
-	//取得
-	#pragma region Getter
+	//要素の消去
+	#pragma region Remove
 
 public:
-	//MinValue() <= x, x <= MaxValue()の乱数を生成
-	u64 Next() {
-		return mMt();
-	}
+	//指定されたキーを持つ要素の削除
+	T Remove(const HashTableKey& aKey) CPOT_OR {
+		auto it = mList.find(aKey);
 
-
-	//シード値を取得
-	u64 GetSeed() const {
-		return mSeed;
-	}
-
-	//乱数の最大値
-	u64 MaxValue() const {
-		return mMt.max();
-	}
-
-	//乱数の最小値
-	u64 MinValue() const {
-		return mMt.min();
-	}
-
-	#pragma endregion
-
-
-	//設定
-	#pragma region Setter
-
-	void SetSeed(u64 aSeed) {
-		mMt.seed(aSeed);
-		mSeed = aSeed;
-
-		//最初は偏るので、読み飛ばす
-		for (u32 i = 0; i < 100; i++) {
-			Next();
+		//要素があれば
+		if (it != mList.end()) {
+			T tRes = (*it).second;
+			mList.erase(it);
+			return tRes;
 		}
+		return T(0);
 	}
 
-	#pragma endregion
+	//指定された値と等しい要素の削除
+	void Remove(T aT) CPOT_OR {
 
-	
-	//フィールド
-	#pragma region Field
-
-private:
-	std::mt19937_64 mMt;	//メルセンヌツイスタで64bitの乱数を生成するデバイス
-	u64 mSeed;	//シード値
-
-	#pragma endregion
-};
-
-
-//32bitの乱数を生成するデバイス
-class Rand32Device {
-
-	//初期化
-	#pragma region Init
-
-public:
-	Rand32Device() {
-		Reset();
 	}
 
-	void Reload() {
-		SetSeed(mSeed);
-	}
-	void Reset() {
-		SetSeed(0);
+	//全ての要素を削除
+	void Clear() CPOT_OR {
+		mList.clear();
 	}
 
 	#pragma endregion
 
 
-	//取得
+	//要素の取得
 	#pragma region Getter
 
 public:
-	//MinValue() <= x, x <= MaxValue()の乱数を生成
-	u32 Next() {
-		return mMt();
+	//インデックスアクセス
+	// ! 要素がなければ、作成する
+	T& operator[](const HashTableKey& aKey) CPOT_OR {
+		return mList[aKey];
 	}
 
-
-	//シード値を取得
-	u32 GetSeed() const {
-		return mSeed;
-	}
-
-	//乱数の最大値
-	u32 MaxValue() const {
-		return mMt.max();
-	}
-
-	//乱数の最小値
-	u32 MinValue() const {
-		return mMt.min();
-	}
-
-	#pragma endregion
-
-
-	//設定
-	#pragma region Setter
-
-	void SetSeed(u32 aSeed) {
-		mMt.seed(aSeed);
-		mSeed = aSeed;
-
-		//最初は偏るので、読み飛ばす
-		for (u32 i = 0; i < 100; i++) {
-			Next();
+	//名前で検索
+	// ! 要素がなければ0を返す
+	T Find(const HashTableKey& aKey) const CPOT_OR {
+		auto it = mList.find(aKey);
+		if (it != mList.end()) {
+			return (*it).second;
 		}
+		return T(0);
+	}
+
+	//指定されたキーを持つ要素が存在するか
+	BOOL Exist(const HashTableKey& aKey) const CPOT_OR {
+		return mList.find(aKey) != mList.end();
 	}
 
 	#pragma endregion
 
 
-	//フィールド
-	#pragma region Field
-
-private:
-	std::mt19937 mMt;	//メルセンヌツイスタで64bitの乱数を生成するデバイス
-	u32 mSeed;	//シード値
-
-	#pragma endregion
-};
-
-
-//RandBaseを派生した乱数を生成するクラス
-class Rand : public RandBase {
-
-	//初期化
-	#pragma region Init
-
-public:
-	Rand() {
-		Reset();
-	}
-
-	#pragma endregion
-
-
-	//取得
-	#pragma region Getter
-
-private:
-	//乱数を生成する
-	RandType NextInner() override {
-		return mRand.Next();
-	}
-
-	//乱数の最大値
-	RandType MaxValueInner() const override {
-		return mRand.MaxValue();
-	}
-	//乱数の最小値
-	RandType MinValueInner() const override {
-		return mRand.MinValue();
-	}
-
-	//現在のシード値の取得
-	SeedType GetSeedInner() const override {
-		return mRand.GetSeed();
-	}
-
-	#pragma endregion
-
-
-	//設定
+	//要素の設定
 	#pragma region Setter
 
-private:
-	//シード値を設定
-	void SetSeedInner(SeedType aSeed) override {
-		mRand.SetSeed(aSeed);
+public:
+	void Set(const HashTableKey& aKey, const T& aValue) CPOT_OR {
+		CPOT_ASSERT(Exist(aKey));	//すでに要素が存在していなければいけない
+		mList[aKey] = aValue;
 	}
 
 	#pragma endregion
 
+	//配列の要素数
+	#pragma region Size
 
-	//グローバルにアクセスできるインスタンスの取得
-	#pragma region Instance
-
-	static Rand& Inst() {
-		static Rand r;
-		return r;
+public:
+	//現在の要素数の取得
+	u32 GetSize() const CPOT_OR {
+		return mList.size();
 	}
 
 	#pragma endregion
@@ -236,18 +115,15 @@ private:
 	#pragma region Field
 
 private:
-	Rand32Device mRand;
-
-public:
-	Rand32Device GetDevice() const {
-		return mRand;
-	}
+	std::map<HashTableKey, T> mList;
 
 	#pragma endregion
 
 };
-
 
 }
+
+template <typename T>
+using HashTable = standard::HashTable<T>;
 
 }

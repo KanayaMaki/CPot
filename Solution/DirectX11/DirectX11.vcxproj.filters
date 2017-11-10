@@ -197,12 +197,6 @@
     <ClCompile Include="..\..\Source\Time\Windows\timeWindows.cpp">
       <Filter>Source\Time\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\List\Standard\vectorStandard.cpp">
-      <Filter>Source\List\Standard</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\List\Standard\hashTableStandard.cpp">
-      <Filter>Source\List\Standard</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\Source\Resource\Windows\Icon.rc">
