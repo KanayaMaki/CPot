@@ -59,7 +59,7 @@ public:
 		return Next(aMax - aMin) + aMin;
 	}
 	f32 Nextf() {
-		return (f64)(Next()) / MaxValue();
+		return static_cast<f32>( (f64)(Next()) / MaxValue() );
 	}
 
 	f32 Nextf(f32 aMin, f32 aMax) {

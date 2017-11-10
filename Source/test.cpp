@@ -17,6 +17,11 @@
 //Time
 #include "Time/time.h"
 
+//Vector
+#include "List/vector.h"
+
+//HashTable
+#include "List/hashTable.h"
 
 #include <Windows.h>
 
@@ -103,3 +108,48 @@ void TestDateTime() {
 
 
 
+#pragma region Vector
+
+void TestVector() {
+
+	Vector<u32> v;
+	v.PushBack(32);
+	v.PushBack(100);
+	v.PushBack(200);
+	v.PushBack(200);
+	v.PushBack(100);
+
+	for (u32 i = 0; i < v.GetSize(); i++) {
+		CPOT_LOG(v[i]);
+	}
+
+	CPOT_LOG(v.Count(100));
+
+	u32 a = v.Remove(100);
+	CPOT_LOG(a);
+
+	CPOT_LOG(v.Count(100));
+
+	for (u32 i = 0; i < v.GetSize(); i++) {
+		CPOT_LOG(v[i]);
+	}
+}
+
+#pragma endregion
+
+
+#pragma region HashTable
+
+void TestHashTable() {
+
+	HashTable<s32> hash;
+
+	hash.Add("data1", 43);
+	hash.Add("data2", 45);
+	hash.Add("data3", 47);
+	hash.Add("data4", 49);
+
+	CPOT_LOG(hash.Find("data1"));
+}
+
+#pragma endregion

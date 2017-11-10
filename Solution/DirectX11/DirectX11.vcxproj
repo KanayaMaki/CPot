@@ -42,8 +42,13 @@
     <ClInclude Include="..\..\Source\Atom\transform.h" />
     <ClInclude Include="..\..\Source\Atom\typedef.h" />
     <ClInclude Include="..\..\Source\Atom\vector.h" />
+    <ClInclude Include="..\..\Source\List\hashTable.h" />
+    <ClInclude Include="..\..\Source\List\Standard\hashTable.h" />
+    <ClInclude Include="..\..\Source\List\Standard\vector.h" />
+    <ClInclude Include="..\..\Source\List\vector.h" />
     <ClInclude Include="..\..\Source\Rand\rand.h" />
     <ClInclude Include="..\..\Source\Rand\Standard\rand.h" />
+    <ClInclude Include="..\..\Source\Resource\Windows\resource.h" />
     <ClInclude Include="..\..\Source\Sleep\sleep.h" />
     <ClInclude Include="..\..\Source\Sleep\Windows\sleep.h" />
     <ClInclude Include="..\..\Source\Output\output.h" />
@@ -69,6 +74,12 @@
     <ClCompile Include="..\..\Source\Time\time.cpp" />
     <ClCompile Include="..\..\Source\Time\Windows\timeWindows.cpp" />
     <ClCompile Include="..\..\Source\Window\Windows\windowWindows.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\Source\Resource\Windows\Icon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Source\Resource\Windows\icon.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -225,7 +236,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;CPOT_MASTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -261,7 +272,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;CPOT_MASTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>

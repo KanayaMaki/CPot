@@ -1,5 +1,7 @@
 #include "window.h"
 
+#include "./Resource/Windows/resource.h"
+
 namespace cpot {
 
 //ウィンドウプロシージャの、一定間隔で呼び出すイベントの識別ID
@@ -37,8 +39,7 @@ void Window::RegistWindowClass(WindowProcFunc aWndProc, const CHAR* aTitle) {
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
 	wc.hInstance = mHInstance;
-	//wc.hIcon = LoadIcon(mHInstance, MAKEINTRESOURCE(IDI_ICON));
-	wc.hIcon = nullptr;
+	wc.hIcon = LoadIcon(mHInstance, MAKEINTRESOURCE(IDI_ICON));
 	wc.hCursor = nullptr;
 	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	wc.lpszMenuName = nullptr;

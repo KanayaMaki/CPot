@@ -18,12 +18,12 @@ const TickType cTickUnit = 1200000UL;	//1秒が何Tickか
 
 //秒をチックに
 inline TickType ToTick(f32 aSecond) {
-	return aSecond * cTickUnit;
+	return static_cast<TickType>( aSecond * cTickUnit );
 }
 
 //チックを秒に
 inline f32 ToSecond(TickType aTick) {
-	return (f64)aTick / cTickUnit;
+	return static_cast<f32>( (f64)aTick / cTickUnit );
 }
 
 

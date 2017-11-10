@@ -46,6 +46,18 @@
     <Filter Include="Source\Time\Windows">
       <UniqueIdentifier>{a54ea99c-4a65-41d2-856a-ed8b0ad6c7e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\List">
+      <UniqueIdentifier>{33a2007d-6ebe-41df-ae9e-1fb61644ac94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\List\Standard">
+      <UniqueIdentifier>{cf9b1076-09bf-482d-a914-93f49c17b981}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Resource">
+      <UniqueIdentifier>{0b6a7aa6-b858-40e6-bb15-8bc8619ac2f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Resource\Windows">
+      <UniqueIdentifier>{0ead0b03-883e-413a-8b41-6541c01c71f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -138,6 +150,21 @@
     <ClInclude Include="..\..\Source\test.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\List\vector.h">
+      <Filter>Source\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\hashTable.h">
+      <Filter>Source\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\Standard\vector.h">
+      <Filter>Source\List\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\Standard\hashTable.h">
+      <Filter>Source\List\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Resource\Windows\resource.h">
+      <Filter>Source\Resource\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -170,5 +197,15 @@
     <ClCompile Include="..\..\Source\Time\Windows\timeWindows.cpp">
       <Filter>Source\Time\Windows</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\Source\Resource\Windows\Icon.rc">
+      <Filter>Source\Resource\Windows</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Source\Resource\Windows\icon.ico">
+      <Filter>Source\Resource\Windows</Filter>
+    </Image>
   </ItemGroup>
 </Project>
