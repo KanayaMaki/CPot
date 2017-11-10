@@ -61,10 +61,10 @@ namespace cpot {
 
 #ifdef _DEBUG
 #define CPOT_ON_DEBUG
+#elif defined CPOT_MASTER
+#define CPOT_ON_MASTER
 #elif defined NDEBUG
 #define CPOT_ON_RELEASE
-#elif defined MASTER
-#define CPOT_ON_MASTER
 #endif
 
 #pragma endregion
