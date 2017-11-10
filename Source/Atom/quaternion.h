@@ -248,10 +248,10 @@ public:
 		cosom = Clamp01(cosom);
 
 		if (NotZero(1.0 - cosom)) {
-			omega = Acos(cosom);
-			sinom = Sin(omega);
-			scale0 = Sin((1.0 - aRate) * omega) / sinom;
-			scale1 = Sin(aRate * omega) / sinom;
+			omega = Acos(f32( cosom ));
+			sinom = Sin(f32( omega ));
+			scale0 = f32( Sin(f32( (1.0f - aRate) * omega) ) / sinom );
+			scale1 = f32( Sin(f32(aRate * omega)) / sinom );
 		}
 		else {
 			scale0 = 1.0 - aRate;
@@ -259,10 +259,10 @@ public:
 		}
 
 		Quaternion tRes;
-		tRes.v.x = scale0 * aFrom.v.x + scale1 * aTo1[0];
-		tRes.v.y = scale0 * aFrom.v.y + scale1 * aTo1[1];
-		tRes.v.z = scale0 * aFrom.v.z + scale1 * aTo1[2];
-		tRes.w = scale0 * aFrom.w + scale1 * aTo1[3];
+		tRes.v.x = f32( scale0 * aFrom.v.x + scale1 * aTo1[0] );
+		tRes.v.y = f32( scale0 * aFrom.v.y + scale1 * aTo1[1] );
+		tRes.v.z = f32( scale0 * aFrom.v.z + scale1 * aTo1[2] );
+		tRes.w = f32( scale0 * aFrom.w + scale1 * aTo1[3] );
 		return tRes.Normal();
 	}
 	#pragma endregion

@@ -12,7 +12,6 @@ WinMain
 	Application::S().Start();
 
 
-
 WindowsGameLoop
 	void GameLoop
 		Init
@@ -46,63 +45,13 @@ Setting
 	CHAR* mTitle;
 
 
-using TickType = u64;
-static const TickType cTickScale = 1200000UL;
+HashTable
+	T Remove(const HashTableKey& aKey)
+	T Remove(const CHAR* aKey)
+	void Clear()
 
-inline TickType ToTick(f32 aSecond) {
-	return aSecond * cTickScale;
-}
-inline f32 ToSecond(TickType aTick) {
-	return (f64)aTick / cTickScale;
-}
+	T Find(const HashTableKey& aKey)
 
-struct DateTime {
-	s32 year;
-	u8 month;
-	u8 day;
-	u8 hour;
-	u8 minute;
-	u8 second;
-	enum CYoubi :  u8 {
-		cSunday,
-	} youbi;
-}
-
-
-f32 GetDeltaTime();
-u64 GetDeltaTick();
-void SetDeltaTick(u64 aDeltaTick);
-u64 mDeltaTick;
-
-
-TimeBase
-	CPOT_VIR u32 GetUnix() const CPOT_ZR;
-	CPOT_VIR f64 GetLocal() const CPOT_ZR;
-	CPOT_VIR DateTime GetDateTime() CPOT_ZR;
-	CPOT_VIR DateTime ToDateTime(u32 aUnix) CPOT_ZR;
-
-
-
-standard::DateTimeDevice
-
-standard::UnixTimeDevice
-
-windows::LocalTimeDevice
-
-
-windows::Time
-	u32 GetUnix() const CPOT_OR {
-		return standard::UnixTimeDevice::Get();
-	}
-	f64 GetLocal() const CPOT_OR {
-		return LocalTimeDevice::Get();
-	}
-	DateTime GetDateTime() const CPOT_OR {
-		return standard::DateTimeDevice::Get();
-	}
-	DateTime ToDateTime(u32 aUnix) const CPOT_OR {
-		return standard::DateTimeDevice::Get(aUnix);
-	}
 
 
 描画

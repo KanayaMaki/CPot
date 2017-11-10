@@ -234,7 +234,12 @@ public:
 	#pragma region Create
 
 	static Color32 FromColor(const Color& aV) {
-		return Color32(Clamp01(aV.r) * MaxValue(), Clamp01(aV.g) * MaxValue(), Clamp01(aV.b) * MaxValue(), Clamp01(aV.a) * MaxValue());
+		return Color32(
+			static_cast<u8>( Clamp01(aV.r) * MaxValue() ),
+			static_cast<u8>( Clamp01(aV.g) * MaxValue() ),
+			static_cast<u8>( Clamp01(aV.b) * MaxValue() ),
+			static_cast<u8>( Clamp01(aV.a) * MaxValue() )
+		);
 	}
 
 	#pragma endregion
