@@ -5,11 +5,16 @@
 
 #include "./Time/Windows/time.h"
 
+#include "./Time/Standard/time.h"
+
 #include <Windows.h>
 
 namespace cpot {
 
 namespace windows {
+
+
+#pragma region DetailTimeDevice
 
 u64 DetailTimeDevice::GetCount() {
 	LARGE_INTEGER lTime;
@@ -23,13 +28,26 @@ u64 DetailTimeDevice::GetTimeUnit() {
 	static LARGE_INTEGER lUnit;
 	static BOOL lIsInit = false;	//‰Šú‰»Ï‚İ‚©‚Ìƒtƒ‰ƒO
 
-	//‰Šú‰»‚³‚ê‚Ä‚¢‚È‚¢‚È‚ç
+									//‰Šú‰»‚³‚ê‚Ä‚¢‚È‚¢‚È‚ç
 	if (Not(lIsInit)) {
 		QueryPerformanceFrequency(&lUnit);	//‰Šú‰»
 		lIsInit = true;	//‰Šú‰»Ï‚İ
 	}
 	return lUnit.QuadPart;
 }
+
+
+#pragma endregion
+
+
+#pragma region Time
+
+UnixTimeType Time::GetUnix() const {
+	return standard::UnixTimeDevice::Get();	//standard‚ÌŠÖ”‚ÉˆÏ÷
+}
+
+#pragma endregion
+
 
 }
 
