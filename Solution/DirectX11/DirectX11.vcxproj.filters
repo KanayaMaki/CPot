@@ -230,6 +230,9 @@
     <ClCompile Include="..\..\Source\Time\Standard\timeStandard.cpp">
       <Filter>Source\Time\Standard</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Rand\rand.cpp">
+      <Filter>Source\Rand</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\Source\Resource\Windows\Icon.rc">
