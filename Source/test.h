@@ -49,3 +49,12 @@ void TestThread();
 void TestRand();
 
 #pragma endregion
+
+
+#pragma region Input
+
+void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd);
+void TestInputDirectInput(HINSTANCE aHInstance, HWND aHwnd);
+void TestInputXInput();
+
+#pragma endregion

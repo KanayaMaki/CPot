@@ -27,6 +27,10 @@
 #include "Thread/thread.h"
 #include "Thread/mutex.h"
 
+//Input
+#include "Input\Windows\inputWindows.h"
+#include "Input\DirectInput\inputDirectInput.h"
+
 
 #include <Windows.h>
 
@@ -199,6 +203,56 @@ void TestRand() {
 	for (u32 i = 0; i < 10; i++) {
 		CPOT_LOG(r.Next());
 	}
+}
+
+#pragma endregion
+
+
+
+#pragma region Input
+
+void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
+
+	windows::InputDevice::S().Init(aHInstance, aHwnd);
+
+	while (true) {
+		windows::InputDevice::S().Update();
+
+		if (windows::InputDevice::S().GetValue(windows::CKeyCode::cA) > 0.0f) {
+			CPOT_LOG("A");
+		}
+		if (windows::InputDevice::S().GetValue(windows::CKeyCode::cMouseButton1) > 0.0f) {
+			CPOT_LOG("MouseClick");
+			CPOT_LOG("MouseLocX:", windows::InputDevice::S().GetValue(windows::CKeyCode::cMouseCursorX));
+			CPOT_LOG("MouseLocY:", windows::InputDevice::S().GetValue(windows::CKeyCode::cMouseCursorY));
+		}
+		
+		::Sleep(16);
+	}
+
+}
+
+void TestInputDirectInput(HINSTANCE aHInstance, HWND aHwnd) {
+
+	directInput::JoystickDevice::S().Init(aHInstance, aHwnd);
+	directInput::JoystickDevice::S().SetTranslater(0, directInput::Translater::PS4());
+
+	while (true) {
+		directInput::JoystickDevice::S().Update();
+
+		if (directInput::JoystickDevice::S().GetValue(0, directInput::CJoystickCode::cRButtonRight) > 0.0f) {
+			CPOT_LOG("A");
+		}
+		if (directInput::JoystickDevice::S().GetValue(0, directInput::CJoystickCode::cLStickUp) > 0.0f) {
+			CPOT_LOG(directInput::JoystickDevice::S().GetValue(0, directInput::CJoystickCode::cLStickUp));
+		}
+
+		::Sleep(16);
+	}
+}
+
+void TestInputXInput() {
+
 }
 
 #pragma endregion

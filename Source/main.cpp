@@ -15,7 +15,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 
 	TestOutput(lWindow->GetHwnd());
 
-	TestRand();
+	//TestInputWindows(lWindow->GetHInstance(), lWindow->GetHwnd());
+	TestInputDirectInput(lWindow->GetHInstance(), lWindow->GetHwnd());
 
 	Window::MessageLoop();
 
