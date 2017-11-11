@@ -239,4 +239,6 @@ public:
 
 }
 
+using Rand = standard::Rand;
+
 }

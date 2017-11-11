@@ -5,6 +5,7 @@
 #pragma once
 
 #include "./Atom/atom.h"
+#include "./Time/time.h"
 
 namespace cpot {
 
@@ -108,9 +109,9 @@ public:
 	void Reload() {
 		SetSeed(GetSeed());
 	}
-	//シード値0でリセット
+	//現在の時間をシードにリセット
 	void Reset() {
-		SetSeed(SeedType(0));
+		SetSeed(SeedType(Time().GetUnix()));
 	}
 
 	#pragma endregion

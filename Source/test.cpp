@@ -190,3 +190,15 @@ void TestThread() {
 }
 
 #pragma endregion
+
+
+#pragma region Rand
+
+void TestRand() {
+	Rand r;
+	for (u32 i = 0; i < 10; i++) {
+		CPOT_LOG(r.Next());
+	}
+}
+
+#pragma endregion
