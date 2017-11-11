@@ -38,21 +38,77 @@ Game
 	virtual void Render()
 		ゲームの描画をする
 
+class GameMain
+	static GameBase* mGame
+
+	static Main() {
+		//初期化
+		mGame->Init();
+
+		while(true) {
+			Input->Update();
+			mGame->Update();
+			mGame->Render();
+			Fps->Wait();
+
+			if(mGameEnd) {
+				break;
+			}
+		}
+	}
+
+伝えたいこと
+	・ゲームの終了（更新時）
+		Win-Game
+		Game-Win
+	・カーソルを表示するか（更新）
+		Game-Win
+	・画面サイズ（更新時）
+		Game-Win
+	・フォーカスがあるか（更新時）
+		Win-Game
+	・ウィンドウタイトル（更新時）
+		Game-Win
+
+class ConfigBase : public Singleton
+	CPOT_VI void SetApplicationEnd(BOOL aEnd) CPOT_ZR;
+	CPOT_VI BOOL GetApplicationEnd() CPOT_ZR;
+	CPOT_VI void SetGameEnd(BOOL aEnd) CPOT_ZR;
+	CPOT_VI const CHAR* GetTitle() CPOT_ZR;
+	CPOT_VI void SetTitle(const CHAR* aTitle) CPOT_ZR;
+
+	CPOT_VI void SetUseCursor(BOOL aUse) CPOT_ZR;
+	CPOT_VI BOOL GetUseCursor() CPOT_ZR;
+
+	CPOT_VI void SetIsActive(BOOL aIsActive) CPOT_ZR;
+	CPOT_VI BOOL GetIsActive() CPOT_ZR;
+
+class windows::Config
+
+
+Window
+	if アプリが終わるなら
+		SetApplicationEnd(true);
+
+	if GetGameEnd() == true
+		//即終了
+
+
 Setting
 	Vector2 mScreenWidth;
 	BOOL mUseCursor;
 	f32 mFps;
 	CHAR* mTitle;
 
+Thread
+	Thread t;
+	t.Start(DoFunc, data);
 
-Thread t;
-t.Start(DoFunc, data);
+	//スレッドの終了を待つ
+	t.Join();
 
-//スレッドの終了を待つ
-t.Join();
-
-//スレッドを終了する
-t.Stop();
+	//スレッドを終了する
+	t.Stop();
 
 描画
 インプットの更新

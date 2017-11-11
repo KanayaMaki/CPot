@@ -13,7 +13,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 	Window* lWindow = Window::Create();
 	lWindow->Load(hInstance, Vector2(960.0f, 540.0f), "Game");
 
-	
 	TestOutput(lWindow->GetHwnd());
 
 	TestThread();
