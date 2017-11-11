@@ -210,6 +210,9 @@
     <ClInclude Include="..\..\Source\Input\DirectInput\inputDirectInput.h">
       <Filter>Source\Input\DirectInput</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Input\XInput\inputXInput.h">
+      <Filter>Source\Input\XInput</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -256,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Input\DirectInput\inputDirectInput.cpp">
       <Filter>Source\Input\DirectInput</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Input\XInput\inputXInput.cpp">
+      <Filter>Source\Input\XInput</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

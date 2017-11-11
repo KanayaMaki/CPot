@@ -1,5 +1,7 @@
 #include "./Atom/atom.h"
 
+#include "./test.h"
+
 //Window
 #include "Window/Windows/window.h"
 
@@ -30,6 +32,7 @@
 //Input
 #include "Input\Windows\inputWindows.h"
 #include "Input\DirectInput\inputDirectInput.h"
+#include "Input\XInput\inputXInput.h"
 
 
 #include <Windows.h>
@@ -251,8 +254,19 @@ void TestInputDirectInput(HINSTANCE aHInstance, HWND aHwnd) {
 	}
 }
 
+
+
 void TestInputXInput() {
 
+	while (true) {
+		xInput::Device::S().Update();
+
+		if (xInput::Device::S().GetValue(0, xInput::CCode::cLStickRight) > 0.0f) {
+
+		}
+
+		::Sleep(16);
+	}
 }
 
 #pragma endregion

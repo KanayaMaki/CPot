@@ -45,6 +45,7 @@
     <ClInclude Include="..\..\Source\Game\game.h" />
     <ClInclude Include="..\..\Source\Input\DirectInput\inputDirectInput.h" />
     <ClInclude Include="..\..\Source\Input\Windows\inputWindows.h" />
+    <ClInclude Include="..\..\Source\Input\XInput\inputXInput.h" />
     <ClInclude Include="..\..\Source\List\hashTable.h" />
     <ClInclude Include="..\..\Source\List\Standard\hashTable.h" />
     <ClInclude Include="..\..\Source\List\Standard\vector.h" />
@@ -76,6 +77,7 @@
     <ClCompile Include="..\..\Source\Game\game.cpp" />
     <ClCompile Include="..\..\Source\Input\DirectInput\inputDirectInput.cpp" />
     <ClCompile Include="..\..\Source\Input\Windows\inputWindows.cpp" />
+    <ClCompile Include="..\..\Source\Input\XInput\inputXInput.cpp" />
     <ClCompile Include="..\..\Source\main.cpp" />
     <ClCompile Include="..\..\Source\Rand\rand.cpp" />
     <ClCompile Include="..\..\Source\Rand\Standard\randStandard.cpp" />

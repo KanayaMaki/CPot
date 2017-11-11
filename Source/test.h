@@ -2,7 +2,6 @@
 
 #include <Windows.h>
 
-
 #pragma region Output
 
 void TestOutput(HWND aHwnd);
