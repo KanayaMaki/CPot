@@ -221,17 +221,6 @@ private:
 	#pragma endregion
 
 
-	//グローバルにアクセスできるインスタンスの取得
-	#pragma region Instance
-
-	static Rand& Inst() {
-		static Rand r;
-		return r;
-	}
-
-	#pragma endregion
-
-
 	//フィールド
 	#pragma region Field
 
