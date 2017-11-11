@@ -8,6 +8,7 @@
 
 #include "./Atom/atom.h"
 #include "./Usefull/singleton.h"
+#include "./Thread/mutex.h"
 #include "cursor.h"
 
 #include <Windows.h>
@@ -177,7 +178,6 @@ private:
 	BOOL mFocus;
 
 	#pragma endregion
-
 };
 
 

@@ -6,8 +6,6 @@
 
 #include "./Time/time.h"
 
-#include "./Time/Standard/time.h"
-
 
 namespace cpot {
 
@@ -43,9 +41,7 @@ class Time : public TimeBase {
 
 public:
 	//ユニックスタイムを取得
-	UnixTimeType GetUnix() const CPOT_OR {
-		return standard::UnixTimeDevice::Get();	//standardの関数に委譲
-	}
+	UnixTimeType GetUnix() const CPOT_OR;
 
 	//細密な時間を取得
 	f64 GetDetail() const CPOT_OR {

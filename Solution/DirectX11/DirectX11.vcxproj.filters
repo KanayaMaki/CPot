@@ -64,6 +64,9 @@
     <Filter Include="Source\Thread\Standard">
       <UniqueIdentifier>{6db0a1a1-c4cb-445b-aff9-7d865e40aba2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Game">
+      <UniqueIdentifier>{f176e9dd-44a5-4f6d-97da-72b54cd3aa46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -186,6 +189,9 @@
     <ClInclude Include="..\..\Source\Thread\thread.h">
       <Filter>Source\Thread</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Game\game.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -217,6 +223,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Time\Windows\timeWindows.cpp">
       <Filter>Source\Time\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Game\game.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Time\Standard\timeStandard.cpp">
+      <Filter>Source\Time\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Rand\rand.cpp">
+      <Filter>Source\Rand</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

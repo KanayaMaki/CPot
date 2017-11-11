@@ -42,3 +42,10 @@ void TestHashTable();
 void TestThread();
 
 #pragma endregion
+
+
+#pragma region Rand
+
+void TestRand();
+
+#pragma endregion
