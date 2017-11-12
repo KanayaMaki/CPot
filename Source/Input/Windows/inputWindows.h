@@ -1,12 +1,6 @@
-﻿///////////////////////////////////////
+﻿//
+//	Windows環境での入力を取得する
 //
-//	ファイル名	:	inputKeyboard.h
-//	作者		:	齊藤芳紀
-//	作成日時	:	2017/03/18
-//	更新日時	:	2017/03/18
-//	内容		:	キーボードの入力クラス
-//
-///////////////////////////////////////
 
 #pragma once
 
@@ -321,6 +315,7 @@ public:
 				return true;
 			}
 		}
+		return false;
 	}
 	BOOL GetButtonUp(CInputCode aCode) const {
 		if (GetButtonBefore(aCode)) {
@@ -328,6 +323,7 @@ public:
 				return true;
 			}
 		}
+		return false;
 	}
 
 	f32 GetAxis(CInputCode aMinus, CInputCode aPlus) const {

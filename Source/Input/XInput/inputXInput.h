@@ -264,6 +264,8 @@ private:
 
 	#pragma endregion
 
+private:
+	static f32 GetValue(const InputData& aData, CInputCode aCode);
 };
 
 

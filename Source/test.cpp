@@ -31,7 +31,6 @@
 
 //Input
 #include "Input\Windows\inputWindows.h"
-#include "Input\DirectInput\inputDirectInput.h"
 #include "Input\XInput\inputXInput.h"
 #include "Input\input.h"
 
@@ -214,6 +213,7 @@ void TestRand() {
 
 #pragma region Input
 
+/*
 void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
 
 	windows::Input::S().Init(aHInstance, aHwnd);
@@ -234,19 +234,21 @@ void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
 	}
 
 }
-
+*/
+/*
 void TestInputXInput() {
 
 	while (true) {
 		xInput::Input::S().Update();
 
-		if (xInput::Input::S().GetValue(0, xInput::cLStickRight) > 0.0f) {
+		if (xInput::Input::S().GetButtonDown(xInput::cLTrigger) > 0.0f) {
 			CPOT_LOG("LStick");
 		}
 
 		::Sleep(16);
 	}
 }
+*/
 
 void TestInputInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
 
@@ -255,7 +257,7 @@ void TestInputInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
 	while (true) {
 		windows::Input::S().Update();
 
-		if (Input::GetValue(windows::cA) > 0.0f) {
+		if (Input::GetButtonDown(windows::cA) > 0.0f) {
 			CPOT_LOG("A");
 		}
 		if (Input::GetValue(windows::cMouseButton1) > 0.0f) {
@@ -267,6 +269,19 @@ void TestInputInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
 		::Sleep(16);
 	}
 
+}
+
+void TestInputInputXInput() {
+
+	while (true) {
+		xInput::Input::S().Update();
+
+		if (Input::GetButtonDown(xInput::cLTrigger) > 0.0f) {
+			CPOT_LOG("LStick");
+		}
+
+		::Sleep(16);
+	}
 }
 
 #pragma endregion

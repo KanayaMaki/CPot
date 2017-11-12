@@ -56,5 +56,6 @@ void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd);
 void TestInputXInput();
 
 void TestInputInputWindows(HINSTANCE aHInstance, HWND aHwnd);
+void TestInputInputXInput();
 
 #pragma endregion

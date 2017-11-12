@@ -43,7 +43,6 @@
     <ClInclude Include="..\..\Source\Atom\typedef.h" />
     <ClInclude Include="..\..\Source\Atom\vector.h" />
     <ClInclude Include="..\..\Source\Game\game.h" />
-    <ClInclude Include="..\..\Source\Input\DirectInput\inputDirectInput.h" />
     <ClInclude Include="..\..\Source\Input\input.h" />
     <ClInclude Include="..\..\Source\Input\Windows\inputWindows.h" />
     <ClInclude Include="..\..\Source\Input\XInput\inputXInput.h" />
@@ -76,7 +75,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\Atom\Standard\stringStandard.cpp" />
     <ClCompile Include="..\..\Source\Game\game.cpp" />
-    <ClCompile Include="..\..\Source\Input\DirectInput\inputDirectInput.cpp" />
     <ClCompile Include="..\..\Source\Input\input.cpp" />
     <ClCompile Include="..\..\Source\Input\Windows\inputWindows.cpp" />
     <ClCompile Include="..\..\Source\Input\XInput\inputXInput.cpp" />
