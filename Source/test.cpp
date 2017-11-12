@@ -33,7 +33,7 @@
 #include "Input\Windows\inputWindows.h"
 #include "Input\DirectInput\inputDirectInput.h"
 #include "Input\XInput\inputXInput.h"
-
+#include "Input\input.h"
 
 #include <Windows.h>
 
@@ -216,18 +216,18 @@ void TestRand() {
 
 void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
 
-	windows::InputDevice::S().Init(aHInstance, aHwnd);
+	windows::Input::S().Init(aHInstance, aHwnd);
 
 	while (true) {
-		windows::InputDevice::S().Update();
+		windows::Input::S().Update();
 
-		if (windows::InputDevice::S().GetValue(windows::CKeyCode::cA) > 0.0f) {
+		if (windows::Input::S().GetValue(windows::cA) > 0.0f) {
 			CPOT_LOG("A");
 		}
-		if (windows::InputDevice::S().GetValue(windows::CKeyCode::cMouseButton1) > 0.0f) {
+		if (windows::Input::S().GetValue(windows::CInputCode::cMouseButton1) > 0.0f) {
 			CPOT_LOG("MouseClick");
-			CPOT_LOG("MouseLocX:", windows::InputDevice::S().GetValue(windows::CKeyCode::cMouseCursorX));
-			CPOT_LOG("MouseLocY:", windows::InputDevice::S().GetValue(windows::CKeyCode::cMouseCursorY));
+			CPOT_LOG("MouseLocX:", windows::Input::S().GetValue(windows::cMouseCursorX));
+			CPOT_LOG("MouseLocY:", windows::Input::S().GetValue(windows::cMouseCursorY));
 		}
 		
 		::Sleep(16);
@@ -235,38 +235,38 @@ void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
 
 }
 
-void TestInputDirectInput(HINSTANCE aHInstance, HWND aHwnd) {
-
-	directInput::JoystickDevice::S().Init(aHInstance, aHwnd);
-	directInput::JoystickDevice::S().SetTranslater(0, directInput::Translater::PS4());
+void TestInputXInput() {
 
 	while (true) {
-		directInput::JoystickDevice::S().Update();
+		xInput::Input::S().Update();
 
-		if (directInput::JoystickDevice::S().GetValue(0, directInput::CJoystickCode::cRButtonRight) > 0.0f) {
-			CPOT_LOG("A");
-		}
-		if (directInput::JoystickDevice::S().GetValue(0, directInput::CJoystickCode::cLStickUp) > 0.0f) {
-			CPOT_LOG(directInput::JoystickDevice::S().GetValue(0, directInput::CJoystickCode::cLStickUp));
+		if (xInput::Input::S().GetValue(0, xInput::cLStickRight) > 0.0f) {
+			CPOT_LOG("LStick");
 		}
 
 		::Sleep(16);
 	}
 }
 
+void TestInputInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
 
-
-void TestInputXInput() {
+	windows::Input::S().Init(aHInstance, aHwnd);
 
 	while (true) {
-		xInput::Device::S().Update();
+		windows::Input::S().Update();
 
-		if (xInput::Device::S().GetValue(0, xInput::CCode::cLStickRight) > 0.0f) {
-
+		if (Input::GetValue(windows::cA) > 0.0f) {
+			CPOT_LOG("A");
+		}
+		if (Input::GetValue(windows::cMouseButton1) > 0.0f) {
+			CPOT_LOG("MouseClick");
+			CPOT_LOG("MouseLocX:",Input::GetValue(windows::cMouseCursorX));
+			CPOT_LOG("MouseLocY:", Input::GetValue(windows::cMouseCursorY));
 		}
 
 		::Sleep(16);
 	}
+
 }
 
 #pragma endregion

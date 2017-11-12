@@ -276,6 +276,9 @@ public:
 
 
 	//インデックスのビットが含まれるBitFlagを返す
+	const BitFlag& GetBitFlag(u32 aIndex) const {
+		return mBitFlag[aIndex / 32];
+	}
 	BitFlag& GetBitFlag(u32 aIndex) {
 		return mBitFlag[aIndex / 32];
 	}
@@ -285,7 +288,7 @@ public:
 	}
 	//使用するBitFlagの数を返す
 	u32 GetBitFlagNum() const {
-		return (cBitNum + 31) / 32);
+		return (cBitNum + 31) / 32;
 	}
 	#pragma endregion
 
@@ -299,7 +302,7 @@ public:
 	#pragma region Stand
 
 	BitFlagLarge& Stand(u32 aIndex) {
-		GetBitFlag(aIndex).BitStand(GetIndex(aIndex));
+		GetBitFlag(aIndex).Stand(GetIndex(aIndex));
 		return *this;
 	}
 	BitFlagLarge& StandAll() {
@@ -319,7 +322,7 @@ public:
 	#pragma region Down
 
 	BitFlagLarge& Down(u32 aIndex) {
-		GetBitFlag(aIndex).BitDown(GetIndex(aIndex));
+		GetBitFlag(aIndex).Down(GetIndex(aIndex));
 		return *this;
 	}
 	BitFlagLarge& DownAll() {
@@ -339,7 +342,7 @@ public:
 	#pragma region Flip
 
 	BitFlagLarge& Flip(u32 aIndex) {
-		GetBitFlag(aIndex).BitFlip(GetIndex(aIndex));
+		GetBitFlag(aIndex).Flip(GetIndex(aIndex));
 		return *this;
 	}
 	BitFlagLarge& FlipAll() {

@@ -155,9 +155,6 @@ inline f32 Replace(f32 aNormal, f32 aMin, f32 aMax) {
 #pragma endregion
 
 
-
-
-
 //	最小値を求める
 #pragma region Min
 
@@ -185,6 +182,40 @@ inline T Max(const T& a, const U& b) {
 template <typename T, typename... Rest>
 inline T Max(const T& a, const Rest&... rest) {
 	return Max(a, Max(rest...));
+}
+
+#pragma endregion
+
+
+
+//	絶対値で最小値を求める
+//	例：Weak(-1.0, 2, 3)のとき、-1.0が返ってくる
+#pragma region Weak
+
+template <typename T, typename U>
+inline T Weak(const T& a, const U& b) {
+	return Abs(a) <= Abs(b) ? a : b;
+}
+
+template <typename T, typename... Rest>
+inline T Weak(const T& a, const Rest&... rest) {
+	return Weak(a, Weak(rest...));
+}
+
+#pragma endregion
+
+
+//	絶対値で最大値を求める
+#pragma region Strong
+
+template <typename T, typename U>
+inline T Strong(const T& a, const U& b) {
+	return Abs(a) >= Abs(b) ? a : b;
+}
+
+template <typename T, typename... Rest>
+inline T Strong(const T& a, const Rest&... rest) {
+	return Strong(a, Strong(rest...));
 }
 
 #pragma endregion

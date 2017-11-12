@@ -53,7 +53,8 @@ void TestRand();
 #pragma region Input
 
 void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd);
-void TestInputDirectInput(HINSTANCE aHInstance, HWND aHwnd);
 void TestInputXInput();
+
+void TestInputInputWindows(HINSTANCE aHInstance, HWND aHwnd);
 
 #pragma endregion

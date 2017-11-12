@@ -110,6 +110,27 @@ Thread
 	//スレッドを終了する
 	t.Stop();
 
+
+Input
+	Input.GetValue(xinput::cLStickLeft);
+	Input.GetButton(xinput::cLStickLeft);
+	Input.GetButtonDown(ps4::cLStickLeft);
+	Input.GetButtonPress(windows::cA);
+	Input.GetAxis(xinput::cLStickX);
+	Input.GetAxis(ps4::cLStickX);
+
+Input.GetButton(ps4::CInputCode) {
+
+}
+Input.GetButton(xinput::CButtonCode) {
+
+}
+Input.GetButton(windows::CButtonCode) {
+
+}
+
+
+
 描画
 インプットの更新
 

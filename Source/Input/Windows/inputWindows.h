@@ -13,6 +13,112 @@
 #include "./Atom/atom.h"
 #include "./Usefull/singleton.h"
 
+
+#ifdef CPOT_ON_WINDOWS
+
+#define CPOT_VALID_INPUT_WINDOWS
+
+#endif
+
+
+#pragma region InputCode
+
+namespace cpot {
+
+namespace windows {
+
+enum CInputCode {
+	c0,
+	c1,
+	c2,
+	c3,
+	c4,
+	c5,
+	c6,
+	c7,
+	c8,
+	c9,
+	cA,
+	cB,
+	cC,
+	cD,
+	cE,
+	cF,
+	cG,
+	cH,
+	cI,
+	cJ,
+	cK,
+	cL,
+	cM,
+	cN,
+	cO,
+	cP,
+	cQ,
+	cR,
+	cS,
+	cT,
+	cU,
+	cV,
+	cW,
+	cX,
+	cY,
+	cZ,
+	cLeft,
+	cRight,
+	cUp,
+	cDown,
+	cSpace,
+	cEnter,
+	cLeftCtrl,
+	cRightCtrl,
+	cLeftAlt,
+	cRightAlt,
+	cLeftShift,
+	cRightShift,
+	cEsc,
+	cF1,
+	cF2,
+	cF3,
+	cF4,
+	cF5,
+	cF6,
+	cF7,
+	cF8,
+	cF9,
+	cF10,
+	cF11,
+	cF12,
+	cMouseCursorX,
+	cMouseCursorY,
+	cMouseWheel,
+	cMouseButton1,
+	cMouseButton2,
+	cMouseButton3,
+	cMouseButton4,
+	cNull,	//何もないキー
+	cMax,
+};
+
+
+enum CInputAxisCode {
+	cAD,
+	cWS,
+	cCrossX,
+	cCrossY
+};
+
+
+}
+
+}
+
+#pragma endregion
+
+
+//Windowsでの入力が有効なら
+#ifdef CPOT_VALID_INPUT_WINDOWS
+
 #include <dinput.h>
 
 namespace cpot {
@@ -20,91 +126,79 @@ namespace cpot {
 namespace windows {
 
 
-class CKeyCode {
-public:
-	enum {
-		c0 = DIK_0,
-		c1 = DIK_1,
-		c2 = DIK_2,
-		c3 = DIK_3,
-		c4 = DIK_4,
-		c5 = DIK_5,
-		c6 = DIK_6,
-		c7 = DIK_7,
-		c8 = DIK_8,
-		c9 = DIK_9,
-		cA = DIK_A,
-		cB = DIK_B,
-		cC = DIK_C,
-		cD = DIK_D,
-		cE = DIK_E,
-		cF = DIK_F,
-		cG = DIK_G,
-		cH = DIK_H,
-		cI = DIK_I,
-		cJ = DIK_J,
-		cK = DIK_K,
-		cL = DIK_L,
-		cM = DIK_M,
-		cN = DIK_N,
-		cO = DIK_O,
-		cP = DIK_P,
-		cQ = DIK_Q,
-		cR = DIK_R,
-		cS = DIK_S,
-		cT = DIK_T,
-		cU = DIK_U,
-		cV = DIK_V,
-		cW = DIK_W,
-		cX = DIK_X,
-		cY = DIK_Y,
-		cZ = DIK_Z,
-		cLeft = DIK_LEFT,
-		cRight = DIK_RIGHT,
-		cUp = DIK_UP,
-		cDown = DIK_DOWN,
-		cSpace = DIK_SPACE,
-		cEnter = 0,
-		cLeftCtrl = DIK_LCONTROL,
-		cRightCtrl = DIK_RCONTROL,
-		cLeftAlt = DIK_LALT,
-		cRightAlt = DIK_RALT,
-		cLeftShift = DIK_LSHIFT,
-		cRightShift = DIK_RSHIFT,
-		cEsc = DIK_ESCAPE,
-		cF1 = DIK_F1,
-		cF2 = DIK_F2,
-		cF3 = DIK_F3,
-		cF4 = DIK_F4,
-		cF5 = DIK_F5,
-		cF6 = DIK_F6,
-		cF7 = DIK_F7,
-		cF8 = DIK_F8,
-		cF9 = DIK_F9,
-		cF10 = DIK_F10,
-		cF11 = DIK_F11,
-		cF12 = DIK_F12,
-		cMouseCursorX = 256,
-		cMouseCursorY,
-		cMouseWheelForward,
-		cMouseWheelBack,
-		cMouseButton1,
-		cMouseButton2,
-		cMouseButton3,
-		cMouseButton4,
-		cNull,	//何もないキー
-		cMax,
-	};
+//InputCodeからDirectXのコードに変換する
+const u8 TransList[]{
+	DIK_0,
+	DIK_1,
+	DIK_2,
+	DIK_3,
+	DIK_4,
+	DIK_5,
+	DIK_6,
+	DIK_7,
+	DIK_8,
+	DIK_9,
+	DIK_A,
+	DIK_B,
+	DIK_C,
+	DIK_D,
+	DIK_E,
+	DIK_F,
+	DIK_G,
+	DIK_H,
+	DIK_I,
+	DIK_J,
+	DIK_K,
+	DIK_L,
+	DIK_M,
+	DIK_N,
+	DIK_O,
+	DIK_P,
+	DIK_Q,
+	DIK_R,
+	DIK_S,
+	DIK_T,
+	DIK_U,
+	DIK_V,
+	DIK_W,
+	DIK_X,
+	DIK_Y,
+	DIK_Z,
+	DIK_LEFT,
+	DIK_RIGHT,
+	DIK_UP,
+	DIK_DOWN,
+	DIK_SPACE,
+	DIK_LCONTROL,
+	DIK_RCONTROL,
+	DIK_LALT,
+	DIK_RALT,
+	DIK_LSHIFT,
+	DIK_RSHIFT,
+	DIK_ESCAPE,
+	DIK_F1,
+	DIK_F2,
+	DIK_F3,
+	DIK_F4,
+	DIK_F5,
+	DIK_F6,
+	DIK_F7,
+	DIK_F8,
+	DIK_F9,
+	DIK_F10,
+	DIK_F11,
+	DIK_F12,
 };
 
-class InputDevice : public Singleton<InputDevice> {
-	friend Singleton<InputDevice>;
+
+class Input : public Singleton<Input> {
+	friend Singleton<Input>;
 
 	//初期化
 	#pragma region Init
 
 private:
-	InputDevice();
+	Input();
 
 public:
 	void Init(HINSTANCE aHInstance, HWND aHwnd);
@@ -116,7 +210,7 @@ public:
 	#pragma region Final
 
 public:
-	~InputDevice();
+	~Input();
 
 	#pragma endregion
 
@@ -140,9 +234,133 @@ private:
 
 public:
 	//入力された値
-	f32 GetValue(u32 aKeyCode) const {
-		CPOT_ASSERT(aKeyCode < CKeyCode::cMax);
-		return mValue[aKeyCode];
+	f32 GetValue(CInputCode aCode) const {
+		if (aCode <= CInputCode::cF12) {
+			return mData.mKey.IsStand(TransList[aCode]) ? 1.0f : 0.0f;
+		}
+		else if (aCode == CInputCode::cMouseCursorX) {
+			return mData.mMouseX;
+		}
+		else if (aCode == CInputCode::cMouseCursorY) {
+			return mData.mMouseY;
+		}
+		else if (aCode == CInputCode::cMouseWheel) {
+			return mData.mMouseWheel;
+		}
+		else if (aCode <= CInputCode::cMouseButton4) {
+			return mData.mMouseButton.IsStand(aCode - cMouseButton1) ? 1.0f : 0.0f;
+		}
+		else {
+			return 0.0f;
+		}
+	}
+	f32 GetValueBefore(CInputCode aCode) const {
+		if (aCode <= CInputCode::cF12) {
+			return mBeforeData.mKey.IsStand(TransList[aCode]) ? 1.0f : 0.0f;
+		}
+		else if (aCode == CInputCode::cMouseCursorX) {
+			return mBeforeData.mMouseX;
+		}
+		else if (aCode == CInputCode::cMouseCursorY) {
+			return mBeforeData.mMouseY;
+		}
+		else if (aCode == CInputCode::cMouseWheel) {
+			return mBeforeData.mMouseWheel;
+		}
+		else if (aCode <= CInputCode::cMouseButton4) {
+			return mBeforeData.mMouseButton.IsStand(aCode - cMouseButton1) ? 1.0f : 0.0f;
+		}
+		else {
+			return 0.0f;
+		}
+	}
+
+	BOOL GetButton(CInputCode aCode) const {
+		if (aCode <= CInputCode::cF12) {
+			return mData.mKey.IsStand(TransList[aCode]);
+		}
+		else if (aCode == CInputCode::cMouseCursorX) {
+			return mData.mMouseX;
+		}
+		else if (aCode == CInputCode::cMouseCursorY) {
+			return mData.mMouseY;
+		}
+		else if (aCode == CInputCode::cMouseWheel) {
+			return mData.mMouseWheel;
+		}
+		else if (aCode <= CInputCode::cMouseButton4) {
+			return mData.mMouseButton.IsStand(aCode - cMouseButton1);
+		}
+		else {
+			return false;
+		}
+	}
+	BOOL GetButtonBefore(CInputCode aCode) const {
+		if (aCode <= CInputCode::cF12) {
+			return mBeforeData.mKey.IsStand(TransList[aCode]);
+		}
+		else if (aCode == CInputCode::cMouseCursorX) {
+			return mBeforeData.mMouseX;
+		}
+		else if (aCode == CInputCode::cMouseCursorY) {
+			return mBeforeData.mMouseY;
+		}
+		else if (aCode == CInputCode::cMouseWheel) {
+			return mBeforeData.mMouseWheel;
+		}
+		else if (aCode <= CInputCode::cMouseButton4) {
+			return mBeforeData.mMouseButton.IsStand(aCode - cMouseButton1);
+		}
+		else {
+			return false;
+		}
+	}
+	BOOL GetButtonDown(CInputCode aCode) const {
+		if (!GetButtonBefore(aCode)) {
+			if (GetButton(aCode)) {
+				return true;
+			}
+		}
+	}
+	BOOL GetButtonUp(CInputCode aCode) const {
+		if (GetButtonBefore(aCode)) {
+			if (!GetButton(aCode)) {
+				return true;
+			}
+		}
+	}
+
+	f32 GetAxis(CInputCode aMinus, CInputCode aPlus) const {
+		return Strong(-GetValue(aMinus), GetValue(aPlus));
+	}
+	f32 GetAxis(CInputAxisCode aAxis) const {
+		switch (aAxis) {
+			case CInputAxisCode::cAD:
+				return GetAxis(cA, cD);
+			case CInputAxisCode::cWS:
+				return GetAxis(cS, cW);
+			case CInputAxisCode::cCrossX:
+				return GetAxis(cLeft, cRight);
+			case CInputAxisCode::cCrossY:
+				return GetAxis(cDown, cUp);
+		}
+	}
+	
+
+	f32 GetMouseLocX() const {
+		return mData.mMouseX;
+	}
+	f32 GetMouseLocY() const {
+		return mData.mMouseY;
+	}
+	Vector2 GetMouseLoc() const {
+		return Vector2(mData.mMouseX, mData.mMouseY);
+	}
+	Vector2 GetMouseMove() const {
+		return GetMouseLoc() - Vector2(mBeforeData.mMouseX, mBeforeData.mMouseY);
+	}
+	f32 GetMouseWheel() const {
+		return mData.mMouseWheel;
 	}
 
 	//使用可能かどうか
@@ -155,9 +373,16 @@ public:
 	#pragma region Field
 
 private:
-	//入力された値を格納する
-	f32 mValue[CKeyCode::cMax];
+	struct InputData {
+		BitFlagLarge<256> mKey;
+		f32 mMouseX, mMouseY;
+		f32 mMouseWheel;
+		BitFlag mMouseButton;
+	};
 
+	//入力された値を格納する
+	InputData mData;
+	InputData mBeforeData;
 
 	//DirectInputを使うのに必要な変数
 	#pragma region DirectInput
@@ -172,9 +397,13 @@ private:
 	#pragma endregion
 
 	#pragma endregion
+
 };
 
 
 }
 
 }
+
+
+#endif

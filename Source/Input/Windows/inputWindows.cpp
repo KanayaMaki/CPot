@@ -1,5 +1,7 @@
 ﻿#include "./Input/Windows/inputWindows.h"
 
+#ifdef CPOT_VALID_INPUT_WINDOWS
+
 #include <Windows.h>
 
 #pragma comment(lib, "dinput8.lib")
@@ -14,7 +16,7 @@ namespace windows {
 #pragma region Init
 
 
-InputDevice::InputDevice() {
+Input::Input() {
 
 	mHInstance = 0;
 	mHwnd = 0;
@@ -24,7 +26,7 @@ InputDevice::InputDevice() {
 	mMouseDevice = nullptr;
 }
 
-void InputDevice::Init(HINSTANCE aHInstance, HWND aHwnd) {
+void Input::Init(HINSTANCE aHInstance, HWND aHwnd) {
 
 	//引数の状態が正常かチェックする
 	if (aHInstance == 0) {
@@ -97,9 +99,7 @@ void InputDevice::Init(HINSTANCE aHInstance, HWND aHwnd) {
 	}
 
 	//入力情報の初期化
-	for (u32 i = 0; i < CKeyCode::cMax; i++) {
-		mValue[i] = 0.0f;
-	}
+	
 }
 
 
@@ -110,7 +110,7 @@ void InputDevice::Init(HINSTANCE aHInstance, HWND aHwnd) {
 //終了処理
 #pragma region Final
 
-InputDevice::~InputDevice() {
+Input::~Input() {
 	if (mKeyboardDevice) {
 		mKeyboardDevice->Unacquire();
 		mKeyboardDevice->Release();
@@ -136,12 +136,15 @@ InputDevice::~InputDevice() {
 #pragma region Update
 
 
-void InputDevice::Update() {
+void Input::Update() {
+
+	mBeforeData = mData;
+
 	UpdateKeyboard();
 	UpdateMouse();
 }
 
-void InputDevice::UpdateKeyboard() {
+void Input::UpdateKeyboard() {
 	//キーボード情報の取得
 	u8 tValue[256];
 	HRESULT  hr;
@@ -156,7 +159,7 @@ void InputDevice::UpdateKeyboard() {
 		//取得に失敗したら
 		if (FAILED(hr)) {
 			for (u32 i = 0; i < 256; i++) {
-				mValue[i] = 0.0f;	//入力無し
+				mData.mKey.DownAll();	//入力無し
 			}
 			return;
 		}
@@ -166,24 +169,22 @@ void InputDevice::UpdateKeyboard() {
 	for (s32 i = 0; i < 256; i++) {
 		//入力があったら
 		if (tValue[i] & 0x80) {
-			mValue[i] = 1.0f;
+			mData.mKey.Stand(i);
 		}
 		else {
-			mValue[i] = 0.0f;
+			mData.mKey.Down(i);
 		}
 	}
 }
 
-void InputDevice::UpdateMouse() {
+void Input::UpdateMouse() {
 	//マウス座標の取得
 	POINT tMouse;
 	GetCursorPos(&tMouse);
 	ScreenToClient(mHwnd, &tMouse);
 
-	mValue[CKeyCode::cMouseCursorX] = (f32)tMouse.x;
-	mValue[CKeyCode::cMouseCursorY] = (f32)tMouse.y;
-
-	mValue[CKeyCode::cNull] = 0.0f;
+	mData.mMouseX = (f32)tMouse.x;
+	mData.mMouseY = (f32)tMouse.y;
 
 
 	//マウス情報の取得
@@ -199,24 +200,29 @@ void InputDevice::UpdateMouse() {
 
 		//もし失敗したなら
 		if (FAILED(hr)) {
-			for (u32 i = CKeyCode::cMouseWheelForward; i <= CKeyCode::cMouseButton4; i++) {
-				mValue[i] = 0.0f; //入力無し
-			}
+			mData.mMouseButton.DownAll();	//入力無し
 		}
 	}
 
 	//ホイール情報の格納
-	mValue[CKeyCode::cMouseWheelForward] = tMouseState.lZ > 0 ? 1.0f : 0.0f;
-	mValue[CKeyCode::cMouseWheelBack] = tMouseState.lZ < 0 ? 1.0f : 0.0f;
+	if (tMouseState.lZ > 0) {
+		mData.mMouseWheel = 1.0f;
+	}
+	else if (tMouseState.lZ < 0) {
+		mData.mMouseWheel = -1.0f;
+	}
+	else {
+		mData.mMouseWheel = 0.0f;
+	}
 
 	//マウスのボタン情報の格納
 	for (u32 i = 0; i < 4; i++) {
 		//入力があれば
 		if (tMouseState.rgbButtons[i] & 0x80) {
-			mValue[CKeyCode::cMouseButton1 + i] = 1.0f;
+			mData.mMouseButton.Stand(i);
 		}
 		else {
-			mValue[CKeyCode::cMouseButton1 + i] = 0.0f;
+			mData.mMouseButton.Down(i);
 		}
 	}
 }
@@ -225,7 +231,7 @@ void InputDevice::UpdateMouse() {
 
 
 
-BOOL InputDevice::IsValid() const {
+BOOL Input::IsValid() const {
 	return mInput != nullptr;
 }
 
@@ -233,3 +239,5 @@ BOOL InputDevice::IsValid() const {
 }
 
 }
+
+#endif
