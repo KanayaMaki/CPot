@@ -73,6 +73,10 @@ public:
 	void Output(f64 aVal) {
 		OutputStr(ToString(aVal));
 	}
+	template<u32 aSize>
+	void Output(const String<aSize>& aVal) {
+		OutputStr(aVal.Get());
+	}
 	void Output(const Buffer& aBuffer) {
 		OutputByte(aBuffer);
 	}
