@@ -79,6 +79,9 @@
     <Filter Include="Source\File">
       <UniqueIdentifier>{859d3421-b434-4fe5-8229-e3c700620ed6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\File\Standard">
+      <UniqueIdentifier>{dde43a6e-aef9-40bf-8c74-05d8c6931411}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -216,6 +219,9 @@
     <ClInclude Include="..\..\Source\File\file.h">
       <Filter>Source\File</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\File\Standard\file.h">
+      <Filter>Source\File\Standard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -265,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Input\input.cpp">
       <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\File\Standard\fileStandard.cpp">
+      <Filter>Source\File\Standard</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

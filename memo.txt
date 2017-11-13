@@ -142,28 +142,15 @@ File
 	}
 	using FileSize = u32;
 
-	FileBase
-		OpenToWrite(const CHAR* aFileName, BOOL aIsAdd = false, BOOL aBinary = false);
-		OpenToRead(const CHAR* aFileName, BOOL aBinary = false);
-		Open(const CHAR* aFileName, BOOL aIsWrite, BOOL aBinary = false, BOOL aIsAdd = false);
-		Open(const CHAR* aFileName, u32 aOpenFlags);
-		Close();
-		u32 Read(BYTE* aBuffer, FileSize aSize);
-		u32 Read(Buffer& aBuffer);
-		u32 Read(Buffer& aBuffer, FileSize aSize);
-		template<FileSize cSize>
-		u32 Read(String<cSize>& aStr);
-		void Write(const Buffer& aBuffer);
-		void Write(const CHAR* aStr, FileSize aSize);
-		template<u32 cSize>
-		void Write(const String<cSize>& aStr);
-		BOOL IsOpen() const;
+	FileIn
+		void Open(const CHAR* aFileName);
+		void Close();
+		void Read(Buffer& aBinary);
 
-		FileSize mPosition;
-		void SetPosition(FileSize aPosition);
-		FileSize GetSize();
-		FileSize GetPosition();
-
+	FileOut
+		void Open(const CHAR* aFileName, BOOL aAdd);
+		void Close();
+		void Write(Buffer& aBinary);
 
 描画
 インプットの更新
