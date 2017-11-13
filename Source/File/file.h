@@ -89,6 +89,7 @@ public:
 
 	#pragma endregion
 
+
 	//ファイルを開く。ファイルを開くのに成功するとtrue、失敗するとfalseを返す
 	#pragma region Open
 
@@ -108,14 +109,10 @@ public:
 
 
 	//ファイルから読み込む
-	//現在のPositionから読み込む
-	//読み込んだサイズを返す
 	#pragma region Read
 
 public:
-	CPOT_VI FileSize Read(BYTE* aBuffer, FileSize aSize) CPOT_ZR;
-	CPOT_VI FileSize Read(Buffer& aBuffer) CPOT_ZR;
-	CPOT_VI FileSize Read(Buffer& aBuffer, FileSize aSize) CPOT_ZR;
+	CPOT_VI void Read(Buffer& aBuffer) CPOT_ZR;
 
 	#pragma endregion
 
@@ -127,28 +124,18 @@ public:
 	//ファイルが開かれているか
 	CPOT_VI BOOL IsOpen() const CPOT_ZR;
 
-	//ファイルの大きさ
-	CPOT_VI FileSize GetSize() const CPOT_ZR;
-
-	//ファイルの現在位置
-	CPOT_VI FileSize GetPosition() const CPOT_ZR;
-
 	//ファイルのオープン設定
 	CPOT_VI BOOL IsBinary() const CPOT_ZR;
 
 	#pragma endregion
 
-
-	//設定する
-	#pragma region Setter
-
-public:
-	//ファイルの現在位置
-	CPOT_VI void SetPosition(FileSize aPosition) CPOT_ZR;
-
-	#pragma endregion
 };
 
 #pragma endregion
 
 }
+
+
+#ifdef CPOT_ON_WINDOWS
+#include "File\Standard\file.h"
+#endif

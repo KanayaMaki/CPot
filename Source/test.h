@@ -59,3 +59,11 @@ void TestInputInputWindows(HINSTANCE aHInstance, HWND aHwnd);
 void TestInputInputXInput();
 
 #pragma endregion
+
+
+#pragma region File
+
+void TestFileOut();
+void TestFileIn();
+
+#pragma endregion

@@ -26,6 +26,10 @@ public:
 		Reset();
 		Load(aBuffer, aSize);
 	}
+	Buffer(const CHAR* aStr) {
+		Reset();
+		Load(aStr);
+	}
 	const Buffer& operator=(const Buffer& aB) {
 		Reset();
 		Load(aB.mBuffer, aB.mSize);
@@ -75,6 +79,9 @@ public:
 			CopyMem(&(mBuffer[0]), &(aBuffer[0]), aSize);
 			mSize = aSize;
 		}
+	}
+	void Load(const CHAR* aStr) {
+		Load((const BYTE*)aStr, StringLen(aStr));
 	}
 
 	void Create(BufferSize aSize) {

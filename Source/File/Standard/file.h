@@ -8,6 +8,7 @@
 #include "./File/file.h"
 
 #include <fstream>
+#include <vector>
 
 namespace cpot {
 
@@ -25,6 +26,9 @@ class FileOut : public FileOutBase {
 public:
 	FileOut() {
 		
+	}
+	FileOut(const CHAR* aFileName, BOOL aIsAdd = false, BOOL aBinary = false) {
+		Open(aFileName, aIsAdd, aBinary);
 	}
 
 	#pragma endregion
@@ -127,8 +131,118 @@ private:
 #pragma endregion
 
 
+
+//ファイル入力のベースクラス
+#pragma region FileIn
+
+class FileIn : public FileInBase {
+
+	//コンストラクタ
+	#pragma region Constructor
+
+public:
+	FileIn() {}
+	FileIn(const CHAR* aFileName, BOOL aBinary = false) {
+		Open(aFileName, aBinary);
+	}
+
+	#pragma endregion
+
+
+	//デストラクタ
+	#pragma region Destructor
+
+public:
+	~FileIn() {
+		Close();
+	}
+
+	#pragma endregion
+
+
+	//ファイルを開く。ファイルを開くのに成功するとtrue、失敗するとfalseを返す
+	#pragma region Open
+
+public:
+	BOOL Open(const CHAR* aFileName, BOOL aBinary = false) CPOT_OR {
+		unsigned int lOpenMode = std::ios::in;
+		if (aBinary) {
+			lOpenMode |= std::ios::binary;
+			mIsBinary = true;
+		}
+		else {
+			mIsBinary = false;
+		}
+
+		mIfs.open(aFileName, lOpenMode);
+
+		return IsOpen();
+	}
+
+	#pragma endregion
+
+
+	//ファイルを閉じる
+	#pragma region Close
+
+public:
+	void Close() CPOT_OR {
+		mIfs.close();
+	}
+
+	#pragma endregion
+
+
+	//ファイルから読み込む
+	//現在のPositionから読み込む
+	#pragma region Read
+
+public:
+	void Read(Buffer& aBuffer) CPOT_OR {
+		
+		std::istreambuf_iterator<char> lTt(mIfs);
+		std::istreambuf_iterator<char> lLast;
+		std::vector<char> lStr(lTt, lLast);
+
+		aBuffer.Load((const BYTE*)lStr.data(), lStr.size());
+	}
+
+	#pragma endregion
+
+
+	//情報を取得する
+	#pragma region Getter
+
+public:
+	//ファイルが開かれているか
+	BOOL IsOpen() const CPOT_OR {
+		return mIfs.is_open();
+	}
+
+	//ファイルのオープン設定
+	BOOL IsBinary() const CPOT_OR {
+		return mIsBinary;
+	}
+
+	#pragma endregion
+
+
+	//フィールド
+	#pragma region Field
+
+private:
+	std::ifstream mIfs;
+	BOOL mIsBinary;
+
+	#pragma endregion
+};
+
+#pragma endregion
+
+
 }
 
 using FileOut = standard::FileOut;
+using FileIn = standard::FileIn;
 
 }
