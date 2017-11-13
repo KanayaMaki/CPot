@@ -34,9 +34,37 @@
 #include "Input\XInput\inputXInput.h"
 #include "Input\input.h"
 
+//FileOut
+#include "File\file.h"
+
 #include <Windows.h>
 
 using namespace cpot;
+
+
+#pragma region File
+
+void TestFileOut() {
+
+	FileOut o;
+	if (!o.Open("aa.txt", false, true)) {
+		CPOT_LOG("FileOut.Open:Failed");
+	}
+	Vector4 lData(1.0f, 2.0f, 3.0f, 4.0f);
+	Buffer b((const BYTE*)(&lData), sizeof(lData));
+	o.Write(b);
+}
+
+void TestFileIn() {
+	FileIn lIn("aa.txt", true);
+	Vector4 lData;
+	Buffer b;
+	lIn.Read(b);
+	b.Read(&lData, sizeof(lData));
+}
+
+#pragma endregion
+
 
 
 #pragma region Output

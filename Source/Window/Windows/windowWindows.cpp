@@ -105,15 +105,15 @@ void Window::SetSize(Vector2 aSize) {
 
 
 	//クライアント領域の大きさを指定された大きさにするために、ウィンドウ全体の大きさを計算する
-	s32 lWindowWidth = (lWinRect.right - lWinRect.left) - (lCliRect.right - lCliRect.left) + lNewSize.x;
-	s32 lWindowHeight = (lWinRect.bottom - lWinRect.top) - (lCliRect.bottom - lCliRect.top) + lNewSize.y;
+	f32 lWindowWidth = (lWinRect.right - lWinRect.left) - (lCliRect.right - lCliRect.left) + lNewSize.x;
+	f32 lWindowHeight = (lWinRect.bottom - lWinRect.top) - (lCliRect.bottom - lCliRect.top) + lNewSize.y;
 
 	//デスクトップの中央にウィンドウがある時の、左上の座標を求める
-	s32 lLocX = ((lDeskRect.right - lDeskRect.left) - lWindowWidth) / 2;
-	s32 lLocY = ((lDeskRect.bottom - lDeskRect.top) - lWindowHeight) / 2;
+	f32 lLocX = ((lDeskRect.right - lDeskRect.left) - lWindowWidth) / 2;
+	f32 lLocY = ((lDeskRect.bottom - lDeskRect.top) - lWindowHeight) / 2;
 
 	//ウィンドウサイズを変更し、デスクトップの中央に移動する
-	SetWindowPos(mHwnd, nullptr, lLocX, lLocY, lWindowWidth, lWindowHeight, SWP_NOZORDER);
+	SetWindowPos(mHwnd, nullptr, (INT)lLocX, (INT)lLocY, (INT)lWindowWidth, (INT)lWindowHeight, SWP_NOZORDER);
 
 	mSize = lNewSize;
 }
