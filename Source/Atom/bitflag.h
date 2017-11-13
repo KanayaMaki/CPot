@@ -17,7 +17,7 @@
 
 namespace cpot {
 
-
+//32bitのビットフラグ
 class BitFlag {
 
 	//コンストラクタ
@@ -215,5 +215,201 @@ public:
 
 };
 
+
+//より大きいビットフラグのクラス
+template <u32 cBitNum>
+class BitFlagLarge {
+
+	//コンストラクタ
+	#pragma region Constructor
+
+public:
+	BitFlagLarge() {
+		DownAll();
+	}
+
+	#pragma endregion
+
+
+	//フラグを取得する
+	#pragma region Getter
+
+public:
+	//インデックスで取得
+	BOOL operator[](u32 aIndex) {
+		return IsStand(aIndex);
+	}
+
+	//指定されたビットが立っているか
+	BOOL IsStand(u32 aIndex) const {
+		return GetBitFlag(aIndex).IsStand(GetIndex(aIndex));
+	}
+	BOOL IsDown(u32 aIndex) const {
+		return GetBitFlag(aIndex).IsDown(GetIndex(aIndex));
+	}
+
+	//全てのビットが立っているか
+	BOOL IsStandAll() const {
+		for (u32 i = 0; i < GetBitFlagNum(); i++) {
+			if (!GetBitFlag(i).IsStandAll()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	BOOL IsDownAll() const {
+		for (u32 i = 0; i < GetBitFlagNum(); i++) {
+			if (!GetBitFlag(i).IsDownAll()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	//いずれかのビットが立っているか
+	BOOL IsStandAny() const {
+		return !IsDownAll();
+	}
+	BOOL IsDownAny() const {
+		return !IsStandAll();
+	}
+
+
+	//インデックスのビットが含まれるBitFlagを返す
+	const BitFlag& GetBitFlag(u32 aIndex) const {
+		return mBitFlag[aIndex / 32];
+	}
+	BitFlag& GetBitFlag(u32 aIndex) {
+		return mBitFlag[aIndex / 32];
+	}
+	//BitFlag内のインデックスを返す
+	u32 GetIndex(u32 aIndex) const {
+		return aIndex % 32;
+	}
+	//使用するBitFlagの数を返す
+	u32 GetBitFlagNum() const {
+		return (cBitNum + 31) / 32;
+	}
+	#pragma endregion
+
+
+	//フラグを設定する
+	#pragma region Setter
+
+public:
+
+	//ビットを立てる
+	#pragma region Stand
+
+	BitFlagLarge& Stand(u32 aIndex) {
+		GetBitFlag(aIndex).Stand(GetIndex(aIndex));
+		return *this;
+	}
+	BitFlagLarge& StandAll() {
+		for (u32 i = 0; i < GetBitFlagNum(); i++) {
+			GetBitFlag(i).StandAll();
+		}
+		return *this;
+	}
+	BitFlagLarge& StandRange(u32 aStartIndex, u32 aEndIndex) {
+		//TODO 実装
+		return *this;
+	}
+
+	#pragma endregion
+
+	//ビットを下ろす
+	#pragma region Down
+
+	BitFlagLarge& Down(u32 aIndex) {
+		GetBitFlag(aIndex).Down(GetIndex(aIndex));
+		return *this;
+	}
+	BitFlagLarge& DownAll() {
+		for (u32 i = 0; i < GetBitFlagNum(); i++) {
+			GetBitFlag(i).DownAll();
+		}
+		return *this;
+	}
+	BitFlagLarge& DownRange(u32 aStartIndex, u32 aEndIndex) {
+		//TODO 実装
+		return *this;
+	}
+
+	#pragma endregion
+
+	//ビットを反転させる
+	#pragma region Flip
+
+	BitFlagLarge& Flip(u32 aIndex) {
+		GetBitFlag(aIndex).Flip(GetIndex(aIndex));
+		return *this;
+	}
+	BitFlagLarge& FlipAll() {
+		for (u32 i = 0; i < GetBitFlagNum(); i++) {
+			GetBitFlag(i).FlipAll();
+		}
+		return *this;
+	}
+	BitFlagLarge& FlipRange(u32 aStartIndex, u32 aEndIndex) {
+		//TODO 実装
+		return *this;
+	}
+
+	#pragma endregion
+
+	//真偽によって、立てるか下ろすか決める
+	#pragma region Flag
+
+	BitFlagLarge& Flag(u32 aIndex, BOOL aIsStand) {
+		if (aIsStand) {
+			Stand(aIndex);
+		}
+		else {
+			Down(aIndex);
+		}
+		return *this;
+	}
+	BitFlagLarge& FlagRange(u32 aStartIndex, u32 aEndIndex, BOOL aIsStand) {
+		if (aIsStand) {
+			StandRange(aStartIndex, aEndIndex);
+		}
+		else {
+			DownRange(aStartIndex, aEndIndex);
+		}
+		return *this;
+	}
+
+	#pragma endregion
+
+	#pragma endregion
+
+
+	//メンバ
+	#pragma region Member
+
+private:
+	BitFlag mBitFlag[(cBitNum + 31) / 32];	//ビットの状態を格納する
+
+	#pragma endregion
+
+
+	//ビットの並びを文字列にする
+	#pragma region ToString
+
+public:
+	using BitString = String<((cBitNum + 31) / 32) * 32 + 1>;
+
+	BitString ToString() const {
+		BitString lRes;
+		for (u32 i = 0; i < GetBitFlagNum(); i++) {
+			lRes += GetBitFlag(i).ToString();
+		}
+		return lRes;
+	}
+
+	#pragma endregion
+
+};
 
 }

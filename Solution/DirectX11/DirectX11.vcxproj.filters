@@ -67,6 +67,15 @@
     <Filter Include="Source\Game">
       <UniqueIdentifier>{f176e9dd-44a5-4f6d-97da-72b54cd3aa46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Input">
+      <UniqueIdentifier>{36f8600a-399a-4d24-b104-060fb0a2ceaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Input\XInput">
+      <UniqueIdentifier>{bc209c6a-ce4a-4efa-baa9-1650cd81a7d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Input\Windows">
+      <UniqueIdentifier>{7215d96c-1562-48c1-83c4-0a0ac7aef21e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -192,6 +201,15 @@
     <ClInclude Include="..\..\Source\Game\game.h">
       <Filter>Source\Game</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Input\Windows\inputWindows.h">
+      <Filter>Source\Input\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Input\XInput\inputXInput.h">
+      <Filter>Source\Input\XInput</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Input\input.h">
+      <Filter>Source\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -232,6 +250,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Rand\rand.cpp">
       <Filter>Source\Rand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Input\Windows\inputWindows.cpp">
+      <Filter>Source\Input\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Input\XInput\inputXInput.cpp">
+      <Filter>Source\Input\XInput</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Input\input.cpp">
+      <Filter>Source\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

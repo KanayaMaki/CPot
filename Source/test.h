@@ -2,7 +2,6 @@
 
 #include <Windows.h>
 
-
 #pragma region Output
 
 void TestOutput(HWND aHwnd);
@@ -47,5 +46,16 @@ void TestThread();
 #pragma region Rand
 
 void TestRand();
+
+#pragma endregion
+
+
+#pragma region Input
+
+void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd);
+void TestInputXInput();
+
+void TestInputInputWindows(HINSTANCE aHInstance, HWND aHwnd);
+void TestInputInputXInput();
 
 #pragma endregion

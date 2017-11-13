@@ -110,6 +110,61 @@ Thread
 	//スレッドを終了する
 	t.Stop();
 
+
+Input
+	Input.GetValue(xinput::cLStickLeft);
+	Input.GetButton(xinput::cLStickLeft);
+	Input.GetButtonDown(ps4::cLStickLeft);
+	Input.GetButtonPress(windows::cA);
+	Input.GetAxis(xinput::cLStickX);
+	Input.GetAxis(ps4::cLStickX);
+
+	Input.GetButton(ps4::CInputCode) {
+
+	}
+	Input.GetButton(xinput::CButtonCode) {
+
+	}
+	Input.GetButton(windows::CButtonCode) {
+
+	}
+
+
+File
+	class CFileOpenFlag {
+	public:
+		enum {
+			cWrite = 1 << 0,
+			cRead = 1 << 1,
+			cBinary = 1 << 2,
+			cAdd = 1 << 3
+		}
+	}
+	using FileSize = u32;
+
+	FileBase
+		OpenToWrite(const CHAR* aFileName, BOOL aIsAdd = false, BOOL aBinary = false);
+		OpenToRead(const CHAR* aFileName, BOOL aBinary = false);
+		Open(const CHAR* aFileName, BOOL aIsWrite, BOOL aBinary = false, BOOL aIsAdd = false);
+		Open(const CHAR* aFileName, u32 aOpenFlags);
+		Close();
+		u32 Read(BYTE* aBuffer, FileSize aSize);
+		u32 Read(Buffer& aBuffer);
+		u32 Read(Buffer& aBuffer, FileSize aSize);
+		template<FileSize cSize>
+		u32 Read(String<cSize>& aStr);
+		void Write(const Buffer& aBuffer);
+		void Write(const CHAR* aStr, FileSize aSize);
+		template<u32 cSize>
+		void Write(const String<cSize>& aStr);
+		BOOL IsOpen() const;
+
+		FileSize mPosition;
+		void SetPosition(FileSize aPosition);
+		FileSize GetSize();
+		FileSize GetPosition();
+
+
 描画
 インプットの更新
 

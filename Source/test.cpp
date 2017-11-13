@@ -1,5 +1,7 @@
 #include "./Atom/atom.h"
 
+#include "./test.h"
+
 //Window
 #include "Window/Windows/window.h"
 
@@ -27,6 +29,10 @@
 #include "Thread/thread.h"
 #include "Thread/mutex.h"
 
+//Input
+#include "Input\Windows\inputWindows.h"
+#include "Input\XInput\inputXInput.h"
+#include "Input\input.h"
 
 #include <Windows.h>
 
@@ -198,6 +204,83 @@ void TestRand() {
 	Rand r;
 	for (u32 i = 0; i < 10; i++) {
 		CPOT_LOG(r.Next());
+	}
+}
+
+#pragma endregion
+
+
+
+#pragma region Input
+
+/*
+void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
+
+	windows::Input::S().Init(aHInstance, aHwnd);
+
+	while (true) {
+		windows::Input::S().Update();
+
+		if (windows::Input::S().GetValue(windows::cA) > 0.0f) {
+			CPOT_LOG("A");
+		}
+		if (windows::Input::S().GetValue(windows::CInputCode::cMouseButton1) > 0.0f) {
+			CPOT_LOG("MouseClick");
+			CPOT_LOG("MouseLocX:", windows::Input::S().GetValue(windows::cMouseCursorX));
+			CPOT_LOG("MouseLocY:", windows::Input::S().GetValue(windows::cMouseCursorY));
+		}
+		
+		::Sleep(16);
+	}
+
+}
+*/
+/*
+void TestInputXInput() {
+
+	while (true) {
+		xInput::Input::S().Update();
+
+		if (xInput::Input::S().GetButtonDown(xInput::cLTrigger) > 0.0f) {
+			CPOT_LOG("LStick");
+		}
+
+		::Sleep(16);
+	}
+}
+*/
+
+void TestInputInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
+
+	windows::Input::S().Init(aHInstance, aHwnd);
+
+	while (true) {
+		windows::Input::S().Update();
+
+		if (Input::GetButtonDown(windows::cA) > 0.0f) {
+			CPOT_LOG("A");
+		}
+		if (Input::GetValue(windows::cMouseButton1) > 0.0f) {
+			CPOT_LOG("MouseClick");
+			CPOT_LOG("MouseLocX:",Input::GetValue(windows::cMouseCursorX));
+			CPOT_LOG("MouseLocY:", Input::GetValue(windows::cMouseCursorY));
+		}
+
+		::Sleep(16);
+	}
+
+}
+
+void TestInputInputXInput() {
+
+	while (true) {
+		xInput::Input::S().Update();
+
+		if (Input::GetButtonDown(xInput::cLTrigger) > 0.0f) {
+			CPOT_LOG("LStick");
+		}
+
+		::Sleep(16);
 	}
 }
 

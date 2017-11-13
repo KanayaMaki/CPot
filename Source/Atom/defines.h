@@ -124,6 +124,19 @@ namespace cpot {
 
 
 
+#pragma region	マスター以外の時にだけ呼ばれる式の設定
+
+#ifndef CPOT_ON_MASTER
+#define CPOT_DEBUG_EXP(expr) (expr)	//有効
+
+#else
+#define CPOT_DEBUG_EXP(expr)	//無効
+#endif
+
+#pragma endregion
+
+
+
 #pragma region バーチャルを有効にするかの設定
 
 //このdefineは、インターフェースをそろえるために開発時はvirtualとoverrideで開発して、Masterでは効率化のために仮想関数にしない時に使用する
