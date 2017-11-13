@@ -29,6 +29,8 @@ void Input::Update() {
 		else {
 			mInputData[i].mIsValid = true;
 
+
+			//値を持つ入力を取る
 			mInputData[i].mData.mLeftStickX = (tState.Gamepad.sThumbLX);
 			mInputData[i].mData.mLeftStickY = (tState.Gamepad.sThumbLY);
 
@@ -37,6 +39,32 @@ void Input::Update() {
 
 			mInputData[i].mData.mLeftTrigger = (tState.Gamepad.bLeftTrigger);
 			mInputData[i].mData.mRightTrigger = (tState.Gamepad.bRightTrigger);
+
+
+			//ボタンの入力を取る
+			mInputData[i].mData.mButton.DownAll();	//ビットをすべて下す
+
+			//ABXYボタン
+			mInputData[i].mData.mButton.Flag(cButtonA, tState.Gamepad.wButtons & XINPUT_GAMEPAD_A);
+			mInputData[i].mData.mButton.Flag(cButtonB, tState.Gamepad.wButtons & XINPUT_GAMEPAD_B);
+			mInputData[i].mData.mButton.Flag(cButtonX, tState.Gamepad.wButtons & XINPUT_GAMEPAD_X);
+			mInputData[i].mData.mButton.Flag(cButtonY, tState.Gamepad.wButtons & XINPUT_GAMEPAD_Y);
+
+			//DPad
+			mInputData[i].mData.mButton.Flag(cDPadLeft, tState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT);
+			mInputData[i].mData.mButton.Flag(cDPadRight, tState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT);
+			mInputData[i].mData.mButton.Flag(cDPadUp, tState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP);
+			mInputData[i].mData.mButton.Flag(cDPadDown, tState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN);
+
+			//ショルダー
+			mInputData[i].mData.mButton.Flag(cLShoulder, tState.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER);
+			mInputData[i].mData.mButton.Flag(cLThumb, tState.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB);
+			mInputData[i].mData.mButton.Flag(cRShoulder, tState.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER);
+			mInputData[i].mData.mButton.Flag(cRThumb, tState.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB);
+
+			//スタート、バック
+			mInputData[i].mData.mButton.Flag(cStart, tState.Gamepad.wButtons & XINPUT_GAMEPAD_START);
+			mInputData[i].mData.mButton.Flag(cBack, tState.Gamepad.wButtons & XINPUT_GAMEPAD_BACK);
 		}
 	}
 }

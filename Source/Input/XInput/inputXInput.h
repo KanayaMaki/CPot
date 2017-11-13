@@ -38,6 +38,8 @@ enum CInputCode {
 	cLShoulder,
 	cRThumb,
 	cRShoulder,
+	cStart,
+	cBack,
 	cLStickLeft,
 	cLStickRight,
 	cLStickUp,
