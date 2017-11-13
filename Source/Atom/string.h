@@ -56,6 +56,10 @@ public:
 		return cSize;
 	}
 
+	operator const CHAR* () {
+		return mStr;
+	}
+
 	#pragma endregion
 
 
@@ -213,14 +217,12 @@ private:
 //数字を文字列にする
 #pragma region ToString
 
-//戻り値は一時バッファかもしれないので、呼び出し後すぐでないと中身の保証はされない
-
-const CHAR* ToString(s32 aVal);
-const CHAR* ToString(u32 aVal);
-const CHAR* ToString(s64 aVal);
-const CHAR* ToString(u64 aVal);
-const CHAR* ToString(f32 aVal);
-const CHAR* ToString(f64 aVal);
+String<15> ToString(s32 aVal);
+String<15> ToString(u32 aVal);
+String<31> ToString(s64 aVal);
+String<31> ToString(u64 aVal);
+String<15> ToString(f32 aVal);
+String<31> ToString(f64 aVal);
 
 #pragma endregion
 
