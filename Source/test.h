@@ -2,6 +2,15 @@
 
 #include <Windows.h>
 
+
+#pragma region Loader
+
+void TestLoader();
+
+#pragma endregion
+
+
+
 #pragma region Output
 
 void TestOutput(HWND aHwnd);

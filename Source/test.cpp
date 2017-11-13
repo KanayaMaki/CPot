@@ -37,9 +37,42 @@
 //FileOut
 #include "File\file.h"
 
+//Loader
+#include "Loader\loader.h"
+
 #include <Windows.h>
 
 using namespace cpot;
+
+
+#pragma region Loader
+
+void TestLoader() {
+	LoaderManager::S().Start(1);
+
+	for (u32 i = 0; i < 10; i++) {
+		LoaderManager::S().Regist(new LoaderTimer(ToString(i)));
+	}
+	for (u32 i = 0; i < 10; i++) {
+		String<32> lFileName("Hurry");
+		lFileName += ToString(i);
+		LoaderManager::S().Regist(new LoaderTimerHurry(lFileName));
+	}
+
+
+	while (true) {
+		LoaderManager::S().Update();
+
+		if (LoaderManager::S().IsLoading() == false) {
+			CPOT_LOG("AllIsEnd");
+			break;
+		}
+
+		::Sleep(16);
+	}
+}
+
+#pragma endregion
 
 
 #pragma region File
@@ -205,7 +238,7 @@ Mutex gMutex;
 
 void TestMutex(u32* aData) {
 
-	//MutexLocker lMl(gMutex);
+	MutexLocker lMl(gMutex);
 
 	for (u32 i = 0; i < 2; i++) {
 		CPOT_LOG(i);

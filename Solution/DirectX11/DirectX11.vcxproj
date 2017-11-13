@@ -52,6 +52,7 @@
     <ClInclude Include="..\..\Source\List\Standard\hashTable.h" />
     <ClInclude Include="..\..\Source\List\Standard\vector.h" />
     <ClInclude Include="..\..\Source\List\vector.h" />
+    <ClInclude Include="..\..\Source\Loader\loader.h" />
     <ClInclude Include="..\..\Source\Rand\rand.h" />
     <ClInclude Include="..\..\Source\Rand\Standard\rand.h" />
     <ClInclude Include="..\..\Source\Resource\Windows\resource.h" />

@@ -152,6 +152,10 @@ File
 		void Close();
 		void Write(Buffer& aBinary);
 
+
+
+
+
 描画
 インプットの更新
 

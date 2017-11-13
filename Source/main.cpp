@@ -15,8 +15,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 
 	TestOutput(lWindow->GetHwnd());
 
+	TestLoader();
+
+	//TestThread();
+
 	//TestFileOut();
-	TestFileIn();
+	//TestFileIn();
 
 	//TestInputWindows(lWindow->GetHInstance(), lWindow->GetHwnd());
 	//TestInputDirectInput(lWindow->GetHInstance(), lWindow->GetHwnd());
