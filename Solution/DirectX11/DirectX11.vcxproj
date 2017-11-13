@@ -42,6 +42,7 @@
     <ClInclude Include="..\..\Source\Atom\transform.h" />
     <ClInclude Include="..\..\Source\Atom\typedef.h" />
     <ClInclude Include="..\..\Source\Atom\vector.h" />
+    <ClInclude Include="..\..\Source\File\file.h" />
     <ClInclude Include="..\..\Source\Game\game.h" />
     <ClInclude Include="..\..\Source\Input\input.h" />
     <ClInclude Include="..\..\Source\Input\Windows\inputWindows.h" />
