@@ -155,12 +155,14 @@ private:
 		if (S().mLoaderListHurry.GetSize() != 0) {
 			//一番後ろのローダを取得する
 			l = S().mLoaderListHurry.PopBack();
-			S().LoadStart();	//ロード開始
 		}
 		//もし通常のローダが存在するなら
 		else if (S().mLoaderListNormal.GetSize() != 0) {
 			//一番後ろのローダを取得する
 			l = S().mLoaderListNormal.PopBack();
+		}
+
+		if (l) {
 			S().LoadStart();	//ロード開始
 		}
 

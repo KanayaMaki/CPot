@@ -10,7 +10,6 @@ void TestLoader();
 #pragma endregion
 
 
-
 #pragma region Output
 
 void TestOutput(HWND aHwnd);
