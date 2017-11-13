@@ -52,6 +52,13 @@ public:
 		mVector.erase(std::remove(mVector.begin(), mVector.end(), aT), mVector.end());
 	}
 
+	//ˆê”ÔÅŒã‚Ì—v‘f‚ğíœ‚µ‚Ä•Ô‚·
+	T PopBack() CPOT_OR {
+		T lRes = mVector.back();
+		mVector.pop_back();
+		return lRes;
+	}
+
 
 	//‘S‚Ä‚Ì—v‘f‚ğíœ
 	void Clear() CPOT_OR {

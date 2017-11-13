@@ -35,6 +35,9 @@ public:
 	//全ての要素を削除
 	CPOT_VI void Clear() CPOT_ZR;
 
+	//一番後ろの要素を削除して、返す
+	CPOT_VI T PopBack() CPOT_ZR;
+
 	#pragma endregion
 
 
