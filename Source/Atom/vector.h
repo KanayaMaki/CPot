@@ -10,6 +10,7 @@
 #include "typedef.h"
 #include "math.h"
 #include "function.h"
+#include "string.h"
 
 
 namespace cpot {
@@ -261,6 +262,20 @@ public:
 
 	#pragma endregion
 
+
+	//•¶š—ñ‚É•ÏŠ·‚·‚é
+	#pragma region ToString
+
+	String<32> ToString() const {
+		String<32> lRes;
+		lRes += "(";
+		lRes += cpot::ToString(x);
+		lRes += ", ";
+		lRes += cpot::ToString(y);
+		lRes += ")";
+		return lRes;
+	}
+	#pragma endregion
 
 
 	//ƒwƒ‹ƒpŠÖ”
@@ -649,6 +664,25 @@ public:
 	#pragma endregion
 
 
+	//•¶š—ñ‚É•ÏŠ·‚·‚é
+	#pragma region ToString
+
+public:
+	String<64> ToString() const {
+		String<64> lRes;
+		lRes += "(";
+		lRes += cpot::ToString(x);
+		lRes += ", ";
+		lRes += cpot::ToString(y);
+		lRes += ", ";
+		lRes += cpot::ToString(z);
+		lRes += ")";
+		return lRes;
+	}
+
+	#pragma endregion
+
+
 	//ƒwƒ‹ƒpŠÖ”
 	#pragma region Helper
 
@@ -983,6 +1017,27 @@ public:
 			return *this;
 		}
 		return *this / len;
+	}
+
+	#pragma endregion
+
+
+	//•¶š—ñ‚É•ÏŠ·‚·‚é
+	#pragma region ToString
+
+public:
+	String<64> ToString() const {
+		String<64> lRes;
+		lRes += "(";
+		lRes += cpot::ToString(x);
+		lRes += ", ";
+		lRes += cpot::ToString(y);
+		lRes += ", ";
+		lRes += cpot::ToString(z);
+		lRes += ", ";
+		lRes += cpot::ToString(w);
+		lRes += ")";
+		return lRes;
 	}
 
 	#pragma endregion

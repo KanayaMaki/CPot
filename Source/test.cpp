@@ -61,6 +61,7 @@ void TestFileIn() {
 	Buffer b;
 	lIn.Read(b);
 	b.Read(&lData, sizeof(lData));
+	Log::S().Output(lData.ToString());
 }
 
 #pragma endregion
@@ -71,12 +72,13 @@ void TestFileIn() {
 
 void TestOutput(HWND aHwnd) {
 
+	#ifdef CPOT_VALID_LOG
 	windows::OutputConsoleDevice::S().Init(aHwnd);
 
 	auto o = new windows::OutputConsole;
 	o->Load();
 	Log::S().Set(o);
-
+	#endif
 }
 
 #pragma endregion
@@ -241,7 +243,7 @@ void TestRand() {
 
 #pragma region Input
 
-/*
+#ifdef CPOT_VALID_INPUT_WINDOWS
 void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
 
 	windows::Input::S().Init(aHInstance, aHwnd);
@@ -262,8 +264,9 @@ void TestInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
 	}
 
 }
-*/
-/*
+#endif
+
+#ifdef CPOT_VALID_XINPUT
 void TestInputXInput() {
 
 	while (true) {
@@ -276,7 +279,7 @@ void TestInputXInput() {
 		::Sleep(16);
 	}
 }
-*/
+#endif
 
 void TestInputInputWindows(HINSTANCE aHInstance, HWND aHwnd) {
 
