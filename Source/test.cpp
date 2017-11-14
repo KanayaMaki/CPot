@@ -48,15 +48,17 @@ using namespace cpot;
 #pragma region Loader
 
 void TestLoader() {
-	LoaderManager::S().Start(1);
+	LoaderManager::S().Start(4);
+	Rand r;
+	r.SetSeed(Time().GetUnix());
 
 	for (u32 i = 0; i < 10; i++) {
-		LoaderManager::S().Regist(new LoaderTimer(ToString(i)));
+		LoaderManager::S().Regist(new LoaderTimer(ToString(i), r.Nextf(2.0f, 5.0f)));
 	}
 	for (u32 i = 0; i < 10; i++) {
 		String<32> lFileName("Hurry");
 		lFileName += ToString(i);
-		LoaderManager::S().Regist(new LoaderTimerHurry(lFileName));
+		LoaderManager::S().Regist(new LoaderTimerHurry(lFileName, r.Nextf(2.0f, 5.0f)));
 	}
 
 
