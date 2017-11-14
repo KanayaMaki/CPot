@@ -85,6 +85,12 @@
     <Filter Include="Source\Loader">
       <UniqueIdentifier>{824fd18e-f87d-44b8-b2c6-6e5969a5b5cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Audio">
+      <UniqueIdentifier>{a21fc80c-0f4f-4651-853d-9d3c82aac7b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Audio\XAudio">
+      <UniqueIdentifier>{439a6ad0-ce75-4a3e-8f38-8885c1e6e175}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -228,6 +234,15 @@
     <ClInclude Include="..\..\Source\Loader\loader.h">
       <Filter>Source\Loader</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\deviceXAudio.h">
+      <Filter>Source\Audio\XAudio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\voiceXAudio.h">
+      <Filter>Source\Audio\XAudio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\clipXAudio.h">
+      <Filter>Source\Audio\XAudio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -280,6 +295,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\File\Standard\fileStandard.cpp">
       <Filter>Source\File\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Audio\XAudio\deviceXAudio.cpp">
+      <Filter>Source\Audio\XAudio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Audio\XAudio\voiceXAudio.cpp">
+      <Filter>Source\Audio\XAudio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Audio\XAudio\clipXAudio.cpp">
+      <Filter>Source\Audio\XAudio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
