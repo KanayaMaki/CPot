@@ -68,7 +68,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Source\File\file.h" />
-    <ClInclude Include="..\..\Source\File\Standard\file.h" />
+    <ClInclude Include="..\..\Source\File\Standard\fileStandard.h" />
     <ClInclude Include="..\..\Source\Game\game.h" />
     <ClInclude Include="..\..\Source\Input\input.h" />
     <ClInclude Include="..\..\Source\Input\Windows\inputWindows.h" />

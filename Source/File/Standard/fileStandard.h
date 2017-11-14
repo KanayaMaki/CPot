@@ -1,5 +1,6 @@
 //
-//	“à—e	:	FileStandardƒNƒ‰ƒX‚ÌŽÀ‘•
+//	content	:	Standard‚Å‚ÌFile‚ÌŽÀ‘•
+//	author	:	SaitoYoshiki
 //
 
 #pragma once

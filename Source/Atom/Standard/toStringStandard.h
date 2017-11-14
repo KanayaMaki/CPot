@@ -1,5 +1,5 @@
 //
-//	content	:	Standard‚Å‚ÌString‚Ì’è‹`
+//	content	:	Standard‚Å‚ÌToString‚Ì’è‹`
 //	author	:	SaitoYoshiki
 //
 

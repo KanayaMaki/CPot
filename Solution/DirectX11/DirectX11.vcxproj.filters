@@ -204,9 +204,6 @@
     <ClInclude Include="..\..\Source\File\file.h">
       <Filter>Source\File</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\File\Standard\file.h">
-      <Filter>Source\File\Standard</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Loader\loader.h">
       <Filter>Source\Loader</Filter>
     </ClInclude>
@@ -245,6 +242,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Atom\Standard\toStringStandard.h">
       <Filter>Source\Atom\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\File\Standard\fileStandard.h">
+      <Filter>Source\File\Standard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

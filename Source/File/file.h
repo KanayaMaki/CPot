@@ -1,5 +1,6 @@
 //
-//	ファイルの入出力のインターフェースとなるクラス
+//	content	:	Fileの入出力のインターフェース
+//	author	:	SaitoYoshiki
 //
 
 #pragma once
