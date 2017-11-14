@@ -26,7 +26,7 @@ public:
 	Voice() {
 		Init();
 	}
-	Voice(Clip* aClip) {
+	Voice(Clip& aClip) {
 		Init();
 		Load(aClip);
 	}
@@ -35,7 +35,7 @@ public:
 		mSourceVoice = nullptr;
 	}
 
-	void Load(Clip* aClip);
+	void Load(Clip& aClip);
 	void Release();
 
 	~Voice() {
@@ -60,7 +60,6 @@ public:
 			//’âŽ~‚·‚é
 			mSourceVoice->Stop();
 		}
-
 	}
 	void Volume(f32 aVolume) {
 		mSourceVoice->SetVolume(aVolume);

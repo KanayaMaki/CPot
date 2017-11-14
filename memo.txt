@@ -180,37 +180,23 @@ Audio
 
 		BOOL IsLoad() const;
 
-	ResourceName
-		public:
-		const CHAR* GetName(const HashTableKey& aNameKey) {
 
-		}
-		const CHAR* GetName(const CHAR* aNameKey) {
-
-		}
-		void Regist(const HashTableKey& aNameKey, const CHAR* aName) {
-
-		}
-		void Regist(const CHAR* aNameKey, const CHAR* aName) {
-
-		}
-		HashTable mName;
-
-		AudioName : public Singleton<AudioTime>, public ResourceTime {
-
-		}
-
-
-	AudioClip
+	AudioClipBase
 		void Load(const CHAR* aFileName);
 		void Load(const HashTableKey& aFileNameKey);
 		void Release();
 
 		void IsLoad() const;
 
-	AudioVoice
+	AudioVoiceBase
 		void Load(AudioClip& c);
 		void Release();
+
+		void SetVolume(f32 aVolume);
+		f32 GetVolume() const;
+		void Play();
+		void Stop();
+		void ToStart();
 
 		void IsLoad() const;
 

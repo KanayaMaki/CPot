@@ -43,6 +43,12 @@
     <ClInclude Include="..\..\Source\Atom\transform.h" />
     <ClInclude Include="..\..\Source\Atom\typedef.h" />
     <ClInclude Include="..\..\Source\Atom\vector.h" />
+    <ClInclude Include="..\..\Source\Audio\audio.h" />
+    <ClInclude Include="..\..\Source\Audio\audioClip.h" />
+    <ClInclude Include="..\..\Source\Audio\audioName.h" />
+    <ClInclude Include="..\..\Source\Audio\audioVoice.h" />
+    <ClInclude Include="..\..\Source\Audio\XAudio\audioClipXAudio.h" />
+    <ClInclude Include="..\..\Source\Audio\XAudio\audioVoiceXAudio.h" />
     <ClInclude Include="..\..\Source\Audio\XAudio\Device\clipXAudioDevice.h" />
     <ClInclude Include="..\..\Source\Audio\XAudio\Device\deviceXAudioDevice.h" />
     <ClInclude Include="..\..\Source\Audio\XAudio\Device\voiceXAudioDevice.h" />

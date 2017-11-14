@@ -45,9 +45,34 @@
 //Loader
 #include "Loader\loader.h"
 
+//Audio
+#include "Audio\audio.h"
+
 #include <Windows.h>
 
 using namespace cpot;
+
+
+#pragma region Audio
+
+void TestAudio() {
+
+	//XAudio‚Ì‰Šú‰»
+	xaudio::device::Device::S().Init();
+
+	AudioClip c;
+	c.Load("./test.wav");
+
+	AudioVoice v;
+	v.Load(c);
+
+	v.Play();
+
+	::Sleep(1000 * 10);
+}
+
+#pragma endregion
+
 
 
 #pragma region Loader

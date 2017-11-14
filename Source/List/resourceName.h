@@ -35,9 +35,12 @@ public:
 
 public:
 	const Name& Get(const HashTableKey& aKey) {
-		return mNameList.Find(aKey);
+		if (mNameList.Exist(aKey)) {
+			return mNameList.Find(aKey);
+		}
+		return mNameNull;
 	}
-	const CHAR* Get(const CHAR* aKey) {
+	const Name& Get(const CHAR* aKey) {
 		return Get(aKey);	//委譲
 	}
 
@@ -49,6 +52,7 @@ public:
 
 private:
 	HashTable<Name> mNameList;	//キーと名前のセット
+	Name mNameNull;	//見つからなかったときに返される
 
 	#pragma endregion
 };

@@ -8,6 +8,13 @@
 #include <Windows.h>
 
 
+#pragma region Audio
+
+void TestAudio();
+
+#pragma endregion
+
+
 #pragma region Loader
 
 void TestLoader();
