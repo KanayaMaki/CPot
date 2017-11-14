@@ -1,4 +1,9 @@
-﻿#include "./Input/XInput/inputXInput.h"
+﻿//
+//	content	:	XInputでの入力
+//	author	:	SaitoYoshiki
+//
+
+#include "./Input/XInput/inputXInput.h"
 
 #ifdef CPOT_VALID_XINPUT
 

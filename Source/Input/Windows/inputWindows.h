@@ -1,5 +1,6 @@
 ﻿//
-//	Windows環境での入力を取得する
+//	content	:	Windowsでの入力
+//	author	:	SaitoYoshiki
 //
 
 #pragma once
