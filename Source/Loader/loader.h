@@ -1,3 +1,8 @@
+//
+//	content	:	別スレッドでロードしてくれるクラス
+//	author	:	SaitoYoshiki
+//
+
 #pragma once
 
 #include "./Atom/atom.h"
