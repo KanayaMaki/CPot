@@ -7,7 +7,7 @@
 
 #include "./Audio/XAudio/Device/deviceXAudioDevice.h"
 
-
+#pragma comment(lib, "XAudio2.lib")
 
 namespace cpot {
 
@@ -22,7 +22,12 @@ void Device::Init() {
 
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 	/**** Create XAudio2 ****/
-	hr = XAudio2Create(&(mXAudio2), 0/* , XAUDIO2_DEFAULT_PROCESSOR*/);
+	UINT32 lCreateFlag = 0;
+	#ifdef CPOT_ON_DEBUG
+	lCreateFlag += XAUDIO2_DEBUG_ENGINE;
+	#endif
+
+	hr = XAudio2Create(&(mXAudio2), lCreateFlag/* , XAUDIO2_DEFAULT_PROCESSOR*/);
 	if (FAILED(hr)) {
 		CoUninitialize();
 		abort();
