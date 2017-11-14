@@ -1,5 +1,6 @@
 //
-//	内容		:	RandStandardクラスの実装
+//	content	:	Standardでの乱数を生成するクラスの実装
+//	author	:	SaitoYoshiki
 //
 
 #pragma once

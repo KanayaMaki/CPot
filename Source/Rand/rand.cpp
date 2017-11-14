@@ -1,5 +1,6 @@
 //
-//	内容　:　RandBaseクラスの実装
+//	content	:	乱数を生成するクラスのインターフェース
+//	author	:	SaitoYoshiki
 //
 
 #include "./Rand/rand.h"

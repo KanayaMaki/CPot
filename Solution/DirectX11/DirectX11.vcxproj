@@ -82,7 +82,7 @@
     <ClInclude Include="..\..\Source\Out\Windows\outConsoleWindows.h" />
     <ClInclude Include="..\..\Source\Out\Windows\outDebugWindowWindows.h" />
     <ClInclude Include="..\..\Source\Rand\rand.h" />
-    <ClInclude Include="..\..\Source\Rand\Standard\rand.h" />
+    <ClInclude Include="..\..\Source\Rand\Standard\randStandard.h" />
     <ClInclude Include="..\..\Source\Resource\Windows\resource.h" />
     <ClInclude Include="..\..\Source\Sleep\sleep.h" />
     <ClInclude Include="..\..\Source\Sleep\Windows\sleep.h" />
