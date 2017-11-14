@@ -3,7 +3,7 @@
 //	author	:	SaitoYoshiki
 //
 
-#include "./outConsole.h"
+#include "./outConsoleWindows.h"
 
 
 namespace cpot {

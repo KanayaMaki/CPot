@@ -210,12 +210,6 @@
     <ClInclude Include="..\..\Source\Audio\XAudio\clipXAudio.h">
       <Filter>Source\Audio\XAudio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Out\Windows\outDebugWindow.h">
-      <Filter>Source\Out\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Out\Windows\outConsole.h">
-      <Filter>Source\Out\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Out\out.h">
       <Filter>Source\Out</Filter>
     </ClInclude>
@@ -245,6 +239,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\List\Standard\hashTableStandard.h">
       <Filter>Source\List\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Out\Windows\outConsoleWindows.h">
+      <Filter>Source\Out\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Out\Windows\outDebugWindowWindows.h">
+      <Filter>Source\Out\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

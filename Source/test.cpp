@@ -12,8 +12,8 @@
 
 //Out
 #include "./Out/out.h"
-#include "./Out/Windows/outDebugWindow.h"
-#include "./Out/Windows/outConsole.h"
+#include "./Out/Windows/outDebugWindowWindows.h"
+#include "./Out/Windows/outConsoleWindows.h"
 
 //Rand
 #include "Rand/rand.h"

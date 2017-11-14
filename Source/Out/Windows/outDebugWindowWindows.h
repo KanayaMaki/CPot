@@ -1,5 +1,6 @@
 //
-//	内容	:	VisualStudioのデバッグウィンドウに出力するクラス
+//	content	:	Windowsで、VisualStudioのデバッグウィンドウに出力
+//	author	:	SaitoYoshiki
 //
 
 #pragma once

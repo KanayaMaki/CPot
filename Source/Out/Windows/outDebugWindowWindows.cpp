@@ -1,8 +1,9 @@
 //
-//	内容	:	VisualStudioのデバッグウィンドウに出力するクラス
+//	content	:	Windowsで、VisualStudioのデバッグウィンドウに出力
+//	author	:	SaitoYoshiki
 //
 
-#include "./outDebugWindow.h"
+#include "./outDebugWindowWindows.h"
 
 #include <Windows.h>
 

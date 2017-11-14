@@ -1,5 +1,6 @@
 //
-//	内容	:	Windowsで、コンソールを作成して標準出力で出力するクラス
+//	content	:	Windowsでコンソールを作成して標準出力する
+//	author	:	SaitoYoshiki
 //
 
 
