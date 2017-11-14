@@ -36,7 +36,7 @@ public:
 public:
 	const Name& Get(const HashTableKey& aKey) {
 		if (mNameList.Exist(aKey)) {
-			return mNameList.Find(aKey);
+			return mNameList[aKey];
 		}
 		return mNameNull;
 	}

@@ -60,8 +60,10 @@ void TestAudio() {
 	//XAudio‚Ì‰Šú‰»
 	xaudio::device::Device::S().Init();
 
+	AudioName::S().Regist("test", "./test.wav");
+
 	AudioClip c;
-	c.Load("./test.wav");
+	c.Load("test");
 
 	AudioVoice v;
 	v.Load(c);

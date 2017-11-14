@@ -24,7 +24,7 @@ void Device::Init() {
 	/**** Create XAudio2 ****/
 	UINT32 lCreateFlag = 0;
 	#ifdef CPOT_ON_DEBUG
-	lCreateFlag += XAUDIO2_DEBUG_ENGINE;
+	//lCreateFlag += XAUDIO2_DEBUG_ENGINE;
 	#endif
 
 	hr = XAudio2Create(&(mXAudio2), lCreateFlag/* , XAUDIO2_DEFAULT_PROCESSOR*/);
