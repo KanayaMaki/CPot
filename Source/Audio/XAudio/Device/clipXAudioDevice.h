@@ -1,14 +1,20 @@
+//
+//	content	:	XAudioにおけるデバイスでのClipの実装
+//	author	:	SaitoYoshiki
+//
+
 #pragma once
 
 #include "./Atom/atom.h"
 
-#include "./Audio/XAudio/deviceXAudio.h"
+#include "./Audio/XAudio/Device/deviceXAudioDevice.h"
 
 
 namespace cpot {
 
-namespace xAudio {
+namespace xaudio {
 
+namespace device {
 
 class Voice;
 
@@ -45,7 +51,7 @@ public:
 			return;
 		}
 
-		//使われているすべてのボイスを削除
+		//!このクリップを使用している全てのボイスをReleaseしておく必要がある
 		delete[] mDataBuffer;
 
 		Reset();
@@ -58,6 +64,8 @@ public:
 
 };
 
+
+}
 
 }
 

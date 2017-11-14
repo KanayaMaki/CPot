@@ -1,19 +1,23 @@
+//
+//	content	:	XAudioにおけるデバイスでのVoiceの実装
+//	author	:	SaitoYoshiki
+//
+
 #pragma once
 
 #include "./Atom/atom.h"
 
-#include "./device.h"
+#include "./Audio/XAudio/Device/deviceXAudioDevice.h"
 
 
-namespace cyc {
-
-namespace pot {
+namespace cpot {
 
 namespace xaudio {
 
+namespace device {
+
 
 class Clip;
-
 
 class Voice {
 	IXAudio2SourceVoice*	mSourceVoice;

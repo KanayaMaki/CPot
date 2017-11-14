@@ -1,11 +1,17 @@
-#include "./voice.h"
-#include "./clip.h"
+//
+//	content	:	XAudioにおけるデバイスでのVoiceの実装
+//	author	:	SaitoYoshiki
+//
 
-namespace cyc {
 
-namespace pot {
+#include "./Audio/XAudio/Device/clipXAudioDevice.h"
+#include "./Audio/XAudio/Device/voiceXAudioDevice.h"
+
+namespace cpot {
 
 namespace xaudio {
+
+namespace device {
 
 
 void Voice::Load(Clip* aAudioClip) {

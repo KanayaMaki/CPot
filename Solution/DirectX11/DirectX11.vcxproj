@@ -43,30 +43,9 @@
     <ClInclude Include="..\..\Source\Atom\transform.h" />
     <ClInclude Include="..\..\Source\Atom\typedef.h" />
     <ClInclude Include="..\..\Source\Atom\vector.h" />
-    <ClInclude Include="..\..\Source\Audio\XAudio\clipXAudio.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\XAudio\deviceXAudio.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\XAudio\voiceXAudio.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\Device\clipXAudioDevice.h" />
+    <ClInclude Include="..\..\Source\Audio\XAudio\Device\deviceXAudioDevice.h" />
+    <ClInclude Include="..\..\Source\Audio\XAudio\Device\voiceXAudioDevice.h" />
     <ClInclude Include="..\..\Source\File\file.h" />
     <ClInclude Include="..\..\Source\File\Standard\fileStandard.h" />
     <ClInclude Include="..\..\Source\Game\game.h" />
@@ -74,6 +53,7 @@
     <ClInclude Include="..\..\Source\Input\Windows\inputWindows.h" />
     <ClInclude Include="..\..\Source\Input\XInput\inputXInput.h" />
     <ClInclude Include="..\..\Source\List\hashTable.h" />
+    <ClInclude Include="..\..\Source\List\resourceName.h" />
     <ClInclude Include="..\..\Source\List\Standard\hashTableStandard.h" />
     <ClInclude Include="..\..\Source\List\Standard\vectorStandard.h" />
     <ClInclude Include="..\..\Source\List\vector.h" />
@@ -101,30 +81,9 @@
     <ClInclude Include="..\..\Source\Window\Windows\windowWindows.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\Audio\XAudio\clipXAudio.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Audio\XAudio\deviceXAudio.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Audio\XAudio\voiceXAudio.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="..\..\Source\Audio\XAudio\Device\clipXAudioDevice.cpp" />
+    <ClCompile Include="..\..\Source\Audio\XAudio\Device\deviceXAudioDevice.cpp" />
+    <ClCompile Include="..\..\Source\Audio\XAudio\Device\voiceXAudioDevice.cpp" />
     <ClCompile Include="..\..\Source\File\Standard\fileStandard.cpp" />
     <ClCompile Include="..\..\Source\Game\game.cpp" />
     <ClCompile Include="..\..\Source\Input\input.cpp" />

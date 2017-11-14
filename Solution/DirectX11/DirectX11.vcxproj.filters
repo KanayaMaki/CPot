@@ -91,6 +91,9 @@
     <Filter Include="Source\Out\Windows">
       <UniqueIdentifier>{15f53439-d7a4-4c01-b5bf-89fc624388c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Audio\XAudio\Device">
+      <UniqueIdentifier>{87caffde-8872-4827-9a26-728fbe86c9a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -189,15 +192,6 @@
     <ClInclude Include="..\..\Source\Loader\loader.h">
       <Filter>Source\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\XAudio\deviceXAudio.h">
-      <Filter>Source\Audio\XAudio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\XAudio\voiceXAudio.h">
-      <Filter>Source\Audio\XAudio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\XAudio\clipXAudio.h">
-      <Filter>Source\Audio\XAudio</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Out\out.h">
       <Filter>Source\Out</Filter>
     </ClInclude>
@@ -246,6 +240,18 @@
     <ClInclude Include="..\..\Source\Thread\Standard\threadStandard.h">
       <Filter>Source\Thread\Standard</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\Device\deviceXAudioDevice.h">
+      <Filter>Source\Audio\XAudio\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\Device\voiceXAudioDevice.h">
+      <Filter>Source\Audio\XAudio\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\Device\clipXAudioDevice.h">
+      <Filter>Source\Audio\XAudio\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\resourceName.h">
+      <Filter>Source\List</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -290,20 +296,20 @@
     <ClCompile Include="..\..\Source\File\Standard\fileStandard.cpp">
       <Filter>Source\File\Standard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Audio\XAudio\deviceXAudio.cpp">
-      <Filter>Source\Audio\XAudio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Audio\XAudio\voiceXAudio.cpp">
-      <Filter>Source\Audio\XAudio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Audio\XAudio\clipXAudio.cpp">
-      <Filter>Source\Audio\XAudio</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Out\Windows\outConsoleWindows.cpp">
       <Filter>Source\Out\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Out\Windows\outDebugWindowWindows.cpp">
       <Filter>Source\Out\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Audio\XAudio\Device\voiceXAudioDevice.cpp">
+      <Filter>Source\Audio\XAudio\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Audio\XAudio\Device\clipXAudioDevice.cpp">
+      <Filter>Source\Audio\XAudio\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Audio\XAudio\Device\deviceXAudioDevice.cpp">
+      <Filter>Source\Audio\XAudio\Device</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

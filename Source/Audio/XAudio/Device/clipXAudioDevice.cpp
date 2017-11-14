@@ -1,4 +1,9 @@
-#include "./clip.h"
+//
+//	content	:	XAudioにおけるデバイスでのClipの実装
+//	author	:	SaitoYoshiki
+//
+
+#include "./Audio/XAudio/Device/clipXAudioDevice.h"
 
 
 #ifdef _XBOX //Big-Endian
@@ -20,11 +25,11 @@
 
 
 
-namespace cyc {
-
-namespace pot {
+namespace cpot {
 
 namespace xaudio {
+
+namespace device {
 
 
 HRESULT FindChunk(HANDLE hFile, DWORD fourcc, DWORD & dwChunkSize, DWORD & dwChunkDataPosition) {

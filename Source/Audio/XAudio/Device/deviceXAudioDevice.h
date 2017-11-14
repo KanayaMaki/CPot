@@ -1,20 +1,22 @@
+//
+//	content	:	XAudioのデバイスを管理する
+//	author	:	SaitoYoshiki
+//
+
 #pragma once
 
 #include "./Atom/atom.h"
-#include "./Inter/singleton.h"
+#include "./Usefull/singleton.h"
 
 #include <xaudio2.h>
 
 
-namespace cyc {
-
-namespace pot {
+namespace cpot {
 
 namespace xaudio {
 
+namespace device {
 
-class Clip;
-class Voice;
 
 class Device : public Singleton<Device> {
 	friend Singleton<Device>;
@@ -32,7 +34,6 @@ public:
 	void Init();
 	void Final();
 };
-
 
 }
 

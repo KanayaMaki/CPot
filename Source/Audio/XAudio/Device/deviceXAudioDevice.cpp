@@ -1,10 +1,18 @@
-#include "./device.h"
+//
+//	content	:	XAudioのデバイスを管理する
+//	author	:	SaitoYoshiki
+//
 
-namespace cyc {
+#include "./Atom/atom.h"
 
-namespace pot {
+#include "./Audio/XAudio/Device/deviceXAudioDevice.h"
+
+
+namespace cpot {
 
 namespace xaudio {
+
+namespace device {
 
 
 void Device::Init() {
