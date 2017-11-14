@@ -1,5 +1,6 @@
 //
-//	ゲームの処理を行うクラスの実装
+//	content	:	ゲーム
+//	author	:	SaitoYoshiki
 //
 
 #pragma once
