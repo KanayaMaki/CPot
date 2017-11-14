@@ -1,8 +1,9 @@
 //
-//	内容	:	Windowsで、コンソールを作成して標準出力で出力するクラス
+//	content	:	Windowsで、コンソールを作成して標準出力で出力するクラス
+//	author	:	SaitoYoshiki
 //
 
-#include "./outputConsole.h"
+#include "./outConsole.h"
 
 
 namespace cpot {
@@ -12,7 +13,7 @@ namespace windows {
 
 #pragma region Init
 
-void OutputConsoleDevice::Load() {
+void OutConsoleDevice::Load() {
 	if (IsLoaded()) {
 		return;
 	}
@@ -33,11 +34,11 @@ void OutputConsoleDevice::Load() {
 
 #pragma region Final
 
-void OutputConsoleDevice::Final() {
+void OutConsoleDevice::Final() {
 	Release();
 }
 
-void OutputConsoleDevice::Release() {
+void OutConsoleDevice::Release() {
 	if (!IsLoaded()) {
 		return;
 	}
@@ -54,14 +55,14 @@ void OutputConsoleDevice::Release() {
 
 #pragma region Operate
 
-void OutputConsoleDevice::Alloc() {
+void OutConsoleDevice::Alloc() {
 	if (!IsLoaded()) {
 		Load();	//コンソールを取得する
 	}
 	mUserNum++;
 }
 
-void OutputConsoleDevice::Free() {
+void OutConsoleDevice::Free() {
 
 	mUserNum--;
 
@@ -70,7 +71,7 @@ void OutputConsoleDevice::Free() {
 	}
 }
 
-void OutputConsoleDevice::Output(const CHAR* aStr) {
+void OutConsoleDevice::Output(const CHAR* aStr) {
 
 	//標準出力すれば、コンソールに表示され
 	std::printf("%s", aStr);

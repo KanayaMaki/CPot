@@ -2,7 +2,7 @@
 //	内容	:	VisualStudioのデバッグウィンドウに出力するクラス
 //
 
-#include "./outputDebugWindow.h"
+#include "./outDebugWindow.h"
 
 #include <Windows.h>
 
@@ -13,7 +13,7 @@ namespace windows {
 
 
 //	デバッグウィンドウに出力
-void OutputDebugWindowDevice::Output(const CHAR* aStr) {
+void OutDebugWindowDevice::Output(const CHAR* aStr) {
 	::OutputDebugStringA(aStr);
 }
 

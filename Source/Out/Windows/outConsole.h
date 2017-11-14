@@ -8,7 +8,7 @@
 #include "./Atom/atom.h"
 #include "./Usefull/singleton.h"
 
-#include "./Output/output.h"
+#include "./Out/out.h"
 
 #include <Windows.h>
 #include <cstdio>
@@ -18,16 +18,15 @@ namespace cpot {
 
 namespace windows {
 
-
 //	コンソールを作成して、標準出力するクラス
-class OutputConsoleDevice : public Singleton<OutputConsoleDevice> {
-	friend class Singleton<OutputConsoleDevice>;
+class OutConsoleDevice : public Singleton<OutConsoleDevice> {
+	friend class Singleton<OutConsoleDevice>;
 
 	//初期化
 	#pragma region Init
 
 private:
-	OutputConsoleDevice() {
+	OutConsoleDevice() {
 		Reset();
 	}
 
@@ -57,7 +56,7 @@ private:
 	#pragma region Final
 
 public:
-	~OutputConsoleDevice() {
+	~OutConsoleDevice() {
 		Final();
 	}
 
@@ -112,13 +111,13 @@ private:
 
 
 //	コンソールを作成して、標準出力するクラス
-class OutputConsole : public OutputBase {
+class OutConsole : public OutBase {
 
 	//初期化
 	#pragma region Init
 
 public:
-	OutputConsole() {
+	OutConsole() {
 		Reset();
 	}
 
@@ -134,7 +133,7 @@ private:
 	#pragma region Final
 
 public:
-	~OutputConsole() override {
+	~OutConsole() override {
 		Release();
 	}
 
@@ -149,14 +148,14 @@ public:
 	void Load() {
 		if (!IsLoaded()) {
 			//コンソール出力の許可をもらう
-			OutputConsoleDevice::S().Alloc();
+			OutConsoleDevice::S().Alloc();
 		}
 	}
 	//出力不可能にする
 	void Release() {
 		if (IsLoaded()) {
 			//コンソール出力の許可を返す
-			OutputConsoleDevice::S().Free();
+			OutConsoleDevice::S().Free();
 		}
 		Reset();
 	}
@@ -180,7 +179,7 @@ public:
 private:
 	//OutBaseの関数のオーバーライド。文字列を出力する
 	void OutputStr(const CHAR* aStr) override {
-		OutputConsoleDevice::S().Output(aStr);
+		OutConsoleDevice::S().Output(aStr);
 	}
 
 	#pragma endregion

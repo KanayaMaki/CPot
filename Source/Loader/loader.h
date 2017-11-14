@@ -3,7 +3,7 @@
 #include "./Atom/atom.h"
 #include "./Thread/thread.h"
 #include "./Thread/mutex.h"
-#include "./Output/output.h"
+#include "./Out/out.h"
 #include "./List/vector.h"
 #include "./Sleep/sleep.h"
 
@@ -15,10 +15,17 @@ namespace cpot {
 
 class Loader {
 public:
+	//ロード
 	virtual void Load() = 0;
+	
+	//メインスレッドで実行される、ロード開始前の処理
+	//!Startの中からLoaderをRegistしてはいけない
 	virtual void Start() {}
+	
+	//メインスレッドで実行される、ロード終了後の処理
 	virtual void Finish() {}
 
+	//優先すべきか
 	virtual BOOL IsHurry() const {
 		return false;
 	}
@@ -53,7 +60,6 @@ public:
 	String<128> mFileName;
 	f32 mTakeTime;
 };
-
 
 class LoaderTimerHurry : public LoaderTimer {
 public:

@@ -1,8 +1,7 @@
-//	ファイル名	:	Output/output.h
-//	作者		:	齊藤芳紀
-//	作成日時	:	2017/11/09
-//	更新日時	:	2017/11/09
-//	内容		:	Outputクラスの実装
+//
+//	content	:	OutBaseの実装
+//	author	:	SaitoYoshiki
+//
 
 #pragma once
 
@@ -15,11 +14,11 @@
 namespace cpot {
 
 
-//アウトプットのベースクラス
-#pragma region OutputBase
+//アウトのベースクラス
+#pragma region OutBase
 
 
-class OutputBase {
+class OutBase {
 
 	//出力を行う関数
 	#pragma region Output
@@ -88,7 +87,7 @@ public:
 	#pragma region Virtual
 
 public:
-	virtual ~OutputBase() {}	//仮想デストラクタ
+	virtual ~OutBase() {}	//仮想デストラクタ
 
 protected:
 	virtual void OutputStr(const CHAR* aStr) = 0;	//文字列を出力。必須
@@ -103,15 +102,15 @@ protected:
 
 
 //何も出力しないヌルオブジェクト
-#pragma region OutputNull
+#pragma region OutNull
 
-class OutputNull : public OutputBase {
+class OutNull : public OutBase {
 private:
 	void OutputStr(const CHAR* aStr) override {}
 
 public:
-	static OutputNull& S() {
-		static OutputNull s;
+	static OutNull& S() {
+		static OutNull s;
 		return s;
 	}
 };
@@ -123,7 +122,7 @@ public:
 //何かのOutputクラスに出力するLog
 #pragma region Log
 
-class Log : public OutputBase {
+class Log : public OutBase {
 
 	//	TODO	プログラムのどこからでも呼ばれるので、マルチスレッドに対応する
 
@@ -137,7 +136,7 @@ public:
 
 	void Reset() {
 		//デフォルトでは、ヌル出力
-		mOut = &(OutputNull::S());
+		mOut = &(OutNull::S());
 	}
 
 	#pragma endregion
@@ -158,7 +157,7 @@ public:
 
 public:
 	//出力先を設定する
-	void Set(OutputBase* aOut) {
+	void Set(OutBase* aOut) {
 		mOut = aOut;
 	}
 
@@ -195,7 +194,7 @@ private:
 	#pragma region Field
 
 private:
-	OutputBase* mOut;
+	OutBase* mOut;
 	Mutex mMutex;
 
 	#pragma endregion

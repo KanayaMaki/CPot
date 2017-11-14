@@ -31,12 +31,6 @@
     <Filter Include="Source\Sleep\Windows">
       <UniqueIdentifier>{509a026c-d2dd-4320-aba1-217cbf05f880}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Output">
-      <UniqueIdentifier>{9256fe66-a836-41f6-94be-1141857c31bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Output\Windows">
-      <UniqueIdentifier>{15f53439-d7a4-4c01-b5bf-89fc624388c2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Time">
       <UniqueIdentifier>{0512ce2d-f961-477b-91ef-aab504a673d1}</UniqueIdentifier>
     </Filter>
@@ -90,6 +84,12 @@
     </Filter>
     <Filter Include="Source\Audio\XAudio">
       <UniqueIdentifier>{439a6ad0-ce75-4a3e-8f38-8885c1e6e175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Out">
+      <UniqueIdentifier>{9256fe66-a836-41f6-94be-1141857c31bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Out\Windows">
+      <UniqueIdentifier>{15f53439-d7a4-4c01-b5bf-89fc624388c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -161,15 +161,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Sleep\Windows\sleep.h">
       <Filter>Source\Sleep\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Output\output.h">
-      <Filter>Source\Output</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Output\Windows\outputDebugWindow.h">
-      <Filter>Source\Output\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Output\Windows\outputConsole.h">
-      <Filter>Source\Output\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Time\time.h">
       <Filter>Source\Time</Filter>
@@ -243,6 +234,15 @@
     <ClInclude Include="..\..\Source\Audio\XAudio\clipXAudio.h">
       <Filter>Source\Audio\XAudio</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Out\Windows\outDebugWindow.h">
+      <Filter>Source\Out\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Out\Windows\outConsole.h">
+      <Filter>Source\Out\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Out\out.h">
+      <Filter>Source\Out</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -262,12 +262,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Atom\Standard\stringStandard.cpp">
       <Filter>Source\Atom\Standard</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Output\Windows\outputDebugWindowWindows.cpp">
-      <Filter>Source\Output\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Output\Windows\outputConsoleWindows.cpp">
-      <Filter>Source\Output\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Time\time.cpp">
       <Filter>Source\Time</Filter>
@@ -304,6 +298,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Audio\XAudio\clipXAudio.cpp">
       <Filter>Source\Audio\XAudio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Out\Windows\outConsoleWindows.cpp">
+      <Filter>Source\Out\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Out\Windows\outDebugWindowWindows.cpp">
+      <Filter>Source\Out\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

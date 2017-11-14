@@ -5,10 +5,10 @@
 //Window
 #include "Window/Windows/window.h"
 
-//Output
-#include "./Output/output.h"
-#include "./Output/Windows/outputDebugWindow.h"
-#include "./Output/Windows/outputConsole.h"
+//Out
+#include "./Out/out.h"
+#include "./Out/Windows/outDebugWindow.h"
+#include "./Out/Windows/outConsole.h"
 
 //Rand
 #include "Rand/rand.h"
@@ -108,9 +108,9 @@ void TestFileIn() {
 void TestOutput(HWND aHwnd) {
 
 	#ifdef CPOT_VALID_LOG
-	windows::OutputConsoleDevice::S().Init(aHwnd);
+	windows::OutConsoleDevice::S().Init(aHwnd);
 
-	auto o = new windows::OutputConsole;
+	auto o = new windows::OutConsole;
 	o->Load();
 	Log::S().Set(o);
 	#endif
