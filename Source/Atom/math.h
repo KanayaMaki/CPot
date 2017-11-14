@@ -79,5 +79,5 @@ f32 Exp(f32 val);
 #ifdef CPOT_ON_WINDOWS
 #include "Standard/mathStandard.h"
 #elif defined CPOT_ON_ANDROID
-#include "Standard/math.h"
+#include "Standard/mathStandard.h"
 #endif

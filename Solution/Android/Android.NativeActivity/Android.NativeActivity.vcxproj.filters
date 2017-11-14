@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{c615354f-a49b-48e4-b74b-34ed2d3bfa45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Android">
+      <UniqueIdentifier>{49be5a8d-80b0-4a8d-bc38-716f0c8358a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Atom">
+      <UniqueIdentifier>{d17d1925-9757-4472-9f87-4d45e0c8910d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Atom\Standard">
+      <UniqueIdentifier>{83915050-ede2-42c7-8f2d-e62c0a47804a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Source\Android\android_native_app_glue.h">
+      <Filter>Source\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\defines.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\function.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\hash.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\hashString.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\math.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\matrix4x4.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\quaternion.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\string.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\transform.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\typedef.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\vector.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\atom.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\bitflag.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\color.h">
+      <Filter>Source\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\Standard\toStringStandard.h">
+      <Filter>Source\Atom\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Atom\Standard\mathStandard.h">
+      <Filter>Source\Atom\Standard</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Source\Android\main.cpp">
+      <Filter>Source\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Android\android_native_app_glue.c">
+      <Filter>Source\Android</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

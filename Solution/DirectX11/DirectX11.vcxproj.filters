@@ -46,12 +46,6 @@
     <Filter Include="Source\List\Standard">
       <UniqueIdentifier>{cf9b1076-09bf-482d-a914-93f49c17b981}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Resource">
-      <UniqueIdentifier>{0b6a7aa6-b858-40e6-bb15-8bc8619ac2f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Resource\Windows">
-      <UniqueIdentifier>{0ead0b03-883e-413a-8b41-6541c01c71f6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Thread">
       <UniqueIdentifier>{2e757ff2-9a9b-40ad-bed6-369b8b251a9d}</UniqueIdentifier>
     </Filter>
@@ -93,6 +87,12 @@
     </Filter>
     <Filter Include="Source\Audio\XAudio\Device">
       <UniqueIdentifier>{87caffde-8872-4827-9a26-728fbe86c9a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Windows">
+      <UniqueIdentifier>{d4cf9b71-2431-451d-a349-20ce55171aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Windows\Resource">
+      <UniqueIdentifier>{77bffa52-15f9-47d3-acb1-50a816f2ffa2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +161,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\List\hashTable.h">
       <Filter>Source\List</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Resource\Windows\resource.h">
-      <Filter>Source\Resource\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Thread\mutex.h">
       <Filter>Source\Thread</Filter>
@@ -270,11 +267,11 @@
     <ClInclude Include="..\..\Source\Audio\audio.h">
       <Filter>Source\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Windows\Resource\resource.h">
+      <Filter>Source\Windows\Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\test.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -329,15 +326,18 @@
     <ClCompile Include="..\..\Source\Audio\XAudio\Device\deviceXAudioDevice.cpp">
       <Filter>Source\Audio\XAudio\Device</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Windows\main.cpp">
+      <Filter>Source\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\Source\Resource\Windows\Icon.rc">
-      <Filter>Source\Resource\Windows</Filter>
+    <ResourceCompile Include="..\..\Source\Windows\Resource\Icon.rc">
+      <Filter>Source\Windows\Resource</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\Source\Resource\Windows\icon.ico">
-      <Filter>Source\Resource\Windows</Filter>
+    <Image Include="..\..\Source\Windows\Resource\icon.ico">
+      <Filter>Source\Windows\Resource</Filter>
     </Image>
   </ItemGroup>
 </Project>

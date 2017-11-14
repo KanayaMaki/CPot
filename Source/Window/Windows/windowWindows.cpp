@@ -6,7 +6,7 @@
 #include "./Window/Windows/windowWindows.h"
 
 //アイコンリソースの読み込み
-#include "./Resource/Windows/resource.h"
+#include "./Windows/Resource/resource.h"
 
 
 namespace cpot {

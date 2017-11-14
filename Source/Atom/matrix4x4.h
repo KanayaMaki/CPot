@@ -204,7 +204,7 @@ public:
 		*this = lRes;
 		return *this;
 	}
-	ShaderMatrix4x4& operator *(const Matrix4x4& aM) {
+	ShaderMatrix4x4 operator *(const Matrix4x4& aM) {
 		ShaderMatrix4x4 lRes = *this;
 		lRes *= aM;
 		return lRes;

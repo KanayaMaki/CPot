@@ -8,7 +8,7 @@
 #include "./Atom/string.h"
 
 #include <cstdio>
-
+#include <cstring>
 
 namespace cpot {
 
@@ -17,6 +17,7 @@ namespace standard {
 class ToString {
 
 public:
+
 	static String<15> Do(s32 aVal) {
 		CHAR toStringBuffer[16];
 		#ifdef CPOT_ON_WINDOWS

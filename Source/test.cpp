@@ -72,6 +72,8 @@ void TestAudio() {
 
 	::Sleep(1000 * 2);
 
+	CPOT_LOG(ToString::Do(v.GetVolume()));
+
 	c.Release();
 	CPOT_LOG(ToString::Do(v.IsLoad()));
 }

@@ -22,8 +22,11 @@ public:
 	void Load(const CHAR* aFileName) CPOT_OR {
 		mClip.Load(aFileName);
 	};
-	void Load(const HashTableKey& aFileNameKey) CPOT_OR {
+	void LoadFromKey(const HashTableKey& aFileNameKey) CPOT_OR {
 		mClip.Load(AudioName::S().Get(aFileNameKey).Get());
+	};
+	void LoadFromKey(const CHAR* aFileNameKey) CPOT_OR {
+		LoadFromKey(HashTableKey(aFileNameKey));
 	};
 
 public:

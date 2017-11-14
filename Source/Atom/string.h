@@ -116,7 +116,7 @@ public:
 	#pragma endregion
 
 
-	//インデックスで、文字を取得。読み書きが可能
+	//インデックスで、文字を取得
 	CHAR& operator[](u32 aIndex) {
 		CPOT_ASSERT(aIndex <= GetLength() - 1);
 		return mStr[aIndex];
@@ -172,6 +172,7 @@ public:
 		return (*this);
 	}
 
+	/*
 	String SliceToEnd(u32 aStart) const {
 		return Slice(aStart, GetLength());
 	}
@@ -191,10 +192,24 @@ public:
 
 		return lRes;
 	}
-
+	*/
 	//指定された長さになるまで、指定された文字で埋める
 	String Padding(CHAR aC, u32 aLength) {
-		u32 aNowLength = GetLen
+		String lRes = *this;
+		
+		u32 lNowLength = GetLength();
+		for (u32 i = lNowLength; i < aLength; i++) {
+			lRes += ToString(aC);
+		}
+
+		return lRes;
+	}
+
+private:
+	static String ToString(CHAR aC) {
+		String lRes("0");
+		lRes.mStr[0] = aC;
+		return lRes;
 	}
 		
 	#pragma endregion

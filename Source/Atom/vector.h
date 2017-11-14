@@ -256,7 +256,8 @@ public:
 		float v[2];
 	};
 	Float2 ToFloat2() const {
-		return Float2{ x, y };
+		Float2 t = { x, y };
+		return t;
 	}
 
 	#pragma endregion
@@ -657,7 +658,8 @@ public:
 		float v[3];
 	};
 	Float3 ToFloat3() const {
-		return Float3{ x, y, z };
+		Float3 t = { x, y, z };
+		return t;
 	}
 
 	#pragma endregion
@@ -1019,6 +1021,21 @@ public:
 	}
 
 	#pragma endregion
+
+
+	//float’l‚Ì”z—ñ‚ðŽæ“¾‚·‚é
+	#pragma region ToFloat
+
+	struct Float4 {
+		float v[4];
+	};
+	Float4 ToFloat4() const {
+		Float4 t = { x, y, z, w };
+		return t;
+	}
+
+	#pragma endregion
+
 
 
 	//•¶Žš—ñ‚É•ÏŠ·‚·‚é

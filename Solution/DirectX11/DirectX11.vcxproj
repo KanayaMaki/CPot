@@ -69,7 +69,6 @@
     <ClInclude Include="..\..\Source\Out\Windows\outDebugWindowWindows.h" />
     <ClInclude Include="..\..\Source\Rand\rand.h" />
     <ClInclude Include="..\..\Source\Rand\Standard\randStandard.h" />
-    <ClInclude Include="..\..\Source\Resource\Windows\resource.h" />
     <ClInclude Include="..\..\Source\Sleep\sleep.h" />
     <ClInclude Include="..\..\Source\Sleep\Windows\sleepWindows.h" />
     <ClInclude Include="..\..\Source\test.h" />
@@ -83,6 +82,7 @@
     <ClInclude Include="..\..\Source\Time\Windows\timeWindows.h" />
     <ClInclude Include="..\..\Source\Usefull\buffer.h" />
     <ClInclude Include="..\..\Source\Usefull\singleton.h" />
+    <ClInclude Include="..\..\Source\Windows\Resource\resource.h" />
     <ClInclude Include="..\..\Source\Window\Windows\cursorWindows.h" />
     <ClInclude Include="..\..\Source\Window\Windows\windowWindows.h" />
   </ItemGroup>
@@ -95,7 +95,6 @@
     <ClCompile Include="..\..\Source\Input\input.cpp" />
     <ClCompile Include="..\..\Source\Input\Windows\inputWindows.cpp" />
     <ClCompile Include="..\..\Source\Input\XInput\inputXInput.cpp" />
-    <ClCompile Include="..\..\Source\main.cpp" />
     <ClCompile Include="..\..\Source\Out\Windows\outConsoleWindows.cpp" />
     <ClCompile Include="..\..\Source\Out\Windows\outDebugWindowWindows.cpp" />
     <ClCompile Include="..\..\Source\Rand\rand.cpp" />
@@ -105,13 +104,14 @@
     <ClCompile Include="..\..\Source\Time\Standard\timeStandard.cpp" />
     <ClCompile Include="..\..\Source\Time\time.cpp" />
     <ClCompile Include="..\..\Source\Time\Windows\timeWindows.cpp" />
+    <ClCompile Include="..\..\Source\Windows\main.cpp" />
     <ClCompile Include="..\..\Source\Window\Windows\windowWindows.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\Source\Resource\Windows\Icon.rc" />
+    <ResourceCompile Include="..\..\Source\Windows\Resource\Icon.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\Source\Resource\Windows\icon.ico" />
+    <Image Include="..\..\Source\Windows\Resource\icon.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

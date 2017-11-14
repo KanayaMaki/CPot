@@ -6,8 +6,13 @@
 #pragma once
 
 //WindowsŠÂ‹«‚¾‚ÆAvoid‚ÆBOOL‚ªdefine‚³‚ê‚Ä‚¢‚é‚±‚Æ‚ª‚ ‚éˆ×undef‚µ‚Ä‚¨‚­
+#ifdef void
 #undef void
+#endif
+
+#ifdef BOOL
 #undef BOOL
+#endif
 
 #include "defines.h"
 

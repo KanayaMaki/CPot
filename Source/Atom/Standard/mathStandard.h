@@ -5,11 +5,18 @@
 
 #pragma once
 
-#include <cmath>
-#include <cfloat>
-
 #include "../defines.h"
 #include "../typedef.h"
+
+#ifdef CPOT_ON_ANDROID
+namespace std {
+#include <math.h>
+#include <float.h>
+}
+#else
+#include <cmath>
+#include <cfloat>
+#endif
 
 
 namespace cpot {

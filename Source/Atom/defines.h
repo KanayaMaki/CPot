@@ -34,6 +34,14 @@ namespace cpot {
 #define CPOT_ON_64BIT
 #endif
 
+#elif defined CPOT_ON_ANDROID
+
+#ifdef CPOT_32BIT
+#define CPOT_ON_32BIT
+#else
+#define CPOT_ON_64BIT
+#endif
+
 #endif
 
 #pragma endregion
@@ -58,12 +66,18 @@ namespace cpot {
 
 #pragma region ビルドの構成を定義
 
-#ifdef _DEBUG
-#define CPOT_ON_DEBUG
-#elif defined CPOT_MASTER
+#ifdef NDEBUG
+
+#ifdef CPOT_MASTER
 #define CPOT_ON_MASTER
-#elif defined NDEBUG
+#else
 #define CPOT_ON_RELEASE
+#endif
+
+#else
+
+#define CPOT_ON_DEBUG
+
 #endif
 
 #pragma endregion

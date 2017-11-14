@@ -228,7 +228,7 @@ template <typename T>
 inline T Pow(T aVal, u32 aTimes) {
 	T tV = T(1);
 	for (u32 i = 0; i < aTimes; i++) {
-		tV *= tVal;
+		tV *= aVal;
 	}
 	return tV;
 }
