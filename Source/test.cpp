@@ -70,7 +70,10 @@ void TestAudio() {
 
 	v.Play();
 
-	::Sleep(1000 * 10);
+	::Sleep(1000 * 2);
+
+	c.Release();
+	CPOT_LOG(ToString::Do(v.IsLoad()));
 }
 
 #pragma endregion

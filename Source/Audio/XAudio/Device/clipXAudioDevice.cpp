@@ -4,6 +4,7 @@
 //
 
 #include "./Audio/XAudio/Device/clipXAudioDevice.h"
+#include "./Audio/XAudio/Device/voiceXAudioDevice.h"
 
 
 #ifdef _XBOX //Big-Endian
@@ -30,6 +31,18 @@ namespace cpot {
 namespace xaudio {
 
 namespace device {
+
+
+void VoiceObservers::Release() {
+	//オブザーバーにリリースを送ると、そのオブザーバがRemoveを呼んでしまうので、
+	//リリースしているときにはRemoveを無効にする
+	mReleasing = true;
+	for (u32 i = 0; i < mObserver.GetSize(); i++) {
+		mObserver[i]->Release();
+	}
+	mObserver.Clear();
+	mReleasing = false;
+}
 
 
 HRESULT FindChunk(HANDLE hFile, DWORD fourcc, DWORD & dwChunkSize, DWORD & dwChunkDataPosition) {

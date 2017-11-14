@@ -21,6 +21,7 @@ class Clip;
 
 class Voice {
 	IXAudio2SourceVoice*	mSourceVoice;
+	Clip* mClip;
 
 public:
 	Voice() {

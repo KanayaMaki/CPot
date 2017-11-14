@@ -71,6 +71,9 @@ public:
 		#endif
 		return String<31>(toStringBuffer);
 	}
+	static String<7> Do(BOOL aVal) {
+		return String<7>(aVal ? "true" : "false");
+	}
 };
 
 }

@@ -225,6 +225,7 @@ public:
 	static String<31> Do(u64 aVal);
 	static String<15> Do(f32 aVal);
 	static String<31> Do(f64 aVal);
+	static String<7> Do(BOOL aVal);
 };
 
 #pragma endregion

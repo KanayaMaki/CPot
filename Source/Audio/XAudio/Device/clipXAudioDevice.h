@@ -6,6 +6,7 @@
 #pragma once
 
 #include "./Atom/atom.h"
+#include "./List/vector.h"
 
 #include "./Audio/XAudio/Device/deviceXAudioDevice.h"
 
@@ -17,6 +18,30 @@ namespace xaudio {
 namespace device {
 
 class Voice;
+
+class VoiceObservers {
+public:
+	VoiceObservers() {
+		mReleasing = false;
+	}
+
+public:
+	void Add(Voice* aObserver) {
+		mObserver.PushBack(aObserver);
+	}
+	void Remove(Voice* aObserver) {
+		if (!mReleasing) {
+			mObserver.Remove(aObserver);
+		}
+	}
+	void Release();
+
+
+private:
+	Vector<Voice*> mObserver;
+	BOOL mReleasing;
+};
+
 
 class Clip {
 
@@ -51,7 +76,10 @@ public:
 			return;
 		}
 
-		//!このクリップを使用している全てのボイスをReleaseしておく必要がある
+		//このクリップを使用しているすべてのボイスの削除
+		mVoices.Release();
+		
+		//サウンドデータの削除
 		delete[] mDataBuffer;
 
 		Reset();
@@ -62,6 +90,8 @@ public:
 		return mDataBuffer != nullptr;
 	}
 
+private:
+	VoiceObservers mVoices;
 };
 
 
