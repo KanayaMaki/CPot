@@ -20,7 +20,7 @@ class AudioClip : public AudioClipBase {
 
 public:
 	void Load(const CHAR* aFileName) CPOT_OR {
-		Load(HashTableKey(aFileName));
+		mClip.Load(aFileName);
 	};
 	void Load(const HashTableKey& aFileNameKey) CPOT_OR {
 		mClip.Load(AudioName::S().Get(aFileNameKey).Get());

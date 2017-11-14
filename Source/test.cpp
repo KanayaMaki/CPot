@@ -63,7 +63,7 @@ void TestAudio() {
 	AudioName::S().Regist("test", "./test.wav");
 
 	AudioClip c;
-	c.Load("test");
+	c.Load("./test.wav");
 
 	AudioVoice v;
 	v.Load(c);
