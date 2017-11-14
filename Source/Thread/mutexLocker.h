@@ -1,5 +1,6 @@
 //
-// Mutexを、コンストラクタでロックして、デストラクタでアンロックする
+//	content	:	Mutexを安全に使用できるクラス
+//	author	:	SaitoYoshiki
 //
 
 #pragma once

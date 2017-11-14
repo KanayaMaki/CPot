@@ -1,5 +1,6 @@
 //
-//	StandardŠÂ‹«‰º‚Å‚ÌThread‚ÌŽÀ‘•
+//	content	:	Standard‚Å‚ÌThread‚ÌŽÀ‘•
+//	author	:	SaitoYoshiki
 //
 
 

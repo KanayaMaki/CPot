@@ -162,12 +162,6 @@
     <ClInclude Include="..\..\Source\Resource\Windows\resource.h">
       <Filter>Source\Resource\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Thread\Standard\mutex.h">
-      <Filter>Source\Thread\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Thread\Standard\thread.h">
-      <Filter>Source\Thread\Standard</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Thread\mutex.h">
       <Filter>Source\Thread</Filter>
     </ClInclude>
@@ -245,6 +239,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Sleep\Windows\sleepWindows.h">
       <Filter>Source\Sleep\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thread\Standard\mutexStandard.h">
+      <Filter>Source\Thread\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thread\Standard\threadStandard.h">
+      <Filter>Source\Thread\Standard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

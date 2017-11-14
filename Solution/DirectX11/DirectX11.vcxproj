@@ -89,8 +89,8 @@
     <ClInclude Include="..\..\Source\test.h" />
     <ClInclude Include="..\..\Source\Thread\mutex.h" />
     <ClInclude Include="..\..\Source\Thread\mutexLocker.h" />
-    <ClInclude Include="..\..\Source\Thread\Standard\mutex.h" />
-    <ClInclude Include="..\..\Source\Thread\Standard\thread.h" />
+    <ClInclude Include="..\..\Source\Thread\Standard\mutexStandard.h" />
+    <ClInclude Include="..\..\Source\Thread\Standard\threadStandard.h" />
     <ClInclude Include="..\..\Source\Thread\thread.h" />
     <ClInclude Include="..\..\Source\Time\Standard\timeStandard.h" />
     <ClInclude Include="..\..\Source\Time\time.h" />
