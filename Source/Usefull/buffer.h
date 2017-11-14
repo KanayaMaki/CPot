@@ -1,8 +1,7 @@
-//	ファイル名	:	Atom/buffer.h
-//	作者		:	齊藤芳紀
-//	作成日時	:	2017/11/07
-//	更新日時	:	2017/11/07
-//	内容		:	Bufferクラスの実装
+//
+//	content	:	バッファクラスの実装
+//	author	:	SaitoYoshiki
+//
 
 #pragma once
 

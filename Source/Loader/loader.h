@@ -1,9 +1,14 @@
+//
+//	content	:	別スレッドでロードしてくれるクラス
+//	author	:	SaitoYoshiki
+//
+
 #pragma once
 
 #include "./Atom/atom.h"
 #include "./Thread/thread.h"
 #include "./Thread/mutex.h"
-#include "./Output/output.h"
+#include "./Out/out.h"
 #include "./List/vector.h"
 #include "./Sleep/sleep.h"
 
@@ -15,9 +20,17 @@ namespace cpot {
 
 class Loader {
 public:
+	//ロード
 	virtual void Load() = 0;
+	
+	//メインスレッドで実行される、ロード開始前の処理
+	//!Startの中からLoaderをRegistしてはいけない
+	virtual void Start() {}
+	
+	//メインスレッドで実行される、ロード終了後の処理
 	virtual void Finish() {}
 
+	//優先すべきか
 	virtual BOOL IsHurry() const {
 		return false;
 	}
@@ -27,28 +40,36 @@ class LoaderTimer : public Loader {
 public:
 	LoaderTimer(const CHAR* aFileName) {
 		mFileName = aFileName;
+		mTakeTime = 3.0f;
+	}
+	LoaderTimer(const CHAR* aFileName, f32 aTakeTime) {
+		mFileName = aFileName;
+		mTakeTime = aTakeTime;
 	}
 
 public:
+	void Start() override {
+		CPOT_LOG("LoadStart:", mFileName.Get());
+	}
 	void Load() override {
-		Sleep lSleep;
 
-		for (u32 i = 0; i < 3; i++) {
-			lSleep.SleepSecond(1);
-			CPOT_LOG("Loading:", mFileName.Get());
-		}
+		CPOT_LOG("Loading:", mFileName.Get());
+		
+		Sleep lSleep;
+		lSleep.SleepSecond(mTakeTime);
 	}
 	void Finish() override {
-		CPOT_LOG("LoadFinish", mFileName.Get());
+		CPOT_LOG("LoadFinish:", mFileName.Get());
 	}
 public:
 	String<128> mFileName;
+	f32 mTakeTime;
 };
-
 
 class LoaderTimerHurry : public LoaderTimer {
 public:
 	LoaderTimerHurry(const CHAR* aFileName) : LoaderTimer(aFileName) {}
+	LoaderTimerHurry(const CHAR* aFileName, f32 aTakeTime) : LoaderTimer(aFileName, aTakeTime) {}
 
 	BOOL IsHurry() const override {
 		return true;
@@ -209,12 +230,8 @@ private:
 
 public:
 	void Regist(Loader* aLoader) {
-		if (aLoader->IsHurry()) {
-			RegistLoaderHurry(aLoader);
-		}
-		else {
-			RegistLoaderNormal(aLoader);
-		}
+		MutexLocker m(mLoaderListWaitMutex);
+		mLoaderListWait.PushBack(aLoader);
 	}
 
 private:
@@ -230,16 +247,42 @@ private:
 	#pragma endregion
 
 
-	//更新。終了したLoaderのFinish()を呼び出す
+	//更新。開始していないLoaderのStart()と、終了したLoaderのFinish()を呼び出す
 	#pragma region Update
 
 public:
 	void Update() {
-		MutexLocker m(mLoaderListFinishMutex);
-		for (u32 i = 0; i < mLoaderListFinish.GetSize(); i++) {
-			mLoaderListFinish[i]->Finish();
+		//処理を開始していないローダのStartを呼び出す
+		{
+			MutexLocker m(mLoaderListWaitMutex);
+
+			while (mLoaderListWait.GetSize() != 0) {
+				Loader* l = mLoaderListWait.PopBack();
+				StartLoad(l);
+			}
 		}
-		Delete(mLoaderListFinish);
+
+
+		//処理の終わったローダのFinishを呼び出す
+		{
+			MutexLocker m(mLoaderListFinishMutex);
+			for (u32 i = 0; i < mLoaderListFinish.GetSize(); i++) {
+				mLoaderListFinish[i]->Finish();
+			}
+			Delete(mLoaderListFinish);
+		}
+	}
+
+
+private:
+	void StartLoad(Loader* aLoader) {
+		aLoader->Start();
+		if (aLoader->IsHurry()) {
+			RegistLoaderHurry(aLoader);
+		}
+		else {
+			RegistLoaderNormal(aLoader);
+		}
 	}
 
 	#pragma endregion
@@ -296,12 +339,20 @@ public:
 	#pragma region LoaderList & Mutex
 
 private:
-	Vector<Loader*> mLoaderListNormal;
-	Vector<Loader*> mLoaderListHurry;
-	Vector<Loader*> mLoaderListFinish;
+	//処理を開始していないローダのリスト
+	Vector<Loader*> mLoaderListWait;
+	Mutex mLoaderListWaitMutex;
 
+	//普通の優先度のローダのリスト
+	Vector<Loader*> mLoaderListNormal;
 	Mutex mLoaderListNormalMutex;
+
+	//優先度の高いローダのリスト
+	Vector<Loader*> mLoaderListHurry;
 	Mutex mLoaderListHurryMutex;
+
+	//処理の終わったローダのリスト
+	Vector<Loader*> mLoaderListFinish;
 	Mutex mLoaderListFinishMutex;
 
 	#pragma endregion

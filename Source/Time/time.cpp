@@ -1,5 +1,6 @@
 //
-//	時間に関するクラスを集めた
+//	content	:	時間に関するクラス
+//	author	:	SaitoYoshiki
 //
 
 #include "./Time/time.h"

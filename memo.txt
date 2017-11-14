@@ -153,7 +153,54 @@ File
 		void Write(Buffer& aBinary);
 
 
+Audio
+	AudioClip c;
+	AUdioVoice v;
+	v.Load(c);
 
+	v.Valid();
+
+	AudioVoiceDevice
+		void Load(AudioClipDevice*);
+		void Release();
+
+		void ReleaseVoice() {
+			ボイスの解放
+		}
+		BOOL IsLoad() const;
+
+	AudioClipDevice
+		void Load(const CHAR* aFileName);
+		void Load(const Buffer& aBuffer);
+		void Release();
+
+		std::list<AudioVoiceDevice*>;
+		void Observe(AudioVoiceDevice*);
+		void UnObserve(AudioVoiceDevice*);
+
+		BOOL IsLoad() const;
+
+
+	AudioClipBase
+		void Load(const CHAR* aFileName);
+		void Load(const HashTableKey& aFileNameKey);
+		void Release();
+
+		void IsLoad() const;
+
+	AudioVoiceBase
+		void Load(AudioClip& c);
+		void Release();
+
+		void SetVolume(f32 aVolume);
+		f32 GetVolume() const;
+		void Play();
+		void Stop();
+		void ToStart();
+
+		void IsLoad() const;
+
+		AudioClip* mClip;
 
 
 描画

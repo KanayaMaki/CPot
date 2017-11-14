@@ -1,8 +1,7 @@
-//	ファイル名	:	Atom/hashString.h
-//	作者		:	齊藤芳紀
-//	作成日時	:	2017/11/06
-//	更新日時	:	2017/11/06
-//	内容		:	Hashで比較する文字列のクラスを定義
+//
+//	content	:	Hash値で比較する文字列のクラス
+//	author	:	SaitoYoshiki
+//
 
 #pragma once
 

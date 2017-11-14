@@ -1,5 +1,6 @@
 ﻿//
-//	XInputを使用した入力のクラス
+//	content	:	XInputでの入力
+//	author	:	SaitoYoshiki
 //
 
 #pragma once

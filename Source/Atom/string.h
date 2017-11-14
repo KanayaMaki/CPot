@@ -1,8 +1,7 @@
-//	ファイル名	:	Atom/string.h
-//	作者		:	齊藤芳紀
-//	作成日時	:	2017/11/06
-//	更新日時	:	2017/11/06
-//	内容		:	文字列系のクラスや関数を定義
+//
+//	content	:	文字列系のクラスや関数
+//	author	:	SaitoYoshiki
+//
 
 #pragma once
 
@@ -217,13 +216,25 @@ private:
 //数字を文字列にする
 #pragma region ToString
 
-String<15> ToString(s32 aVal);
-String<15> ToString(u32 aVal);
-String<31> ToString(s64 aVal);
-String<31> ToString(u64 aVal);
-String<15> ToString(f32 aVal);
-String<31> ToString(f64 aVal);
+class ToStringBase {
+
+public:
+	static String<15> Do(s32 aVal);
+	static String<15> Do(u32 aVal);
+	static String<31> Do(s64 aVal);
+	static String<31> Do(u64 aVal);
+	static String<15> Do(f32 aVal);
+	static String<31> Do(f64 aVal);
+	static String<7> Do(BOOL aVal);
+};
 
 #pragma endregion
 
 }
+
+//	環境ごとのファイルのインクルード
+#ifdef CPOT_ON_WINDOWS
+#include "Standard/toStringStandard.h"
+#elif defined CPOT_ON_ANDROID
+#include "Standard/toStringStandard.h"
+#endif

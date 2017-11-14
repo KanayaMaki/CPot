@@ -1,5 +1,6 @@
 ﻿//
-//	入力のクラス
+//	content	:	入力
+//	author	:	SaitoYoshiki
 //
 
 #pragma once

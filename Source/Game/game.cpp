@@ -1,5 +1,6 @@
 //
-//	一定時間スレッドを止める、スリープクラスの実装
+//	content	:	ゲーム
+//	author	:	SaitoYoshiki
 //
 
 #pragma once

@@ -1,8 +1,18 @@
-#include "window.h"
+//
+//	content	:	ウィンドウズのウィンドウの実装
+//	author	:	SaitoYoshiki
+//
 
+#include "./Window/Windows/windowWindows.h"
+
+//アイコンリソースの読み込み
 #include "./Resource/Windows/resource.h"
 
+
 namespace cpot {
+
+namespace windows {
+
 
 //ウィンドウプロシージャの、一定間隔で呼び出すイベントの識別ID
 const u32 cPotTimerID = 10010010;
@@ -65,7 +75,7 @@ void Window::CreateWindow_CPot(const CHAR* aTitle) {
 	SetSize(mSize);	//ウィンドウのサイズを変更
 	ShowWindow(mHwnd, 1);	//ウィンドウの表示
 
-	//一定時間ごとにタイマーを呼び出して、処理を行う
+							//一定時間ごとにタイマーを呼び出して、処理を行う
 	::SetTimer(mHwnd, cPotTimerID, 100, NULL);
 }
 
@@ -143,14 +153,14 @@ LRESULT CALLBACK Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 			if (wParam == cPotTimerID) {
 				//	TODO ゲーム側で終了なら、ウィンドウも終わらせる
 				/*if (Config::S().GameEnd()) {
-					SendMessageA(hwnd, WM_CLOSE, 0, 0);
-					break;
+				SendMessageA(hwnd, WM_CLOSE, 0, 0);
+				break;
 				}*/
 				return 0;
 			}
 			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 
-			
+
 		case WM_CLOSE: {
 
 			#ifdef CPOT_ON_MASTER
@@ -173,7 +183,7 @@ LRESULT CALLBACK Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 			}
 			#endif
 		}
-			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
+					   return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 
 		case WM_CREATE:
 			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
@@ -184,7 +194,7 @@ LRESULT CALLBACK Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 				tWindow->mFocus = true;	//フォーカスがセットされた
 			}
 		}
-			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
+						  return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 
 		case WM_KILLFOCUS: {
 			Window* tWindow = WindowManager::S().Find(hwnd);
@@ -192,12 +202,13 @@ LRESULT CALLBACK Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 				tWindow->mFocus = false;	//フォーカスが外れた
 			}
 		}
-			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
+						   return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 	}
 	return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 }
 
 #pragma endregion
 
+}
 
 }

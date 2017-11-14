@@ -1,8 +1,9 @@
 //
-//	“à—e	:	FileStandardƒNƒ‰ƒX‚ÌŽÀ‘•
+//	content	:	Standard‚Å‚ÌFile‚ÌŽÀ‘•
+//	author	:	SaitoYoshiki
 //
 
-#include "./File/Standard/file.h"
+#include "./File/Standard/fileStandard.h"
 
 namespace cpot {
 

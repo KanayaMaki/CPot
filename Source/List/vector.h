@@ -1,5 +1,6 @@
 //
-//	内容　:　VectorBaseクラスの実装
+//	content	:	Vectorのインターフェース
+//	author	:	SaitoYoshiki
 //
 
 #pragma once
@@ -83,5 +84,5 @@ public:
 
 
 #ifdef CPOT_ON_WINDOWS
-#include "./List/Standard/vector.h"
+#include "./List/Standard/vectorStandard.h"
 #endif

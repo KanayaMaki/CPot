@@ -1,11 +1,12 @@
 //
-//	時間に関するクラス
+//	content	:	Windowsでの時間に関するクラス
+//	author	:	SaitoYoshiki
 //
 
 
-#include "./Time/Windows/time.h"
+#include "./Time/Windows/timeWindows.h"
 
-#include "./Time/Standard/time.h"
+#include "./Time/Standard/timeStandard.h"
 
 #include <Windows.h>
 

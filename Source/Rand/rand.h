@@ -1,5 +1,6 @@
 //
-//	内容　:　RandBaseクラスの実装
+//	content	:	乱数を生成するクラスのインターフェース
+//	author	:	SaitoYoshiki
 //
 
 #pragma once
@@ -126,5 +127,5 @@ protected:
 
 
 #ifdef CPOT_ON_WINDOWS
-#include "./Standard/rand.h"
+#include "./Standard/randStandard.h"
 #endif

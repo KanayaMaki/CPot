@@ -1,5 +1,6 @@
 //
-//	ファイルの入出力のインターフェースとなるクラス
+//	content	:	Fileの入出力のインターフェース
+//	author	:	SaitoYoshiki
 //
 
 #pragma once
@@ -137,5 +138,5 @@ public:
 
 
 #ifdef CPOT_ON_WINDOWS
-#include "File\Standard\file.h"
+#include "File\Standard\fileStandard.h"
 #endif

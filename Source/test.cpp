@@ -1,14 +1,19 @@
+//
+//	content	:	ライブラリのテストを行う
+//	author	:	SaitoYoshiki
+//
+
 #include "./Atom/atom.h"
 
 #include "./test.h"
 
 //Window
-#include "Window/Windows/window.h"
+#include "Window/Windows/windowWindows.h"
 
-//Output
-#include "./Output/output.h"
-#include "./Output/Windows/outputDebugWindow.h"
-#include "./Output/Windows/outputConsole.h"
+//Out
+#include "./Out/out.h"
+#include "./Out/Windows/outDebugWindowWindows.h"
+#include "./Out/Windows/outConsoleWindows.h"
 
 //Rand
 #include "Rand/rand.h"
@@ -40,23 +45,55 @@
 //Loader
 #include "Loader\loader.h"
 
+//Audio
+#include "Audio\audio.h"
+
 #include <Windows.h>
 
 using namespace cpot;
 
 
+#pragma region Audio
+
+void TestAudio() {
+
+	//XAudioの初期化
+	xaudio::device::Device::S().Init();
+
+	AudioName::S().Regist("test", "./test.wav");
+
+	AudioClip c;
+	c.Load("./test.wav");
+
+	AudioVoice v;
+	v.Load(c);
+
+	v.Play();
+
+	::Sleep(1000 * 2);
+
+	c.Release();
+	CPOT_LOG(ToString::Do(v.IsLoad()));
+}
+
+#pragma endregion
+
+
+
 #pragma region Loader
 
 void TestLoader() {
-	LoaderManager::S().Start(1);
+	LoaderManager::S().Start(4);
+	Rand r;
+	r.SetSeed(Time().GetUnix());
 
 	for (u32 i = 0; i < 10; i++) {
-		LoaderManager::S().Regist(new LoaderTimer(ToString(i)));
+		LoaderManager::S().Regist(new LoaderTimer(ToString::Do(i), r.Nextf(2.0f, 5.0f)));
 	}
 	for (u32 i = 0; i < 10; i++) {
 		String<32> lFileName("Hurry");
-		lFileName += ToString(i);
-		LoaderManager::S().Regist(new LoaderTimerHurry(lFileName));
+		lFileName += ToString::Do(i);
+		LoaderManager::S().Regist(new LoaderTimerHurry(lFileName, r.Nextf(2.0f, 5.0f)));
 	}
 
 
@@ -106,9 +143,9 @@ void TestFileIn() {
 void TestOutput(HWND aHwnd) {
 
 	#ifdef CPOT_VALID_LOG
-	windows::OutputConsoleDevice::S().Init(aHwnd);
+	windows::OutConsoleDevice::S().Init(aHwnd);
 
-	auto o = new windows::OutputConsole;
+	auto o = new windows::OutConsole;
 	o->Load();
 	Log::S().Set(o);
 	#endif

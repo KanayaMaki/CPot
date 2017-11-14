@@ -1,5 +1,6 @@
 //
-//	一定時間スレッドを止める、スリープクラスの実装
+//	content	:	一定時間スレッドを停止するクラスのインターフェース
+//	author	:	SaitoYoshiki
 //
 
 #pragma once
@@ -20,7 +21,7 @@ public:
 
 
 #ifdef CPOT_ON_WINDOWS
-#include "./Sleep/Windows/sleep.h"
+#include "./Sleep/Windows/sleepWindows.h"
 #elif defined CPOT_ON_ANDROID
-#include "./Sleep/Android/sleep.h"
+#include "./Sleep/Android/sleepWindows.h"
 #endif

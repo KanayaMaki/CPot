@@ -1,4 +1,9 @@
-﻿#include "./Input/Windows/inputWindows.h"
+﻿//
+//	content	:	Windowsでの入力
+//	author	:	SaitoYoshiki
+//
+
+#include "./Input/Windows/inputWindows.h"
 
 #ifdef CPOT_VALID_INPUT_WINDOWS
 

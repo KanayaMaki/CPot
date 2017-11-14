@@ -1,5 +1,6 @@
 //
-//	Mutexのインターフェース
+//	content	:	スレッド間での排他制御を可能にするクラスのインターフェース
+//	author	:	SaitoYoshiki
 //
 
 
@@ -23,5 +24,5 @@ public:
 
 //デバイスごとのMutexの宣言
 #ifdef CPOT_ON_WINDOWS
-#include "./Thread/Standard/mutex.h"
+#include "./Thread/Standard/mutexStandard.h"
 #endif

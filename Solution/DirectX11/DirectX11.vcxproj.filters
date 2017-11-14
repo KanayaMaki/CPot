@@ -31,12 +31,6 @@
     <Filter Include="Source\Sleep\Windows">
       <UniqueIdentifier>{509a026c-d2dd-4320-aba1-217cbf05f880}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Output">
-      <UniqueIdentifier>{9256fe66-a836-41f6-94be-1141857c31bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Output\Windows">
-      <UniqueIdentifier>{15f53439-d7a4-4c01-b5bf-89fc624388c2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Time">
       <UniqueIdentifier>{0512ce2d-f961-477b-91ef-aab504a673d1}</UniqueIdentifier>
     </Filter>
@@ -85,6 +79,21 @@
     <Filter Include="Source\Loader">
       <UniqueIdentifier>{824fd18e-f87d-44b8-b2c6-6e5969a5b5cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Audio">
+      <UniqueIdentifier>{a21fc80c-0f4f-4651-853d-9d3c82aac7b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Audio\XAudio">
+      <UniqueIdentifier>{439a6ad0-ce75-4a3e-8f38-8885c1e6e175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Out">
+      <UniqueIdentifier>{9256fe66-a836-41f6-94be-1141857c31bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Out\Windows">
+      <UniqueIdentifier>{15f53439-d7a4-4c01-b5bf-89fc624388c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Audio\XAudio\Device">
+      <UniqueIdentifier>{87caffde-8872-4827-9a26-728fbe86c9a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -111,9 +120,6 @@
     <ClInclude Include="..\..\Source\Atom\math.h">
       <Filter>Source\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\Standard\math.h">
-      <Filter>Source\Atom\Standard</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Atom\vector.h">
       <Filter>Source\Atom</Filter>
     </ClInclude>
@@ -138,41 +144,14 @@
     <ClInclude Include="..\..\Source\Usefull\buffer.h">
       <Filter>Source\Usefull</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Window\Windows\window.h">
-      <Filter>Source\Window\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Window\Windows\cursor.h">
-      <Filter>Source\Window\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Rand\rand.h">
       <Filter>Source\Rand</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Rand\Standard\rand.h">
-      <Filter>Source\Rand\Standard</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Sleep\sleep.h">
       <Filter>Source\Sleep</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Sleep\Windows\sleep.h">
-      <Filter>Source\Sleep\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Output\output.h">
-      <Filter>Source\Output</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Output\Windows\outputDebugWindow.h">
-      <Filter>Source\Output\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Output\Windows\outputConsole.h">
-      <Filter>Source\Output\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Time\time.h">
       <Filter>Source\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Time\Standard\time.h">
-      <Filter>Source\Time\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Time\Windows\time.h">
-      <Filter>Source\Time\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\test.h">
       <Filter>Source</Filter>
@@ -183,20 +162,8 @@
     <ClInclude Include="..\..\Source\List\hashTable.h">
       <Filter>Source\List</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\List\Standard\vector.h">
-      <Filter>Source\List\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\List\Standard\hashTable.h">
-      <Filter>Source\List\Standard</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Resource\Windows\resource.h">
       <Filter>Source\Resource\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Thread\Standard\mutex.h">
-      <Filter>Source\Thread\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Thread\Standard\thread.h">
-      <Filter>Source\Thread\Standard</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Thread\mutex.h">
       <Filter>Source\Thread</Filter>
@@ -222,11 +189,86 @@
     <ClInclude Include="..\..\Source\File\file.h">
       <Filter>Source\File</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\File\Standard\file.h">
-      <Filter>Source\File\Standard</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Loader\loader.h">
       <Filter>Source\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Out\out.h">
+      <Filter>Source\Out</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Window\Windows\windowWindows.h">
+      <Filter>Source\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Window\Windows\cursorWindows.h">
+      <Filter>Source\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Time\Standard\timeStandard.h">
+      <Filter>Source\Time\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Time\Windows\timeWindows.h">
+      <Filter>Source\Time\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\Standard\mathStandard.h">
+      <Filter>Source\Atom\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\Standard\toStringStandard.h">
+      <Filter>Source\Atom\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\File\Standard\fileStandard.h">
+      <Filter>Source\File\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\Standard\vectorStandard.h">
+      <Filter>Source\List\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\Standard\hashTableStandard.h">
+      <Filter>Source\List\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Out\Windows\outConsoleWindows.h">
+      <Filter>Source\Out\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Out\Windows\outDebugWindowWindows.h">
+      <Filter>Source\Out\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Rand\Standard\randStandard.h">
+      <Filter>Source\Rand\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Sleep\Windows\sleepWindows.h">
+      <Filter>Source\Sleep\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thread\Standard\mutexStandard.h">
+      <Filter>Source\Thread\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thread\Standard\threadStandard.h">
+      <Filter>Source\Thread\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\Device\deviceXAudioDevice.h">
+      <Filter>Source\Audio\XAudio\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\Device\voiceXAudioDevice.h">
+      <Filter>Source\Audio\XAudio\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\Device\clipXAudioDevice.h">
+      <Filter>Source\Audio\XAudio\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\resourceName.h">
+      <Filter>Source\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\audioName.h">
+      <Filter>Source\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\audioVoice.h">
+      <Filter>Source\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\audioClip.h">
+      <Filter>Source\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\audioClipXAudio.h">
+      <Filter>Source\Audio\XAudio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\XAudio\audioVoiceXAudio.h">
+      <Filter>Source\Audio\XAudio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audio\audio.h">
+      <Filter>Source\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -244,15 +286,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Sleep\Windows\sleepWindows.cpp">
       <Filter>Source\Sleep\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Atom\Standard\stringStandard.cpp">
-      <Filter>Source\Atom\Standard</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Output\Windows\outputDebugWindowWindows.cpp">
-      <Filter>Source\Output\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Output\Windows\outputConsoleWindows.cpp">
-      <Filter>Source\Output\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Time\time.cpp">
       <Filter>Source\Time</Filter>
@@ -280,6 +313,21 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\File\Standard\fileStandard.cpp">
       <Filter>Source\File\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Out\Windows\outConsoleWindows.cpp">
+      <Filter>Source\Out\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Out\Windows\outDebugWindowWindows.cpp">
+      <Filter>Source\Out\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Audio\XAudio\Device\voiceXAudioDevice.cpp">
+      <Filter>Source\Audio\XAudio\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Audio\XAudio\Device\clipXAudioDevice.cpp">
+      <Filter>Source\Audio\XAudio\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Audio\XAudio\Device\deviceXAudioDevice.cpp">
+      <Filter>Source\Audio\XAudio\Device</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

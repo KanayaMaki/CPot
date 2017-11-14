@@ -1,6 +1,18 @@
+//
+//	content	:	ライブラリのテストを行う
+//	author	:	SaitoYoshiki
+//
+
 #include "./Atom/atom.h"
 
 #include <Windows.h>
+
+
+#pragma region Audio
+
+void TestAudio();
+
+#pragma endregion
 
 
 #pragma region Loader

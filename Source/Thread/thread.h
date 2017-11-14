@@ -1,5 +1,6 @@
 //
-//	Threadのインターフェースを実装
+//	content	:	別のスレッドで関数を実行するクラスのインターフェース
+//	author	:	SaitoYoshiki
 //
 
 #pragma once
@@ -30,5 +31,5 @@ public:
 
 //ThreadとMutexの宣言
 #ifdef CPOT_ON_WINDOWS
-#include "./Thread/Standard/thread.h"
+#include "./Thread/Standard/threadStandard.h"
 #endif
