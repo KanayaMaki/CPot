@@ -2,7 +2,7 @@
 //	一定時間スレッドを止める、スリープクラスの実装
 //
 
-#include "./Sleep/Windows/sleep.h"
+#include "./Sleep/Windows/sleepWindows.h"
 
 #include <Windows.h>
 

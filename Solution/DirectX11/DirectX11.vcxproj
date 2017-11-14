@@ -85,7 +85,7 @@
     <ClInclude Include="..\..\Source\Rand\Standard\randStandard.h" />
     <ClInclude Include="..\..\Source\Resource\Windows\resource.h" />
     <ClInclude Include="..\..\Source\Sleep\sleep.h" />
-    <ClInclude Include="..\..\Source\Sleep\Windows\sleep.h" />
+    <ClInclude Include="..\..\Source\Sleep\Windows\sleepWindows.h" />
     <ClInclude Include="..\..\Source\test.h" />
     <ClInclude Include="..\..\Source\Thread\mutex.h" />
     <ClInclude Include="..\..\Source\Thread\mutexLocker.h" />

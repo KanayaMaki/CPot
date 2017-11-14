@@ -147,9 +147,6 @@
     <ClInclude Include="..\..\Source\Sleep\sleep.h">
       <Filter>Source\Sleep</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Sleep\Windows\sleep.h">
-      <Filter>Source\Sleep\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Time\time.h">
       <Filter>Source\Time</Filter>
     </ClInclude>
@@ -245,6 +242,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Rand\Standard\randStandard.h">
       <Filter>Source\Rand\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Sleep\Windows\sleepWindows.h">
+      <Filter>Source\Sleep\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
