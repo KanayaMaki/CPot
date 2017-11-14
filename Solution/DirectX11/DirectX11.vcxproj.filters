@@ -165,12 +165,6 @@
     <ClInclude Include="..\..\Source\List\hashTable.h">
       <Filter>Source\List</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\List\Standard\vector.h">
-      <Filter>Source\List\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\List\Standard\hashTable.h">
-      <Filter>Source\List\Standard</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Resource\Windows\resource.h">
       <Filter>Source\Resource\Windows</Filter>
     </ClInclude>
@@ -245,6 +239,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\File\Standard\fileStandard.h">
       <Filter>Source\File\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\Standard\vectorStandard.h">
+      <Filter>Source\List\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\List\Standard\hashTableStandard.h">
+      <Filter>Source\List\Standard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

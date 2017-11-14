@@ -1,5 +1,6 @@
 //
-//	“à—e		:	Standard‚Å‚ÌVectorƒNƒ‰ƒX‚ÌŽÀ‘•
+//	content	:	Standard‚Å‚ÌVector‚ÌŽÀ‘•
+//	author	:	SaitoYoshiki
 //
 
 #pragma once

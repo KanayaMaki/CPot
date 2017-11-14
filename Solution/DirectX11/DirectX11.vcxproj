@@ -74,8 +74,8 @@
     <ClInclude Include="..\..\Source\Input\Windows\inputWindows.h" />
     <ClInclude Include="..\..\Source\Input\XInput\inputXInput.h" />
     <ClInclude Include="..\..\Source\List\hashTable.h" />
-    <ClInclude Include="..\..\Source\List\Standard\hashTable.h" />
-    <ClInclude Include="..\..\Source\List\Standard\vector.h" />
+    <ClInclude Include="..\..\Source\List\Standard\hashTableStandard.h" />
+    <ClInclude Include="..\..\Source\List\Standard\vectorStandard.h" />
     <ClInclude Include="..\..\Source\List\vector.h" />
     <ClInclude Include="..\..\Source\Loader\loader.h" />
     <ClInclude Include="..\..\Source\Out\out.h" />

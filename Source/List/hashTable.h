@@ -1,5 +1,6 @@
 //
-//	内容　:　HashTableBaseクラスの実装
+//	content	:	HashTableのインターフェース
+//	author	:	SaitoYoshiki
 //
 
 #pragma once
@@ -82,5 +83,5 @@ public:
 
 
 #ifdef CPOT_ON_WINDOWS
-#include "./List/Standard/hashTable.h"
+#include "./List/Standard/hashTableStandard.h"
 #endif

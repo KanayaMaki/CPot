@@ -1,5 +1,6 @@
 //
-//	“à—e		:	RandStandardƒNƒ‰ƒX‚ÌŽÀ‘•
+//	content	:	Standard‚Å‚ÌHashTable‚ÌŽÀ‘•
+//	author	:	SaitoYoshiki
 //
 
 #pragma once
