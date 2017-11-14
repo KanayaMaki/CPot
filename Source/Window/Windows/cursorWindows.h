@@ -1,8 +1,7 @@
-//	ファイル名	:	Window/Windows/window.h
-//	作者		:	齊藤芳紀
-//	作成日時	:	2017/11/08
-//	更新日時	:	2017/11/08
-//	内容		:	ウィンドウクラスの実装
+//
+//	content	:	ウィンドウズのカーソルを制御する
+//	author	:	SaitoYoshiki
+//
 
 #pragma once
 
@@ -12,6 +11,9 @@
 #include <Windows.h>
 
 namespace cpot {
+
+namespace windows {
+
 
 class Cursor : public Singleton<Cursor> {
 	friend class Singleton<Cursor>;
@@ -53,5 +55,7 @@ private:
 		return mCursorState == cShow;
 	}
 };
+
+}
 
 }

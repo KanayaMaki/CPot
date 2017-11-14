@@ -1,19 +1,21 @@
-//	ファイル名	:	Window/Windows/window.h
-//	作者		:	齊藤芳紀
-//	作成日時	:	2017/11/08
-//	更新日時	:	2017/11/08
-//	内容		:	ウィンドウクラスの実装
+//
+//	content	:	ウィンドウズのウィンドウの実装
+//	author	:	SaitoYoshiki
+//
 
 #pragma once
 
 #include "./Atom/atom.h"
 #include "./Usefull/singleton.h"
 #include "./Thread/mutex.h"
-#include "cursor.h"
+#include "./Window/Windows/cursorWindows.h"
 
 #include <Windows.h>
 
 namespace cpot {
+
+namespace windows {
+
 
 
 using WindowProcFunc = LRESULT(CALLBACK *)(HWND, UINT, WPARAM, LPARAM);
@@ -79,7 +81,7 @@ public:
 	void SetSize(f32 aWidth, f32 aHeight) {
 		SetSize(Vector2(aWidth, aHeight));
 	}
-	
+
 	void SetTitle(const CHAR* aTitle);
 
 
@@ -130,7 +132,7 @@ public:
 	#pragma region Getter
 
 public:
-	f32 GetWidth() const { 
+	f32 GetWidth() const {
 		return mSize.x;
 	}
 	f32 GetHeight() const {
@@ -163,7 +165,7 @@ public:
 private:
 	//ウィンドウプロシージャ
 	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	
+
 	#pragma endregion
 
 
@@ -240,5 +242,6 @@ private:
 
 };
 
+}
 
 }

@@ -1,5 +1,6 @@
 //
-//	時間に関するクラスを集めた
+//	content	:	時間に関するクラス
+//	author	:	SaitoYoshiki
 //
 
 #pragma once
@@ -106,7 +107,7 @@ public:
 
 
 #ifdef CPOT_ON_WINDOWS
-#include "./Time/Windows/time.h"
+#include "./Time/Windows/timeWindows.h"
 #elif defined CPOT_ON_ANDROID
-#include "./Sleep/Android/sleep.h"
+#include "./Time/Android/timeAndroid.h"
 #endif

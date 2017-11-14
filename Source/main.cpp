@@ -1,6 +1,11 @@
+//
+//	content	:	エントリーポイント
+//	author	:	SaitoYoshiki
+//
+
 #include "./Atom/atom.h"
 
-#include "Window/Windows/window.h"
+#include "Window/Windows/windowWindows.h"
 
 #include <Windows.h>
 
@@ -10,7 +15,7 @@ using namespace cpot;
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArgs, int nWinMode) {
 
-	Window* lWindow = Window::Create();
+	windows::Window* lWindow = windows::Window::Create();
 	lWindow->Load(hInstance, Vector2(960.0f, 540.0f), "Game");
 
 	TestOutput(lWindow->GetHwnd());
@@ -29,9 +34,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 	//TestInputInputWindows(lWindow->GetHInstance(), lWindow->GetHwnd());
 	//TestInputInputXInput();
 
-	Window::MessageLoop();
+	windows::Window::MessageLoop();
 
-	Window::Destroy(lWindow);
+	windows::Window::Destroy(lWindow);
 
 	return 0;
 }

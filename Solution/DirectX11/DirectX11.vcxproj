@@ -36,7 +36,8 @@
     <ClInclude Include="..\..\Source\Atom\math.h" />
     <ClInclude Include="..\..\Source\Atom\matrix4x4.h" />
     <ClInclude Include="..\..\Source\Atom\quaternion.h" />
-    <ClInclude Include="..\..\Source\Atom\Standard\math.h" />
+    <ClInclude Include="..\..\Source\Atom\Standard\mathStandard.h" />
+    <ClInclude Include="..\..\Source\Atom\Standard\toStringStandard.h" />
     <ClInclude Include="..\..\Source\Atom\string.h" />
     <ClInclude Include="..\..\Source\Atom\hashString.h" />
     <ClInclude Include="..\..\Source\Atom\transform.h" />
@@ -91,16 +92,15 @@
     <ClInclude Include="..\..\Source\Thread\Standard\mutex.h" />
     <ClInclude Include="..\..\Source\Thread\Standard\thread.h" />
     <ClInclude Include="..\..\Source\Thread\thread.h" />
-    <ClInclude Include="..\..\Source\Time\Standard\time.h" />
+    <ClInclude Include="..\..\Source\Time\Standard\timeStandard.h" />
     <ClInclude Include="..\..\Source\Time\time.h" />
-    <ClInclude Include="..\..\Source\Time\Windows\time.h" />
+    <ClInclude Include="..\..\Source\Time\Windows\timeWindows.h" />
     <ClInclude Include="..\..\Source\Usefull\buffer.h" />
     <ClInclude Include="..\..\Source\Usefull\singleton.h" />
-    <ClInclude Include="..\..\Source\Window\Windows\cursor.h" />
-    <ClInclude Include="..\..\Source\Window\Windows\window.h" />
+    <ClInclude Include="..\..\Source\Window\Windows\cursorWindows.h" />
+    <ClInclude Include="..\..\Source\Window\Windows\windowWindows.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\Atom\Standard\stringStandard.cpp" />
     <ClCompile Include="..\..\Source\Audio\XAudio\clipXAudio.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>

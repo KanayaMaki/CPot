@@ -1,5 +1,6 @@
 //
-//	時間に関するクラスを集めた
+//	content	:	Windowsでの時間に関するクラス
+//	author	:	SaitoYoshiki
 //
 
 #pragma once

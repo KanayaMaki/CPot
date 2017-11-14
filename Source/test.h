@@ -1,3 +1,8 @@
+//
+//	content	:	ライブラリのテストを行う
+//	author	:	SaitoYoshiki
+//
+
 #include "./Atom/atom.h"
 
 #include <Windows.h>

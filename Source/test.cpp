@@ -1,9 +1,14 @@
+//
+//	content	:	ライブラリのテストを行う
+//	author	:	SaitoYoshiki
+//
+
 #include "./Atom/atom.h"
 
 #include "./test.h"
 
 //Window
-#include "Window/Windows/window.h"
+#include "Window/Windows/windowWindows.h"
 
 //Out
 #include "./Out/out.h"
@@ -53,11 +58,11 @@ void TestLoader() {
 	r.SetSeed(Time().GetUnix());
 
 	for (u32 i = 0; i < 10; i++) {
-		LoaderManager::S().Regist(new LoaderTimer(ToString(i), r.Nextf(2.0f, 5.0f)));
+		LoaderManager::S().Regist(new LoaderTimer(ToString::Do(i), r.Nextf(2.0f, 5.0f)));
 	}
 	for (u32 i = 0; i < 10; i++) {
 		String<32> lFileName("Hurry");
-		lFileName += ToString(i);
+		lFileName += ToString::Do(i);
 		LoaderManager::S().Regist(new LoaderTimerHurry(lFileName, r.Nextf(2.0f, 5.0f)));
 	}
 

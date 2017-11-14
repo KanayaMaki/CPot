@@ -117,9 +117,6 @@
     <ClInclude Include="..\..\Source\Atom\math.h">
       <Filter>Source\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\Standard\math.h">
-      <Filter>Source\Atom\Standard</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Atom\vector.h">
       <Filter>Source\Atom</Filter>
     </ClInclude>
@@ -144,12 +141,6 @@
     <ClInclude Include="..\..\Source\Usefull\buffer.h">
       <Filter>Source\Usefull</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Window\Windows\window.h">
-      <Filter>Source\Window\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Window\Windows\cursor.h">
-      <Filter>Source\Window\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Rand\rand.h">
       <Filter>Source\Rand</Filter>
     </ClInclude>
@@ -164,12 +155,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Time\time.h">
       <Filter>Source\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Time\Standard\time.h">
-      <Filter>Source\Time\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Time\Windows\time.h">
-      <Filter>Source\Time\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\test.h">
       <Filter>Source</Filter>
@@ -243,6 +228,24 @@
     <ClInclude Include="..\..\Source\Out\out.h">
       <Filter>Source\Out</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Window\Windows\windowWindows.h">
+      <Filter>Source\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Window\Windows\cursorWindows.h">
+      <Filter>Source\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Time\Standard\timeStandard.h">
+      <Filter>Source\Time\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Time\Windows\timeWindows.h">
+      <Filter>Source\Time\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\Standard\mathStandard.h">
+      <Filter>Source\Atom\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Atom\Standard\toStringStandard.h">
+      <Filter>Source\Atom\Standard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -259,9 +262,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Sleep\Windows\sleepWindows.cpp">
       <Filter>Source\Sleep\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Atom\Standard\stringStandard.cpp">
-      <Filter>Source\Atom\Standard</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Time\time.cpp">
       <Filter>Source\Time</Filter>

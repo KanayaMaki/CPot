@@ -1,8 +1,9 @@
 //
-//	Standard環境での、時間に関するクラス
+//	content	:	Standardでの時間に関するクラス
+//	author	:	SaitoYoshiki
 //
 
-#include "./Time/Standard/time.h"
+#include "./Time/Standard/timeStandard.h"
 
 #include <ctime>
 

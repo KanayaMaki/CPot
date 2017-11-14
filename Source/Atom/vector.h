@@ -1,8 +1,7 @@
-//	ファイル名	:	Atom/vector.h
-//	作者		:	齊藤芳紀
-//	作成日時	:	2017/11/07
-//	更新日時	:	2017/11/07
-//	内容		:	Vector3などの実装
+//
+//	content	:	Vector2, Vector3などの実装
+//	author	:	SaitoYoshiki
+//
 
 #pragma once
 
@@ -269,9 +268,9 @@ public:
 	String<32> ToString() const {
 		String<32> lRes;
 		lRes += "(";
-		lRes += cpot::ToString(x);
+		lRes += cpot::ToString::Do(x);
 		lRes += ", ";
-		lRes += cpot::ToString(y);
+		lRes += cpot::ToString::Do(y);
 		lRes += ")";
 		return lRes;
 	}
@@ -671,11 +670,11 @@ public:
 	String<64> ToString() const {
 		String<64> lRes;
 		lRes += "(";
-		lRes += cpot::ToString(x);
+		lRes += cpot::ToString::Do(x);
 		lRes += ", ";
-		lRes += cpot::ToString(y);
+		lRes += cpot::ToString::Do(y);
 		lRes += ", ";
-		lRes += cpot::ToString(z);
+		lRes += cpot::ToString::Do(z);
 		lRes += ")";
 		return lRes;
 	}
@@ -1029,13 +1028,13 @@ public:
 	String<64> ToString() const {
 		String<64> lRes;
 		lRes += "(";
-		lRes += cpot::ToString(x);
+		lRes += cpot::ToString::Do(x);
 		lRes += ", ";
-		lRes += cpot::ToString(y);
+		lRes += cpot::ToString::Do(y);
 		lRes += ", ";
-		lRes += cpot::ToString(z);
+		lRes += cpot::ToString::Do(z);
 		lRes += ", ";
-		lRes += cpot::ToString(w);
+		lRes += cpot::ToString::Do(w);
 		lRes += ")";
 		return lRes;
 	}

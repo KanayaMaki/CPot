@@ -43,34 +43,34 @@ public:
 		OutputStr(aStr);
 	}
 	void Output(s8 aVal) {
-		OutputStr(ToString((s32)aVal));
+		OutputStr(ToString::Do((s32)aVal));
 	}
 	void Output(u8 aVal) {
-		OutputStr(ToString((u32)aVal));
+		OutputStr(ToString::Do((u32)aVal));
 	}
 	void Output(s16 aVal) {
-		OutputStr(ToString((s32)aVal));
+		OutputStr(ToString::Do((s32)aVal));
 	}
 	void Output(u16 aVal) {
-		OutputStr(ToString((u32)aVal));
+		OutputStr(ToString::Do((u32)aVal));
 	}
 	void Output(s32 aVal) {
-		OutputStr(ToString(aVal));
+		OutputStr(ToString::Do(aVal));
 	}
 	void Output(u32 aVal) {
-		OutputStr(ToString(aVal));
+		OutputStr(ToString::Do(aVal));
 	}
 	void Output(s64 aVal) {
-		OutputStr(ToString(aVal));
+		OutputStr(ToString::Do(aVal));
 	}
 	void Output(u64 aVal) {
-		OutputStr(ToString(aVal));
+		OutputStr(ToString::Do(aVal));
 	}
 	void Output(f32 aVal) {
-		OutputStr(ToString(aVal));
+		OutputStr(ToString::Do(aVal));
 	}
 	void Output(f64 aVal) {
-		OutputStr(ToString(aVal));
+		OutputStr(ToString::Do(aVal));
 	}
 	template<u32 aSize>
 	void Output(const String<aSize>& aVal) {

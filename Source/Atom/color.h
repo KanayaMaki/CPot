@@ -1,8 +1,7 @@
-//	ファイル名	:	Atom/vector.h
-//	作者		:	齊藤芳紀
-//	作成日時	:	2017/11/07
-//	更新日時	:	2017/11/07
-//	内容		:	Vector3などの実装
+//
+//	content	:	色を表すクラス
+//	author	:	SaitoYoshiki
+//
 
 #pragma once
 

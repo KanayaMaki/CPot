@@ -1,8 +1,7 @@
-//	ファイル名	:	Atom/typedef.h
-//	作者		:	齊藤芳紀
-//	作成日時	:	2017/11/06
-//	更新日時	:	2017/11/06
-//	内容		:	基本のtypedefを定義
+//
+//	content	:	基本のtypedefを定義
+//	author	:	SaitoYoshiki
+//
 
 #pragma once
 

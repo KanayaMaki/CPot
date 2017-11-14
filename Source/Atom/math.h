@@ -1,8 +1,7 @@
-//	ファイル名	:	Atom/math.h
-//	作者		:	齊藤芳紀
-//	作成日時	:	2017/11/07
-//	更新日時	:	2017/11/07
-//	内容		:	使用するライブラリを切り替え
+//
+//	content	:	Mathの宣言。実装は、環境ごとのcppで
+//	author	:	SaitoYoshiki
+//
 
 #pragma once
 
@@ -76,9 +75,9 @@ f32 Exp(f32 val);
 
 
 
-//	定義
+//	環境ごとのファイルのインクルード
 #ifdef CPOT_ON_WINDOWS
-#include "Standard/math.h"
+#include "Standard/mathStandard.h"
 #elif defined CPOT_ON_ANDROID
 #include "Standard/math.h"
 #endif
