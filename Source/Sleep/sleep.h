@@ -23,5 +23,5 @@ public:
 #ifdef CPOT_ON_WINDOWS
 #include "./Sleep/Windows/sleepWindows.h"
 #elif defined CPOT_ON_ANDROID
-#include "./Sleep/Android/sleepWindows.h"
+#include "./Sleep/Android/sleepAndroid.h"
 #endif

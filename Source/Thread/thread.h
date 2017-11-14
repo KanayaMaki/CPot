@@ -32,4 +32,6 @@ public:
 //Thread‚ÆMutex‚ÌéŒ¾
 #ifdef CPOT_ON_WINDOWS
 #include "./Thread/Standard/threadStandard.h"
+#elif defined CPOT_ON_ANDROID
+#include "./Thread/Android/threadAndroid.h"
 #endif

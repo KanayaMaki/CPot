@@ -64,6 +64,7 @@
     <ClInclude Include="..\..\Source\List\Standard\vectorStandard.h" />
     <ClInclude Include="..\..\Source\List\vector.h" />
     <ClInclude Include="..\..\Source\Loader\loader.h" />
+    <ClInclude Include="..\..\Source\Out\Android\outLogAndroid.h" />
     <ClInclude Include="..\..\Source\Out\out.h" />
     <ClInclude Include="..\..\Source\Out\Windows\outConsoleWindows.h" />
     <ClInclude Include="..\..\Source\Out\Windows\outDebugWindowWindows.h" />

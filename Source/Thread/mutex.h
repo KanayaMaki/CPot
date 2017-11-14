@@ -25,4 +25,6 @@ public:
 //デバイスごとのMutexの宣言
 #ifdef CPOT_ON_WINDOWS
 #include "./Thread/Standard/mutexStandard.h"
+#elif defined CPOT_ON_ANDROID
+#include "./Thread/Android/mutexAndroid.h"
 #endif

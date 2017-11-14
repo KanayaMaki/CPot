@@ -32,6 +32,9 @@
 #include "android_native_app_glue.h"
 
 #include "./Atom/atom.h"
+#include "./Out/Android/outLogAndroid.h"
+
+#include "./Android/test.h"
 
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "AndroidProject1.NativeActivity", __VA_ARGS__))
@@ -236,6 +239,11 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
 * 入力イベントを受け取ったり他の操作を実行したりします。
 */
 void android_main(struct android_app* state) {
+
+	TestFunc();
+
+	cpot::android::OutLog o;
+
 	struct engine engine;
 
 	memset(&engine, 0, sizeof(engine));
@@ -261,6 +269,8 @@ void android_main(struct android_app* state) {
 	// ループはスタッフによる開始を待っています。
 
 	while (1) {
+
+
 		// 保留中のすべてのイベントを読み取ります。
 		int ident;
 		int events;
@@ -303,6 +313,7 @@ void android_main(struct android_app* state) {
 			if (engine.state.angle > 1) {
 				engine.state.angle = 0;
 			}
+			o.Output("-----------------------------------------------------------------------Android", cpot::u32(32), "\n");
 
 			// 描画は画面の更新レートに合わせて調整されているため、
 			// ここで時間調整をする必要はありません。

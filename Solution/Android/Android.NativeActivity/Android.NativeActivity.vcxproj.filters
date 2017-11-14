@@ -13,6 +13,30 @@
     <Filter Include="Source\Atom\Standard">
       <UniqueIdentifier>{83915050-ede2-42c7-8f2d-e62c0a47804a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Out">
+      <UniqueIdentifier>{1653257f-c874-434f-b7ed-d3ac3a6b4081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Out\Android">
+      <UniqueIdentifier>{47fe2328-cc8c-4a16-8b08-b88af5a5e83b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Sleep">
+      <UniqueIdentifier>{d6fed41a-7e3c-4783-bcf5-239031d4e538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Sleep\Android">
+      <UniqueIdentifier>{c8595885-fb63-4174-9f27-fe10df3fadac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Time">
+      <UniqueIdentifier>{94ad9c11-2f3f-49bc-8474-7775bfd9a854}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Time\Android">
+      <UniqueIdentifier>{a92ae58b-1df7-4998-b1a7-dc8046908b00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Thread">
+      <UniqueIdentifier>{6d890df7-d94b-4ce3-837c-e3e4c559b478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Thread\Android">
+      <UniqueIdentifier>{01a8ce9c-69d3-4122-bef6-0b1928c14486}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\Android\android_native_app_glue.h">
@@ -66,6 +90,42 @@
     <ClInclude Include="..\..\..\Source\Atom\Standard\mathStandard.h">
       <Filter>Source\Atom\Standard</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\Out\Android\outLogAndroid.h">
+      <Filter>Source\Out\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Out\out.h">
+      <Filter>Source\Out</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Sleep\sleep.h">
+      <Filter>Source\Sleep</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Sleep\Android\sleepAndroid.h">
+      <Filter>Source\Sleep\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Time\Android\timeAndroid.h">
+      <Filter>Source\Time\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Time\time.h">
+      <Filter>Source\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Android\test.h">
+      <Filter>Source\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\mutexLocker.h">
+      <Filter>Source\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\thread.h">
+      <Filter>Source\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\mutex.h">
+      <Filter>Source\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\Android\mutexAndroid.h">
+      <Filter>Source\Thread\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\Android\threadAndroid.h">
+      <Filter>Source\Thread\Android</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\Android\main.cpp">
@@ -73,6 +133,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Android\android_native_app_glue.c">
       <Filter>Source\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Android\test.cpp">
+      <Filter>Source\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Time\time.cpp">
+      <Filter>Source\Time</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

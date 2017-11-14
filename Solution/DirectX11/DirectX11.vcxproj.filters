@@ -94,6 +94,9 @@
     <Filter Include="Source\Windows\Resource">
       <UniqueIdentifier>{77bffa52-15f9-47d3-acb1-50a816f2ffa2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Out\Android">
+      <UniqueIdentifier>{5f823f25-0381-431e-b901-94dd1ac35d16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Atom\defines.h">
@@ -269,6 +272,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Windows\Resource\resource.h">
       <Filter>Source\Windows\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Out\Android\outLogAndroid.h">
+      <Filter>Source\Out\Android</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
