@@ -26,7 +26,7 @@ class Config : public ConfigBase, public Singleton<Config> {
 	#pragma region ScreenSize
 
 public:
-	void SetScreenSize(const Vector2 aScreenSize) CPOT_OR {
+	void SetScreenSize(const Vector2& aScreenSize) CPOT_OR {
 		MutexLocker m(mScreenSizeMutex);
 		mScreenSize = aScreenSize;
 	}

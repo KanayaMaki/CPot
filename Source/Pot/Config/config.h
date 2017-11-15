@@ -29,7 +29,7 @@ public:
 	#pragma region ScreenSize
 
 public:
-	CPOT_VI void SetScreenSize(const Vector2 aScreenSize) CPOT_ZR;
+	CPOT_VI void SetScreenSize(const Vector2& aScreenSize) CPOT_ZR;
 	CPOT_VI Vector2 GetScreenSize() CPOT_ZR;
 
 	#pragma endregion
