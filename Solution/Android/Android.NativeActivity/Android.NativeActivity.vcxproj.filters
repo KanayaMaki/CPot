@@ -4,141 +4,144 @@
     <Filter Include="Source">
       <UniqueIdentifier>{c615354f-a49b-48e4-b74b-34ed2d3bfa45}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Android">
-      <UniqueIdentifier>{49be5a8d-80b0-4a8d-bc38-716f0c8358a4}</UniqueIdentifier>
+    <Filter Include="Source\Pot">
+      <UniqueIdentifier>{19c31307-8765-4eca-86b1-0773c115cd9d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Atom">
-      <UniqueIdentifier>{d17d1925-9757-4472-9f87-4d45e0c8910d}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Android">
+      <UniqueIdentifier>{b0a92511-0a45-4862-ae66-2def3161f7cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Atom\Standard">
-      <UniqueIdentifier>{83915050-ede2-42c7-8f2d-e62c0a47804a}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Atom">
+      <UniqueIdentifier>{d0980852-4b16-44d2-9ee9-14e2eb627268}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Out">
-      <UniqueIdentifier>{1653257f-c874-434f-b7ed-d3ac3a6b4081}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Time">
+      <UniqueIdentifier>{bd07c2c7-0ac9-4b62-a0ee-17a699017889}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Out\Android">
-      <UniqueIdentifier>{47fe2328-cc8c-4a16-8b08-b88af5a5e83b}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Sleep">
+      <UniqueIdentifier>{8a00de71-2b52-46aa-bc5e-d02d466a4365}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Sleep">
-      <UniqueIdentifier>{d6fed41a-7e3c-4783-bcf5-239031d4e538}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Thread">
+      <UniqueIdentifier>{be7e9778-117a-4ec1-9d9f-d352476eda96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Sleep\Android">
-      <UniqueIdentifier>{c8595885-fb63-4174-9f27-fe10df3fadac}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Out">
+      <UniqueIdentifier>{b31d49b9-42b4-4fb5-a0c1-423ddd8d1c8e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Time">
-      <UniqueIdentifier>{94ad9c11-2f3f-49bc-8474-7775bfd9a854}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Atom\Standard">
+      <UniqueIdentifier>{c94dd14d-b499-44d0-9db2-fb0d11703f64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Time\Android">
-      <UniqueIdentifier>{a92ae58b-1df7-4998-b1a7-dc8046908b00}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Out\Android">
+      <UniqueIdentifier>{d2c3834d-a594-4579-af95-d7d6b7ba7ff4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Thread">
-      <UniqueIdentifier>{6d890df7-d94b-4ce3-837c-e3e4c559b478}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Thread\Android">
+      <UniqueIdentifier>{bfb8e7ea-41e8-4c52-a3e5-f8bdb9206718}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Thread\Android">
-      <UniqueIdentifier>{01a8ce9c-69d3-4122-bef6-0b1928c14486}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Sleep\Android">
+      <UniqueIdentifier>{96bbca36-dc7f-43e5-a9eb-82e4baed7e5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Time\Android">
+      <UniqueIdentifier>{c2effd5d-9e32-46dd-b1c4-eefd187c6f9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Source\Android\android_native_app_glue.h">
-      <Filter>Source\Android</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\defines.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\function.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\hash.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\hashString.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\math.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\matrix4x4.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\quaternion.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\string.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\transform.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\typedef.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\vector.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\atom.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\bitflag.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\color.h">
-      <Filter>Source\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\Standard\toStringStandard.h">
-      <Filter>Source\Atom\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Atom\Standard\mathStandard.h">
-      <Filter>Source\Atom\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Out\Android\outLogAndroid.h">
-      <Filter>Source\Out\Android</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Out\out.h">
-      <Filter>Source\Out</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Sleep\sleep.h">
-      <Filter>Source\Sleep</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Sleep\Android\sleepAndroid.h">
-      <Filter>Source\Sleep\Android</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Time\Android\timeAndroid.h">
-      <Filter>Source\Time\Android</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Time\time.h">
-      <Filter>Source\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Android\test.h">
-      <Filter>Source\Android</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Thread\mutexLocker.h">
-      <Filter>Source\Thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Thread\thread.h">
-      <Filter>Source\Thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Thread\mutex.h">
-      <Filter>Source\Thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Thread\Android\mutexAndroid.h">
-      <Filter>Source\Thread\Android</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Thread\Android\threadAndroid.h">
-      <Filter>Source\Thread\Android</Filter>
-    </ClInclude>
+    <ClCompile Include="..\..\..\Source\Pot\Android\main.cpp">
+      <Filter>Source\Pot\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\Android\test.cpp">
+      <Filter>Source\Pot\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\Android\android_native_app_glue.c">
+      <Filter>Source\Pot\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\Time\time.cpp">
+      <Filter>Source\Pot\Time</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\Android\main.cpp">
-      <Filter>Source\Android</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Android\android_native_app_glue.c">
-      <Filter>Source\Android</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Android\test.cpp">
-      <Filter>Source\Android</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Time\time.cpp">
-      <Filter>Source\Time</Filter>
-    </ClCompile>
+    <ClInclude Include="..\..\..\Source\Pot\Android\test.h">
+      <Filter>Source\Pot\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Android\android_native_app_glue.h">
+      <Filter>Source\Pot\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\function.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\hash.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\hashString.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\math.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\matrix4x4.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\quaternion.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\string.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\transform.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\typedef.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\vector.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\atom.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\bitflag.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\color.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\defines.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\Standard\toStringStandard.h">
+      <Filter>Source\Pot\Atom\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Atom\Standard\mathStandard.h">
+      <Filter>Source\Pot\Atom\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Out\Android\outLogAndroid.h">
+      <Filter>Source\Pot\Out\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Out\out.h">
+      <Filter>Source\Pot\Out</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Thread\mutexLocker.h">
+      <Filter>Source\Pot\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Thread\thread.h">
+      <Filter>Source\Pot\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Thread\mutex.h">
+      <Filter>Source\Pot\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Thread\Android\mutexAndroid.h">
+      <Filter>Source\Pot\Thread\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Thread\Android\threadAndroid.h">
+      <Filter>Source\Pot\Thread\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Sleep\sleep.h">
+      <Filter>Source\Pot\Sleep</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Sleep\Android\sleepAndroid.h">
+      <Filter>Source\Pot\Sleep\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Time\time.h">
+      <Filter>Source\Pot\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Time\Android\timeAndroid.h">
+      <Filter>Source\Pot\Time\Android</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -46,10 +46,10 @@ class GameMain
 		mGame->Init();
 
 		while(true) {
-			Input->Update();
+			Input::S().Update();
 			mGame->Update();
 			mGame->Render();
-			Fps->Wait();
+			Fps::S().Wait();
 
 			if(mGameEnd) {
 				break;
@@ -70,7 +70,7 @@ class GameMain
 	・ウィンドウタイトル（更新時）
 		Game-Win
 
-class ConfigBase : public Singleton
+class ConfigBase : public Singleton<ConfigBase>
 	CPOT_VI void SetApplicationEnd(BOOL aEnd) CPOT_ZR;
 	CPOT_VI BOOL GetApplicationEnd() CPOT_ZR;
 	CPOT_VI void SetGameEnd(BOOL aEnd) CPOT_ZR;
@@ -83,7 +83,16 @@ class ConfigBase : public Singleton
 	CPOT_VI void SetIsActive(BOOL aIsActive) CPOT_ZR;
 	CPOT_VI BOOL GetIsActive() CPOT_ZR;
 
-class windows::Config
+protected:
+	String<64> mTitle;
+	BOOL mApplicationEnd;
+	BOOL mGameEnd;
+	BOOL mActive;
+	BOOL mUseCursor;
+
+class windows::Config : public ConfigBase {
+	CPOT_VI BOOL GetIsActive() CPOT_ZR;
+}
 
 
 Window
@@ -201,6 +210,9 @@ Audio
 		void IsLoad() const;
 
 		AudioClip* mClip;
+
+
+
 
 
 描画

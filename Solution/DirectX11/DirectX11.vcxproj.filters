@@ -4,346 +4,364 @@
     <Filter Include="Source">
       <UniqueIdentifier>{5e8784f8-0aa2-47a7-bc61-b171faec12b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Atom">
-      <UniqueIdentifier>{28db1964-4db4-46de-996a-1e1d719e68f5}</UniqueIdentifier>
+    <Filter Include="Source\Pot">
+      <UniqueIdentifier>{56e2f7db-6e2a-489c-8842-81d983b1b460}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Atom\Standard">
-      <UniqueIdentifier>{b90ce3f5-1a3d-4f53-b922-bfbad266a28d}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Atom">
+      <UniqueIdentifier>{f29de195-2c9d-4b19-83c5-4250b4b1cbf4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Usefull">
-      <UniqueIdentifier>{4aba450b-a743-424d-b368-ab9d824475cf}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Atom\Standard">
+      <UniqueIdentifier>{d44d0e5a-3181-42ab-a8fe-8814e5185b07}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Window">
-      <UniqueIdentifier>{a079b5da-19aa-420e-bce7-e0d552e1db6b}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Audio">
+      <UniqueIdentifier>{4e87b550-5660-44b3-a041-8151c3aa062a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Window\Windows">
-      <UniqueIdentifier>{dfa6d590-b5c0-4cd2-8b84-e15656d62300}</UniqueIdentifier>
+    <Filter Include="Source\Pot\File">
+      <UniqueIdentifier>{802fdefa-517f-4f10-9fb0-e50009b20309}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Rand">
-      <UniqueIdentifier>{c7f189a8-586a-4cc9-815d-973aadf1b97c}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Game">
+      <UniqueIdentifier>{bedb3c7f-a3a6-4f42-9e03-bf56c677ce25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Rand\Standard">
-      <UniqueIdentifier>{419ee489-5b98-4e12-8529-c71656087799}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Input">
+      <UniqueIdentifier>{a862f937-fbef-47f2-ba6d-92a4d3354ee6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Sleep">
-      <UniqueIdentifier>{e25eea21-1b70-4a4f-8522-3cd1bd93fbe9}</UniqueIdentifier>
+    <Filter Include="Source\Pot\List">
+      <UniqueIdentifier>{12782e8d-2abe-4691-8a0d-3503b0228826}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Sleep\Windows">
-      <UniqueIdentifier>{509a026c-d2dd-4320-aba1-217cbf05f880}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Loader">
+      <UniqueIdentifier>{8ae425b6-ef1d-4a5a-8df7-ab85214fbc16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Time">
-      <UniqueIdentifier>{0512ce2d-f961-477b-91ef-aab504a673d1}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Out">
+      <UniqueIdentifier>{42e37820-3221-4eb9-ac21-afb2a22fa8db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Time\Standard">
-      <UniqueIdentifier>{30663041-c606-49d9-826f-8fc5c5c7efae}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Thread">
+      <UniqueIdentifier>{02a6befa-21d9-422d-8c7f-b6571cbd1537}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Time\Windows">
-      <UniqueIdentifier>{a54ea99c-4a65-41d2-856a-ed8b0ad6c7e3}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Sleep">
+      <UniqueIdentifier>{109b7b52-79db-4b8c-8ee7-37d85adb295e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\List">
-      <UniqueIdentifier>{33a2007d-6ebe-41df-ae9e-1fb61644ac94}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Rand">
+      <UniqueIdentifier>{96be79bd-8448-40ca-8c9c-9e36caa00a29}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\List\Standard">
-      <UniqueIdentifier>{cf9b1076-09bf-482d-a914-93f49c17b981}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Time">
+      <UniqueIdentifier>{8aff2b28-dca6-4076-91e6-27ab0d4ca312}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Thread">
-      <UniqueIdentifier>{2e757ff2-9a9b-40ad-bed6-369b8b251a9d}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Usefull">
+      <UniqueIdentifier>{f693d07f-e146-4a71-80ad-a6a9f47d56ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Thread\Standard">
-      <UniqueIdentifier>{6db0a1a1-c4cb-445b-aff9-7d865e40aba2}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Window">
+      <UniqueIdentifier>{91fd7c3a-3f58-457b-879c-7d0db02b79d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Game">
-      <UniqueIdentifier>{f176e9dd-44a5-4f6d-97da-72b54cd3aa46}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Windows">
+      <UniqueIdentifier>{51cf5365-300f-4257-bb09-6c95dc8e1481}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Input">
-      <UniqueIdentifier>{36f8600a-399a-4d24-b104-060fb0a2ceaf}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Audio\XAudio">
+      <UniqueIdentifier>{bdcf986f-452c-46c8-8b18-3080c56b6285}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Input\XInput">
-      <UniqueIdentifier>{bc209c6a-ce4a-4efa-baa9-1650cd81a7d9}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Audio\XAudio\Device">
+      <UniqueIdentifier>{9601d4c9-455f-4502-b36d-5b3fd6244ee8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Input\Windows">
-      <UniqueIdentifier>{7215d96c-1562-48c1-83c4-0a0ac7aef21e}</UniqueIdentifier>
+    <Filter Include="Source\Pot\File\Standard">
+      <UniqueIdentifier>{13eeb655-606f-415b-a36b-519fc372f5d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\File">
-      <UniqueIdentifier>{859d3421-b434-4fe5-8229-e3c700620ed6}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Input\Windows">
+      <UniqueIdentifier>{9f85e1fe-5da4-47d3-bc6d-fb2ab845abd0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\File\Standard">
-      <UniqueIdentifier>{dde43a6e-aef9-40bf-8c74-05d8c6931411}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Input\XInput">
+      <UniqueIdentifier>{9ecff2df-7513-47ad-80d7-2cf1994963f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Loader">
-      <UniqueIdentifier>{824fd18e-f87d-44b8-b2c6-6e5969a5b5cc}</UniqueIdentifier>
+    <Filter Include="Source\Pot\List\Standard">
+      <UniqueIdentifier>{12617156-ebb0-4375-8f84-b1ccd95d0749}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Audio">
-      <UniqueIdentifier>{a21fc80c-0f4f-4651-853d-9d3c82aac7b9}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Out\Windows">
+      <UniqueIdentifier>{5f933cab-7e71-49eb-9a53-3c815634d7fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Audio\XAudio">
-      <UniqueIdentifier>{439a6ad0-ce75-4a3e-8f38-8885c1e6e175}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Out\Standard">
+      <UniqueIdentifier>{2779051c-7bb3-42f8-b57f-9a147ee58a97}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Out">
-      <UniqueIdentifier>{9256fe66-a836-41f6-94be-1141857c31bc}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Rand\Standard">
+      <UniqueIdentifier>{05810506-09e6-4775-87f8-a42e08685a2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Out\Windows">
-      <UniqueIdentifier>{15f53439-d7a4-4c01-b5bf-89fc624388c2}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Sleep\Windows">
+      <UniqueIdentifier>{6bd28a34-2e64-4406-86f0-fb891b1df15d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Audio\XAudio\Device">
-      <UniqueIdentifier>{87caffde-8872-4827-9a26-728fbe86c9a8}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Thread\Android">
+      <UniqueIdentifier>{c477f09c-afac-4d98-be8c-904f9b3cdbc6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Windows">
-      <UniqueIdentifier>{d4cf9b71-2431-451d-a349-20ce55171aeb}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Thread\Standard">
+      <UniqueIdentifier>{d665251d-7911-4941-8acd-5286681c7e28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Windows\Resource">
-      <UniqueIdentifier>{77bffa52-15f9-47d3-acb1-50a816f2ffa2}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Time\Android">
+      <UniqueIdentifier>{6786e9dd-7e60-4538-9c6f-b39f2f6ea12f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Out\Android">
-      <UniqueIdentifier>{5f823f25-0381-431e-b901-94dd1ac35d16}</UniqueIdentifier>
+    <Filter Include="Source\Pot\Time\Windows">
+      <UniqueIdentifier>{511a3199-cc8b-4866-bf06-147651c263d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Time\Standard">
+      <UniqueIdentifier>{be5cc4ed-acbb-484f-9d39-f4af124a1d0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Window\Windows">
+      <UniqueIdentifier>{731b5f3b-6cbe-4565-8a59-51a93be8ccb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Windows\Resource">
+      <UniqueIdentifier>{f3d2b75b-327a-426a-8d12-7e72c88a3819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Cycle">
+      <UniqueIdentifier>{0d616b9c-88e7-4bdc-9dc7-ea37fd4e20d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\Atom\defines.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\defines.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\typedef.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\function.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\function.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\hash.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\string.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\hashString.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\hash.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\math.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\hashString.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\matrix4x4.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\atom.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\quaternion.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\math.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\string.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\vector.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\transform.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\quaternion.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\typedef.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\matrix4x4.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\vector.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\bitflag.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\atom.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\color.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\bitflag.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\transform.h">
-      <Filter>Source\Atom</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\color.h">
+      <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Usefull\singleton.h">
-      <Filter>Source\Usefull</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\Standard\mathStandard.h">
+      <Filter>Source\Pot\Atom\Standard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Usefull\buffer.h">
-      <Filter>Source\Usefull</Filter>
+    <ClInclude Include="..\..\Source\Pot\Atom\Standard\toStringStandard.h">
+      <Filter>Source\Pot\Atom\Standard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Rand\rand.h">
-      <Filter>Source\Rand</Filter>
+    <ClInclude Include="..\..\Source\Pot\Audio\audioClip.h">
+      <Filter>Source\Pot\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Sleep\sleep.h">
-      <Filter>Source\Sleep</Filter>
+    <ClInclude Include="..\..\Source\Pot\Audio\audioName.h">
+      <Filter>Source\Pot\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Time\time.h">
-      <Filter>Source\Time</Filter>
+    <ClInclude Include="..\..\Source\Pot\Audio\audioVoice.h">
+      <Filter>Source\Pot\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\test.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\..\Source\Pot\Audio\audio.h">
+      <Filter>Source\Pot\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\List\vector.h">
-      <Filter>Source\List</Filter>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\audioVoiceXAudio.h">
+      <Filter>Source\Pot\Audio\XAudio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\List\hashTable.h">
-      <Filter>Source\List</Filter>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\audioClipXAudio.h">
+      <Filter>Source\Pot\Audio\XAudio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Thread\mutex.h">
-      <Filter>Source\Thread</Filter>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.h">
+      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Thread\mutexLocker.h">
-      <Filter>Source\Thread</Filter>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Device\voiceXAudioDevice.h">
+      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Thread\thread.h">
-      <Filter>Source\Thread</Filter>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Device\clipXAudioDevice.h">
+      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Game\game.h">
-      <Filter>Source\Game</Filter>
+    <ClInclude Include="..\..\Source\Pot\File\file.h">
+      <Filter>Source\Pot\File</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Input\Windows\inputWindows.h">
-      <Filter>Source\Input\Windows</Filter>
+    <ClInclude Include="..\..\Source\Pot\File\Standard\fileStandard.h">
+      <Filter>Source\Pot\File\Standard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Input\XInput\inputXInput.h">
-      <Filter>Source\Input\XInput</Filter>
+    <ClInclude Include="..\..\Source\Pot\Game\game.h">
+      <Filter>Source\Pot\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Input\input.h">
-      <Filter>Source\Input</Filter>
+    <ClInclude Include="..\..\Source\Pot\Input\input.h">
+      <Filter>Source\Pot\Input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\File\file.h">
-      <Filter>Source\File</Filter>
+    <ClInclude Include="..\..\Source\Pot\Input\XInput\inputXInput.h">
+      <Filter>Source\Pot\Input\XInput</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Loader\loader.h">
-      <Filter>Source\Loader</Filter>
+    <ClInclude Include="..\..\Source\Pot\Input\Windows\inputWindows.h">
+      <Filter>Source\Pot\Input\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Out\out.h">
-      <Filter>Source\Out</Filter>
+    <ClInclude Include="..\..\Source\Pot\List\Standard\vectorStandard.h">
+      <Filter>Source\Pot\List\Standard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Window\Windows\windowWindows.h">
-      <Filter>Source\Window\Windows</Filter>
+    <ClInclude Include="..\..\Source\Pot\List\Standard\hashTableStandard.h">
+      <Filter>Source\Pot\List\Standard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Window\Windows\cursorWindows.h">
-      <Filter>Source\Window\Windows</Filter>
+    <ClInclude Include="..\..\Source\Pot\List\resourceName.h">
+      <Filter>Source\Pot\List</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Time\Standard\timeStandard.h">
-      <Filter>Source\Time\Standard</Filter>
+    <ClInclude Include="..\..\Source\Pot\List\vector.h">
+      <Filter>Source\Pot\List</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Time\Windows\timeWindows.h">
-      <Filter>Source\Time\Windows</Filter>
+    <ClInclude Include="..\..\Source\Pot\List\hashTable.h">
+      <Filter>Source\Pot\List</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\Standard\mathStandard.h">
-      <Filter>Source\Atom\Standard</Filter>
+    <ClInclude Include="..\..\Source\Pot\Loader\loader.h">
+      <Filter>Source\Pot\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Atom\Standard\toStringStandard.h">
-      <Filter>Source\Atom\Standard</Filter>
+    <ClInclude Include="..\..\Source\Pot\Out\out.h">
+      <Filter>Source\Pot\Out</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\File\Standard\fileStandard.h">
-      <Filter>Source\File\Standard</Filter>
+    <ClInclude Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.h">
+      <Filter>Source\Pot\Out\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\List\Standard\vectorStandard.h">
-      <Filter>Source\List\Standard</Filter>
+    <ClInclude Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.h">
+      <Filter>Source\Pot\Out\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\List\Standard\hashTableStandard.h">
-      <Filter>Source\List\Standard</Filter>
+    <ClInclude Include="..\..\Source\Pot\Rand\rand.h">
+      <Filter>Source\Pot\Rand</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Out\Windows\outConsoleWindows.h">
-      <Filter>Source\Out\Windows</Filter>
+    <ClInclude Include="..\..\Source\Pot\Rand\Standard\randStandard.h">
+      <Filter>Source\Pot\Rand\Standard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Out\Windows\outDebugWindowWindows.h">
-      <Filter>Source\Out\Windows</Filter>
+    <ClInclude Include="..\..\Source\Pot\Sleep\sleep.h">
+      <Filter>Source\Pot\Sleep</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Rand\Standard\randStandard.h">
-      <Filter>Source\Rand\Standard</Filter>
+    <ClInclude Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.h">
+      <Filter>Source\Pot\Sleep\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Sleep\Windows\sleepWindows.h">
-      <Filter>Source\Sleep\Windows</Filter>
+    <ClInclude Include="..\..\Source\Pot\Thread\mutex.h">
+      <Filter>Source\Pot\Thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Thread\Standard\mutexStandard.h">
-      <Filter>Source\Thread\Standard</Filter>
+    <ClInclude Include="..\..\Source\Pot\Thread\mutexLocker.h">
+      <Filter>Source\Pot\Thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Thread\Standard\threadStandard.h">
-      <Filter>Source\Thread\Standard</Filter>
+    <ClInclude Include="..\..\Source\Pot\Thread\thread.h">
+      <Filter>Source\Pot\Thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\XAudio\Device\deviceXAudioDevice.h">
-      <Filter>Source\Audio\XAudio\Device</Filter>
+    <ClInclude Include="..\..\Source\Pot\Thread\Android\mutexAndroid.h">
+      <Filter>Source\Pot\Thread\Android</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\XAudio\Device\voiceXAudioDevice.h">
-      <Filter>Source\Audio\XAudio\Device</Filter>
+    <ClInclude Include="..\..\Source\Pot\Thread\Android\threadAndroid.h">
+      <Filter>Source\Pot\Thread\Android</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\XAudio\Device\clipXAudioDevice.h">
-      <Filter>Source\Audio\XAudio\Device</Filter>
+    <ClInclude Include="..\..\Source\Pot\Thread\Standard\mutexStandard.h">
+      <Filter>Source\Pot\Thread\Standard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\List\resourceName.h">
-      <Filter>Source\List</Filter>
+    <ClInclude Include="..\..\Source\Pot\Thread\Standard\threadStandard.h">
+      <Filter>Source\Pot\Thread\Standard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\audioName.h">
-      <Filter>Source\Audio</Filter>
+    <ClInclude Include="..\..\Source\Pot\Time\time.h">
+      <Filter>Source\Pot\Time</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\audioVoice.h">
-      <Filter>Source\Audio</Filter>
+    <ClInclude Include="..\..\Source\Pot\Time\Windows\timeWindows.h">
+      <Filter>Source\Pot\Time\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\audioClip.h">
-      <Filter>Source\Audio</Filter>
+    <ClInclude Include="..\..\Source\Pot\Time\Standard\timeStandard.h">
+      <Filter>Source\Pot\Time\Standard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\XAudio\audioClipXAudio.h">
-      <Filter>Source\Audio\XAudio</Filter>
+    <ClInclude Include="..\..\Source\Pot\Time\Android\timeAndroid.h">
+      <Filter>Source\Pot\Time\Android</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\XAudio\audioVoiceXAudio.h">
-      <Filter>Source\Audio\XAudio</Filter>
+    <ClInclude Include="..\..\Source\Pot\Window\Windows\windowWindows.h">
+      <Filter>Source\Pot\Window\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Audio\audio.h">
-      <Filter>Source\Audio</Filter>
+    <ClInclude Include="..\..\Source\Pot\Window\Windows\cursorWindows.h">
+      <Filter>Source\Pot\Window\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Windows\Resource\resource.h">
-      <Filter>Source\Windows\Resource</Filter>
+    <ClInclude Include="..\..\Source\Pot\Usefull\buffer.h">
+      <Filter>Source\Pot\Usefull</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Out\Android\outLogAndroid.h">
-      <Filter>Source\Out\Android</Filter>
+    <ClInclude Include="..\..\Source\Pot\Usefull\singleton.h">
+      <Filter>Source\Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Windows\gameMain.h">
+      <Filter>Source\Pot\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Windows\test.h">
+      <Filter>Source\Pot\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Windows\Resource\resource.h">
+      <Filter>Source\Pot\Windows\Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\test.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.cpp">
+      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Window\Windows\windowWindows.cpp">
-      <Filter>Source\Window\Windows</Filter>
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\voiceXAudioDevice.cpp">
+      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Rand\Standard\randStandard.cpp">
-      <Filter>Source\Rand\Standard</Filter>
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\clipXAudioDevice.cpp">
+      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Sleep\Windows\sleepWindows.cpp">
-      <Filter>Source\Sleep\Windows</Filter>
+    <ClCompile Include="..\..\Source\Pot\File\Standard\fileStandard.cpp">
+      <Filter>Source\Pot\File\Standard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Time\time.cpp">
-      <Filter>Source\Time</Filter>
+    <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">
+      <Filter>Source\Pot\Input\XInput</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Time\Windows\timeWindows.cpp">
-      <Filter>Source\Time\Windows</Filter>
+    <ClCompile Include="..\..\Source\Pot\Input\Windows\inputWindows.cpp">
+      <Filter>Source\Pot\Input\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Game\game.cpp">
-      <Filter>Source\Game</Filter>
+    <ClCompile Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.cpp">
+      <Filter>Source\Pot\Out\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Time\Standard\timeStandard.cpp">
-      <Filter>Source\Time\Standard</Filter>
+    <ClCompile Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.cpp">
+      <Filter>Source\Pot\Out\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Rand\rand.cpp">
-      <Filter>Source\Rand</Filter>
+    <ClCompile Include="..\..\Source\Pot\Rand\rand.cpp">
+      <Filter>Source\Pot\Rand</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Input\Windows\inputWindows.cpp">
-      <Filter>Source\Input\Windows</Filter>
+    <ClCompile Include="..\..\Source\Pot\Rand\Standard\randStandard.cpp">
+      <Filter>Source\Pot\Rand\Standard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Input\XInput\inputXInput.cpp">
-      <Filter>Source\Input\XInput</Filter>
+    <ClCompile Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.cpp">
+      <Filter>Source\Pot\Sleep\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Input\input.cpp">
-      <Filter>Source\Input</Filter>
+    <ClCompile Include="..\..\Source\Pot\Time\time.cpp">
+      <Filter>Source\Pot\Time</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\File\Standard\fileStandard.cpp">
-      <Filter>Source\File\Standard</Filter>
+    <ClCompile Include="..\..\Source\Pot\Time\Windows\timeWindows.cpp">
+      <Filter>Source\Pot\Time\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Out\Windows\outConsoleWindows.cpp">
-      <Filter>Source\Out\Windows</Filter>
+    <ClCompile Include="..\..\Source\Pot\Time\Standard\timeStandard.cpp">
+      <Filter>Source\Pot\Time\Standard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Out\Windows\outDebugWindowWindows.cpp">
-      <Filter>Source\Out\Windows</Filter>
+    <ClCompile Include="..\..\Source\Pot\Window\Windows\windowWindows.cpp">
+      <Filter>Source\Pot\Window\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Audio\XAudio\Device\voiceXAudioDevice.cpp">
-      <Filter>Source\Audio\XAudio\Device</Filter>
+    <ClCompile Include="..\..\Source\Pot\Windows\main.cpp">
+      <Filter>Source\Pot\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Audio\XAudio\Device\clipXAudioDevice.cpp">
-      <Filter>Source\Audio\XAudio\Device</Filter>
+    <ClCompile Include="..\..\Source\Pot\Windows\test.cpp">
+      <Filter>Source\Pot\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Audio\XAudio\Device\deviceXAudioDevice.cpp">
-      <Filter>Source\Audio\XAudio\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Windows\main.cpp">
-      <Filter>Source\Windows</Filter>
+    <ClCompile Include="..\..\Source\Pot\Windows\gameMain.cpp">
+      <Filter>Source\Pot\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\Source\Windows\Resource\Icon.rc">
-      <Filter>Source\Windows\Resource</Filter>
+    <ResourceCompile Include="..\..\Source\Pot\Windows\Resource\Icon.rc">
+      <Filter>Source\Pot\Windows\Resource</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\Source\Windows\Resource\icon.ico">
-      <Filter>Source\Windows\Resource</Filter>
+    <Image Include="..\..\Source\Pot\Windows\Resource\icon.ico">
+      <Filter>Source\Pot\Windows\Resource</Filter>
     </Image>
   </ItemGroup>
 </Project>
