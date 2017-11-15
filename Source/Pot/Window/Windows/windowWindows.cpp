@@ -35,9 +35,6 @@ void Window::Load(
 
 	//ウィンドウの作成
 	CreateWindow_CPot(aTitle);
-
-	//ウィンドウをマネージャに登録
-	WindowManager::S().Regist(this);
 }
 
 void Window::RegistWindowClass(WindowProcFunc aWndProc, const CHAR* aTitle) {
@@ -87,8 +84,6 @@ void Window::CreateWindow_CPot(const CHAR* aTitle) {
 
 void Window::Release() {
 
-	//ウィンドウの解放
-	WindowManager::S().Free(this);
 }
 
 #pragma endregion
@@ -189,18 +184,12 @@ LRESULT CALLBACK Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 
 		case WM_SETFOCUS: {
-			Window* tWindow = WindowManager::S().Find(hwnd);
-			if (tWindow) {
-				tWindow->mFocus = true;	//フォーカスがセットされた
-			}
+			Window::S().mFocus = true;
 		}
 						  return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 
 		case WM_KILLFOCUS: {
-			Window* tWindow = WindowManager::S().Find(hwnd);
-			if (tWindow) {
-				tWindow->mFocus = false;	//フォーカスが外れた
-			}
+			Window::S().mFocus = false;
 		}
 						   return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 	}

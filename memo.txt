@@ -91,7 +91,9 @@ protected:
 	BOOL mUseCursor;
 
 class windows::Config : public ConfigBase {
-	CPOT_VI BOOL GetIsActive() CPOT_ZR;
+	BOOL GetIsActive() CPOT_OR {
+		
+	}
 }
 
 

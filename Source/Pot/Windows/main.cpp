@@ -20,8 +20,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 
 	GameMain::Setting();
 
-	windows::Window* lWindow = windows::Window::Create();
-	lWindow->Load(hInstance, Vector2(960.0f, 540.0f), "Game");
+	windows::Window::S().Load(hInstance, Vector2(960.0f, 540.0f), "Game");
 
 	//ゲームスレッドの開始
 	Thread t;
@@ -50,8 +49,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 	#pragma endregion
 
 	windows::Window::MessageLoop();
-
-	windows::Window::Destroy(lWindow);
 
 	return 0;
 }

@@ -20,7 +20,9 @@ namespace windows {
 
 using WindowProcFunc = LRESULT(CALLBACK *)(HWND, UINT, WPARAM, LPARAM);
 
-class Window {
+class Window : public Singleton<Window> {
+	friend class Singleton<Window>;
+
 
 	//コンストラクタなど
 	#pragma region Constructor
@@ -33,17 +35,6 @@ private:
 	}
 	~Window() {
 		Release();
-	}
-
-
-public:
-	//ウィンドウの作成
-	static Window* Create() {
-		return new Window;
-	}
-	//ウィンドウの消滅
-	static void Destroy(Window* aWindow) {
-		CPOT_DELETE(aWindow);
 	}
 
 	#pragma endregion
@@ -182,65 +173,6 @@ private:
 	#pragma endregion
 };
 
-
-class WindowManager : public Singleton<WindowManager> {
-	friend class Singleton<WindowManager>;
-
-	//コンストラクタ
-	#pragma region Constructor
-
-protected:
-	WindowManager() {
-		mWindow = nullptr;
-	}
-
-	#pragma endregion
-
-
-	//操作
-	#pragma region Operate
-
-public:
-	//登録
-	void Regist(Window* aWindow) {
-		if (mWindow == nullptr) {
-			mWindow = aWindow;
-		}
-	}
-	//解放
-	void Free(Window* aWindow) {
-		if (mWindow == aWindow) {
-			mWindow = nullptr;
-		}
-	}
-
-	//取得
-	Window* Get() {
-		return mWindow;
-	}
-
-	//指定されたHWNDを持つウィンドウを検索
-	Window* Find(HWND aHwnd) {
-		if (mWindow != nullptr) {
-			if (mWindow->GetHwnd() == aHwnd) {
-				return mWindow;
-			}
-		}
-		return nullptr;
-	}
-
-	#pragma endregion
-
-
-	//フィールド
-	#pragma region Field
-
-private:
-	Window* mWindow;
-
-	#pragma endregion
-
-};
 
 }
 
