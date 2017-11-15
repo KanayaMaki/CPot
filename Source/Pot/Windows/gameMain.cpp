@@ -14,6 +14,7 @@
 #include "./Pot/Config/config.h"
 
 #include "./Pot/Fps/fps.h"
+#include "./Pot/Loader/loader.h"
 
 namespace cpot {
 
@@ -70,7 +71,11 @@ void GameMain::GameLoop(void* aDummy) {
 		if (Config::S().GetApplicationEnd() || Config::S().GetGameEnd()) {
 			break;
 		}
+		
+		//ローダのアップデート
+		LoaderManager::S().Update();
 
+		
 		//FPS制御
 		Fps::S().Update();
 	}

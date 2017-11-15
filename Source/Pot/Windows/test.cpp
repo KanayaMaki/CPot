@@ -90,12 +90,12 @@ void TestLoader() {
 	r.SetSeed(Time().GetUnix());
 
 	for (u32 i = 0; i < 10; i++) {
-		LoaderManager::S().Regist(new LoaderTimer(ToString::Do(i), r.Nextf(2.0f, 5.0f)));
+		//LoaderManager::S().Regist(new LoaderTimer(ToString::Do(i), r.Nextf(2.0f, 5.0f)));
 	}
 	for (u32 i = 0; i < 10; i++) {
 		String<32> lFileName("Hurry");
 		lFileName += ToString::Do(i);
-		LoaderManager::S().Regist(new LoaderTimerHurry(lFileName, r.Nextf(2.0f, 5.0f)));
+		//LoaderManager::S().Regist(new LoaderTimerHurry(lFileName, r.Nextf(2.0f, 5.0f)));
 	}
 
 

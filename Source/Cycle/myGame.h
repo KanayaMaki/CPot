@@ -6,10 +6,7 @@
 #pragma once
 
 #include "./Pot/Atom/atom.h"
-
-#include "./Pot/Out/out.h"
 #include "./Pot/Game/game.h"
-#include "./Pot/Config/config.h"
 
 namespace myspc {
 
@@ -18,15 +15,10 @@ class MyGame : public cpot::GameBase {
 
 public:
 	//CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
-	void Setting() override {
-		cpot::Config::S().SetScreenSize(cpot::Vector2(960.0f, 540.0f));
-		cpot::Config::S().SetTitle("MyGame!");
-	}
+	void Setting() override;
 
 	//ゲームの初期化
-	void Init() override {
-		CPOT_LOG("Init!");
-	}
+	void Init() override;
 
 	//ゲームの更新
 	void Update() override;

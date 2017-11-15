@@ -36,46 +36,6 @@ public:
 	}
 };
 
-class LoaderTimer : public Loader {
-public:
-	LoaderTimer(const CHAR* aFileName) {
-		mFileName = aFileName;
-		mTakeTime = 3.0f;
-	}
-	LoaderTimer(const CHAR* aFileName, f32 aTakeTime) {
-		mFileName = aFileName;
-		mTakeTime = aTakeTime;
-	}
-
-public:
-	void Start() override {
-		CPOT_LOG("LoadStart:", mFileName.Get());
-	}
-	void Load() override {
-
-		CPOT_LOG("Loading:", mFileName.Get());
-		
-		Sleep lSleep;
-		lSleep.SleepSecond(mTakeTime);
-	}
-	void Finish() override {
-		CPOT_LOG("LoadFinish:", mFileName.Get());
-	}
-public:
-	String<128> mFileName;
-	f32 mTakeTime;
-};
-
-class LoaderTimerHurry : public LoaderTimer {
-public:
-	LoaderTimerHurry(const CHAR* aFileName) : LoaderTimer(aFileName) {}
-	LoaderTimerHurry(const CHAR* aFileName, f32 aTakeTime) : LoaderTimer(aFileName, aTakeTime) {}
-
-	BOOL IsHurry() const override {
-		return true;
-	}
-};
-
 
 class LoaderManager : public Singleton<LoaderManager> {
 	friend class Singleton<LoaderManager>;
