@@ -11,6 +11,8 @@
 #include "./Pot/Input/XInput/inputXInput.h"
 #include "./Pot/Out/Windows/outConsoleWindows.h"
 
+#include "./Pot/Config/config.h"
+
 #include "./Pot/Fps/fps.h"
 
 namespace cpot {
@@ -64,11 +66,10 @@ void GameMain::GameLoop(void* aDummy) {
 		//ƒQ[ƒ€‚Ì•`‰æ
 		mGame->Render();
 
-		/*
-		if (mGameEnd) {
+		//ƒQ[ƒ€‚ÌI—¹
+		if (Config::S().GetApplicationEnd() || Config::S().GetGameEnd()) {
 			break;
 		}
-		*/
 
 		//FPS§Œä
 		Fps::S().Update();

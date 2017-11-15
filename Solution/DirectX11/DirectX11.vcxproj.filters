@@ -112,6 +112,12 @@
     <Filter Include="Source\Pot\Fps">
       <UniqueIdentifier>{000ba5c4-1a7f-4b31-ab15-9c027754ffbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Pot\Config">
+      <UniqueIdentifier>{17f0d7ff-44af-4519-b2da-3c0f652f08a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Config\Windows">
+      <UniqueIdentifier>{ba2540e4-1621-4cf6-ac06-e228dacac5c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Pot\Atom\defines.h">
@@ -306,6 +312,12 @@
     <ClInclude Include="..\..\Source\Pot\Fps\fps.h">
       <Filter>Source\Pot\Fps</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Config\Windows\configWindows.h">
+      <Filter>Source\Pot\Config\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Config\config.h">
+      <Filter>Source\Pot\Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.cpp">
@@ -367,6 +379,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Fps\fps.cpp">
       <Filter>Source\Pot\Fps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Config\Windows\configWindows.cpp">
+      <Filter>Source\Pot\Config\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

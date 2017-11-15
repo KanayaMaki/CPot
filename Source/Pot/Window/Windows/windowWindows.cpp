@@ -8,6 +8,8 @@
 //アイコンリソースの読み込み
 #include "./Pot/Windows/Resource/resource.h"
 
+#include "./Pot/Config/config.h"
+
 
 namespace cpot {
 
@@ -15,7 +17,7 @@ namespace windows {
 
 
 //ウィンドウプロシージャの、一定間隔で呼び出すイベントの識別ID
-const u32 cPotTimerID = 10010010;
+static const u32 cPotTimerID = 10010010;
 
 
 #pragma region Load
@@ -139,25 +141,25 @@ LRESULT CALLBACK Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 	switch (uMsg) {
 
 		case WM_DESTROY:
-			//Config::S().GameEnd(true);
+			Config::S().SetApplicationEnd();
 			PostQuitMessage(0);
 			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 
 		case WM_TIMER:
 			//一定間隔で呼ばれるイベント
 			if (wParam == cPotTimerID) {
-				//	TODO ゲーム側で終了なら、ウィンドウも終わらせる
-				/*if (Config::S().GameEnd()) {
-				SendMessageA(hwnd, WM_CLOSE, 0, 0);
-				break;
-				}*/
+
+				if (Config::S().GetGameEnd()) {
+					SendMessageA(hwnd, WM_CLOSE, 0, 0);
+					break;
+				}
 				return 0;
 			}
 			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 
 
 		case WM_CLOSE: {
-
+			/*
 			#ifdef CPOT_ON_MASTER
 			BOOL tIsShow = Cursor::S().IsShow();
 			Cursor::S().Show();
@@ -177,8 +179,9 @@ LRESULT CALLBACK Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 				return 0L;
 			}
 			#endif
+			*/
 		}
-					   return DefWindowProcA(hwnd, uMsg, wParam, lParam);
+			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 
 		case WM_CREATE:
 			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
@@ -186,7 +189,7 @@ LRESULT CALLBACK Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 		case WM_SETFOCUS: {
 			Window::S().mFocus = true;
 		}
-						  return DefWindowProcA(hwnd, uMsg, wParam, lParam);
+			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 
 		case WM_KILLFOCUS: {
 			Window::S().mFocus = false;

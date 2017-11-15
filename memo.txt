@@ -70,6 +70,18 @@ class GameMain
 	・ウィンドウタイトル（更新時）
 		Game-Win
 
+Game側で終了
+	GameEndがtrue
+	if(Application.End == false)
+
+Application側で終了
+	Application.End = true;
+	if(Game.End == true) {
+	
+	}
+
+
+
 class ConfigBase : public Singleton<ConfigBase>
 	CPOT_VI void SetApplicationEnd(BOOL aEnd) CPOT_ZR;
 	CPOT_VI BOOL GetApplicationEnd() CPOT_ZR;
@@ -92,7 +104,7 @@ protected:
 
 class windows::Config : public ConfigBase {
 	BOOL GetIsActive() CPOT_OR {
-		
+
 	}
 }
 

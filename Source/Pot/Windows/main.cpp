@@ -9,6 +9,7 @@
 
 #include "./Pot/Windows/gameMain.h"
 #include "./Pot/Thread/thread.h"
+#include "./Pot/Config/config.h"
 
 #include <Windows.h>
 
@@ -18,9 +19,16 @@ using namespace cpot;
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArgs, int nWinMode) {
 
+	//デフォルトの設定
+	Config::S().SetScreenSize(Vector2(960.0f, 540.0f));
+	Config::S().SetTitle("CPotGame!");
+
+
+	//ゲームの設定で上書き
 	GameMain::Setting();
 
-	windows::Window::S().Load(hInstance, Vector2(960.0f, 540.0f), "Game");
+	//ウィンドウの作成
+	windows::Window::S().Load(hInstance, Config::S().GetScreenSize(), Config::S().GetTitle());
 
 	//ゲームスレッドの開始
 	Thread t;
@@ -49,6 +57,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 	#pragma endregion
 
 	windows::Window::MessageLoop();
+
+
+	//ゲームスレッドの合流を待つ
+	t.Join();
 
 	return 0;
 }
