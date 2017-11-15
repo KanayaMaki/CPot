@@ -27,6 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\Cycle\myGame.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\atom.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\bitflag.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\color.h" />
@@ -91,6 +92,7 @@
     <ClInclude Include="..\..\Source\Pot\Window\Windows\windowWindows.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\Cycle\myGame.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\clipXAudioDevice.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\voiceXAudioDevice.cpp" />

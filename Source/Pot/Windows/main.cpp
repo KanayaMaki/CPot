@@ -7,6 +7,9 @@
 
 #include "./Pot/Window/Windows/windowWindows.h"
 
+#include "./Pot/Windows/gameMain.h"
+#include "./Pot/Thread/thread.h"
+
 #include <Windows.h>
 
 #include "./test.h"
@@ -15,12 +18,20 @@ using namespace cpot;
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArgs, int nWinMode) {
 
+	GameMain::Setting();
+
 	windows::Window* lWindow = windows::Window::Create();
 	lWindow->Load(hInstance, Vector2(960.0f, 540.0f), "Game");
 
-	TestOutput(lWindow->GetHwnd());
+	//ゲームスレッドの開始
+	Thread t;
+	t.Start(GameMain::GameLoop, nullptr);
 
-	TestAudio();
+	#pragma region Test
+
+	//TestOutput(lWindow->GetHwnd());
+
+	//TestAudio();
 
 	//TestLoader();
 
@@ -35,6 +46,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 
 	//TestInputInputWindows(lWindow->GetHInstance(), lWindow->GetHwnd());
 	//TestInputInputXInput();
+
+	#pragma endregion
 
 	windows::Window::MessageLoop();
 

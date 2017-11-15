@@ -297,6 +297,9 @@
     <ClInclude Include="..\..\Source\Pot\Windows\Resource\resource.h">
       <Filter>Source\Pot\Windows\Resource</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Cycle\myGame.h">
+      <Filter>Source\Cycle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.cpp">
@@ -352,6 +355,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Windows\gameMain.cpp">
       <Filter>Source\Pot\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cycle\myGame.cpp">
+      <Filter>Source\Cycle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
