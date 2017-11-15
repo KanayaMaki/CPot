@@ -253,7 +253,15 @@ private:
 
 public:
 	BOOL IsLoading() {
-		//LoaderListにローダーが残っていれば、ロード中
+		//LoaderListWaitにローダーが残っていれば、ロード中
+		{
+			MutexLocker m(mLoaderListWaitMutex);
+			if (mLoaderListWait.GetSize() != 0) {
+				return true;
+			}
+		}
+
+		//LoaderListNormalにローダーが残っていれば、ロード中
 		{
 			MutexLocker m(mLoaderListNormalMutex);
 			if (mLoaderListNormal.GetSize() != 0) {

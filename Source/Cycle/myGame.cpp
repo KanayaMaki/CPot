@@ -97,7 +97,7 @@ void MyGame::Init() {
 	CPOT_LOG("Init!");
 
 	//Loaderのスタート
-	LoaderManager::S().Start(4);
+	LoaderManager::S().Start(2);
 }
 
 
@@ -124,9 +124,12 @@ void MyGame::Update() {
 		c->Play();
 	}
 
+	static cpot::BOOL lLoading = false;
 
 	//ローダ
 	if (Input::GetButtonUp(windows::c2)) {
+		lLoading = true;
+
 		Rand r;
 
 		for (u32 i = 0; i < 10; i++) {
@@ -134,6 +137,13 @@ void MyGame::Update() {
 		}
 		for (u32 i = 0; i < 10; i++) {
 			LoaderManager::S().Regist(new LoaderGenerate);
+		}
+	}
+
+	if (lLoading == true) {
+		if (!LoaderManager::S().IsLoading()) {
+			lLoading = false;
+			CPOT_LOG("FinishLoading");
 		}
 	}
 }
