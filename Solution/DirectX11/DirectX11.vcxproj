@@ -55,6 +55,7 @@
     <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Device\voiceXAudioDevice.h" />
     <ClInclude Include="..\..\Source\Pot\File\file.h" />
     <ClInclude Include="..\..\Source\Pot\File\Standard\fileStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\Fps\fps.h" />
     <ClInclude Include="..\..\Source\Pot\Game\game.h" />
     <ClInclude Include="..\..\Source\Pot\Input\input.h" />
     <ClInclude Include="..\..\Source\Pot\Input\Windows\inputWindows.h" />
@@ -97,6 +98,7 @@
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\voiceXAudioDevice.cpp" />
     <ClCompile Include="..\..\Source\Pot\File\Standard\fileStandard.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Fps\fps.cpp" />
     <ClCompile Include="..\..\Source\Pot\Input\Windows\inputWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp" />
     <ClCompile Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.cpp" />

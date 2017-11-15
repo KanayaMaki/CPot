@@ -28,12 +28,13 @@ public:
 
 	//ƒQ[ƒ€‚ÌXV
 	void Update() override {
-		CPOT_LOG("Update!");
+		static cpot::u32 i = 0;
+		i++;
+		CPOT_LOG("Update! : ", i);
 	}
 
 	//ƒQ[ƒ€‚Ì•`‰æ
 	void Render() override {
-		CPOT_LOG("Render!");
 	}
 };
 

@@ -11,6 +11,8 @@
 #include "./Pot/Input/XInput/inputXInput.h"
 #include "./Pot/Out/Windows/outConsoleWindows.h"
 
+#include "./Pot/Fps/fps.h"
+
 namespace cpot {
 
 
@@ -40,6 +42,9 @@ void GameMain::GameLoop(void* aDummy) {
 	Log::S().Set(o);
 	#endif
 
+
+	//FpsÇÃçÏê¨
+	Fps::S().Init(new Time, new Sleep, 60.0f);
 	#pragma endregion
 
 
@@ -63,10 +68,10 @@ void GameMain::GameLoop(void* aDummy) {
 		if (mGameEnd) {
 			break;
 		}
+		*/
 
 		//FPSêßå‰
-		Fps::S().Wait();
-		*/
+		Fps::S().Update();
 	}
 }
 
