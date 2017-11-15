@@ -38,6 +38,31 @@ Game
 	virtual void Render()
 		ゲームの描画をする
 
+template <typename T>
+class DirtyFlag {
+	T t;
+	BOOL mIsDirty;
+
+	operator const T&() {
+		return Get();
+	}
+
+	const T& Get() const {
+		return t;
+	}
+	void Set(const T& aT) {
+		t = aT;
+		mIsDirty = true;
+	}
+
+	void Clear() {
+		mIsDirty = false;
+	}
+	BOOL IsDirty() const {
+		return mIsDirty;
+	}
+}
+
 class GameMain
 	static GameBase* mGame
 
@@ -70,17 +95,6 @@ class GameMain
 	・ウィンドウタイトル（更新時）
 		Game-Win
 
-Game側で終了
-	GameEndがtrue
-	if(Application.End == false)
-
-Application側で終了
-	Application.End = true;
-	if(Game.End == true) {
-	
-	}
-
-
 
 class ConfigBase : public Singleton<ConfigBase>
 	CPOT_VI void SetApplicationEnd(BOOL aEnd) CPOT_ZR;
@@ -95,7 +109,7 @@ class ConfigBase : public Singleton<ConfigBase>
 	CPOT_VI void SetIsActive(BOOL aIsActive) CPOT_ZR;
 	CPOT_VI BOOL GetIsActive() CPOT_ZR;
 
-protected:
+	protected:
 	String<64> mTitle;
 	BOOL mApplicationEnd;
 	BOOL mGameEnd;
@@ -108,20 +122,6 @@ class windows::Config : public ConfigBase {
 	}
 }
 
-
-Window
-	if アプリが終わるなら
-		SetApplicationEnd(true);
-
-	if GetGameEnd() == true
-		//即終了
-
-
-Setting
-	Vector2 mScreenWidth;
-	BOOL mUseCursor;
-	f32 mFps;
-	CHAR* mTitle;
 
 Thread
 	Thread t;
@@ -226,7 +226,112 @@ Audio
 		AudioClip* mClip;
 
 
+using GameObjectName = HashString<32>;
 
+GameObject
+
+	void Init(GameObject* aParent, const CHAR* aName) {
+		//GameObjectの追加
+	}
+	void Init(GameObject* aParent) {
+		Init(aParent, nullptr);
+	}
+
+	Transform mTransform;
+	const Transform& GetTransform() const;
+	void SetTransform(const Transform& aTransform);
+
+	GameObject* aParent;
+	GameObject* GetParent();
+	void SetParent(GameObject* aParent);
+	void DetachParent();	//親オブジェクトから独立する
+
+	List<GameObject*> mChilds;
+	GameObject* GetChild(u32 aIndex);
+	GameObject* FindChild(const CHAR* aName);
+	u32 GetChildNum() const;
+	void RegistChild(GameObject* aChild);
+	void RemoveChild(GameObject* aChild);
+
+	GameObjectName mName;
+	const GameObjectName& GetName() const;
+	void SetName(const CHAR* aName);
+	void SetName(const GameObjectName& aName);
+
+	List<Component*> mList;
+	template<typename T>
+	T* GetComponent();
+	T* AddComponent();
+	void AddComponent(T*);
+	void RemoveComponent(T* aComponent);
+	u32 GetComponentNum() const;
+	template<typename T>
+	u32 GetComponentNum() const;
+
+	BitFlag mFlags;
+	enum CFlags {
+		cDelete,
+		cActive
+	}
+	BOOL GetDelete() const;
+	void SetDelete();
+
+	BOOL GetActive() const;
+	BOOL GetHierarchyActive() const;
+	void SetActive(BOOL aIsActive);
+
+	u32 mUnique;
+	u32 GetUnique() const;
+
+	static GameObject* Find(const CHAR* aName);
+	static GameObject* Find(const CHAR* aName);
+	static GameObject* Delete(GameObject* aGameObject);
+
+
+//GameObject.UpdateList();	//ゲームオブジェクトが更新される
+Component.UpdateList();	//コンポーネントが更新される
+GameObject.DeleteList();	//要素の削除
+Component.DeleteList();	//要素の削除
+GameObject.Merge();	//追加された要素の統合
+Component.Merge();	//追加された要素の統合
+
+using ComponentName = HashString<28>;
+
+Component
+	GameObject* mGameObject;
+	GameObject* GetGameObject();
+
+	BitFlag mFlags;
+	enum CFlags {
+		cDelete,
+		cDeleteNow,
+		cActive,
+		cGameObjectActive
+	}
+	BOOL GetDelete() const;
+	void SetDelete();
+
+	BOOL GetDeleteNow() const;
+
+	BOOL GetActive() const;
+	BOOL GetThisActive() const;
+	BOOL GetGameObjectActive() const;
+	void SetActive(BOOL aIsActive);
+
+	template <typename T>
+	T* GetComponent();
+	template <typename T>
+	u32 GetComponentNum();
+	const Transform& GetTransform();
+	void SetTransform(const Transform& aTransform);
+
+	ComponentName mName;
+	const ComponentName& GetName() const;
+	void SetName(const CHAR* aName);
+	void SetName(const ComponentName& aName);
+
+	u32 mUnique;
+	u32 GetUnique() const;
 
 
 描画

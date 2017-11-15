@@ -143,7 +143,7 @@ void MyGame::Update() {
 	if (lLoading == true) {
 		if (!LoaderManager::S().IsLoading()) {
 			lLoading = false;
-			CPOT_LOG("FinishLoading");
+			Config::S().SetTitle("FinishLoading");
 		}
 	}
 }

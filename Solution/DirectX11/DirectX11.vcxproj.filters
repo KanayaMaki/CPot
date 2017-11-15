@@ -318,6 +318,9 @@
     <ClInclude Include="..\..\Source\Pot\Config\config.h">
       <Filter>Source\Pot\Config</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\component.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.cpp">

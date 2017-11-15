@@ -58,6 +58,7 @@
     <ClInclude Include="..\..\Source\Pot\File\file.h" />
     <ClInclude Include="..\..\Source\Pot\File\Standard\fileStandard.h" />
     <ClInclude Include="..\..\Source\Pot\Fps\fps.h" />
+    <ClInclude Include="..\..\Source\Pot\Game\component.h" />
     <ClInclude Include="..\..\Source\Pot\Game\game.h" />
     <ClInclude Include="..\..\Source\Pot\Input\input.h" />
     <ClInclude Include="..\..\Source\Pot\Input\Windows\inputWindows.h" />

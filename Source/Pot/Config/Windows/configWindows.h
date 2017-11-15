@@ -72,10 +72,7 @@ public:
 	//ゲームタイトルの設定
 	#pragma region Title
 
-	void SetTitle(const CHAR* aTitle) CPOT_OR {
-		MutexLocker m(mTitleMutex);
-		mTitle = aTitle;
-	}
+	void SetTitle(const CHAR* aTitle) CPOT_OR;
 	const CHAR* GetTitle() CPOT_OR {
 		MutexLocker m(mTitleMutex);
 		return mTitle.Get();
