@@ -60,6 +60,8 @@
     <ClInclude Include="..\..\Source\Pot\Fps\fps.h" />
     <ClInclude Include="..\..\Source\Pot\Game\component.h" />
     <ClInclude Include="..\..\Source\Pot\Game\game.h" />
+    <ClInclude Include="..\..\Source\Pot\Game\gameObject.h" />
+    <ClInclude Include="..\..\Source\Pot\Game\unique.h" />
     <ClInclude Include="..\..\Source\Pot\Input\input.h" />
     <ClInclude Include="..\..\Source\Pot\Input\Windows\inputWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Input\XInput\inputXInput.h" />
@@ -103,6 +105,7 @@
     <ClCompile Include="..\..\Source\Pot\Config\Windows\configWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\File\Standard\fileStandard.cpp" />
     <ClCompile Include="..\..\Source\Pot\Fps\fps.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Game\component.cpp" />
     <ClCompile Include="..\..\Source\Pot\Input\Windows\inputWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp" />
     <ClCompile Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.cpp" />

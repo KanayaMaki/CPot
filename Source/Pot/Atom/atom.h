@@ -13,6 +13,7 @@
 #include "vector.h"
 #include "quaternion.h"
 #include "matrix4x4.h"
+#include "transform.h"
 
 #include "hash.h"
 #include "string.h"
