@@ -24,7 +24,7 @@
 #include "./Pot/Input/Android/inputAndroid.h"
 #include "./Pot/Input/input.h"
 
-#include "./Pot/Android/test.h"
+#include "./Pot/Game/game.h"
 
 
 /*
@@ -76,7 +76,6 @@ void android_main(struct android_app* state) {
 * 保存状態のデータです。
 */
 struct saved_state {
-	float angle;
 	int32_t x;
 	int32_t y;
 };
@@ -157,7 +156,6 @@ static int engine_init_display(struct engine* engine) {
 	engine->surface = surface;
 	engine->width = w;
 	engine->height = h;
-	engine->state.angle = 0;
 
 	// GL の状態を初期化します。
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
@@ -259,9 +257,8 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
 */
 void android_main(struct android_app* state) {
 
-	TestFunc();
-
-	cpot::android::OutLog o;
+	cpot::GameBase* lGame = cpot::CreateGame();
+	lGame->Setting();
 
 	struct engine engine;
 
@@ -285,6 +282,7 @@ void android_main(struct android_app* state) {
 
 	engine.animating = 1;
 
+	lGame->Init();
 	// ループはスタッフによる開始を待っています。
 
 	while (1) {
@@ -332,14 +330,11 @@ void android_main(struct android_app* state) {
 			engine.state.y = cpot::Input::GetValue(cpot::android::cTouchPosY);
 		}
 
+		lGame->Update();
 
 		if (engine.animating) {
-			// イベントが完了したら次のアニメーション フレームを描画します。
-			engine.state.angle += .01f;
-			if (engine.state.angle > 1) {
-				engine.state.angle = 0;
-			}
-			o.Output("-----------------------------------------------------------------------Android", cpot::u32(32), "\n");
+			
+			lGame->Render();
 
 			// 描画は画面の更新レートに合わせて調整されているため、
 			// ここで時間調整をする必要はありません。
