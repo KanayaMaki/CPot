@@ -88,4 +88,6 @@ protected:
 
 #ifdef CPOT_ON_WINDOWS
 #include "./Pot/Config/Windows/configWindows.h"
+#elif defined CPOT_ON_ANDROID
+#include "./Pot/Config/Android/configAndroid.h"
 #endif

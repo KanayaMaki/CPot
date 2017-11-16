@@ -69,6 +69,7 @@ void GameMain::GameLoop(void* aDummy) {
 
 		//ƒQ[ƒ€‚ÌI—¹
 		if (Config::S().GetApplicationEnd() || Config::S().GetGameEnd()) {
+			LoaderManager::S().Join();
 			break;
 		}
 		

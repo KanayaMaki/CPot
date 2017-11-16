@@ -51,14 +51,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\Pot\Android\android_native_app_glue.c" />
+    <ClCompile Include="..\..\..\Source\Cycle\myGame.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Android\main.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Android\test.cpp" />
+    <ClCompile Include="..\..\..\Source\Pot\Application\Android\android_native_app_glue.c" />
+    <ClCompile Include="..\..\..\Source\Pot\Application\Android\applicationAndroid.cpp" />
+    <ClCompile Include="..\..\..\Source\Pot\Game\component.cpp" />
+    <ClCompile Include="..\..\..\Source\Pot\Input\Android\inputAndroid.cpp" />
+    <ClCompile Include="..\..\..\Source\Pot\Rand\rand.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Time\time.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Source\Pot\Android\android_native_app_glue.h" />
+    <ClInclude Include="..\..\..\Source\Cycle\myGame.h" />
     <ClInclude Include="..\..\..\Source\Pot\Android\test.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Application\Android\android_native_app_glue.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Application\Android\applicationAndroid.h" />
     <ClInclude Include="..\..\..\Source\Pot\Atom\atom.h" />
     <ClInclude Include="..\..\..\Source\Pot\Atom\bitflag.h" />
     <ClInclude Include="..\..\..\Source\Pot\Atom\color.h" />
@@ -75,8 +82,32 @@
     <ClInclude Include="..\..\..\Source\Pot\Atom\transform.h" />
     <ClInclude Include="..\..\..\Source\Pot\Atom\typedef.h" />
     <ClInclude Include="..\..\..\Source\Pot\Atom\vector.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\audioClipAndroid.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\audioVoiceAndroid.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\Device\audioClipAndroidDevice.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\Device\audioVoiceAndroidDevice.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audio.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audioClip.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audioName.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audioVoice.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Config\Android\configAndroid.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Config\config.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Game\component.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Game\game.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Game\gameObject.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Game\unique.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Input\Android\inputAndroid.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Input\input.h" />
+    <ClInclude Include="..\..\..\Source\Pot\List\Android\hashTableAndroid.h" />
+    <ClInclude Include="..\..\..\Source\Pot\List\Android\vectorAndroid.h" />
+    <ClInclude Include="..\..\..\Source\Pot\List\hashTable.h" />
+    <ClInclude Include="..\..\..\Source\Pot\List\resourceName.h" />
+    <ClInclude Include="..\..\..\Source\Pot\List\vector.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Loader\loader.h" />
     <ClInclude Include="..\..\..\Source\Pot\Out\Android\outLogAndroid.h" />
     <ClInclude Include="..\..\..\Source\Pot\Out\out.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Rand\Android\randAndroid.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Rand\rand.h" />
     <ClInclude Include="..\..\..\Source\Pot\Sleep\Android\sleepAndroid.h" />
     <ClInclude Include="..\..\..\Source\Pot\Sleep\sleep.h" />
     <ClInclude Include="..\..\..\Source\Pot\Thread\Android\mutexAndroid.h" />
@@ -86,6 +117,8 @@
     <ClInclude Include="..\..\..\Source\Pot\Thread\thread.h" />
     <ClInclude Include="..\..\..\Source\Pot\Time\Android\timeAndroid.h" />
     <ClInclude Include="..\..\..\Source\Pot\Time\time.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Usefull\buffer.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Usefull\singleton.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0b89d5a7-1f1f-4bca-94fe-31901992c73c}</ProjectGuid>

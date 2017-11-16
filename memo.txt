@@ -333,6 +333,11 @@ Component
 	u32 mUnique;
 	u32 GetUnique() const;
 
+	virtual Component* Generate() {
+		return new T;
+	}
+	
+
 
 描画
 インプットの更新

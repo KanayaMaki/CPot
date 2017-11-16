@@ -85,4 +85,6 @@ public:
 
 #ifdef CPOT_ON_WINDOWS
 #include "./Pot/List/Standard/vectorStandard.h"
+#elif defined CPOT_ON_ANDROID
+#include "./Pot/List/Android/vectorAndroid.h"
 #endif

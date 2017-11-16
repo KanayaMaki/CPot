@@ -146,6 +146,7 @@ void MyGame::Update() {
 			Config::S().SetTitle("FinishLoading");
 		}
 	}
+
 }
 
 }

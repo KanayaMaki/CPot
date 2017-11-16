@@ -11,6 +11,7 @@
 
 #include "./Pot/Input/Windows/inputWindows.h"
 #include "./Pot/Input/XInput/inputXInput.h"
+#include "./Pot/Input/Android/inputAndroid.h"
 
 
 namespace cpot {
@@ -127,6 +128,48 @@ public:
 		return 0.0f;
 	}
 
+	#endif
+
+	#pragma endregion
+
+
+
+	//Androidの入力を担当する
+	#pragma region Android
+
+	//Windowsの入力が有効なら
+	#ifdef CPOT_VALID_INPUT_ANDROID
+
+public:
+	static f32 GetValue(android::CInputCode aCode) {
+		return android::Input::S().GetValue(aCode);
+	}
+	static BOOL GetButton(android::CInputCode aCode) {
+		return android::Input::S().GetButton(aCode);
+	}
+	static BOOL GetButtonDown(android::CInputCode aCode) {
+		return android::Input::S().GetButtonDown(aCode);
+	}
+	static BOOL GetButtonUp(android::CInputCode aCode) {
+		return android::Input::S().GetButtonUp(aCode);
+	}
+
+	//Windowsの入力が無効なら、入力無し
+	#else
+
+public:
+	static f32 GetValue(android::CInputCode aCode) {
+		return 0.0f;
+	}
+	static BOOL GetButton(android::CInputCode aCode) {
+		return false;
+	}
+	static BOOL GetButtonDown(android::CInputCode aCode) {
+		return false;
+	}
+	static BOOL GetButtonUp(android::CInputCode aCode) {
+		return false;
+	}
 	#endif
 
 	#pragma endregion

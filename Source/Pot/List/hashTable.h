@@ -84,4 +84,6 @@ public:
 
 #ifdef CPOT_ON_WINDOWS
 #include "./Pot/List/Standard/hashTableStandard.h"
+#elif defined CPOT_ON_ANDROID
+#include "./Pot/List/Android/hashTableAndroid.h"
 #endif
