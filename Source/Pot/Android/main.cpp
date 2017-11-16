@@ -16,25 +16,57 @@
 */
 
 
-#include <jni.h>
-#include <errno.h>
-
-#include <string.h>
-#include <unistd.h>
-#include <sys/resource.h>
-
-#include <EGL/egl.h>
-#include <GLES/gl.h>
-
-#include <android/sensor.h>
-
-#include <android/log.h>
-#include "android_native_app_glue.h"
+#include "./Pot/Application/Android/android_native_app_glue.h"
+#include "./Pot/Application/Android/applicationAndroid.h"
 
 #include "./Pot/Atom/atom.h"
 #include "./Pot/Out/Android/outLogAndroid.h"
+#include "./Pot/Input/Android/inputAndroid.h"
+#include "./Pot/Input/input.h"
 
 #include "./Pot/Android/test.h"
+
+
+/*
+void engine_draw_frame(struct engine* engine) {
+	if (engine->display == NULL) {
+		// ディスプレイがありません。
+		return;
+	}
+
+	// 色で画面を塗りつぶします。
+	glClearColor(((float)engine->state.x) / engine->width, 1.0f,
+		((float)engine->state.y) / engine->height, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	eglSwapBuffers(engine->display, engine->surface);
+}
+
+
+void android_main(struct android_app* state) {
+
+	cpot::android::OutLog o;
+	cpot::Log::S().Set(&o);
+
+	cpot::android::Application::S().Load(state);
+	cpot::android::Input::S().Init();
+
+	while (1) {
+		
+		cpot::android::Application::S().EventLoop();
+
+		cpot::android::Input::S().Update();
+
+		if (cpot::Input::GetButton(cpot::android::cTouch)) {
+			cpot::android::Application::S().GetEngine()->state.x = cpot::Input::GetValue(cpot::android::cTouchPosX);
+			cpot::android::Application::S().GetEngine()->state.y = cpot::Input::GetValue(cpot::android::cTouchPosY);
+		}
+
+		engine_draw_frame(cpot::android::Application::S().GetEngine());
+	}
+}
+*/
+
 
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "AndroidProject1.NativeActivity", __VA_ARGS__))
@@ -146,7 +178,7 @@ static void engine_draw_frame(struct engine* engine) {
 	}
 
 	// 色で画面を塗りつぶします。
-	glClearColor(((float)engine->state.x) / engine->width, engine->state.angle,
+	glClearColor(((float)engine->state.x) / engine->width, 1.0f,
 		((float)engine->state.y) / engine->height, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -192,44 +224,44 @@ static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) 
 static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
 	struct engine* engine = (struct engine*)app->userData;
 	switch (cmd) {
-	case APP_CMD_SAVE_STATE:
-		// 現在の状態を保存するようシステムによって要求されました。保存してください。
-		engine->app->savedState = malloc(sizeof(struct saved_state));
-		*((struct saved_state*)engine->app->savedState) = engine->state;
-		engine->app->savedStateSize = sizeof(struct saved_state);
-		break;
-	case APP_CMD_INIT_WINDOW:
-		// ウィンドウが表示されています。準備してください。
-		if (engine->app->window != NULL) {
-			engine_init_display(engine);
+		case APP_CMD_SAVE_STATE:
+			// 現在の状態を保存するようシステムによって要求されました。保存してください。
+			engine->app->savedState = malloc(sizeof(struct saved_state));
+			*((struct saved_state*)engine->app->savedState) = engine->state;
+			engine->app->savedStateSize = sizeof(struct saved_state);
+			break;
+		case APP_CMD_INIT_WINDOW:
+			// ウィンドウが表示されています。準備してください。
+			if (engine->app->window != NULL) {
+				engine_init_display(engine);
+				engine_draw_frame(engine);
+			}
+			break;
+		case APP_CMD_TERM_WINDOW:
+			// ウィンドウが非表示または閉じています。クリーン アップしてください。
+			engine_term_display(engine);
+			break;
+		case APP_CMD_GAINED_FOCUS:
+			// アプリがフォーカスを取得すると、加速度計の監視を開始します。
+			if (engine->accelerometerSensor != NULL) {
+				ASensorEventQueue_enableSensor(engine->sensorEventQueue,
+					engine->accelerometerSensor);
+				// 目標は 1 秒ごとに 60 のイベントを取得することです (米国)。
+				ASensorEventQueue_setEventRate(engine->sensorEventQueue,
+					engine->accelerometerSensor, (1000L / 60) * 1000);
+			}
+			break;
+		case APP_CMD_LOST_FOCUS:
+			// アプリがフォーカスを失うと、加速度計の監視を停止します。
+			// これにより、使用していないときのバッテリーを節約できます。
+			if (engine->accelerometerSensor != NULL) {
+				ASensorEventQueue_disableSensor(engine->sensorEventQueue,
+					engine->accelerometerSensor);
+			}
+			// また、アニメーションを停止します。
+			engine->animating = 0;
 			engine_draw_frame(engine);
-		}
-		break;
-	case APP_CMD_TERM_WINDOW:
-		// ウィンドウが非表示または閉じています。クリーン アップしてください。
-		engine_term_display(engine);
-		break;
-	case APP_CMD_GAINED_FOCUS:
-		// アプリがフォーカスを取得すると、加速度計の監視を開始します。
-		if (engine->accelerometerSensor != NULL) {
-			ASensorEventQueue_enableSensor(engine->sensorEventQueue,
-				engine->accelerometerSensor);
-			// 目標は 1 秒ごとに 60 のイベントを取得することです (米国)。
-			ASensorEventQueue_setEventRate(engine->sensorEventQueue,
-				engine->accelerometerSensor, (1000L / 60) * 1000);
-		}
-		break;
-	case APP_CMD_LOST_FOCUS:
-		// アプリがフォーカスを失うと、加速度計の監視を停止します。
-		// これにより、使用していないときのバッテリーを節約できます。
-		if (engine->accelerometerSensor != NULL) {
-			ASensorEventQueue_disableSensor(engine->sensorEventQueue,
-				engine->accelerometerSensor);
-		}
-		// また、アニメーションを停止します。
-		engine->animating = 0;
-		engine_draw_frame(engine);
-		break;
+			break;
 	}
 }
 
@@ -249,7 +281,7 @@ void android_main(struct android_app* state) {
 	memset(&engine, 0, sizeof(engine));
 	state->userData = &engine;
 	state->onAppCmd = engine_handle_cmd;
-	state->onInputEvent = engine_handle_input;
+	state->onInputEvent = cpot::android::device::Input::engine_handle_input;
 	engine.app = state;
 
 	// 加速度計の監視の準備
@@ -269,7 +301,6 @@ void android_main(struct android_app* state) {
 	// ループはスタッフによる開始を待っています。
 
 	while (1) {
-
 
 		// 保留中のすべてのイベントを読み取ります。
 		int ident;
@@ -306,6 +337,14 @@ void android_main(struct android_app* state) {
 				return;
 			}
 		}
+
+		cpot::android::Input::S().Update();
+
+		if (cpot::Input::GetButton(cpot::android::cTouch)) {
+			engine.state.x = cpot::Input::GetValue(cpot::android::cTouchPosX);
+			engine.state.y = cpot::Input::GetValue(cpot::android::cTouchPosY);
+		}
+
 
 		if (engine.animating) {
 			// イベントが完了したら次のアニメーション フレームを描画します。

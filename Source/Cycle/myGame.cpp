@@ -11,7 +11,7 @@
 #include "./Pot/Config/config.h"
 
 #include "./Pot/Input/input.h"
-#include "./Pot/Audio/audio.h"
+//#include "./Pot/Audio/audio.h"
 #include "./Pot/Loader/loader.h"
 
 #include "./Pot/Rand/rand.h"
@@ -114,6 +114,7 @@ void MyGame::Update() {
 	}
 
 	//ƒTƒEƒ“ƒh
+	/*
 	if (Input::GetButtonUp(windows::c1)) {
 		auto a = new AudioClip;
 		a->Load("./test.wav");
@@ -123,6 +124,7 @@ void MyGame::Update() {
 
 		c->Play();
 	}
+	*/
 
 	static cpot::BOOL lLoading = false;
 

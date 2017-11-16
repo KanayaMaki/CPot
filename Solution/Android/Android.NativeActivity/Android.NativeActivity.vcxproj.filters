@@ -40,6 +40,48 @@
     <Filter Include="Source\Pot\Time\Android">
       <UniqueIdentifier>{c2effd5d-9e32-46dd-b1c4-eefd187c6f9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Cycle">
+      <UniqueIdentifier>{eef0c2a4-8148-401e-9e69-45cb869c59ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Game">
+      <UniqueIdentifier>{0c840016-655d-4c0e-b16f-2ed7c330679e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Loader">
+      <UniqueIdentifier>{5ae92f80-659e-45cc-b89f-0dff781d7661}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Input">
+      <UniqueIdentifier>{97538ca9-6819-48bc-b17e-8f9c0437785a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Input\Android">
+      <UniqueIdentifier>{6738818f-9964-490a-a8e0-d4e951fc695e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\List">
+      <UniqueIdentifier>{f513b177-b04e-4147-b84f-c44063de2840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Config">
+      <UniqueIdentifier>{374db05d-eba4-4746-8237-9d3d0ede0371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Config\Android">
+      <UniqueIdentifier>{87be33b7-f026-46ba-9e2e-04ec8065eca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\List\Android">
+      <UniqueIdentifier>{3b54298d-c1c3-49d0-86a4-61d5f7928e9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Rand">
+      <UniqueIdentifier>{cd40c068-9dc6-4e32-a8e8-d74412cd7dbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Rand\Android">
+      <UniqueIdentifier>{a1887142-a0d1-44b1-bfe7-2760e5b37887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Usefull">
+      <UniqueIdentifier>{24e0fd5f-e5db-4fa2-b54c-c07f367c4e48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Application">
+      <UniqueIdentifier>{0e9e1b81-c0fb-4861-b1c2-4092ac7f1d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Application\Android">
+      <UniqueIdentifier>{da0d47cb-77f0-4091-85eb-5488da8d01b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\Pot\Android\main.cpp">
@@ -48,18 +90,30 @@
     <ClCompile Include="..\..\..\Source\Pot\Android\test.cpp">
       <Filter>Source\Pot\Android</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Pot\Android\android_native_app_glue.c">
-      <Filter>Source\Pot\Android</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\Pot\Time\time.cpp">
       <Filter>Source\Pot\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Cycle\myGame.cpp">
+      <Filter>Source\Cycle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\Game\component.cpp">
+      <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\Input\Android\inputAndroid.cpp">
+      <Filter>Source\Pot\Input\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\Rand\rand.cpp">
+      <Filter>Source\Pot\Rand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\Application\Android\applicationAndroid.cpp">
+      <Filter>Source\Pot\Application\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\Application\Android\android_native_app_glue.c">
+      <Filter>Source\Pot\Application\Android</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\Pot\Android\test.h">
-      <Filter>Source\Pot\Android</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Pot\Android\android_native_app_glue.h">
       <Filter>Source\Pot\Android</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Pot\Atom\function.h">
@@ -142,6 +196,69 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Pot\Time\Android\timeAndroid.h">
       <Filter>Source\Pot\Time\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Cycle\myGame.h">
+      <Filter>Source\Cycle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Loader\loader.h">
+      <Filter>Source\Pot\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Game\gameObject.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Game\unique.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Game\component.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Game\game.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Input\Android\inputAndroid.h">
+      <Filter>Source\Pot\Input\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Input\input.h">
+      <Filter>Source\Pot\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\List\resourceName.h">
+      <Filter>Source\Pot\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\List\vector.h">
+      <Filter>Source\Pot\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\List\hashTable.h">
+      <Filter>Source\Pot\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Config\config.h">
+      <Filter>Source\Pot\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Config\Android\configAndroid.h">
+      <Filter>Source\Pot\Config\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\List\Android\hashTableAndroid.h">
+      <Filter>Source\Pot\List\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\List\Android\vectorAndroid.h">
+      <Filter>Source\Pot\List\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Rand\rand.h">
+      <Filter>Source\Pot\Rand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Rand\Android\randAndroid.h">
+      <Filter>Source\Pot\Rand\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Usefull\buffer.h">
+      <Filter>Source\Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Usefull\singleton.h">
+      <Filter>Source\Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Application\Android\applicationAndroid.h">
+      <Filter>Source\Pot\Application\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Application\Android\android_native_app_glue.h">
+      <Filter>Source\Pot\Application\Android</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -128,4 +128,6 @@ protected:
 
 #ifdef CPOT_ON_WINDOWS
 #include "./Pot/Rand/Standard/randStandard.h"
+#elif defined CPOT_ON_ANDROID
+#include "./Pot/Rand/Android/randAndroid.h"
 #endif
