@@ -82,6 +82,14 @@
     <ClInclude Include="..\..\..\Source\Pot\Atom\transform.h" />
     <ClInclude Include="..\..\..\Source\Pot\Atom\typedef.h" />
     <ClInclude Include="..\..\..\Source\Pot\Atom\vector.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\audioClipAndroid.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\audioVoiceAndroid.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\Device\audioClipAndroidDevice.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\Device\audioVoiceAndroidDevice.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audio.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audioClip.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audioName.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audioVoice.h" />
     <ClInclude Include="..\..\..\Source\Pot\Config\Android\configAndroid.h" />
     <ClInclude Include="..\..\..\Source\Pot\Config\config.h" />
     <ClInclude Include="..\..\..\Source\Pot\Game\component.h" />

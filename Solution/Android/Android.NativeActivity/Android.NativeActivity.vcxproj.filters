@@ -82,6 +82,15 @@
     <Filter Include="Source\Pot\Application\Android">
       <UniqueIdentifier>{da0d47cb-77f0-4091-85eb-5488da8d01b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Pot\Audio">
+      <UniqueIdentifier>{1142a999-6b1b-4e5c-9ad1-17b7c8e3eddc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Audio\Android">
+      <UniqueIdentifier>{0c51c64a-c552-40b8-ab48-fde59bbf9820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Audio\Android\Device">
+      <UniqueIdentifier>{dd4acf78-7758-4f0f-8137-14d5cb651605}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\Pot\Android\main.cpp">
@@ -259,6 +268,30 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Pot\Application\Android\android_native_app_glue.h">
       <Filter>Source\Pot\Application\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\audioClipAndroid.h">
+      <Filter>Source\Pot\Audio\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\audioVoiceAndroid.h">
+      <Filter>Source\Pot\Audio\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audioClip.h">
+      <Filter>Source\Pot\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audioName.h">
+      <Filter>Source\Pot\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audioVoice.h">
+      <Filter>Source\Pot\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Audio\audio.h">
+      <Filter>Source\Pot\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\Device\audioClipAndroidDevice.h">
+      <Filter>Source\Pot\Audio\Android\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Audio\Android\Device\audioVoiceAndroidDevice.h">
+      <Filter>Source\Pot\Audio\Android\Device</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

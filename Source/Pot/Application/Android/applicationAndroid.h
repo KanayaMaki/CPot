@@ -58,10 +58,14 @@ private:
 	#pragma endregion
 
 
-	//終了
+	//イベントを取得する
 	#pragma region Event
 
 public:
+	void MessageLoop() {
+
+	}
+
 
 	#pragma region Handler
 private:
