@@ -38,30 +38,6 @@ Game
 	virtual void Render()
 		ゲームの描画をする
 
-template <typename T>
-class DirtyFlag {
-	T t;
-	BOOL mIsDirty;
-
-	operator const T&() {
-		return Get();
-	}
-
-	const T& Get() const {
-		return t;
-	}
-	void Set(const T& aT) {
-		t = aT;
-		mIsDirty = true;
-	}
-
-	void Clear() {
-		mIsDirty = false;
-	}
-	BOOL IsDirty() const {
-		return mIsDirty;
-	}
-}
 
 class GameMain
 	static GameBase* mGame
@@ -336,10 +312,14 @@ Component
 	virtual Component* Generate() {
 		return new T;
 	}
-	
 
+Network
+	template<typename T>
+	class Message {
+		u32 mType;
+		T mData;
+	}
 
-描画
-インプットの更新
-
-GameLoop：一定の間隔で呼ばれ続ける。入力の更新などを行う
+	Message m;
+	m.mData.
+	Network.Send();

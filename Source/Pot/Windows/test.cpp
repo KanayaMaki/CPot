@@ -48,9 +48,61 @@
 //Audio
 #include "./Pot/Audio\audio.h"
 
+//Animation
+#include "./Pot/Animation/animation.h"
+
+
 #include <Windows.h>
 
 using namespace cpot;
+
+
+#pragma region Animation
+
+void TestAnimation() {
+	
+	///*
+	Animation<Quaternion> v;
+	v.Add(0.0f, Quaternion::FromAxis(Vector3(0.0f, 1.0f, 0.0f), ToRad(0.0f)));
+	v.Add(2.0f, Quaternion::FromAxis(Vector3(0.0f, 1.0f, 0.0f), ToRad(90.0f)));
+	v.Add(4.0f, Quaternion::FromAxis(Vector3(0.0f, 0.0f, 1.0f), ToRad(90.0f)));
+
+	CPOT_LOG(v.Get().ToString());
+	for (u32 i = 0; i < 100; i++) {
+		v.Forward(4.0f / 100);
+		CPOT_LOG(v.Get().ToString());
+	}
+	//*/
+
+	/*
+	Animation<f32> v;
+	v.Add(0.0f, 0.0f);
+	v.Add(2.0f, 2.0f);
+	v.Add(4.0f, 6.0f);
+
+	CPOT_LOG(v.Get());
+	for (u32 i = 0; i < 100; i++) {
+		v.Forward(4.0f / 100);
+		CPOT_LOG(v.Get());
+	}
+	//*/
+
+	/*
+	Animation<Vector3*> v;
+	v.Add(0.0f, nullptr);
+	v.Add(2.0f, (Vector3*)1010);
+	v.Add(4.0f, (Vector3*)3030);
+
+	CPOT_LOG((u32)v.Get());
+	for (u32 i = 0; i < 100; i++) {
+		v.Forward(4.0f / 100);
+		CPOT_LOG((u32)v.Get());
+	}
+	//*/
+}
+
+#pragma endregion
+
 
 
 #pragma region Audio
@@ -79,7 +131,6 @@ void TestAudio() {
 }
 
 #pragma endregion
-
 
 
 #pragma region Loader

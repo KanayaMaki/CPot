@@ -94,6 +94,18 @@ public:
 	#pragma endregion
 
 
+	//操作
+	#pragma region Operate
+
+public:
+	//ソート
+	void Sort() CPOT_OR {
+		
+	}
+
+	#pragma endregion
+
+
 	//配列の要素数
 	#pragma region Size
 

@@ -429,7 +429,7 @@ inline T ReverseEndian(const T aVal) {
 inline void ReverseEndian(void* aVal, u32 aByteNum) {
 
 	CPOT_ASSERT(Mod(aByteNum, 2) == 0);
-	
+
 	//バイト数が4の場合、0と3、1と2、という風になるように入れ替える
 	for (u32 i = 0; i < aByteNum / 2; i++) {
 
@@ -450,8 +450,13 @@ inline void ReverseEndian(void* aVal, u32 aByteNum) {
 //補間関数
 #pragma region Tween
 
-//線形補間を行う
-inline f32 Lerp(f32 start, f32 end, f32 now) {
+inline f32 Lerp(f32 aStart, f32 aEnd, f32 aRate) {
+	return aStart + (aEnd - aStart) * aRate;
+}
+
+
+//割合を求める
+inline f32 Rate(f32 start, f32 end, f32 now) {
 	f32 dist = end - start;
 	CPOT_ASSERT(NotZero(dist));
 	return (now - start) / dist;

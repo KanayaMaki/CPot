@@ -16,6 +16,8 @@
 
 #include "./Pot/Rand/rand.h"
 
+#include "./Pot/Animation/animation.h"
+
 namespace cpot {
 
 cpot::GameBase* CreateGame() {
@@ -90,6 +92,7 @@ namespace myspc {
 void MyGame::Setting() {
 	cpot::Config::S().SetScreenSize(cpot::Vector2(960.0f, 540.0f));
 	cpot::Config::S().SetTitle("MyGame!");
+
 }
 
 //ゲームの初期化
@@ -104,14 +107,12 @@ void MyGame::Init() {
 
 //ゲームの更新
 void MyGame::Update() {
-	static cpot::u32 i = 0;
-	i++;
-	//CPOT_LOG("Update! : ", i);
-
+	
 	//ゲーム終了
 	if (Input::GetButtonUp(windows::c0)) {
 		Config::S().SetGameEnd();
 	}
+
 
 	//サウンド
 	if (Input::GetButtonUp(windows::c1)) {
@@ -124,9 +125,10 @@ void MyGame::Update() {
 		c->Play();
 	}
 
-	static cpot::BOOL lLoading = false;
 
 	//ローダ
+	static cpot::BOOL lLoading = false;
+
 	if (Input::GetButtonUp(windows::c2)) {
 		lLoading = true;
 
