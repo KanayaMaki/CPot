@@ -95,19 +95,18 @@ Animation<f32> v;
 void MyGame::Setting() {
 	cpot::Config::S().SetScreenSize(cpot::Vector2(960.0f, 540.0f));
 	cpot::Config::S().SetTitle("MyGame!");
-
 }
 
 //ゲームの初期化
 void MyGame::Init() {
-	CPOT_LOG("Init!");
+	//CPOT_LOG("Init!");
 
 	//Loaderのスタート
-	LoaderManager::S().Start(2);
+	//LoaderManager::S().Start(2);
 
 	v.Add(0.0f, 0.0f);
-	v.Add(2.0f, 2.0f);
-	v.Add(4.0f, 6.0f);
+	v.Add(2.0f, 0.5f);
+	v.Add(4.0f, 1.0f);
 	v.SetIsLoop(true);
 }
 
@@ -133,6 +132,7 @@ void MyGame::Update() {
 	}
 
 
+	///*
 	//ローダ
 	static cpot::BOOL lLoading = false;
 
@@ -155,8 +155,16 @@ void MyGame::Update() {
 			Config::S().SetTitle("FinishLoading");
 		}
 	}
+	//*/
+
+	if (cpot::Input::GetButton(cpot::android::cTouch)) {
+		cpot::android::Config::S().color.r = cpot::Input::GetValue(cpot::android::cTouchPosX);
+		cpot::android::Config::S().color.b = cpot::Input::GetValue(cpot::android::cTouchPosY);
+	}
 
 	v.ForwardTime(DeltaTime());
+	//cpot::android::Config::S().color.g = v.Get();
+	v.Get();
 	CPOT_LOG(v.Get());
 }
 

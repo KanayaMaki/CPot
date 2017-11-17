@@ -327,13 +327,14 @@ void TestHashTable() {
 
 Mutex gMutex;
 
-void TestMutex(u32* aData) {
+void* TestMutex(u32* aData) {
 
 	MutexLocker lMl(gMutex);
 
 	for (u32 i = 0; i < 2; i++) {
 		CPOT_LOG(i);
 	}
+	return nullptr;
 }
 
 void TestThread() {

@@ -46,70 +46,6 @@ inline f32 ToDeg(f32 aRadian) {
 
 
 
-//	範囲内に制限された値を返す
-#pragma region Clamp
-
-template <typename T>
-inline T Clamp(T aVal, T aMin, T aMax) {
-	if (aVal < aMin) {
-		return aMin;
-	}
-	if (aVal > aMax) {
-		return aMax;
-	}
-	return aVal;
-}
-
-//	範囲内に制限された値を返す
-template <typename T>
-inline T Clamp(T aVal, T aMax) {
-	return Clamp(aVal, (T)0, aMax);
-}
-
-template <typename T>
-inline T Clamp01(T aVal) {
-	return Clamp(aVal, (T)0, (T)1);
-}
-
-
-//	範囲内に制限された値を返す
-template <typename T>
-inline T ClampRange(T aVal, T aEdge1, T aEdge2) {
-	if (aEdge1 < aEdge2) {
-		return Clamp(aVal, aEdge1, aEdge2);
-	}
-	else {
-		return Clamp(aVal, aEdge2, aEdge1);
-	}
-}
-
-
-#pragma endregion
-
-
-
-//	範囲内に収まるようにループされた数
-#pragma region Wrap
-
-template <typename T>
-inline T Wrap(T aVal, T aMin, T aMax) {
-	T dist = aMax - aMin;
-	while (aVal >= aMax) aVal -= dist;
-	while (aVal < aMin) aVal += dist;
-	return aVal;
-}
-
-template <typename T>
-inline T Wrap(T aVal, T aMax) {
-	return Wrap(aVal, (T)0, aMax);
-}
-
-
-#pragma endregion
-
-
-
-
 //	値の符号を返す
 #pragma region Sign
 
@@ -337,6 +273,71 @@ inline BOOL Is(BOOL aExp) {
 }
 inline BOOL Not(BOOL aExp) {
 	return aExp != true;
+}
+
+
+#pragma endregion
+
+
+
+
+//	範囲内に制限された値を返す
+#pragma region Clamp
+
+template <typename T>
+inline T Clamp(T aVal, T aMin, T aMax) {
+	if (aVal < aMin) {
+		return aMin;
+	}
+	if (aVal > aMax) {
+		return aMax;
+	}
+	return aVal;
+}
+
+//	範囲内に制限された値を返す
+template <typename T>
+inline T Clamp(T aVal, T aMax) {
+	return Clamp(aVal, (T)0, aMax);
+}
+
+template <typename T>
+inline T Clamp01(T aVal) {
+	return Clamp(aVal, (T)0, (T)1);
+}
+
+
+//	範囲内に制限された値を返す
+template <typename T>
+inline T ClampRange(T aVal, T aEdge1, T aEdge2) {
+	if (aEdge1 < aEdge2) {
+		return Clamp(aVal, aEdge1, aEdge2);
+	}
+	else {
+		return Clamp(aVal, aEdge2, aEdge1);
+	}
+}
+
+
+#pragma endregion
+
+
+
+//	範囲内に収まるようにループされた数
+#pragma region Wrap
+
+template <typename T>
+inline T Wrap(T aVal, T aMin, T aMax) {
+	T dist = aMax - aMin;
+	if (IsZero(dist)) return aMin;
+	while (aVal >= aMax) aVal -= dist;
+	while (aVal < aMin) aVal += dist;
+	return aVal;
+}
+
+template <typename T>
+inline T Wrap(T aVal, T aMax) {
+	return Wrap(aVal, (T)0, aMax);
 }
 
 

@@ -113,6 +113,9 @@ public:
 
 	#pragma endregion
 
+	Color color;
+
+
 private:
 	Mutex mScreenSizeMutex;
 	Mutex mTitleMutex;

@@ -47,8 +47,9 @@ void engine_draw_frame(struct engine* engine) {
 	}
 
 	// 色で画面を塗りつぶします。
-	glClearColor((cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->x) / engine->width, 1.0f,
-		(cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->y) / engine->height, 1);
+	//glClearColor((cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->x) / engine->width, 1.0f, (cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->y) / engine->height, 1);
+	glClearColor((cpot::android::Config::S().color.r) / engine->width, 1.0f, (cpot::android::Config::S().color.b) / engine->height, 1);
+
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	eglSwapBuffers(engine->display, engine->surface);
@@ -74,7 +75,7 @@ void android_main(struct android_app* state) {
 	cpot::SetDeltaTime(1.0f / cpot::Config::S().GetFps());
 
 
-	//lGame->Init();
+	lGame->Init();
 	// ループはスタッフによる開始を待っています。
 
 	cpot::f64 lBeforeTime = lTime.GetDetail();
@@ -98,7 +99,7 @@ void android_main(struct android_app* state) {
 			}
 
 			//ゲームの更新
-			//lGame->Update();
+			lGame->Update();
 
 			//ゲームの描画
 			lGame->Render();
