@@ -37,9 +37,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 
 	#pragma region Test
 
-	TestOutput(windows::Window::S().GetHwnd());
-	TestAnimation();
-
+	//TestOutput(windows::Window::S().GetHwnd());
+	//TestAnimation();
 
 	//TestAudio();
 
