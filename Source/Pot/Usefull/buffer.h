@@ -70,11 +70,6 @@ public:
 	//作成
 	#pragma region Create
 
-	template <typename T>
-	void Load(const T& aData) {
-		Load((const BYTE*)(&aData), sizeof(T));
-	}
-
 	void Load(const BYTE* aBuffer, BufferSize aSize) {
 
 		Release();
@@ -164,6 +159,24 @@ public:
 	}
 
 	#pragma endregion
+
+
+	//データ
+	#pragma region Data
+
+public:
+	template <typename T>
+	void LoadData(const T& aData) {
+		Load((const BYTE*)(&aData), sizeof(T));
+	}
+
+	template <typename T>
+	T* GetData() {
+		return (T*)(mBuffer);
+	}
+
+	#pragma endregion
+
 
 
 	//フィールド

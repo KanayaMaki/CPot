@@ -26,7 +26,7 @@ void GameMain::Setting() {
 	mGame->Setting();
 }
 
-void GameMain::GameLoop(void* aDummy) {
+void* GameMain::GameLoop(void* aDummy) {
 
 	//プラットフォームの初期化
 	#pragma region PlatformInit
@@ -80,6 +80,8 @@ void GameMain::GameLoop(void* aDummy) {
 		//FPS制御
 		Fps::S().Update();
 	}
+
+	return nullptr;
 }
 
 

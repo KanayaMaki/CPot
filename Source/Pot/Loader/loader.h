@@ -149,7 +149,7 @@ private:
 
 		return l;
 	}
-	static void Load(u32* aThreadIndex) {
+	static void* Load(u32* aThreadIndex) {
 
 		Sleep lSleep;
 
@@ -180,6 +180,8 @@ private:
 				break;	//ƒ‹[ƒv‚ğ”²‚¯‚é
 			}
 		}
+
+		return nullptr;
 	}
 
 	#pragma endregion

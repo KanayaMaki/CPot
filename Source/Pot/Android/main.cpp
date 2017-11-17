@@ -47,8 +47,8 @@ void engine_draw_frame(struct engine* engine) {
 	}
 
 	// 色で画面を塗りつぶします。
-	glClearColor((cpot::android::Application::S().GetEngine()->State<saved_state>()->x) / engine->width, 1.0f,
-		(cpot::android::Application::S().GetEngine()->State<saved_state>()->y) / engine->height, 1);
+	glClearColor((cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->x) / engine->width, 1.0f,
+		(cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->y) / engine->height, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	eglSwapBuffers(engine->display, engine->surface);
@@ -67,20 +67,22 @@ void android_main(struct android_app* state) {
 	saved_state lSavedState;
 
 	cpot::android::Application::S().Load(state);
-	cpot::android::Application::S().GetEngine()->state.Load<saved_state>(lSavedState);
+	cpot::android::Application::S().GetEngine()->state.LoadData<saved_state>(lSavedState);
 	cpot::android::Input::S().Init();
 
 	cpot::Time lTime;
 	cpot::SetDeltaTime(1.0f / cpot::Config::S().GetFps());
 
 
-	lGame->Init();
+	//lGame->Init();
 	// ループはスタッフによる開始を待っています。
 
 	cpot::f64 lBeforeTime = lTime.GetDetail();
 
 	while (1) {
 		
+		cpot::android::Application::S().MessageLoop();
+
 		if (cpot::android::Application::S().IsAnimate()) {
 			
 			//入力の更新
@@ -91,12 +93,12 @@ void android_main(struct android_app* state) {
 
 			//
 			if (cpot::Input::GetButton(cpot::android::cTouch)) {
-				cpot::android::Application::S().GetEngine()->State<saved_state>()->x = cpot::Input::GetValue(cpot::android::cTouchPosX);
-				cpot::android::Application::S().GetEngine()->State<saved_state>()->y = cpot::Input::GetValue(cpot::android::cTouchPosY);
+				cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->x = cpot::Input::GetValue(cpot::android::cTouchPosX);
+				cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->y = cpot::Input::GetValue(cpot::android::cTouchPosY);
 			}
 
 			//ゲームの更新
-			lGame->Update();
+			//lGame->Update();
 
 			//ゲームの描画
 			lGame->Render();
