@@ -14,6 +14,4 @@ void TestFunc() {
 
 	cpot::Sleep s;
 	s.SleepSecond(1.0f);
-
-	
 }

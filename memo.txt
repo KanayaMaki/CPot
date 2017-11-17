@@ -326,11 +326,11 @@ Network
 	}
 
 	template<typename T>
-	void Send(Message<T>& m);
+	void Send(const Message<T>& m);
 
 	template<typename T>
 	std::shared_ptr<T> Recieve() {
-
+		new T;
 	}
 
 	union Data {

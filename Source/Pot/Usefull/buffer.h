@@ -25,6 +25,7 @@ public:
 		Reset();
 		Load(aBuffer, aSize);
 	}
+
 	Buffer(const CHAR* aStr) {
 		Reset();
 		Load(aStr);
@@ -68,6 +69,11 @@ public:
 
 	//çÏê¨
 	#pragma region Create
+
+	template <typename T>
+	void Load(const T& aData) {
+		Load((const BYTE*)(&aData), sizeof(T));
+	}
 
 	void Load(const BYTE* aBuffer, BufferSize aSize) {
 
