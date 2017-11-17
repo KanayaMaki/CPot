@@ -93,7 +93,7 @@ inline T ClampRange(T aVal, T aEdge1, T aEdge2) {
 
 template <typename T>
 inline T Wrap(T aVal, T aMin, T aMax) {
-	T dist = aMax - aMin + 1;
+	T dist = aMax - aMin;
 	while (aVal >= aMax) aVal -= dist;
 	while (aVal < aMin) aVal += dist;
 	return aVal;

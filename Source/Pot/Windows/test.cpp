@@ -61,7 +61,7 @@ using namespace cpot;
 
 void TestAnimation() {
 	
-	///*
+	/*
 	Animation<Quaternion> v;
 	v.Add(0.0f, Quaternion::FromAxis(Vector3(0.0f, 1.0f, 0.0f), ToRad(0.0f)));
 	v.Add(2.0f, Quaternion::FromAxis(Vector3(0.0f, 1.0f, 0.0f), ToRad(90.0f)));
@@ -74,15 +74,16 @@ void TestAnimation() {
 	}
 	//*/
 
-	/*
+	///*
 	Animation<f32> v;
 	v.Add(0.0f, 0.0f);
 	v.Add(2.0f, 2.0f);
 	v.Add(4.0f, 6.0f);
+	v.SetIsLoop(true);
 
 	CPOT_LOG(v.Get());
 	for (u32 i = 0; i < 100; i++) {
-		v.Forward(4.0f / 100);
+		v.ForwardTime(8.0f / 100);
 		CPOT_LOG(v.Get());
 	}
 	//*/
