@@ -24,49 +24,10 @@
 #include "./Pot/Input/Android/inputAndroid.h"
 #include "./Pot/Input/input.h"
 
+#include "./Pot/Time/time.h"
+#include "./Pot/Loader/loader.h"
+
 #include "./Pot/Game/game.h"
-
-
-/*
-void engine_draw_frame(struct engine* engine) {
-	if (engine->display == NULL) {
-		// ディスプレイがありません。
-		return;
-	}
-
-	// 色で画面を塗りつぶします。
-	glClearColor(((float)engine->state.x) / engine->width, 1.0f,
-		((float)engine->state.y) / engine->height, 1);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	eglSwapBuffers(engine->display, engine->surface);
-}
-
-
-void android_main(struct android_app* state) {
-
-	cpot::android::OutLog o;
-	cpot::Log::S().Set(&o);
-
-	cpot::android::Application::S().Load(state);
-	cpot::android::Input::S().Init();
-
-	while (1) {
-		
-		cpot::android::Application::S().EventLoop();
-
-		cpot::android::Input::S().Update();
-
-		if (cpot::Input::GetButton(cpot::android::cTouch)) {
-			cpot::android::Application::S().GetEngine()->state.x = cpot::Input::GetValue(cpot::android::cTouchPosX);
-			cpot::android::Application::S().GetEngine()->state.y = cpot::Input::GetValue(cpot::android::cTouchPosY);
-		}
-
-		engine_draw_frame(cpot::android::Application::S().GetEngine());
-	}
-}
-*/
-
 
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "AndroidProject1.NativeActivity", __VA_ARGS__))
@@ -99,9 +60,8 @@ struct engine {
 	struct saved_state state;
 };
 
-/**
-* 現在の表示の EGL コンテキストを初期化します。
-*/
+
+// 現在の表示の EGL コンテキストを初期化します。
 static int engine_init_display(struct engine* engine) {
 	// OpenGL ES と EGL の初期化
 
@@ -166,26 +126,7 @@ static int engine_init_display(struct engine* engine) {
 	return 0;
 }
 
-/**
-* ディスプレイ内の現在のフレームのみ。
-*/
-static void engine_draw_frame(struct engine* engine) {
-	if (engine->display == NULL) {
-		// ディスプレイがありません。
-		return;
-	}
-
-	// 色で画面を塗りつぶします。
-	glClearColor(((float)engine->state.x) / engine->width, 1.0f,
-		((float)engine->state.y) / engine->height, 1);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	eglSwapBuffers(engine->display, engine->surface);
-}
-
-/**
-* 現在ディスプレイに関連付けられている EGL コンテキストを削除します。
-*/
+// 現在ディスプレイに関連付けられている EGL コンテキストを削除します。
 static void engine_term_display(struct engine* engine) {
 	if (engine->display != EGL_NO_DISPLAY) {
 		eglMakeCurrent(engine->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
@@ -203,9 +144,24 @@ static void engine_term_display(struct engine* engine) {
 	engine->surface = EGL_NO_SURFACE;
 }
 
-/**
-* 次のメイン コマンドを処理します。
-*/
+
+// ディスプレイ内の現在のフレームのみ。
+void engine_draw_frame(struct engine* engine) {
+	if (engine->display == NULL) {
+		// ディスプレイがありません。
+		return;
+	}
+
+	// 色で画面を塗りつぶします。
+	glClearColor(((float)engine->state.x) / engine->width, 1.0f,
+		((float)engine->state.y) / engine->height, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	eglSwapBuffers(engine->display, engine->surface);
+}
+
+
+// 次のメイン コマンドを処理します。
 static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
 	struct engine* engine = (struct engine*)app->userData;
 	switch (cmd) {
@@ -260,6 +216,9 @@ void android_main(struct android_app* state) {
 	cpot::GameBase* lGame = cpot::CreateGame();
 	lGame->Setting();
 
+	cpot::Time lTime;
+	cpot::SetDeltaTime(1.0f / cpot::Config::S().GetFps());
+
 	struct engine engine;
 
 	memset(&engine, 0, sizeof(engine));
@@ -284,6 +243,8 @@ void android_main(struct android_app* state) {
 
 	lGame->Init();
 	// ループはスタッフによる開始を待っています。
+
+	cpot::f64 lBeforeTime = lTime.GetDetail();
 
 	while (1) {
 
@@ -323,22 +284,42 @@ void android_main(struct android_app* state) {
 			}
 		}
 
-		cpot::android::Input::S().Update();
-
-		if (cpot::Input::GetButton(cpot::android::cTouch)) {
-			engine.state.x = cpot::Input::GetValue(cpot::android::cTouchPosX);
-			engine.state.y = cpot::Input::GetValue(cpot::android::cTouchPosY);
-		}
-
-		lGame->Update();
-
+		
 		if (engine.animating) {
 			
+			//入力の更新
+			cpot::android::Input::S().Update();
+
+			//ローダの更新
+			cpot::LoaderManager::S().Update();
+
+			//
+			if (cpot::Input::GetButton(cpot::android::cTouch)) {
+				engine.state.x = cpot::Input::GetValue(cpot::android::cTouchPosX);
+				engine.state.y = cpot::Input::GetValue(cpot::android::cTouchPosY);
+			}
+
+			//ゲームの更新
+			lGame->Update();
+
+			//ゲームの描画
 			lGame->Render();
 
-			// 描画は画面の更新レートに合わせて調整されているため、
-			// ここで時間調整をする必要はありません。
+			//
 			engine_draw_frame(&engine);
+
+
+			//DeltaTimeの計測
+			#pragma region DeltaTime
+
+			cpot::f64 lNowTime = lTime.GetDetail();
+
+			//DeltaTimeは、最大でもFpsからの計算値の二倍までとする
+			cpot::SetDeltaTime(cpot::Min(lNowTime - lBeforeTime, 2.0f / cpot::Config::S().GetFps()));
+
+			lBeforeTime = lNowTime;
+
+			#pragma endregion
 		}
 	}
 }

@@ -22,6 +22,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 	//デフォルトの設定
 	Config::S().SetScreenSize(Vector2(960.0f, 540.0f));
 	Config::S().SetTitle("CPotGame!");
+	Config::S().SetFps(60.0f);
 
 
 	//ゲームの設定で上書き

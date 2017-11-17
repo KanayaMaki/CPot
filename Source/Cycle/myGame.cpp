@@ -15,8 +15,10 @@
 #include "./Pot/Loader/loader.h"
 
 #include "./Pot/Rand/rand.h"
+#include "./Pot/Time/time.h"
 
 #include "./Pot/Animation/animation.h"
+
 
 namespace cpot {
 
@@ -87,6 +89,7 @@ using namespace cpot;
 
 namespace myspc {
 
+Animation<f32> v;
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
 void MyGame::Setting() {
@@ -101,8 +104,12 @@ void MyGame::Init() {
 
 	//Loaderのスタート
 	LoaderManager::S().Start(2);
-}
 
+	v.Add(0.0f, 0.0f);
+	v.Add(2.0f, 2.0f);
+	v.Add(4.0f, 6.0f);
+	v.SetIsLoop(true);
+}
 
 
 //ゲームの更新
@@ -149,6 +156,8 @@ void MyGame::Update() {
 		}
 	}
 
+	v.ForwardTime(DeltaTime());
+	CPOT_LOG(v.Get());
 }
 
 }

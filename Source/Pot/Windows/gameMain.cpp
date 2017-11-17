@@ -47,7 +47,7 @@ void GameMain::GameLoop(void* aDummy) {
 
 
 	//Fps�̍쐬
-	Fps::S().Init(new Time, new Sleep, 60.0f);
+	Fps::S().Init(new Time, new Sleep, Config::S().GetFps());
 	#pragma endregion
 
 

@@ -74,7 +74,7 @@ void TestAnimation() {
 	}
 	//*/
 
-	///*
+	/*
 	Animation<f32> v;
 	v.Add(0.0f, 0.0f);
 	v.Add(2.0f, 2.0f);

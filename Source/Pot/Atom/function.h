@@ -63,12 +63,12 @@ inline T Clamp(T aVal, T aMin, T aMax) {
 //	”ÍˆÍ“à‚É§ŒÀ‚³‚ê‚½’l‚ğ•Ô‚·
 template <typename T>
 inline T Clamp(T aVal, T aMax) {
-	return Clamp(aVal, T(0), aMax);
+	return Clamp(aVal, (T)0, aMax);
 }
 
 template <typename T>
 inline T Clamp01(T aVal) {
-	return Clamp(aVal, T(0), T(1));
+	return Clamp(aVal, (T)0, (T)1);
 }
 
 
@@ -101,7 +101,7 @@ inline T Wrap(T aVal, T aMin, T aMax) {
 
 template <typename T>
 inline T Wrap(T aVal, T aMax) {
-	return Wrap(aVal, T(0), aMax);
+	return Wrap(aVal, (T)0, aMax);
 }
 
 
@@ -115,16 +115,16 @@ inline T Wrap(T aVal, T aMax) {
 
 template <typename T>
 inline s32 Sign(T aVal) {
-	if (aVal > T(0)) return 1;
-	if (aVal < T(0)) return -1;
+	if (aVal > (T)0) return 1;
+	if (aVal < (T)0) return -1;
 	return 0;
 }
 
 
 template <typename T>
 inline s32 SignSafe(T aVal) {
-	if (aVal > T(0)) return 1;
-	if (aVal < T(0)) return -1;
+	if (aVal > (T)0) return 1;
+	if (aVal < (T)0) return -1;
 	return 1;
 }
 

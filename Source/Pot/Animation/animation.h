@@ -1,5 +1,5 @@
 //
-//	content	:	Animationしてくれるクラス
+//	content	:	Animationクラス
 //	author	:	SaitoYoshiki
 //
 

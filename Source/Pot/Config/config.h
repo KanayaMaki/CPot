@@ -71,6 +71,14 @@ public:
 
 	#pragma endregion
 
+
+	//ÉQÅ[ÉÄÇÃFPS
+	#pragma region Fps
+
+	CPOT_VI void SetFps(f32 aFps) CPOT_ZR;
+	CPOT_VI f32 GetFps() CPOT_ZR;
+
+	#pragma endregion
 	
 protected:
 	Vector2 mScreenSize;
@@ -78,6 +86,7 @@ protected:
 	BOOL mApplicationEnd;
 	BOOL mGameEnd;
 	BOOL mActive;
+	f32 mFps;
 };
 
 #pragma endregion

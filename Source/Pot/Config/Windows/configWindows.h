@@ -96,12 +96,28 @@ public:
 	#pragma endregion
 
 
+	//ÉQÅ[ÉÄÇÃFPS
+	#pragma region Fps
+
+	void SetFps(f32 aFps) CPOT_OR {
+		MutexLocker m(mFpsMutex);
+		mFps = aFps;
+	}
+	f32 GetFps() CPOT_OR {
+		MutexLocker m(mFpsMutex);
+		return mFps;
+	}
+
+	#pragma endregion
+
+
 private:
 	Mutex mScreenSizeMutex;
 	Mutex mTitleMutex;
 	Mutex mApplicationEndMutex;
 	Mutex mGameEndMutex;
 	Mutex mActiveMutex;
+	Mutex mFpsMutex;
 };
 
 #pragma endregion

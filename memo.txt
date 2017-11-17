@@ -314,12 +314,29 @@ Component
 	}
 
 Network
+	class Header {
+		u32 mMessageType;
+		String<32>
+	}
+
 	template<typename T>
 	class Message {
-		u32 mType;
+		Header mHeader;
 		T mData;
 	}
 
-	Message m;
-	m.mData.
-	Network.Send();
+	template<typename T>
+	void Send(Message<T>& m);
+
+	template<typename T>
+	std::shared_ptr<T> Recieve() {
+
+	}
+
+	union Data {
+		Matrix4x4 data;
+	}
+
+	Message<Data> m;
+	m.mData;
+	Network.Send(m);
