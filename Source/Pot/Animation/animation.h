@@ -145,7 +145,7 @@ public:
 private:
 	s32 GetKeyFrameIndex(f32 aTime) {
 		s32 aIdx = -1;
-		for (s32 i = 0; i < mKeyFrames.GetSize(); i++) {
+		for (u32 i = 0; i < mKeyFrames.GetSize(); i++) {
 			if (mKeyFrames[i].mTime <= aTime) {
 				aIdx = i;
 			}
