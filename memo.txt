@@ -315,28 +315,115 @@ Component
 
 Network
 	class Header {
-		u32 mMessageType;
-		String<32>
+		u32 mType;
+		u32 mUserNum;
 	}
 
 	template<typename T>
-	class Message {
+	class MessageData {
 		Header mHeader;
 		T mData;
 	}
 
 	template<typename T>
-	void Send(const Message<T>& m);
+	class Message {
+		union {
+			MessageData<T> mData;
+			CHAR mBuffer[sizeof(T)];
+		}
+	}
 
 	template<typename T>
-	std::shared_ptr<T> Recieve() {
-		new T;
+	void Send(const T& m, u32 aType, u32 DentatsuHanni);
+
+	template<typename T>
+	std::shared_ptr<Message<T>> Recieve(u32 aType);
+
+
+	struct Data {
+		Matrix4x4 matrix;
 	}
 
-	union Data {
-		Matrix4x4 data;
+	Data m;
+
+	Network::Init();
+	Network::Connect(const CHAR* aAddress, u32 aPort);
+	Network::Send(m, cMessageCharacterMove);
+
+	std::shared_ptr<Message<Data>> d = Network::Recieve<Data>(cMessageCharacterMove);
+	if(d != nullptr) {
 	}
 
-	Message<Data> m;
-	m.mData;
-	Network.Send(m);
+	Model model("./file.fbx");
+	model.mMesh;
+
+	Model<VertexType>
+		Mesh<VertexType>
+			Submesh
+				Vertex<VertexType> vertex;
+					Buffer buffer;
+						DeviceBuffer* buffer;
+						u32 size;
+					u32 vertexNum;
+					u32 vertexSize;
+				Index index;
+					Buffer buffer;
+					u32 indexNum;
+					u32 type;
+				u32 submesh[10];
+		Material[10];
+			Texture albedo;
+				u32 width;
+				u32 height;
+				u32 type;
+			Texture roughness;
+			Texture shineness;
+			u32 shaderNum;
+
+	Resource
+		Name
+
+	Resource<Model>::Find("");
+	Resource<Texture>::Find("");
+	Resource<Motion>::Find("");
+	Resource<Shader>::Find("testShader");
+
+	Shader
+
+
+	class TypeFactoryBase {
+		virtual T* Create() = 0;
+		virtual const TypeName& GetName() = 0;
+	}
+
+	class TypeList {
+		TypeFactoryBase* factory[1024];
+		u32 factoryNum = 0;
+
+		void Regist(TypeFactoryBase* aFactory) {
+		CPOT_ASSERT(factoryNum < 1024);
+			factory[factoryNum] = aFactory;
+			factoryNum++;
+		}
+	}
+
+	template<typename T>
+	class TypeFactory : public TypeFactoryBase {
+		TypeFactory() {
+			TypeList::Regist();
+		}
+		virtual T* Create() {
+			return new T;
+		}
+		virtual const TypeName& GetName() {
+			return T::SGetName();
+		}
+	}
+
+	template<typename T>
+	class TypeRegister {
+		static TypeFactory<T> mFactory;
+	}
+
+	template<typename T>
+	TypeFactory<T> TypeRegister::mFactory;

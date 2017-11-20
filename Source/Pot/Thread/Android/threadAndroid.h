@@ -28,7 +28,7 @@ public:
 		if (IsStarted()) {
 			return;
 		}
-		pthread_create(&mThread, NULL, aFunc, aData);
+		pthread_create(&mThread, nullptr, aFunc, aData);
 		mIsStarted = true;
 	}
 	template <typename T>
@@ -51,7 +51,7 @@ public:
 		if (!IsStarted()) {
 			return;
 		}
-		pthread_join(mThread, NULL);
+		pthread_join(mThread, nullptr);
 		mIsStarted = false;
 	}
 

@@ -125,26 +125,26 @@ public:
 	#pragma region Load
 
 private:
-	static Loader* GetLoader() {
+	Loader* GetLoader() {
 
 		Loader* l = nullptr;
 
-		MutexLocker m0(S().mLoaderListNormalMutex);
-		MutexLocker m1(S().mLoaderListHurryMutex);
+		MutexLocker m0(mLoaderListNormalMutex);
+		MutexLocker m1(mLoaderListHurryMutex);
 
 		//もし急ぎのローダが存在するなら
-		if (S().mLoaderListHurry.GetSize() != 0) {
+		if (mLoaderListHurry.GetSize() != 0) {
 			//一番後ろのローダを取得する
-			l = S().mLoaderListHurry.PopBack();
+			l = mLoaderListHurry.PopBack();
 		}
 		//もし通常のローダが存在するなら
-		else if (S().mLoaderListNormal.GetSize() != 0) {
+		else if (mLoaderListNormal.GetSize() != 0) {
 			//一番後ろのローダを取得する
-			l = S().mLoaderListNormal.PopBack();
+			l = mLoaderListNormal.PopBack();
 		}
 
 		if (l) {
-			S().LoadStart();	//ロード開始
+			LoadStart();	//ロード開始
 		}
 
 		return l;
@@ -153,11 +153,11 @@ private:
 
 		Sleep lSleep;
 
-		u32 lThreadIndex = (u32)aThreadIndex;
+		u32 lThreadIndex = (Pointer)aThreadIndex;
 
 		while (true) {
 
-			Loader* l = GetLoader();
+			Loader* l = S().GetLoader();
 
 			//もしローダを取得できていたら
 			if (l) {

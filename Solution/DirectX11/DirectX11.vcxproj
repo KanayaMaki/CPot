@@ -104,7 +104,6 @@
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\voiceXAudioDevice.cpp" />
     <ClCompile Include="..\..\Source\Pot\Config\Windows\configWindows.cpp" />
-    <ClCompile Include="..\..\Source\Pot\File\Standard\fileStandard.cpp" />
     <ClCompile Include="..\..\Source\Pot\Fps\fps.cpp" />
     <ClCompile Include="..\..\Source\Pot\Game\component.cpp" />
     <ClCompile Include="..\..\Source\Pot\Input\Windows\inputWindows.cpp" />

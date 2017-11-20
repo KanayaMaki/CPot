@@ -105,6 +105,12 @@ protected:
 #pragma region OutNull
 
 class OutNull : public OutBase {
+public:
+	OutNull() {
+		u32 i = 0;
+		i++;
+	}
+
 private:
 	void OutputStr(const CHAR* aStr) override {}
 

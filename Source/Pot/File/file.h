@@ -139,4 +139,6 @@ public:
 
 #ifdef CPOT_ON_WINDOWS
 #include "./Pot/File/Standard/fileStandard.h"
+#elif defined CPOT_ON_ANDROID
+#include "./Pot/File/Android/fileAndroid.h"
 #endif

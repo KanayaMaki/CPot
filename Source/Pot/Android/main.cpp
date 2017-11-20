@@ -27,6 +27,11 @@
 #include "./Pot/Time/time.h"
 #include "./Pot/Loader/loader.h"
 
+#include "./Pot/Thread/thread.h"
+#include "./Pot/Thread/mutex.h"
+
+#include "./Pot/File/file.h"
+
 #include "./Pot/Game/game.h"
 
 
@@ -47,7 +52,6 @@ void engine_draw_frame(struct engine* engine) {
 	}
 
 	// 色で画面を塗りつぶします。
-	//glClearColor((cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->x) / engine->width, 1.0f, (cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->y) / engine->height, 1);
 	glClearColor((cpot::android::Config::S().color.r) / engine->width, 1.0f, (cpot::android::Config::S().color.b) / engine->height, 1);
 
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -60,7 +64,13 @@ void engine_draw_frame(struct engine* engine) {
 * のメイン エントリ ポイントです。それ自体のスレッドでイベント ループによって実行され、
 * 入力イベントを受け取ったり他の操作を実行したりします。
 */
+
+
 void android_main(struct android_app* state) {
+
+	cpot::FileOut f;
+	f.Open("./test.txt", false, false);
+	f.Write("testです");
 
 	cpot::GameBase* lGame = cpot::CreateGame();
 	lGame->Setting();
@@ -90,13 +100,7 @@ void android_main(struct android_app* state) {
 			cpot::android::Input::S().Update();
 
 			//ローダの更新
-			//cpot::LoaderManager::S().Update();
-
-			//
-			if (cpot::Input::GetButton(cpot::android::cTouch)) {
-				cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->x = cpot::Input::GetValue(cpot::android::cTouchPosX);
-				cpot::android::Application::S().GetEngine()->state.GetData<saved_state>()->y = cpot::Input::GetValue(cpot::android::cTouchPosY);
-			}
+			cpot::LoaderManager::S().Update();
 
 			//ゲームの更新
 			lGame->Update();

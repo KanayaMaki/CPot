@@ -26,14 +26,6 @@ public:
 
 
 private:
-	static constexpr u32 Hash(const CHAR * aStr, s32 aIdx) {
-		if (aIdx == -1) {
-			return 0xFFFFFFFFU;
-		}
-		return (Hash(aStr, aIdx - 1) >> 8) ^ sCrcTable[(Hash(aStr, aIdx - 1) ^ aStr[aIdx]) & 0x000000FFU];
-	}
-
-
 	static constexpr u32 sCrcTable[256] = {
 		0x00000000UL, 0x77073096UL, 0xee0e612cUL, 0x990951baUL, 0x076dc419UL,
 		0x706af48fUL, 0xe963a535UL, 0x9e6495a3UL, 0x0edb8832UL, 0x79dcb8a4UL,
@@ -88,6 +80,13 @@ private:
 		0x5d681b02UL, 0x2a6f2b94UL, 0xb40bbe37UL, 0xc30c8ea1UL, 0x5a05df1bUL,
 		0x2d02ef8dUL
 	};
+
+	static constexpr u32 Hash(const CHAR * aStr, s32 aIdx) {
+		if (aIdx == -1) {
+			return 0xFFFFFFFFU;
+		}
+		return (Hash(aStr, aIdx - 1) >> 8) ^ sCrcTable[(Hash(aStr, aIdx - 1) ^ aStr[aIdx]) & 0x000000FFU];
+	}
 
 };
 

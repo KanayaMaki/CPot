@@ -91,6 +91,12 @@
     <Filter Include="Source\Pot\Audio\Android\Device">
       <UniqueIdentifier>{dd4acf78-7758-4f0f-8137-14d5cb651605}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Pot\File">
+      <UniqueIdentifier>{1b93e97a-fb6b-49c4-9c6b-e4f1988af3cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\File\Android">
+      <UniqueIdentifier>{5cf2bcf5-8502-443f-bd92-b8de13618baf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\Pot\Android\main.cpp">
@@ -292,6 +298,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Pot\Audio\Android\Device\audioVoiceAndroidDevice.h">
       <Filter>Source\Pot\Audio\Android\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\File\file.h">
+      <Filter>Source\Pot\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\File\Android\fileAndroid.h">
+      <Filter>Source\Pot\File\Android</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

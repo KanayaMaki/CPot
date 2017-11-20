@@ -16,6 +16,7 @@
 
 #include "./Pot/Rand/rand.h"
 #include "./Pot/Time/time.h"
+#include "./Pot/File/file.h"
 
 #include "./Pot/Animation/animation.h"
 
@@ -102,7 +103,7 @@ void MyGame::Init() {
 	//CPOT_LOG("Init!");
 
 	//Loaderのスタート
-	LoaderManager::S().Start(2);
+	//LoaderManager::S().Start(2);
 
 	v.Add(0.0f, 0.0f);
 	v.Add(2.0f, 0.5f);
@@ -128,13 +129,13 @@ void MyGame::Update() {
 	#pragma region Audio
 
 	if (Input::GetButtonUp(windows::c1)) {
-		auto a = new AudioClip;
-		a->Load("./test.wav");
+		auto c = new AudioClip;
+		c->Load("./test.wav");
 
-		auto c = new AudioVoice;
-		c->Load(*a);
+		auto v = new AudioVoice;
+		v->Load(*c);
 
-		c->Play();
+		v->Play();
 	}
 
 	#pragma endregion
@@ -149,20 +150,15 @@ void MyGame::Update() {
 	if (Input::GetButtonUp(windows::c2)) {
 		lLoading = true;
 
-		Rand r;
-
-		for (u32 i = 0; i < 10; i++) {
-			LoaderManager::S().Regist(new LoaderTimer(ToString::Do(i), r.Nextf(2.0f, 5.0f)));
-		}
-		for (u32 i = 0; i < 10; i++) {
-			LoaderManager::S().Regist(new LoaderGenerate);
+		for (u32 i = 0; i < 5; i++) {
+			LoaderManager::S().Regist(new LoaderTimer(ToString::Do(i), 2.0f));
 		}
 	}
 
 	if (lLoading == true) {
 		if (!LoaderManager::S().IsLoading()) {
 			lLoading = false;
-			Config::S().SetTitle("FinishLoading");
+			CPOT_LOG("FinishLoading");
 		}
 	}
 
@@ -182,18 +178,16 @@ void MyGame::Update() {
 
 	//*/
 
-	/*
+	///*
 	if (cpot::Input::GetButton(cpot::android::cTouch)) {
 		cpot::android::Config::S().color.r = cpot::Input::GetValue(cpot::android::cTouchPosX);
 		cpot::android::Config::S().color.b = cpot::Input::GetValue(cpot::android::cTouchPosY);
 	}
 
-	v.ForwardTime(DeltaTime());
-	//cpot::android::Config::S().color.g = v.Get();
-	v.Get();
-	CPOT_LOG(v.Get());
+	cpot::android::Config::S().color.g = 1.0f;
 
 	//*/
 }
+
 
 }

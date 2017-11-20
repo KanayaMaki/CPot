@@ -344,9 +344,6 @@
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\clipXAudioDevice.cpp">
       <Filter>Source\Pot\Audio\XAudio\Device</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\File\Standard\fileStandard.cpp">
-      <Filter>Source\Pot\File\Standard</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">
       <Filter>Source\Pot\Input\XInput</Filter>
     </ClCompile>
