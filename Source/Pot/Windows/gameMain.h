@@ -16,7 +16,7 @@ public:
 public:
 	static void Setting();
 
-	static void GameLoop(void* aDummy);
+	static void* GameLoop(void* aDummy);
 };
 
 }

@@ -8,6 +8,12 @@
 #include <Windows.h>
 
 
+#pragma region Animation
+
+void TestAnimation();
+
+#pragma endregion
+
 #pragma region Audio
 
 void TestAudio();

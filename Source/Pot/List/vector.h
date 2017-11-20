@@ -55,6 +55,16 @@ public:
 	#pragma endregion
 
 
+	//操作
+	#pragma region Operate
+
+public:
+	//ソート
+	CPOT_VI void Sort() CPOT_ZR;
+
+	#pragma endregion
+
+
 	//配列の要素数
 	#pragma region Size
 

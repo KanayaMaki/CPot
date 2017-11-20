@@ -218,6 +218,27 @@ public:
 	#pragma endregion
 
 
+	//ï∂éöóÒÇ…ïœä∑Ç∑ÇÈ
+	#pragma region ToString
+
+	String<64> ToString() const {
+		String<64> lRes;
+		lRes += "(";
+		lRes += "(";
+		lRes += cpot::ToString::Do(v.x);
+		lRes += ", ";
+		lRes += cpot::ToString::Do(v.y);
+		lRes += ", ";
+		lRes += cpot::ToString::Do(v.z);
+		lRes += ")";
+		lRes += ", ";
+		lRes += cpot::ToString::Do(w);
+		lRes += ")";
+		return lRes;
+	}
+	#pragma endregion
+
+
 	//ÉwÉãÉpä÷êî
 	#pragma region Helper
 
@@ -264,6 +285,7 @@ public:
 		tRes.w = f32( scale0 * aFrom.w + scale1 * aTo1[3] );
 		return tRes.Normal();
 	}
+
 	#pragma endregion
 
 };

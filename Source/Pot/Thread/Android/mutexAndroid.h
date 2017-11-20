@@ -1,5 +1,5 @@
 //
-//	content	:	Standard‚Å‚ÌMutex‚ÌŽÀ‘•
+//	content	:	Android‚Å‚ÌMutex‚ÌŽÀ‘•
 //	author	:	SaitoYoshiki
 //
 
@@ -9,31 +9,37 @@
 #include "./Pot/Atom/atom.h"
 #include "./Pot/Thread/mutex.h"
 
-#include <mutex>
+#include <pthread.h>
 
 
 namespace cpot {
 
-namespace standard {
+namespace android {
 
 
 class Mutex : public MutexBase {
 public:
+	Mutex() {
+		pthread_mutex_init(&mMutex, NULL);
+	}
+
+public:
 	void Lock() CPOT_OR {
-		mMutex.lock();
+		pthread_mutex_lock(&mMutex);
 	}
 	void Unlock() CPOT_OR {
-		mMutex.unlock();
+		pthread_mutex_unlock(&mMutex);
 	}
 
 private:
-	std::mutex mMutex;
+	pthread_mutex_t mMutex;
 };
 
 
 }
 
-using Mutex = standard::Mutex;
+//Android‚ÌMutex‚ðŽg—p
+using Mutex = android::Mutex;
 
 }
 

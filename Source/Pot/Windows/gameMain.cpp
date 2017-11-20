@@ -11,6 +11,8 @@
 #include "./Pot/Input/XInput/inputXInput.h"
 #include "./Pot/Out/Windows/outConsoleWindows.h"
 
+#include "./Pot/Audio/XAudio/Device/deviceXAudioDevice.h"
+
 #include "./Pot/Config/config.h"
 
 #include "./Pot/Fps/fps.h"
@@ -26,10 +28,12 @@ void GameMain::Setting() {
 	mGame->Setting();
 }
 
-void GameMain::GameLoop(void* aDummy) {
+void* GameMain::GameLoop(void* aDummy) {
 
 	//プラットフォームの初期化
 	#pragma region PlatformInit
+
+	xaudio::device::Device::S().Init();
 
 	windows::Window& tW = windows::Window::S();
 
@@ -47,7 +51,7 @@ void GameMain::GameLoop(void* aDummy) {
 
 
 	//Fpsの作成
-	Fps::S().Init(new Time, new Sleep, 60.0f);
+	Fps::S().Init(new Time, new Sleep, Config::S().GetFps());
 	#pragma endregion
 
 
@@ -61,6 +65,9 @@ void GameMain::GameLoop(void* aDummy) {
 		xInput::Input::S().Update();
 		windows::Input::S().Update();
 
+		//ローダのアップデート
+		LoaderManager::S().Update();
+
 		//ゲームの更新
 		mGame->Update();
 
@@ -73,13 +80,12 @@ void GameMain::GameLoop(void* aDummy) {
 			break;
 		}
 		
-		//ローダのアップデート
-		LoaderManager::S().Update();
 
-		
 		//FPS制御
 		Fps::S().Update();
 	}
+
+	return nullptr;
 }
 
 

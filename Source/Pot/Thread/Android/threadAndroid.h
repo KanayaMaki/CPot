@@ -9,12 +9,12 @@
 #include "./Pot/Atom/atom.h"
 #include "./Pot/Thread/thread.h"
 
-#include <thread>
+#include <pthread.h>
 
 
 namespace cpot {
 
-namespace standard {
+namespace android {
 
 
 class Thread : public ThreadBase {
@@ -28,7 +28,7 @@ public:
 		if (IsStarted()) {
 			return;
 		}
-		mThread = std::thread(aFunc, aData);
+		pthread_create(&mThread, nullptr, aFunc, aData);
 		mIsStarted = true;
 	}
 	template <typename T>
@@ -44,14 +44,14 @@ public:
 		if (!IsStarted()) {
 			return;
 		}
-		mThread.detach();
+		pthread_detach(mThread);
 		mIsStarted = false;
 	}
 	void Join() CPOT_OR {
 		if (!IsStarted()) {
 			return;
 		}
-		mThread.join();
+		pthread_join(mThread, nullptr);
 		mIsStarted = false;
 	}
 
@@ -60,14 +60,14 @@ public:
 	}
 
 public:
-	std::thread mThread;
+	pthread_t mThread;
 	BOOL mIsStarted;
 };
 
 
 }
 
-//デフォルトでは、StandardのThreadを使用
-using Thread = standard::Thread;
+//AndroidのThreadを使用
+using Thread = android::Thread;
 
 }

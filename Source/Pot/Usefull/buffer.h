@@ -25,6 +25,7 @@ public:
 		Reset();
 		Load(aBuffer, aSize);
 	}
+
 	Buffer(const CHAR* aStr) {
 		Reset();
 		Load(aStr);
@@ -158,6 +159,24 @@ public:
 	}
 
 	#pragma endregion
+
+
+	//データ
+	#pragma region Data
+
+public:
+	template <typename T>
+	void LoadData(const T& aData) {
+		Load((const BYTE*)(&aData), sizeof(T));
+	}
+
+	template <typename T>
+	T* GetData() {
+		return (T*)(mBuffer);
+	}
+
+	#pragma endregion
+
 
 
 	//フィールド

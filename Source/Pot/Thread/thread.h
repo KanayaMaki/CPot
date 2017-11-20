@@ -11,8 +11,8 @@
 namespace cpot {
 
 
-template<typename T> using ThreadFuncTmp = void(*)(T*);
-using ThreadFunc = void(*)(void*);
+template<typename T> using ThreadFuncTmp = void*(*)(T*);
+using ThreadFunc = void*(*)(void*);
 
 class ThreadBase {
 public:

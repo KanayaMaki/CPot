@@ -46,85 +46,21 @@ inline f32 ToDeg(f32 aRadian) {
 
 
 
-//	範囲内に制限された値を返す
-#pragma region Clamp
-
-template <typename T>
-inline T Clamp(T aVal, T aMin, T aMax) {
-	if (aVal < aMin) {
-		return aMin;
-	}
-	if (aVal > aMax) {
-		return aMax;
-	}
-	return aVal;
-}
-
-//	範囲内に制限された値を返す
-template <typename T>
-inline T Clamp(T aVal, T aMax) {
-	return Clamp(aVal, T(0), aMax);
-}
-
-template <typename T>
-inline T Clamp01(T aVal) {
-	return Clamp(aVal, T(0), T(1));
-}
-
-
-//	範囲内に制限された値を返す
-template <typename T>
-inline T ClampRange(T aVal, T aEdge1, T aEdge2) {
-	if (aEdge1 < aEdge2) {
-		return Clamp(aVal, aEdge1, aEdge2);
-	}
-	else {
-		return Clamp(aVal, aEdge2, aEdge1);
-	}
-}
-
-
-#pragma endregion
-
-
-
-//	範囲内に収まるようにループされた数
-#pragma region Wrap
-
-template <typename T>
-inline T Wrap(T aVal, T aMin, T aMax) {
-	T dist = aMax - aMin + 1;
-	while (aVal >= aMax) aVal -= dist;
-	while (aVal < aMin) aVal += dist;
-	return aVal;
-}
-
-template <typename T>
-inline T Wrap(T aVal, T aMax) {
-	return Wrap(aVal, T(0), aMax);
-}
-
-
-#pragma endregion
-
-
-
-
 //	値の符号を返す
 #pragma region Sign
 
 template <typename T>
 inline s32 Sign(T aVal) {
-	if (aVal > T(0)) return 1;
-	if (aVal < T(0)) return -1;
+	if (aVal > (T)0) return 1;
+	if (aVal < (T)0) return -1;
 	return 0;
 }
 
 
 template <typename T>
 inline s32 SignSafe(T aVal) {
-	if (aVal > T(0)) return 1;
-	if (aVal < T(0)) return -1;
+	if (aVal > (T)0) return 1;
+	if (aVal < (T)0) return -1;
 	return 1;
 }
 
@@ -344,6 +280,71 @@ inline BOOL Not(BOOL aExp) {
 
 
 
+
+//	範囲内に制限された値を返す
+#pragma region Clamp
+
+template <typename T>
+inline T Clamp(T aVal, T aMin, T aMax) {
+	if (aVal < aMin) {
+		return aMin;
+	}
+	if (aVal > aMax) {
+		return aMax;
+	}
+	return aVal;
+}
+
+//	範囲内に制限された値を返す
+template <typename T>
+inline T Clamp(T aVal, T aMax) {
+	return Clamp(aVal, (T)0, aMax);
+}
+
+template <typename T>
+inline T Clamp01(T aVal) {
+	return Clamp(aVal, (T)0, (T)1);
+}
+
+
+//	範囲内に制限された値を返す
+template <typename T>
+inline T ClampRange(T aVal, T aEdge1, T aEdge2) {
+	if (aEdge1 < aEdge2) {
+		return Clamp(aVal, aEdge1, aEdge2);
+	}
+	else {
+		return Clamp(aVal, aEdge2, aEdge1);
+	}
+}
+
+
+#pragma endregion
+
+
+
+//	範囲内に収まるようにループされた数
+#pragma region Wrap
+
+template <typename T>
+inline T Wrap(T aVal, T aMin, T aMax) {
+	T dist = aMax - aMin;
+	if (IsZero(dist)) return aMin;
+	while (aVal >= aMax) aVal -= dist;
+	while (aVal < aMin) aVal += dist;
+	return aVal;
+}
+
+template <typename T>
+inline T Wrap(T aVal, T aMax) {
+	return Wrap(aVal, (T)0, aMax);
+}
+
+
+#pragma endregion
+
+
+
 //その他
 #pragma region Other
 
@@ -429,7 +430,7 @@ inline T ReverseEndian(const T aVal) {
 inline void ReverseEndian(void* aVal, u32 aByteNum) {
 
 	CPOT_ASSERT(Mod(aByteNum, 2) == 0);
-	
+
 	//バイト数が4の場合、0と3、1と2、という風になるように入れ替える
 	for (u32 i = 0; i < aByteNum / 2; i++) {
 
@@ -450,8 +451,13 @@ inline void ReverseEndian(void* aVal, u32 aByteNum) {
 //補間関数
 #pragma region Tween
 
-//線形補間を行う
-inline f32 Lerp(f32 start, f32 end, f32 now) {
+inline f32 Lerp(f32 aStart, f32 aEnd, f32 aRate) {
+	return aStart + (aEnd - aStart) * aRate;
+}
+
+
+//割合を求める
+inline f32 Rate(f32 start, f32 end, f32 now) {
 	f32 dist = end - start;
 	CPOT_ASSERT(NotZero(dist));
 	return (now - start) / dist;
