@@ -9,7 +9,7 @@
 
 #pragma region DirectX11
 
-void TestDirectX11();
+void TestDirectX11(HWND aHwnd);
 
 #pragma endregion
 
