@@ -50,6 +50,13 @@ public:
 		Vector3 lRes(r, g, b);
 		return lRes;
 	}
+	struct Float4 {
+		f32 v[4];
+	};
+	Float4 ToFloat4() const {
+		Float4 lRes = { r, g, b, a };
+		return lRes;
+	}
 
 	#pragma endregion
 
@@ -174,7 +181,6 @@ public:
 		lRes.a = MaxValue();
 		return lRes;
 	}
-
 
 	#pragma endregion
 

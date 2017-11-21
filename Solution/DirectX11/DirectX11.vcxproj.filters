@@ -378,6 +378,21 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\textureDirectX11Platform.h">
       <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\depthStencilViewDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\renderTargetViewDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderResourceViewDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\viewDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">

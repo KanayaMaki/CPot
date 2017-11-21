@@ -56,6 +56,7 @@
 #include "./Pot/Render/DirectX11/Platform/constantBufferDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/vertexBufferDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/indexBufferDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/shaderResourceViewDirectX11Platform.h"
 #include "./Pot/Config/config.h"
 
 #include <Windows.h>
