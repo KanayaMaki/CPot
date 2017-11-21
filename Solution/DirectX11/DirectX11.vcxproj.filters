@@ -342,6 +342,9 @@
     <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.h">
       <Filter>Source\Pot\Audio\XAudio\Platform</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\deviceDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">
@@ -406,6 +409,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.cpp">
       <Filter>Source\Pot\Audio\XAudio\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\deviceDirectX11Platform.cpp">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

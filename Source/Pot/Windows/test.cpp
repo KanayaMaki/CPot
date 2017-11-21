@@ -56,6 +56,14 @@
 
 using namespace cpot;
 
+#pragma region DirectX11
+
+void TestDirectX11() {
+
+}
+
+#pragma endregion
+
 
 #pragma region Animation
 
