@@ -86,6 +86,8 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\rasterizerStateDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\samplerStateDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\stateDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\textureDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\vertexBufferDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\sleep.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.h" />
@@ -123,6 +125,7 @@
     <ClCompile Include="..\..\Source\Pot\Rand\rand.cpp" />
     <ClCompile Include="..\..\Source\Pot\Rand\Standard\randStandard.cpp" />
     <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\deviceDirectX11Platform.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.cpp" />
     <ClCompile Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Time\Standard\timeStandard.cpp" />
     <ClCompile Include="..\..\Source\Pot\Time\time.cpp" />

@@ -4,6 +4,8 @@
 #include "./Pot/Out/out.h"
 #include "./Pot/Usefull/singleton.h"
 
+#include "./Pot/Render/DirectX11/Platform/usefullDirectX11Platform.h"
+
 #include <Windows.h>
 
 #include <d3d11.h>

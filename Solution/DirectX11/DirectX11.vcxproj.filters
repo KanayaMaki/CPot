@@ -372,6 +372,12 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\samplerStateDirectX11Platform.h">
       <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\textureDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">
@@ -438,6 +444,9 @@
       <Filter>Source\Pot\Audio\XAudio\Platform</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\deviceDirectX11Platform.cpp">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.cpp">
       <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
     </ClCompile>
   </ItemGroup>

@@ -66,19 +66,6 @@ public:
 		lBufferDesc.MiscFlags = 0;
 		return lBufferDesc;
 	}
-	static u32 GetFormatSize(DXGI_FORMAT aFormat) {
-		switch (aFormat) {
-			case DXGI_FORMAT_R8_UINT:
-				return 1;
-			case DXGI_FORMAT_R16_UINT:
-				return 2;
-			case DXGI_FORMAT_R32_UINT:
-				return 4;
-			case DXGI_FORMAT_R32_SINT:
-				return 4;
-		}
-		return 0;
-	}
 
 	#pragma endregion
 
