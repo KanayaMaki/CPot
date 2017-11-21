@@ -7,14 +7,14 @@
 
 #include "./Pot/Atom/atom.h"
 
-#include "./Pot/Audio/XAudio/Device/deviceXAudioDevice.h"
+#include "./Pot/Audio/XAudio/Platform/deviceXAudioPlatform.h"
 
 
 namespace cpot {
 
 namespace xaudio {
 
-namespace device {
+namespace platform {
 
 
 class Clip;

@@ -11,7 +11,7 @@
 #include "./Pot/Input/XInput/inputXInput.h"
 #include "./Pot/Out/Windows/outConsoleWindows.h"
 
-#include "./Pot/Audio/XAudio/Device/deviceXAudioDevice.h"
+#include "./Pot/Audio/XAudio/Platform/deviceXAudioPlatform.h"
 
 #include "./Pot/Config/config.h"
 
@@ -33,7 +33,7 @@ void* GameMain::GameLoop(void* aDummy) {
 	//プラットフォームの初期化
 	#pragma region PlatformInit
 
-	xaudio::device::Device::S().Init();
+	xaudio::platform::Device::S().Init();
 
 	windows::Window& tW = windows::Window::S();
 

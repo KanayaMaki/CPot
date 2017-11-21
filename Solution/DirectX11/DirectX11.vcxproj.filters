@@ -58,9 +58,6 @@
     <Filter Include="Source\Pot\Audio\XAudio">
       <UniqueIdentifier>{bdcf986f-452c-46c8-8b18-3080c56b6285}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Pot\Audio\XAudio\Device">
-      <UniqueIdentifier>{9601d4c9-455f-4502-b36d-5b3fd6244ee8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Pot\File\Standard">
       <UniqueIdentifier>{13eeb655-606f-415b-a36b-519fc372f5d6}</UniqueIdentifier>
     </Filter>
@@ -120,6 +117,18 @@
     </Filter>
     <Filter Include="Source\Pot\Animation">
       <UniqueIdentifier>{0a35a8bc-0478-4c72-a4aa-618e573c33fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Render">
+      <UniqueIdentifier>{31e32a96-d2dc-4c5a-9535-6fd512542ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Render\DirectX11">
+      <UniqueIdentifier>{d683fc4c-83ae-471d-a0e3-66fc0cda1027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Render\DirectX11\Platform">
+      <UniqueIdentifier>{5cde1e07-e491-49f7-a6a3-b610ac11c108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Audio\XAudio\Platform">
+      <UniqueIdentifier>{4f7c1bf9-c503-41ef-98a2-e45109d55d2e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -188,15 +197,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Audio\XAudio\audioClipXAudio.h">
       <Filter>Source\Pot\Audio\XAudio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.h">
-      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Device\voiceXAudioDevice.h">
-      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Device\clipXAudioDevice.h">
-      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\File\file.h">
       <Filter>Source\Pot\File</Filter>
@@ -333,17 +333,17 @@
     <ClInclude Include="..\..\Source\Pot\Animation\animation.h">
       <Filter>Source\Pot\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.h">
+      <Filter>Source\Pot\Audio\XAudio\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.h">
+      <Filter>Source\Pot\Audio\XAudio\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.h">
+      <Filter>Source\Pot\Audio\XAudio\Platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.cpp">
-      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\voiceXAudioDevice.cpp">
-      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\clipXAudioDevice.cpp">
-      <Filter>Source\Pot\Audio\XAudio\Device</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">
       <Filter>Source\Pot\Input\XInput</Filter>
     </ClCompile>
@@ -397,6 +397,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Game\component.cpp">
       <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.cpp">
+      <Filter>Source\Pot\Audio\XAudio\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.cpp">
+      <Filter>Source\Pot\Audio\XAudio\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.cpp">
+      <Filter>Source\Pot\Audio\XAudio\Platform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

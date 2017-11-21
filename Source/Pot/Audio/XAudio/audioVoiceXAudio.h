@@ -10,7 +10,7 @@
 #include "./Pot/Audio/audioVoice.h"
 #include "./Pot/Audio/XAudio/audioClipXAudio.h"
 
-#include "./Pot/Audio/XAudio/Device/voiceXAudioDevice.h"
+#include "./Pot/Audio/XAudio/Platform/voiceXAudioPlatform.h"
 
 namespace cpot {
 
@@ -70,7 +70,7 @@ public:
 	#pragma region Field
 
 public:
-	device::Voice mVoice;
+	platform::Voice mVoice;
 
 	#pragma endregion
 

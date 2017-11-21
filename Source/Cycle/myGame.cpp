@@ -175,18 +175,6 @@ void MyGame::Update() {
 
 	#pragma endregion
 
-
-	//*/
-
-	///*
-	if (cpot::Input::GetButton(cpot::android::cTouch)) {
-		cpot::android::Config::S().color.r = cpot::Input::GetValue(cpot::android::cTouchPosX);
-		cpot::android::Config::S().color.b = cpot::Input::GetValue(cpot::android::cTouchPosY);
-	}
-
-	cpot::android::Config::S().color.g = 1.0f;
-
-	//*/
 }
 
 

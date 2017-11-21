@@ -111,7 +111,7 @@ void TestAnimation() {
 void TestAudio() {
 
 	//XAudio‚Ì‰Šú‰»
-	xaudio::device::Device::S().Init();
+	xaudio::platform::Device::S().Init();
 
 	AudioName::S().Regist("test", "./test.wav");
 

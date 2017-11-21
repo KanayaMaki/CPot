@@ -8,7 +8,7 @@
 #include "./Pot/Atom/atom.h"
 
 #include "./Pot/Audio/audioClip.h"
-#include "./Pot/Audio/XAudio/Device/clipXAudioDevice.h"
+#include "./Pot/Audio/XAudio/Platform/clipXAudioPlatform.h"
 
 
 namespace cpot {
@@ -44,7 +44,7 @@ public:
 	#pragma region Field
 
 public:
-	device::Clip mClip;
+	platform::Clip mClip;
 
 	#pragma endregion
 };

@@ -15,7 +15,7 @@ namespace cpot {
 
 namespace xaudio {
 
-namespace device {
+namespace platform {
 
 
 class Device : public Singleton<Device> {
