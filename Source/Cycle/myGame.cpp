@@ -129,13 +129,7 @@ void MyGame::Update() {
 	#pragma region Audio
 
 	if (Input::GetButtonUp(windows::c1)) {
-		auto c = new AudioClip;
-		c->Load("./test.wav");
-
-		auto v = new AudioVoice;
-		v->Load(*c);
-
-		v->Play();
+		
 	}
 
 	#pragma endregion

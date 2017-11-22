@@ -59,9 +59,21 @@
 #include "./Pot/Render/DirectX11/Platform/shaderResourceViewDirectX11Platform.h"
 #include "./Pot/Config/config.h"
 
+#include "./Pot/Render/texture2D.h"
+
 #include <Windows.h>
 
 using namespace cpot;
+
+#pragma region Texture
+
+void TestTexture() {
+	Texture2D t;
+	t.LoadDirectX11("./test.png");
+}
+
+#pragma endregion
+
 
 #pragma region DirectX11
 
@@ -142,14 +154,10 @@ void TestAudio() {
 	//XAudioÇÃèâä˙âª
 	xaudio::platform::Device::S().Init();
 
-	AudioName::S().Regist("test", "./test.wav");
+	xaudio::AudioXAudioData::S().Regist("test", "./test.wav");
 
-	AudioClip c;
-	c.Load("./test.wav");
 
-	AudioVoice v;
-	v.Load(c);
-
+	/*
 	v.Play();
 
 	::Sleep(1000 * 2);
@@ -158,6 +166,7 @@ void TestAudio() {
 
 	c.Release();
 	CPOT_LOG(ToString::Do(v.IsLoad()));
+	//*/
 }
 
 #pragma endregion

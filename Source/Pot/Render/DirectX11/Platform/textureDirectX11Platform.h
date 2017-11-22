@@ -74,7 +74,7 @@ public:
 			return;	//“Ç‚İ‚Ü‚ê‚Ä‚¢‚È‚¢‚È‚çAˆ—‚ğ‚µ‚È‚¢
 		}
 		CPOT_SAFE_RELEASE(mTexture);
-		Reset();
+		Clear();
 	}
 
 	#pragma endregion

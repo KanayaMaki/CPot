@@ -372,7 +372,7 @@ Network
 					u32 type;
 				u32 submesh[10];
 		Material[10];
-			Texture albedo;
+			std::shared_ptr<Texture> albedo;
 				u32 width;
 				u32 height;
 				u32 type;
@@ -388,9 +388,16 @@ Network
 	Resource<Motion>::Find("");
 	Resource<Shader>::Find("testShader");
 
-	Shader
+	Texture
+	 u32 GetWidth();
+	 u32 GetHeight();
+	 u32 GetDepth();
+
+	Render
+		void RenderSprite(std::shared_ptr<Texture>& aTexture, Vector2 aPosition, Vector2 aSize, f32 aAngle);
 
 
+Type
 	class TypeFactoryBase {
 		virtual T* Create() = 0;
 		virtual const TypeName& GetName() = 0;
@@ -427,3 +434,50 @@ Network
 
 	template<typename T>
 	TypeFactory<T> TypeRegister::mFactory;
+
+
+Find
+	もし見つかれば
+	　その要素を返す
+	もし見つからなければ
+	　T* a = new T;
+		a->Load(ResourceName&);　これでTの中で自動で探してくれる
+
+		名前をどこかでつけないと、テクスチャを検索できない
+		名づけ場所：
+		　コンストラクタ：デフォルトのコンストラクタが使えなくなると、他の場所で面倒かも
+		　ロード：ロードされてないテクスチャを検索できるのは変だからいいかも
+		　　ロード時に名前を渡すのが面倒かも
+		　セットネーム：こうしたほうがいいかも
+		NamedResource
+		ファイルを読み込む
+		→共通ネームと読み込みに必要な要素をリストにする（DirectX11でやる）
+		→共通ネームでロードすると、中（DirectX11）で情報を取得してロードする
+		→ロード後に、共通ネームでリストに登録する
+
+enum CFormat {
+	CPOT_FORMAT_R8_UINT,
+	CPOT_FORMAT_RG8_UINT,
+	CPOT_FORMAT_RGB8_UINT,
+	CPOT_FORMAT_RGBA8_UINT,
+	CPOT_FORMAT_R32_FLOAT,
+};
+
+Texture
+　Load時に、読み込みが可能かを設定する
+	Load(u32 aWidth, u32 aHeight, CFormat aFormat);
+	Load(u32 aWidth, u32 aHeight, CFormat aFormat);
+
+　BOOL IsLoad();
+	u32 GetWidth();
+	u32 GetHeight();
+
+
+std::shared_ptr<Model> m = Resource<Model>::Find("miku");
+m->Render();
+
+std::shared_ptr<Shader> v = Resource<Shader>::Find("phong");
+v->Set();
+
+std::shared_ptr<Model> m = Model::Create();
+m->Load("");

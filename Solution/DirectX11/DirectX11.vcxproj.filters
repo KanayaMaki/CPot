@@ -130,6 +130,12 @@
     <Filter Include="Source\Pot\Audio\XAudio\Platform">
       <UniqueIdentifier>{4f7c1bf9-c503-41ef-98a2-e45109d55d2e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Pot\Render\OpenGL">
+      <UniqueIdentifier>{7b8f9511-f2fc-4887-ac34-2788b9fc33ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Render\OpenGL\Platform">
+      <UniqueIdentifier>{a64ce4b1-aba0-462e-82fb-9b2e122dc9cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Pot\Atom\defines.h">
@@ -183,9 +189,6 @@
     <ClInclude Include="..\..\Source\Pot\Audio\audioClip.h">
       <Filter>Source\Pot\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Audio\audioName.h">
-      <Filter>Source\Pot\Audio</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Audio\audioVoice.h">
       <Filter>Source\Pot\Audio</Filter>
     </ClInclude>
@@ -221,9 +224,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\List\Standard\hashTableStandard.h">
       <Filter>Source\Pot\List\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\List\resourceName.h">
-      <Filter>Source\Pot\List</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\List\vector.h">
       <Filter>Source\Pot\List</Filter>
@@ -393,6 +393,45 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderDirectX11Platform.h">
       <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceList.h">
+      <Filter>Source\Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceLoadList.h">
+      <Filter>Source\Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Usefull\namedResource.h">
+      <Filter>Source\Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\texture2D.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\texture3D.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\texture1D.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture2DDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture3DDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture1DDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\samplerOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\textureOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLWindows.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLAndroid.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">
@@ -463,6 +502,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.cpp">
       <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLWindows.cpp">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLAndroid.cpp">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

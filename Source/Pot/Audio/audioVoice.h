@@ -6,16 +6,17 @@
 #pragma once
 
 #include "./Pot/Atom/atom.h"
+#include "./Pot/Usefull/namedResource.h"
 
-#include "./Pot/Audio/audioName.h"
 #include "./Pot/Audio/audioClip.h"
 
 namespace cpot {
 
-class AudioVoiceBase {
+class AudioVoiceBase : public NamedResource {
 
 public:
-	CPOT_VI void Load(AudioClip& aClip) CPOT_ZR;
+	CPOT_VI void Load(const HashTableKey& aUnionName) CPOT_ZR;
+	CPOT_VI void Load(const std::shared_ptr<AudioClip>& aClip) CPOT_ZR;
 
 public:
 	CPOT_VI void Release() CPOT_ZR;

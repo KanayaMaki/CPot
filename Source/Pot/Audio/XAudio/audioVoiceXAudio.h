@@ -19,8 +19,11 @@ namespace xaudio {
 class AudioVoice : public AudioVoiceBase {
 
 public:
-	void Load(AudioClip& aClip) CPOT_OR {
-		mVoice.Load(aClip.mClip);
+	void Load(const HashTableKey& aUnionName) CPOT_OR {
+
+	}
+	void Load(const std::shared_ptr<AudioClip>& aClip) CPOT_OR {
+		mVoice.Load(aClip->mClip);
 	}
 
 public:

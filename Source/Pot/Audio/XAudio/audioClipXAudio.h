@@ -7,6 +7,7 @@
 
 #include "./Pot/Atom/atom.h"
 
+#include "./Pot/Usefull/resourceLoadList.h"
 #include "./Pot/Audio/audioClip.h"
 #include "./Pot/Audio/XAudio/Platform/clipXAudioPlatform.h"
 
@@ -16,17 +17,23 @@ namespace cpot {
 namespace xaudio {
 
 
+class AudioXAudioData : public ResourceLoadList<AudioXAudioData, String<64>> {
+
+};
+
 class AudioClip : public AudioClipBase {
 
 public:
-	void Load(const CHAR* aFileName) CPOT_OR {
+	void Load(const HashTableKey& aUnionName) CPOT_OR {
+		mClip.Load(AudioXAudioData::S().Get(aUnionName).Get());
+	};
+	void Load(const CHAR* aUnionName) CPOT_OR {
+		Load(HashTableKey(aUnionName));
+	};
+
+	//プラットフォーム限定の読み込み
+	void LoadPlatform(const CHAR* aFileName) {
 		mClip.Load(aFileName);
-	};
-	void LoadFromKey(const HashTableKey& aFileNameKey) CPOT_OR {
-		mClip.Load(AudioName::S().Get(aFileNameKey).Get());
-	};
-	void LoadFromKey(const CHAR* aFileNameKey) CPOT_OR {
-		LoadFromKey(HashTableKey(aFileNameKey));
 	};
 
 public:

@@ -47,7 +47,6 @@
     <ClInclude Include="..\..\Source\Pot\Atom\vector.h" />
     <ClInclude Include="..\..\Source\Pot\Audio\audio.h" />
     <ClInclude Include="..\..\Source\Pot\Audio\audioClip.h" />
-    <ClInclude Include="..\..\Source\Pot\Audio\audioName.h" />
     <ClInclude Include="..\..\Source\Pot\Audio\audioVoice.h" />
     <ClInclude Include="..\..\Source\Pot\Audio\XAudio\audioClipXAudio.h" />
     <ClInclude Include="..\..\Source\Pot\Audio\XAudio\audioVoiceXAudio.h" />
@@ -67,7 +66,6 @@
     <ClInclude Include="..\..\Source\Pot\Input\Windows\inputWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Input\XInput\inputXInput.h" />
     <ClInclude Include="..\..\Source\Pot\List\hashTable.h" />
-    <ClInclude Include="..\..\Source\Pot\List\resourceName.h" />
     <ClInclude Include="..\..\Source\Pot\List\Standard\hashTableStandard.h" />
     <ClInclude Include="..\..\Source\Pot\List\Standard\vectorStandard.h" />
     <ClInclude Include="..\..\Source\Pot\List\vector.h" />
@@ -94,6 +92,16 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\vertexBufferDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\viewDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture1DDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture2DDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture3DDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLAndroid.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLWindows.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\samplerOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\textureOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\texture1D.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\texture2D.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\texture3D.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\sleep.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Thread\Android\mutexAndroid.h" />
@@ -108,6 +116,9 @@
     <ClInclude Include="..\..\Source\Pot\Time\time.h" />
     <ClInclude Include="..\..\Source\Pot\Time\Windows\timeWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Usefull\buffer.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\namedResource.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceList.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceLoadList.h" />
     <ClInclude Include="..\..\Source\Pot\Usefull\singleton.h" />
     <ClInclude Include="..\..\Source\Pot\Windows\gameMain.h" />
     <ClInclude Include="..\..\Source\Pot\Windows\Resource\resource.h" />
@@ -131,6 +142,8 @@
     <ClCompile Include="..\..\Source\Pot\Rand\Standard\randStandard.cpp" />
     <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\deviceDirectX11Platform.cpp" />
     <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLAndroid.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Time\Standard\timeStandard.cpp" />
     <ClCompile Include="..\..\Source\Pot\Time\time.cpp" />
