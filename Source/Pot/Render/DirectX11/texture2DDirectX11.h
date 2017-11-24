@@ -8,7 +8,7 @@
 #include "./Pot/Atom/atom.h"
 
 #include "./Pot/Usefull/resourceLoadList.h"
-#include "./Pot/Render/texture.h"
+#include "./Pot/Render/texture2D.h"
 #include "./Pot/Render/DirectX11/Platform/textureDirectX11Platform.h"
 
 

@@ -91,6 +91,7 @@ using namespace cpot;
 namespace myspc {
 
 Animation<f32> v;
+std::shared_ptr<AudioVoice> voice;
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
 void MyGame::Setting() {
@@ -109,6 +110,12 @@ void MyGame::Init() {
 	v.Add(2.0f, 0.5f);
 	v.Add(4.0f, 1.0f);
 	v.SetIsLoop(true);
+
+	#ifdef CPOT_ON_WINDOWS
+	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
+	#else defined CPOT_ON_ANDROID
+
+	#endif
 }
 
 
@@ -129,8 +136,19 @@ void MyGame::Update() {
 	#pragma region Audio
 
 	if (Input::GetButtonUp(windows::c1)) {
-		
+		voice = ResourceList<AudioVoice>::S().Find("test");
+		voice->Play();
 	}
+	if (Input::GetButtonUp(windows::c6)) {
+		voice->Stop();
+	}
+
+	if (Input::GetButtonUp(windows::c7)) {
+		voice = nullptr;
+	}
+
+	CPOT_LOG("Exist:", ResourceList<AudioClip>::S().Exist("test"));
+	CPOT_LOG(voice.operator bool());
 
 	#pragma endregion
 

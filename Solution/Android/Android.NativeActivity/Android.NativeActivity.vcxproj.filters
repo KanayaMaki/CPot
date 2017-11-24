@@ -254,9 +254,6 @@
     <ClInclude Include="..\..\..\Source\Pot\List\Android\hashTableAndroid.h">
       <Filter>Source\Pot\List\Android</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\Pot\List\Android\vectorAndroid.h">
-      <Filter>Source\Pot\List\Android</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\Pot\Rand\rand.h">
       <Filter>Source\Pot\Rand</Filter>
     </ClInclude>
@@ -304,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Pot\File\Android\fileAndroid.h">
       <Filter>Source\Pot\File\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\List\Android\vectorAndroid.h">
+      <Filter>Source\Pot\List\Android</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

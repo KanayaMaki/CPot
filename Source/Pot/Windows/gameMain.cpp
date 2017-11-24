@@ -18,6 +18,8 @@
 #include "./Pot/Fps/fps.h"
 #include "./Pot/Loader/loader.h"
 
+#include "./Pot/Usefull/resourceUpdaterList.h"
+
 namespace cpot {
 
 
@@ -67,6 +69,9 @@ void* GameMain::GameLoop(void* aDummy) {
 
 		//ローダのアップデート
 		LoaderManager::S().Update();
+		
+		//リソースのアップデート
+		ResourceUpdaterList::S().Update();
 
 		//ゲームの更新
 		mGame->Update();

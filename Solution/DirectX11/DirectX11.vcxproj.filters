@@ -130,11 +130,8 @@
     <Filter Include="Source\Pot\Audio\XAudio\Platform">
       <UniqueIdentifier>{4f7c1bf9-c503-41ef-98a2-e45109d55d2e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Pot\Render\OpenGL">
-      <UniqueIdentifier>{7b8f9511-f2fc-4887-ac34-2788b9fc33ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Pot\Render\OpenGL\Platform">
-      <UniqueIdentifier>{a64ce4b1-aba0-462e-82fb-9b2e122dc9cc}</UniqueIdentifier>
+    <Filter Include="Source\Pot\ModelLoader">
+      <UniqueIdentifier>{7ec22a70-02bd-4602-a735-a53b523d10e4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -420,17 +417,17 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture1DDirectX11.h">
       <Filter>Source\Pot\Render\DirectX11</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\samplerOpenGLPlatform.h">
-      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\elementManagerDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\textureOpenGLPlatform.h">
-      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\renderDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLWindows.h">
-      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderManagerDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLAndroid.h">
-      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceUpdaterList.h">
+      <Filter>Source\Pot\Usefull</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -502,12 +499,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.cpp">
       <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLWindows.cpp">
-      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLAndroid.cpp">
-      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

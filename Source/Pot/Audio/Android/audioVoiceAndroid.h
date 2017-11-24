@@ -7,6 +7,8 @@
 
 #include "./Pot/Atom/atom.h"
 
+#include "./Pot/Usefull/resourceList.h"
+
 #include "./Pot/Audio/audioVoice.h"
 
 #include "./Pot/Audio/Android/audioClipAndroid.h"
@@ -17,11 +19,23 @@ namespace cpot {
 namespace android {
 
 class AudioVoice : public AudioVoiceBase {
+	friend class ResourceList<AudioVoice>;
+
+
+	//ÉçÅ[Éh
+	#pragma region Load
 
 public:
-	void Load(AudioClip& aClip) CPOT_OR {
-		mVoice.Load(aClip.mClip);
+	void Load(const HashTableKey& aUnionName) CPOT_OR {
+		mClip = ResourceList<AudioClip>::S().Find(aUnionName);
+		Load(mClip);	//àœè˜
 	}
+	void Load(AudioClip* aClip) CPOT_OR {
+		mVoice.Load(aClip->mClip);
+		SetName(aClip->GetName());
+	}
+
+	#pragma endregion
 
 public:
 	void Release() CPOT_OR {
@@ -70,6 +84,7 @@ public:
 	#pragma region Field
 
 public:
+	AudioClip* mClip;
 	device::AudioVoice mVoice;
 
 	#pragma endregion

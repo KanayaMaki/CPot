@@ -154,7 +154,7 @@ void TestAudio() {
 	//XAudio‚Ì‰Šú‰»
 	xaudio::platform::Device::S().Init();
 
-	xaudio::AudioXAudioData::S().Regist("test", "./test.wav");
+	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
 
 
 	/*

@@ -7,6 +7,8 @@
 
 #include "./Pot/Atom/atom.h"
 
+#include "./Pot/Usefull/resourceList.h"
+
 #include "./Pot/Audio/audioVoice.h"
 #include "./Pot/Audio/XAudio/audioClipXAudio.h"
 
@@ -16,20 +18,37 @@ namespace cpot {
 
 namespace xaudio {
 
+
 class AudioVoice : public AudioVoiceBase {
+	friend class ResourceList<AudioVoice>;
+
+
+	//ロード
+	#pragma region Load
 
 public:
 	void Load(const HashTableKey& aUnionName) CPOT_OR {
-
+		mClip = ResourceList<AudioClip>::S().Find(aUnionName);
+		Load(mClip);	//委譲
 	}
-	void Load(const std::shared_ptr<AudioClip>& aClip) CPOT_OR {
+	void Load(std::shared_ptr<AudioClip> aClip) CPOT_OR {
 		mVoice.Load(aClip->mClip);
+		SetName(aClip->GetName());
 	}
+
+	#pragma endregion
+
+
+	//リリース
+	#pragma region Release
 
 public:
 	void Release() CPOT_OR {
 		mVoice.Release();
+		mClip = nullptr;
 	}
+
+	#pragma endregion
 
 
 	//操作
@@ -58,6 +77,9 @@ public:
 	#pragma endregion
 
 
+	//取得
+	#pragma region Getter
+
 public:
 	//ボリュームを取得
 	f32 GetVolume() CPOT_OR {
@@ -68,11 +90,14 @@ public:
 		return mVoice.IsLoaded();
 	}
 
+	#pragma endregion
+
 
 	//フィールド
 	#pragma region Field
 
 public:
+	std::shared_ptr<AudioClip> mClip;
 	platform::Voice mVoice;
 
 	#pragma endregion

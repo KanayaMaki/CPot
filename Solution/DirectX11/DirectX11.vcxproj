@@ -81,11 +81,14 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\depthStencilStateDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\depthStencilViewDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\deviceDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\elementManagerDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\indexBufferDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\rasterizerStateDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\renderDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\renderTargetViewDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\samplerStateDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderManagerDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderResourceViewDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\stateDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\textureDirectX11Platform.h" />
@@ -95,10 +98,6 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture1DDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture2DDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture3DDirectX11.h" />
-    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLAndroid.h" />
-    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLWindows.h" />
-    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\samplerOpenGLPlatform.h" />
-    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\textureOpenGLPlatform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\texture1D.h" />
     <ClInclude Include="..\..\Source\Pot\Render\texture2D.h" />
     <ClInclude Include="..\..\Source\Pot\Render\texture3D.h" />
@@ -120,6 +119,7 @@
     <ClInclude Include="..\..\Source\Pot\Usefull\resourceList.h" />
     <ClInclude Include="..\..\Source\Pot\Usefull\resourceLoadList.h" />
     <ClInclude Include="..\..\Source\Pot\Usefull\singleton.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceUpdaterList.h" />
     <ClInclude Include="..\..\Source\Pot\Windows\gameMain.h" />
     <ClInclude Include="..\..\Source\Pot\Windows\Resource\resource.h" />
     <ClInclude Include="..\..\Source\Pot\Windows\test.h" />
@@ -142,8 +142,6 @@
     <ClCompile Include="..\..\Source\Pot\Rand\Standard\randStandard.cpp" />
     <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\deviceDirectX11Platform.cpp" />
     <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.cpp" />
-    <ClCompile Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLAndroid.cpp" />
-    <ClCompile Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Time\Standard\timeStandard.cpp" />
     <ClCompile Include="..\..\Source\Pot\Time\time.cpp" />

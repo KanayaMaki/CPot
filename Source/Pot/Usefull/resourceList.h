@@ -7,38 +7,87 @@
 
 #include "./Pot/Atom/atom.h"
 #include "./Pot/Usefull/singleton.h"
+#include "./Pot/List/vector.h"
+#include "./Pot/Usefull/resourceUpdaterList.h"
 
 namespace cpot {
 
+template<typename T>
+class ResourceListUpdater : public ResourceUpdater {
+public:
+	void Update() override;
+};
 
+//NamedResourceÇåpè≥ÇµÇƒÇ¢ÇÈïKóvÇ™Ç†ÇÈ
 template <typename T>
-class ResourceList : public Singleton<ResourceList<T>>{
+class ResourceList : public Singleton<ResourceList<T>> {
 	friend class Singleton<ResourceList<T>>;
+	friend class ResourceListUpdater<T>;
+
+private:
+	ResourceList() {
+		ResourceUpdaterList::S().Regist(&mResourceListUpdater);
+	}
+	
+	static ResourceListUpdater<T> mResourceListUpdater;
 
 public:
+	BOOL Exist(const HashTableKey& aUnionName) {
+		for (u32 i = 0; i < mResourceList.GetSize(); i++) {
+			auto lT = mResourceList[i];
+			if (lT->GetName() == aUnionName) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	std::shared_ptr<T> Find(const HashTableKey& aUnionName) {
-		if (mResourceList.Exist(aUnionName)) {
-			return mResourceList.Find(aUnionName);
+		for (u32 i = 0; i < mResourceList.GetSize(); i++) {
+			auto lT = mResourceList[i];
+			if (lT->GetName() == aUnionName) {
+				return lT;
+			}
 		}
-		else {
-			std::shared_ptr<T> m(new T);
-			m->Load(aUnionName);
-			m->SetName(aUnionName);
-			Regist(m, aUnionName);
-			return m;
-		}
+		std::shared_ptr<T> lT(new T);
+		lT->Load(aUnionName);
+		mResourceList.PushBack(lT);
+		return lT;
 	}
 
 public:
-	void Regist(const std::shared_ptr<T>& aResource, const HashTableKey& aUnionName) {
-		mResourceList.Add(aUnionName, aResource);
+	void Regist(T* aResource) {
+		mResourceList.PushBack(aResource);
 	}
-	std::shared_ptr<T> Remove(const HashTableKey& aUnionName) {
-		mResourceList.Remove(aUnionName);
+	void Remove(const std::shared_ptr<T>& aResource) {
+		mResourceList.Remove(aResource);
+	}
+	void Remove(const HashTableKey& aUnionName) {
+		for (u32 i = 0; i < mResourceList.GetSize(); i++) {
+			auto& lT = mResourceList[i];
+			if (lT->GetName() == aUnionName) {
+				mResourceList.Remove(lT);
+			}
+		}
 	}
 
 private:
-	HashTable<std::shared_ptr<T>> mResourceList;
+	Vector<std::shared_ptr<T>> mResourceList;
 };
+
+
+template<typename T>
+void ResourceListUpdater<T>::Update() {
+	for (u32 i = 0; i < ResourceList<T>::S().mResourceList.GetSize(); i++) {
+		auto& lT = ResourceList<T>::S().mResourceList[i];
+		if (lT.use_count() == 1) {
+			ResourceList<T>::S().mResourceList.Remove(lT);
+		}
+	}
+	CPOT_LOG("ResourceUpdate!");
+}
+
+template<typename T>
+ResourceListUpdater<T> ResourceList<T>::mResourceListUpdater;
 
 }

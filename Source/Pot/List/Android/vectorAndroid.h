@@ -1,5 +1,5 @@
 //
-//	content	:	StandardでのVectorの実装
+//	content	:	AndroidでのVectorの実装
 //	author	:	SaitoYoshiki
 //
 
@@ -7,6 +7,10 @@
 
 #include "./Pot/Atom/atom.h"
 #include "./Pot/List/vector.h"
+
+#include <vector>
+//#include <algorithm>
+
 
 namespace cpot {
 
@@ -22,7 +26,7 @@ class Vector : public VectorBase<T> {
 
 public:
 	void PushBack(const T& aT) CPOT_OR {
-		//mVector.push_back(aT);
+		mVector.push_back(aT);
 	}
 
 	#pragma endregion
@@ -34,7 +38,6 @@ public:
 public:
 	//指定された値と等しい要素の削除（１つだけ）
 	T Remove(const T& aT) CPOT_OR {
-		/*
 		for (auto it = mVector.begin(); it != mVector.end(); it++) {
 			if (*it == aT) {
 				T lVal = *it;
@@ -42,7 +45,6 @@ public:
 				return lVal;
 			}
 		}
-		*/
 		return T(0);
 	}
 
@@ -53,17 +55,15 @@ public:
 
 	//一番最後の要素を削除して返す
 	T PopBack() CPOT_OR {
-		/*
 		T lRes = mVector.back();
 		mVector.pop_back();
 		return lRes;
-		*/
 	}
 
 
 	//全ての要素を削除
 	void Clear() CPOT_OR {
-		//mVector.clear();
+		mVector.clear();
 	}
 
 	#pragma endregion
@@ -75,12 +75,11 @@ public:
 public:
 	//インデックスアクセス
 	T& operator[](u32 aIndex) CPOT_OR {
-		//return mVector[aIndex];
+		return mVector[aIndex];
 	}
 
 	//指定された値の要素がいくつあるか
 	u32 Count(const T& aT) const CPOT_OR {
-		/*
 		u32 lCount = 0;
 		for (auto it = mVector.begin(); it != mVector.end(); it++) {
 			if (*it == aT) {
@@ -88,7 +87,6 @@ public:
 			}
 		}
 		return lCount;
-		*/
 	}
 
 	#pragma endregion
@@ -100,7 +98,7 @@ public:
 public:
 	//ソート
 	void Sort() CPOT_OR {
-		
+		//std::sort(mVector.begin(), mVector.end());
 	}
 
 	#pragma endregion
@@ -112,7 +110,7 @@ public:
 public:
 	//現在の要素数の取得
 	u32 GetSize() const CPOT_OR {
-		//return mVector.size();
+		return mVector.size();
 	}
 
 	#pragma endregion
@@ -124,12 +122,12 @@ public:
 public:
 	//バッファの要素数を増やす
 	void Reserve(u32 aSize) CPOT_OR {
-		//mVector.reserve(aSize);
+		mVector.reserve(aSize);
 	}
 
 	//バッファの要素数を取得
 	u32 GetCapacity() const CPOT_OR {
-		//return mVector.capacity();
+		return mVector.capacity();
 	}
 
 	#pragma endregion
@@ -139,10 +137,10 @@ public:
 	#pragma region Field
 
 private:
-	//device::Vector<T> mVector;
+	std::vector<T> mVector;
 
 	#pragma endregion
-	
+
 };
 
 }
