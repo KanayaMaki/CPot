@@ -41,7 +41,7 @@ public:
 		}
 		aBufferDesc.ByteWidth = Align(aBufferDesc.ByteWidth, (UINT)256U);
 		mCPUBuffer = aInitData;
-		return Buffer::Load(aBufferDesc, nullptr);
+		return Buffer::Load(aBufferDesc, aInitData);
 	}
 
 	#pragma endregion

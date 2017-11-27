@@ -67,5 +67,7 @@ float4 PS_TEST(PS_PHONG_INPUT input) : SV_TARGET{
 	float4 texel = myTexture.Sample(mySampler, input.Tex);
 	col *= texel;
 
+	col *= Timer;
+
 	return col;
 }

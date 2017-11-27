@@ -154,16 +154,14 @@ void MyGame::Init() {
 
 	wvpBuffer.reset(new directX11::platform::ConstantBuffer);
 	wvpBuffer->Load<WVPBuffer>(new WVPBuffer);
-	wvpBuffer->Write();
 
 	diffuseBuffer.reset(new directX11::platform::ConstantBuffer);
 	diffuseBuffer->Load<DiffuseBuffer>(new DiffuseBuffer);
 	diffuseBuffer->GetCPUBuffer<DiffuseBuffer>()->mDiffuse = Color::White();
-	diffuseBuffer->Write();
 
 	timerBuffer.reset(new directX11::platform::ConstantBuffer);
 	timerBuffer->Load<TimerBuffer>(new TimerBuffer);
-	timerBuffer->Write();
+	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = 0.0f;
 
 	sampler.reset(new directX11::platform::SamplerState);
 	sampler->Load(directX11::platform::SamplerState::CreateDescClamp());
@@ -334,6 +332,12 @@ void MyGame::Update() {
 
 	#pragma endregion
 
+	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer += DeltaTime();
+	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = Wrap(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer, 1.0f);
+
+	wvpBuffer->Write();
+	diffuseBuffer->Write();
+	timerBuffer->Write();
 
 	directX11::platform::Render::S().SetToDevice();
 	directX11::platform::Render::S().DrawIndexed(6, 0, 0);
