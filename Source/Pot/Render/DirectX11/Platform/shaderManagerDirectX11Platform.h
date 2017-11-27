@@ -8,6 +8,7 @@
 #include "./Pot/Render/DirectX11/Platform/shaderResourceViewDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/samplerStateDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/constantBufferDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/unorderedAccessViewDirectX11Platform.h"
 
 namespace cpot {
 
@@ -24,33 +25,29 @@ public:
 	}
 
 public:
-	void SetShader(ShaderType* aShader) {
+	void SetShader(std::shared_ptr<ShaderType> aShader) {
 		mShader.Set(aShader, 0);
 	}
-	void SetSampler(ID3D11SamplerState* aSampler, u32 aSlotNum) {
+	void SetSampler(std::shared_ptr<SamplerState> aSampler, u32 aSlotNum) {
 		mSampler.Set(aSampler, aSlotNum);
 	}
-	void SetShaderResource(ShaderResourceView* aShaderResource, u32 aSlotNum) {
+	void SetShaderResource(std::shared_ptr<ShaderResourceView> aShaderResource, u32 aSlotNum) {
 		mShaderResource.Set(aShaderResource, aSlotNum);
 	}
-	void SetConstantBuffer(ID3D11Buffer* aBuffer, u32 aSlotNum) {
+	void SetConstantBuffer(std::shared_ptr<ConstantBuffer> aBuffer, u32 aSlotNum) {
 		mConstantBuffer.Set(aBuffer, aSlotNum);
 	}
-	ShaderType* GetShader() {
+	std::shared_ptr<ShaderType> GetShader() {
 		return mShader.Get();
 	}
-	ID3D11SamplerState* GetSampler(u32 aSlotNum) {
+	std::shared_ptr<SamplerState> GetSampler(u32 aSlotNum) {
 		return mSampler.Get(aSlotNum);
 	}
-	ID3D11ShaderResourceView* GetShaderResource(u32 aSlotNum) {
+	std::shared_ptr<ShaderResourceView> GetShaderResource(u32 aSlotNum) {
 		return mShaderResource.Get(aSlotNum);
 	}
-	ID3D11Buffer* GetConstantBuffer(u32 aSlotNum) {
+	std::shared_ptr<ConstantBuffer> GetConstantBuffer(u32 aSlotNum) {
 		return mConstantBuffer.Get(aSlotNum);
-	}
-
-	void SetConstantBufferChanged() {
-		mConstantBuffer.SetChanged();
 	}
 
 	void SetToDevice() {
@@ -92,7 +89,7 @@ using VertexShaderManager = ShaderManager<VertexShader>;
 
 template <>
 inline void VertexShaderManager::SetShaderToDevice() {
-	Device::S().GetDeviceContext()->VSSetShader(*(mShader.GetArray()), nullptr, 0);
+	Device::S().GetDeviceContext()->VSSetShader(mShader.Get()->GetShader(), nullptr, 0);
 }
 template <>
 inline void VertexShaderManager::SetSamplerToDevice() {
@@ -112,11 +109,11 @@ inline void VertexShaderManager::SetConstantBufferToDevice() {
 
 #pragma region GeometryShaderManager
 
-using GeometryShaderManager = ShaderManager<ID3D11GeometryShader>;
+using GeometryShaderManager = ShaderManager<GeometryShader>;
 
 template <>
 inline void GeometryShaderManager::SetShaderToDevice() {
-	Device::S().GetDeviceContext()->GSSetShader(*(mShader.GetArray()), nullptr, 0);
+	Device::S().GetDeviceContext()->GSSetShader(mShader.Get()->GetShader(), nullptr, 0);
 }
 template <>
 inline void GeometryShaderManager::SetSamplerToDevice() {
@@ -135,11 +132,11 @@ inline void GeometryShaderManager::SetConstantBufferToDevice() {
 
 
 #pragma region PixelShaderManager
-using PixelShaderManager = ShaderManager<ID3D11PixelShader>;
+using PixelShaderManager = ShaderManager<PixelShader>;
 
 template <>
 inline void PixelShaderManager::SetShaderToDevice() {
-	Device::S().GetDeviceContext()->PSSetShader(*(mShader.GetArray()), nullptr, 0);
+	Device::S().GetDeviceContext()->PSSetShader(mShader.Get()->GetShader(), nullptr, 0);
 }
 template <>
 inline void PixelShaderManager::SetSamplerToDevice() {
@@ -159,11 +156,11 @@ inline void PixelShaderManager::SetConstantBufferToDevice() {
 
 #pragma region DomainShaderManager
 
-using DomainShaderManager = ShaderManager<ID3D11DomainShader>;
+using DomainShaderManager = ShaderManager<DomainShader>;
 
 template <>
 inline void DomainShaderManager::SetShaderToDevice() {
-	Device::S().GetDeviceContext()->DSSetShader(*(mShader.GetArray()), nullptr, 0);
+	Device::S().GetDeviceContext()->DSSetShader(mShader.Get()->GetShader(), nullptr, 0);
 }
 template <>
 inline void DomainShaderManager::SetSamplerToDevice() {
@@ -183,11 +180,11 @@ inline void DomainShaderManager::SetConstantBufferToDevice() {
 
 #pragma region HullShaderManager
 
-using HullShaderManager = ShaderManager<ID3D11HullShader>;
+using HullShaderManager = ShaderManager<HullShader>;
 
 template <>
 inline void HullShaderManager::SetShaderToDevice() {
-	Device::S().GetDeviceContext()->HSSetShader(*(mShader.GetArray()), nullptr, 0);
+	Device::S().GetDeviceContext()->HSSetShader(mShader.Get()->GetShader(), nullptr, 0);
 }
 template <>
 inline void HullShaderManager::SetSamplerToDevice() {
@@ -207,29 +204,29 @@ inline void HullShaderManager::SetConstantBufferToDevice() {
 
 #pragma region ComputeShaderManager
 
-using ComputeShaderManager = ShaderManager<ID3D11ComputeShader>;
+using ComputeShaderManager = ShaderManager<ComputeShader>;
 
 template <>
-class ShaderManager<ID3D11ComputeShader> {
+class ShaderManager<ComputeShader> {
 public:
 	ShaderManager() {
 
 	}
 
 public:
-	void SetShader(ID3D11ComputeShader* aShader) {
+	void SetShader(std::shared_ptr<ComputeShader> aShader) {
 		mShader.Set(aShader, 0);
 	}
-	void SetSampler(ID3D11SamplerState* aSampler, u32 aSlotNum) {
+	void SetSampler(std::shared_ptr<SamplerState> aSampler, u32 aSlotNum) {
 		mSampler.Set(aSampler, aSlotNum);
 	}
-	void SetShaderResource(ID3D11ShaderResourceView* aShaderResource, u32 aSlotNum) {
+	void SetShaderResource(std::shared_ptr<ShaderResourceView> aShaderResource, u32 aSlotNum) {
 		mShaderResource.Set(aShaderResource, aSlotNum);
 	}
-	void SetConstantBuffer(ID3D11Buffer* aBuffer, u32 aSlotNum) {
+	void SetConstantBuffer(std::shared_ptr<ConstantBuffer> aBuffer, u32 aSlotNum) {
 		mConstantBuffer.Set(aBuffer, aSlotNum);
 	}
-	void SetUnorderedAccessView(ID3D11UnorderedAccessView* aUnorderedAccessView, u32 aSlotNum) {
+	void SetUnorderedAccessView(std::shared_ptr<UnorderedAccessView> aUnorderedAccessView, u32 aSlotNum) {
 		mUnorderedAccessView.Set(aUnorderedAccessView, aSlotNum);
 	}
 
@@ -258,7 +255,7 @@ public:
 
 private:
 	void SetShaderToDevice() {
-		Device::S().GetDeviceContext()->CSSetShader(*(mShader.GetArray()), nullptr, 0);
+		Device::S().GetDeviceContext()->CSSetShader(mShader.Get()->GetShader(), nullptr, 0);
 	}
 	void SetSamplerToDevice() {
 		Device::S().GetDeviceContext()->CSSetSamplers(0, mSampler.SlotMaxNum(), mSampler.GetArray());
@@ -274,7 +271,7 @@ private:
 	}
 
 private:
-	ElementManager<ID3D11ComputeShader, 1> mShader;
+	ElementManager<ComputeShader, 1> mShader;
 	SamplerStateManager mSampler;
 	ShaderResourceViewManager mShaderResource;
 	ConstantBufferManager mConstantBuffer;

@@ -16,7 +16,7 @@ class AudioVoiceBase : public NamedResource {
 
 public:
 	CPOT_VI void Load(const HashTableKey& aUnionName) CPOT_ZR;
-	CPOT_VI void Load(AudioClip* aClip) CPOT_ZR;
+	CPOT_VI void Load(std::shared_ptr<AudioClip> aClip) CPOT_ZR;
 
 public:
 	CPOT_VI void Release() CPOT_ZR;

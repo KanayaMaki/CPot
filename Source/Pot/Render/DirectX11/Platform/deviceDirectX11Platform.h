@@ -26,7 +26,7 @@ namespace directX11 {
 namespace platform {
 
 
-#define CPOT_SAFE_RELEASE(p) if(p) {p->Release();}
+#define CPOT_SAFE_RELEASE(p) if(p != nullptr) {p->Release();}
 
 class Device : public Singleton<Device> {
 	friend class Singleton<Device>;

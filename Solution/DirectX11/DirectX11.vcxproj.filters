@@ -429,6 +429,15 @@
     <ClInclude Include="..\..\Source\Pot\Usefull\resourceUpdaterList.h">
       <Filter>Source\Pot\Usefull</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Usefull\path.h">
+      <Filter>Source\Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\unorderedAccessViewDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\textureAllDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">

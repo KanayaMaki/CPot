@@ -12,6 +12,7 @@
 #include "./Pot/Out/Windows/outConsoleWindows.h"
 
 #include "./Pot/Audio/XAudio/Platform/deviceXAudioPlatform.h"
+#include "./Pot/Render/DirectX11/Platform/deviceDirectX11Platform.h"
 
 #include "./Pot/Config/config.h"
 
@@ -35,9 +36,10 @@ void* GameMain::GameLoop(void* aDummy) {
 	//プラットフォームの初期化
 	#pragma region PlatformInit
 
-	xaudio::platform::Device::S().Init();
-
 	windows::Window& tW = windows::Window::S();
+
+	xaudio::platform::Device::S().Init();
+	directX11::platform::Device::S().Init(tW.GetHwnd(), tW.GetSize());
 
 	//ウィンドウズの入力の初期化
 	windows::Input::S().Init(tW.GetHInstance(), tW.GetHwnd());

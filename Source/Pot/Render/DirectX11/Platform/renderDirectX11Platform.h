@@ -6,8 +6,10 @@
 #include "./Pot/Render/DirectX11/Platform/elementManagerDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/shaderManagerDirectX11Platform.h"
 
+#include "./Pot/Render/DirectX11/Platform/textureAllDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/usefullDirectX11Platform.h"
 
-#include "./Pot/Render/DirectX11/Platform/viewPortDirectX11Platform.h"
+//#include "./Pot/Render/DirectX11/Platform/viewPortDirectX11Platform.h"
 
 
 namespace cpot {
@@ -40,9 +42,6 @@ public:
 	}
 	IndexBufferManager& GetIndexBufferManager() {
 		return mIndexBufferManager;
-	}
-	PrimitiveTopologyManager& GetPrimitiveTopologyManager() {
-		return mPrimitiveTopologyManager;
 	}
 	InputLayoutManager& GetInputLayoutManager() {
 		return mInputLayoutManager;
@@ -84,7 +83,6 @@ public:
 		mRenderTargetViewManager.SetToDevice(mDepthStencilViewManager);
 		mIndexBufferManager.SetToDevice();
 		mVertexBufferManager.SetToDevice();
-		mPrimitiveTopologyManager.SetToDevice();
 		mInputLayoutManager.SetToDevice();
 		mViewPortManager.SetToDevice();
 
@@ -108,7 +106,6 @@ private:
 	DepthStencilViewManager mDepthStencilViewManager;
 	VertexBufferManager mVertexBufferManager;
 	IndexBufferManager mIndexBufferManager;
-	PrimitiveTopologyManager mPrimitiveTopologyManager;
 	InputLayoutManager mInputLayoutManager;
 	ViewPortManager mViewPortManager;
 

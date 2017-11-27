@@ -59,6 +59,8 @@
 #include "./Pot/Render/DirectX11/Platform/shaderResourceViewDirectX11Platform.h"
 #include "./Pot/Config/config.h"
 
+#include "./Pot/Usefull/path.h"
+
 #include "./Pot/Render/texture2D.h"
 
 #include <Windows.h>
@@ -78,21 +80,7 @@ void TestTexture() {
 #pragma region DirectX11
 
 void TestDirectX11(HWND aHwnd) {
-	directX11::platform::Device::S().Init(aHwnd, Config::S().GetScreenSize());
 
-	auto c = new directX11::platform::ConstantBuffer;
-	c->Load<Vector4>(nullptr);
-	c->Release();
-
-	auto v = new directX11::platform::VertexBuffer;
-	v->Load(32, 32, nullptr);
-	v->Release();
-
-	auto i = new directX11::platform::IndexBuffer;
-	i->Load(DXGI_FORMAT_R8_UINT, 20, nullptr, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	//i->Release();
-
-	CPOT_LOG(i->IsLoaded());
 }
 
 #pragma endregion

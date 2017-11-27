@@ -3,9 +3,6 @@
 #include "./Pot/Render/DirectX11/Platform/deviceDirectX11Platform.h"
 #include "./Pot/Usefull/singleton.h"
 
-#include "./Pot/Render/DirectX11/Platform/elementManagerDirectX11Platform.h"
-#include "./Pot/Render/DirectX11/Platform/shaderManagerDirectX11Platform.h"
-
 
 #include "./Pot/Render/DirectX11/Platform/shaderDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/constantBufferDirectX11Platform.h"
@@ -22,6 +19,7 @@
 #include "./Pot/Render/DirectX11/Platform/renderTargetViewDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/shaderResourceViewDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/depthStencilViewDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/unorderedAccessViewDirectX11Platform.h"
 
 
 namespace cpot {
@@ -47,8 +45,8 @@ protected:
 	}
 
 public:
-	void Set(ElementType* aElement, u32 aSlotNum) {
-		CYC_POT_ASSERT(aSlotNum < cSlotMax);
+	void Set(std::shared_ptr<ElementType> aElement, u32 aSlotNum) {
+		CPOT_ASSERT(aSlotNum < cSlotMax);
 		if (mElement[aSlotNum] == aElement) {
 			return;
 		}
@@ -56,13 +54,10 @@ public:
 		SetChanged();
 	}
 
-	ElementType** GetArray() {
-		return mElement;
-	}
-	ElementType* Get() const {
+	std::shared_ptr<ElementType> Get() const {
 		return mElement[0];
 	}
-	ElementType* Get(u32 aSlotNum) const {
+	std::shared_ptr<ElementType> Get(u32 aSlotNum) const {
 		return mElement[aSlotNum];
 	}
 
@@ -80,7 +75,7 @@ public:
 	}
 
 protected:
-	ElementType* mElement[cSlotMax];
+	std::shared_ptr<ElementType> mElement[cSlotMax];
 	BOOL mChanged;
 };
 
@@ -89,7 +84,9 @@ protected:
 
 struct BlendStateData {
 
-	BlendStateData() {}
+	BlendStateData() {
+		Reset();
+	}
 
 	FLOAT mBlendFactor[4];
 	UINT mSampleMask;
@@ -138,7 +135,7 @@ public:
 		SetChanged();
 	}
 
-	void Set(ID3D11BlendState* aElement, const BlendStateData* aData) {
+	void Set(std::shared_ptr<BlendState> aElement, const BlendStateData* aData) {
 		if (mElement[0] != aElement) {
 			mElement[0] = aElement;
 			SetChanged();
@@ -154,7 +151,7 @@ public:
 
 	void SetToDevice() {
 		if (IsChanged()) {
-			Device::S().GetDeviceContext()->OMSetBlendState(Get(), mData.mBlendFactor, mData.mSampleMask);
+			Device::S().GetDeviceContext()->OMSetBlendState(Get()->GetState(), mData.mBlendFactor, mData.mSampleMask);
 			SetNotChanged();
 		}
 	}
@@ -186,8 +183,8 @@ struct DepthStencilStateData {
 	}
 };
 
-class DepthStencilStateManager : public ElementManager<ID3D11DepthStencilState, 1> {
-	using super = ElementManager<ID3D11DepthStencilState, 1>;
+class DepthStencilStateManager : public ElementManager<DepthStencilState, 1> {
+	using super = ElementManager<DepthStencilState, 1>;
 
 public:
 	DepthStencilStateManager() {
@@ -207,7 +204,7 @@ public:
 	}
 
 
-	void Set(ID3D11DepthStencilState* aElement, const DepthStencilStateData* aData) {
+	void Set(std::shared_ptr<DepthStencilState> aElement, const DepthStencilStateData* aData) {
 		if (mElement[0] != aElement) {
 			mElement[0] = aElement;
 			SetChanged();
@@ -223,7 +220,7 @@ public:
 
 	void SetToDevice() {
 		if (IsChanged()) {
-			Device::S().GetDeviceContext()->OMSetDepthStencilState(Get(), mData.mStencilRef);
+			Device::S().GetDeviceContext()->OMSetDepthStencilState(Get()->GetState(), mData.mStencilRef);
 			SetNotChanged();
 		}
 	}
@@ -237,15 +234,17 @@ private:
 
 #pragma region RasterizerState
 
-class RasterizerStateManager : public ElementManager<ID3D11RasterizerState, 1> {
+class RasterizerStateManager : public ElementManager<RasterizerState, 1> {
+	using super = ElementManager<RasterizerState, 1>;
+
 public:
-	void Set(ID3D11RasterizerState* aRasterizer) {
-		ElementManager<ID3D11RasterizerState, 1>::Set(aRasterizer, 0);
+	void Set(std::shared_ptr<RasterizerState> aElement) {
+		super::Set(aElement, 0);
 	}
 
 	void SetToDevice() {
 		if (IsChanged()) {
-			Device::S().GetDeviceContext()->RSSetState(Get());
+			Device::S().GetDeviceContext()->RSSetState(Get()->GetState());
 			SetNotChanged();
 		}
 	}
@@ -256,10 +255,12 @@ public:
 
 #pragma region DepthStencilView
 
-class DepthStencilViewManager : public ElementManager<ID3D11DepthStencilView, 1> {
+class DepthStencilViewManager : public ElementManager<DepthStencilView, 1> {
+	using super = ElementManager<DepthStencilView, 1>;
+
 public:
-	void Set(ID3D11DepthStencilView* aDepthStencil) {
-		ElementManager<ID3D11DepthStencilView, 1>::Set(aDepthStencil, 0);
+	void Set(std::shared_ptr<DepthStencilView> aElement) {
+		super::Set(aElement, 0);
 	}
 };
 
@@ -268,15 +269,33 @@ public:
 
 #pragma region RenderTargetView
 
-class RenderTargetViewManager : public ElementManager<ID3D11RenderTargetView, 1> {
+const u32 cRenderTargetViewSlotMax = 8;
+
+class RenderTargetViewManager : public ElementManager<RenderTargetView, cRenderTargetViewSlotMax> {
+public:
+	void Set(std::shared_ptr<RenderTargetView> aElement, u32 aSlotNum) {
+		CPOT_ASSERT(aSlotNum < SlotMaxNum());
+		if (mElement[aSlotNum] == aElement) {
+			return;
+		}
+		mElement[aSlotNum] = aElement;
+		mRenderTargetView[aSlotNum] = aElement->Get();
+
+		SetChanged();
+	}
+
+
 public:
 	void SetToDevice(DepthStencilViewManager& aDepthStencil) {
 		if (IsChanged() || aDepthStencil.IsChanged()) {
-			Device::S().GetDeviceContext()->OMSetRenderTargets(SlotMaxNum(), GetArray(), aDepthStencil.Get());
+			Device::S().GetDeviceContext()->OMSetRenderTargets(SlotMaxNum(), mRenderTargetView, aDepthStencil.Get()->Get());
 			SetNotChanged();
 			aDepthStencil.SetNotChanged();
 		}
 	}
+
+private:
+	ID3D11RenderTargetView* mRenderTargetView[cRenderTargetViewSlotMax];
 };
 
 #pragma endregion
@@ -284,15 +303,17 @@ public:
 
 #pragma region InputLayout
 
-class InputLayoutManager : public ElementManager<ID3D11InputLayout, 1> {
+class InputLayoutManager : public ElementManager<InputLayout, 1> {
+	using super = ElementManager<InputLayout, 1>;
+
 public:
-	void Set(ID3D11InputLayout* aInputLayout) {
-		ElementManager<ID3D11InputLayout, 1>::Set(aInputLayout, 0);
+	void Set(std::shared_ptr<InputLayout> aInputLayout) {
+		super::Set(aInputLayout, 0);
 	}
 
 	void SetToDevice() {
 		if (IsChanged()) {
-			Device::S().GetDeviceContext()->IASetInputLayout(Get());
+			Device::S().GetDeviceContext()->IASetInputLayout(Get()->Get());
 			SetNotChanged();
 		}
 	}
@@ -306,62 +327,37 @@ public:
 
 const u32 cVertexBufferSlotMax = 8;
 
-class VertexBufferManager : public ElementManager<ID3D11Buffer, cVertexBufferSlotMax> {
-	using super = ElementManager<ID3D11Buffer, cVertexBufferSlotMax>;
-public:
-	VertexBufferManager() {
-		Reset();
-	}
-
-private:
-	void Reset() {
-		ResetData();
-		super::Reset();
-	}
+class VertexBufferManager : public ElementManager<VertexBuffer, cVertexBufferSlotMax> {
+	using super = ElementManager<VertexBuffer, cVertexBufferSlotMax>;
 
 public:
-	void Clear() {
-		Reset();
-		SetChanged();
-	}
-public:
-	void Set(ID3D11Buffer* aElement, u32 aSlotNum, u32 aOffset, u32 aStride) {
-		CYC_POT_ASSERT(aSlotNum < SlotMaxNum());
+	void Set(std::shared_ptr<VertexBuffer> aElement, u32 aSlotNum) {
+		CPOT_ASSERT(aSlotNum < SlotMaxNum());
 		if (mElement[aSlotNum] != aElement) {
 			mElement[aSlotNum] = aElement;
-			SetChanged();
-		}
-
-		if (mOffsets[aSlotNum] != aOffset) {
-			mOffsets[aSlotNum] = aOffset;
-			SetChanged();
-		}
-
-		if (mStrides[aSlotNum] != aStride) {
-			mStrides[aSlotNum] = aStride;
+			mArrayElement[aSlotNum] = aElement->GetBuffer();
+			mStrides[aSlotNum] = aElement->GetVertexSize();
+			mOffsets[aSlotNum] = 0;
 			SetChanged();
 		}
 	}
 
 	void SetToDevice() {
 		if (IsChanged()) {
-			Device::S().GetDeviceContext()->IASetVertexBuffers(0, SlotMaxNum(), mElement, mStrides, mOffsets);
+			Device::S().GetDeviceContext()->IASetVertexBuffers(0, SlotMaxNum(), GetArray(), mStrides, mOffsets);
 			SetNotChanged();
 		}
 	}
 
-private:
-	UINT mOffsets[cVertexBufferSlotMax];
-	UINT mStrides[cVertexBufferSlotMax];
-
-	void ResetData() {
-		for (s32 i = 0; i < cVertexBufferSlotMax; i++) {
-			mStrides[i] = 0;
-		}
-		for (s32 i = 0; i < cVertexBufferSlotMax; i++) {
-			mOffsets[i] = 0;
-		}
+public:
+	ID3D11Buffer* const* GetArray() const {
+		return mArrayElement;
 	}
+
+private:
+	ID3D11Buffer* mArrayElement[cVertexBufferSlotMax];
+	UINT mStrides[cVertexBufferSlotMax];
+	UINT mOffsets[cVertexBufferSlotMax];
 };
 
 #pragma endregion
@@ -369,140 +365,24 @@ private:
 
 #pragma region IndexBuffer
 
-struct IndexBufferData {
-	FLOAT mBlendFactor[4];
-	UINT mSampleMask;
-	BOOL operator ==(const BlendStateData& aD) {
-		if (mSampleMask != aD.mSampleMask) return false;
-		for (s32 i = 0; i < 4; i++) {
-			if (mBlendFactor[i] != aD.mBlendFactor[i]) return false;
-		}
-		return true;
-	}
-	BOOL operator !=(const BlendStateData& aD) {
-		return !((*this) == aD);
-	}
-	const BlendStateData& operator =(const BlendStateData& aD) {
-		mSampleMask = aD.mSampleMask;
-		for (s32 i = 0; i < 4; i++) {
-			mBlendFactor[i] = aD.mBlendFactor[i];
-		}
-	}
-	void Reset() {
-		mSampleMask = 0;
-		for (s32 i = 0; i < 4; i++) {
-			mBlendFactor[i] = 0.0f;
-		}
-	}
-};
-
-class IndexBufferManager : public ElementManager<ID3D11Buffer, 1> {
-	using super = ElementManager<ID3D11Buffer, 1>;
+class IndexBufferManager : public ElementManager<IndexBuffer, 1> {
+	using super = ElementManager<IndexBuffer, 1>;
 
 public:
-	IndexBufferManager() {
-		Reset();
-	}
-
-private:
-	void Reset() {
-		ResetData();
-		super::Reset();
-	}
-
-public:
-	void Clear() {
-		Reset();
-		SetChanged();
-	}
-
-	void Set(ID3D11Buffer* aElement, DXGI_FORMAT aFormat, UINT aOffset) {
+	void Set(std::shared_ptr<IndexBuffer> aElement) {
 		if (mElement[0] != aElement) {
 			mElement[0] = aElement;
 			SetChanged();
 		}
-
-		if (mFormat != aFormat) {
-			mFormat = aFormat;
-			SetChanged();
-		}
-
-		if (mOffset != aOffset) {
-			mOffset = aOffset;
-			SetChanged();
-		}
 	}
 
 	void SetToDevice() {
 		if (IsChanged()) {
-			Device::S().GetDeviceContext()->IASetIndexBuffer(Get(), mFormat, mOffset);
+			Device::S().GetDeviceContext()->IASetIndexBuffer(Get()->GetBuffer(), Get()->GetFormat(), 0);
+			Device::S().GetDeviceContext()->IASetPrimitiveTopology(Get()->GetTopology());
 			SetNotChanged();
 		}
 	}
-
-private:
-	DXGI_FORMAT mFormat;
-	UINT mOffset;
-
-private:
-	void ResetData() {
-		mFormat = DXGI_FORMAT_UNKNOWN;
-		mOffset = 0;
-	}
-};
-
-#pragma endregion
-
-
-#pragma region PrimitiveTopology
-
-class PrimitiveTopologyManager {
-public:
-	PrimitiveTopologyManager() {
-		Reset();
-	}
-
-private:
-	void Reset() {
-		mPrimitiveTopology = D3D11_PRIMITIVE_TOPOLOGY_UNDEFINED;
-	}
-
-public:
-	void Clear() {
-		Reset();
-		SetChanged();
-	}
-
-	void Set(D3D_PRIMITIVE_TOPOLOGY aPrimitiveTopology) {
-		if (mPrimitiveTopology != aPrimitiveTopology) {
-			mPrimitiveTopology = aPrimitiveTopology;
-			SetChanged();
-		}
-	}
-	D3D_PRIMITIVE_TOPOLOGY Get() const {
-		return mPrimitiveTopology;
-	}
-	void SetToDevice() {
-		if (IsChanged()) {
-			Device::S().GetDeviceContext()->IASetPrimitiveTopology(mPrimitiveTopology);
-			SetNotChanged();
-		}
-	}
-
-
-	BOOL IsChanged() const {
-		return mChanged;
-	}
-	void SetChanged() {
-		mChanged = true;
-	}
-	void SetNotChanged() {
-		mChanged = false;
-	}
-
-protected:
-	D3D_PRIMITIVE_TOPOLOGY mPrimitiveTopology;
-	BOOL mChanged;
 };
 
 #pragma endregion
@@ -510,8 +390,26 @@ protected:
 
 #pragma region SamplerState
 
-class SamplerStateManager : public ElementManager<ID3D11SamplerState, 8> {
+const u32 cSamplerStateSlotMax = 8;
 
+class SamplerStateManager : public ElementManager<SamplerState, cSamplerStateSlotMax> {
+public:
+	void Set(std::shared_ptr<SamplerState> aElement, u32 aSlotNum) {
+		CPOT_ASSERT(aSlotNum < SlotMaxNum());
+		if (mElement[aSlotNum] != aElement) {
+			mElement[aSlotNum] = aElement;
+			mArrayElement[aSlotNum] = aElement->GetState();
+			SetChanged();
+		}
+	}
+
+public:
+	ID3D11SamplerState* const* GetArray() const {
+		return mArrayElement;
+	}
+
+private:
+	ID3D11SamplerState* mArrayElement[cSamplerStateSlotMax];
 };
 
 #pragma endregion
@@ -519,8 +417,27 @@ class SamplerStateManager : public ElementManager<ID3D11SamplerState, 8> {
 
 #pragma region ShaderResourceView
 
-class ShaderResourceViewManager : public ElementManager<ID3D11ShaderResourceView, 16> {
+const u32 cShaderResourceViewSlotMax = 8;
 
+class ShaderResourceViewManager : public ElementManager<ShaderResourceView, cShaderResourceViewSlotMax> {
+
+public:
+	void Set(std::shared_ptr<ShaderResourceView> aElement, u32 aSlotNum) {
+		CPOT_ASSERT(aSlotNum < SlotMaxNum());
+		if (mElement[aSlotNum] != aElement) {
+			mElement[aSlotNum] = aElement;
+			mArrayElement[aSlotNum] = aElement->Get();
+			SetChanged();
+		}
+	}
+
+public:
+	ID3D11ShaderResourceView* const* GetArray() const {
+		return mArrayElement;
+	}
+
+private:
+	ID3D11ShaderResourceView* mArrayElement[cShaderResourceViewSlotMax];
 };
 
 #pragma endregion
@@ -528,8 +445,26 @@ class ShaderResourceViewManager : public ElementManager<ID3D11ShaderResourceView
 
 #pragma region ConstantBuffer
 
-class ConstantBufferManager : public ElementManager<ID3D11Buffer, 8> {
+const u32 cConstantBufferSlotMax = 8;
 
+class ConstantBufferManager : public ElementManager<ConstantBuffer, cConstantBufferSlotMax> {
+public:
+	void Set(std::shared_ptr<ConstantBuffer> aElement, u32 aSlotNum) {
+		CPOT_ASSERT(aSlotNum < SlotMaxNum());
+		if (mElement[aSlotNum] != aElement) {
+			mElement[aSlotNum] = aElement;
+			mArrayElement[aSlotNum] = aElement->GetBuffer();
+			SetChanged();
+		}
+	}
+
+public:
+	ID3D11Buffer* const* GetArray() const {
+		return mArrayElement;
+	}
+
+private:
+	ID3D11Buffer* mArrayElement[cConstantBufferSlotMax];
 };
 
 #pragma endregion
@@ -537,8 +472,26 @@ class ConstantBufferManager : public ElementManager<ID3D11Buffer, 8> {
 
 #pragma region UnorderedAccessView
 
-class UnorderedAccessViewManager : public ElementManager<ID3D11UnorderedAccessView, 16> {
+const u32 cUnorderedAccessViewSlotMax = 16;
 
+class UnorderedAccessViewManager : public ElementManager<UnorderedAccessView, cUnorderedAccessViewSlotMax> {
+public:
+	void Set(std::shared_ptr<UnorderedAccessView> aElement, u32 aSlotNum) {
+		CPOT_ASSERT(aSlotNum < SlotMaxNum());
+		if (mElement[aSlotNum] != aElement) {
+			mElement[aSlotNum] = aElement;
+			mArrayElement[aSlotNum] = aElement->Get();
+			SetChanged();
+		}
+	}
+
+public:
+	ID3D11UnorderedAccessView* const* GetArray() const {
+		return mArrayElement;
+	}
+
+private:
+	ID3D11UnorderedAccessView* mArrayElement[cUnorderedAccessViewSlotMax];
 };
 
 #pragma endregion
@@ -562,7 +515,7 @@ protected:
 
 public:
 	void Set(D3D11_VIEWPORT aElement, u32 aSlotNum) {
-		CYC_POT_ASSERT(aSlotNum < cSlotMax);
+		CPOT_ASSERT(aSlotNum < cSlotMax);
 		if (mElement[aSlotNum] == aElement) {
 			return;
 		}

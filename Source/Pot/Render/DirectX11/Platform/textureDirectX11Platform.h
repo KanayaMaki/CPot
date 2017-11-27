@@ -99,14 +99,49 @@ public:
 		return lTexture;
 	}
 
+	BOOL IsBindRenderTarget() const {
+		return mData.IsStand(cBindRenderTarget);
+	}
+	BOOL IsBindShaderResource() const {
+		return mData.IsStand(cBindShaderResource);
+	}
+	BOOL IsBindDepthStencil() const {
+		return mData.IsStand(cBindDepthStencil);
+	}
+	BOOL IsCPUAccessReadable() const {
+		return mData.IsStand(cCPUAccessReadable);
+	}
+	BOOL IsCPUAccessWritable() const {
+		return mData.IsStand(cCPUAccessWritable);
+	}
+
+	void SetBindFlags(UINT aBindFlags) {
+		mData.Flag(cBindRenderTarget, IsRenderTarget(aBindFlags));
+		mData.Flag(cBindShaderResource, IsShaderResource(aBindFlags));
+		mData.Flag(cBindDepthStencil, IsDepthStencil(aBindFlags));
+	}
+	void SetCPUAccessFlags(UINT aCPUAccessFlags) {
+		mData.Flag(cCPUAccessReadable, IsReadable(aCPUAccessFlags));
+		mData.Flag(cCPUAccessWritable, IsWritable(aCPUAccessFlags));
+	}
+
 	#pragma endregion
 
+
+	enum CData {
+		cBindRenderTarget,
+		cBindShaderResource,
+		cBindDepthStencil,
+		cCPUAccessReadable,
+		cCPUAccessWritable,
+	};
 
 	//フィールド
 	#pragma region Field
 
 protected:
 	TextureType* mTexture;
+	BitFlag mData;
 
 	#pragma endregion
 
@@ -248,6 +283,8 @@ public:
 
 		mWidth = aDesc.Width;
 		mHeight = aDesc.Height;
+		SetBindFlags(aDesc.BindFlags);
+		SetCPUAccessFlags(aDesc.CPUAccessFlags);
 
 		return true;
 	}
@@ -268,6 +305,8 @@ public:
 		D3D11_TEXTURE2D_DESC lDesc = CreateDesc(mTexture);
 		mWidth = lDesc.Width;
 		mHeight = lDesc.Height;
+		SetBindFlags(lDesc.BindFlags);
+		SetCPUAccessFlags(lDesc.CPUAccessFlags);
 
 		return true;
 	}

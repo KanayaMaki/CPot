@@ -28,12 +28,13 @@ class AudioVoice : public AudioVoiceBase {
 
 public:
 	void Load(const HashTableKey& aUnionName) CPOT_OR {
-		mClip = ResourceList<AudioClip>::S().Find(aUnionName);
-		Load(mClip);	//ˆÏ÷
+		std::shared_ptr<AudioClip> lClip = ResourceList<AudioClip>::S().Find(aUnionName);
+		Load(lClip);	//ˆÏ÷
 	}
 	void Load(std::shared_ptr<AudioClip> aClip) CPOT_OR {
 		mVoice.Load(aClip->mClip);
 		SetName(aClip->GetName());
+		mClip = aClip;
 	}
 
 	#pragma endregion

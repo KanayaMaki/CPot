@@ -45,7 +45,7 @@ public:
 	u32 GetIndexSize() const {
 		return GetFormatSize(GetFormat());
 	}
-	D3D11_PRIMITIVE_TOPOLOGY Topology() const {
+	D3D11_PRIMITIVE_TOPOLOGY GetTopology() const {
 		return mTopology;
 	}
 

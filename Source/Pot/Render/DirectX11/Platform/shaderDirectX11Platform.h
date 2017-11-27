@@ -17,140 +17,34 @@ namespace directX11 {
 namespace platform {
 
 
-template <typename ShaderType>
-class Shader {
-
-	//初期化
-	#pragma region Init
-
+class InputLayout {
 public:
-	Shader() {
-		Clear();
+	InputLayout() {
+		Reset();
 	}
-
-protected:
-	void Clear() {
-		mShader = nullptr;
-	}
-
-	#pragma endregion
-
-
-	//終了処理
-	#pragma region Final
-
-public:
-	~Shader() {
+	~InputLayout() {
 		Release();
 	}
 
-public:
-	void Release() {
-		CPOT_SAFE_RELEASE(mShader);
-		Clear();
+	void Reset() {
+		mInputLayout = nullptr;
 	}
 
-	#pragma endregion
-
-
-	//取得
-	#pragma region Getter
-
-public:
-	ShaderType* GetShader() const {
-		return mShader;
+	ID3D11InputLayout* Get() const {
+		return mInputLayout;
 	}
 	BOOL IsLoaded() const {
-		return mShader != nullptr;
+		return mInputLayout != nullptr;
 	}
 
-	#pragma endregion
-
+	void Release() {
+		if (IsLoaded()) {
+			CPOT_SAFE_RELEASE(mInputLayout);
+			Reset();
+		}
+	}
 
 public:
-	void GetCompiledBuffer(const CHAR* aFileName, const CHAR* aEntryPoint, const CHAR* aShaderType, Buffer& aBuffer) {
-
-		#if defined DEBUG || defined _DEBUG
-		const UINT lCompileFlag = D3D10_SHADER_DEBUG | D3D10_SHADER_SKIP_OPTIMIZATION | D3D10_SHADER_ENABLE_STRICTNESS | D3D10_SHADER_PACK_MATRIX_COLUMN_MAJOR;
-		#else
-		const UINT lCompileFlag = D3D10_SHADER_ENABLE_STRICTNESS | D3D10_SHADER_PACK_MATRIX_COLUMN_MAJOR | D3D10_SHADER_SKIP_OPTIMIZATION;
-		#endif
-
-		ID3DBlob* lBlob = nullptr;
-		ID3DBlob* lError = nullptr;
-		HRESULT hr;
-
-		// 頂点シェーダのコードをコンパイル
-		lBlob = NULL;
-		hr = D3DX11CompileFromFileA(
-			aFileName,  // ファイル名
-			NULL,          // マクロ定義(なし)
-			NULL,          // インクルード・ファイル定義(なし)
-			aEntryPoint,          // 「VS関数」がシェーダから実行される
-			aShaderType,      // 頂点シェーダ
-			lCompileFlag, // コンパイル・オプション
-			0,             // エフェクトのコンパイル・オプション(なし)
-			NULL,          // 直ぐにコンパイルしてから関数を抜ける。
-			&lBlob,      // コンパイルされたバイト・コード
-			&lError,          // エラーメッセージは不要
-			NULL);         // 戻り値
-		if (FAILED(hr)) {
-			Log::S().Output("ShaderCompileError:", (const CHAR*)(lError->GetBufferPointer()));
-			return;
-		}
-
-		aBuffer.Load((BYTE*)(lBlob->GetBufferPointer()), lBlob->GetBufferSize());
-		
-		CPOT_SAFE_RELEASE(lBlob);
-		CPOT_SAFE_RELEASE(lError);
-	}
-
-
-	//フィールド
-	#pragma region Field
-
-protected:
-	ShaderType* mShader;
-
-	#pragma endregion
-
-};
-
-
-
-class VertexShader : public Shader<ID3D11VertexShader> {
-
-public:
-	void CompileFromFile(const CHAR* aFileName, const CHAR* aEntryPoint, const CHAR* aShaderType, const D3D11_INPUT_ELEMENT_DESC* aInputElement = nullptr, u32 aInputElementNum = 0) {
-		Buffer lBuffer;
-		GetCompiledBuffer(aFileName, aEntryPoint, aShaderType, lBuffer);
-		CreateFromCompiledBuffer(lBuffer, aInputElement, aInputElementNum);
-	}
-	void CreateFromCompiledBuffer(const Buffer& mBuffer, const D3D11_INPUT_ELEMENT_DESC* aInputElement = nullptr, u32 aInputElementNum = 0) {
-
-		HRESULT hr;
-
-		// 頂点シェーダの作成
-		hr = Device::S().GetDevice()->CreateVertexShader(
-			mBuffer.Get(), // バイト・コードへのポインタ
-			mBuffer.GetSize(),    // バイト・コードの長さ
-			NULL,
-			&mShader); // 頂点シェーダを受け取る変数
-
-		if (FAILED(hr)) {
-			Log::S().Output("VertexShaderDirectX11.CreateError:");
-			return;
-		}
-
-		if (aInputElement == nullptr) {
-			CreateInputLayout(mBuffer);
-		}
-		else {
-			CreateInputLayout(mBuffer, aInputElement, aInputElementNum);
-		}
-	}
-
-private:
 	DXGI_FORMAT GetFormat(const D3D11_SIGNATURE_PARAMETER_DESC& aParameterDesc) {
 
 		s32 lParameterNum = 0;
@@ -197,8 +91,9 @@ private:
 
 		return DXGI_FORMAT_UNKNOWN;
 	}
-	void CreateInputLayout(const Buffer& aBuffer) {
-		
+
+	void Load(const cpot::Buffer& aBuffer) {
+
 		HRESULT hr;
 
 		ID3D11ShaderReflection* lShaderReflection = nullptr;
@@ -250,7 +145,7 @@ private:
 		}
 		CPOT_SAFE_RELEASE(lShaderReflection);
 	}
-	void CreateInputLayout(const Buffer& aBuffer, const D3D11_INPUT_ELEMENT_DESC* aInputElement, u32 aInputElementNum) {
+	void Load(const cpot::Buffer& aBuffer, const D3D11_INPUT_ELEMENT_DESC* aInputElement, u32 aInputElementNum) {
 
 		HRESULT hr;
 
@@ -270,47 +165,200 @@ private:
 
 
 private:
+	ID3D11InputLayout* mInputLayout;
+};
+
+
+
+template <typename ShaderType>
+class Shader {
+
+	//初期化
+	#pragma region Init
+
+public:
+	Shader() {
+		Clear();
+	}
+
+protected:
+	void Clear() {
+		mShader = nullptr;
+	}
+
+	#pragma endregion
+
+
+	//終了処理
+	#pragma region Final
+
+public:
+	~Shader() {
+		Release();
+	}
+
+public:
+	void Release() {
+		CPOT_SAFE_RELEASE(mShader);
+		Clear();
+	}
+
+	#pragma endregion
+
+
+	//取得
+	#pragma region Getter
+
+public:
+	ShaderType* GetShader() const {
+		return mShader.get();
+	}
+	BOOL IsLoaded() const {
+		return mShader != nullptr;
+	}
+
+	#pragma endregion
+
+
+public:
+	void GetCompiledBuffer(const CHAR* aFileName, const CHAR* aEntryPoint, const CHAR* aShaderType, cpot::Buffer& aBuffer) {
+
+		#if defined DEBUG || defined _DEBUG
+		const UINT lCompileFlag = D3D10_SHADER_DEBUG | D3D10_SHADER_SKIP_OPTIMIZATION | D3D10_SHADER_ENABLE_STRICTNESS | D3D10_SHADER_PACK_MATRIX_COLUMN_MAJOR;
+		#else
+		const UINT lCompileFlag = D3D10_SHADER_ENABLE_STRICTNESS | D3D10_SHADER_PACK_MATRIX_COLUMN_MAJOR | D3D10_SHADER_SKIP_OPTIMIZATION;
+		#endif
+
+		ID3DBlob* lBlob = nullptr;
+		ID3DBlob* lError = nullptr;
+		HRESULT hr;
+
+		// 頂点シェーダのコードをコンパイル
+		lBlob = NULL;
+		hr = D3DX11CompileFromFileA(
+			aFileName,  // ファイル名
+			NULL,          // マクロ定義(なし)
+			NULL,          // インクルード・ファイル定義(なし)
+			aEntryPoint,          // 「VS関数」がシェーダから実行される
+			aShaderType,      // 頂点シェーダ
+			lCompileFlag, // コンパイル・オプション
+			0,             // エフェクトのコンパイル・オプション(なし)
+			NULL,          // 直ぐにコンパイルしてから関数を抜ける。
+			&lBlob,      // コンパイルされたバイト・コード
+			&lError,          // エラーメッセージは不要
+			NULL);         // 戻り値
+		if (FAILED(hr)) {
+			Log::S().Output("ShaderCompileError:", (const CHAR*)(lError->GetBufferPointer()));
+			return;
+		}
+
+		aBuffer.Load((BYTE*)(lBlob->GetBufferPointer()), lBlob->GetBufferSize());
+		
+		CPOT_SAFE_RELEASE(lBlob);
+		CPOT_SAFE_RELEASE(lError);
+	}
+
+
+	//フィールド
+	#pragma region Field
+
+protected:
+	std::shared_ptr<ShaderType> mShader;
+
+	#pragma endregion
+
+};
+
+
+
+class VertexShader : public Shader<ID3D11VertexShader> {
+
+public:
+	void CompileFromFile(const CHAR* aFileName, const CHAR* aEntryPoint, const CHAR* aShaderType, const D3D11_INPUT_ELEMENT_DESC* aInputElement = nullptr, u32 aInputElementNum = 0) {
+		cpot::Buffer lBuffer;
+		GetCompiledBuffer(aFileName, aEntryPoint, aShaderType, lBuffer);
+		CreateFromCompiledBuffer(lBuffer, aInputElement, aInputElementNum);
+	}
+	void CreateFromCompiledBuffer(const cpot::Buffer& mBuffer, const D3D11_INPUT_ELEMENT_DESC* aInputElement = nullptr, u32 aInputElementNum = 0) {
+
+		HRESULT hr;
+
+		ID3D11VertexShader* lTmp;
+
+		// 頂点シェーダの作成
+		hr = Device::S().GetDevice()->CreateVertexShader(
+			mBuffer.Get(), // バイト・コードへのポインタ
+			mBuffer.GetSize(),    // バイト・コードの長さ
+			NULL,
+			&lTmp); // 頂点シェーダを受け取る変数
+
+		if (FAILED(hr)) {
+			Log::S().Output("VertexShaderDirectX11.CreateError:");
+			return;
+		}
+
+		{
+			mShader = std::shared_ptr<ID3D11VertexShader>(lTmp);
+			mInputLayout = std::shared_ptr<InputLayout>(new InputLayout);
+		}
+
+		if (aInputElement == nullptr) {
+			mInputLayout->Load(mBuffer);
+		}
+		else {
+			mInputLayout->Load(mBuffer, aInputElement, aInputElementNum);
+		}
+	}
+
+
+private:
 	void Clear() {
 		mInputLayout = nullptr;
 		Shader<ID3D11VertexShader>::Clear();
 	}
 public:
 	void Release() {
-		CPOT_SAFE_RELEASE(mInputLayout);
+		mInputLayout->Release();
 		Shader<ID3D11VertexShader>::Release();
 		Clear();
 	}
 
 public:
-	ID3D11InputLayout* GetInputLayout() const {
+	std::shared_ptr<InputLayout> GetInputLayout() const {
 		return mInputLayout;
 	}
 private:
-	ID3D11InputLayout* mInputLayout;
+	std::shared_ptr<InputLayout> mInputLayout;
 };
 
 
 class GeometryShader : public Shader<ID3D11GeometryShader> {
 public:
 	void CompileFromFile(const CHAR* aFileName, const CHAR* aEntryPoint, const CHAR* aShaderType) {
-		Buffer lBuffer;
+		cpot::Buffer lBuffer;
 		GetCompiledBuffer(aFileName, aEntryPoint, aShaderType, lBuffer);
 		CreateFromCompiledBuffer(lBuffer);
 	}
-	void CreateFromCompiledBuffer(const Buffer& aBuffer) {
+	void CreateFromCompiledBuffer(const cpot::Buffer& aBuffer) {
 
 		HRESULT hr;
+
+		ID3D11GeometryShader* lTmp;
 
 		// 頂点シェーダの作成
 		hr = Device::S().GetDevice()->CreateGeometryShader(
 			aBuffer.Get(), // バイト・コードへのポインタ
 			aBuffer.GetSize(),    // バイト・コードの長さ
 			NULL,
-			&mShader); // 頂点シェーダを受け取る変数
+			&lTmp); // 頂点シェーダを受け取る変数
 
 		if (FAILED(hr)) {
 			Log::S().Output("GeometryShaderDirectX11.CreateError:");
 			return;
+		}
+
+		{
+			mShader = std::shared_ptr<ID3D11GeometryShader>(lTmp);
 		}
 	}
 };
@@ -320,24 +368,30 @@ class PixelShader : public Shader<ID3D11PixelShader> {
 
 public:
 	void CompileFromFile(const CHAR* aFileName, const CHAR* aEntryPoint, const CHAR* aShaderType) {
-		Buffer lBuffer;
+		cpot::Buffer lBuffer;
 		GetCompiledBuffer(aFileName, aEntryPoint, aShaderType, lBuffer);
 		CreateFromCompiledBuffer(lBuffer);
 	}
-	void CreateFromCompiledBuffer(const Buffer& aBuffer) {
+	void CreateFromCompiledBuffer(const cpot::Buffer& aBuffer) {
 
 		HRESULT hr;
+
+		ID3D11PixelShader* lTmp;
 
 		// 頂点シェーダの作成
 		hr = Device::S().GetDevice()->CreatePixelShader(
 			aBuffer.Get(), // バイト・コードへのポインタ
 			aBuffer.GetSize(),    // バイト・コードの長さ
 			NULL,
-			&mShader); // 頂点シェーダを受け取る変数
+			&lTmp); // 頂点シェーダを受け取る変数
 
 		if (FAILED(hr)) {
 			Log::S().Output("PixelShaderDirectX11.CreateError:");
 			return;
+		}
+
+		{
+			mShader = std::shared_ptr<ID3D11PixelShader>(lTmp);
 		}
 	}
 };
@@ -347,24 +401,30 @@ class HullShader : public Shader<ID3D11HullShader> {
 
 public:
 	void CompileFromFile(const CHAR* aFileName, const CHAR* aEntryPoint, const CHAR* aShaderType) {
-		Buffer lBuffer;
+		cpot::Buffer lBuffer;
 		GetCompiledBuffer(aFileName, aEntryPoint, aShaderType, lBuffer);
 		CreateFromCompiledBuffer(lBuffer);
 	}
-	void CreateFromCompiledBuffer(const Buffer& aBuffer) {
+	void CreateFromCompiledBuffer(const cpot::Buffer& aBuffer) {
 
 		HRESULT hr;
+
+		ID3D11HullShader* lTmp;
 
 		// 頂点シェーダの作成
 		hr = Device::S().GetDevice()->CreateHullShader(
 			aBuffer.Get(), // バイト・コードへのポインタ
 			aBuffer.GetSize(),    // バイト・コードの長さ
 			NULL,
-			&mShader); // 頂点シェーダを受け取る変数
+			&lTmp); // 頂点シェーダを受け取る変数
 
 		if (FAILED(hr)) {
 			Log::S().Output("HullShaderDirectX11.CreateError:");
 			return;
+		}
+
+		{
+			mShader = std::shared_ptr<ID3D11HullShader>(lTmp);
 		}
 	}
 };
@@ -373,24 +433,30 @@ public:
 class DomainShader : public Shader<ID3D11DomainShader> {
 public:
 	void CompileFromFile(const CHAR* aFileName, const CHAR* aEntryPoint, const CHAR* aShaderType) {
-		Buffer lBuffer;
+		cpot::Buffer lBuffer;
 		GetCompiledBuffer(aFileName, aEntryPoint, aShaderType, lBuffer);
 		CreateFromCompiledBuffer(lBuffer);
 	}
-	void CreateFromCompiledBuffer(const Buffer& aBuffer) {
+	void CreateFromCompiledBuffer(const cpot::Buffer& aBuffer) {
 
 		HRESULT hr;
+
+		ID3D11DomainShader* lTmp;
 
 		// 頂点シェーダの作成
 		hr = Device::S().GetDevice()->CreateDomainShader(
 			aBuffer.Get(), // バイト・コードへのポインタ
 			aBuffer.GetSize(),    // バイト・コードの長さ
 			NULL,
-			&mShader); // 頂点シェーダを受け取る変数
+			&lTmp); // 頂点シェーダを受け取る変数
 
 		if (FAILED(hr)) {
 			Log::S().Output("DomainShaderDirectX11.CreateError:");
 			return;
+		}
+
+		{
+			mShader = std::shared_ptr<ID3D11DomainShader>(lTmp);
 		}
 	}
 };
@@ -400,24 +466,30 @@ class ComputeShader : public Shader<ID3D11ComputeShader> {
 
 public:
 	void CompileFromFile(const CHAR* aFileName, const CHAR* aEntryPoint, const CHAR* aShaderType) {
-		Buffer lBuffer;
+		cpot::Buffer lBuffer;
 		GetCompiledBuffer(aFileName, aEntryPoint, aShaderType, lBuffer);
 		CreateFromCompiledBuffer(lBuffer);
 	}
-	void CreateFromCompiledBuffer(const Buffer& aBuffer) {
+	void CreateFromCompiledBuffer(const cpot::Buffer& aBuffer) {
 
 		HRESULT hr;
+
+		ID3D11ComputeShader* lTmp;
 
 		// 頂点シェーダの作成
 		hr = Device::S().GetDevice()->CreateComputeShader(
 			aBuffer.Get(), // バイト・コードへのポインタ
 			aBuffer.GetSize(),    // バイト・コードの長さ
 			NULL,
-			&mShader); // 頂点シェーダを受け取る変数
+			&lTmp); // 頂点シェーダを受け取る変数
 
 		if (FAILED(hr)) {
 			Log::S().Output("ComputeShaderDirectX11.CreateError:");
 			return;
+		}
+
+		{
+			mShader = std::shared_ptr<ID3D11ComputeShader>(lTmp);
 		}
 	}
 };

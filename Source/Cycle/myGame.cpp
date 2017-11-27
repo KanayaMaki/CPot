@@ -21,6 +21,12 @@
 #include "./Pot/Animation/animation.h"
 
 
+#include "./Pot/Render/DirectX11/Platform/renderDirectX11Platform.h"
+#include "./Pot/Config/config.h"
+
+#include "./Pot/Usefull/path.h"
+
+
 namespace cpot {
 
 cpot::GameBase* CreateGame() {
@@ -83,7 +89,6 @@ public:
 	}
 };
 
-
 }
 
 using namespace cpot;
@@ -92,6 +97,41 @@ namespace myspc {
 
 Animation<f32> v;
 std::shared_ptr<AudioVoice> voice;
+
+struct BasicVertex {
+	Vector3 mPosition;
+	Vector3 mNormal;
+	Vector2 mUV;
+};
+struct WVPBuffer {
+	ShaderMatrix4x4 mWorld;
+	ShaderMatrix4x4 mView;
+	ShaderMatrix4x4 mProjection;
+};
+struct DiffuseBuffer {
+	Color mDiffuse;
+};
+struct TimerBuffer {
+	f32 mTimer;
+};
+
+
+std::shared_ptr<directX11::platform::IndexBuffer> indexBuffer;
+std::shared_ptr<directX11::platform::VertexBuffer> vertexBuffer;
+std::shared_ptr<directX11::platform::ConstantBuffer> wvpBuffer;
+std::shared_ptr<directX11::platform::ConstantBuffer> diffuseBuffer;
+std::shared_ptr<directX11::platform::ConstantBuffer> timerBuffer;
+std::shared_ptr<directX11::platform::Texture2DAll> texture;
+std::shared_ptr<directX11::platform::Texture2DAll> depthTexture;
+std::shared_ptr<directX11::platform::Texture2DAll> renderTexture;
+std::shared_ptr<directX11::platform::SamplerState> sampler;
+std::shared_ptr<directX11::platform::BlendState> blendState;
+std::shared_ptr<directX11::platform::DepthStencilState> depthStencilState;
+std::shared_ptr<directX11::platform::RasterizerState> rasterizerState;
+std::shared_ptr<directX11::platform::VertexShader> vertexShader;
+std::shared_ptr<directX11::platform::GeometryShader> geometryShader;
+std::shared_ptr<directX11::platform::PixelShader> pixelShader;
+
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
 void MyGame::Setting() {
@@ -110,6 +150,113 @@ void MyGame::Init() {
 	v.Add(2.0f, 0.5f);
 	v.Add(4.0f, 1.0f);
 	v.SetIsLoop(true);
+
+
+	wvpBuffer.reset(new directX11::platform::ConstantBuffer);
+	wvpBuffer->Load<WVPBuffer>(new WVPBuffer);
+	wvpBuffer->Write();
+
+	diffuseBuffer.reset(new directX11::platform::ConstantBuffer);
+	diffuseBuffer->Load<DiffuseBuffer>(new DiffuseBuffer);
+	diffuseBuffer->GetCPUBuffer<DiffuseBuffer>()->mDiffuse = Color::White();
+	diffuseBuffer->Write();
+
+	timerBuffer.reset(new directX11::platform::ConstantBuffer);
+	timerBuffer->Load<TimerBuffer>(new TimerBuffer);
+	timerBuffer->Write();
+
+	sampler.reset(new directX11::platform::SamplerState);
+	sampler->Load(directX11::platform::SamplerState::CreateDescClamp());
+
+	rasterizerState.reset(new directX11::platform::RasterizerState);
+	rasterizerState->Load(directX11::platform::RasterizerState::CreateDescNoCull());
+
+	depthStencilState.reset(new directX11::platform::DepthStencilState);
+	depthStencilState->Load(directX11::platform::DepthStencilState::CreateDescNoZTest());
+
+	blendState.reset(new directX11::platform::BlendState);
+	blendState->Load(directX11::platform::BlendState::CreateDescNormal());
+
+	PathString p = Path::FromRelative("./", "./test.png");
+
+	texture.reset(new directX11::platform::Texture2DAll);
+	texture->Load(p.Get());
+	
+	depthTexture.reset(new directX11::platform::Texture2DAll);
+	depthTexture->Load(directX11::platform::Texture2D::CreateDesc(
+		Config::S().GetScreenSize().x, Config::S().GetScreenSize().y,
+		DXGI_FORMAT_R32_TYPELESS, D3D11_USAGE_DEFAULT, directX11::platform::GetBindFlags(false, true, true), 0));
+
+	renderTexture.reset(new directX11::platform::Texture2DAll);
+	renderTexture->Load(directX11::platform::Texture2D::CreateDesc(
+		Config::S().GetScreenSize().x, Config::S().GetScreenSize().y,
+		DXGI_FORMAT_R32G32B32A32_FLOAT, D3D11_USAGE_DEFAULT, directX11::platform::GetBindFlags(true, true, false), 0));
+
+	BasicVertex lVertex[]{
+		{ { -0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
+		{ { -0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
+		{ { 0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
+		{ { 0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
+	};
+	vertexBuffer.reset(new directX11::platform::VertexBuffer);
+	vertexBuffer->Load(sizeof(BasicVertex), 4, lVertex);
+
+	u16 lIndex[]{ 0, 1, 2, 2, 1, 3 };
+	indexBuffer.reset(new directX11::platform::IndexBuffer);
+	indexBuffer->Load(DXGI_FORMAT_R16_UINT, 6, lIndex, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+
+	vertexShader.reset(new directX11::platform::VertexShader);
+	vertexShader->CompileFromFile("./test.fx", "VS_TEST", "vs_4_0");
+	directX11::platform::Render::S().GetVertexShaderManager().SetShader(vertexShader);
+	directX11::platform::Render::S().GetInputLayoutManager().Set(vertexShader->GetInputLayout());
+
+	geometryShader.reset(new directX11::platform::GeometryShader);
+	geometryShader->CompileFromFile("./test.fx", "GS_TEST", "gs_4_0");
+	directX11::platform::Render::S().GetGeometryShaderManager().SetShader(geometryShader);
+
+	pixelShader.reset(new directX11::platform::PixelShader);
+	pixelShader->CompileFromFile("./test.fx", "PS_TEST", "ps_4_0");
+	directX11::platform::Render::S().GetPixelShaderManager().SetShader(pixelShader);
+
+	directX11::platform::Render::S().GetVertexShaderManager().SetConstantBuffer(wvpBuffer, 0);
+	directX11::platform::Render::S().GetGeometryShaderManager().SetConstantBuffer(wvpBuffer, 0);
+	directX11::platform::Render::S().GetPixelShaderManager().SetConstantBuffer(wvpBuffer, 0);
+	directX11::platform::Render::S().GetVertexShaderManager().SetConstantBuffer(diffuseBuffer, 1);
+	directX11::platform::Render::S().GetGeometryShaderManager().SetConstantBuffer(diffuseBuffer, 1);
+	directX11::platform::Render::S().GetPixelShaderManager().SetConstantBuffer(diffuseBuffer, 1);
+	directX11::platform::Render::S().GetVertexShaderManager().SetConstantBuffer(timerBuffer, 2);
+	directX11::platform::Render::S().GetGeometryShaderManager().SetConstantBuffer(timerBuffer, 2);
+	directX11::platform::Render::S().GetPixelShaderManager().SetConstantBuffer(timerBuffer, 2);
+
+	directX11::platform::Render::S().GetVertexShaderManager().SetShaderResource(texture->GetShaderResourceView(), 0);
+	directX11::platform::Render::S().GetGeometryShaderManager().SetShaderResource(texture->GetShaderResourceView(), 0);
+	directX11::platform::Render::S().GetPixelShaderManager().SetShaderResource(texture->GetShaderResourceView(), 0);
+
+	directX11::platform::Render::S().GetVertexShaderManager().SetSampler(sampler, 0);
+	directX11::platform::Render::S().GetGeometryShaderManager().SetSampler(sampler, 0);
+	directX11::platform::Render::S().GetPixelShaderManager().SetSampler(sampler, 0);
+
+	directX11::platform::Render::S().GetBlendStateManager().Set(blendState, nullptr);
+	directX11::platform::Render::S().GetDepthStencilStateManager().Set(depthStencilState, nullptr);
+	directX11::platform::Render::S().GetRasterizerStateManager().Set(rasterizerState);
+
+	directX11::platform::Render::S().GetDepthStencilViewManager().Set(depthTexture->GetDepthStencilView());
+
+	directX11::platform::Render::S().GetVertexBufferManager().Set(vertexBuffer, 0);
+	directX11::platform::Render::S().GetIndexBufferManager().Set(indexBuffer);
+
+	directX11::platform::Render::S().GetRenderTargetViewManager().Set(renderTexture->GetRenderTargetView(), 0);
+
+	D3D11_VIEWPORT v;
+	v.MinDepth = 0.0f;
+	v.MaxDepth = 1.0f;
+	v.TopLeftX = 0;
+	v.TopLeftY = 0;
+	v.Width = 960;
+	v.Height = 540;
+	directX11::platform::Device::S().GetDeviceContext()->RSSetViewports(1, &v);
+
 
 	#ifdef CPOT_ON_WINDOWS
 	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
@@ -187,6 +334,10 @@ void MyGame::Update() {
 
 	#pragma endregion
 
+
+	directX11::platform::Render::S().SetToDevice();
+	directX11::platform::Render::S().DrawIndexed(6, 0, 0);
+	directX11::platform::Render::S().Present();
 }
 
 

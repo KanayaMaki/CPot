@@ -435,7 +435,6 @@ Type
 	template<typename T>
 	TypeFactory<T> TypeRegister::mFactory;
 
-
 Find
 	もし見つかれば
 	　その要素を返す
@@ -472,7 +471,6 @@ Texture2D
 	struct TextureLoadData {
 		u32 mWidth;
 		u32 mHeight;
-
 	}
 
 	シェーダの読み込みに使う
@@ -508,3 +506,12 @@ m->Load("");
 	std::shared_ptr<Message<Data>> d = Network::Recieve<Data>(cMessageCharacterMove);
 	if(d != nullptr) {
 	}
+
+
+	Model.Load("4343.pmx");
+		Mesh = Load("data.mesh");
+		Material = Load(Path::FromRelative("Data/a.model", "data.mesh"));
+
+
+ロボット　原先生
+アンドロイドスタジオにお詳しいと鈴木先生に教えていただいて聞きにこさせていただきました

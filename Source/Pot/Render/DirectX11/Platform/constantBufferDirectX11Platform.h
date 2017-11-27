@@ -35,10 +35,11 @@ public:
 		return Load(ConstantBuffer::CreateBufferDesc(aSize), aInitData);	//委譲
 	}
 
-	BOOL Load(const D3D11_BUFFER_DESC& aBufferDesc, void* aInitData) {
+	BOOL Load(D3D11_BUFFER_DESC& aBufferDesc, void* aInitData) {
 		if (!(aBufferDesc.BindFlags & D3D11_BIND_CONSTANT_BUFFER)) {
 			return false;	//バインドフラグにConstantBufferが入っていないなら、ロード失敗
 		}
+		aBufferDesc.ByteWidth = Align(aBufferDesc.ByteWidth, (UINT)256U);
 		mCPUBuffer = aInitData;
 		return Buffer::Load(aBufferDesc, nullptr);
 	}

@@ -344,6 +344,17 @@ inline T Wrap(T aVal, T aMax) {
 #pragma endregion
 
 
+//	ƒAƒ‰ƒCƒ“ƒƒ“ƒg‚³‚ê‚½”
+#pragma region Align
+
+template <typename T>
+inline T Align(T aVal, T aAlignNum) {
+	return (aVal + aAlignNum - 1) / aAlignNum * aAlignNum;
+}
+
+
+#pragma endregion
+
 
 //‚»‚Ì‘¼
 #pragma region Other

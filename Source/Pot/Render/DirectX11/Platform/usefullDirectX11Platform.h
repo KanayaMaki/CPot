@@ -13,6 +13,22 @@ namespace directX11 {
 
 namespace platform {
 
+inline BOOL IsRenderTarget(UINT aBindFlag) {
+	return aBindFlag & D3D11_BIND_RENDER_TARGET;
+}
+inline BOOL IsShaderResource(UINT aBindFlag) {
+	return aBindFlag & D3D11_BIND_SHADER_RESOURCE;
+}
+inline BOOL IsDepthStencil(UINT aBindFlag) {
+	return aBindFlag & D3D11_BIND_DEPTH_STENCIL;
+}
+inline BOOL IsReadable(UINT aCPUAccessFlag) {
+	return aCPUAccessFlag & D3D11_CPU_ACCESS_READ;
+}
+inline BOOL IsWritable(UINT aCPUAccessFlag) {
+	return aCPUAccessFlag & D3D11_CPU_ACCESS_WRITE;
+}
+
 
 UINT GetBindFlags(BOOL aIsRenderTarget, BOOL aIsShaderResourceView, BOOL aIsDepthStencilView = false);
 UINT GetCPUAccessFlags(BOOL aIsReadable, BOOL aIsWritable);

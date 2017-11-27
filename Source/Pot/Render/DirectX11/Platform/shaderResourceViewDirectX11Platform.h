@@ -15,6 +15,7 @@ class ShaderResourceView : public View<ID3D11ShaderResourceView> {
 	//1Dテクスチャのロード
 	#pragma region Load1D
 
+public:
 	BOOL Load(Texture1D& aTexture) {
 
 		if (IsLoaded()) {
@@ -45,9 +46,11 @@ class ShaderResourceView : public View<ID3D11ShaderResourceView> {
 
 	#pragma endregion
 
+
 	//2Dテクスチャのロード
 	#pragma region Load2D
 
+public:
 	BOOL Load(Texture2D& aTexture) {
 
 		if (IsLoaded()) {
@@ -94,9 +97,11 @@ class ShaderResourceView : public View<ID3D11ShaderResourceView> {
 
 	#pragma endregion
 
+
 	//3Dテクスチャのロード
 	#pragma region Load3D
 
+public:
 	BOOL Load(Texture3D& aTexture) {
 
 		if (IsLoaded()) {

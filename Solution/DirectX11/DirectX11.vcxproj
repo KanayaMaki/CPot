@@ -91,7 +91,9 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderManagerDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderResourceViewDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\stateDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\textureAllDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\textureDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\unorderedAccessViewDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\vertexBufferDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\viewDirectX11Platform.h" />
@@ -116,6 +118,7 @@
     <ClInclude Include="..\..\Source\Pot\Time\Windows\timeWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Usefull\buffer.h" />
     <ClInclude Include="..\..\Source\Pot\Usefull\namedResource.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\path.h" />
     <ClInclude Include="..\..\Source\Pot\Usefull\resourceList.h" />
     <ClInclude Include="..\..\Source\Pot\Usefull\resourceLoadList.h" />
     <ClInclude Include="..\..\Source\Pot\Usefull\singleton.h" />
