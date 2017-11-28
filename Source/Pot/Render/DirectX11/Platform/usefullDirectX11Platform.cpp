@@ -2,6 +2,9 @@
 
 #include "./Pot/Render/DirectX11/Platform/deviceDirectX11Platform.h"
 
+#include "./Pot/Render/DirectX11/Platform/textureDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/textureAllDirectX11Platform.h"
+
 #include "./Pot/Out/out.h"
 #include "./Pot/Time/time.h"
 
@@ -296,7 +299,7 @@ void SaveScreenShot(ID3D11Resource* aResource, const CHAR* aName) {
 	}
 }
 void SaveScreenShot(const CHAR* aName) {
-	SaveScreenShot(Device::S().GetBackBuffer(), aName);
+	SaveScreenShot(Device::S().GetBackBuffer()->GetTexture()->Get(), aName);
 }
 
 

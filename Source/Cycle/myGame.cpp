@@ -104,9 +104,10 @@ struct BasicVertex {
 	Vector2 mUV;
 };
 struct WVPBuffer {
-	ShaderMatrix4x4 mWorld;
 	ShaderMatrix4x4 mView;
 	ShaderMatrix4x4 mProjection;
+	ShaderMatrix4x4 mWorld;
+	ShaderMatrix4x4 mNormalWorld;
 };
 struct DiffuseBuffer {
 	Color mDiffuse;
@@ -244,7 +245,7 @@ void MyGame::Init() {
 	directX11::platform::Render::S().GetVertexBufferManager().Set(vertexBuffer, 0);
 	directX11::platform::Render::S().GetIndexBufferManager().Set(indexBuffer);
 
-	directX11::platform::Render::S().GetRenderTargetViewManager().Set(renderTexture->GetRenderTargetView(), 0);
+	directX11::platform::Render::S().GetRenderTargetViewManager().Set(directX11::platform::Device::S().GetBackBuffer()->GetRenderTargetView(), 0);
 
 	D3D11_VIEWPORT v;
 	v.MinDepth = 0.0f;

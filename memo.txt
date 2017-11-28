@@ -462,29 +462,6 @@ enum CFormat {
 	CPOT_FORMAT_R32_FLOAT,
 };
 
-Texture2D
-　Load時に、読み込みが可能かを設定する
-	Load(u32 aWidth, u32 aHeight, CFormat aFormat);
-	Load(const HashTableKey& aUnionName);
-	Load();
-
-	struct TextureLoadData {
-		u32 mWidth;
-		u32 mHeight;
-	}
-
-	シェーダの読み込みに使う
-	シェーダの書き込みに使う
-	シェーダのデプス書き込みに使う
-	コンピュータから書き込む
-	コンピュータから読み込む
-
-
-　BOOL IsLoad();
-	u32 GetWidth();
-	u32 GetHeight();
-
-	ロード時に登録
 
 std::shared_ptr<Model> m = Resource<Model>::Find("miku");
 m->Render();
@@ -500,12 +477,38 @@ m->Load("");
 		u32 mPort;
 	}
 	Network::Init();
-	Network::Connect(const CHAR* aAddress, u32 aPort);
+	Network::Connect(const NetworkConnect& aConnect);
 	Network::Send(m, cMessageCharacterMove);
 
 	std::shared_ptr<Message<Data>> d = Network::Recieve<Data>(cMessageCharacterMove);
 	if(d != nullptr) {
 	}
+
+	template<typename T>
+	MessageData {
+		union {
+			T mData;
+			CHAR mByte[sizeof(T)];
+		}
+	}
+	MessageHeader {
+		String<32> mName;
+		u32 mMessageType;
+		u32 mPlayerNum;
+	}
+	template<typename T>
+	Message {
+		MessageHeader mHeader;
+		MessageData<T> mData;
+	}
+	Data d;
+	Network::RecieveLoop();
+	Network::Send<Data>(const Data& aData, u32 aMessageType);
+	std::unique_ptr<Message<Data>> d = Network::Recieve<Data>(u32 aMessageType);
+	if(d != nullptr) {
+	}
+
+	TextureAll a;
 
 
 	Model.Load("4343.pmx");

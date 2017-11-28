@@ -65,6 +65,14 @@ public:
 	BOOL Load(const CHAR* aFileName) {
 		return Load(aFileName, nullptr);
 	}
+	BOOL Load(std::shared_ptr<Texture2D> aTexture) {
+		if (IsLoaded()) {
+			Release();
+		}
+		mTexture = aTexture;
+		LoadView();
+		return true;
+	}
 
 	#pragma endregion
 

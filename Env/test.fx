@@ -60,7 +60,14 @@ void GS_TEST(triangle VS_INPUT input[3],
 	TriStream.RestartStrip();
 }
 
-float4 PS_TEST(PS_PHONG_INPUT input) : SV_TARGET{
+
+struct PS_OUTPUT {
+	float4 Diffuse	: SV_TARGET0;
+};
+
+PS_OUTPUT PS_TEST(PS_PHONG_INPUT input) {
+
+	PS_OUTPUT output;
 
 	float4 col = Diffuse;
 
@@ -69,5 +76,7 @@ float4 PS_TEST(PS_PHONG_INPUT input) : SV_TARGET{
 
 	col *= Timer;
 
-	return col;
+	output.Diffuse = col;
+
+	return output;
 }

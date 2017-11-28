@@ -1,4 +1,5 @@
 ﻿#include "./Pot/Render/DirectX11/Platform/deviceDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/textureAllDirectX11Platform.h"
 
 namespace cpot {
 
@@ -67,22 +68,31 @@ HRESULT Device::Init(HWND aHwnd, const Vector2& aScreenSize) {
 		}
 	}
 
+	ID3D11Texture2D* lBackBuffer;
+
 	//バックバッファの取得
 	hr = mSwapChain->GetBuffer(
 		0,                         // バック・バッファの番号
 		__uuidof(ID3D11Texture2D), // バッファにアクセスするインターフェイス
-		(LPVOID*)&mBackBuffer);    // バッファを受け取る変数
+		(LPVOID*)&lBackBuffer);    // バッファを受け取る変数
 	if (FAILED(hr)) {
 		CPOT_ERROR("バックバッファの取得に失敗しました");
 		Final();
 		return -1L;
 	}
 
+	mBackBufferTexture.reset(new Texture2D);
+	mBackBufferTexture->Set(lBackBuffer);
+
+	mBackBuffer.reset(new Texture2DAll);
+	mBackBuffer->Load(mBackBufferTexture);
+
 	return 0L;
 }
 
 
 void Device::Final() {
+	mBackBuffer = nullptr;
 	CPOT_SAFE_RELEASE(mDeviceContext);
 	CPOT_SAFE_RELEASE(mSwapChain);
 	CPOT_SAFE_RELEASE(mDevice);

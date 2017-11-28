@@ -320,9 +320,11 @@ public:
 		}
 		mTexture = aTexture;
 
-		auto t = CreateDesc(mTexture);
-		mWidth = t.Width;
-		mHeight = t.Height;
+		auto lDesc = CreateDesc(mTexture);
+		mWidth = lDesc.Width;
+		mHeight = lDesc.Height;
+		SetBindFlags(lDesc.BindFlags);
+		SetCPUAccessFlags(lDesc.CPUAccessFlags);
 	}
 
 	#pragma endregion
