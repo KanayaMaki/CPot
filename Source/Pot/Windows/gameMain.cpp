@@ -62,6 +62,8 @@ void* GameMain::GameLoop(void* aDummy) {
 	//ゲームの初期化
 	mGame->Init();
 
+	Fps::S().Restart();
+
 	//ゲームループ
 	while (true) {
 

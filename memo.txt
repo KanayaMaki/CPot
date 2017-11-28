@@ -511,6 +511,7 @@ m->Load("");
 	TextureAll a;
 
 
+
 	Model.Load("4343.pmx");
 		Mesh = Load("data.mesh");
 		Material = Load(Path::FromRelative("Data/a.model", "data.mesh"));

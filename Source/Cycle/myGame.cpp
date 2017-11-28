@@ -192,10 +192,10 @@ void MyGame::Init() {
 		DXGI_FORMAT_R32G32B32A32_FLOAT, D3D11_USAGE_DEFAULT, directX11::platform::GetBindFlags(true, true, false), 0));
 
 	BasicVertex lVertex[]{
-		{ { -0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
-		{ { -0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
-		{ { 0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
-		{ { 0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
+		{ { -1.0f, -1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
+		{ { -1.0f, 1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
+		{ { 1.0f, -1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
+		{ { 1.0f, 1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
 	};
 	vertexBuffer.reset(new directX11::platform::VertexBuffer);
 	vertexBuffer->Load(sizeof(BasicVertex), 4, lVertex);
@@ -293,9 +293,7 @@ void MyGame::Update() {
 		voice = nullptr;
 	}
 
-	CPOT_LOG("Exist:", ResourceList<AudioClip>::S().Exist("test"));
-	CPOT_LOG(voice.operator bool());
-
+	
 	#pragma endregion
 
 
@@ -333,8 +331,9 @@ void MyGame::Update() {
 
 	#pragma endregion
 
-	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer += DeltaTime();
+	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer += DeltaTime() / 4.0f;
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = Wrap(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer, 1.0f);
+	CPOT_LOG(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer);
 
 	wvpBuffer->Write();
 	diffuseBuffer->Write();
