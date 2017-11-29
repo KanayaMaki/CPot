@@ -55,11 +55,6 @@ public:
 		return cSize;
 	}
 
-	//const CHAR*Œ^‚Ö‚Ì•ÏŠ·
-	operator const CHAR* () {
-		return mStr;
-	}
-
 	#pragma endregion
 
 
@@ -148,7 +143,7 @@ public:
 		if (GetLength() != aStr.GetLength()) {
 			return false;
 		}
-		if (StrSame(Get(), aStr.Get())) {
+		if (StringSame(Get(), aStr.Get())) {
 			return true;
 		}
 		return false;
@@ -160,7 +155,7 @@ public:
 	}
 
 	BOOL operator ==(const CHAR* aStr) {
-		if (StrSame(Get(), aStr)) {
+		if (StringSame(Get(), aStr)) {
 			return true;
 		}
 		return false;
@@ -179,8 +174,8 @@ public:
 public:
 	const String& Pop(u32 aNum) {
 		CPOT_ASSERT(0 <= aNum);
-		u32 lNewLen = GetLength() - aNum;
-		lNewLen = Clamp((u32)0, lNewLen);
+		s32 lNewLen = (s32)GetLength() - aNum;
+		lNewLen = Clamp(lNewLen, 0L, lNewLen);
 		mStr[lNewLen] = '\0';
 		mLength = lNewLen;
 		return (*this);
@@ -217,6 +212,17 @@ public:
 		}
 
 		return lRes;
+	}
+
+	BOOL Exist(const CHAR* aStr) const {
+
+		//‚²‚è‰Ÿ‚µ‚Ås‚­
+		for (u32 i = 0; i < GetLength(); i++) {
+			if (StringSame(&(mStr[i]), aStr) == true) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 private:

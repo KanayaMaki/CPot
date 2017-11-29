@@ -63,9 +63,28 @@
 
 #include "./Pot/Render/texture2D.h"
 
+#include "./Pot/ModelLoader/PmxLoader.h"
+
 #include <Windows.h>
 
 using namespace cpot;
+
+
+#pragma region Pmx
+
+void TestPmx() {
+	PmxLoader pmx;
+	pmx.Load("./Miku/miku.pmx");
+
+	for (u32 i = 0; i < pmx.Get().textures.GetSize(); i++) {
+		const CHAR* t = &(pmx.Get().textures[i].fileName.buf[0]);
+		PathString p = Path::FromRelative("./Miku/miku.pmx", t);
+		CPOT_LOG(p.Get());
+	}
+}
+
+#pragma endregion
+
 
 #pragma region Texture
 

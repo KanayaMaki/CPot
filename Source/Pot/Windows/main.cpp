@@ -37,7 +37,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 
 	#pragma region Test
 
-	TestDirectX11(windows::Window::S().GetHwnd());
+	TestPmx();
 
 
 	//TestOutput(windows::Window::S().GetHwnd());

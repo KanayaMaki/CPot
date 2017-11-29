@@ -52,6 +52,7 @@ template <typename T>
 struct KeyFrame {
 	KeyFrame(f32 aTime, const T& aValue) : mTime(aTime), mValue(aValue) {}
 	KeyFrame(f32 aTime) : mTime(aTime) {}
+	KeyFrame() {}
 	f32 mTime;
 	T mValue;
 

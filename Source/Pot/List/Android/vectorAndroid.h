@@ -113,6 +113,11 @@ public:
 		return mVector.size();
 	}
 
+	//Œ»İ‚Ì—v‘f”‚ğ‘‚â‚·
+	void SetSize(u32 aSize) CPOT_OR {
+		mVector.resize(aSize);
+	}
+
 	#pragma endregion
 
 

@@ -307,7 +307,7 @@ void MyGame::Update() {
 		lLoading = true;
 
 		for (u32 i = 0; i < 5; i++) {
-			LoaderManager::S().Regist(new LoaderTimer(ToString::Do(i), 2.0f));
+			LoaderManager::S().Regist(new LoaderTimer(ToString::Do(i).Get(), 2.0f));
 		}
 	}
 
@@ -333,7 +333,7 @@ void MyGame::Update() {
 
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer += DeltaTime() / 4.0f;
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = Wrap(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer, 1.0f);
-	CPOT_LOG(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer);
+	//CPOT_LOG(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer);
 
 	wvpBuffer->Write();
 	diffuseBuffer->Write();

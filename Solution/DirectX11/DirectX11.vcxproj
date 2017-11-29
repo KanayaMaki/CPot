@@ -70,6 +70,15 @@
     <ClInclude Include="..\..\Source\Pot\List\Standard\vectorStandard.h" />
     <ClInclude Include="..\..\Source\Pot\List\vector.h" />
     <ClInclude Include="..\..\Source\Pot\Loader\loader.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\CharCode.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\Material.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmdData.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxLoader.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxData.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\SkinMeshModel.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\StaticMeshModel.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\SubMesh.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\Windows\CharCodeWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Out\out.h" />
     <ClInclude Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.h" />
@@ -139,6 +148,7 @@
     <ClCompile Include="..\..\Source\Pot\Game\component.cpp" />
     <ClCompile Include="..\..\Source\Pot\Input\Windows\inputWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp" />
+    <ClCompile Include="..\..\Source\Pot\ModelLoader\PmxLoader.cpp" />
     <ClCompile Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Rand\rand.cpp" />
