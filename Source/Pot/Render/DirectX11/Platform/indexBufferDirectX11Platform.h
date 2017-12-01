@@ -26,6 +26,7 @@ public:
 		}
 		mFormat = aIndexFormat;
 		mTopology = aTopology;
+		mIndexNum = aIndexNum;
 		return Buffer::Load(aBufferDesc, aInitData);
 	}
 

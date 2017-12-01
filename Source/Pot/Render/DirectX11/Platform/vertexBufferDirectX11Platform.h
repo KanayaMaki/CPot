@@ -33,6 +33,22 @@ public:
 	#pragma endregion
 
 
+	//‘‚«‚İ
+	#pragma region Write
+
+public:
+	BOOL Write(void* aData) {
+		return Buffer::Write(aData, GetVertexSize() * GetVertexNum());
+	}
+	BOOL Write(void* aData, u32 aSize) {
+		return Buffer::Write(aData, aSize);
+	}
+
+	#pragma endregion
+
+
+
+
 	//æ“¾
 	#pragma region Getter
 

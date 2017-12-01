@@ -67,7 +67,9 @@ public:
 	void SetIndexBuffer(IndexBuffer* aIndexBuffer) CPOT_OR {
 		
 	}
-	void SetVertexBuffer(VertexBuffer* aVertexBuffer) CPOT_OR {}
+	void SetVertexBuffer(std::shared_ptr<VertexBuffer> aVertexBuffer) CPOT_OR {
+		platform::Render::S();
+	}
 
 
 	void SetToDevice() CPOT_OR {

@@ -477,6 +477,18 @@
     <ClInclude Include="..\..\Source\Pot\Render\constantBuffer.h">
       <Filter>Source\Pot\Render</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\vertexBufferDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\vertexBuffer.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\indexBuffer.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\indexBufferDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">

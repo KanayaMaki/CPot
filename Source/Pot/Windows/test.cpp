@@ -65,6 +65,8 @@
 #include "./Pot/Render/texture2D.h"
 #include "./Pot/Render/sampler.h"
 #include "./Pot/Render/constantBuffer.h"
+#include "./Pot/Render/vertexBuffer.h"
+#include "./Pot/Render/indexBuffer.h"
 
 #include "./Pot/ModelLoader/PmxLoader.h"
 #include "./Pot/ModelLoader/PmxToMesh.h"
@@ -107,9 +109,17 @@ void TestTexture() {
 	ConstantBuffer c;
 	c.Load(&s);
 
+	Vector3 vertexData[20];
+	VertexBuffer v;
+	v.Load(sizeof(Vector3), 20, vertexData, true);
+	v.Write(vertexData);
 
-	s32 i = 0;
-	i++;
+	u16 indexData[20];
+	IndexBuffer i;
+	i.Load(IndexBuffer::cU16, 20, IndexBuffer::cTriangleStrip, indexData);
+	
+	s32 tmp = 0;
+	tmp++;
 }
 
 #pragma endregion

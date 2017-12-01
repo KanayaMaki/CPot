@@ -12,6 +12,7 @@
 #include "./Pot/Render/texture2D.h"
 #include "./Pot/Render/sampler.h"
 #include "./Pot/Render/constantBuffer.h"
+#include "./Pot/Render/vertexBuffer.h"
 
 namespace cpot {
 
@@ -44,7 +45,7 @@ public:
 	CPOT_VI void SetRenderTarget(RenderTarget* aRenderTarget, u32 aSlotNum) CPOT_ZR;
 
 	CPOT_VI void SetIndexBuffer(IndexBuffer* aIndexBuffer) CPOT_ZR;
-	CPOT_VI void SetVertexBuffer(VertexBuffer* aVertexBuffer) CPOT_ZR;
+	CPOT_VI void SetVertexBuffer(std::shared_ptr<VertexBuffer> aVertexBuffer) CPOT_ZR;
 
 
 	CPOT_VI void SetToDevice() CPOT_ZR;

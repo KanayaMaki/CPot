@@ -87,6 +87,7 @@
     <ClInclude Include="..\..\Source\Pot\Rand\Standard\randStandard.h" />
     <ClInclude Include="..\..\Source\Pot\Render\constantBuffer.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\constantBufferDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\indexBufferDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\blendStateDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\bufferDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\constantBufferDirectX11Platform.h" />
@@ -112,9 +113,12 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\renderDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\samplerDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture2DDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\vertexBufferDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\indexBuffer.h" />
     <ClInclude Include="..\..\Source\Pot\Render\render.h" />
     <ClInclude Include="..\..\Source\Pot\Render\sampler.h" />
     <ClInclude Include="..\..\Source\Pot\Render\texture2D.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\vertexBuffer.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\sleep.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Thread\Android\mutexAndroid.h" />
