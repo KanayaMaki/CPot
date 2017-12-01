@@ -35,8 +35,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 	Thread t;
 	t.Start(GameMain::GameLoop, nullptr);
 
+	Sleep(1000);
+
 	#pragma region Test
 
+	TestTexture();
 	TestPmx();
 
 

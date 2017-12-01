@@ -14,7 +14,6 @@ class Texture2DBase : public NamedResource {
 
 public:
 	CPOT_VI void Load(const HashTableKey& aUnionName) CPOT_ZR;
-	CPOT_VI void Load(const CHAR* aUnionName) CPOT_ZR;
 
 public:
 	CPOT_VI void Release() CPOT_ZR;

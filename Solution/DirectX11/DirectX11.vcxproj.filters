@@ -405,19 +405,7 @@
     <ClInclude Include="..\..\Source\Pot\Render\texture2D.h">
       <Filter>Source\Pot\Render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\texture3D.h">
-      <Filter>Source\Pot\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\texture1D.h">
-      <Filter>Source\Pot\Render</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture2DDirectX11.h">
-      <Filter>Source\Pot\Render\DirectX11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture3DDirectX11.h">
-      <Filter>Source\Pot\Render\DirectX11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture1DDirectX11.h">
       <Filter>Source\Pot\Render\DirectX11</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\elementManagerDirectX11Platform.h">
@@ -467,6 +455,27 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\ModelLoader\Windows\CharCodeWindows.h">
       <Filter>Source\Pot\ModelLoader\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxToMesh.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\render.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\renderDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\sampler.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\samplerDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\constantBufferDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\constantBuffer.h">
+      <Filter>Source\Pot\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -48,6 +48,7 @@ public:
 public:
 	//インデックスアクセス
 	CPOT_VI T& operator[](u32 aIndex) CPOT_ZR;
+	CPOT_VI const T& operator[](u32 aIndex) const CPOT_ZR;
 
 	//指定された値の要素がいくつあるか
 	CPOT_VI u32 Count(const T& aT) const CPOT_ZR;
@@ -112,6 +113,7 @@ public:
 public:
 	//インデックスアクセス
 	CPOT_VI T& operator[](u32 aIndex) CPOT_ZR;
+	CPOT_VI const T& operator[](u32 aIndex) const CPOT_ZR;
 
 	#pragma endregion
 

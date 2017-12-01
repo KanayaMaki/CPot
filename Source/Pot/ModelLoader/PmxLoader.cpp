@@ -1,5 +1,6 @@
 #include "./Pot/ModelLoader/PmxLoader.h"
 #include "./Pot/File/file.h"
+#include "./Pot/Out/out.h"
 
 #include "./Pot/ModelLoader/CharCode.h"
 
@@ -12,15 +13,25 @@ BOOL PmxLoader::Load(const CHAR* aFileName) {
 	FileIn lFile;
 	lFile.Open(aFileName, true);
 
+	//開くのに失敗したら
+	if (!lFile.IsOpen()) {
+		CPOT_LOG("ファイル：", aFileName, "のオープンに失敗しました");
+		return false;
+	}
+
+
 	//ファイルから読み込む
 	Buffer lBuffer;
 	lFile.Read(lBuffer);
+
+	//ファイル名の設定
+	mData.fileName = aFileName;
+
 
 	//読み込んだバイナリからロードする
 	return Load(lBuffer);
 }
 BOOL PmxLoader::Load(Buffer& aData) {
-	//バイナリからロードする
 
 	//ヘッダの読み込み
 	aData.Read(&mData.header, sizeof(mData.header));

@@ -221,6 +221,10 @@ public:
 	//その他静的な関数
 	#pragma region Static
 
+	static Vector2 FromFloat2(const f32* aVal) {
+		return Vector2(aVal[0], aVal[1]);
+	}
+
 	//基本となる単位ベクトル
 	static Vector2 Unit() {
 		return Vector2(1.0f, 0.0f);
@@ -617,6 +621,9 @@ public:
 
 	static Vector3 FromVector2(const Vector2& aVal) {
 		return Vector3(aVal.x, aVal.y, 0.0f);
+	}
+	static Vector3 FromFloat3(const f32* aVal) {
+		return Vector3(aVal[0], aVal[1], aVal[2]);
 	}
 
 	static Vector3 Unit() {
@@ -1061,6 +1068,10 @@ public:
 
 	//静的な関数
 	#pragma region Static
+
+	static Vector4 FromFloat4(const f32* aVal) {
+		return Vector4(aVal[0], aVal[1], aVal[2], aVal[3]);
+	}
 
 	static Vector4 FromVector3(const Vector3& aVal) {
 		return Vector4(aVal.x, aVal.y, aVal.z, 1.0f);

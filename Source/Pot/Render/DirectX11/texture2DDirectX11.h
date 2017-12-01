@@ -9,7 +9,7 @@
 
 #include "./Pot/Usefull/resourceLoadList.h"
 #include "./Pot/Render/texture2D.h"
-#include "./Pot/Render/DirectX11/Platform/textureDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/textureAllDirectX11Platform.h"
 
 
 namespace cpot {
@@ -27,14 +27,6 @@ public:
 	void Load(const HashTableKey& aUnionName) CPOT_OR {
 		mTexture.Load(Texture2DDirectX11Data::S().Get(aUnionName).Get());
 	};
-	void Load(const CHAR* aUnionName) CPOT_OR {
-		Load(HashTableKey(aUnionName));	//委譲
-	};
-
-	//プラットフォーム限定の読み込み
-	void LoadDirectX11(const CHAR* aFileName) {
-		mTexture.Load(aFileName);
-	};
 
 public:
 	void Release() CPOT_OR {
@@ -51,7 +43,7 @@ public:
 	#pragma region Field
 
 public:
-	platform::Texture2D mTexture;
+	platform::Texture2DAll mTexture;
 
 	#pragma endregion
 };

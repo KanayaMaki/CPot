@@ -8,6 +8,7 @@
 #include "./Pot/ModelLoader/PmdData.h"
 #include "./Pot/ModelLoader/PmxData.h"
 
+
 namespace cpot {
 
 class PmxLoader {
@@ -17,6 +18,8 @@ class PmxLoader {
 
 public:
 	BOOL Load(const CHAR* aFileName);
+
+private:
 	BOOL Load(Buffer& aData);
 
 	#pragma endregion

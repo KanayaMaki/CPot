@@ -75,6 +75,7 @@
     <ClInclude Include="..\..\Source\Pot\ModelLoader\PmdData.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxLoader.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxData.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxToMesh.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\SkinMeshModel.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\StaticMeshModel.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\SubMesh.h" />
@@ -84,6 +85,8 @@
     <ClInclude Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Rand\rand.h" />
     <ClInclude Include="..\..\Source\Pot\Rand\Standard\randStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\constantBuffer.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\constantBufferDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\blendStateDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\bufferDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\constantBufferDirectX11Platform.h" />
@@ -106,12 +109,12 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\vertexBufferDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\viewDirectX11Platform.h" />
-    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture1DDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\renderDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\samplerDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture2DDirectX11.h" />
-    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture3DDirectX11.h" />
-    <ClInclude Include="..\..\Source\Pot\Render\texture1D.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\render.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\sampler.h" />
     <ClInclude Include="..\..\Source\Pot\Render\texture2D.h" />
-    <ClInclude Include="..\..\Source\Pot\Render\texture3D.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\sleep.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Thread\Android\mutexAndroid.h" />

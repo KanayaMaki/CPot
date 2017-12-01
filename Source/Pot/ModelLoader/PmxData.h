@@ -14,6 +14,8 @@ public:
 		Vector<CHAR> buf;
 	};
 
+	String<256> fileName;
+
 	struct Header {
 		u8 pmx[4];
 		f32 ver;

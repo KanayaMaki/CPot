@@ -61,9 +61,13 @@
 
 #include "./Pot/Usefull/path.h"
 
+//#include "./Pot/Render/render.h"
 #include "./Pot/Render/texture2D.h"
+#include "./Pot/Render/sampler.h"
+#include "./Pot/Render/constantBuffer.h"
 
 #include "./Pot/ModelLoader/PmxLoader.h"
+#include "./Pot/ModelLoader/PmxToMesh.h"
 
 #include <Windows.h>
 
@@ -76,10 +80,14 @@ void TestPmx() {
 	PmxLoader pmx;
 	pmx.Load("./Miku/miku.pmx");
 
-	for (u32 i = 0; i < pmx.Get().textures.GetSize(); i++) {
-		const CHAR* t = &(pmx.Get().textures[i].fileName.buf[0]);
-		PathString p = Path::FromRelative("./Miku/miku.pmx", t);
-		CPOT_LOG(p.Get());
+	StaticMeshModel staticMesh;
+	PmxToMesh::Load(staticMesh, pmx.Get());
+
+	SkinMeshModel skinMesh;
+	PmxToMesh::Load(skinMesh, pmx.Get());
+
+	for (u32 i = 0; i < skinMesh.submesh.GetSize(); i++) {
+		CPOT_LOG(skinMesh.submesh[i].material.texture.name);
 	}
 }
 
@@ -89,8 +97,19 @@ void TestPmx() {
 #pragma region Texture
 
 void TestTexture() {
-	Texture2D t;
-	t.LoadDirectX11("./test.png");
+	Texture2D tex;
+	tex.Load("r");
+	
+	Sampler s;
+	s.Load(Sampler::cClamp);
+	//Render::S().SetSampler();
+
+	ConstantBuffer c;
+	c.Load(&s);
+
+
+	s32 i = 0;
+	i++;
 }
 
 #pragma endregion

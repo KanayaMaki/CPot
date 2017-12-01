@@ -1,5 +1,5 @@
 //
-//	content	:	Textureのインターフェース
+//	content	:	Samplerのインターフェース
 //	author	:	SaitoYoshiki
 //
 
@@ -10,20 +10,27 @@
 
 namespace cpot {
 
-class Texture3DBase : public NamedResource {
+class SamplerBase : public NamedResource {
+public:
+	enum CUVMode {
+		cWrap,
+		cClamp,
+	};
+
+public:
+	CPOT_VI void Load(CUVMode aMode) CPOT_ZR;
 
 public:
 	CPOT_VI void Release() CPOT_ZR;
 
 public:
 	CPOT_VI BOOL IsLoad() const CPOT_ZR;
-
 };
 
 }
 
 #ifdef CPOT_ON_WINDOWS
-#include "./Pot/Render/DirectX11/texture3DDirectX11.h"
+#include "./Pot/Render/DirectX11/samplerDirectX11.h"
 #elif defined CPOT_ON_ANDROID
-#include "./Pot/Audio/Android/audioClipAndroid.h"
+#include "./Pot/Audio/Android/samplerAndroid.h"
 #endif

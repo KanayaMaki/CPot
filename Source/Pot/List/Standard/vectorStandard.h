@@ -77,6 +77,9 @@ public:
 	T& operator[](u32 aIndex) CPOT_OR {
 		return mVector[aIndex];
 	}
+	const T& operator[](u32 aIndex) const CPOT_OR {
+		return mVector[aIndex];
+	}
 
 	//指定された値の要素がいくつあるか
 	u32 Count(const T& aT) const CPOT_OR {
@@ -172,6 +175,9 @@ public:
 public:
 	//インデックスアクセス
 	T& operator[](u32 aIndex) CPOT_OR {
+		return mVector[aIndex];
+	}
+	const T& operator[](u32 aIndex) const CPOT_OR {
 		return mVector[aIndex];
 	}
 
