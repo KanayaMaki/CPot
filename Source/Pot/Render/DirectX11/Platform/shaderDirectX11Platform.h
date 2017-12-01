@@ -169,7 +169,6 @@ private:
 };
 
 
-
 template <typename ShaderType>
 class Shader {
 
@@ -211,7 +210,7 @@ public:
 
 public:
 	ShaderType* GetShader() const {
-		return mShader.get();
+		return mShader;
 	}
 	BOOL IsLoaded() const {
 		return mShader != nullptr;
@@ -263,7 +262,7 @@ public:
 	#pragma region Field
 
 protected:
-	std::shared_ptr<ShaderType> mShader;
+	ShaderType* mShader;
 
 	#pragma endregion
 
@@ -298,7 +297,7 @@ public:
 		}
 
 		{
-			mShader = std::shared_ptr<ID3D11VertexShader>(lTmp);
+			mShader = lTmp;
 			mInputLayout = std::shared_ptr<InputLayout>(new InputLayout);
 		}
 
@@ -357,9 +356,7 @@ public:
 			return;
 		}
 
-		{
-			mShader = std::shared_ptr<ID3D11GeometryShader>(lTmp);
-		}
+		mShader = lTmp;
 	}
 };
 
@@ -390,9 +387,7 @@ public:
 			return;
 		}
 
-		{
-			mShader = std::shared_ptr<ID3D11PixelShader>(lTmp);
-		}
+		mShader = lTmp;
 	}
 };
 
@@ -423,9 +418,7 @@ public:
 			return;
 		}
 
-		{
-			mShader = std::shared_ptr<ID3D11HullShader>(lTmp);
-		}
+		mShader = lTmp;
 	}
 };
 
@@ -455,9 +448,7 @@ public:
 			return;
 		}
 
-		{
-			mShader = std::shared_ptr<ID3D11DomainShader>(lTmp);
-		}
+		mShader = lTmp;
 	}
 };
 
@@ -488,9 +479,7 @@ public:
 			return;
 		}
 
-		{
-			mShader = std::shared_ptr<ID3D11ComputeShader>(lTmp);
-		}
+		mShader = lTmp;
 	}
 };
 

@@ -45,7 +45,7 @@ public:
 				return lVal;
 			}
 		}
-		//return (T)(0);
+		return mNull;
 	}
 
 	//指定された値と等しい要素の削除
@@ -146,11 +146,14 @@ public:
 
 private:
 	std::vector<T> mVector;
+	static T mNull;
 
 	#pragma endregion
 	
 };
 
+template <typename T>
+T Vector<T>::mNull;
 
 
 //可変長配列のクラス

@@ -112,11 +112,13 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\viewDirectX11Platform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\renderDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\samplerDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\shaderDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture2DDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\vertexBufferDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\indexBuffer.h" />
     <ClInclude Include="..\..\Source\Pot\Render\render.h" />
     <ClInclude Include="..\..\Source\Pot\Render\sampler.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\shader.h" />
     <ClInclude Include="..\..\Source\Pot\Render\texture2D.h" />
     <ClInclude Include="..\..\Source\Pot\Render\vertexBuffer.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\sleep.h" />

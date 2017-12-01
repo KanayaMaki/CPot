@@ -13,6 +13,8 @@
 #include "./Pot/Render/sampler.h"
 #include "./Pot/Render/constantBuffer.h"
 #include "./Pot/Render/vertexBuffer.h"
+#include "./Pot/Render/indexBuffer.h"
+#include "./Pot/Render/shader.h"
 
 namespace cpot {
 
@@ -36,15 +38,13 @@ public:
 	
 	CPOT_VI void SetConstantBuffer(std::shared_ptr<ConstantBuffer> aConstantBuffer, u32 aSlotNum) CPOT_ZR;
 	
-	CPOT_VI void SetVertexShader(VertexShader* aVertexShader) CPOT_ZR;
-	CPOT_VI void SetGeometryShader(GeometryShader* aGeometryShader) CPOT_ZR;
-	CPOT_VI void SetPixelShader(PixelShader* aPixelShader) CPOT_ZR;
+	CPOT_VI void SetShader(std::shared_ptr<Shader> aShader) CPOT_ZR;
 
 
 	CPOT_VI void SetDepthStencilView(DepthStencilView* aDepthStencilView) CPOT_ZR;
 	CPOT_VI void SetRenderTarget(RenderTarget* aRenderTarget, u32 aSlotNum) CPOT_ZR;
 
-	CPOT_VI void SetIndexBuffer(IndexBuffer* aIndexBuffer) CPOT_ZR;
+	CPOT_VI void SetIndexBuffer(std::shared_ptr<IndexBuffer> aIndexBuffer) CPOT_ZR;
 	CPOT_VI void SetVertexBuffer(std::shared_ptr<VertexBuffer> aVertexBuffer) CPOT_ZR;
 
 

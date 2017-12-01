@@ -489,6 +489,12 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\indexBufferDirectX11.h">
       <Filter>Source\Pot\Render\DirectX11</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\shader.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\shaderDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">

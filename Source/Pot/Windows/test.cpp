@@ -67,6 +67,7 @@
 #include "./Pot/Render/constantBuffer.h"
 #include "./Pot/Render/vertexBuffer.h"
 #include "./Pot/Render/indexBuffer.h"
+#include "./Pot/Render/shader.h"
 
 #include "./Pot/ModelLoader/PmxLoader.h"
 #include "./Pot/ModelLoader/PmxToMesh.h"
@@ -118,6 +119,18 @@ void TestTexture() {
 	IndexBuffer i;
 	i.Load(IndexBuffer::cU16, 20, IndexBuffer::cTriangleStrip, indexData);
 	
+
+	directX11::ShaderDirectX11Data::S().Regist("test",
+	{
+		{ "test.fx", "VS_TEST" },
+		{ "test.fx", "GS_TEST" },
+		{ "test.fx", "PS_TEST" },
+	});
+
+	Shader shader;
+	shader.Load(HashTableKey("test"));
+
+
 	s32 tmp = 0;
 	tmp++;
 }

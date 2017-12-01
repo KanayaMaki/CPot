@@ -46,13 +46,7 @@ public:
 	}
 
 
-	void SetVertexShader(VertexShader* aVertexShader) CPOT_OR {
-		
-	}
-	void SetGeometryShader(GeometryShader* aGeometryShader) CPOT_OR {
-		
-	}
-	void SetPixelShader(PixelShader* aPixelShader) CPOT_OR {
+	void SetShader(std::shared_ptr<Shader> aShader) CPOT_OR {
 		
 	}
 
@@ -64,11 +58,11 @@ public:
 		
 	}
 
-	void SetIndexBuffer(IndexBuffer* aIndexBuffer) CPOT_OR {
-		
+	void SetIndexBuffer(std::shared_ptr<IndexBuffer> aIndexBuffer) CPOT_OR {
+		platform::Render::S().GetIndexBufferManager().Set(aIndexBuffer);
 	}
 	void SetVertexBuffer(std::shared_ptr<VertexBuffer> aVertexBuffer) CPOT_OR {
-		platform::Render::S();
+		platform::Render::S().GetVertexBufferManager().Set(aVertexBuffer);
 	}
 
 
