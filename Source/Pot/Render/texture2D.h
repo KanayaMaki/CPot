@@ -19,6 +19,11 @@ public:
 	CPOT_VI void Release() CPOT_ZR;
 
 public:
+	CPOT_VI u32 GetWidth() CPOT_ZR;
+	CPOT_VI u32 GetHeight() CPOT_ZR;
+
+
+public:
 	CPOT_VI BOOL IsLoad() const CPOT_ZR;
 
 };

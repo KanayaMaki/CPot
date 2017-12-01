@@ -28,9 +28,7 @@ public:
 		return mIndexBuffer->Load(ConvertType(aIndexType), aIndexNum, aInitData, ConvertTopology(aTopology));
 	}
 
-
 	#pragma endregion
-
 
 
 	//Žæ“¾

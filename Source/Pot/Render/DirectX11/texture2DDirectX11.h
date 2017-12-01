@@ -38,6 +38,14 @@ public:
 		return mTexture.IsLoaded();
 	};
 
+public:
+	u32 GetWidth() CPOT_OR {
+		return mTexture.GetTexture()->GetWidth();
+	}
+	u32 GetHeight() CPOT_OR {
+		return mTexture.GetTexture()->GetHeight();
+	}
+
 
 	//フィールド
 	#pragma region Field
