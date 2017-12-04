@@ -6,9 +6,9 @@
 
 namespace cpot {
 
-struct SubMesh {
+struct SubMeshCPU {
 	u32 indexCount;
-	Material material;
+	MaterialCPU material;
 };
 
 }

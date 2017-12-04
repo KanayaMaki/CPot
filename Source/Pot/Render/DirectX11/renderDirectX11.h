@@ -20,12 +20,19 @@ class Render : public RenderBase, public Singleton<Render> {
 	friend class Singleton<Render>;
 
 public:
-	void SetRasterizer(Rasterizer* aRasterizer) CPOT_OR {}
-	void SetBlend(Blend* aBlend) CPOT_OR {}
+	void SetRasterizer(std::shared_ptr<Rasterizer> aRasterizer) CPOT_OR {
+		platform::Render::S().GetRasterizerStateManager().Set(aRasterizer->mRasterizer);
+	}
+	void SetBlend(std::shared_ptr<Blend> aBlend) CPOT_OR {
+		platform::Render::S().GetBlendStateManager().Set(aBlend->mBlend, nullptr);
+	}
+	void SetDepthStencil(std::shared_ptr<DepthStencil> aDepthStencil) CPOT_OR {
+		platform::Render::S().GetDepthStencilStateManager().Set(aDepthStencil->mDepthStencil, nullptr);
+	}
 
-	void SetDepthStencil(DepthStencil* aDepthStencil) CPOT_OR {}
-
-	void SetViewPort(cyc::pot::ViewPort& aViewPort, u32 aSlotNum) CPOT_OR {}
+	void SetViewPort(std::shared_ptr<Viewport> aViewport, u32 aSlotNum) CPOT_OR {
+		platform::Render::S().GetViewPortManager().Set(aViewport->mViewport, aSlotNum);
+	}
 
 	void SetSampler(std::shared_ptr<Sampler> aSampler, u32 aSlotNum) CPOT_OR {
 		platform::Render::S().GetVertexShaderManager().SetSampler(aSampler->mSampler, aSlotNum);
@@ -47,22 +54,25 @@ public:
 
 
 	void SetShader(std::shared_ptr<Shader> aShader) CPOT_OR {
-		
+		platform::Render::S().GetInputLayoutManager().Set(aShader->mVertexShader->GetInputLayout());
+		platform::Render::S().GetVertexShaderManager().SetShader(aShader->mVertexShader);
+		platform::Render::S().GetGeometryShaderManager().SetShader(aShader->mGeometryShader);
+		platform::Render::S().GetPixelShaderManager().SetShader(aShader->mPixelShader);
 	}
 
 
-	void SetDepthStencilView(DepthStencilView* aDepthStencilView) CPOT_OR {
-		
+	void SetDepthTexture(std::shared_ptr<Texture2D> aDepthTexture) CPOT_OR {
+		platform::Render::S().GetDepthStencilViewManager().Set(aDepthTexture->mTexture.GetDepthStencilView());
 	}
-	void SetRenderTarget(RenderTarget* aRenderTarget, u32 aSlotNum) CPOT_OR {
-		
+	void SetRenderTexture(std::shared_ptr<Texture2D> aRenderTexture, u32 aSlotNum) CPOT_OR {
+		platform::Render::S().GetRenderTargetViewManager().Set(aRenderTexture->mTexture.GetRenderTargetView(), aSlotNum);
 	}
 
 	void SetIndexBuffer(std::shared_ptr<IndexBuffer> aIndexBuffer) CPOT_OR {
-		platform::Render::S().GetIndexBufferManager().Set(aIndexBuffer);
+		platform::Render::S().GetIndexBufferManager().Set(aIndexBuffer->mIndexBuffer);
 	}
 	void SetVertexBuffer(std::shared_ptr<VertexBuffer> aVertexBuffer) CPOT_OR {
-		platform::Render::S().GetVertexBufferManager().Set(aVertexBuffer);
+		platform::Render::S().GetVertexBufferManager().Set(aVertexBuffer->mVertexBuffer, 0);
 	}
 
 

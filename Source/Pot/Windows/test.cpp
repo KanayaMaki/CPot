@@ -61,13 +61,7 @@
 
 #include "./Pot/Usefull/path.h"
 
-//#include "./Pot/Render/render.h"
-#include "./Pot/Render/texture2D.h"
-#include "./Pot/Render/sampler.h"
-#include "./Pot/Render/constantBuffer.h"
-#include "./Pot/Render/vertexBuffer.h"
-#include "./Pot/Render/indexBuffer.h"
-#include "./Pot/Render/shader.h"
+#include "./Pot/Render/render.h"
 
 #include "./Pot/ModelLoader/PmxLoader.h"
 #include "./Pot/ModelLoader/PmxToMesh.h"
@@ -83,10 +77,10 @@ void TestPmx() {
 	PmxLoader pmx;
 	pmx.Load("./Miku/miku.pmx");
 
-	StaticMeshModel staticMesh;
+	StaticMeshModelCPU staticMesh;
 	PmxToMesh::Load(staticMesh, pmx.Get());
 
-	SkinMeshModel skinMesh;
+	SkinMeshModelCPU skinMesh;
 	PmxToMesh::Load(skinMesh, pmx.Get());
 
 	for (u32 i = 0; i < skinMesh.submesh.GetSize(); i++) {
@@ -100,25 +94,8 @@ void TestPmx() {
 #pragma region Texture
 
 void TestTexture() {
-	Texture2D tex;
-	tex.Load("r");
-	
-	Sampler s;
-	s.Load(Sampler::cClamp);
-	//Render::S().SetSampler();
 
-	ConstantBuffer c;
-	c.Load(&s);
-
-	Vector3 vertexData[20];
-	VertexBuffer v;
-	v.Load(sizeof(Vector3), 20, vertexData, true);
-	v.Write(vertexData);
-
-	u16 indexData[20];
-	IndexBuffer i;
-	i.Load(IndexBuffer::cU16, 20, IndexBuffer::cTriangleStrip, indexData);
-	
+	directX11::Texture2DDirectX11Data::S().Regist("test", "./test.png");
 
 	directX11::ShaderDirectX11Data::S().Regist("test",
 	{
@@ -127,12 +104,75 @@ void TestTexture() {
 		{ "test.fx", "PS_TEST" },
 	});
 
-	Shader shader;
-	shader.Load(HashTableKey("test"));
+	std::shared_ptr<Texture2D> texture;
+	texture.reset(new Texture2D);
+	texture->Load("test");
+	
+	std::shared_ptr<Texture2D> renderTarget;
+	renderTarget.reset(new Texture2D);
+	renderTarget->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
+
+	std::shared_ptr<Texture2D> depthTexture;
+	depthTexture.reset(new Texture2D);
+	depthTexture->Load(960, 540, Texture2D::cR32Float, false, true, true);
+
+	std::shared_ptr<Sampler> sampler;
+	sampler.reset(new Sampler);
+	sampler->Load(Sampler::cClamp);
+
+	std::shared_ptr<Blend> blend;
+	blend.reset(new Blend);
+	blend->Load(Blend::cNormal);
+
+	std::shared_ptr<DepthStencil> depthStencil;
+	depthStencil.reset(new DepthStencil);
+	depthStencil->Load(DepthStencil::cTest);
+
+	std::shared_ptr<ConstantBuffer> constantBuffer;
+	constantBuffer.reset(new ConstantBuffer);
+	constantBuffer->Load(&texture);
+
+	std::shared_ptr<Viewport> viewport;
+	viewport.reset(new Viewport);
+	viewport->Load(Vector2(0.0f, 0.0f), Vector2(960.0f, 540.0f));
+
+	Vector3 vertexData[20];
+	std::shared_ptr<VertexBuffer> vertexBuffer;
+	vertexBuffer.reset(new VertexBuffer);
+	vertexBuffer->Load(sizeof(Vector3), 20, vertexData, true);
+	vertexBuffer->Write(vertexData);
+
+	u16 indexData[20];
+	std::shared_ptr<IndexBuffer> indexBuffer;
+	indexBuffer.reset(new IndexBuffer);
+	indexBuffer->Load(IndexBuffer::cU16, 20, IndexBuffer::cTriangleStrip, indexData);
+	
+	std::shared_ptr<Shader> shader;
+	shader.reset(new Shader);
+	shader->Load("test");
+
+	std::shared_ptr<Rasterizer> rasterizer;
+	rasterizer.reset(new Rasterizer);
+	rasterizer->Load(Rasterizer::cSolid, Rasterizer::cCullNone);
 
 
-	s32 tmp = 0;
-	tmp++;
+	Render::S().SetBlend(blend);
+	Render::S().SetRasterizer(rasterizer);
+	Render::S().SetDepthStencil(depthStencil);
+	Render::S().SetIndexBuffer(indexBuffer);
+	Render::S().SetVertexBuffer(vertexBuffer);
+	Render::S().SetViewPort(viewport, 0);
+	Render::S().SetDepthTexture(depthTexture);
+	Render::S().SetTexture2D(texture, 0);
+	Render::S().SetSampler(sampler, 0);
+	Render::S().SetConstantBuffer(constantBuffer, 0);
+	Render::S().SetRenderTexture(renderTarget, 0);
+	Render::S().SetShader(shader);
+
+	Render::S().SetToDevice();
+
+	Render::S().DrawIndexed(6, 0);
+	Render::S().Present();
 }
 
 #pragma endregion

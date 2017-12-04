@@ -5,12 +5,12 @@
 
 namespace cpot {
 
-struct Texture {
+struct TextureCPU {
 	String<256> name;
 };
 
-struct Material {
-	Texture texture;
+struct MaterialCPU {
+	TextureCPU texture;
 	Color diffuse;
 	Vector3 specular;
 	f32 specularPower;

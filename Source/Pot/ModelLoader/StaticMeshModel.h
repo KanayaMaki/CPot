@@ -13,11 +13,11 @@ struct StaticMeshVertex {
 	Vector2 texCoord;
 };
 
-struct StaticMeshModel {
+struct StaticMeshModelCPU {
 public:
 	VectorSimple<StaticMeshVertex> vertex;
 	VectorSimple<u32> index;
-	VectorSimple<SubMesh> submesh;
+	VectorSimple<SubMeshCPU> submesh;
 };
 
 }

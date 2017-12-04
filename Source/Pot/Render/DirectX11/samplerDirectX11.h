@@ -35,7 +35,6 @@ public:
 public:
 	void Release() CPOT_OR {
 		mSampler->Release();
-		mSampler = nullptr;
 	}
 
 public:

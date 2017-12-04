@@ -39,7 +39,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszArg
 
 	#pragma region Test
 
-	TestTexture();
+	//TestTexture();
 	TestPmx();
 
 

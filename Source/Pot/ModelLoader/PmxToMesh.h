@@ -15,7 +15,7 @@ namespace cpot {
 class PmxToMesh {
 
 public:
-	static void Load(StaticMeshModel& aMesh, const PmxData& aPmx) {
+	static void Load(StaticMeshModelCPU& aMesh, const PmxData& aPmx) {
 
 		//頂点データの読み込み
 		aMesh.vertex.SetSize(aPmx.vertexs.GetSize());
@@ -54,7 +54,7 @@ public:
 		}
 	}
 
-	static void Load(SkinMeshModel& aMesh, const PmxData& aPmx) {
+	static void Load(SkinMeshModelCPU& aMesh, const PmxData& aPmx) {
 		
 		//頂点データの読み込み
 		aMesh.vertex.SetSize(aPmx.vertexs.GetSize());

@@ -16,12 +16,11 @@ struct SkinMeshVertex {
 	u16 weightIndex[4];
 };
 
-struct SkinMeshModel {
+struct SkinMeshModelCPU {
 public:
 	VectorSimple<SkinMeshVertex> vertex;
 	VectorSimple<u32> index;
-	VectorSimple<SubMesh> submesh;
+	VectorSimple<SubMeshCPU> submesh;
 };
-
 
 }
