@@ -25,6 +25,7 @@ public:
 	CPOT_VI void Load(const HashTableKey& aUnionName) CPOT_ZR;
 	CPOT_VI void Load(u32 aWidth, u32 aHeight, CFormat aFormat, BOOL aIsRenderTarget, BOOL aIsShaderResource) CPOT_ZR;
 	CPOT_VI void Load(u32 aWidth, u32 aHeight, CFormat aFormat, BOOL aIsRenderTarget, BOOL aIsShaderResource, BOOL aIsDepthStencil) CPOT_ZR;
+	CPOT_VI void LoadFileName(const CHAR* aFileName) CPOT_ZR;
 
 public:
 	CPOT_VI void Release() CPOT_ZR;

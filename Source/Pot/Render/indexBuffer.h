@@ -19,7 +19,7 @@ public:
 	enum CType {
 		cU8,
 		cU16,
-		cS32,
+		cU32,
 		cInvalidType
 	};
 	enum CTopology {
@@ -37,7 +37,7 @@ public:
 	#pragma region Load
 
 public:
-	CPOT_VI BOOL Load(CType aIndexType, u32 aIndexNum, CTopology aTopology, void* aInitData) CPOT_ZR;
+	CPOT_VI BOOL Load(CType aIndexType, u32 aIndexNum, CTopology aTopology, const void* aInitData) CPOT_ZR;
 
 	#pragma endregion
 

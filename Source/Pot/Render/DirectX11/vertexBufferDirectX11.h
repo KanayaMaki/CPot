@@ -24,10 +24,10 @@ public:
 	#pragma region Load
 
 public:
-	BOOL Load(u32 aVertexSize, u32 aVertexNum, void* aInitData, BOOL aCPUWritable) CPOT_OR {
+	BOOL Load(u32 aVertexSize, u32 aVertexNum, const void* aInitData, BOOL aCPUWritable) CPOT_OR {
 		return mVertexBuffer->Load(D3D11_USAGE_DYNAMIC, D3D11_CPU_ACCESS_WRITE, aVertexSize, aVertexNum, aInitData);
 	}
-	BOOL Load(u32 aVertexSize, u32 aVertexNum, void* aInitData) CPOT_OR {
+	BOOL Load(u32 aVertexSize, u32 aVertexNum, const void* aInitData) CPOT_OR {
 		return mVertexBuffer->Load(aVertexSize, aVertexNum, aInitData);
 	}
 	
@@ -38,10 +38,10 @@ public:
 	#pragma region Write
 
 public:
-	BOOL Write(void* aData) CPOT_OR {
+	BOOL Write(const void* aData) CPOT_OR {
 		return mVertexBuffer->Write(aData);
 	}
-	BOOL Write(void* aData, u32 aSize) CPOT_OR {
+	BOOL Write(const void* aData, u32 aSize) CPOT_OR {
 		return mVertexBuffer->Write(aData, aSize);
 	}
 

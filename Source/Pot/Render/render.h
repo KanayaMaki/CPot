@@ -19,6 +19,7 @@
 #include "./Pot/Render/blend.h"
 #include "./Pot/Render/rasterizer.h"
 #include "./Pot/Render/viewport.h"
+#include "./Pot/Render/camera.h"
 
 namespace cpot {
 

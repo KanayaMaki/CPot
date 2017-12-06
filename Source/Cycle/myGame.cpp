@@ -21,7 +21,10 @@
 #include "./Pot/Animation/animation.h"
 
 #include "./Pot/ModelLoader/PmxToMesh.h"
+#include "./Pot/Model/ModelCPUToModel.h"
+#include "./Pot/ModelLoader/PmxLoader.h"
 #include "./Pot/Render/render.h"
+
 #include "./Pot/Config/config.h"
 
 #include "./Pot/Usefull/path.h"
@@ -131,6 +134,8 @@ std::shared_ptr<VertexBuffer> vertexBuffer;
 std::shared_ptr<IndexBuffer> indexBuffer;
 std::shared_ptr<Shader> shader;
 std::shared_ptr<Rasterizer> rasterizer;
+std::shared_ptr<StaticMeshModel> model;
+PersCamera camera;
 
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
@@ -228,7 +233,18 @@ void MyGame::Init() {
 	Render::S().SetShader(shader);
 
 
+	PmxLoader lPmx;
+	lPmx.Load("./Miku/miku.pmx");
 
+	StaticMeshModelCPU lSkinMeshCPU;
+	PmxToMesh::Load(lSkinMeshCPU, lPmx.Get());
+
+	model.reset(new StaticMeshModel);
+	ModelCPUToModel::Load(*model, lSkinMeshCPU);
+
+	camera.mProjection.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
+	camera.mView.SetLocation(Vector3(0.0f, 0.0f, -3.0f));
+	camera.mView.SetRotation(Quaternion::FromAxis(Vector3(0.0f, 1.0f, 0.0f), ToRad(45.0f)));
 
 	#ifdef CPOT_ON_WINDOWS
 	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
@@ -304,6 +320,18 @@ void MyGame::Update() {
 
 	#pragma endregion
 
+
+	if (Input::GetButton(windows::cLeft)) {
+		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::FromTransform(Vector3(-5.0f, 0.0f, 0.0f));
+	}
+	if (Input::GetButton(windows::cRight)) {
+		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::FromTransform(Vector3(5.0f, 0.0f, 0.0f));
+	}
+
+	camera.Update();
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = camera.mProjection.GetMatrix();
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = camera.mView.GetMatrix();
+
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer += DeltaTime() / 4.0f;
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = Wrap(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer, 1.0f);
 	//CPOT_LOG(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer);
@@ -315,8 +343,16 @@ void MyGame::Update() {
 	depthTexture->ClearDepth(1.0f);
 	renderTarget->ClearColor(Color::Black().Translate());
 
-	Render::S().SetToDevice();
-	Render::S().DrawIndexed(6, 0);
+
+	Render::S().SetVertexBuffer(model->mesh.vertex);
+	Render::S().SetIndexBuffer(model->mesh.index);
+	
+	for (u32 i = 0; i < model->submeshNum; i++) {
+		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
+		Render::S().SetToDevice();
+		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
+	}
+
 	Render::S().Present();
 }
 

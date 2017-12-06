@@ -226,7 +226,7 @@ PS_OUTPUT PS_TEST(PS_PHONG_INPUT input) {
 	col *= texel;
 
 	//col *= Timer;
-	col *= OctavePerlin(input.Tex.x * 5.0f, input.Tex.y * 5.0f, 5, 0.8f);
+	//col *= OctavePerlin(input.Tex.x * 5.0f, input.Tex.y * 5.0f, 5, 0.8f);
 
 	output.Diffuse = col;
 

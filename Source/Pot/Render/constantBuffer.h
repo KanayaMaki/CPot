@@ -28,7 +28,7 @@ public:
 
 public:
 	CPOT_VI BOOL Write() CPOT_ZR;
-	CPOT_VI BOOL Write(void* aBuffer) CPOT_ZR;
+	CPOT_VI BOOL Write(const void* aBuffer) CPOT_ZR;
 
 	#pragma endregion
 

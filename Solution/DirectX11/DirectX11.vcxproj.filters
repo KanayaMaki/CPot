@@ -136,6 +136,9 @@
     <Filter Include="Source\Pot\ModelLoader\Windows">
       <UniqueIdentifier>{240e7e36-1d1b-468a-b533-10e18fb2d09d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Pot\Model">
+      <UniqueIdentifier>{084c45d1-d7cf-4ab3-b320-14cd4459d8bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Pot\Atom\defines.h">
@@ -521,6 +524,24 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\viewportDirectX11Platform.h">
       <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\StaticMeshModel.h">
+      <Filter>Source\Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\SkinMeshModel.h">
+      <Filter>Source\Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\Material.h">
+      <Filter>Source\Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\Submesh.h">
+      <Filter>Source\Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\ModelCPUToModel.h">
+      <Filter>Source\Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\camera.h">
+      <Filter>Source\Pot\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

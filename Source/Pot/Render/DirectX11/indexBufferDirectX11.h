@@ -24,7 +24,7 @@ public:
 	#pragma region Load
 
 public:
-	BOOL Load(CType aIndexType, u32 aIndexNum, CTopology aTopology, void* aInitData) CPOT_OR {
+	BOOL Load(CType aIndexType, u32 aIndexNum, CTopology aTopology, const void* aInitData) CPOT_OR {
 		return mIndexBuffer->Load(ConvertType(aIndexType), aIndexNum, aInitData, ConvertTopology(aTopology));
 	}
 
@@ -68,8 +68,8 @@ public:
 				return cU8;
 			case DXGI_FORMAT_R16_UINT:
 				return cU16;
-			case DXGI_FORMAT_R32_SINT:
-				return cS32;
+			case DXGI_FORMAT_R32_UINT:
+				return cU32;
 		}
 		return cInvalidType;
 	}
@@ -79,8 +79,8 @@ public:
 				return DXGI_FORMAT_R8_UINT;
 			case cU16:
 				return DXGI_FORMAT_R16_UINT;
-			case cS32:
-				return DXGI_FORMAT_R32_SINT;
+			case cU32:
+				return DXGI_FORMAT_R32_UINT;
 		}
 		return DXGI_FORMAT_UNKNOWN;
 	}
@@ -105,8 +105,6 @@ public:
 	}
 
 	#pragma endregion
-
-
 
 
 public:

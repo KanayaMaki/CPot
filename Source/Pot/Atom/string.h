@@ -29,6 +29,9 @@ public:
 	String(const CHAR* aStr) {
 		Set(aStr);
 	}
+	String(CHAR aChar) {
+		Set(ToString(aChar).Get());
+	}
 	template <u32 cOtherSize>
 	String(const String<cOtherSize>& aStr) {
 		Set(aStr.Get());

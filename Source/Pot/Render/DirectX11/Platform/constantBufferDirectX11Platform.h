@@ -54,7 +54,7 @@ public:
 	BOOL Write() {
 		return Buffer::Write(mCPUBuffer, GetSize());
 	}
-	BOOL Write(void* aBuffer) {
+	BOOL Write(const void* aBuffer) {
 		return Buffer::Write(aBuffer, GetSize());
 	}
 

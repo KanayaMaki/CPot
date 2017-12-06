@@ -19,8 +19,8 @@ public:
 	#pragma region Load
 
 public:
-	CPOT_VI BOOL Load(u32 aVertexSize, u32 aVertexNum, void* aInitData, BOOL aCPUWritable) CPOT_ZR;
-	CPOT_VI BOOL Load(u32 aVertexSize, u32 aVertexNum, void* aInitData) CPOT_ZR;
+	CPOT_VI BOOL Load(u32 aVertexSize, u32 aVertexNum, const void* aInitData, BOOL aCPUWritable) CPOT_ZR;
+	CPOT_VI BOOL Load(u32 aVertexSize, u32 aVertexNum, const void* aInitData) CPOT_ZR;
 
 
 	#pragma endregion
@@ -29,8 +29,8 @@ public:
 	#pragma region Write
 
 public:
-	CPOT_VI BOOL Write(void* aData) CPOT_ZR;
-	CPOT_VI BOOL Write(void* aData, u32 aSize) CPOT_ZR;
+	CPOT_VI BOOL Write(const void* aData) CPOT_ZR;
+	CPOT_VI BOOL Write(const void* aData, u32 aSize) CPOT_ZR;
 
 	#pragma endregion
 

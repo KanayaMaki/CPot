@@ -42,7 +42,7 @@ public:
 	BOOL Write() CPOT_OR {
 		return mConstantBuffer->Write();
 	}
-	BOOL Write(void* aBuffer) CPOT_OR {
+	BOOL Write(const void* aBuffer) CPOT_OR {
 		return mConstantBuffer->Write(aBuffer);
 	}
 

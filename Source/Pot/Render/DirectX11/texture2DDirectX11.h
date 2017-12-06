@@ -54,6 +54,10 @@ public:
 		mTexture.Load(platform::Texture2D::CreateDesc(aWidth, aHeight, Convert(aFormat), D3D11_USAGE_DEFAULT,
 			platform::GetBindFlags(aIsRenderTarget, aIsShaderResource, aIsDepthStencil), 0));
 	}
+	void LoadFileName(const CHAR* aFileName) CPOT_OR {
+		mTexture.Load(aFileName);
+	};
+
 	void LoadPlatform(std::shared_ptr<platform::Texture2D> aTexture) {
 		mTexture.Load(aTexture);
 	}

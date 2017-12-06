@@ -510,6 +510,10 @@ m->Load("");
 
 	TextureAll a;
 
+	1, 0, 1
+	-Lx / Vy, 0, -Lz / Vy
+	0, 0, 0
+
 
 
 	Model.Load("4343.pmx");

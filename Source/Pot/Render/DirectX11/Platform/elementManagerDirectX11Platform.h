@@ -428,7 +428,12 @@ public:
 		CPOT_ASSERT(aSlotNum < SlotMaxNum());
 		if (mElement[aSlotNum] != aElement) {
 			mElement[aSlotNum] = aElement;
-			mArrayElement[aSlotNum] = aElement->Get();
+			if (mElement[aSlotNum] != nullptr) {
+				mArrayElement[aSlotNum] = aElement->Get();
+			}
+			else {
+				mArrayElement[aSlotNum] = nullptr;
+			}
 			SetChanged();
 		}
 	}
