@@ -16,7 +16,6 @@ class Buffer {
 	//コンストラクタなど
 	#pragma region Constructor
 
-
 public:
 	Buffer() {
 		Reset();
@@ -106,6 +105,16 @@ public:
 		return mBuffer;
 	}
 
+	//インデックスアクセス
+	BYTE& operator[](u32 aIndex) {
+		CPOT_ASSERT(aIndex < mSize);
+		return mBuffer[aIndex];
+	}
+	BYTE operator[](u32 aIndex) const {
+		CPOT_ASSERT(aIndex < mSize);
+		return mBuffer[aIndex];
+	}
+
 	//バッファのサイズ
 	BufferSize GetSize() const {
 		return mSize;
@@ -128,7 +137,7 @@ public:
 	#pragma region Setter
 
 	//現在位置を設定する
-	void Position(BufferSize aPosition) {
+	void SetPosition(BufferSize aPosition) {
 		mPosition = Clamp(aPosition, BufferSize(0), mSize - 1);
 	}
 
@@ -156,6 +165,23 @@ public:
 		mPosition += lReadSize;
 
 		return lReadSize;
+	}
+
+	void Read(Buffer& aBuffer, BufferSize aSize) {
+
+		if (IsLoaded() == false) {
+			return;
+		}
+		CPOT_ASSERT(aSize >= 0);
+
+		BufferSize lEnd = mPosition + aSize;
+		if (GetSize() < lEnd) {
+			lEnd = GetSize();
+		}
+		BufferSize lReadSize = lEnd - mPosition;
+
+		aBuffer.Load(&mBuffer[mPosition], lReadSize);
+		mPosition += lReadSize;
 	}
 
 	#pragma endregion

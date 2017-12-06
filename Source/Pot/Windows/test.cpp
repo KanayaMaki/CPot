@@ -61,17 +61,118 @@
 
 #include "./Pot/Usefull/path.h"
 
-#include "./Pot/Render/texture2D.h"
+#include "./Pot/Render/render.h"
+
+#include "./Pot/ModelLoader/PmxLoader.h"
+#include "./Pot/ModelLoader/PmxToMesh.h"
 
 #include <Windows.h>
 
 using namespace cpot;
 
+
+#pragma region Pmx
+
+void TestPmx() {
+	PmxLoader pmx;
+	pmx.Load("./Miku/miku.pmx");
+
+	StaticMeshModelCPU staticMesh;
+	PmxToMesh::Load(staticMesh, pmx.Get());
+
+	SkinMeshModelCPU skinMesh;
+	PmxToMesh::Load(skinMesh, pmx.Get());
+
+	for (u32 i = 0; i < skinMesh.submesh.GetSize(); i++) {
+		CPOT_LOG(skinMesh.submesh[i].material.texture.name);
+	}
+}
+
+#pragma endregion
+
+
 #pragma region Texture
 
 void TestTexture() {
-	Texture2D t;
-	t.LoadDirectX11("./test.png");
+
+	directX11::Texture2DDirectX11Data::S().Regist("test", "./test.png");
+
+	directX11::ShaderDirectX11Data::S().Regist("test",
+	{
+		{ "test.fx", "VS_TEST" },
+		{ "test.fx", "GS_TEST" },
+		{ "test.fx", "PS_TEST" },
+	});
+
+	std::shared_ptr<Texture2D> texture;
+	texture.reset(new Texture2D);
+	texture->Load("test");
+	
+	std::shared_ptr<Texture2D> renderTarget;
+	renderTarget.reset(new Texture2D);
+	renderTarget->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
+
+	std::shared_ptr<Texture2D> depthTexture;
+	depthTexture.reset(new Texture2D);
+	depthTexture->Load(960, 540, Texture2D::cR32Float, false, true, true);
+
+	std::shared_ptr<Sampler> sampler;
+	sampler.reset(new Sampler);
+	sampler->Load(Sampler::cClamp);
+
+	std::shared_ptr<Blend> blend;
+	blend.reset(new Blend);
+	blend->Load(Blend::cNormal);
+
+	std::shared_ptr<DepthStencil> depthStencil;
+	depthStencil.reset(new DepthStencil);
+	depthStencil->Load(DepthStencil::cTest);
+
+	std::shared_ptr<ConstantBuffer> constantBuffer;
+	constantBuffer.reset(new ConstantBuffer);
+	constantBuffer->Load(&texture);
+
+	std::shared_ptr<Viewport> viewport;
+	viewport.reset(new Viewport);
+	viewport->Load(Vector2(0.0f, 0.0f), Vector2(960.0f, 540.0f));
+
+	Vector3 vertexData[20];
+	std::shared_ptr<VertexBuffer> vertexBuffer;
+	vertexBuffer.reset(new VertexBuffer);
+	vertexBuffer->Load(sizeof(Vector3), 20, vertexData, true);
+	vertexBuffer->Write(vertexData);
+
+	u16 indexData[20];
+	std::shared_ptr<IndexBuffer> indexBuffer;
+	indexBuffer.reset(new IndexBuffer);
+	indexBuffer->Load(IndexBuffer::cU16, 20, IndexBuffer::cTriangleStrip, indexData);
+	
+	std::shared_ptr<Shader> shader;
+	shader.reset(new Shader);
+	shader->Load("test");
+
+	std::shared_ptr<Rasterizer> rasterizer;
+	rasterizer.reset(new Rasterizer);
+	rasterizer->Load(Rasterizer::cSolid, Rasterizer::cCullNone);
+
+
+	Render::S().SetBlend(blend);
+	Render::S().SetRasterizer(rasterizer);
+	Render::S().SetDepthStencil(depthStencil);
+	Render::S().SetIndexBuffer(indexBuffer);
+	Render::S().SetVertexBuffer(vertexBuffer);
+	Render::S().SetViewPort(viewport, 0);
+	Render::S().SetDepthTexture(depthTexture);
+	Render::S().SetTexture2D(texture, 0);
+	Render::S().SetSampler(sampler, 0);
+	Render::S().SetConstantBuffer(constantBuffer, 0);
+	Render::S().SetRenderTexture(renderTarget, 0);
+	Render::S().SetShader(shader);
+
+	Render::S().SetToDevice();
+
+	Render::S().DrawIndexed(6, 0);
+	Render::S().Present();
 }
 
 #pragma endregion

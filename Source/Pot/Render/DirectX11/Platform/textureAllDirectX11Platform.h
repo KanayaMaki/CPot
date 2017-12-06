@@ -47,8 +47,14 @@ public:
 		if (IsLoaded()) {
 			Release();
 		}
+
+		D3D11_TEXTURE2D_DESC lDesc = aDesc;
+		if (lDesc.BindFlags & D3D11_BIND_DEPTH_STENCIL) {
+			lDesc.Format = DXGI_FORMAT_R32_TYPELESS;
+		}
+
 		mTexture.reset(new Texture2D);
-		mTexture->Load(aDesc, aInitData);
+		mTexture->Load(lDesc, aInitData);
 		LoadView();
 		return true;
 	}

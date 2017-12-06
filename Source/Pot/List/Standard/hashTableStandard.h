@@ -45,7 +45,7 @@ public:
 			mList.erase(it);
 			return tRes;
 		}
-		return T(0);
+		return mNull;
 	}
 
 	//指定された値と等しい要素の削除
@@ -78,8 +78,9 @@ public:
 		if (it != mList.end()) {
 			return (*it).second;
 		}
-		return T(0);
+		return mNull;
 	}
+
 
 	//指定されたキーを持つ要素が存在するか
 	BOOL Exist(const HashTableKey& aKey) const CPOT_OR {
@@ -117,10 +118,14 @@ public:
 
 private:
 	std::map<HashTableKey, T> mList;
+	static T mNull;
 
 	#pragma endregion
 
 };
+
+template <typename T>
+T HashTable<T>::mNull;
 
 }
 

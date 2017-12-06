@@ -43,37 +43,37 @@ public:
 		OutputStr(aStr);
 	}
 	void Output(BOOL aVal) {
-		OutputStr(ToString::Do(aVal));
+		OutputStr(ToString::Do(aVal).Get());
 	}
 	void Output(s8 aVal) {
-		OutputStr(ToString::Do((s32)aVal));
+		OutputStr(ToString::Do((s32)aVal).Get());
 	}
 	void Output(u8 aVal) {
-		OutputStr(ToString::Do((u32)aVal));
+		OutputStr(ToString::Do((u32)aVal).Get());
 	}
 	void Output(s16 aVal) {
-		OutputStr(ToString::Do((s32)aVal));
+		OutputStr(ToString::Do((s32)aVal).Get());
 	}
 	void Output(u16 aVal) {
-		OutputStr(ToString::Do((u32)aVal));
+		OutputStr(ToString::Do((u32)aVal).Get());
 	}
 	void Output(s32 aVal) {
-		OutputStr(ToString::Do(aVal));
+		OutputStr(ToString::Do(aVal).Get());
 	}
 	void Output(u32 aVal) {
-		OutputStr(ToString::Do(aVal));
+		OutputStr(ToString::Do(aVal).Get());
 	}
 	void Output(s64 aVal) {
-		OutputStr(ToString::Do(aVal));
+		OutputStr(ToString::Do(aVal).Get());
 	}
 	void Output(u64 aVal) {
-		OutputStr(ToString::Do(aVal));
+		OutputStr(ToString::Do(aVal).Get());
 	}
 	void Output(f32 aVal) {
-		OutputStr(ToString::Do(aVal));
+		OutputStr(ToString::Do(aVal).Get());
 	}
 	void Output(f64 aVal) {
-		OutputStr(ToString::Do(aVal));
+		OutputStr(ToString::Do(aVal).Get());
 	}
 	template<u32 aSize>
 	void Output(const String<aSize>& aVal) {

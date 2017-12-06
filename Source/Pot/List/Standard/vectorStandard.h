@@ -45,7 +45,7 @@ public:
 				return lVal;
 			}
 		}
-		return T(0);
+		return mNull;
 	}
 
 	//指定された値と等しい要素の削除
@@ -75,6 +75,9 @@ public:
 public:
 	//インデックスアクセス
 	T& operator[](u32 aIndex) CPOT_OR {
+		return mVector[aIndex];
+	}
+	const T& operator[](u32 aIndex) const CPOT_OR {
 		return mVector[aIndex];
 	}
 
@@ -113,6 +116,91 @@ public:
 		return mVector.size();
 	}
 
+	//現在の要素数を増やす
+	void SetSize(u32 aSize) CPOT_OR {
+		mVector.resize(aSize);
+	}
+
+	#pragma endregion
+
+
+	//確保しているバッファの要素数
+	#pragma region Capacity
+
+public:
+	//バッファの要素数を増やす
+	void Reserve(u32 aSize) CPOT_OR {
+		mVector.reserve(aSize);
+	}
+
+	//バッファの要素数を取得
+	u32 GetCapacity() const CPOT_OR {
+		return mVector.capacity();
+	}
+
+	#pragma endregion
+
+
+	//フィールド
+	#pragma region Field
+
+private:
+	std::vector<T> mVector;
+	static T mNull;
+
+	#pragma endregion
+	
+};
+
+template <typename T>
+T Vector<T>::mNull;
+
+
+//可変長配列のクラス
+template <typename T>
+class VectorSimple : public VectorSimpleBase<T> {
+
+	//要素の消去
+	#pragma region Remove
+
+public:
+	//全ての要素を削除
+	void Clear() CPOT_OR {
+		mVector.clear();
+	}
+
+	#pragma endregion
+
+
+	//要素の取得
+	#pragma region Getter
+
+public:
+	//インデックスアクセス
+	T& operator[](u32 aIndex) CPOT_OR {
+		return mVector[aIndex];
+	}
+	const T& operator[](u32 aIndex) const CPOT_OR {
+		return mVector[aIndex];
+	}
+
+	#pragma endregion
+
+
+	//配列の要素数
+	#pragma region Size
+
+public:
+	//現在の要素数の取得
+	u32 GetSize() const CPOT_OR {
+		return mVector.size();
+	}
+
+	//現在の要素数を増やす
+	void SetSize(u32 aSize) CPOT_OR {
+		mVector.resize(aSize);
+	}
+
 	#pragma endregion
 
 
@@ -140,13 +228,16 @@ private:
 	std::vector<T> mVector;
 
 	#pragma endregion
-	
+
 };
+
 
 }
 
 template <typename T>
 using Vector = standard::Vector<T>;
 
+template <typename T>
+using VectorSimple = standard::VectorSimple<T>;
 
 }

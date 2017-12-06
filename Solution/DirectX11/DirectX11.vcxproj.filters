@@ -133,6 +133,12 @@
     <Filter Include="Source\Pot\ModelLoader">
       <UniqueIdentifier>{7ec22a70-02bd-4602-a735-a53b523d10e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Pot\ModelLoader\Windows">
+      <UniqueIdentifier>{240e7e36-1d1b-468a-b533-10e18fb2d09d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Model">
+      <UniqueIdentifier>{084c45d1-d7cf-4ab3-b320-14cd4459d8bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Pot\Atom\defines.h">
@@ -402,19 +408,7 @@
     <ClInclude Include="..\..\Source\Pot\Render\texture2D.h">
       <Filter>Source\Pot\Render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\texture3D.h">
-      <Filter>Source\Pot\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\texture1D.h">
-      <Filter>Source\Pot\Render</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture2DDirectX11.h">
-      <Filter>Source\Pot\Render\DirectX11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture3DDirectX11.h">
-      <Filter>Source\Pot\Render\DirectX11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture1DDirectX11.h">
       <Filter>Source\Pot\Render\DirectX11</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\elementManagerDirectX11Platform.h">
@@ -437,6 +431,117 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\textureAllDirectX11Platform.h">
       <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\SkinMeshModel.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\StaticMeshModel.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxLoader.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\Material.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\SubMesh.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxData.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmdData.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\CharCode.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\Windows\CharCodeWindows.h">
+      <Filter>Source\Pot\ModelLoader\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxToMesh.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\render.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\renderDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\sampler.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\samplerDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\constantBufferDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\constantBuffer.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\vertexBufferDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\vertexBuffer.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\indexBuffer.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\indexBufferDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\shader.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\shaderDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\rasterizer.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\rasterizerDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\blendDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\blend.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\depthStencilDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\depthStencil.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\viewport.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\viewportDirectX11.h">
+      <Filter>Source\Pot\Render\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\viewportDirectX11Platform.h">
+      <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\StaticMeshModel.h">
+      <Filter>Source\Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\SkinMeshModel.h">
+      <Filter>Source\Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\Material.h">
+      <Filter>Source\Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\Submesh.h">
+      <Filter>Source\Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\ModelCPUToModel.h">
+      <Filter>Source\Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\camera.h">
+      <Filter>Source\Pot\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -508,6 +613,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.cpp">
       <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ModelLoader\PmxLoader.cpp">
+      <Filter>Source\Pot\ModelLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

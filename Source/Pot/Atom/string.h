@@ -29,6 +29,9 @@ public:
 	String(const CHAR* aStr) {
 		Set(aStr);
 	}
+	String(CHAR aChar) {
+		Set(ToString(aChar).Get());
+	}
 	template <u32 cOtherSize>
 	String(const String<cOtherSize>& aStr) {
 		Set(aStr.Get());
@@ -53,11 +56,6 @@ public:
 	//文字列のバッファの大きさの取得
 	const u32 GetSize() const {
 		return cSize;
-	}
-
-	//const CHAR*型への変換
-	operator const CHAR* () {
-		return mStr;
 	}
 
 	#pragma endregion
@@ -148,7 +146,7 @@ public:
 		if (GetLength() != aStr.GetLength()) {
 			return false;
 		}
-		if (StrSame(Get(), aStr.Get())) {
+		if (StringSame(Get(), aStr.Get())) {
 			return true;
 		}
 		return false;
@@ -160,7 +158,7 @@ public:
 	}
 
 	BOOL operator ==(const CHAR* aStr) {
-		if (StrSame(Get(), aStr)) {
+		if (StringSame(Get(), aStr)) {
 			return true;
 		}
 		return false;
@@ -179,8 +177,8 @@ public:
 public:
 	const String& Pop(u32 aNum) {
 		CPOT_ASSERT(0 <= aNum);
-		u32 lNewLen = GetLength() - aNum;
-		lNewLen = Clamp((u32)0, lNewLen);
+		s32 lNewLen = (s32)GetLength() - aNum;
+		lNewLen = Clamp(lNewLen, 0L, lNewLen);
 		mStr[lNewLen] = '\0';
 		mLength = lNewLen;
 		return (*this);
@@ -217,6 +215,17 @@ public:
 		}
 
 		return lRes;
+	}
+
+	BOOL Exist(const CHAR* aStr) const {
+
+		//ごり押しで行く
+		for (u32 i = 0; i < GetLength(); i++) {
+			if (StringSame(&(mStr[i]), aStr) == true) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 private:

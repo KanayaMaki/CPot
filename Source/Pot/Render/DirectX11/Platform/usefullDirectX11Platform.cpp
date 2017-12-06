@@ -299,7 +299,7 @@ void SaveScreenShot(ID3D11Resource* aResource, const CHAR* aName) {
 	}
 }
 void SaveScreenShot(const CHAR* aName) {
-	SaveScreenShot(Device::S().GetBackBuffer()->GetTexture()->Get(), aName);
+	SaveScreenShot(Device::S().GetBackBuffer()->Get(), aName);
 }
 
 

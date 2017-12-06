@@ -39,7 +39,7 @@ protected:
 	BOOL Load(const D3D11_BUFFER_DESC& aBufferDesc) {
 		return Load(aBufferDesc, nullptr);
 	}
-	BOOL Load(const D3D11_BUFFER_DESC& aBufferDesc, void* aInitData) {
+	BOOL Load(const D3D11_BUFFER_DESC& aBufferDesc, const void* aInitData) {
 		if (IsLoaded()) {
 			Release();
 		}
@@ -100,7 +100,7 @@ public:
 	#pragma region Write
 
 protected:
-	BOOL Write(void* aBuffer, u32 aSize) {
+	BOOL Write(const void* aBuffer, u32 aSize) {
 
 		//É}ÉbÉvèàóù
 		void* lToBuffer = Map(D3D11_MAP_WRITE_DISCARD);

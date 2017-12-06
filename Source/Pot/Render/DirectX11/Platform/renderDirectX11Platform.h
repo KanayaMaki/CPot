@@ -9,7 +9,7 @@
 #include "./Pot/Render/DirectX11/Platform/textureAllDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/usefullDirectX11Platform.h"
 
-//#include "./Pot/Render/DirectX11/Platform/viewPortDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/viewportDirectX11Platform.h"
 
 
 namespace cpot {

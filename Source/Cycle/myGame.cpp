@@ -20,8 +20,11 @@
 
 #include "./Pot/Animation/animation.h"
 
+#include "./Pot/ModelLoader/PmxToMesh.h"
+#include "./Pot/Model/ModelCPUToModel.h"
+#include "./Pot/ModelLoader/PmxLoader.h"
+#include "./Pot/Render/render.h"
 
-#include "./Pot/Render/DirectX11/Platform/renderDirectX11Platform.h"
 #include "./Pot/Config/config.h"
 
 #include "./Pot/Usefull/path.h"
@@ -117,21 +120,24 @@ struct TimerBuffer {
 };
 
 
-std::shared_ptr<directX11::platform::IndexBuffer> indexBuffer;
-std::shared_ptr<directX11::platform::VertexBuffer> vertexBuffer;
-std::shared_ptr<directX11::platform::ConstantBuffer> wvpBuffer;
-std::shared_ptr<directX11::platform::ConstantBuffer> diffuseBuffer;
-std::shared_ptr<directX11::platform::ConstantBuffer> timerBuffer;
-std::shared_ptr<directX11::platform::Texture2DAll> texture;
-std::shared_ptr<directX11::platform::Texture2DAll> depthTexture;
-std::shared_ptr<directX11::platform::Texture2DAll> renderTexture;
-std::shared_ptr<directX11::platform::SamplerState> sampler;
-std::shared_ptr<directX11::platform::BlendState> blendState;
-std::shared_ptr<directX11::platform::DepthStencilState> depthStencilState;
-std::shared_ptr<directX11::platform::RasterizerState> rasterizerState;
-std::shared_ptr<directX11::platform::VertexShader> vertexShader;
-std::shared_ptr<directX11::platform::GeometryShader> geometryShader;
-std::shared_ptr<directX11::platform::PixelShader> pixelShader;
+std::shared_ptr<Texture2D> texture;
+std::shared_ptr<Texture2D> renderTarget;
+std::shared_ptr<Texture2D> depthTexture;
+std::shared_ptr<Sampler> sampler;
+std::shared_ptr<Blend> blend;
+std::shared_ptr<DepthStencil> depthStencil;
+std::shared_ptr<ConstantBuffer> wvpBuffer;
+std::shared_ptr<ConstantBuffer> diffuseBuffer;
+std::shared_ptr<ConstantBuffer> timerBuffer;
+std::shared_ptr<Viewport> viewport;
+std::shared_ptr<VertexBuffer> vertexBuffer;
+std::shared_ptr<IndexBuffer> indexBuffer;
+std::shared_ptr<Shader> shader;
+std::shared_ptr<Rasterizer> rasterizer;
+std::shared_ptr<StaticMeshModel> model;
+PersCamera camera;
+Vector3 cameraLoc;
+Quaternion cameraRot;
 
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
@@ -153,43 +159,52 @@ void MyGame::Init() {
 	v.SetIsLoop(true);
 
 
-	wvpBuffer.reset(new directX11::platform::ConstantBuffer);
-	wvpBuffer->Load<WVPBuffer>(new WVPBuffer);
+	directX11::Texture2DDirectX11Data::S().Regist("test", "./test.png");
 
-	diffuseBuffer.reset(new directX11::platform::ConstantBuffer);
-	diffuseBuffer->Load<DiffuseBuffer>(new DiffuseBuffer);
+	directX11::ShaderDirectX11Data::S().Regist("test",
+	{
+		{ "test.fx", "VS_TEST" },
+		{ "test.fx", "GS_TEST" },
+		{ "test.fx", "PS_TEST" },
+	});
+
+	texture.reset(new Texture2D);
+	texture->Load("test");
+
+	renderTarget.reset(new Texture2D);
+	renderTarget->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
+
+	depthTexture.reset(new Texture2D);
+	depthTexture->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, true, true);
+
+	sampler.reset(new Sampler);
+	sampler->Load(Sampler::cClamp);
+	
+	blend.reset(new Blend);
+	blend->Load(Blend::cNormal);
+
+	depthStencil.reset(new DepthStencil);
+	depthStencil->Load(DepthStencil::cTest);
+
+	viewport.reset(new Viewport);
+	viewport->Load(Vector2(0.0f, 0.0f), Config::S().GetScreenSize());
+
+	shader.reset(new Shader);
+	shader->Load("test");
+
+	rasterizer.reset(new Rasterizer);
+	rasterizer->Load(Rasterizer::cSolid, Rasterizer::cCullNone);
+
+	wvpBuffer.reset(new ConstantBuffer);
+	wvpBuffer->Load(new WVPBuffer);
+
+	diffuseBuffer.reset(new ConstantBuffer);
+	diffuseBuffer->Load(new DiffuseBuffer);
 	diffuseBuffer->GetCPUBuffer<DiffuseBuffer>()->mDiffuse = Color::White();
 
-	timerBuffer.reset(new directX11::platform::ConstantBuffer);
-	timerBuffer->Load<TimerBuffer>(new TimerBuffer);
+	timerBuffer.reset(new ConstantBuffer);
+	timerBuffer->Load(new TimerBuffer);
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = 0.0f;
-
-	sampler.reset(new directX11::platform::SamplerState);
-	sampler->Load(directX11::platform::SamplerState::CreateDescClamp());
-
-	rasterizerState.reset(new directX11::platform::RasterizerState);
-	rasterizerState->Load(directX11::platform::RasterizerState::CreateDescNoCull());
-
-	depthStencilState.reset(new directX11::platform::DepthStencilState);
-	depthStencilState->Load(directX11::platform::DepthStencilState::CreateDescNoZTest());
-
-	blendState.reset(new directX11::platform::BlendState);
-	blendState->Load(directX11::platform::BlendState::CreateDescNormal());
-
-	PathString p = Path::FromRelative("./", "./test.png");
-
-	texture.reset(new directX11::platform::Texture2DAll);
-	texture->Load(p.Get());
-	
-	depthTexture.reset(new directX11::platform::Texture2DAll);
-	depthTexture->Load(directX11::platform::Texture2D::CreateDesc(
-		Config::S().GetScreenSize().x, Config::S().GetScreenSize().y,
-		DXGI_FORMAT_R32_TYPELESS, D3D11_USAGE_DEFAULT, directX11::platform::GetBindFlags(false, true, true), 0));
-
-	renderTexture.reset(new directX11::platform::Texture2DAll);
-	renderTexture->Load(directX11::platform::Texture2D::CreateDesc(
-		Config::S().GetScreenSize().x, Config::S().GetScreenSize().y,
-		DXGI_FORMAT_R32G32B32A32_FLOAT, D3D11_USAGE_DEFAULT, directX11::platform::GetBindFlags(true, true, false), 0));
 
 	BasicVertex lVertex[]{
 		{ { -1.0f, -1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
@@ -197,65 +212,45 @@ void MyGame::Init() {
 		{ { 1.0f, -1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
 		{ { 1.0f, 1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
 	};
-	vertexBuffer.reset(new directX11::platform::VertexBuffer);
-	vertexBuffer->Load(sizeof(BasicVertex), 4, lVertex);
+	vertexBuffer.reset(new VertexBuffer);
+	vertexBuffer->Load(sizeof(BasicVertex), 4, lVertex, true);
 
 	u16 lIndex[]{ 0, 1, 2, 2, 1, 3 };
-	indexBuffer.reset(new directX11::platform::IndexBuffer);
-	indexBuffer->Load(DXGI_FORMAT_R16_UINT, 6, lIndex, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	indexBuffer.reset(new IndexBuffer);
+	indexBuffer->Load(IndexBuffer::cU16, 6, IndexBuffer::cTriangleList, lIndex);
+
+	Render::S().SetBlend(blend);
+	Render::S().SetRasterizer(rasterizer);
+	Render::S().SetDepthStencil(depthStencil);
+	Render::S().SetIndexBuffer(indexBuffer);
+	Render::S().SetVertexBuffer(vertexBuffer);
+	Render::S().SetViewPort(viewport, 0);
+	Render::S().SetDepthTexture(depthTexture);
+	Render::S().SetTexture2D(texture, 0);
+	Render::S().SetSampler(sampler, 0);
+	Render::S().SetConstantBuffer(wvpBuffer, 0);
+	Render::S().SetConstantBuffer(diffuseBuffer, 1);
+	Render::S().SetConstantBuffer(timerBuffer, 2);
+	Render::S().SetRenderTexture(renderTarget, 0);
+	Render::S().SetShader(shader);
 
 
-	vertexShader.reset(new directX11::platform::VertexShader);
-	vertexShader->CompileFromFile("./test.fx", "VS_TEST", "vs_4_0");
-	directX11::platform::Render::S().GetVertexShaderManager().SetShader(vertexShader);
-	directX11::platform::Render::S().GetInputLayoutManager().Set(vertexShader->GetInputLayout());
+	FileIn lFile;
+	lFile.Open("./Miku/miku.pmx");
+	Buffer lFileBuffer;
+	lFile.Read(lFileBuffer);
 
-	geometryShader.reset(new directX11::platform::GeometryShader);
-	geometryShader->CompileFromFile("./test.fx", "GS_TEST", "gs_4_0");
-	directX11::platform::Render::S().GetGeometryShaderManager().SetShader(geometryShader);
+	PmxLoader lPmx;
+	lPmx.Load("./Miku/miku.pmx");
 
-	pixelShader.reset(new directX11::platform::PixelShader);
-	pixelShader->CompileFromFile("./test.fx", "PS_TEST", "ps_4_0");
-	directX11::platform::Render::S().GetPixelShaderManager().SetShader(pixelShader);
+	StaticMeshModelCPU lSkinMeshCPU;
+	PmxToMesh::Load(lSkinMeshCPU, lPmx.Get());
 
-	directX11::platform::Render::S().GetVertexShaderManager().SetConstantBuffer(wvpBuffer, 0);
-	directX11::platform::Render::S().GetGeometryShaderManager().SetConstantBuffer(wvpBuffer, 0);
-	directX11::platform::Render::S().GetPixelShaderManager().SetConstantBuffer(wvpBuffer, 0);
-	directX11::platform::Render::S().GetVertexShaderManager().SetConstantBuffer(diffuseBuffer, 1);
-	directX11::platform::Render::S().GetGeometryShaderManager().SetConstantBuffer(diffuseBuffer, 1);
-	directX11::platform::Render::S().GetPixelShaderManager().SetConstantBuffer(diffuseBuffer, 1);
-	directX11::platform::Render::S().GetVertexShaderManager().SetConstantBuffer(timerBuffer, 2);
-	directX11::platform::Render::S().GetGeometryShaderManager().SetConstantBuffer(timerBuffer, 2);
-	directX11::platform::Render::S().GetPixelShaderManager().SetConstantBuffer(timerBuffer, 2);
+	model.reset(new StaticMeshModel);
+	ModelCPUToModel::Load(*model, lSkinMeshCPU);
 
-	directX11::platform::Render::S().GetVertexShaderManager().SetShaderResource(texture->GetShaderResourceView(), 0);
-	directX11::platform::Render::S().GetGeometryShaderManager().SetShaderResource(texture->GetShaderResourceView(), 0);
-	directX11::platform::Render::S().GetPixelShaderManager().SetShaderResource(texture->GetShaderResourceView(), 0);
-
-	directX11::platform::Render::S().GetVertexShaderManager().SetSampler(sampler, 0);
-	directX11::platform::Render::S().GetGeometryShaderManager().SetSampler(sampler, 0);
-	directX11::platform::Render::S().GetPixelShaderManager().SetSampler(sampler, 0);
-
-	directX11::platform::Render::S().GetBlendStateManager().Set(blendState, nullptr);
-	directX11::platform::Render::S().GetDepthStencilStateManager().Set(depthStencilState, nullptr);
-	directX11::platform::Render::S().GetRasterizerStateManager().Set(rasterizerState);
-
-	directX11::platform::Render::S().GetDepthStencilViewManager().Set(depthTexture->GetDepthStencilView());
-
-	directX11::platform::Render::S().GetVertexBufferManager().Set(vertexBuffer, 0);
-	directX11::platform::Render::S().GetIndexBufferManager().Set(indexBuffer);
-
-	directX11::platform::Render::S().GetRenderTargetViewManager().Set(directX11::platform::Device::S().GetBackBuffer()->GetRenderTargetView(), 0);
-
-	D3D11_VIEWPORT v;
-	v.MinDepth = 0.0f;
-	v.MaxDepth = 1.0f;
-	v.TopLeftX = 0;
-	v.TopLeftY = 0;
-	v.Width = 960;
-	v.Height = 540;
-	directX11::platform::Device::S().GetDeviceContext()->RSSetViewports(1, &v);
-
+	camera.mProjection.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
+	cameraLoc = Vector3(0.0f, 10.0f, -30.0f);
 
 	#ifdef CPOT_ON_WINDOWS
 	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
@@ -307,7 +302,7 @@ void MyGame::Update() {
 		lLoading = true;
 
 		for (u32 i = 0; i < 5; i++) {
-			LoaderManager::S().Regist(new LoaderTimer(ToString::Do(i), 2.0f));
+			LoaderManager::S().Regist(new LoaderTimer(ToString::Do(i).Get(), 2.0f));
 		}
 	}
 
@@ -331,17 +326,69 @@ void MyGame::Update() {
 
 	#pragma endregion
 
+
+	const f32 rotSpeed = 50.0f;
+	if (Input::GetButton(windows::cLeft)) {
+		cameraRot *= Quaternion::FromAxis(Vector3::Up(), -ToRad(rotSpeed * DeltaTime()));
+	}
+	if (Input::GetButton(windows::cRight)) {
+		cameraRot *= Quaternion::FromAxis(Vector3::Up(), ToRad(rotSpeed * DeltaTime()));
+	}
+	if (Input::GetButton(windows::cUp)) {
+		cameraRot *= Quaternion::FromAxis(cameraRot.Right(), -ToRad(rotSpeed * DeltaTime()));
+	}
+	if (Input::GetButton(windows::cDown)) {
+		cameraRot *= Quaternion::FromAxis(cameraRot.Right(), ToRad(rotSpeed * DeltaTime()));
+	}
+
+	const f32 moveSpeed = 10.0f;
+	if (Input::GetButton(windows::cA)) {
+		cameraLoc += cameraRot.Left() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cD)) {
+		cameraLoc += cameraRot.Right() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cW)) {
+		cameraLoc += cameraRot.Forward() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cS)) {
+		cameraLoc += cameraRot.Back() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cE)) {
+		cameraLoc += cameraRot.Up() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cQ)) {
+		cameraLoc += cameraRot.Down() * moveSpeed * DeltaTime();
+	}
+
+	camera.mView.SetLocation(cameraLoc);
+	camera.mView.SetRotation(cameraRot);
+	camera.Update();
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = camera.mProjection.GetMatrix();
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = camera.mView.GetMatrix();
+
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer += DeltaTime() / 4.0f;
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = Wrap(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer, 1.0f);
-	CPOT_LOG(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer);
+	//CPOT_LOG(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer);
 
 	wvpBuffer->Write();
 	diffuseBuffer->Write();
 	timerBuffer->Write();
 
-	directX11::platform::Render::S().SetToDevice();
-	directX11::platform::Render::S().DrawIndexed(6, 0, 0);
-	directX11::platform::Render::S().Present();
+	depthTexture->ClearDepth(1.0f);
+	renderTarget->ClearColor(Color::Black().Translate());
+
+
+	Render::S().SetVertexBuffer(model->mesh.vertex);
+	Render::S().SetIndexBuffer(model->mesh.index);
+	
+	for (u32 i = 0; i < model->submeshNum; i++) {
+		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
+		Render::S().SetToDevice();
+		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
+	}
+
+	Render::S().Present();
 }
 
 

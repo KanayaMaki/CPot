@@ -81,11 +81,8 @@ HRESULT Device::Init(HWND aHwnd, const Vector2& aScreenSize) {
 		return -1L;
 	}
 
-	mBackBufferTexture.reset(new Texture2D);
-	mBackBufferTexture->Set(lBackBuffer);
-
-	mBackBuffer.reset(new Texture2DAll);
-	mBackBuffer->Load(mBackBufferTexture);
+	mBackBuffer.reset(new Texture2D);
+	mBackBuffer->Set(lBackBuffer);
 
 	return 0L;
 }

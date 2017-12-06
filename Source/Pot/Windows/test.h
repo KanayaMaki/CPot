@@ -7,6 +7,12 @@
 
 #include <Windows.h>
 
+#pragma region Pmx
+
+void TestPmx();
+
+#pragma endregion
+
 #pragma region Texture
 
 void TestTexture();

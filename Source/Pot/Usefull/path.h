@@ -15,6 +15,10 @@ class Path {
 	
 public:
 	static PathString FromRelative(const PathString& aNowPath, const PathString& aRelativePath) {
+		return GetDirectory(aNowPath) + aRelativePath;
+	}
+
+	static PathString GetDirectory(const PathString& aNowPath) {
 		PathString lRes = aNowPath;
 
 		for (u32 i = lRes.GetLength() - 1; i >= 0; i--) {
@@ -24,7 +28,33 @@ public:
 			lRes.Pop(1);
 		}
 
-		return lRes + aRelativePath;
+		return lRes;
+	}
+	static PathString GetEx(const PathString& aNowPath) {
+		PathString lPath = aNowPath;
+		PathString lRes;
+
+		for (u32 i = lPath.GetLength() - 1; i >= 0; i--) {
+			if (lPath[i] == '.') {
+				break;
+			}
+			lRes = PathString(lPath[i]) + lRes;
+			lPath.Pop(1);
+		}
+
+		return lRes;
+	}
+	static PathString ChangeEx(const PathString& aNowPath, const String<32>& aNewEx) {
+		PathString lRes = aNowPath;
+
+		for (u32 i = lRes.GetLength() - 1; i >= 0; i--) {
+			if (lRes[i] == '.') {
+				break;
+			}
+			lRes.Pop(1);
+		}
+
+		return lRes + aNewEx;
 	}
 };
 

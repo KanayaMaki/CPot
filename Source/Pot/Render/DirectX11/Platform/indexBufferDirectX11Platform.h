@@ -14,18 +14,19 @@ class IndexBuffer : public Buffer {
 	#pragma region Load
 
 public:
-	BOOL Load(D3D11_USAGE aUsage, UINT aCPUAccessFlags, DXGI_FORMAT aIndexFormat, u32 aIndexNum, void* aInitData, D3D11_PRIMITIVE_TOPOLOGY aTopology) {
+	BOOL Load(D3D11_USAGE aUsage, UINT aCPUAccessFlags, DXGI_FORMAT aIndexFormat, u32 aIndexNum, const void* aInitData, D3D11_PRIMITIVE_TOPOLOGY aTopology) {
 		return Load(Buffer::CreateBufferDesc(aUsage, D3D11_BIND_INDEX_BUFFER, aCPUAccessFlags, GetFormatSize(aIndexFormat) * aIndexNum), aIndexFormat, aIndexNum, aInitData, aTopology);
 	}
-	BOOL Load(DXGI_FORMAT aIndexFormat, u32 aIndexNum, void* aInitData, D3D11_PRIMITIVE_TOPOLOGY aTopology) {
+	BOOL Load(DXGI_FORMAT aIndexFormat, u32 aIndexNum, const void* aInitData, D3D11_PRIMITIVE_TOPOLOGY aTopology) {
 		return Load(CreateBufferDesc(GetFormatSize(aIndexFormat) * aIndexNum), aIndexFormat, aIndexNum, aInitData, aTopology);
 	}
-	BOOL Load(const D3D11_BUFFER_DESC& aBufferDesc, DXGI_FORMAT aIndexFormat, u32 aIndexNum, void* aInitData, D3D11_PRIMITIVE_TOPOLOGY aTopology) {
+	BOOL Load(const D3D11_BUFFER_DESC& aBufferDesc, DXGI_FORMAT aIndexFormat, u32 aIndexNum, const void* aInitData, D3D11_PRIMITIVE_TOPOLOGY aTopology) {
 		if ((aBufferDesc.BindFlags & D3D11_BIND_INDEX_BUFFER) == false) {
 			return false;
 		}
 		mFormat = aIndexFormat;
 		mTopology = aTopology;
+		mIndexNum = aIndexNum;
 		return Buffer::Load(aBufferDesc, aInitData);
 	}
 

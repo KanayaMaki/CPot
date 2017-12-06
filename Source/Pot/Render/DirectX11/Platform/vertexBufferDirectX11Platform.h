@@ -15,13 +15,13 @@ class VertexBuffer : public Buffer {
 	#pragma region Load
 
 public:
-	BOOL Load(D3D11_USAGE aUsage, UINT aCPUAccessFlags, u32 aVertexSize, u32 aVertexNum, void* aInitData) {
+	BOOL Load(D3D11_USAGE aUsage, UINT aCPUAccessFlags, u32 aVertexSize, u32 aVertexNum, const void* aInitData) {
 		return Load(Buffer::CreateBufferDesc(aUsage, D3D11_BIND_VERTEX_BUFFER, aCPUAccessFlags, aVertexSize * aVertexNum), aVertexSize, aVertexNum, aInitData);
 	}
-	BOOL Load(u32 aVertexSize, u32 aVertexNum, void* aInitData) {
+	BOOL Load(u32 aVertexSize, u32 aVertexNum, const void* aInitData) {
 		return Load(VertexBuffer::CreateBufferDesc(aVertexSize * aVertexNum), aVertexSize, aVertexNum, aInitData);
 	}
-	BOOL Load(const D3D11_BUFFER_DESC& aBufferDesc, u32 aVertexSize, u32 aVertexNum, void* aInitData) {
+	BOOL Load(const D3D11_BUFFER_DESC& aBufferDesc, u32 aVertexSize, u32 aVertexNum, const void* aInitData) {
 		if (!(aBufferDesc.BindFlags & D3D11_BIND_VERTEX_BUFFER)) {
 			return false;
 		}
@@ -31,6 +31,22 @@ public:
 	}
 
 	#pragma endregion
+
+
+	//èëÇ´çûÇ›
+	#pragma region Write
+
+public:
+	BOOL Write(const void* aData) {
+		return Buffer::Write(aData, GetVertexSize() * GetVertexNum());
+	}
+	BOOL Write(const void* aData, u32 aSize) {
+		return Buffer::Write(aData, aSize);
+	}
+
+	#pragma endregion
+
+
 
 
 	//éÊìæ

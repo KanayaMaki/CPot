@@ -29,7 +29,6 @@ namespace platform {
 #define CPOT_SAFE_RELEASE(p) if(p != nullptr) {p->Release();}
 
 class Texture2D;
-class Texture2DAll;
 
 class Device : public Singleton<Device> {
 	friend class Singleton<Device>;
@@ -77,7 +76,7 @@ public:
 	IDXGISwapChain* GetSwapChain() const {
 		return mSwapChain;
 	}
-	std::shared_ptr<Texture2DAll> GetBackBuffer() const {
+	std::shared_ptr<Texture2D> GetBackBuffer() const {
 		return mBackBuffer;
 	}
 
@@ -91,8 +90,7 @@ private:
 	ID3D11Device* mDevice;
 	ID3D11DeviceContext* mDeviceContext;
 	IDXGISwapChain* mSwapChain;
-	std::shared_ptr<Texture2D> mBackBufferTexture;
-	std::shared_ptr<Texture2DAll> mBackBuffer;
+	std::shared_ptr<Texture2D> mBackBuffer;
 
 	#pragma endregion
 

@@ -1,6 +1,7 @@
 #pragma once
 
-#include"./Pot/Render/DirectX11/Platform/deviceDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/deviceDirectX11Platform.h"
+#include "./Pot/Usefull/path.h"
 
 
 namespace cpot {
@@ -298,8 +299,21 @@ public:
 
 		hr = D3DX11CreateTextureFromFileA(Device::S().GetDevice(), aFileName, aLoadInfo, nullptr, (ID3D11Resource**)(&mTexture), nullptr);
 		if (FAILED(hr)) {
-			Log::S().Output("Texture2D.Load : FailedCreate");
-			return false;
+			
+			PathString lFileName(aFileName);
+			if (Path::GetEx(lFileName) == "tga") {
+				lFileName = Path::ChangeEx(lFileName, "png");
+				hr = D3DX11CreateTextureFromFileA(Device::S().GetDevice(), lFileName.Get(), aLoadInfo, nullptr, (ID3D11Resource**)(&mTexture), nullptr);
+
+				if (FAILED(hr)) {
+					Log::S().Output("Texture2D.Load : FailedCreate");
+					return false;
+				}
+			}
+			else {
+				Log::S().Output("Texture2D.Load : FailedCreate");
+				return false;
+			}
 		}
 
 		D3D11_TEXTURE2D_DESC lDesc = CreateDesc(mTexture);

@@ -21,6 +21,8 @@
 #include "./Pot/Render/DirectX11/Platform/depthStencilViewDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/unorderedAccessViewDirectX11Platform.h"
 
+#include "./Pot/Render/DirectX11/Platform/viewportDirectX11Platform.h"
+
 
 namespace cpot {
 
@@ -426,7 +428,12 @@ public:
 		CPOT_ASSERT(aSlotNum < SlotMaxNum());
 		if (mElement[aSlotNum] != aElement) {
 			mElement[aSlotNum] = aElement;
-			mArrayElement[aSlotNum] = aElement->Get();
+			if (mElement[aSlotNum] != nullptr) {
+				mArrayElement[aSlotNum] = aElement->Get();
+			}
+			else {
+				mArrayElement[aSlotNum] = nullptr;
+			}
 			SetChanged();
 		}
 	}
@@ -514,12 +521,22 @@ protected:
 	}
 
 public:
-	void Set(D3D11_VIEWPORT aElement, u32 aSlotNum) {
+	void Set(const Viewport& aElement, u32 aSlotNum) {
 		CPOT_ASSERT(aSlotNum < cSlotMax);
-		if (mElement[aSlotNum] == aElement) {
+
+		D3D11_VIEWPORT lViewport = {
+			aElement.mLeftTop.x,
+			aElement.mLeftTop.y,
+			aElement.mSize.x,
+			aElement.mSize.y,
+			aElement.mMinDepth,
+			aElement.mMaxDepth,
+		};
+
+		if (mElement[aSlotNum] == lViewport) {
 			return;
 		}
-		mElement[aSlotNum] = aElement;
+		mElement[aSlotNum] = lViewport;
 		SetChanged();
 	}
 
