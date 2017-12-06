@@ -47,13 +47,12 @@
     <ClInclude Include="..\..\Source\Pot\Atom\vector.h" />
     <ClInclude Include="..\..\Source\Pot\Audio\audio.h" />
     <ClInclude Include="..\..\Source\Pot\Audio\audioClip.h" />
-    <ClInclude Include="..\..\Source\Pot\Audio\audioName.h" />
     <ClInclude Include="..\..\Source\Pot\Audio\audioVoice.h" />
     <ClInclude Include="..\..\Source\Pot\Audio\XAudio\audioClipXAudio.h" />
     <ClInclude Include="..\..\Source\Pot\Audio\XAudio\audioVoiceXAudio.h" />
-    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Device\clipXAudioDevice.h" />
-    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.h" />
-    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Device\voiceXAudioDevice.h" />
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.h" />
     <ClInclude Include="..\..\Source\Pot\Config\config.h" />
     <ClInclude Include="..\..\Source\Pot\Config\Windows\configWindows.h" />
     <ClInclude Include="..\..\Source\Pot\File\file.h" />
@@ -67,7 +66,6 @@
     <ClInclude Include="..\..\Source\Pot\Input\Windows\inputWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Input\XInput\inputXInput.h" />
     <ClInclude Include="..\..\Source\Pot\List\hashTable.h" />
-    <ClInclude Include="..\..\Source\Pot\List\resourceName.h" />
     <ClInclude Include="..\..\Source\Pot\List\Standard\hashTableStandard.h" />
     <ClInclude Include="..\..\Source\Pot\List\Standard\vectorStandard.h" />
     <ClInclude Include="..\..\Source\Pot\List\vector.h" />
@@ -77,6 +75,34 @@
     <ClInclude Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Rand\rand.h" />
     <ClInclude Include="..\..\Source\Pot\Rand\Standard\randStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\blendStateDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\bufferDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\constantBufferDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\depthStencilStateDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\depthStencilViewDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\deviceDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\elementManagerDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\indexBufferDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\rasterizerStateDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\renderDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\renderTargetViewDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\samplerStateDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderManagerDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\shaderResourceViewDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\stateDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\textureAllDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\textureDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\unorderedAccessViewDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\vertexBufferDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\viewDirectX11Platform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture1DDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture2DDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\DirectX11\texture3DDirectX11.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\texture1D.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\texture2D.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\texture3D.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\sleep.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Thread\Android\mutexAndroid.h" />
@@ -91,7 +117,12 @@
     <ClInclude Include="..\..\Source\Pot\Time\time.h" />
     <ClInclude Include="..\..\Source\Pot\Time\Windows\timeWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Usefull\buffer.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\namedResource.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\path.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceList.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceLoadList.h" />
     <ClInclude Include="..\..\Source\Pot\Usefull\singleton.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceUpdaterList.h" />
     <ClInclude Include="..\..\Source\Pot\Windows\gameMain.h" />
     <ClInclude Include="..\..\Source\Pot\Windows\Resource\resource.h" />
     <ClInclude Include="..\..\Source\Pot\Windows\test.h" />
@@ -100,9 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Cycle\myGame.cpp" />
-    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\clipXAudioDevice.cpp" />
-    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\deviceXAudioDevice.cpp" />
-    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Device\voiceXAudioDevice.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.cpp" />
     <ClCompile Include="..\..\Source\Pot\Config\Windows\configWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Fps\fps.cpp" />
     <ClCompile Include="..\..\Source\Pot\Game\component.cpp" />
@@ -112,6 +143,8 @@
     <ClCompile Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Rand\rand.cpp" />
     <ClCompile Include="..\..\Source\Pot\Rand\Standard\randStandard.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\deviceDirectX11Platform.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Render\DirectX11\Platform\usefullDirectX11Platform.cpp" />
     <ClCompile Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Time\Standard\timeStandard.cpp" />
     <ClCompile Include="..\..\Source\Pot\Time\time.cpp" />
@@ -236,11 +269,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -250,11 +284,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -266,13 +301,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">
@@ -284,13 +320,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;CPOT_MASTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -302,13 +339,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Master|x64'">
@@ -320,13 +358,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;CPOT_MASTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -11,12 +11,15 @@
 #include "./Pot/Input/XInput/inputXInput.h"
 #include "./Pot/Out/Windows/outConsoleWindows.h"
 
-#include "./Pot/Audio/XAudio/Device/deviceXAudioDevice.h"
+#include "./Pot/Audio/XAudio/Platform/deviceXAudioPlatform.h"
+#include "./Pot/Render/DirectX11/Platform/deviceDirectX11Platform.h"
 
 #include "./Pot/Config/config.h"
 
 #include "./Pot/Fps/fps.h"
 #include "./Pot/Loader/loader.h"
+
+#include "./Pot/Usefull/resourceUpdaterList.h"
 
 namespace cpot {
 
@@ -33,9 +36,10 @@ void* GameMain::GameLoop(void* aDummy) {
 	//プラットフォームの初期化
 	#pragma region PlatformInit
 
-	xaudio::device::Device::S().Init();
-
 	windows::Window& tW = windows::Window::S();
+
+	xaudio::platform::Device::S().Init();
+	directX11::platform::Device::S().Init(tW.GetHwnd(), tW.GetSize());
 
 	//ウィンドウズの入力の初期化
 	windows::Input::S().Init(tW.GetHInstance(), tW.GetHwnd());
@@ -58,6 +62,8 @@ void* GameMain::GameLoop(void* aDummy) {
 	//ゲームの初期化
 	mGame->Init();
 
+	Fps::S().Restart();
+
 	//ゲームループ
 	while (true) {
 
@@ -67,6 +73,9 @@ void* GameMain::GameLoop(void* aDummy) {
 
 		//ローダのアップデート
 		LoaderManager::S().Update();
+		
+		//リソースのアップデート
+		ResourceUpdaterList::S().Update();
 
 		//ゲームの更新
 		mGame->Update();

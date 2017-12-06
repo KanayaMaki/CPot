@@ -1,5 +1,5 @@
 //
-//	content	:	AudioClipのインターフェース
+//	content	:	Textureのインターフェース
 //	author	:	SaitoYoshiki
 //
 
@@ -10,10 +10,11 @@
 
 namespace cpot {
 
-class AudioClipBase : public NamedResource {
+class Texture2DBase : public NamedResource {
 
 public:
 	CPOT_VI void Load(const HashTableKey& aUnionName) CPOT_ZR;
+	CPOT_VI void Load(const CHAR* aUnionName) CPOT_ZR;
 
 public:
 	CPOT_VI void Release() CPOT_ZR;
@@ -26,7 +27,7 @@ public:
 }
 
 #ifdef CPOT_ON_WINDOWS
-#include "./Pot/Audio/XAudio/audioClipXAudio.h"
+#include "./Pot/Render/DirectX11/texture2DDirectX11.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Audio/Android/audioClipAndroid.h"
 #endif

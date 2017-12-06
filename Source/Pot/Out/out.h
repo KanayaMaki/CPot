@@ -42,6 +42,9 @@ public:
 	void Output(const CHAR* aStr) {
 		OutputStr(aStr);
 	}
+	void Output(BOOL aVal) {
+		OutputStr(ToString::Do(aVal));
+	}
 	void Output(s8 aVal) {
 		OutputStr(ToString::Do((s32)aVal));
 	}

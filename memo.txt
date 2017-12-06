@@ -372,7 +372,7 @@ Network
 					u32 type;
 				u32 submesh[10];
 		Material[10];
-			Texture albedo;
+			std::shared_ptr<Texture> albedo;
 				u32 width;
 				u32 height;
 				u32 type;
@@ -388,9 +388,16 @@ Network
 	Resource<Motion>::Find("");
 	Resource<Shader>::Find("testShader");
 
-	Shader
+	Texture
+	 u32 GetWidth();
+	 u32 GetHeight();
+	 u32 GetDepth();
+
+	Render
+		void RenderSprite(std::shared_ptr<Texture>& aTexture, Vector2 aPosition, Vector2 aSize, f32 aAngle);
 
 
+Type
 	class TypeFactoryBase {
 		virtual T* Create() = 0;
 		virtual const TypeName& GetName() = 0;
@@ -427,3 +434,88 @@ Network
 
 	template<typename T>
 	TypeFactory<T> TypeRegister::mFactory;
+
+Find
+	もし見つかれば
+	　その要素を返す
+	もし見つからなければ
+	　T* a = new T;
+		a->Load(ResourceName&);　これでTの中で自動で探してくれる
+
+		名前をどこかでつけないと、テクスチャを検索できない
+		名づけ場所：
+		　コンストラクタ：デフォルトのコンストラクタが使えなくなると、他の場所で面倒かも
+		　ロード：ロードされてないテクスチャを検索できるのは変だからいいかも
+		　　ロード時に名前を渡すのが面倒かも
+		　セットネーム：こうしたほうがいいかも
+		NamedResource
+		ファイルを読み込む
+		→共通ネームと読み込みに必要な要素をリストにする（DirectX11でやる）
+		→共通ネームでロードすると、中（DirectX11）で情報を取得してロードする
+		→ロード後に、共通ネームでリストに登録する
+
+enum CFormat {
+	CPOT_FORMAT_R8_UINT,
+	CPOT_FORMAT_RG8_UINT,
+	CPOT_FORMAT_RGB8_UINT,
+	CPOT_FORMAT_RGBA8_UINT,
+	CPOT_FORMAT_R32_FLOAT,
+};
+
+
+std::shared_ptr<Model> m = Resource<Model>::Find("miku");
+m->Render();
+
+std::shared_ptr<Shader> v = Resource<Shader>::Find("phong");
+v->Set();
+
+std::shared_ptr<Model> m = Model::Create();
+m->Load("");
+
+	struct NetworkConnect {
+		u32 mAddress[4];
+		u32 mPort;
+	}
+	Network::Init();
+	Network::Connect(const NetworkConnect& aConnect);
+	Network::Send(m, cMessageCharacterMove);
+
+	std::shared_ptr<Message<Data>> d = Network::Recieve<Data>(cMessageCharacterMove);
+	if(d != nullptr) {
+	}
+
+	template<typename T>
+	MessageData {
+		union {
+			T mData;
+			CHAR mByte[sizeof(T)];
+		}
+	}
+	MessageHeader {
+		String<32> mName;
+		u32 mMessageType;
+		u32 mPlayerNum;
+	}
+	template<typename T>
+	Message {
+		MessageHeader mHeader;
+		MessageData<T> mData;
+	}
+	Data d;
+	Network::RecieveLoop();
+	Network::Send<Data>(const Data& aData, u32 aMessageType);
+	std::unique_ptr<Message<Data>> d = Network::Recieve<Data>(u32 aMessageType);
+	if(d != nullptr) {
+	}
+
+	TextureAll a;
+
+
+
+	Model.Load("4343.pmx");
+		Mesh = Load("data.mesh");
+		Material = Load(Path::FromRelative("Data/a.model", "data.mesh"));
+
+
+ロボット　原先生
+アンドロイドスタジオにお詳しいと鈴木先生に教えていただいて聞きにこさせていただきました

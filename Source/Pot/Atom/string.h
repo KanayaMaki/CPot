@@ -55,6 +55,7 @@ public:
 		return cSize;
 	}
 
+	//const CHAR*Œ^‚Ö‚Ì•ÏŠ·
 	operator const CHAR* () {
 		return mStr;
 	}
@@ -113,6 +114,19 @@ public:
 		return *this;
 	}
 
+
+	template <u32 cOtherSize>
+	const String& operator +=(const String<cOtherSize>& aStr) {
+		Add(aStr.Get());
+		return (*this);
+	}
+	template <u32 cOtherSize>
+	String operator +(const String<cOtherSize>& aStr) {
+		String lStr(*this);
+		lStr += aStr;
+		return lStr;
+	}
+
 	#pragma endregion
 
 
@@ -165,8 +179,8 @@ public:
 public:
 	const String& Pop(u32 aNum) {
 		CPOT_ASSERT(0 <= aNum);
-		s32 lNewLen = GetLength() - aNum;
-		CPOT_ASSERT(0 <= lNewLen);
+		u32 lNewLen = GetLength() - aNum;
+		lNewLen = Clamp((u32)0, lNewLen);
 		mStr[lNewLen] = '\0';
 		mLength = lNewLen;
 		return (*this);

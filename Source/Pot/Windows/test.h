@@ -7,6 +7,17 @@
 
 #include <Windows.h>
 
+#pragma region Texture
+
+void TestTexture();
+
+#pragma endregion
+
+#pragma region DirectX11
+
+void TestDirectX11(HWND aHwnd);
+
+#pragma endregion
 
 #pragma region Animation
 

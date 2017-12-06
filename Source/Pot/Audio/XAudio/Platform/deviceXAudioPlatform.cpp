@@ -5,7 +5,7 @@
 
 #include "./Pot/Atom/atom.h"
 
-#include "./Pot/Audio/XAudio/Device/deviceXAudioDevice.h"
+#include "./Pot/Audio/XAudio/Platform/deviceXAudioPlatform.h"
 
 #pragma comment(lib, "XAudio2.lib")
 
@@ -13,7 +13,7 @@ namespace cpot {
 
 namespace xaudio {
 
-namespace device {
+namespace platform {
 
 
 void Device::Init() {

@@ -313,7 +313,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_64BIT;</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -327,7 +327,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_64BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -341,7 +341,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_MASTER;CPOT_64BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -355,7 +355,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_32BIT;</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -369,7 +369,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_32BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -383,7 +383,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_MASTER;CPOT_32BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -397,7 +397,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_64BIT;</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -411,7 +411,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_64BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -425,7 +425,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_64BIT;NDEBUG;CPOT_MASTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -439,7 +439,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_32BIT;</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -453,7 +453,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_32BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -467,7 +467,7 @@
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>CPOT_ANDROID;CPOT_32BIT;NDEBUG;CPOT_MASTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\desktop\MyWorks\CPot\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>

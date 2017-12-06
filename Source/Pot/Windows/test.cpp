@@ -51,10 +51,39 @@
 //Animation
 #include "./Pot/Animation/animation.h"
 
+//DirectX11
+#include "./Pot/Render/DirectX11/Platform/deviceDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/constantBufferDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/vertexBufferDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/indexBufferDirectX11Platform.h"
+#include "./Pot/Render/DirectX11/Platform/shaderResourceViewDirectX11Platform.h"
+#include "./Pot/Config/config.h"
+
+#include "./Pot/Usefull/path.h"
+
+#include "./Pot/Render/texture2D.h"
 
 #include <Windows.h>
 
 using namespace cpot;
+
+#pragma region Texture
+
+void TestTexture() {
+	Texture2D t;
+	t.LoadDirectX11("./test.png");
+}
+
+#pragma endregion
+
+
+#pragma region DirectX11
+
+void TestDirectX11(HWND aHwnd) {
+
+}
+
+#pragma endregion
 
 
 #pragma region Animation
@@ -111,16 +140,12 @@ void TestAnimation() {
 void TestAudio() {
 
 	//XAudioÇÃèâä˙âª
-	xaudio::device::Device::S().Init();
+	xaudio::platform::Device::S().Init();
 
-	AudioName::S().Regist("test", "./test.wav");
+	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
 
-	AudioClip c;
-	c.Load("./test.wav");
 
-	AudioVoice v;
-	v.Load(c);
-
+	/*
 	v.Play();
 
 	::Sleep(1000 * 2);
@@ -129,6 +154,7 @@ void TestAudio() {
 
 	c.Release();
 	CPOT_LOG(ToString::Do(v.IsLoad()));
+	//*/
 }
 
 #pragma endregion

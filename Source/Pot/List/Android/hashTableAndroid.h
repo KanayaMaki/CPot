@@ -8,6 +8,8 @@
 #include "./Pot/Atom/atom.h"
 #include "./Pot/List/hashTable.h"
 
+#include <map>
+
 namespace cpot {
 
 namespace android {
@@ -23,7 +25,7 @@ class HashTable : public HashTableBase<T> {
 public:
 	// ! 同じキーがすでにある場合、追加しない
 	void Add(const HashTableKey& aKey, T aValue) CPOT_OR {
-		//mList.insert(std::make_pair(aKey, aValue));
+		mList.insert(std::make_pair(aKey, aValue));
 	}
 
 	#pragma endregion
@@ -35,7 +37,6 @@ public:
 public:
 	//指定されたキーを持つ要素の削除
 	T Remove(const HashTableKey& aKey) CPOT_OR {
-		/*
 		auto it = mList.find(aKey);
 
 		//要素があれば
@@ -45,7 +46,6 @@ public:
 			return tRes;
 		}
 		return T(0);
-		*/
 	}
 
 	//指定された値と等しい要素の削除
@@ -55,7 +55,7 @@ public:
 
 	//全ての要素を削除
 	void Clear() CPOT_OR {
-		//mList.clear();
+		mList.clear();
 	}
 
 	#pragma endregion
@@ -68,24 +68,22 @@ public:
 	//インデックスアクセス
 	// ! 要素がなければ、作成する
 	T& operator[](const HashTableKey& aKey) CPOT_OR {
-		//return mList[aKey];
+		return mList[aKey];
 	}
 
 	//名前で検索
 	// ! 要素がなければ0を返す
 	T Find(const HashTableKey& aKey) const CPOT_OR {
-		/*
 		auto it = mList.find(aKey);
 		if (it != mList.end()) {
 			return (*it).second;
 		}
 		return T(0);
-		*/
 	}
 
 	//指定されたキーを持つ要素が存在するか
 	BOOL Exist(const HashTableKey& aKey) const CPOT_OR {
-		//return mList.find(aKey) != mList.end();
+		return mList.find(aKey) != mList.end();
 	}
 
 	#pragma endregion
@@ -96,8 +94,8 @@ public:
 
 public:
 	void Set(const HashTableKey& aKey, const T& aValue) CPOT_OR {
-		//CPOT_ASSERT(Exist(aKey));	//すでに要素が存在していなければいけない
-		//mList[aKey] = aValue;
+		CPOT_ASSERT(Exist(aKey));	//すでに要素が存在していなければいけない
+		mList[aKey] = aValue;
 	}
 
 	#pragma endregion
@@ -108,7 +106,7 @@ public:
 public:
 	//現在の要素数の取得
 	u32 GetSize() const CPOT_OR {
-		//return mList.size();
+		return mList.size();
 	}
 
 	#pragma endregion
@@ -118,7 +116,7 @@ public:
 	#pragma region Field
 
 private:
-	//std::map<HashTableKey, T> mList;
+	std::map<HashTableKey, T> mList;
 
 	#pragma endregion
 

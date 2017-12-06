@@ -7,8 +7,11 @@
 
 #include "./Pot/Atom/atom.h"
 
+#include "./Pot/Usefull/resourceLoadList.h"
+#include "./Pot/Usefull/resourceList.h"
+
 #include "./Pot/Audio/audioClip.h"
-#include "./Pot/Audio/XAudio/Device/clipXAudioDevice.h"
+#include "./Pot/Audio/XAudio/Platform/clipXAudioPlatform.h"
 
 
 namespace cpot {
@@ -16,17 +19,23 @@ namespace cpot {
 namespace xaudio {
 
 
+class AudioLoadData : public ResourceLoadList<AudioLoadData, String<64>> {
+
+};
+
 class AudioClip : public AudioClipBase {
+	friend class ResourceList<AudioClip>;
 
 public:
-	void Load(const CHAR* aFileName) CPOT_OR {
+	void Load(const HashTableKey& aUnionName) CPOT_OR {
+		mClip.Load(AudioLoadData::S().Get(aUnionName).Get());
+		SetName(aUnionName);
+	};
+
+	//プラットフォーム限定の読み込み
+	void LoadPlatform(const CHAR* aFileName) {
 		mClip.Load(aFileName);
-	};
-	void LoadFromKey(const HashTableKey& aFileNameKey) CPOT_OR {
-		mClip.Load(AudioName::S().Get(aFileNameKey).Get());
-	};
-	void LoadFromKey(const CHAR* aFileNameKey) CPOT_OR {
-		LoadFromKey(HashTableKey(aFileNameKey));
+		SetName(aFileName);
 	};
 
 public:
@@ -44,7 +53,7 @@ public:
 	#pragma region Field
 
 public:
-	device::Clip mClip;
+	platform::Clip mClip;
 
 	#pragma endregion
 };

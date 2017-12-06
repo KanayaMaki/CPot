@@ -1,17 +1,17 @@
 //
-//	content	:	XAudioにおけるデバイスでのVoiceの実装
+//	content	:	XAudioにおけるPlatformでのVoiceの実装
 //	author	:	SaitoYoshiki
 //
 
 
-#include "./Pot/Audio/XAudio/Device/clipXAudioDevice.h"
-#include "./Pot/Audio/XAudio/Device/voiceXAudioDevice.h"
+#include "./Pot/Audio/XAudio/Platform/clipXAudioPlatform.h"
+#include "./Pot/Audio/XAudio/Platform/voiceXAudioPlatform.h"
 
 namespace cpot {
 
 namespace xaudio {
 
-namespace device {
+namespace platform {
 
 
 void Voice::Load(Clip& aAudioClip) {
