@@ -136,6 +136,8 @@ std::shared_ptr<Shader> shader;
 std::shared_ptr<Rasterizer> rasterizer;
 std::shared_ptr<StaticMeshModel> model;
 PersCamera camera;
+Vector3 cameraLoc;
+Quaternion cameraRot;
 
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
@@ -182,7 +184,7 @@ void MyGame::Init() {
 	blend->Load(Blend::cNormal);
 
 	depthStencil.reset(new DepthStencil);
-	depthStencil->Load(DepthStencil::cNoTest);
+	depthStencil->Load(DepthStencil::cTest);
 
 	viewport.reset(new Viewport);
 	viewport->Load(Vector2(0.0f, 0.0f), Config::S().GetScreenSize());
@@ -233,6 +235,11 @@ void MyGame::Init() {
 	Render::S().SetShader(shader);
 
 
+	FileIn lFile;
+	lFile.Open("./Miku/miku.pmx");
+	Buffer lFileBuffer;
+	lFile.Read(lFileBuffer);
+
 	PmxLoader lPmx;
 	lPmx.Load("./Miku/miku.pmx");
 
@@ -243,8 +250,7 @@ void MyGame::Init() {
 	ModelCPUToModel::Load(*model, lSkinMeshCPU);
 
 	camera.mProjection.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
-	camera.mView.SetLocation(Vector3(0.0f, 0.0f, -3.0f));
-	camera.mView.SetRotation(Quaternion::FromAxis(Vector3(0.0f, 1.0f, 0.0f), ToRad(45.0f)));
+	cameraLoc = Vector3(0.0f, 10.0f, -30.0f);
 
 	#ifdef CPOT_ON_WINDOWS
 	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
@@ -321,13 +327,42 @@ void MyGame::Update() {
 	#pragma endregion
 
 
+	const f32 rotSpeed = 50.0f;
 	if (Input::GetButton(windows::cLeft)) {
-		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::FromTransform(Vector3(-5.0f, 0.0f, 0.0f));
+		cameraRot *= Quaternion::FromAxis(Vector3::Up(), -ToRad(rotSpeed * DeltaTime()));
 	}
 	if (Input::GetButton(windows::cRight)) {
-		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::FromTransform(Vector3(5.0f, 0.0f, 0.0f));
+		cameraRot *= Quaternion::FromAxis(Vector3::Up(), ToRad(rotSpeed * DeltaTime()));
+	}
+	if (Input::GetButton(windows::cUp)) {
+		cameraRot *= Quaternion::FromAxis(cameraRot.Right(), -ToRad(rotSpeed * DeltaTime()));
+	}
+	if (Input::GetButton(windows::cDown)) {
+		cameraRot *= Quaternion::FromAxis(cameraRot.Right(), ToRad(rotSpeed * DeltaTime()));
 	}
 
+	const f32 moveSpeed = 10.0f;
+	if (Input::GetButton(windows::cA)) {
+		cameraLoc += cameraRot.Left() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cD)) {
+		cameraLoc += cameraRot.Right() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cW)) {
+		cameraLoc += cameraRot.Forward() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cS)) {
+		cameraLoc += cameraRot.Back() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cE)) {
+		cameraLoc += cameraRot.Up() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cQ)) {
+		cameraLoc += cameraRot.Down() * moveSpeed * DeltaTime();
+	}
+
+	camera.mView.SetLocation(cameraLoc);
+	camera.mView.SetRotation(cameraRot);
 	camera.Update();
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = camera.mProjection.GetMatrix();
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = camera.mView.GetMatrix();
