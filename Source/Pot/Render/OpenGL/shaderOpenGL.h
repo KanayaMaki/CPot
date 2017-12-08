@@ -1,5 +1,5 @@
 //
-//	content	:	Texture‚ÌDirectX11‚Å‚ÌŽÀ‘•
+//	content	:	Shader‚ÌOpenGL‚Å‚ÌŽÀ‘•
 //	author	:	SaitoYoshiki
 //
 
@@ -9,64 +9,45 @@
 
 #include "./Pot/Usefull/resourceLoadList.h"
 #include "./Pot/Render/shader.h"
-#include "./Pot/Render/DirectX11/Platform/shaderDirectX11Platform.h"
+#include "./Pot/Render/OpenGL/Platform/shaderOpenGLPlatform.h"
 
 
 namespace cpot {
 
-namespace directX11 {
+namespace openGL {
 
 struct ShaderLoadDataElement {
 	String<128> filePath;
-	String<64> entryPoint;
 };
 
 struct ShaderLoadData {
 	ShaderLoadDataElement vertexShader;
 	ShaderLoadDataElement geometryShader;
-	ShaderLoadDataElement pixelShader;
+	ShaderLoadDataElement fragmentShader;
 };
 
 
-class ShaderDirectX11Data : public ResourceLoadList<ShaderDirectX11Data, ShaderLoadData> {
+class ShaderOpenGLData : public ResourceLoadList<ShaderOpenGLData, ShaderLoadData> {
 
 };
 
 class Shader : public ShaderBase {
 
 public:
-	Shader() {
-		mVertexShader.reset(new platform::VertexShader);
-		mGeometryShader.reset(new platform::GeometryShader);
-		mPixelShader.reset(new platform::PixelShader);
-	}
-
-public:
 	void Load(const HashTableKey& aUnionName) CPOT_OR {
-		mVertexShader->CompileFromFile(
-			ShaderDirectX11Data::S().Get(aUnionName).vertexShader.filePath.Get(),
-			ShaderDirectX11Data::S().Get(aUnionName).vertexShader.entryPoint.Get(),
-			"vs_4_0");
-		mGeometryShader->CompileFromFile(
-			ShaderDirectX11Data::S().Get(aUnionName).geometryShader.filePath.Get(),
-			ShaderDirectX11Data::S().Get(aUnionName).geometryShader.entryPoint.Get(),
-			"gs_4_0");
-		mPixelShader->CompileFromFile(
-			ShaderDirectX11Data::S().Get(aUnionName).pixelShader.filePath.Get(),
-			ShaderDirectX11Data::S().Get(aUnionName).pixelShader.entryPoint.Get(),
-			"ps_4_0");
+		mProgram.Load(ShaderOpenGLData::S().Get(aUnionName).vertexShader.filePath.Get(),
+			ShaderOpenGLData::S().Get(aUnionName).geometryShader.filePath.Get(),
+			ShaderOpenGLData::S().Get(aUnionName).fragmentShader.filePath.Get());
 	};
 
 public:
 	void Release() CPOT_OR {
-		mVertexShader->Release();
-		mGeometryShader->Release();
-		mPixelShader->Release();
+		mProgram.Release();
 	};
 
 public:
 	BOOL IsLoad() const CPOT_OR {
-		return mVertexShader->IsLoaded() || mGeometryShader->IsLoaded() || mPixelShader->IsLoaded();
+		return mProgram.IsLoaded();
 	};
 
 
@@ -74,15 +55,13 @@ public:
 	#pragma region Field
 
 public:
-	std::shared_ptr<platform::VertexShader> mVertexShader;
-	std::shared_ptr<platform::GeometryShader> mGeometryShader;
-	std::shared_ptr<platform::PixelShader> mPixelShader;
-
+	platform::Program mProgram;
+	
 	#pragma endregion
 };
 
 }
 
-using Shader = directX11::Shader;
+using Shader = openGL::Shader;
 
 }
