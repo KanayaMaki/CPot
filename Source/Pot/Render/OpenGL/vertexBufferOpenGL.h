@@ -1,5 +1,5 @@
 //
-//	content	:	DirectX11‚Å‚ÌSampler
+//	content	:	OpenGL‚Å‚ÌVertexBuffer
 //	author	:	SaitoYoshiki
 //
 
@@ -8,27 +8,24 @@
 #include "./Pot/Atom/atom.h"
 
 #include "./Pot/Render/vertexBuffer.h"
-#include "./Pot/Render/DirectX11/Platform/vertexBufferDirectX11Platform.h"
+#include "./Pot/Render/OpenGL/Platform/arrayBufferOpenGLPlatform.h"
 
 namespace cpot {
 
-namespace directX11 {
+namespace openGL {
 
 class VertexBuffer : public VertexBufferBase {
-
-public:
-	VertexBuffer() {
-		mVertexBuffer.reset(new platform::VertexBuffer);
-	}
 
 	#pragma region Load
 
 public:
 	BOOL Load(u32 aVertexSize, u32 aVertexNum, const void* aInitData, BOOL aCPUWritable) CPOT_OR {
-		return mVertexBuffer->Load(D3D11_USAGE_DYNAMIC, D3D11_CPU_ACCESS_WRITE, aVertexSize, aVertexNum, aInitData);
+		mArrayBuffer.Load(aVertexSize, aVertexNum, aInitData, aCPUWritable ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
+		return true;
 	}
 	BOOL Load(u32 aVertexSize, u32 aVertexNum, const void* aInitData) CPOT_OR {
-		return mVertexBuffer->Load(aVertexSize, aVertexNum, aInitData);
+		mArrayBuffer.Load(aVertexSize, aVertexNum, aInitData);
+		return true;
 	}
 	
 
@@ -39,10 +36,10 @@ public:
 
 public:
 	BOOL Write(const void* aData) CPOT_OR {
-		return mVertexBuffer->Write(aData);
+		return mArrayBuffer.Write(aData);
 	}
 	BOOL Write(const void* aData, u32 aSize) CPOT_OR {
-		return mVertexBuffer->Write(aData, aSize);
+		return mArrayBuffer.Write(aData, aSize);
 	}
 
 	#pragma endregion
@@ -53,10 +50,10 @@ public:
 
 public:
 	u32 GetVertexSize() const CPOT_OR {
-		return mVertexBuffer->GetVertexSize();
+		return mArrayBuffer.GetVertexSize();
 	}
 	u32 GetVertexNum() const CPOT_OR {
-		return mVertexBuffer->GetVertexNum();
+		return mArrayBuffer.GetVertexNum();
 	}
 
 	#pragma endregion
@@ -64,21 +61,21 @@ public:
 
 public:
 	void Release() CPOT_OR {
-		mVertexBuffer->Release();
+		mArrayBuffer.Release();
 	}
 
 public:
 	BOOL IsLoad() const CPOT_OR {
-		return mVertexBuffer->IsLoaded();
+		return mArrayBuffer.IsLoaded();
 	}
 
 public:
-	std::shared_ptr<platform::VertexBuffer> mVertexBuffer;
+	platform::ArrayBuffer mArrayBuffer;
 
 };
 
 }
 
-using VertexBuffer = directX11::VertexBuffer;
+using VertexBuffer = openGL::VertexBuffer;
 
 }

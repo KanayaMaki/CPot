@@ -22,13 +22,13 @@ glViewport(0,0,1024,768); //フレームバッファ全体に描画する。左�
 
 class ArrayBuffer : public Buffer {
 public:
-	void Load(u32 aVertexSize, u32 aVertexNum, void* aInitData, GLenum aUsage) {
+	void Load(u32 aVertexSize, u32 aVertexNum, const void* aInitData, GLenum aUsage) {
 		mVertexNum = aVertexNum;
 		mVertexSize = aVertexSize;
 		Buffer::Load(GL_ARRAY_BUFFER, aVertexSize * aVertexNum, aInitData, aUsage);
 	}
 
-	void Load(u32 aVertexSize, u32 aVertexNum, void* aInitData) {
+	void Load(u32 aVertexSize, u32 aVertexNum, const void* aInitData) {
 		Load(aVertexSize, aVertexNum, aInitData, GL_STATIC_DRAW);	//委譲
 	}
 	void Load(u32 aVertexSize, u32 aVertexNum) {
