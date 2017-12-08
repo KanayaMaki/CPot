@@ -8,53 +8,52 @@
 #include "./Pot/Atom/atom.h"
 
 #include "./Pot/Render/depthStencil.h"
-#include "./Pot/Render/DirectX11/Platform/depthStencilStateDirectX11Platform.h"
+#include "./Pot/Render/OpenGL/Platform/depthOpenGLPlatform.h"
+#include "./Pot/Render/OpenGL/Platform/stencilOpenGLPlatform.h"
 
 namespace cpot {
 
-namespace directX11 {
+namespace openGL {
 
 class DepthStencil : public DepthStencilBase {
 
 public:
-	DepthStencil() {
-		mDepthStencil.reset(new platform::DepthStencilState);
-	}
-
-public:
 	void Load(CDepthMode aMode) CPOT_OR {
 
-		switch (aMode)
-		{
+		switch (aMode) {
 			case cTest:
-				mDepthStencil->Load(platform::DepthStencilState::CreateDescZTest());
+				mDepth.Load(platform::Depth::cTest);
 				break;
 			case cNoWrite:
-				mDepthStencil->Load(platform::DepthStencilState::CreateDescNoZWrite());
+				mDepth.Load(platform::Depth::cNoWrite);
 				break;
 			case cNoTest:
-				mDepthStencil->Load(platform::DepthStencilState::CreateDescNoZTest());
+				mDepth.Load(platform::Depth::cNoTest);
 				break;
 		}
+
+		//ステンシル機能は無効にする
+		mStencil.Load();
 	}
 
 public:
 	void Release() CPOT_OR {
-		mDepthStencil->Release();
+		mDepth.Release();
+		mStencil.Release();
 	}
 
 public:
 	BOOL IsLoad() const CPOT_OR {
-		return mDepthStencil->IsLoaded();
+		return mDepth.IsLoaded() && mStencil.IsLoaded();
 	}
 
 public:
-	std::shared_ptr<platform::DepthStencilState> mDepthStencil;
-
+	platform::Depth mDepth;
+	platform::Stencil mStencil;
 };
 
 }
 
-using DepthStencil = directX11::DepthStencil;
+using DepthStencil = openGL::DepthStencil;
 
 }
