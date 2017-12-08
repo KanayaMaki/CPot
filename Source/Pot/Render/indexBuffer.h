@@ -65,7 +65,7 @@ public:
 }
 
 
-#ifdef CPOT_ON_WINDOWS
+#ifdef CPOT_ON_DIRECTX11
 #include "./Pot/Render/DirectX11/indexBufferDirectX11.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Audio/Android/vertexBufferAndroid.h"

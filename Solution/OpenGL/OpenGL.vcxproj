@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Master|Win32">
+      <Configuration>Master</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Master|x64">
+      <Configuration>Master</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{360781C6-2705-4AF8-AA1C-53D0D5D13632}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>OpenGL</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Master|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Master|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Master|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Master|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Master|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CPOT_OPENGL;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CPOT_OPENGL;CPOT_MASTER;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CPOT_OPENGL;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CPOT_OPENGL;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CPOT_OPENGL;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Master|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CPOT_OPENGL;CPOT_MASTER;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Cycle\myGame.h" />
+    <ClInclude Include="..\..\Source\Pot\Animation\animation.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\atom.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\bitflag.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\color.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\defines.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\function.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\hash.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\hashString.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\math.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\matrix4x4.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\quaternion.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\Standard\mathStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\Standard\toStringStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\string.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\transform.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\typedef.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\vector.h" />
+    <ClInclude Include="..\..\Source\Pot\Audio\audio.h" />
+    <ClInclude Include="..\..\Source\Pot\Audio\audioClip.h" />
+    <ClInclude Include="..\..\Source\Pot\Audio\audioVoice.h" />
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\audioClipXAudio.h" />
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\audioVoiceXAudio.h" />
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Config\config.h" />
+    <ClInclude Include="..\..\Source\Pot\Config\Windows\configWindows.h" />
+    <ClInclude Include="..\..\Source\Pot\File\file.h" />
+    <ClInclude Include="..\..\Source\Pot\File\Standard\fileStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\Fps\fps.h" />
+    <ClInclude Include="..\..\Source\Pot\Input\input.h" />
+    <ClInclude Include="..\..\Source\Pot\Input\Windows\inputWindows.h" />
+    <ClInclude Include="..\..\Source\Pot\Input\XInput\inputXInput.h" />
+    <ClInclude Include="..\..\Source\Pot\List\hashTable.h" />
+    <ClInclude Include="..\..\Source\Pot\List\Standard\hashTableStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\List\Standard\vectorStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\List\vector.h" />
+    <ClInclude Include="..\..\Source\Pot\Loader\loader.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\CharCode.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\Material.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmdData.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxData.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxLoader.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxToMesh.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\SkinMeshModel.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\StaticMeshModel.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\SubMesh.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\Windows\CharCodeWindows.h" />
+    <ClInclude Include="..\..\Source\Pot\Model\Material.h" />
+    <ClInclude Include="..\..\Source\Pot\Model\ModelCPUToModel.h" />
+    <ClInclude Include="..\..\Source\Pot\Model\SkinMeshModel.h" />
+    <ClInclude Include="..\..\Source\Pot\Model\StaticMeshModel.h" />
+    <ClInclude Include="..\..\Source\Pot\Model\Submesh.h" />
+    <ClInclude Include="..\..\Source\Pot\Out\out.h" />
+    <ClInclude Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.h" />
+    <ClInclude Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.h" />
+    <ClInclude Include="..\..\Source\Pot\Rand\rand.h" />
+    <ClInclude Include="..\..\Source\Pot\Rand\Standard\randStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\blend.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\camera.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\constantBuffer.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\depthStencil.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\indexBuffer.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\arrayBufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\blendOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\bufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\cullOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\depthBufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\depthOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLPlatformWindows.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\elementArrayBufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\frameBufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\inputLayoutOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\managerOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\renderOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\samplerOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\shaderOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\stencilOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\textureOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\uniformBufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\vertexArrayObjectOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\rasterizer.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\render.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\sampler.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\shader.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\texture2D.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\vertexBuffer.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\viewport.h" />
+    <ClInclude Include="..\..\Source\Pot\Sleep\sleep.h" />
+    <ClInclude Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.h" />
+    <ClInclude Include="..\..\Source\Pot\Thread\mutex.h" />
+    <ClInclude Include="..\..\Source\Pot\Thread\mutexLocker.h" />
+    <ClInclude Include="..\..\Source\Pot\Thread\Standard\mutexStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\Thread\Standard\threadStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\Thread\thread.h" />
+    <ClInclude Include="..\..\Source\Pot\Time\Standard\timeStandard.h" />
+    <ClInclude Include="..\..\Source\Pot\Time\time.h" />
+    <ClInclude Include="..\..\Source\Pot\Time\Windows\timeWindows.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\buffer.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\namedResource.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\path.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceList.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceLoadList.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceUpdaterList.h" />
+    <ClInclude Include="..\..\Source\Pot\Usefull\singleton.h" />
+    <ClInclude Include="..\..\Source\Pot\Windows\gameMain.h" />
+    <ClInclude Include="..\..\Source\Pot\Windows\Resource\resource.h" />
+    <ClInclude Include="..\..\Source\Pot\Windows\test.h" />
+    <ClInclude Include="..\..\Source\Pot\Window\Windows\cursorWindows.h" />
+    <ClInclude Include="..\..\Source\Pot\Window\Windows\windowWindows.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Cycle\myGameDummy.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Config\Windows\configWindows.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Fps\fps.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Input\Windows\inputWindows.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp" />
+    <ClCompile Include="..\..\Source\Pot\ModelLoader\PmxLoader.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Rand\rand.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Rand\Standard\randStandard.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Time\Standard\timeStandard.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Time\time.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Time\Windows\timeWindows.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Windows\gameMain.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Windows\main.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Windows\test.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Window\Windows\windowWindows.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\Source\Pot\Windows\Resource\Icon.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

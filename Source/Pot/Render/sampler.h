@@ -29,7 +29,7 @@ public:
 
 }
 
-#ifdef CPOT_ON_WINDOWS
+#ifdef CPOT_ON_DIRECTX11
 #include "./Pot/Render/DirectX11/samplerDirectX11.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Audio/Android/samplerAndroid.h"

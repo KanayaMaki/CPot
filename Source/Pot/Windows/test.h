@@ -7,6 +7,12 @@
 
 #include <Windows.h>
 
+#pragma region OpenGL
+
+void TestOpenGL(HWND aHwnd);
+
+#pragma endregion
+
 #pragma region Pmx
 
 void TestPmx();

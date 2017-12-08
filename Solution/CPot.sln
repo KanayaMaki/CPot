@@ -11,6 +11,8 @@ Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "Android.Packaging", "Androi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Android.NativeActivity", "Android\Android.NativeActivity\Android.NativeActivity.vcxproj", "{0B89D5A7-1F1F-4BCA-94FE-31901992C73C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGL", "OpenGL\OpenGL.vcxproj", "{360781C6-2705-4AF8-AA1C-53D0D5D13632}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -105,6 +107,26 @@ Global
 		{0B89D5A7-1F1F-4BCA-94FE-31901992C73C}.Release|x64.Build.0 = Release|x64
 		{0B89D5A7-1F1F-4BCA-94FE-31901992C73C}.Release|x86.ActiveCfg = Release|x86
 		{0B89D5A7-1F1F-4BCA-94FE-31901992C73C}.Release|x86.Build.0 = Release|x86
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Debug|ARM.ActiveCfg = Debug|Win32
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Debug|ARM64.ActiveCfg = Debug|Win32
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Debug|x64.ActiveCfg = Debug|x64
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Debug|x64.Build.0 = Debug|x64
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Debug|x86.ActiveCfg = Debug|Win32
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Debug|x86.Build.0 = Debug|Win32
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Master|ARM.ActiveCfg = Release|x64
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Master|ARM.Build.0 = Release|x64
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Master|ARM64.ActiveCfg = Release|x64
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Master|ARM64.Build.0 = Release|x64
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Master|x64.ActiveCfg = Master|x64
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Master|x64.Build.0 = Master|x64
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Master|x86.ActiveCfg = Master|Win32
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Master|x86.Build.0 = Master|Win32
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Release|ARM.ActiveCfg = Release|Win32
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Release|ARM64.ActiveCfg = Release|Win32
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Release|x64.ActiveCfg = Release|x64
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Release|x64.Build.0 = Release|x64
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Release|x86.ActiveCfg = Release|Win32
+		{360781C6-2705-4AF8-AA1C-53D0D5D13632}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

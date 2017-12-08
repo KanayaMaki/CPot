@@ -30,7 +30,7 @@ public:
 
 }
 
-#ifdef CPOT_ON_WINDOWS
+#ifdef CPOT_ON_DIRECTX11
 #include "./Pot/Render/DirectX11/depthStencilDirectX11.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Render/Android/depthStencilAndroid.h"

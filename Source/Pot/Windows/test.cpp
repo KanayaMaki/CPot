@@ -52,16 +52,22 @@
 #include "./Pot/Animation/animation.h"
 
 //DirectX11
+#ifdef CPOT_ON_DIRECTX11
 #include "./Pot/Render/DirectX11/Platform/deviceDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/constantBufferDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/vertexBufferDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/indexBufferDirectX11Platform.h"
 #include "./Pot/Render/DirectX11/Platform/shaderResourceViewDirectX11Platform.h"
+#elif defined CPOT_ON_OPENGL
+#include "./Pot/Render/OpenGL/Platform/renderOpenGLPlatform.h"
+#endif
+
+
 #include "./Pot/Config/config.h"
 
 #include "./Pot/Usefull/path.h"
 
-#include "./Pot/Render/render.h"
+//#include "./Pot/Render/render.h"
 
 #include "./Pot/ModelLoader/PmxLoader.h"
 #include "./Pot/ModelLoader/PmxToMesh.h"
@@ -69,6 +75,120 @@
 #include <Windows.h>
 
 using namespace cpot;
+
+static struct UniformMatrix {
+	ShaderMatrix4x4 mWorld;
+	ShaderMatrix4x4 mView;
+	ShaderMatrix4x4 mProj;
+} mUniformMatrix;
+
+static struct TmpData {
+	Color mDiffuse;
+} mTmpData;
+
+static struct Vertex {
+	Vector3 loc;
+	Vector3 nor;
+	Vector2 uv;
+};
+
+
+#pragma region OpenGL
+
+void TestOpenGL(HWND aHwnd) {
+	openGL::platform::Device::S().Init(aHwnd);
+
+	openGL::platform::Sampler s;
+	s.Load(openGL::platform::Sampler::cClamp);
+	openGL::platform::Render::S().GetSamplerManager().Set(&s, 0);
+
+	Vertex lVertex[]{
+		{ { -0.5f, -0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f } ,{ 0.0f, 0.0f } },
+		{ { -0.5f, 0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f } ,{ 0.0f, 2.0f } },
+		{ { 0.5f, -0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f } ,{ 2.0f, 0.0f } },
+		{ { 0.5f, 0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f } ,{ 2.0f, 2.0f } },
+	};
+	openGL::platform::ArrayBuffer a;
+	a.Load(sizeof(Vertex), 4, lVertex);
+	openGL::platform::Render::S().GetArrayBufferManager().Set(&a);
+
+	openGL::platform::InputLayout inputLayout;
+	openGL::platform::InputLayoutElement element[] = {
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 3, sizeof(Vertex), sizeof(f32) * 0),
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 3, sizeof(Vertex), sizeof(f32) * 3),
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 2, sizeof(Vertex), sizeof(f32) * 6),
+	};
+	inputLayout.Load(element, 3);
+	openGL::platform::Render::S().GetInputLayoutManager().SetInputLayout(&inputLayout);
+
+	u16 index[] = {
+		0, 1, 2, 2, 1, 3
+	};
+	openGL::platform::ElementArrayBuffer e;
+	e.Load(GL_UNSIGNED_SHORT, 6, index, GL_TRIANGLES);
+	openGL::platform::Render::S().GetElementArrayBufferManager().Set(&e);
+
+	mUniformMatrix.mWorld *= Matrix4x4::FromTransform(Vector3(0.5f, 0.0f, 0.0f));
+	openGL::platform::UniformBuffer matrix;
+	matrix.Load(&mUniformMatrix);
+	openGL::platform::Render::S().GetUniformBufferManager().Set(&matrix, 0);
+
+	mTmpData.mDiffuse = Color::White();
+	openGL::platform::UniformBuffer diffuse;
+	diffuse.Load(&mTmpData);
+	openGL::platform::Render::S().GetUniformBufferManager().Set(&diffuse, 1);
+
+	openGL::platform::Blend b;
+	b.Load(openGL::platform::Blend::cNormal);
+	openGL::platform::Render::S().GetBlendManager().Set(&b);
+
+	openGL::platform::Cull c;
+	c.Load(true, GL_CW);
+	openGL::platform::Render::S().GetCullManager().Set(&c);
+
+	openGL::platform::Depth d;
+	d.Load(openGL::platform::Depth::cTest);
+	openGL::platform::Render::S().GetDepthManager().Set(&d);
+
+	openGL::platform::Stencil stencil;
+	stencil.Load();
+	openGL::platform::Render::S().GetStencilManager().Set(&stencil);
+
+	openGL::platform::Program program;
+	program.Load("./test.vert", "", "./test.frag");
+	openGL::platform::Render::S().GetProgramManager().Set(&program);
+
+	openGL::platform::Texture2D texture;
+	texture.Load("./wing.bmp");
+	//texture.Load("./test.bmp");
+	openGL::platform::Render::S().GetTextureManager().Set(&texture, 0);
+
+	openGL::platform::DepthBuffer depthBuffer;
+	depthBuffer.Load(960, 540);
+	//openGL::platform::Render::S().GetRenderTextureManager().SetDepthBuffer(&depthBuffer);
+
+	openGL::platform::Texture2D renderTexture;
+	renderTexture.Load(960, 540, GL_RGBA, GL_UNSIGNED_BYTE);
+	openGL::platform::Render::S().GetRenderTextureManager().ClearBackBuffer(Color::Black());
+	openGL::platform::Render::S().GetRenderTextureManager().ClearBackBuffer(1.0f);
+	//openGL::platform::Render::S().GetRenderTextureManager().ClearColor(&renderTexture, Color::Red());
+
+	//openGL::platform::Render::S().GetRenderTextureManager().SetTexture(&renderTexture, 0);
+
+	openGL::platform::Render::S().SetToDevice();
+
+
+	openGL::platform::Render::S().DrawElement();
+
+	openGL::platform::Render::S().SwapBuffer();
+
+
+	u32 i = 0;
+	i++;
+}
+
+#pragma endregion
+
 
 
 #pragma region Pmx
@@ -91,6 +211,7 @@ void TestPmx() {
 #pragma endregion
 
 
+/*
 #pragma region Texture
 
 void TestTexture() {
@@ -185,7 +306,7 @@ void TestDirectX11(HWND aHwnd) {
 }
 
 #pragma endregion
-
+*/
 
 #pragma region Animation
 
