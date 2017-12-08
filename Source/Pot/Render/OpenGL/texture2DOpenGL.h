@@ -1,5 +1,5 @@
 //
-//	content	:	Texture‚ÌDirectX11‚Å‚ÌŽÀ‘•
+//	content	:	Texture‚ÌOpenGL‚Å‚ÌŽÀ‘•
 //	author	:	SaitoYoshiki
 //
 
@@ -9,69 +9,100 @@
 
 #include "./Pot/Usefull/resourceLoadList.h"
 #include "./Pot/Render/texture2D.h"
-#include "./Pot/Render/DirectX11/Platform/textureAllDirectX11Platform.h"
+#include "./Pot/Render/OpenGL/Platform/textureOpenGLPlatform.h"
+#include "./Pot/Render/OpenGL/Platform/depthBufferOpenGLPlatform.h"
+#include "./Pot/Render/OpenGL/Platform/renderOpenGLPlatform.h"
+
 
 
 namespace cpot {
 
-namespace directX11 {
+namespace openGL {
 
 
-class Texture2DDirectX11Data : public ResourceLoadList<Texture2DDirectX11Data, String<128>> {
+class Texture2DData : public ResourceLoadList<Texture2DData, String<128>> {
 
 };
 
 class Texture2D : public Texture2DBase {
 
 public:
-	static DXGI_FORMAT Convert(CFormat aFormat) {
+	struct GLFormat {
+		GLenum format;
+		GLenum type;
+	};
+
+	static GLFormat Convert(CFormat aFormat) {
+
+		GLFormat lRes;
 		switch (aFormat) {
 			case cR8Uint:
-				return DXGI_FORMAT_R8_UNORM;
+				lRes.format = GL_R;
+				lRes.type = GL_UNSIGNED_BYTE;
+				break;
 			case cRGBA8Uint:
-				return DXGI_FORMAT_R8G8B8A8_UNORM;
+				lRes.format = GL_RGBA;
+				lRes.type = GL_UNSIGNED_BYTE;
+				break;
 			case cR32Float:
-				return DXGI_FORMAT_R32_FLOAT;
+				lRes.format = GL_R;
+				lRes.type = GL_FLOAT;
+				break;
 			case cRGBA32Float:
-				return DXGI_FORMAT_R32G32B32A32_FLOAT;
+				lRes.format = GL_RGBA;
+				lRes.type = GL_FLOAT;
+				break;
+			default:
+				lRes.format = GL_INVALID_ENUM;
+				lRes.type = GL_INVALID_ENUM;
+				break;
 		}
-		return DXGI_FORMAT_UNKNOWN;
-	}
-	static CFormat Convert(DXGI_FORMAT aFormat) {
-		switch (aFormat) {
-
-		}
+		return lRes;
 	}
 
 public:
 	void Load(const HashTableKey& aUnionName) CPOT_OR {
-		mTexture.Load(Texture2DDirectX11Data::S().Get(aUnionName).Get());
+		mTexture.Load(Texture2DData::S().Get(aUnionName).Get());
 	};
 	void Load(u32 aWidth, u32 aHeight, CFormat aFormat, BOOL aIsRenderTarget, BOOL aIsShaderResource) CPOT_OR {
 		Load(aWidth, aHeight, aFormat, aIsRenderTarget, aIsShaderResource, false);
 	}
 	void Load(u32 aWidth, u32 aHeight, CFormat aFormat, BOOL aIsRenderTarget, BOOL aIsShaderResource, BOOL aIsDepthStencil) CPOT_OR {
-		mTexture.Load(platform::Texture2D::CreateDesc(aWidth, aHeight, Convert(aFormat), D3D11_USAGE_DEFAULT,
-			platform::GetBindFlags(aIsRenderTarget, aIsShaderResource, aIsDepthStencil), 0));
+		if (!aIsDepthStencil) {
+			mTexture.Load(aWidth, aHeight, Convert(aFormat).format, Convert(aFormat).type);
+		}
+		else {
+			mDepthBuffer.Load(aWidth, aHeight);
+		}
 	}
 	void LoadFileName(const CHAR* aFileName) CPOT_OR {
 		mTexture.Load(aFileName);
 	};
-
-	void LoadPlatform(std::shared_ptr<platform::Texture2D> aTexture) {
-		mTexture.Load(aTexture);
-	}
+	void LoadPlatform() {
+		aIsBackBuffer = true;
+	};
 
 public:
 	void Release() CPOT_OR {
 		mTexture.Release();
+		mDepthBuffer.Release();
 	};
 
 	void ClearDepth(f32 aDepth) CPOT_OR {
-		mTexture.GetDepthStencilView()->ClearDepth(aDepth);
+		if (aIsBackBuffer) {
+			platform::Render::S().GetRenderTextureManager().ClearBackBuffer(aDepth);
+		}
+		else if (mDepthBuffer.IsLoaded()) {
+			platform::Render::S().GetRenderTextureManager().ClearDepth(&mDepthBuffer, aDepth);
+		}
 	}
 	void ClearColor(const Color& aColor) CPOT_OR {
-		mTexture.GetRenderTargetView()->ClearTexture(aColor);
+		if (aIsBackBuffer) {
+			platform::Render::S().GetRenderTextureManager().ClearBackBuffer(aColor);
+		}
+		else if (mTexture.IsLoaded()) {
+			platform::Render::S().GetRenderTextureManager().ClearColor(&mTexture, aColor);
+		}
 	}
 
 public:
@@ -81,10 +112,10 @@ public:
 
 public:
 	u32 GetWidth() CPOT_OR {
-		return mTexture.GetTexture()->GetWidth();
+		return mTexture.GetWidth();
 	}
 	u32 GetHeight() CPOT_OR {
-		return mTexture.GetTexture()->GetHeight();
+		return mTexture.GetHeight();
 	}
 
 
@@ -92,13 +123,15 @@ public:
 	#pragma region Field
 
 public:
-	platform::Texture2DAll mTexture;
+	platform::Texture2D mTexture;
+	platform::DepthBuffer mDepthBuffer;
+	BOOL aIsBackBuffer;
 
 	#pragma endregion
 };
 
 }
 
-using Texture2D = directX11::Texture2D;
+using Texture2D = openGL::Texture2D;
 
 }
