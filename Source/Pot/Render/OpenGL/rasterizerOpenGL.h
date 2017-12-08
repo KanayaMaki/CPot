@@ -1,5 +1,5 @@
 //
-//	content	:	DirectX11‚Å‚ÌSampler
+//	content	:	OpenGL‚Å‚ÌRasterizer
 //	author	:	SaitoYoshiki
 //
 
@@ -8,44 +8,46 @@
 #include "./Pot/Atom/atom.h"
 
 #include "./Pot/Render/rasterizer.h"
-#include "./Pot/Render/DirectX11/Platform/rasterizerStateDirectX11Platform.h"
+#include "./Pot/Render/OpenGL/Platform/cullOpenGLPlatform.h"
 
 namespace cpot {
 
-namespace directX11 {
+namespace openGL {
 
 class Rasterizer : public RasterizerBase {
 
 public:
-	Rasterizer() {
-		mRasterizer.reset(new platform::RasterizerState);
-	}
-
-public:
 	void Load(CFillMode aFillMode, CCullMode aCullMode) CPOT_OR {
 		BOOL lIsSolid = aFillMode == cSolid;
-		BOOL lCullCW = aCullMode == cCullCW;
-		BOOL lCullCCW = aCullMode == cCullCCW;
-		mRasterizer->Load(platform::RasterizerState::CreateDesc(lIsSolid, lCullCW, lCullCCW));
+
+
+		//ƒJƒŠƒ“ƒO‚ÌÝ’è
+		BOOL lCullFace = aCullMode != cCullNone;
+		GLenum lFrontFace = GL_CW;
+		if (aCullMode == cCullCW) {
+			lFrontFace = GL_CCW;
+		}
+
+		mCull.Load(lCullFace, GL_CCW);
 	}
 
 public:
 	void Release() CPOT_OR {
-		mRasterizer->Release();
+		mCull.Release();
 	}
 
 public:
 	BOOL IsLoad() const CPOT_OR {
-		return mRasterizer->IsLoaded();
+		return mCull.IsLoaded();
 	}
 
 public:
-	std::shared_ptr<platform::RasterizerState> mRasterizer;
+	platform::Cull mCull;
 
 };
 
 }
 
-using Rasterizer = directX11::Rasterizer;
+using Rasterizer = openGL::Rasterizer;
 
 }
