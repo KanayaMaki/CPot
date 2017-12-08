@@ -57,7 +57,7 @@ public:
 	BOOL Write() {
 		return Buffer::Write(mCPUBuffer, GetSize());
 	}
-	BOOL Write(void* aBuffer) {
+	BOOL Write(const void* aBuffer) {
 		return Buffer::Write(aBuffer, GetSize());
 	}
 
@@ -74,6 +74,9 @@ public:
 	template<typename T>
 	T* GetCPUBuffer() {
 		return (T*)(mCPUBuffer);
+	}
+	void SetCPUBuffer(void* aCPUBuffer) {
+		mCPUBuffer = aCPUBuffer;
 	}
 
 

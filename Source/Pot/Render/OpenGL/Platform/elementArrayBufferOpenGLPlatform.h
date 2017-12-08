@@ -18,13 +18,13 @@ class ElementArrayBuffer : public Buffer {
 	#pragma region Load
 
 public:
-	void Load(GLenum aType, u32 aNum, void* aInitData, GLenum aMode, GLenum aUsage) {
+	void Load(GLenum aType, u32 aNum, const void* aInitData, GLenum aMode, GLenum aUsage) {
 		mIndexNum = aNum;
 		mType = aType;
 		mMode = aMode;
 		Buffer::Load(GL_ELEMENT_ARRAY_BUFFER, GetTypeSize(aType) * aNum, aInitData, aUsage);
 	}
-	void Load(GLenum aType, u32 aNum, void* aInitData, GLenum aMode) {
+	void Load(GLenum aType, u32 aNum, const void* aInitData, GLenum aMode) {
 		Load(aType, aNum, aInitData, aMode, GL_STATIC_DRAW);	//委譲
 	}
 	void Load(GLenum aType, u32 aNum, GLenum aMode) {

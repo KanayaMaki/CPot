@@ -293,6 +293,10 @@
     <ClInclude Include="..\..\Source\Pot\Render\constantBuffer.h" />
     <ClInclude Include="..\..\Source\Pot\Render\depthStencil.h" />
     <ClInclude Include="..\..\Source\Pot\Render\indexBuffer.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\blendOpenGL.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\constantBufferOpenGL.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\depthStencilOpenGL.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\indexBufferOpenGL.h" />
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\arrayBufferOpenGLPlatform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\blendOpenGLPlatform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\bufferOpenGLPlatform.h" />
@@ -312,6 +316,13 @@
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\textureOpenGLPlatform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\uniformBufferOpenGLPlatform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\vertexArrayObjectOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\rasterizerOpenGL.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\renderOpenGL.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\samplerOpenGL.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\shaderOpenGL.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\texture2DOpenGL.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\vertexBufferOpenGL.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\viewportOpenGL.h" />
     <ClInclude Include="..\..\Source\Pot\Render\rasterizer.h" />
     <ClInclude Include="..\..\Source\Pot\Render\render.h" />
     <ClInclude Include="..\..\Source\Pot\Render\sampler.h" />

@@ -63,6 +63,6 @@ public:
 
 #ifdef CPOT_ON_DIRECTX11
 #include "./Pot/Render/DirectX11/constantBufferDirectX11.h"
-#elif defined CPOT_ON_ANDROID
-#include "./Pot/Audio/Android/constantBufferAndroid.h"
+#elif defined CPOT_ON_OPENGL
+#include "./Pot/Render/OpenGL/constantBufferOpenGL.h"
 #endif

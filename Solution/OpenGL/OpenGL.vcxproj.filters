@@ -414,6 +414,39 @@
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\inputLayoutOpenGLPlatform.h">
       <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\rasterizerOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\renderOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\samplerOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\shaderOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\texture2DOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\vertexBufferOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\viewportOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\blendOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\constantBufferOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\depthStencilOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\indexBufferOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.cpp">
