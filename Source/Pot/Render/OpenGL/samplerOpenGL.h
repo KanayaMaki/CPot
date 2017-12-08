@@ -1,5 +1,5 @@
 //
-//	content	:	DirectX11‚Å‚ÌSampler
+//	content	:	OpenGL‚Å‚ÌSampler
 //	author	:	SaitoYoshiki
 //
 
@@ -8,47 +8,42 @@
 #include "./Pot/Atom/atom.h"
 
 #include "./Pot/Render/sampler.h"
-#include "./Pot/Render/DirectX11/Platform/samplerStateDirectX11Platform.h"
+#include "./Pot/Render/OpenGL/Platform/samplerOpenGLPlatform.h"
 
 namespace cpot {
 
-namespace directX11 {
+namespace openGL {
 
 class Sampler : public SamplerBase {
-
-public:
-	Sampler() {
-		mSampler.reset(new platform::SamplerState);
-	}
 
 public:
 	void Load(CUVMode aMode) CPOT_OR {
 
 		if (aMode == cWrap) {
-			mSampler->Load(platform::SamplerState::CreateDescWrap());
+			mSampler.Load(platform::Sampler::cRepeat);
 		}
 		else if (aMode == cClamp) {
-			mSampler->Load(platform::SamplerState::CreateDescClamp());
+			mSampler.Load(platform::Sampler::cClamp);
 		}
 	}
 
 public:
 	void Release() CPOT_OR {
-		mSampler->Release();
+		mSampler.Release();
 	}
 
 public:
 	BOOL IsLoad() const CPOT_OR {
-		return mSampler->IsLoaded();
+		return mSampler.IsLoaded();
 	}
 
 public:
-	std::shared_ptr<platform::SamplerState> mSampler;
+	platform::Sampler mSampler;
 
 };
 
 }
 
-using Sampler = directX11::Sampler;
+using Sampler = openGL::Sampler;
 
 }
