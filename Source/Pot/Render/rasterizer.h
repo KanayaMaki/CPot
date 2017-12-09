@@ -36,6 +36,6 @@ public:
 
 #ifdef CPOT_ON_DIRECTX11
 #include "./Pot/Render/DirectX11/rasterizerDirectX11.h"
-#elif defined CPOT_ON_ANDROID
-#include "./Pot/Render/Android/rasterizerAndroid.h"
+#elif defined CPOT_ON_OPENGL
+#include "./Pot/Render/OpenGL/rasterizerOpenGL.h"
 #endif

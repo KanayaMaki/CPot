@@ -36,6 +36,7 @@ public:
 			//テクスチャの読み込み
 			aMesh.submesh[i].material.texture.reset(new Texture2D);
 			aMesh.submesh[i].material.texture->LoadFileName(aMeshCPU.submesh[i].material.texture.name.Get());
+			CPOT_LOG(aMeshCPU.submesh[i].material.texture.name.Get(), "の読み込みが完了");
 
 			//インデックスカウントの読み込み
 			aMesh.submesh[i].indexStartCount = indexStartCount;

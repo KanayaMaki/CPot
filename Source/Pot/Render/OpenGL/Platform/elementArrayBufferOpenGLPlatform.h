@@ -48,6 +48,9 @@ public:
 	u32 GetIndexNum() const {
 		return mIndexNum;
 	}
+	u32 GetIndexSize() const {
+		return GetTypeSize(mType);
+	}
 	GLenum GetMode() const {
 		return mMode;
 	}

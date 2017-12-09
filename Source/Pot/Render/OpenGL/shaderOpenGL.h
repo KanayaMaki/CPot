@@ -10,6 +10,7 @@
 #include "./Pot/Usefull/resourceLoadList.h"
 #include "./Pot/Render/shader.h"
 #include "./Pot/Render/OpenGL/Platform/shaderOpenGLPlatform.h"
+#include "./Pot/Render/OpenGL/Platform/inputLayoutOpenGLPlatform.h"
 
 
 namespace cpot {
@@ -24,10 +25,11 @@ struct ShaderLoadData {
 	ShaderLoadDataElement vertexShader;
 	ShaderLoadDataElement geometryShader;
 	ShaderLoadDataElement fragmentShader;
+	platform::InputLayout inputLayout;
 };
 
 
-class ShaderOpenGLData : public ResourceLoadList<ShaderOpenGLData, ShaderLoadData> {
+class ShaderData : public ResourceLoadList<ShaderData, ShaderLoadData> {
 
 };
 
@@ -35,9 +37,11 @@ class Shader : public ShaderBase {
 
 public:
 	void Load(const HashTableKey& aUnionName) CPOT_OR {
-		mProgram.Load(ShaderOpenGLData::S().Get(aUnionName).vertexShader.filePath.Get(),
-			ShaderOpenGLData::S().Get(aUnionName).geometryShader.filePath.Get(),
-			ShaderOpenGLData::S().Get(aUnionName).fragmentShader.filePath.Get());
+		mProgram.Load(ShaderData::S().Get(aUnionName).vertexShader.filePath.Get(),
+			ShaderData::S().Get(aUnionName).geometryShader.filePath.Get(),
+			ShaderData::S().Get(aUnionName).fragmentShader.filePath.Get());
+		
+		mInputLayout = ShaderData::S().Get(aUnionName).inputLayout;
 	};
 
 public:
@@ -55,6 +59,7 @@ public:
 	#pragma region Field
 
 public:
+	platform::InputLayout mInputLayout;
 	platform::Program mProgram;
 	
 	#pragma endregion

@@ -96,6 +96,8 @@ static struct Vertex {
 #pragma region OpenGL
 
 void TestOpenGL(HWND aHwnd) {
+
+	#ifdef CPOT_ON_OPENGL
 	openGL::platform::Device::S().Init(aHwnd);
 
 	openGL::platform::Sampler s;
@@ -185,6 +187,8 @@ void TestOpenGL(HWND aHwnd) {
 
 	u32 i = 0;
 	i++;
+
+	#endif
 }
 
 #pragma endregion

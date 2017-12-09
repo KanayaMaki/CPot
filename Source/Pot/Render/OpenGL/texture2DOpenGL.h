@@ -27,6 +27,11 @@ class Texture2DData : public ResourceLoadList<Texture2DData, String<128>> {
 class Texture2D : public Texture2DBase {
 
 public:
+	Texture2D() {
+		aIsBackBuffer = false;
+	}
+
+public:
 	struct GLFormat {
 		GLenum format;
 		GLenum type;

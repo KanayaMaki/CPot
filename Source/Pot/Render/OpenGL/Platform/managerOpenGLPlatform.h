@@ -18,6 +18,7 @@
 #include "./Pot/Render/OpenGL/Platform/vertexArrayObjectOpenGLPlatform.h"
 #include "./Pot/Render/OpenGL/Platform/depthBufferOpenGLPlatform.h"
 #include "./Pot/Render/OpenGL/Platform/inputLayoutOpenGLPlatform.h"
+#include "./Pot/Render/OpenGL/Platform/viewportOpenGLPlatform.h"
 
 
 namespace cpot {
@@ -598,6 +599,36 @@ public:
 
 private:
 	InputLayout* mInputLayout;
+};
+
+#pragma endregion
+
+
+
+#pragma region ViewportManager
+
+class ViewportManager {
+public:
+	ViewportManager() {
+		mViewport = nullptr;
+	}
+
+public:
+	void Set(Viewport* aViewport) {
+		mViewport = aViewport;
+	}
+
+
+	void SetToDevice() {
+		if (mViewport == nullptr) {
+			return;
+		}
+
+		mViewport->SetToDevice();
+	}
+
+private:
+	Viewport* mViewport;
 };
 
 #pragma endregion

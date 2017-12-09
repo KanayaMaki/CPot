@@ -8,7 +8,7 @@
 #include "./Cycle/myGame.h"
 #include "./Pot/Config/config.h"
 
-#include "./Pot/Render/OpenGL/Platform/renderOpenGLPlatform.h"
+#include "./Pot/Render/OpenGL/renderOpenGL.h"
 
 namespace cpot {
 

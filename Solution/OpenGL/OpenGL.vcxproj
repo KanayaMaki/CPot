@@ -316,6 +316,7 @@
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\textureOpenGLPlatform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\uniformBufferOpenGLPlatform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\vertexArrayObjectOpenGLPlatform.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\viewportOpenGLPlatform.h" />
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\rasterizerOpenGL.h" />
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\renderOpenGL.h" />
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\samplerOpenGL.h" />
@@ -354,7 +355,15 @@
     <ClInclude Include="..\..\Source\Pot\Window\Windows\windowWindows.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\Cycle\myGameDummy.cpp" />
+    <ClCompile Include="..\..\Source\Cycle\myGame.cpp" />
+    <ClCompile Include="..\..\Source\Cycle\myGameDummy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.cpp" />

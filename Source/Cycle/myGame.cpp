@@ -101,11 +101,6 @@ namespace myspc {
 Animation<f32> v;
 std::shared_ptr<AudioVoice> voice;
 
-struct BasicVertex {
-	Vector3 mPosition;
-	Vector3 mNormal;
-	Vector2 mUV;
-};
 struct WVPBuffer {
 	ShaderMatrix4x4 mView;
 	ShaderMatrix4x4 mProjection;
@@ -158,8 +153,10 @@ void MyGame::Init() {
 	v.Add(4.0f, 1.0f);
 	v.SetIsLoop(true);
 
+	renderTarget.reset(new Texture2D);
 
-	directX11::Texture2DDirectX11Data::S().Regist("test", "./test.png");
+	#ifdef CPOT_ON_DIRECTX11
+	directX11::Texture2DDirectX11Data::S().Regist("test", "./test.bmp");
 
 	directX11::ShaderDirectX11Data::S().Regist("test",
 	{
@@ -168,14 +165,38 @@ void MyGame::Init() {
 		{ "test.fx", "PS_TEST" },
 	});
 
+	renderTarget->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
+
+	#elif defined CPOT_ON_OPENGL
+
+	openGL::Texture2DData::S().Regist("test", "./test.bmp");
+
+	openGL::platform::InputLayout lInputLayout;
+	openGL::platform::InputLayoutElement element[] = {
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 3, sizeof(StaticMeshVertex), sizeof(f32) * 0),
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 3, sizeof(StaticMeshVertex), sizeof(f32) * 3),
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 2, sizeof(StaticMeshVertex), sizeof(f32) * 6),
+	};
+	lInputLayout.Load(element, 3);
+
+	openGL::ShaderData::S().Regist("test",
+	{
+		{ "test.vert" },
+		{ "" },
+		{ "test.frag" },
+		lInputLayout
+	});
+
+	renderTarget->LoadPlatform();
+	#endif
+
+
 	texture.reset(new Texture2D);
 	texture->Load("test");
 
-	renderTarget.reset(new Texture2D);
-	renderTarget->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
-
 	depthTexture.reset(new Texture2D);
 	depthTexture->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, true, true);
+	//depthTexture->LoadPlatform();
 
 	sampler.reset(new Sampler);
 	sampler->Load(Sampler::cClamp);
@@ -206,14 +227,14 @@ void MyGame::Init() {
 	timerBuffer->Load(new TimerBuffer);
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = 0.0f;
 
-	BasicVertex lVertex[]{
-		{ { -1.0f, -1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
-		{ { -1.0f, 1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
-		{ { 1.0f, -1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
-		{ { 1.0f, 1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
+	StaticMeshVertex lVertex[]{
+		{ { -0.5f, -0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 2.0f } },
+		{ { -0.5f, 0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
+		{ { 0.5f, -0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 2.0f, 2.0f } },
+		{ { 0.5f, 0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 2.0f, 0.0f } },
 	};
 	vertexBuffer.reset(new VertexBuffer);
-	vertexBuffer->Load(sizeof(BasicVertex), 4, lVertex, true);
+	vertexBuffer->Load(sizeof(StaticMeshVertex), 4, lVertex, true);
 
 	u16 lIndex[]{ 0, 1, 2, 2, 1, 3 };
 	indexBuffer.reset(new IndexBuffer);
@@ -376,9 +397,17 @@ void MyGame::Update() {
 	timerBuffer->Write();
 
 	depthTexture->ClearDepth(1.0f);
-	renderTarget->ClearColor(Color::Black().Translate());
+	renderTarget->ClearColor(Color::Blue());
 
+	/*
+	Render::S().SetVertexBuffer(vertexBuffer);
+	Render::S().SetIndexBuffer(indexBuffer);
+	Render::S().SetTexture2D(texture, 0);
+	Render::S().SetToDevice();
+	Render::S().DrawIndexed(6, 0);
+	//*/
 
+	///*
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
 	
@@ -387,6 +416,7 @@ void MyGame::Update() {
 		Render::S().SetToDevice();
 		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
 	}
+	//*/
 
 	Render::S().Present();
 }

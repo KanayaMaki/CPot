@@ -64,6 +64,9 @@ public:
 	InputLayoutManager& GetInputLayoutManager() {
 		return mInputLayoutManager;
 	}
+	ViewportManager& GetViewportManager() {
+		return mViewportManager;
+	}
 
 	void Init() {
 
@@ -81,7 +84,7 @@ public:
 			mElementArrayBufferManager.Get()->GetMode(),      // mode
 			aCount,    // count
 			mElementArrayBufferManager.Get()->GetType(),   // type
-			(void*)(aOffset)
+			(void*)(aOffset * mElementArrayBufferManager.Get()->GetIndexSize())
 		);
 	}
 
@@ -99,6 +102,7 @@ public:
 		mElementArrayBufferManager.SetToDevice();
 		//mRenderTextureManager.SetToDevice();
 		mInputLayoutManager.SetToDevice(mArrayBufferManager);
+		mViewportManager.SetToDevice();
 	}
 
 
@@ -116,6 +120,7 @@ private:
 	StencilManager mStencilManager;
 	RenderTextureManager mRenderTextureManager;
 	InputLayoutManager mInputLayoutManager;
+	ViewportManager mViewportManager;
 };
 
 

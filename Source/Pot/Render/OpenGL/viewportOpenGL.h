@@ -1,5 +1,5 @@
 //
-//	content	:	DirectX11‚Å‚ÌViewport
+//	content	:	OpenGL‚Å‚ÌViewport
 //	author	:	SaitoYoshiki
 //
 
@@ -8,11 +8,11 @@
 #include "./Pot/Atom/atom.h"
 
 #include "./Pot/Render/viewport.h"
-#include "./Pot/Render/DirectX11/Platform/viewportDirectX11Platform.h"
+#include "./Pot/Render/OpenGL/Platform/viewportOpenGLPlatform.h"
 
 namespace cpot {
 
-namespace directX11 {
+namespace openGL {
 
 class Viewport : public ViewportBase {
 
@@ -47,6 +47,6 @@ public:
 
 }
 
-using Viewport = directX11::Viewport;
+using Viewport = openGL::Viewport;
 
 }

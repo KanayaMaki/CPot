@@ -10,7 +10,7 @@ namespace cpot {
 struct StaticMeshVertex {
 	Vector3 position;
 	Vector3 normal;
-	Vector2 texCoord;
+	TexCoord texCoord;
 };
 
 struct StaticMeshModelCPU {

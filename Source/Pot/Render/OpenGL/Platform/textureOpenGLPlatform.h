@@ -2,6 +2,7 @@
 
 #include "./Pot/Render/OpenGL/Platform/deviceOpenGLPlatform.h"
 #include "./Pot/File/file.h"
+#include "./Pot/Usefull/path.h"
 
 
 namespace cpot {
@@ -75,9 +76,14 @@ public:
 		u32 lWidth, lHeight;
 		u32 lImageSize;
 
+		PathString lFileName(aFileName);
+		if (Path::GetEx(lFileName) == "tga") {
+			lFileName = Path::ChangeEx(lFileName, "bmp");
+		}
+
 		//ファイルから読み込む
 		FileIn lFile;
-		lFile.Open(aFileName, true);
+		lFile.Open(lFileName.Get(), true);
 		cpot::Buffer b;
 		lFile.Read(b);
 

@@ -447,6 +447,9 @@
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\indexBufferOpenGL.h">
       <Filter>Source\Pot\Render\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\viewportOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.cpp">
@@ -510,6 +513,9 @@
       <Filter>Source\Pot\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Cycle\myGameDummy.cpp">
+      <Filter>Source\Cycle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cycle\myGame.cpp">
       <Filter>Source\Cycle</Filter>
     </ClCompile>
   </ItemGroup>

@@ -47,6 +47,6 @@ public:
 
 #ifdef CPOT_ON_DIRECTX11
 #include "./Pot/Render/DirectX11/texture2DDirectX11.h"
-#elif defined CPOT_ON_ANDROID
-#include "./Pot/Audio/Android/audioClipAndroid.h"
+#elif defined CPOT_ON_OPENGL
+#include "./Pot/Render//OpenGL/texture2DOpenGL.h"
 #endif
