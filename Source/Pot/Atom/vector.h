@@ -1115,7 +1115,7 @@ private:
 		#ifdef CPOT_ON_DIRECTX11
 		return Vector2(aUV.x, aUV.y);
 		#elif defined CPOT_ON_OPENGL
-		return Vector2(aUV.x, 1.0f - aUV.y);
+		return Vector2(aUV.x, aUV.y);
 		#endif
 	}
 

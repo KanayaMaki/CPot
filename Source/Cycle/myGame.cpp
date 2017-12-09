@@ -154,9 +154,10 @@ void MyGame::Init() {
 	v.SetIsLoop(true);
 
 	renderTarget.reset(new Texture2D);
+	depthTexture.reset(new Texture2D);
 
 	#ifdef CPOT_ON_DIRECTX11
-	directX11::Texture2DDirectX11Data::S().Regist("test", "./test.bmp");
+	directX11::Texture2DDirectX11Data::S().Regist("test", "./test.png");
 
 	directX11::ShaderDirectX11Data::S().Regist("test",
 	{
@@ -166,10 +167,11 @@ void MyGame::Init() {
 	});
 
 	renderTarget->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
+	depthTexture->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, true, true);
 
 	#elif defined CPOT_ON_OPENGL
 
-	openGL::Texture2DData::S().Regist("test", "./test.bmp");
+	openGL::Texture2DData::S().Regist("test", "./test.png");
 
 	openGL::platform::InputLayout lInputLayout;
 	openGL::platform::InputLayoutElement element[] = {
@@ -188,15 +190,12 @@ void MyGame::Init() {
 	});
 
 	renderTarget->LoadPlatform();
+	depthTexture->LoadPlatform();
 	#endif
 
 
 	texture.reset(new Texture2D);
 	texture->Load("test");
-
-	depthTexture.reset(new Texture2D);
-	depthTexture->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, true, true);
-	//depthTexture->LoadPlatform();
 
 	sampler.reset(new Sampler);
 	sampler->Load(Sampler::cClamp);

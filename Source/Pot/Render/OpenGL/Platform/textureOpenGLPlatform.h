@@ -4,6 +4,9 @@
 #include "./Pot/File/file.h"
 #include "./Pot/Usefull/path.h"
 
+#include "./Pot/Render/OpenGL/Platform/loadBmp.h"
+#include "./Pot/Render/OpenGL/Platform/loadPng.h"
+
 
 namespace cpot {
 
@@ -71,59 +74,43 @@ public:
 
 	void Load(const CHAR* aFileName) {
 
-		u8 lHeader[54];
-		u32 lDataPos;
-		u32 lWidth, lHeight;
-		u32 lImageSize;
-
 		PathString lFileName(aFileName);
-		if (Path::GetEx(lFileName) == "tga") {
-			lFileName = Path::ChangeEx(lFileName, "bmp");
-		}
 
 		//ファイルから読み込む
 		FileIn lFile;
 		lFile.Open(lFileName.Get(), true);
+
+		if (!lFile.IsOpen()) {
+			lFileName = Path::ChangeEx(lFileName, "png");
+			lFile.Open(lFileName.Get(), true);
+
+			if (!lFile.IsOpen()) {
+				lFileName = Path::ChangeEx(lFileName, "bmp");
+				lFile.Open(lFileName.Get(), true);
+			}
+		}
+
 		cpot::Buffer b;
 		lFile.Read(b);
-
-		b.Read(lHeader, 54);
-		if (lHeader[0] != 'B' || lHeader[1] != 'M') {
-			CPOT_LOG_NO_ENDL(aFileName);
-			CPOT_LOG("はBMPファイルではありません");
-			return;
-		}
-
-		// バイト配列から整数を読み込む
-		lDataPos = *(int*)&(lHeader[0x0A]);
-		lImageSize = *(int*)&(lHeader[0x22]);
-		lWidth = *(int*)&(lHeader[0x12]);
-		lHeight = *(int*)&(lHeader[0x16]);
 		
-		BOOL lIsRGB = true;
+		BitmapData aBitmap;
+		
 
-		if (lImageSize == 0) {
-			if (b.GetSize() <= lWidth * lHeight * 4) {
-				lImageSize = lWidth * lHeight * 3;
-			}
-			else {
-				lImageSize = lWidth * lHeight * 4;
-			}
+		if (Path::GetEx(lFileName) == "tga") {
+			return;	//tgaファイルは読み込めない
+		}
+		if (Path::GetEx(lFileName) == "png") {
+			PngLoader::Load(b, aBitmap);
+		}
+		if (Path::GetEx(lFileName) == "bmp") {
+			BmpLoader::Load(b, aBitmap);
 		}
 
-		if (lImageSize != lWidth * lHeight * 3) {
-			lIsRGB = false;
-		}
-
-		std::unique_ptr<u8> lData(new u8[lImageSize]);
-		BufferSize res = b.Read(&(*lData), lImageSize);
-
-
-		if (lIsRGB) {
-			Load(lWidth, lHeight, &(*lData), GL_BGR, GL_RGB, GL_UNSIGNED_BYTE);
+		if (aBitmap.pixelBytes == 3) {
+			Load(aBitmap.width, aBitmap.height, &(aBitmap.data[0]), GL_RGB, GL_RGB, GL_UNSIGNED_BYTE);
 		}
 		else {
-			Load(lWidth, lHeight, &(*lData), GL_BGRA, GL_RGBA, GL_UNSIGNED_BYTE);
+			Load(aBitmap.width, aBitmap.height, &(aBitmap.data[0]), GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
 		}
 	}
 
