@@ -53,6 +53,40 @@ public:
 			aMesh.submesh[i].material.specularPower = aPmx.materials[i].specularPow;
 		}
 	}
+	static void LoadVertex(VectorSimple<StaticMeshVertex>& aVertex, const PmxData& aPmx) {
+
+		//頂点データの読み込み
+		aVertex.SetSize(aPmx.vertexs.GetSize());
+		for (u32 i = 0; i < aPmx.vertexs.GetSize(); i++) {
+			aVertex[i].position = Vector3::FromFloat3(aPmx.vertexs[i].location);
+			aVertex[i].normal = Vector3::FromFloat3(aPmx.vertexs[i].normal);
+			aVertex[i].texCoord = Vector2::FromFloat2(aPmx.vertexs[i].uv);
+		}
+	}
+	static void LoadSubMesh(VectorSimple<SubMeshCPU>& aSubMesh, const PmxData& aPmx) {
+
+		//マテリアルデータの読み込み
+		aSubMesh.SetSize(aPmx.materials.GetSize());
+		for (u32 i = 0; i < aPmx.materials.GetSize(); i++) {
+
+			//テクスチャ名の読み込み
+			s32 lTextureIndex = aPmx.materials[i].textureRef;
+			if (lTextureIndex != -1) {
+				const CHAR* lTextureFileName = &(aPmx.textures[lTextureIndex].fileName.buf[0]);
+				PathString lPath = Path::FromRelative(aPmx.fileName, lTextureFileName);
+				aSubMesh[i].material.texture.name = lPath.Get();
+			}
+
+			//インデックスカウントの読み込み
+			aSubMesh[i].indexCount = aPmx.materials[i].indexNum;
+
+			//色などの取得
+			aSubMesh[i].material.diffuse = Color::FromVector4(Vector4::FromFloat4(aPmx.materials[i].diffuse));
+			aSubMesh[i].material.ambient = Vector3::FromFloat3(aPmx.materials[i].ambient);
+			aSubMesh[i].material.specular = Vector3::FromFloat3(aPmx.materials[i].specular);
+			aSubMesh[i].material.specularPower = aPmx.materials[i].specularPow;
+		}
+	}
 
 	static void Load(SkinMeshModelCPU& aMesh, const PmxData& aPmx) {
 		

@@ -146,7 +146,12 @@ Transform planeTransform;
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
 void MyGame::Setting() {
 	cpot::Config::S().SetScreenSize(cpot::Vector2(960.0f, 540.0f));
-	cpot::Config::S().SetTitle("MyGame!");
+
+	#ifdef CPOT_ON_DIRECTX11
+	Config::S().SetTitle("DirectX11 Game!");
+	#else ifdef CPOT_ON_OPENGL
+	Config::S().SetTitle("OpenGL Game!");
+	#endif
 }
 
 //ゲームの初期化
@@ -338,22 +343,12 @@ void MyGame::Init() {
 	model.reset(new StaticMeshModel);
 	ModelCPUToModel::Load(*model, lSkinMeshCPU, true);
 
-	lBefore.SetSize(lSkinMeshCPU.vertex.GetSize());
-	for (u32 i = 0; i < lSkinMeshCPU.vertex.GetSize(); i++) {
-		lBefore[i] = lSkinMeshCPU.vertex[i];
-	}
+	PmxToMesh::LoadVertex(lBefore, lPmx.Get());
+	PmxToMesh::LoadVertex(lNow, lPmx.Get());
+	PmxToMesh::LoadVertex(lAfter, lPmx.Get());
 
-	lAfter.SetSize(lSkinMeshCPU.vertex.GetSize());
-	for (u32 i = 0; i < lSkinMeshCPU.vertex.GetSize(); i++) {
-		lAfter[i] = lSkinMeshCPU.vertex[i];
-	}
 	for (u32 i = 0; i < lSkinMeshCPU.vertex.GetSize(); i++) {
 		lAfter[i].position = ((lAfter[i].position - Vector3(0.0f, 10.0f, 0.0f)).NormalSafe() * 10.0f) * 0.9f + lAfter[i].position * 0.1f;
-	}
-
-	lNow.SetSize(lSkinMeshCPU.vertex.GetSize());
-	for (u32 i = 0; i < lSkinMeshCPU.vertex.GetSize(); i++) {
-		lNow[i] = lSkinMeshCPU.vertex[i];
 	}
 
 	planeTransform.mScale = Vector3::One() * 10.0f;
