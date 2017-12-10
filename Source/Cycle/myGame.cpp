@@ -356,6 +356,7 @@ void MyGame::Init() {
 		lNow[i] = lSkinMeshCPU.vertex[i];
 	}
 
+	planeTransform.mScale = Vector3::One() * 10.0f;
 
 	camera.mProjection.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
 	cameraLoc = Vector3(30.0f, 45.0f, -30.0f);
@@ -487,10 +488,10 @@ void MyGame::Update() {
 		planeTransform.mPosition += Vector3::Down() * moveSpeed * DeltaTime();
 	}
 	if (Input::GetButton(windows::cG)) {
-		planeTransform.mRotation *= Quaternion::FromAxis(cameraRot.Right(), ToRad(rotSpeed * DeltaTime()));
+		planeTransform.mRotation *= Quaternion::FromAxis(Vector3::Right(), ToRad(rotSpeed * DeltaTime()));
 	}
 	if (Input::GetButton(windows::cH)) {
-		planeTransform.mRotation *= Quaternion::FromAxis(cameraRot.Right(), -ToRad(rotSpeed * DeltaTime()));
+		planeTransform.mRotation *= Quaternion::FromAxis(Vector3::Right(), -ToRad(rotSpeed * DeltaTime()));
 	}
 
 
