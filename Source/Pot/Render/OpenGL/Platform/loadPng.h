@@ -91,6 +91,7 @@ public:
 		s32 result = inflateInit(&z);
 
 		Buffer pngData;
+		pngData.Reserve(1024 * 1024);
 		const s32 cOutBufSize = 1024 * 1024;
 		std::unique_ptr<BYTE> outBuf(new BYTE[cOutBufSize]);
 

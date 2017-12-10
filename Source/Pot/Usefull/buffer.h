@@ -43,6 +43,7 @@ public:
 	void Reset() {
 		mBuffer = nullptr;
 		mSize = 0;
+		mCapacity = 0;
 		mPosition = 0;
 	}
 
@@ -77,6 +78,7 @@ public:
 			mBuffer = new BYTE[aSize];
 			CopyMem(&(mBuffer[0]), &(aBuffer[0]), aSize);
 			mSize = aSize;
+			mCapacity = aSize;
 		}
 	}
 	void Load(const CHAR* aStr) {
@@ -91,6 +93,7 @@ public:
 			mBuffer = new BYTE[aSize];
 			ZeroMem(&(mBuffer[0]), aSize);
 			mSize = aSize;
+			mCapacity = aSize;
 		}
 	}
 
@@ -115,9 +118,14 @@ public:
 		return mBuffer[aIndex];
 	}
 
-	//バッファのサイズ
+	//データのサイズ
 	BufferSize GetSize() const {
 		return mSize;
+	}
+
+	//バッファのサイズ
+	BufferSize GetCapacity() const {
+		return mCapacity;
 	}
 
 	//バッファのカーソルの現在位置
@@ -189,20 +197,42 @@ public:
 		//新しいバッファのサイズの計算
 		BufferSize lNewSize = mSize + aSize;
 		//新しいバッファの作成
-		BYTE* lNewBuffer = new BYTE[lNewSize];
+		Reserve(lNewSize);
 
-		//前のバッファのデータをコピー
-		CopyMem(lNewBuffer, mBuffer, mSize);
 		//追加するバッファのデータをコピー
-		CopyMem(&lNewBuffer[mSize], aBuffer, aSize);
-
-		//現在のバッファを削除
-		Release();
-		mBuffer = lNewBuffer;
+		CopyMem(&mBuffer[mSize], aBuffer, aSize);
 		mSize = lNewSize;
 	}
 	void Add(const Buffer& aBuffer) {
 		Add(aBuffer.mBuffer, aBuffer.GetSize());
+	}
+
+	void Reserve(BufferSize aCapacity) {
+		
+		BufferSize lNewCapacity = Max(32, mCapacity);
+		
+		//バッファサイズが足りなくなる場合
+		if (mCapacity < aCapacity) {
+
+			//バッファサイズを計算する
+			while (lNewCapacity < aCapacity) {
+				lNewCapacity *= 2;
+			}
+
+			BYTE* lNewBuffer = new BYTE[lNewCapacity];
+
+			//前のバッファのデータをコピー
+			CopyMem(lNewBuffer, mBuffer, mSize);
+
+			//現在のバッファを削除
+			delete[] mBuffer;
+			mBuffer = lNewBuffer;
+			mCapacity = lNewCapacity;
+		}
+		//現在のバッファサイズで十分な場合
+		else {
+
+		}
 	}
 
 	#pragma endregion
@@ -231,6 +261,7 @@ public:
 
 private:
 	BYTE* mBuffer;
+	BufferSize mCapacity;
 	BufferSize mSize;
 	BufferSize mPosition;
 
