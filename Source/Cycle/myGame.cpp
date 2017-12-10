@@ -92,6 +92,36 @@ public:
 	}
 };
 
+
+
+class LoaderModel : public Loader {
+public:
+	LoaderModel(const CHAR* aFileName, std::shared_ptr<StaticMeshModel>& aResult) : mResult(aResult) {
+		mFileName = aFileName;
+	}
+public:
+	void Start() override {
+		mModel.reset(new StaticMeshModel);
+	}
+	void Load() override {
+		PmxLoader lPmx;
+		lPmx.Load(mFileName.Get());
+
+		StaticMeshModelCPU lSkinMeshCPU;
+		PmxToMesh::Load(lSkinMeshCPU, lPmx.Get());
+
+		ModelCPUToModel::Load(*mModel, lSkinMeshCPU, true);
+	}
+	void Finish() override {
+		mResult = mModel;
+	}
+public:
+	String<128> mFileName;
+	std::shared_ptr<StaticMeshModel> mModel;
+	std::shared_ptr<StaticMeshModel>& mResult;
+};
+
+
 }
 
 using namespace cpot;
@@ -136,6 +166,7 @@ std::shared_ptr<IndexBuffer> indexBuffer;
 std::shared_ptr<Shader> shader;
 std::shared_ptr<Rasterizer> rasterizer;
 std::shared_ptr<StaticMeshModel> model;
+std::shared_ptr<StaticMeshModel> loadModel;
 PersCamera camera;
 Vector3 cameraLoc;
 Quaternion cameraRot;
@@ -159,7 +190,7 @@ void MyGame::Init() {
 	//CPOT_LOG("Init!");
 
 	//Loaderのスタート
-	//LoaderManager::S().Start(2);
+	LoaderManager::S().Start(2);
 
 	const f32 lBeforeBalling = 0.5f;
 	const f32 lBalling = 0.5f;
@@ -358,6 +389,8 @@ void MyGame::Init() {
 	#else defined CPOT_ON_ANDROID
 
 	#endif
+
+	LoaderManager::S().Regist(new LoaderModel("./Miku/miku.pmx", loadModel));
 }
 
 
@@ -523,6 +556,23 @@ void MyGame::Update() {
 		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
 	}
 	//*/
+
+
+	///*
+	if (loadModel) {
+		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(Quaternion::FromAxis(Vector3::Up(), ToRad(45.0f)), Vector3(20.0f, 0.0f, 0.0f));
+		wvpBuffer->Write();
+		Render::S().SetVertexBuffer(loadModel->mesh.vertex);
+		Render::S().SetIndexBuffer(loadModel->mesh.index);
+
+		for (u32 i = 0; i < loadModel->submeshNum; i++) {
+			Render::S().SetTexture2D(loadModel->submesh[i].material.texture, 0);
+			Render::S().SetToDevice();
+			Render::S().DrawIndexed(loadModel->submesh[i].indexCount, loadModel->submesh[i].indexStartCount);
+		}
+	}
+	//*/
+
 
 	Render::S().Present();
 }

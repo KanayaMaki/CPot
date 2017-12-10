@@ -20,7 +20,7 @@ namespace cpot {
 
 class Loader {
 public:
-	//ロード
+	//ローダスレッドで実行される、ロード処理
 	virtual void Load() = 0;
 	
 	//メインスレッドで実行される、ロード開始前の処理
@@ -54,11 +54,13 @@ private:
 public:
 	//ローダスレッドを起動する
 	void Start(u32 aThreadNum) {
+		#ifndef CPOT_ON_ANDROID
 		//指定された引数分のスレッドを起動する
 		for (u32 i = 0; i < aThreadNum; i++) {
 			SetEnd(i, false);
 			mThread[i].Start(Load, (u32*)i);
 		}
+		#endif
 	}
 
 	//ローダスレッドの数を、指定された数にする
