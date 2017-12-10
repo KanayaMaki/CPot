@@ -43,7 +43,7 @@ public:
 		
 		aPNGData.SetPosition(8);
 
-		while (!aPNGData.GetSize() != aPNGData.GetPosition()) {
+		while (aPNGData.GetSize() != aPNGData.GetPosition()) {
 			std::shared_ptr<Chank> c(new Chank);
 			v.PushBack(c);
 			BYTE buffer[1000000];
