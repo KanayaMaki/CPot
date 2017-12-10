@@ -18,9 +18,8 @@ layout(binding = 2) uniform Other {
 };
 
 
-layout(binding = 0) uniform sampler2D myTextureSampler;
+layout(binding = 0) uniform sampler2D DiffuseTexture;
 
 void main() {
-	color = texture( myTextureSampler, UV ) * Diffuse;
-	//color = Diffuse;
+	color = texture( DiffuseTexture, UV ) * Diffuse;
 }
