@@ -92,7 +92,7 @@ public:
 
 		Buffer pngData;
 		pngData.Reserve(1024 * 1024);
-		const s32 cOutBufSize = 1024 * 1024;
+		const s32 cOutBufSize = 1024 * 128;
 		std::unique_ptr<BYTE> outBuf(new BYTE[cOutBufSize]);
 
 		for (u32 i = 0; i < v.GetSize(); i++) {
@@ -234,6 +234,7 @@ public:
 		aResult.width = width;
 		aResult.depth = depth;
 		aResult.pixelBytes = pixelSize;
+		aResult.data.Reserve(height * width * pixelSize);
 
 		for (s32 i = 0; i < height; i++) {
 			s32 start = BuildIndex(widthSize, i, 0, pixelSize);
