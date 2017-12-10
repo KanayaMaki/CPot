@@ -91,16 +91,17 @@ public:
 		s32 result = inflateInit(&z);
 
 		Buffer pngData;
-		const s32 kOutBufSize = 1024;
-		BYTE outBuf[kOutBufSize];
+		pngData.Reserve(1024 * 1024);
+		const s32 cOutBufSize = 1024 * 128;
+		std::unique_ptr<BYTE> outBuf(new BYTE[cOutBufSize]);
 
 		for (u32 i = 0; i < v.GetSize(); i++) {
 			std::shared_ptr<Chank> c = v[i];
 
 			if (c->type == "IDAT") {
 				s32 status, count;
-				z.next_out = (Bytef*)outBuf;
-				z.avail_out = kOutBufSize;
+				z.next_out = (Bytef*)(&*outBuf);
+				z.avail_out = cOutBufSize;
 				status = Z_OK;
 				z.next_in = (Bytef*)(&c->data[0]);
 				z.avail_in = c->data.GetSize();
@@ -115,16 +116,15 @@ public:
 						abort();
 					}
 					if (z.avail_out == 0) {
-						pngData.Add(outBuf, kOutBufSize);
-						z.next_out = (Bytef*)outBuf;
-						z.avail_out = kOutBufSize;
+						pngData.Add((&*outBuf), cOutBufSize);
+						z.next_out = (Bytef*)(&*outBuf);
+						z.avail_out = cOutBufSize;
 					}
 				}
-				if ((count = kOutBufSize - z.avail_out) != 0) {
-					pngData.Add(outBuf, count);
+				if ((count = cOutBufSize - z.avail_out) != 0) {
+					pngData.Add((&*outBuf), count);
 				}
 			}
-
 		}
 
 
@@ -234,6 +234,7 @@ public:
 		aResult.width = width;
 		aResult.depth = depth;
 		aResult.pixelBytes = pixelSize;
+		aResult.data.Reserve(height * width * pixelSize);
 
 		for (s32 i = 0; i < height; i++) {
 			s32 start = BuildIndex(widthSize, i, 0, pixelSize);

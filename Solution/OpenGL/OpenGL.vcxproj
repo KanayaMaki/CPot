@@ -423,6 +423,10 @@
   <ItemGroup>
     <ResourceCompile Include="..\..\Source\Pot\Windows\Resource\Icon.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Env\test.frag" />
+    <None Include="..\..\Env\test.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

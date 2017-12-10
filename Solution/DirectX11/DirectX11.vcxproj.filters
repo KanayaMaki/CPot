@@ -139,6 +139,9 @@
     <Filter Include="Source\Pot\Model">
       <UniqueIdentifier>{084c45d1-d7cf-4ab3-b320-14cd4459d8bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{03d0d46c-60da-4877-ac73-55859374140c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Pot\Atom\defines.h">
@@ -627,5 +630,10 @@
     <Image Include="..\..\Source\Pot\Windows\Resource\icon.ico">
       <Filter>Source\Pot\Windows\Resource</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\Env\test.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

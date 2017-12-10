@@ -105,9 +105,9 @@ Animation<Quaternion> mikuRotAnim;
 std::shared_ptr<AudioVoice> voice;
 
 struct WVPBuffer {
+	ShaderMatrix4x4 mWorld;
 	ShaderMatrix4x4 mView;
 	ShaderMatrix4x4 mProjection;
-	ShaderMatrix4x4 mWorld;
 	ShaderMatrix4x4 mNormalWorld;
 };
 struct DiffuseBuffer {
@@ -139,6 +139,8 @@ std::shared_ptr<StaticMeshModel> model;
 PersCamera camera;
 Vector3 cameraLoc;
 Quaternion cameraRot;
+
+Transform planeTransform;
 
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
@@ -294,10 +296,10 @@ void MyGame::Init() {
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = 0.0f;
 
 	StaticMeshVertex lVertex[]{
-		{ { -0.5f, -0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 2.0f } },
-		{ { -0.5f, 0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
-		{ { 0.5f, -0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 2.0f, 2.0f } },
-		{ { 0.5f, 0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 2.0f, 0.0f } },
+		{ { -0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 2.0f } },
+		{ { -0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
+		{ { 0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 2.0f, 2.0f } },
+		{ { 0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 2.0f, 0.0f } },
 	};
 	vertexBuffer.reset(new VertexBuffer);
 	vertexBuffer->Load(sizeof(StaticMeshVertex), 4, lVertex, true);
@@ -346,7 +348,7 @@ void MyGame::Init() {
 		lAfter[i] = lSkinMeshCPU.vertex[i];
 	}
 	for (u32 i = 0; i < lSkinMeshCPU.vertex.GetSize(); i++) {
-		lAfter[i].position = (lAfter[i].position - Vector3(0.0f, 10.0f, 0.0f)).NormalSafe() * 10.0f * 0.9f + lAfter[i].position * 0.1f;
+		lAfter[i].position = ((lAfter[i].position - Vector3(0.0f, 10.0f, 0.0f)).NormalSafe() * 10.0f) * 0.9f + lAfter[i].position * 0.1f;
 	}
 
 	lNow.SetSize(lSkinMeshCPU.vertex.GetSize());
@@ -354,12 +356,13 @@ void MyGame::Init() {
 		lNow[i] = lSkinMeshCPU.vertex[i];
 	}
 
+	planeTransform.mScale = Vector3::One() * 10.0f;
 
 	camera.mProjection.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
 	cameraLoc = Vector3(30.0f, 45.0f, -30.0f);
 	cameraRot = Quaternion::FromAxis(cameraRot.Up(), ToRad(-45.0f));
 	cameraRot *= Quaternion::FromAxis(cameraRot.Right(), ToRad(45.0f));
-
+	
 	#ifdef CPOT_ON_WINDOWS
 	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
 	#else defined CPOT_ON_ANDROID
@@ -438,8 +441,7 @@ void MyGame::Update() {
 	//トランスフォーム
 	mikuRotAnim.ForwardTime(DeltaTime());
 	mikuLocAnim.ForwardTime(DeltaTime());
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get());
-
+	
 	#pragma endregion
 
 
@@ -479,6 +481,19 @@ void MyGame::Update() {
 		cameraLoc += cameraRot.Down() * moveSpeed * DeltaTime();
 	}
 
+	if (Input::GetButton(windows::cT)) {
+		planeTransform.mPosition += Vector3::Up() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cY)) {
+		planeTransform.mPosition += Vector3::Down() * moveSpeed * DeltaTime();
+	}
+	if (Input::GetButton(windows::cG)) {
+		planeTransform.mRotation *= Quaternion::FromAxis(Vector3::Right(), ToRad(rotSpeed * DeltaTime()));
+	}
+	if (Input::GetButton(windows::cH)) {
+		planeTransform.mRotation *= Quaternion::FromAxis(Vector3::Right(), -ToRad(rotSpeed * DeltaTime()));
+	}
+
 
 	camera.mView.SetLocation(cameraLoc);
 	camera.mView.SetRotation(cameraRot);
@@ -490,14 +505,15 @@ void MyGame::Update() {
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = Wrap(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer, 1.0f);
 	//CPOT_LOG(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer);
 
-	wvpBuffer->Write();
 	diffuseBuffer->Write();
 	timerBuffer->Write();
 
 	depthTexture->ClearDepth(1.0f);
 	renderTarget->ClearColor(Color::Blue());
 
-	/*
+	///*
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = planeTransform.GetMatrix();
+	wvpBuffer->Write();
 	Render::S().SetVertexBuffer(vertexBuffer);
 	Render::S().SetIndexBuffer(indexBuffer);
 	Render::S().SetTexture2D(texture, 0);
@@ -506,6 +522,8 @@ void MyGame::Update() {
 	//*/
 
 	///*
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get());
+	wvpBuffer->Write();
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
 	

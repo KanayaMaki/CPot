@@ -82,6 +82,9 @@
     <Filter Include="Source\Pot\ThirdParty\Zlib">
       <UniqueIdentifier>{cfb8ca5b-a327-4322-b13a-065d8aee9d74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{89c548d4-14f1-4498-b919-8fc547bf8bf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Pot\Animation\animation.h">
@@ -616,5 +619,13 @@
     <ResourceCompile Include="..\..\Source\Pot\Windows\Resource\Icon.rc">
       <Filter>Source\Pot\Windows</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Env\test.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="..\..\Env\test.vert">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

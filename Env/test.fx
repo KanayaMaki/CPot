@@ -1,8 +1,8 @@
 // 定数バッファのデータ定義
 cbuffer cWVPBuffer : register(b0) { // 常にスロット「0」を使う
+	matrix World;      // ワールド変換行列
 	matrix View;   // ビュー変換行列
 	matrix Projection;   // 透視変換行列
-	matrix World;      // ワールド変換行列
 	matrix NorWorld;      // ワールド変換行列
 };
 // 定数バッファのデータ定義
