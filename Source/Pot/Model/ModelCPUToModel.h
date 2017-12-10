@@ -65,7 +65,7 @@ public:
 		aMesh.mesh.index.reset(new IndexBuffer);
 		aMesh.mesh.index->Load(IndexBuffer::cU32, aIndex.GetSize(), IndexBuffer::cTriangleList, &(aIndex[0]));
 
-		CPOT_ASSERT(aMeshCPU.submesh.GetSize() <= 32);
+		CPOT_ASSERT(aSubMesh.GetSize() <= 32);
 		aMesh.submeshNum = aSubMesh.GetSize();
 
 		u32 indexStartCount = 0;
@@ -76,7 +76,7 @@ public:
 			//テクスチャの読み込み
 			aMesh.submesh[i].material.texture.reset(new Texture2D);
 			aMesh.submesh[i].material.texture->LoadFileName(aSubMesh[i].material.texture.name.Get());
-			CPOT_LOG(aMeshCPU.submesh[i].material.texture.name.Get(), "の読み込みが完了");
+			CPOT_LOG(aSubMesh[i].material.texture.name.Get(), "の読み込みが完了");
 
 			//インデックスカウントの読み込み
 			aMesh.submesh[i].indexStartCount = indexStartCount;

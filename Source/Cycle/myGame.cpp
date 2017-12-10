@@ -329,11 +329,6 @@ void MyGame::Init() {
 	Render::S().SetShader(shader);
 
 
-	FileIn lFile;
-	lFile.Open("./Miku/miku.pmx");
-	Buffer lFileBuffer;
-	lFile.Read(lFileBuffer);
-
 	PmxLoader lPmx;
 	lPmx.Load("./Miku/miku.pmx");
 
@@ -372,7 +367,7 @@ void MyGame::Update() {
 	//ゲーム終了
 	#pragma region GameEnd
 
-	if (Input::GetButtonUp(windows::c0)) {
+	if (Input::GetButtonDown(windows::cEsc)) {
 		Config::S().SetGameEnd();
 	}
 
@@ -382,15 +377,15 @@ void MyGame::Update() {
 	//サウンド
 	#pragma region Audio
 
-	if (Input::GetButtonUp(windows::c1)) {
+	if (Input::GetButtonDown(windows::c1)) {
 		voice = ResourceList<AudioVoice>::S().Find("test");
 		voice->Play();
 	}
-	if (Input::GetButtonUp(windows::c6)) {
+	if (Input::GetButtonDown(windows::c6)) {
 		voice->Stop();
 	}
 
-	if (Input::GetButtonUp(windows::c7)) {
+	if (Input::GetButtonDown(windows::c7)) {
 		voice = nullptr;
 	}
 
@@ -404,7 +399,7 @@ void MyGame::Update() {
 
 	static cpot::BOOL lLoading = false;
 
-	if (Input::GetButtonUp(windows::c2)) {
+	if (Input::GetButtonDown(windows::c2)) {
 		lLoading = true;
 
 		for (u32 i = 0; i < 5; i++) {
