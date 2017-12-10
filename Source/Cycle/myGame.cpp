@@ -98,14 +98,12 @@ using namespace cpot;
 
 namespace myspc {
 
-Animation<f32> v;
+Animation<f32> mikuMorphAnim;
+Animation<Vector3> mikuLocAnim;
+Animation<Quaternion> mikuRotAnim;
+
 std::shared_ptr<AudioVoice> voice;
 
-struct BasicVertex {
-	Vector3 mPosition;
-	Vector3 mNormal;
-	Vector2 mUV;
-};
 struct WVPBuffer {
 	ShaderMatrix4x4 mView;
 	ShaderMatrix4x4 mProjection;
@@ -119,6 +117,9 @@ struct TimerBuffer {
 	f32 mTimer;
 };
 
+VectorSimple<StaticMeshVertex> lBefore;
+VectorSimple<StaticMeshVertex> lAfter;
+VectorSimple<StaticMeshVertex> lNow;
 
 std::shared_ptr<Texture2D> texture;
 std::shared_ptr<Texture2D> renderTarget;
@@ -153,12 +154,76 @@ void MyGame::Init() {
 	//Loaderのスタート
 	//LoaderManager::S().Start(2);
 
-	v.Add(0.0f, 0.0f);
-	v.Add(2.0f, 0.5f);
-	v.Add(4.0f, 1.0f);
-	v.SetIsLoop(true);
+	const f32 lBeforeBalling = 0.5f;
+	const f32 lBalling = 0.5f;
+	const f32 lAfterBalling = 0.5f;
+	const f32 lRolling = 2.0f;
+	const f32 lBeforeUnBalling = 0.5f;
+	const f32 lUnBalling = 0.5f;
+	const f32 lAfterUnBalling = 0.5f;
+	const f32 lRotating = 1.0f;
+	f32 lTime;
+
+	//ミクのモーフィングのアニメーション
+	mikuMorphAnim.SetIsLoop(true);
+	lTime = 0.0f;
+	mikuMorphAnim.Add(lTime, 0.0f);
+	lTime += lBeforeBalling;
+	mikuMorphAnim.Add(lTime, 0.0f);
+	lTime += lBalling;
+	mikuMorphAnim.Add(lTime, 1.0f);
+	lTime += lAfterBalling + lRolling + lBeforeBalling;
+	mikuMorphAnim.Add(lTime, 1.0f);
+	lTime += lUnBalling;
+	mikuMorphAnim.Add(lTime, 0.0f);
+	lTime += lAfterUnBalling + lRotating;
+	mikuMorphAnim.Add(lTime, 0.0f);
 
 
+	//ミクの移動アニメーション
+	mikuLocAnim.SetIsLoop(true);
+	lTime = 0.0f;
+	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, 20.0f));
+	lTime += lBeforeBalling + lBalling + lAfterBalling;
+	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, 20.0f));
+	lTime += lRolling;
+	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, -20.0f));
+	lTime += lBeforeUnBalling + lUnBalling + lAfterUnBalling + lRotating + lBeforeBalling + lBalling + lAfterBalling;
+	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, -20.0f));
+	lTime += lRolling;
+	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, 20.0f));
+	lTime += lBeforeUnBalling + lUnBalling + lAfterUnBalling + lRotating;
+	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, 20.0f));
+
+	//ミクの回転アニメーション
+	mikuRotAnim.SetIsLoop(true);
+	lTime = 0.0f;
+	mikuRotAnim.Add(lTime, Quaternion::XAxis(ToRad(0.0f)));
+	lTime += lBeforeBalling + lBalling + lAfterBalling;
+	mikuRotAnim.Add(lTime, Quaternion::XAxis(ToRad(0.0f)));
+	lTime += lRolling / 2.0f;
+	mikuRotAnim.Add(lTime, Quaternion::XAxis(ToRad(180.0f)));
+	lTime += lRolling / 2.0f;
+	mikuRotAnim.Add(lTime, Quaternion::XAxis(ToRad(360.0f)));
+	lTime += lBeforeUnBalling + lUnBalling + lAfterUnBalling;
+	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(0.0f)));
+	lTime += lRotating;
+	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(180.0f)));
+	lTime += lBeforeBalling + lBalling + lAfterBalling;
+	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(180.0f)));
+	lTime += lRolling / 2.0f;
+	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(180.0f)) * Quaternion::XAxis(ToRad(-180.0f)));
+	lTime += lRolling / 2.0f;
+	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(180.0f)) * Quaternion::XAxis(ToRad(-360.0f)));
+	lTime += lBeforeUnBalling + lUnBalling + lAfterUnBalling;
+	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(180.0f)));
+	lTime += lRotating;
+	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(360.0f)));
+
+	renderTarget.reset(new Texture2D);
+	depthTexture.reset(new Texture2D);
+
+	#ifdef CPOT_ON_DIRECTX11
 	directX11::Texture2DDirectX11Data::S().Regist("test", "./test.png");
 
 	directX11::ShaderDirectX11Data::S().Regist("test",
@@ -168,14 +233,36 @@ void MyGame::Init() {
 		{ "test.fx", "PS_TEST" },
 	});
 
+	renderTarget->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
+	depthTexture->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, true, true);
+
+	#elif defined CPOT_ON_OPENGL
+
+	openGL::Texture2DData::S().Regist("test", "./test.png");
+
+	openGL::platform::InputLayout lInputLayout;
+	openGL::platform::InputLayoutElement element[] = {
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 3, sizeof(StaticMeshVertex), sizeof(f32) * 0),
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 3, sizeof(StaticMeshVertex), sizeof(f32) * 3),
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 2, sizeof(StaticMeshVertex), sizeof(f32) * 6),
+	};
+	lInputLayout.Load(element, 3);
+
+	openGL::ShaderData::S().Regist("test",
+	{
+		{ "test.vert" },
+		{ "" },
+		{ "test.frag" },
+		lInputLayout
+	});
+
+	renderTarget->LoadPlatform();
+	depthTexture->LoadPlatform();
+	#endif
+
+
 	texture.reset(new Texture2D);
 	texture->Load("test");
-
-	renderTarget.reset(new Texture2D);
-	renderTarget->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
-
-	depthTexture.reset(new Texture2D);
-	depthTexture->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, true, true);
 
 	sampler.reset(new Sampler);
 	sampler->Load(Sampler::cClamp);
@@ -206,14 +293,14 @@ void MyGame::Init() {
 	timerBuffer->Load(new TimerBuffer);
 	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = 0.0f;
 
-	BasicVertex lVertex[]{
-		{ { -1.0f, -1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
-		{ { -1.0f, 1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
-		{ { 1.0f, -1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
-		{ { 1.0f, 1.0f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
+	StaticMeshVertex lVertex[]{
+		{ { -0.5f, -0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 2.0f } },
+		{ { -0.5f, 0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
+		{ { 0.5f, -0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 2.0f, 2.0f } },
+		{ { 0.5f, 0.5f, 0.1f },{ 0.0f, 0.0f, -1.0f },{ 2.0f, 0.0f } },
 	};
 	vertexBuffer.reset(new VertexBuffer);
-	vertexBuffer->Load(sizeof(BasicVertex), 4, lVertex, true);
+	vertexBuffer->Load(sizeof(StaticMeshVertex), 4, lVertex, true);
 
 	u16 lIndex[]{ 0, 1, 2, 2, 1, 3 };
 	indexBuffer.reset(new IndexBuffer);
@@ -247,10 +334,31 @@ void MyGame::Init() {
 	PmxToMesh::Load(lSkinMeshCPU, lPmx.Get());
 
 	model.reset(new StaticMeshModel);
-	ModelCPUToModel::Load(*model, lSkinMeshCPU);
+	ModelCPUToModel::Load(*model, lSkinMeshCPU, true);
+
+	lBefore.SetSize(lSkinMeshCPU.vertex.GetSize());
+	for (u32 i = 0; i < lSkinMeshCPU.vertex.GetSize(); i++) {
+		lBefore[i] = lSkinMeshCPU.vertex[i];
+	}
+
+	lAfter.SetSize(lSkinMeshCPU.vertex.GetSize());
+	for (u32 i = 0; i < lSkinMeshCPU.vertex.GetSize(); i++) {
+		lAfter[i] = lSkinMeshCPU.vertex[i];
+	}
+	for (u32 i = 0; i < lSkinMeshCPU.vertex.GetSize(); i++) {
+		lAfter[i].position = (lAfter[i].position - Vector3(0.0f, 10.0f, 0.0f)).NormalSafe() * 10.0f * 0.9f + lAfter[i].position * 0.1f;
+	}
+
+	lNow.SetSize(lSkinMeshCPU.vertex.GetSize());
+	for (u32 i = 0; i < lSkinMeshCPU.vertex.GetSize(); i++) {
+		lNow[i] = lSkinMeshCPU.vertex[i];
+	}
+
 
 	camera.mProjection.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
-	cameraLoc = Vector3(0.0f, 10.0f, -30.0f);
+	cameraLoc = Vector3(30.0f, 45.0f, -30.0f);
+	cameraRot = Quaternion::FromAxis(cameraRot.Up(), ToRad(-45.0f));
+	cameraRot *= Quaternion::FromAxis(cameraRot.Right(), ToRad(45.0f));
 
 	#ifdef CPOT_ON_WINDOWS
 	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
@@ -319,12 +427,22 @@ void MyGame::Update() {
 	//アニメーション
 	#pragma region Animation
 
-	if (Input::GetButton(windows::c3)) {
-		v.ForwardTime(DeltaTime());
-		CPOT_LOG(v.Get());
+	//モーフ
+	mikuMorphAnim.ForwardTime(DeltaTime());
+	for (u32 i = 0; i < lNow.GetSize(); i++) {
+		f32 t = mikuMorphAnim.Get();
+		lNow[i].position = lBefore[i].position * (1.0f - t) + lAfter[i].position * t;
 	}
+	model->mesh.vertex->Write(&lNow[0]);
+
+	//トランスフォーム
+	mikuRotAnim.ForwardTime(DeltaTime());
+	mikuLocAnim.ForwardTime(DeltaTime());
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get());
 
 	#pragma endregion
+
+
 
 
 	const f32 rotSpeed = 50.0f;
@@ -361,6 +479,7 @@ void MyGame::Update() {
 		cameraLoc += cameraRot.Down() * moveSpeed * DeltaTime();
 	}
 
+
 	camera.mView.SetLocation(cameraLoc);
 	camera.mView.SetRotation(cameraRot);
 	camera.Update();
@@ -376,9 +495,17 @@ void MyGame::Update() {
 	timerBuffer->Write();
 
 	depthTexture->ClearDepth(1.0f);
-	renderTarget->ClearColor(Color::Black().Translate());
+	renderTarget->ClearColor(Color::Blue());
 
+	/*
+	Render::S().SetVertexBuffer(vertexBuffer);
+	Render::S().SetIndexBuffer(indexBuffer);
+	Render::S().SetTexture2D(texture, 0);
+	Render::S().SetToDevice();
+	Render::S().DrawIndexed(6, 0);
+	//*/
 
+	///*
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
 	
@@ -387,6 +514,7 @@ void MyGame::Update() {
 		Render::S().SetToDevice();
 		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
 	}
+	//*/
 
 	Render::S().Present();
 }

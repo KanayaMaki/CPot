@@ -25,8 +25,8 @@ public:
 
 }
 
-#ifdef CPOT_ON_WINDOWS
+#ifdef CPOT_ON_DIRECTX11
 #include "./Pot/Render/DirectX11/shaderDirectX11.h"
-#elif defined CPOT_ON_ANDROID
-#include "./Pot/Render/Android/shaderAndroid.h"
+#elif defined CPOT_ON_OPENGL
+#include "./Pot/Render/OpenGL/shaderOpenGL.h"
 #endif

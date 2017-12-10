@@ -1089,4 +1089,40 @@ public:
 #pragma endregion
 
 
+class TexCoord {
+public:
+	TexCoord() {
+		*this = Vector2(0.0f, 0.0f);
+	}
+	TexCoord(f32 aU, f32 aV) {
+		*this = Vector2(aU, aV);
+	}
+	TexCoord(const Vector2& aUV) {
+		*this = aUV;
+	}
+
+	const TexCoord& operator =(const Vector2& aUV) {
+		mUV = Convert(aUV);
+		return *this;
+	}
+	operator Vector2() const {
+		return Convert(mUV);
+	}
+
+private:
+	//ŠÂ‹«‚²‚Æ‚Ì•ÏŠ·
+	static Vector2 Convert(const Vector2& aUV) {
+		#ifdef CPOT_ON_DIRECTX11
+		return Vector2(aUV.x, aUV.y);
+		#elif defined CPOT_ON_OPENGL
+		return Vector2(aUV.x, aUV.y);
+		#endif
+	}
+
+
+private:
+	Vector2 mUV;
+};
+
+
 }

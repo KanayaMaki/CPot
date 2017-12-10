@@ -35,11 +35,11 @@ public:
 
 
 public:
-	Transform() {
-		mRotation = Quaternion::Unit();
-		mPosition = Vector3::Zero();
-		mScale = Vector3::One();
-	}
+	Transform() : mRotation(Quaternion::Unit()), mPosition(Vector3::Zero()), mScale(Vector3::One()) {}
+	Transform(const Vector3& aPosition) : mRotation(Quaternion::Unit()), mPosition(aPosition), mScale(Vector3::One()) {}
+	Transform(const Quaternion& aRotation) : mRotation(aRotation), mPosition(Vector3::Zero()), mScale(Vector3::One()) {}
+	Transform(const Quaternion& aRotation, const Vector3& aPosition) : mRotation(aRotation), mPosition(aPosition), mScale(Vector3::One()) {}
+	Transform(const Quaternion& aRotation, const Vector3& aPosition, const Vector3& aScale) : mRotation(aRotation), mPosition(aPosition), mScale(aScale) {}
 
 	Matrix4x4 GetMatrix() const {
 		Matrix4x4 lM;
@@ -57,6 +57,10 @@ public:
 	}
 	BOOL operator !=(const Transform& aT) {
 		return !((*this) == aT);
+	}
+
+	friend Transform Lerp(const Transform& aFrom, const Transform& aTo, f32 aRate) {
+		return Transform(SLerp(aFrom.mRotation, aTo.mRotation, aRate), Lerp(aFrom.mPosition, aTo.mPosition, aRate), Lerp(aFrom.mScale, aTo.mScale, aRate));
 	}
 };
 

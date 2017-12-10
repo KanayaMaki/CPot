@@ -12,7 +12,12 @@
 #include "./Pot/Out/Windows/outConsoleWindows.h"
 
 #include "./Pot/Audio/XAudio/Platform/deviceXAudioPlatform.h"
+
+#ifdef CPOT_ON_DIRECTX11
 #include "./Pot/Render/DirectX11/Platform/deviceDirectX11Platform.h"
+#elif defined CPOT_ON_OPENGL
+#include "./Pot/Render/OpenGL/Platform/deviceOpenGLPlatform.h"
+#endif
 
 #include "./Pot/Config/config.h"
 
@@ -39,7 +44,13 @@ void* GameMain::GameLoop(void* aDummy) {
 	windows::Window& tW = windows::Window::S();
 
 	xaudio::platform::Device::S().Init();
+
+	#ifdef CPOT_ON_DIRECTX11
 	directX11::platform::Device::S().Init(tW.GetHwnd(), tW.GetSize());
+	#elif defined CPOT_ON_OPENGL
+	openGL::platform::Device::S().Init(tW.GetHwnd());
+	#endif
+
 
 	//ウィンドウズの入力の初期化
 	windows::Input::S().Init(tW.GetHInstance(), tW.GetHwnd());
@@ -93,6 +104,12 @@ void* GameMain::GameLoop(void* aDummy) {
 		//FPS制御
 		Fps::S().Update();
 	}
+
+	#ifdef CPOT_ON_DIRECTX11
+	directX11::platform::Device::S().Final();
+	#elif defined CPOT_ON_OPENGL
+	openGL::platform::Device::S().Final();
+	#endif
 
 	return nullptr;
 }

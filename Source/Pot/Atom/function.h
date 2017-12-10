@@ -11,6 +11,12 @@
 
 #include "math.h"
 
+#ifdef CPOT_ON_WINDOWS
+#include <Windows.h>
+#else
+#endif
+
+
 namespace cpot {
 
 
@@ -403,9 +409,14 @@ inline constexpr u32 StringLen(const CHAR* aStr) {
 
 //	ÉÅÉÇÉäÇÉRÉsÅ[Ç∑ÇÈ
 inline void CopyMem(void* aTo, const void* aFrom, Pointer aSize) {
+	#ifdef CPOT_ON_WINDOWS
+	CopyMemory(aTo, aFrom, aSize);
+	#else
 	for (Pointer i = 0; i < aSize; i++) {
 		((u8*)aTo)[i] = ((const u8*)aFrom)[i];
-	}
+}
+	#endif
+	
 }
 
 

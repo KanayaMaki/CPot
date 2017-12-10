@@ -184,6 +184,27 @@ public:
 		mPosition += lReadSize;
 	}
 
+	void Add(const BYTE* aBuffer, BufferSize aSize) {
+
+		//新しいバッファのサイズの計算
+		BufferSize lNewSize = mSize + aSize;
+		//新しいバッファの作成
+		BYTE* lNewBuffer = new BYTE[lNewSize];
+
+		//前のバッファのデータをコピー
+		CopyMem(lNewBuffer, mBuffer, mSize);
+		//追加するバッファのデータをコピー
+		CopyMem(&lNewBuffer[mSize], aBuffer, aSize);
+
+		//現在のバッファを削除
+		Release();
+		mBuffer = lNewBuffer;
+		mSize = lNewSize;
+	}
+	void Add(const Buffer& aBuffer) {
+		Add(aBuffer.mBuffer, aBuffer.GetSize());
+	}
+
 	#pragma endregion
 
 

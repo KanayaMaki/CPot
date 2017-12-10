@@ -59,6 +59,16 @@ public:
 		v[3][3] = 1.0f;
 	}
 
+	Matrix4x4(const Quaternion& aRotation) {
+		*this = FromRotate(aRotation);
+	}
+	Matrix4x4(const Vector3& aTransform) {
+		*this = FromTransform(aTransform);
+	}
+	Matrix4x4(const Quaternion& aRotation, const Vector3& aTransform) {
+		*this = FromRotate(aRotation) * FromTransform(aTransform);
+	}
+
 private:
 	//èâä˙âªÇçsÇÌÇ»Ç¢ÅAå¯ó¶âªóp
 	Matrix4x4(s32 aDummy) {
@@ -76,10 +86,10 @@ public:
 		return Matrix4x4();
 	}
 
-	static Matrix4x4 FromRotate(const Quaternion& q) {
+	static Matrix4x4 FromRotate(const Quaternion& aRotate) {
 		Matrix4x4 tRes = Unit();
-		f32 q0 = q.w; f32 q1 = q.v.x;
-		f32 q2 = q.v.y; f32 q3 = q.v.z;
+		f32 q0 = aRotate.w; f32 q1 = aRotate.v.x;
+		f32 q2 = aRotate.v.y; f32 q3 = aRotate.v.z;
 
 		tRes._11 = q0 * q0 + q1 * q1 - q2 * q2 - q3 * q3;
 		tRes._12 = 2 * (q1 * q2 - q0 * q3);
@@ -92,11 +102,11 @@ public:
 		tRes._33 = q0 * q0 - q1 * q1 - q2 * q2 + q3 * q3;
 		return tRes;
 	}
-	static Matrix4x4 FromTransform(const Vector3& aLoc) {
+	static Matrix4x4 FromTransform(const Vector3& aTransform) {
 		Matrix4x4 tRes = Unit();
-		tRes._41 = aLoc.x;
-		tRes._42 = aLoc.y;
-		tRes._43 = aLoc.z;
+		tRes._41 = aTransform.x;
+		tRes._42 = aTransform.y;
+		tRes._43 = aTransform.z;
 		return tRes;
 	}
 	static Matrix4x4 FromScale(const Vector3& aScale) {

@@ -1,5 +1,5 @@
 //
-//	content	:	Texture‚ÌDirectX11‚Å‚ÌŽÀ‘•
+//	content	:	Render‚ÌŽÀ‘•
 //	author	:	SaitoYoshiki
 //
 
@@ -64,8 +64,8 @@ public:
 }
 
 
-#ifdef CPOT_ON_WINDOWS
+#ifdef CPOT_ON_DIRECTX11
 #include "./Pot/Render/DirectX11/renderDirectX11.h"
-#elif defined CPOT_ON_ANDROID
-#include "./Pot/Audio/Android/renderAndroid.h"
+#elif defined CPOT_ON_OPENGL
+#include "./Pot/Render/OpenGL/renderOpenGL.h"
 #endif
