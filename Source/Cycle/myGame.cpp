@@ -390,7 +390,7 @@ void MyGame::Init() {
 
 	#endif
 
-	LoaderManager::S().Regist(new LoaderModel("./Miku/miku.pmx", loadModel));
+	//LoaderManager::S().Regist(new LoaderModel("./Miku/miku.pmx", loadModel));
 }
 
 
