@@ -30,7 +30,7 @@ public:
 		mClip = ResourceList<AudioClip>::S().Find(aUnionName);
 		Load(mClip);	//ˆÏ÷
 	}
-	void Load(AudioClip* aClip) CPOT_OR {
+	void Load(std::shared_ptr<AudioClip> aClip) CPOT_OR {
 		mVoice.Load(aClip->mClip);
 		SetName(aClip->GetName());
 	}
@@ -84,7 +84,7 @@ public:
 	#pragma region Field
 
 public:
-	AudioClip* mClip;
+	std::shared_ptr<AudioClip> mClip;
 	device::AudioVoice mVoice;
 
 	#pragma endregion

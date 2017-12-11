@@ -84,15 +84,18 @@ public:
 
 	void AttachmentColor(GLuint aTexture, u32 aAttachmentNum) {
 		glBindFramebuffer(GL_FRAMEBUFFER, mGLNum);
-		glFramebufferTexture(GL_FRAMEBUFFER, GetAttachment(aAttachmentNum), aTexture, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GetAttachment(aAttachmentNum), GL_TEXTURE_2D, aTexture, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 	void AttachmentDepth(GLuint aTexture) {
 		glBindFramebuffer(GL_FRAMEBUFFER, mGLNum);
-		glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, aTexture, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, aTexture, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 	void AttachmentStencil(GLuint aTexture) {
 		glBindFramebuffer(GL_FRAMEBUFFER, mGLNum);
-		glFramebufferTexture(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, aTexture, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_TEXTURE_2D, aTexture, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
 	void SetDrawBuffer(u32 aDrawBufferNum) {

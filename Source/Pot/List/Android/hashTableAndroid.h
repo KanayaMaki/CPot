@@ -45,7 +45,8 @@ public:
 			mList.erase(it);
 			return tRes;
 		}
-		return T(0);
+		T lRes;
+		return lRes;
 	}
 
 	//指定された値と等しい要素の削除
@@ -78,7 +79,8 @@ public:
 		if (it != mList.end()) {
 			return (*it).second;
 		}
-		return T(0);
+		T lRes;
+		return lRes;
 	}
 
 	//指定されたキーを持つ要素が存在するか

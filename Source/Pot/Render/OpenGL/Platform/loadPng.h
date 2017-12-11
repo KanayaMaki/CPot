@@ -9,11 +9,6 @@
 
 #include "zlib.h"
 
-#include <fstream>
-#include <string>
-#include <vector>
-#include <algorithm>
-
 #include "./Pot/List/vector.h"
 
 
@@ -113,7 +108,7 @@ public:
 						break;
 					}
 					if (status != Z_OK) {
-						abort();
+						CPOT_ERROR("ÉGÉâÅ[");
 					}
 					if (z.avail_out == 0) {
 						pngData.Add((&*outBuf), cOutBufSize);

@@ -97,6 +97,21 @@
     <Filter Include="Source\Pot\File\Android">
       <UniqueIdentifier>{5cf2bcf5-8502-443f-bd92-b8de13618baf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Pot\Render">
+      <UniqueIdentifier>{9577d159-3298-4c5d-aaef-033942718e75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Render\OpenGL">
+      <UniqueIdentifier>{80afbd7c-e172-4102-9af8-224f74aa31d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Render\OpenGL\Platform">
+      <UniqueIdentifier>{e2d7d879-7cc6-413b-84c3-f4ee3d8b68f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\ThirdParty">
+      <UniqueIdentifier>{1cc42a97-de5a-41ba-9ffd-6760a5f1388e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\ThirdParty\Zlib">
+      <UniqueIdentifier>{a70d2f25-f13e-4d53-b576-6fb8775acf48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\Pot\Android\main.cpp">
@@ -107,9 +122,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Pot\Time\time.cpp">
       <Filter>Source\Pot\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Cycle\myGame.cpp">
-      <Filter>Source\Cycle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Pot\Game\component.cpp">
       <Filter>Source\Pot\Game</Filter>
@@ -125,6 +137,57 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Pot\Application\Android\android_native_app_glue.c">
       <Filter>Source\Pot\Application\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Cycle\myGameDummy.cpp">
+      <Filter>Source\Cycle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\adler32.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\compress.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\crc32.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\deflate.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\gzclose.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\gzlib.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\gzread.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\gzwrite.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\infback.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\inffast.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\inflate.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\inftrees.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\trees.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\uncompr.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\zutil.c">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\Atom\hash.cpp">
+      <Filter>Source\Pot\Atom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +367,177 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Pot\List\Android\vectorAndroid.h">
       <Filter>Source\Pot\List\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\indexBuffer.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\rasterizer.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\render.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\sampler.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\shader.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\texture2D.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\vertexBuffer.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\viewport.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\blend.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\camera.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\constantBuffer.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\depthStencil.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\renderOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\samplerOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\shaderOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\texture2DOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\vertexBufferOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\viewportOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\blendOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\constantBufferOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\depthStencilOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\indexBufferOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\rasterizerOpenGL.h">
+      <Filter>Source\Pot\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\depthOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\elementArrayBufferOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\frameBufferOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\inputLayoutOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\loadBmp.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\loadPng.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\managerOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\renderOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\samplerOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\shaderOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\stencilOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\textureOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\uniformBufferOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\vertexArrayObjectOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\viewportOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\arrayBufferOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\bitmap.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\blendOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\bufferOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\cullOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\depthBufferOpenGLPlatform.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLPlatformAndroid.h">
+      <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\crc32.h">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\deflate.h">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\gzguts.h">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\inffast.h">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\inffixed.h">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\inflate.h">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\inftrees.h">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\trees.h">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\zconf.h">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\zlib.h">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\zutil.h">
+      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -121,7 +121,9 @@ public:
 class GeometryShader : public Shader {
 public:
 	void Load(const CHAR* aFileName) {
+		#ifndef CPOT_ON_ANDROID
 		Shader::Load(aFileName, GL_GEOMETRY_SHADER);
+		#endif
 	}
 };
 

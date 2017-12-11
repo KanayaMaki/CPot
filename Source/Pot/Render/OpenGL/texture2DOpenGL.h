@@ -42,7 +42,7 @@ public:
 		GLFormat lRes;
 		switch (aFormat) {
 			case cR8Uint:
-				lRes.format = GL_R;
+				lRes.format = GL_RED;
 				lRes.type = GL_UNSIGNED_BYTE;
 				break;
 			case cRGBA8Uint:
@@ -50,7 +50,7 @@ public:
 				lRes.type = GL_UNSIGNED_BYTE;
 				break;
 			case cR32Float:
-				lRes.format = GL_R;
+				lRes.format = GL_RED;
 				lRes.type = GL_FLOAT;
 				break;
 			case cRGBA32Float:

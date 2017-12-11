@@ -148,49 +148,6 @@ private:
 	GLenum mFormat;
 };
 
-class Texture1D : public Texture {
-public:
-	void Load(u32 aWidth, void* aInitData, GLenum aInitDataFormat, GLenum aFormat, GLenum aType) {
-
-		glGenTextures(1, &mGLNum);
-
-		glBindTexture(GL_TEXTURE_1D, mGLNum);
-		glTexImage1D(GL_TEXTURE_1D, 0, aFormat, aWidth, 0, aInitDataFormat, aType, aInitData);
-
-		mWidth = aWidth;
-		mFormat = aFormat;
-		mType = aType;
-	}
-
-	void Load(u32 aWidth, GLenum aFormat, GLenum aType) {
-		Load(aWidth, nullptr, 0, aFormat, aType);
-	}
-
-	void GenerateMipmap() {
-		glBindTexture(GL_TEXTURE_1D, mGLNum);
-		glGenerateMipmap(GL_TEXTURE_1D);
-		glBindTexture(GL_TEXTURE_1D, 0);
-	}
-	void Bind() {
-		glBindTexture(GL_TEXTURE_1D, mGLNum);
-	}
-
-public:
-	u32 GetWidth() const {
-		return mWidth;
-	}
-	GLenum GetType() const {
-		return mType;
-	}
-	GLenum GetFormat() const {
-		return mFormat;
-	}
-
-private:
-	u32 mWidth;
-	GLenum mType;
-	GLenum mFormat;
-};
 
 }
 

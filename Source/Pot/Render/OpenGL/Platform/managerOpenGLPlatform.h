@@ -535,7 +535,7 @@ public:
 	void ClearDepth(GLuint aNum, f32 aDepth) {
 		mFrameBuffer.AttachmentDepth(aNum);
 		mFrameBuffer.SetDrawBuffer(1);
-		glClearDepth(aDepth);
+		glClearDepthf(aDepth);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		mFrameBuffer.AttachmentDepth(0);
 	}
@@ -553,7 +553,7 @@ public:
 	}
 	void ClearBackBuffer(f32 aDepth) {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glClearDepth(aDepth);
+		glClearDepthf(aDepth);
 		glClear(GL_DEPTH_BUFFER_BIT);
 	}
 

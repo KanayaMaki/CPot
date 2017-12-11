@@ -26,7 +26,7 @@ public:
 public:
 	void SetToDevice() {
 		glViewport(mLeftTop.x, mLeftTop.y, mSize.x, mSize.y);
-		glDepthRange(mMinDepth, mMaxDepth);
+		glDepthRangef(mMinDepth, mMaxDepth);
 	}
 
 

@@ -51,14 +51,225 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\Cycle\myGame.cpp" />
+    <ClCompile Include="..\..\..\Source\Cycle\myGameDummy.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Android\main.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Android\test.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Application\Android\android_native_app_glue.c" />
     <ClCompile Include="..\..\..\Source\Pot\Application\Android\applicationAndroid.cpp" />
+    <ClCompile Include="..\..\..\Source\Pot\Atom\hash.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Game\component.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Input\Android\inputAndroid.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Rand\rand.cpp" />
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\adler32.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\compress.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\crc32.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\deflate.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\gzclose.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\gzlib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\gzread.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\gzwrite.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\infback.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\inffast.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\inflate.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\inftrees.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\trees.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\uncompr.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\zutil.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x86'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Master|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+    </ClCompile>
     <ClCompile Include="..\..\..\Source\Pot\Time\time.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -110,8 +321,65 @@
     <ClInclude Include="..\..\..\Source\Pot\Out\out.h" />
     <ClInclude Include="..\..\..\Source\Pot\Rand\Android\randAndroid.h" />
     <ClInclude Include="..\..\..\Source\Pot\Rand\rand.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\blend.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\camera.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\constantBuffer.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\depthStencil.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\indexBuffer.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\blendOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\constantBufferOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\depthStencilOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\indexBufferOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\arrayBufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\bitmap.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\blendOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\bufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\cullOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\depthBufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\depthOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLPlatformAndroid.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\elementArrayBufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\frameBufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\inputLayoutOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\loadBmp.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\loadPng.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\managerOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\renderOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\samplerOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\shaderOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\stencilOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\textureOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\uniformBufferOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\vertexArrayObjectOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\Platform\viewportOpenGLPlatform.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\rasterizerOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\renderOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\samplerOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\shaderOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\texture2DOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\vertexBufferOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\OpenGL\viewportOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\rasterizer.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\render.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\sampler.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\shader.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\texture2D.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\vertexBuffer.h" />
+    <ClInclude Include="..\..\..\Source\Pot\Render\viewport.h" />
     <ClInclude Include="..\..\..\Source\Pot\Sleep\Android\sleepAndroid.h" />
     <ClInclude Include="..\..\..\Source\Pot\Sleep\sleep.h" />
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\crc32.h" />
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\deflate.h" />
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\gzguts.h" />
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\inffast.h" />
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\inffixed.h" />
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\inflate.h" />
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\inftrees.h" />
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\trees.h" />
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\zconf.h" />
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\zlib.h" />
+    <ClInclude Include="..\..\..\Source\Pot\ThirdParty\Zlib\zutil.h" />
     <ClInclude Include="..\..\..\Source\Pot\Thread\Android\mutexAndroid.h" />
     <ClInclude Include="..\..\..\Source\Pot\Thread\Android\threadAndroid.h" />
     <ClInclude Include="..\..\..\Source\Pot\Thread\mutex.h" />
@@ -312,12 +580,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_64BIT;</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_64BIT;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -326,12 +594,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_64BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_64BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Master|ARM64'">
@@ -340,12 +608,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_MASTER;CPOT_64BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_MASTER;CPOT_64BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -354,12 +622,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_32BIT;</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_32BIT;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -368,12 +636,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_32BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_32BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Master|ARM'">
@@ -382,12 +650,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_MASTER;CPOT_32BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_MASTER;CPOT_32BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -396,12 +664,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_64BIT;</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_64BIT;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -410,12 +678,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_64BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_64BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Master|x64'">
@@ -424,12 +692,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_64BIT;NDEBUG;CPOT_MASTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_64BIT;NDEBUG;CPOT_MASTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
@@ -438,12 +706,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_32BIT;</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_32BIT;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
@@ -452,12 +720,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_32BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_32BIT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Master|x86'">
@@ -466,12 +734,12 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_32BIT;NDEBUG;CPOT_MASTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPOT_ANDROID;CPOT_OPENGL;CPOT_32BIT;NDEBUG;CPOT_MASTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;m;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv3;EGL;m;</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

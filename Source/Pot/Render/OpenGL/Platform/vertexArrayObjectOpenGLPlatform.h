@@ -21,7 +21,7 @@ struct ArrayBufferLayout {
 };
 
 inline ArrayBufferLayout CreateArrayBufferLayout(const ArrayBuffer& aArrayBuffer, GLuint aCount, GLenum aType, GLuint aOffset) {
-	ArrayBufferLayout res = { aArrayBuffer.GetGLNum(), aCount, aType, GL_FALSE,  aArrayBuffer.GetVertexSize(), aOffset };
+	ArrayBufferLayout res = { aArrayBuffer.GetGLNum(), aCount, aType, GL_FALSE,  (GLuint)aArrayBuffer.GetVertexSize(), aOffset };
 	return res;
 }
 
@@ -31,7 +31,7 @@ public:
 	void Load(const ArrayBufferLayout* aLayout, u32 aLayoutCount) {
 
 		//Create VertexArrayObject
-		glCreateVertexArrays(1, &mGLNum);
+		glGenVertexArrays(1, &mGLNum);
 		glBindVertexArray(mGLNum);	//Bind
 
 		//Set Vertex Data To VertexArrayObject

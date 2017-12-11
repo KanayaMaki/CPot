@@ -14,8 +14,6 @@ namespace platform {
 glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, mNum);
 
 
-
-
 描画されたテクスチャを使うときにデプスが必要な場合があるかもしれません。その場合には、以下のように作られたテクスチャに単純に描画するだけです。
 glTexImage2D(GL_TEXTURE_2D, 0,GL_DEPTH_COMPONENT24, 1024, 768, 0,GL_DEPTH_COMPONENT, GL_FLOAT, 0);
 

@@ -15,6 +15,8 @@
 #include "./Pot/Out/out.h"
 #include "./Pot/Usefull/buffer.h"
 
+#include "./Pot/Render/OpenGL/Platform/deviceOpenGLPlatformAndroid.h"
+
 
 /**
 * アプリの保存状態です。
@@ -27,11 +29,6 @@ struct engine {
 	ASensorEventQueue* sensorEventQueue;
 
 	int animating;
-	EGLDisplay display;
-	EGLSurface surface;
-	EGLContext context;
-	int32_t width;
-	int32_t height;
 	cpot::Buffer state;
 
 	template<typename T>
@@ -156,85 +153,15 @@ private:
 
 	// 現在の表示の EGL コンテキストを初期化します。
 	static int engine_init_display(struct engine* engine) {
-		// OpenGL ES と EGL の初期化
-
-		/*
-		* 目的の構成の属性をここで指定します。
-		* 以下で、オンスクリーン ウィンドウと
-		* 互換性のある、各色最低 8 ビットのコンポーネントの EGLConfig を選択します
-		*/
-		const EGLint attribs[] = {
-			EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
-			EGL_BLUE_SIZE, 8,
-			EGL_GREEN_SIZE, 8,
-			EGL_RED_SIZE, 8,
-			EGL_NONE
-		};
-		EGLint w, h, format;
-		EGLint numConfigs;
-		EGLConfig config;
-		EGLSurface surface;
-		EGLContext context;
-
-		EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-
-		eglInitialize(display, 0, 0);
-
-		/* ここで、アプリケーションは目的の構成を選択します。このサンプルでは、
-		* 抽出条件と一致する最初の EGLConfig を
-		* 選択する単純な選択プロセスがあります */
-		eglChooseConfig(display, attribs, &config, 1, &numConfigs);
-
-		/* EGL_NATIVE_VISUAL_ID は、ANativeWindow_setBuffersGeometry() に
-		* よって受け取られることが保証されている EGLConfig の属性です。
-		* EGLConfig を選択したらすぐに、ANativeWindow バッファーを一致させるために
-		* EGL_NATIVE_VISUAL_ID を使用して安全に再構成できます。*/
-		eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format);
-
-		ANativeWindow_setBuffersGeometry(engine->app->window, 0, 0, format);
-
-		surface = eglCreateWindowSurface(display, config, engine->app->window, NULL);
-		context = eglCreateContext(display, config, NULL, NULL);
-
-		if (eglMakeCurrent(display, surface, surface, context) == EGL_FALSE) {
-			LOGW("Unable to eglMakeCurrent");
-			return -1;
-		}
-
-		eglQuerySurface(display, surface, EGL_WIDTH, &w);
-		eglQuerySurface(display, surface, EGL_HEIGHT, &h);
-
-		engine->display = display;
-		engine->context = context;
-		engine->surface = surface;
-		engine->width = w;
-		engine->height = h;
-
-		// GL の状態を初期化します。
-		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-		glEnable(GL_CULL_FACE);
-		glShadeModel(GL_SMOOTH);
-		glDisable(GL_DEPTH_TEST);
-
+		engine->animating = 1;
+		cpot::openGL::platform::Device::S().Init(engine->app->window);
 		return 0;
 	}
 
 	// 現在ディスプレイに関連付けられている EGL コンテキストを削除します。
 	static void engine_term_display(struct engine* engine) {
-		if (engine->display != EGL_NO_DISPLAY) {
-			eglMakeCurrent(engine->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
-			if (engine->context != EGL_NO_CONTEXT) {
-				eglDestroyContext(engine->display, engine->context);
-			}
-			if (engine->surface != EGL_NO_SURFACE) {
-				eglDestroySurface(engine->display, engine->surface);
-			}
-			eglTerminate(engine->display);
-		}
+		cpot::openGL::platform::Device::S().Final();
 		engine->animating = 0;
-		engine->display = EGL_NO_DISPLAY;
-		engine->context = EGL_NO_CONTEXT;
-		engine->surface = EGL_NO_SURFACE;
 	}
 
 	// 次のメイン コマンドを処理します。
@@ -289,15 +216,6 @@ private:
 	#pragma region Getter
 
 public:
-	f32 GetWidth() const {
-		return mSize.x;
-	}
-	f32 GetHeight() const {
-		return mSize.y;
-	}
-	Vector2 GetSize() const {
-		return mSize;
-	}
 	BOOL GetFocus() const {
 		return mFocus;
 	}
@@ -324,7 +242,6 @@ public:
 
 private:
 	android_app* mState;
-	Vector2 mSize;
 	BOOL mFocus;
 	struct engine mEngine;
 

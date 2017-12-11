@@ -43,7 +43,7 @@ public:
 		Load(GL_REPEAT, GL_REPEAT);
 	}
 	void LoadClamp() {
-		Load(GL_CLAMP, GL_CLAMP);
+		Load(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 	}
 	enum CWrapMode {
 		cRepeat,

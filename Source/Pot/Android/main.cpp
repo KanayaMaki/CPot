@@ -44,21 +44,6 @@ struct saved_state {
 };
 
 
-// ディスプレイ内の現在のフレームのみ。
-void engine_draw_frame(struct engine* engine) {
-	if (engine->display == NULL) {
-		// ディスプレイがありません。
-		return;
-	}
-
-	// 色で画面を塗りつぶします。
-	glClearColor((cpot::android::Config::S().color.r) / engine->width, 1.0f, (cpot::android::Config::S().color.b) / engine->height, 1);
-
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	eglSwapBuffers(engine->display, engine->surface);
-}
-
 /**
 * これは、android_native_app_glue を使用しているネイティブ アプリケーション
 * のメイン エントリ ポイントです。それ自体のスレッドでイベント ループによって実行され、
@@ -107,9 +92,6 @@ void android_main(struct android_app* state) {
 
 			//ゲームの描画
 			lGame->Render();
-
-			//
-			engine_draw_frame(cpot::android::Application::S().GetEngine());
 
 
 			//DeltaTimeの計測
