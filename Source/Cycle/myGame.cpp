@@ -411,7 +411,9 @@ void MyGame::Update() {
 	#pragma region Audio
 
 	if (Input::GetButtonDown(windows::c1)) {
-		voice = ResourceList<AudioVoice>::S().Find("test");
+		if (!voice) {
+			voice = ResourceList<AudioVoice>::S().Find("test");
+		}
 		voice->Play();
 	}
 	if (Input::GetButtonDown(windows::c6)) {
