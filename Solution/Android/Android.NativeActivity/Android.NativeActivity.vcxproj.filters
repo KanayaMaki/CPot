@@ -43,9 +43,6 @@
     <Filter Include="Source\Cycle">
       <UniqueIdentifier>{eef0c2a4-8148-401e-9e69-45cb869c59ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Pot\Game">
-      <UniqueIdentifier>{0c840016-655d-4c0e-b16f-2ed7c330679e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Pot\Loader">
       <UniqueIdentifier>{5ae92f80-659e-45cc-b89f-0dff781d7661}</UniqueIdentifier>
     </Filter>
@@ -122,9 +119,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Pot\Time\time.cpp">
       <Filter>Source\Pot\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Pot\Game\component.cpp">
-      <Filter>Source\Pot\Game</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Pot\Input\Android\inputAndroid.cpp">
       <Filter>Source\Pot\Input\Android</Filter>
@@ -280,18 +274,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Pot\Loader\loader.h">
       <Filter>Source\Pot\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Pot\Game\gameObject.h">
-      <Filter>Source\Pot\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Pot\Game\unique.h">
-      <Filter>Source\Pot\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Pot\Game\component.h">
-      <Filter>Source\Pot\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Pot\Game\game.h">
-      <Filter>Source\Pot\Game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Pot\Input\Android\inputAndroid.h">
       <Filter>Source\Pot\Input\Android</Filter>

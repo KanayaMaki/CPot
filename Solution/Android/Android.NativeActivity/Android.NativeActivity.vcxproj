@@ -57,7 +57,6 @@
     <ClCompile Include="..\..\..\Source\Pot\Application\Android\android_native_app_glue.c" />
     <ClCompile Include="..\..\..\Source\Pot\Application\Android\applicationAndroid.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Atom\hash.cpp" />
-    <ClCompile Include="..\..\..\Source\Pot\Game\component.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Input\Android\inputAndroid.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\Rand\rand.cpp" />
     <ClCompile Include="..\..\..\Source\Pot\ThirdParty\Zlib\adler32.c">
@@ -305,10 +304,6 @@
     <ClInclude Include="..\..\..\Source\Pot\Config\config.h" />
     <ClInclude Include="..\..\..\Source\Pot\File\Android\fileAndroid.h" />
     <ClInclude Include="..\..\..\Source\Pot\File\file.h" />
-    <ClInclude Include="..\..\..\Source\Pot\Game\component.h" />
-    <ClInclude Include="..\..\..\Source\Pot\Game\game.h" />
-    <ClInclude Include="..\..\..\Source\Pot\Game\gameObject.h" />
-    <ClInclude Include="..\..\..\Source\Pot\Game\unique.h" />
     <ClInclude Include="..\..\..\Source\Pot\Input\Android\inputAndroid.h" />
     <ClInclude Include="..\..\..\Source\Pot\Input\input.h" />
     <ClInclude Include="..\..\..\Source\Pot\List\Android\hashTableAndroid.h" />

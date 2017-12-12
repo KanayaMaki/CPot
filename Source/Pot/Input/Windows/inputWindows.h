@@ -115,6 +115,7 @@ enum CInputAxisCode {
 #ifdef CPOT_VALID_INPUT_WINDOWS
 
 #include <dinput.h>
+#include "./Pot/Config/config.h"
 
 namespace cpot {
 
@@ -238,7 +239,7 @@ public:
 			return mData.mMouseX;
 		}
 		else if (aCode == CInputCode::cMouseCursorY) {
-			return mData.mMouseY;
+			return Config::S().GetScreenSize().y - mData.mMouseY;
 		}
 		else if (aCode == CInputCode::cMouseWheel) {
 			return mData.mMouseWheel;
@@ -258,7 +259,7 @@ public:
 			return mBeforeData.mMouseX;
 		}
 		else if (aCode == CInputCode::cMouseCursorY) {
-			return mBeforeData.mMouseY;
+			return Config::S().GetScreenSize().y - mBeforeData.mMouseY;
 		}
 		else if (aCode == CInputCode::cMouseWheel) {
 			return mBeforeData.mMouseWheel;

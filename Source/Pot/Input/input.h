@@ -8,6 +8,7 @@
 #include "./Pot/Atom/atom.h"
 #include "./Pot/Usefull/singleton.h"
 
+#include "./Pot/Config/config.h"
 
 #include "./Pot/Input/Windows/inputWindows.h"
 #include "./Pot/Input/XInput/inputXInput.h"

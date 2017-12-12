@@ -37,6 +37,7 @@ public:
 			EGL_BLUE_SIZE, 8,
 			EGL_GREEN_SIZE, 8,
 			EGL_RED_SIZE, 8,
+			EGL_NONE
 		};
 		EGLint w, h, format;
 		EGLint numConfigs;
@@ -105,6 +106,9 @@ public:
 	void SwapBuffer() {
 		glFlush();
 		eglSwapBuffers(mDisplay, mSurface);
+	}
+	Vector2 GetScreenSize() const {
+		return Vector2(mHeight, mWidth);
 	}
 
 private:

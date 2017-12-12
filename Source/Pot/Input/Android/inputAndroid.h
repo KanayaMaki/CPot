@@ -37,7 +37,7 @@ enum CInputCode {
 #pragma endregion
 
 
-//Windowsでの入力が有効なら
+//Androidでの入力が有効なら
 #ifdef CPOT_VALID_INPUT_ANDROID
 
 #include "./Pot/Application/Android/android_native_app_glue.h"
@@ -125,10 +125,10 @@ public:
 			return mBeforeData.mButton.IsStand(cTouch) ? 1.0f : 0.0f;
 		}
 		else if (aCode == CInputCode::cTouchPosX) {
-			return GetTouchBeforePos().x;
+			return GetTouchBeforePos().y;
 		}
 		else if (aCode == CInputCode::cTouchPosY) {
-			return GetTouchBeforePos().y;
+			return GetTouchBeforePos().x;
 		}
 		else {
 			return 0.0f;
@@ -159,10 +159,10 @@ public:
 	}
 
 	f32 GetTouchPosX() const {
-		return GetTouchPos().x;
+		return GetTouchPos().y;
 	}
 	f32 GetTouchPosY() const {
-		return GetTouchPos().y;
+		return GetTouchPos().x;
 	}
 	Vector2 GetTouchPos() const {
 		return mData.mTouchPos[0];

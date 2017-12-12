@@ -155,6 +155,7 @@ private:
 	static int engine_init_display(struct engine* engine) {
 		engine->animating = 1;
 		cpot::openGL::platform::Device::S().Init(engine->app->window);
+		Config::S().SetScreenSize(cpot::openGL::platform::Device::S().GetScreenSize());
 		return 0;
 	}
 
