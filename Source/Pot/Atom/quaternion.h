@@ -147,37 +147,7 @@ public:
 	}
 
 	//ベクター同士の差から作成
-	static Quaternion FromVectorDistance(const Vector3& aFrom, const Vector3& aTo) {
-		//クォータニオンの回転軸を求める
-		Vector3 lTo = aTo.Normal();
-		Vector3 lFrom = aFrom.Normal();
-
-		Vector3 lAxis = lTo.Cross(lFrom);
-
-		BOOL lFail = false;
-
-		//もし軸の長さが０なら
-		if (IsZero(lAxis.LenQuad())) {
-			lFail = true;	//作成に失敗
-		}
-
-		//失敗するなら
-		if (lFail == true) {
-			if (lTo == -lFrom) {
-				return Quaternion(Vector3(0.0f, 1.0f, 0.0f), ToRad(180)); //もしlToとlFromが真逆の時
-			}
-			return Quaternion::Unit();	//作成に失敗。単位クォータニオンを返す
-		}
-
-		//	ToDo
-		//	直角の時に回転しない。おかしい
-		f32 lDot = lTo.Dot(lFrom);
-		lDot = Clamp(lDot, -1.0f, 1.0f);
-		f32 lAngle = Acos(lDot);
-
-		return Quaternion(lAxis, -lAngle);
-	}
-
+	
 	#pragma endregion
 
 

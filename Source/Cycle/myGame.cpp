@@ -176,7 +176,8 @@ Transform planeTransform;
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
 void MyGame::Setting() {
-	cpot::Config::S().SetScreenSize(cpot::Vector2(960.0f, 540.0f));
+	Vector2 lScreenSize = Vector2(960.0f, 540.0f);
+	cpot::Config::S().SetScreenSize(lScreenSize);
 
 	#ifdef CPOT_ON_DIRECTX11
 	Config::S().SetTitle("DirectX11 Game!");
@@ -486,7 +487,14 @@ void MyGame::Update() {
 		cameraRot *= Quaternion::FromAxis(cameraRot.Right(), ToRad(rotSpeed * DeltaTime()));
 	}
 
-	const f32 moveSpeed = 10.0f;
+	f32 moveSpeed;
+	if (Input::GetButton(windows::cLeftShift)) {
+		moveSpeed = 20.0f;
+	}
+	else {
+		moveSpeed = 10.0f;
+	}
+
 	if (Input::GetButton(windows::cA)) {
 		cameraLoc += cameraRot.Left() * moveSpeed * DeltaTime();
 	}

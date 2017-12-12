@@ -9,10 +9,12 @@
 #include "./Pot/List/vector.h"
 #include "./Pot/Game/component.h"
 #include "./Pot/Game/unique.h"
+#include "./Pot/Usefull/singleton.h"
 
 namespace cpot {
 
-using GameObjectName = HashString<32>;
+using GameObjectName = HashString<28>;
+
 
 class GameObject {
 
@@ -27,14 +29,8 @@ public:
 		Init(aName);
 	}
 
-public:
-	void Init(const CHAR* aName) {
-		SetName(aName);
-		mUnique = UniqueGenerator<GameObject>::S().Generate();
-
-		mFlags.DownAll();
-		mFlags.Stand(cActive);
-	}
+private:
+	void Init(const CHAR* aName);
 	void Init() {
 		Init("GameObject");
 	}
@@ -42,6 +38,15 @@ public:
 	#pragma endregion
 
 	
+	//終了処理
+	#pragma region Final
+
+public:
+	~GameObject();
+
+	#pragma endregion
+
+
 	//トランスフォーム
 	#pragma region Transform
 
@@ -173,21 +178,43 @@ private:
 
 	#pragma region Static
 
-private:
-	static void Regist(GameObject* aGameObject);
-
 public:
 	static GameObject* Find(const CHAR* aName) {
 		return Find(GameObjectName(aName));
 	}
-	static GameObject* Find(const GameObjectName& aName) {
-
-	}
-
-private:
-	static Vector<GameObject*> mGameObjects;
+	static GameObject* Find(const GameObjectName& aName);
 
 	#pragma endregion
 };
+
+
+class GameObjectManager : public Singleton<GameObjectManager> {
+	friend class GameObject;
+
+private:
+	void Regist(GameObject* aGameObject) {
+		mGameObjects.PushBack(aGameObject);
+	}
+	void Remove(GameObject* aGameObject) {
+		mGameObjects.Remove(aGameObject);
+	}
+
+public:
+	GameObject* Find(const CHAR* aName) {
+		return Find(GameObjectName(aName));
+	}
+	GameObject* Find(const GameObjectName& aName) {
+		for (u32 i = 0; i < mGameObjects.GetSize(); i++) {
+			GameObject* lG = mGameObjects[i];
+			if (lG->GetName() == aName) {
+				return lG;
+			}
+		}
+		return nullptr;
+	}
+
+	Vector<GameObject*> mGameObjects;
+};
+
 
 }

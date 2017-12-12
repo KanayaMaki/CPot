@@ -6,6 +6,8 @@
 #pragma once
 
 #include "./Pot/Atom/atom.h"
+#include "./Pot/Usefull/singleton.h"
+#include "./Pot/Usefull/buffer.h"
 
 namespace cpot {
 
@@ -36,7 +38,8 @@ public:															\
 protected:														\
 	static BOOL SEqualType(const Type& aTypeName) {				\
 		return	SGetTypeName() == aTypeName;					\
-	}
+	}															\
+private:
 
 #pragma endregion
 
@@ -65,7 +68,8 @@ public:															\
 protected:														\
 	static BOOL SEqualType(const Type& aTypeName) {				\
 		return	SGetTypeName() == aTypeName;					\
-	}
+	}															\
+private:
 
 #pragma endregion
 
@@ -95,7 +99,8 @@ public:															\
 protected:														\
 	static BOOL SEqualType(const Type& aTypeName) {				\
 		return	SGetTypeName() == aTypeName;					\
-	}
+	}															\
+private:
 
 #pragma endregion
 
@@ -115,7 +120,7 @@ public:
 	//コンストラクタ
 	Component();
 
-	void Init(GameObject* aGameObject);
+	void InitComponent(GameObject* aGameObject);
 
 	#pragma endregion
 
@@ -124,7 +129,7 @@ public:
 	#pragma region Final
 public:
 	//仮想コンストラクタ
-	virtual ~Component() {}
+	virtual ~Component();
 
 	#pragma endregion
 
@@ -230,7 +235,62 @@ public:
 	}
 
 	#pragma endregion
+
 };
+
+
+class ComponentManager : public Singleton<ComponentManager> {
+
+	friend class Component;
+
+	//登録&解除。Componentが呼び出す
+	#pragma region Regist&Remove
+
+private:
+	void Regist(Component* aComponent) {
+		mComponentNowFrame.PushBack(aComponent);
+	}
+	void Remove(Component* aComponent) {
+		
+	}
+	void Clear() {
+		while (mComponentNowFrame.GetSize() != 0) {
+			CPOT_DELETE(mComponentNowFrame.PopBack());
+		}
+		while (mComponent.GetSize() != 0) {
+			CPOT_DELETE(mComponent.PopBack());
+		}
+	}
+
+	#pragma endregion
+
+
+	void Update() {
+		Merge();	//前のフレームに追加されたコンポーネントを統合する
+		Delete();	//コンポーネントを削除する
+	}
+
+private:
+	void Merge() {
+		while (mComponentNowFrame.GetSize() != 0) {
+			mComponent.PushBack(mComponentNowFrame.PopBack());
+		}
+	}
+
+	void Delete() {
+		for (u32 i = 0; i < mComponent.GetSize(); i++) {
+			if (mComponent[i]->GetDelete() == true) {
+
+			}
+		}
+	}
+
+
+private:
+	Vector<Component*> mComponentNowFrame;	//新しく追加されたコンポーネント
+	Vector<Component*> mComponent;
+};
+
 
 }
 

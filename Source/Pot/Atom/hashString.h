@@ -76,10 +76,12 @@ public:
 	#pragma region Equal
 
 public:
-	BOOL operator ==(const HashStringNone<cSize>& aStr) const {
+	template <u32 cOtherSize>
+	BOOL operator ==(const HashStringNone<cOtherSize>& aStr) const {
 		return mHashCode == aStr.mHashCode;
 	}
-	BOOL operator !=(const HashStringNone<cSize>& aStr) const {
+	template <u32 cOtherSize>
+	BOOL operator !=(const HashStringNone<cOtherSize>& aStr) const {
 		return !((*this) == aStr);
 	}
 
@@ -206,10 +208,12 @@ public:
 	#pragma region Equal
 
 public:
-	BOOL operator ==(const HashStringLeft<cSize>& aStr) const {
+	template <u32 cOtherSize>
+	BOOL operator ==(const HashStringLeft<cOtherSize>& aStr) const {
 		return mHashCode == aStr.mHashCode;
 	}
-	BOOL operator !=(const HashStringLeft<cSize>& aStr) const {
+	template <u32 cOtherSize>
+	BOOL operator !=(const HashStringLeft<cOtherSize>& aStr) const {
 		return !((*this) == aStr);
 	}
 

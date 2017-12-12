@@ -10,13 +10,23 @@
 
 namespace cpot {
 
-void Component::Init(GameObject* aGameObject) {
+Component::Component() {
+	ComponentManager::S().Regist(this);
+}
+
+Component::~Component() {
+	ComponentManager::S().Remove(this);
+}
+
+
+
+void Component::InitComponent(GameObject* aGameObject) {
 
 	//ユニークな番号の取得
 	mUnique = UniqueGenerator<Component>::S().Generate();
 
+	//ゲームオブジェクトの設定
 	mGameObject = aGameObject;
-
 
 	//フラグのリセット
 	mFlags.AllBitDown();
@@ -25,9 +35,6 @@ void Component::Init(GameObject* aGameObject) {
 	if (mGameObject->GetActive()) {
 		mFlags.Stand(cGameObjectActive);
 	}
-
-
-	//コンポーネントのリストに登録する
 }
 
 }
