@@ -87,6 +87,9 @@ public:
 			if (!lFile.IsOpen()) {
 				lFileName = Path::ChangeEx(lFileName, "bmp");
 				lFile.Open(lFileName.Get(), true);
+				if (!lFile.IsOpen()) {
+					return;	//ファイルを開けなかった
+				}
 			}
 		}
 

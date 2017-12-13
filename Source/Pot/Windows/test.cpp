@@ -130,7 +130,6 @@ void TestOpenGL(HWND aHwnd) {
 	e.Load(GL_UNSIGNED_SHORT, 6, index, GL_TRIANGLES);
 	openGL::platform::Render::S().GetElementArrayBufferManager().Set(&e);
 
-	mUniformMatrix.mWorld *= Matrix4x4::FromTransform(Vector3(0.5f, 0.0f, 0.0f));
 	openGL::platform::UniformBuffer matrix;
 	matrix.Load(&mUniformMatrix);
 	openGL::platform::Render::S().GetUniformBufferManager().Set(&matrix, 0);

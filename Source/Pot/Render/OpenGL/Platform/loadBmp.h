@@ -48,14 +48,13 @@ public:
 		lWidth = *(int*)&(lHeader[0x12]);
 		lHeight = *(int*)&(lHeader[0x16]);
 
-		if (lImageSize == 0) {
-			if (aBMPData.GetSize() <= lWidth * lHeight * 4) {
-				lBytePerPixel = 3;
-			}
-			else {
-				lBytePerPixel = 4;
-			}
+		if (aBMPData.GetSize() <= lWidth * lHeight * 4) {
+			lBytePerPixel = 3;
 		}
+		else {
+			lBytePerPixel = 4;
+		}
+
 		lLineSize = Align(lWidth * lBytePerPixel, 4UL);
 		lImageSize = lLineSize * lHeight;
 

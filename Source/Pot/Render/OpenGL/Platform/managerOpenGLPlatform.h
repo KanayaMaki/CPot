@@ -389,10 +389,10 @@ public:
 				
 				if (lSamplerChange) {
 					if (aSampler.Get(i)) {
-						aSampler.Get(i)->Bind();
+						aSampler.Get(i)->Bind(i);
 					}
 					else {
-						mNullSampler.Bind();
+						mNullSampler.Bind(i);
 					}
 					aSampler.SetNotChanged(i);
 				}

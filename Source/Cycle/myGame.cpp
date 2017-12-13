@@ -166,7 +166,6 @@ VectorSimple<StaticMeshVertex> lNow;
 std::shared_ptr<Texture2D> whiteTexture;
 std::shared_ptr<Texture2D> diffuseTexture;
 std::shared_ptr<Sampler> diffuseSampler;
-std::shared_ptr<Sampler> toonSampler;
 
 std::shared_ptr<Texture2D> renderTarget;
 std::shared_ptr<Texture2D> depthTexture;
@@ -313,6 +312,7 @@ void MyGame::Init() {
 	#elif defined CPOT_ON_OPENGL
 
 	openGL::Texture2DData::S().Regist("test", "./test.png");
+	openGL::Texture2DData::S().Regist("white", "./white.png");
 
 	openGL::platform::InputLayout lInputLayout;
 	openGL::platform::InputLayoutElement element[] = {
@@ -322,11 +322,27 @@ void MyGame::Init() {
 	};
 	lInputLayout.Load(element, 3);
 
-	openGL::ShaderData::S().Regist("test",
+	openGL::ShaderData::S().Regist("Lambert",
 	{
-		{ "test.vert" },
+		{ "toon.vert" },
 		{ "" },
-		{ "test.frag" },
+		{ "toon.frag" },
+		lInputLayout
+	});
+
+	openGL::ShaderData::S().Regist("Toon",
+	{
+		{ "toon.vert" },
+		{ "" },
+		{ "toon.frag" },
+		lInputLayout
+	});
+
+	openGL::ShaderData::S().Regist("ToonLine",
+	{
+		{ "toon.vert" },
+		{ "" },
+		{ "toon.frag" },
 		lInputLayout
 	});
 
@@ -342,9 +358,6 @@ void MyGame::Init() {
 
 	diffuseSampler.reset(new Sampler);
 	diffuseSampler->Load(Sampler::cClamp);
-
-	toonSampler.reset(new Sampler);
-	toonSampler->Load(Sampler::cClamp);
 
 	blend.reset(new Blend);
 	blend->Load(Blend::cNormal);
@@ -545,14 +558,31 @@ void MyGame::Update() {
 	depthTexture->ClearDepth(1.0f);
 	renderTarget->ClearColor(Color::Blue());
 
-	/*
+	///*
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = planeTransform.GetMatrix();
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(planeTransform.mRotation);
 	wvpBuffer->Write();
-	Render::S().SetShader(lambertShader);
+
+	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
+	materialBuffer->Write();
+
+	Render::S().SetBlend(blend);
+	Render::S().SetRasterizer(rasterizer);
+	Render::S().SetDepthStencil(depthStencil);
 	Render::S().SetVertexBuffer(vertexBuffer);
 	Render::S().SetIndexBuffer(indexBuffer);
+	Render::S().SetViewPort(viewport, 0);
+	Render::S().SetDepthTexture(depthTexture);
+	Render::S().SetConstantBuffer(wvpBuffer, 0);
+	Render::S().SetConstantBuffer(materialBuffer, 1);
+	Render::S().SetConstantBuffer(otherBuffer, 2);
+	Render::S().SetRenderTexture(renderTarget, 0);
+	Render::S().SetShader(toonShader);
+
+	Render::S().SetSampler(diffuseSampler, 0);
+	Render::S().SetSampler(diffuseSampler, 1);
 	Render::S().SetTexture2D(diffuseTexture, 0);
+	Render::S().SetTexture2D(whiteTexture, 1);
 	Render::S().SetToDevice();
 	Render::S().DrawIndexed(6, 0);
 	//*/
@@ -564,6 +594,8 @@ void MyGame::Update() {
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(mikuRotAnim.Get());
 	wvpBuffer->Write();
 	
+
+	/*
 	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::Black();
 	materialBuffer->Write();
 
@@ -588,7 +620,7 @@ void MyGame::Update() {
 		Render::S().SetToDevice();
 		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
 	}
-
+	//*/
 
 	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
 	materialBuffer->Write();
@@ -601,7 +633,7 @@ void MyGame::Update() {
 	Render::S().SetViewPort(viewport, 0);
 	Render::S().SetDepthTexture(depthTexture);
 	Render::S().SetSampler(diffuseSampler, 0);
-	Render::S().SetSampler(toonSampler, 1);
+	Render::S().SetSampler(diffuseSampler, 1);
 	Render::S().SetConstantBuffer(wvpBuffer, 0);
 	Render::S().SetConstantBuffer(materialBuffer, 1);
 	Render::S().SetConstantBuffer(otherBuffer, 2);
@@ -610,7 +642,7 @@ void MyGame::Update() {
 
 	for (u32 i = 0; i < model->submeshNum; i++) {
 		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
-		if (model->submesh[i].material.toonTexture->mTexture.GetTexture()->IsLoaded()) {
+		if (model->submesh[i].material.toonTexture->IsLoad()) {
 			Render::S().SetTexture2D(model->submesh[i].material.toonTexture, 1);
 		}
 		else {

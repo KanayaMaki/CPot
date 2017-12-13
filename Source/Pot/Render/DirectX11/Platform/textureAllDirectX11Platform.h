@@ -33,7 +33,8 @@ public:
 	}
 
 	BOOL IsLoaded() const {
-		return mTexture != nullptr;
+		if (mTexture == nullptr) return false;
+		return mTexture->IsLoaded();
 	}
 
 public:

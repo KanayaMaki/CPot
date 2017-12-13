@@ -4,10 +4,10 @@ Texture2D ToonTexture : register(t1);
 SamplerState ToonSampler : register(s1);
 
 
-struct PS_PHONG_INPUT {
+struct PS_INPUT {
 	float4 PosProj	: SV_POSITION; //頂点座標（プロジェクション）
-	float4 PosWor	: POS_WOR; //頂点座標（ワールド）
-	float4 NorWor	: NORMAL;	//法線ベクトル（ワールド）
+	float3 PosWor	: POS_WOR; //頂点座標（ワールド）
+	float3 NorWor	: NORMAL;	//法線ベクトル（ワールド）
 	float2 Tex	: TEXTURE;	//テクスチャ座標
 };
 
@@ -21,18 +21,21 @@ VS_INPUT VS_MAIN(VS_INPUT input) {
 // ジオメトリ シェーダの関数
 [maxvertexcount(3)]
 void GS_MAIN(triangle VS_INPUT input[3],
-	inout TriangleStream<PS_PHONG_INPUT> TriStream) {
+	inout TriangleStream<PS_INPUT> TriStream) {
 
-	PS_PHONG_INPUT output;
+	PS_INPUT output;
 
 	for (int i = 0; i < 3; ++i) {
+		
+		float4 lPosWor = mul(float4(input[i].Pos, 1.0f), World);
+		output.PosWor = lPosWor.xyz / lPosWor.w;
 
-		output.PosWor = mul(float4(input[i].Pos, 1.0f), World);
+		float4 lPosView = mul(lPosWor, View);
+		float4 lPosProj = mul(lPosView, Projection);
+		output.PosProj = lPosProj;
 
-		output.PosProj = mul(output.PosWor, View);
-		output.PosProj = mul(output.PosProj, Projection);
-
-		output.NorWor = mul(float4(input[i].Nor, 1.0f), NorWorld);
+		float4 lNorWor = mul(float4(input[i].Nor, 1.0f), NorWorld);
+		output.NorWor = lNorWor.xyz / lNorWor.w;
 
 		output.Tex = input[i].Tex;
 
@@ -61,11 +64,11 @@ float HalfLambert(float3 aNormal, float3 aToLight) {
 	return halfLambert;
 }
 
-PS_OUTPUT PS_MAIN(PS_PHONG_INPUT input) {
+PS_OUTPUT PS_MAIN(PS_INPUT input) {
 
 	PS_OUTPUT output;
 
-	float lighting = HalfLambert(input.NorWor.xyz / input.NorWor.w , -LightDirection);
+	float lighting = HalfLambert(input.NorWor, -LightDirection);
 	float4 toonTexel = ToonTexture.Sample(ToonSampler, float2(lighting, lighting));
 
 	float4 diffuseTexel = DiffuseTexture.Sample(DiffuseSampler, input.Tex);
@@ -73,7 +76,7 @@ PS_OUTPUT PS_MAIN(PS_PHONG_INPUT input) {
 	float4 color = float4(1.0f, 1.0f, 1.0f, 1.0f);
 	color *= Diffuse;
 	color *= diffuseTexel;
-	color.xyz *= toonTexel;
+	color.xyz *= toonTexel.xyz;
 	output.Diffuse = color;
 
 	return output;

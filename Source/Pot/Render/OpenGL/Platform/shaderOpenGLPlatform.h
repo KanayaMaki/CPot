@@ -31,6 +31,25 @@ inline void GetShaderInfoLog(GLuint shader) {
 		}
 	}
 }
+inline void GetProgramInfoLog(GLuint aProgram) {
+
+	GLsizei lBufSize;
+
+	/* シェーダのコンパイル時のログの長さを取得する */
+	glGetProgramiv(aProgram, GL_INFO_LOG_LENGTH, &lBufSize);
+
+	if (lBufSize > 1) {
+		std::unique_ptr<CHAR> lInfoLog(new CHAR[lBufSize]);
+
+		if (lInfoLog != NULL) {
+			GLsizei lLength;
+
+			/* シェーダのコンパイル時のログの内容を取得する */
+			glGetProgramInfoLog(aProgram, lBufSize, &lLength, &(*lInfoLog));
+			CPOT_LOG((const CHAR*)&(*lInfoLog));
+		}
+	}
+}
 
 
 using ShaderName = HashString<64 - sizeof(HashCode)>;
@@ -79,6 +98,8 @@ public:
 		glGetShaderiv(mGLNum, GL_COMPILE_STATUS, &tCompiled);
 		if (tCompiled == GL_FALSE) {
 			GetShaderInfoLog(mGLNum);
+			Release();
+			return;
 		}
 
 		mShaderType = aShaderType;
@@ -190,6 +211,8 @@ public:
 		glGetProgramiv(mGLNum, GL_LINK_STATUS, &lLinked);
 		if (lLinked == GL_FALSE) {
 			CPOT_LOG("OpenGLのProgramのリンクに失敗しました");
+			GetProgramInfoLog(mGLNum);
+			Release();
 		}
 	}
 	void Release() {

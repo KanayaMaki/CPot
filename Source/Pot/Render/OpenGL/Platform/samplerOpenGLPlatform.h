@@ -70,8 +70,8 @@ public:
 		Reset();
 	}
 
-	void Bind() {
-		glBindSampler(0, mGLNum);
+	void Bind(u32 aSlotNum) {
+		glBindSampler(aSlotNum, mGLNum);
 	}
 
 public:

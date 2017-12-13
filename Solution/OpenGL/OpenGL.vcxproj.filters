@@ -85,6 +85,9 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{89c548d4-14f1-4498-b919-8fc547bf8bf0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Pot\Game">
+      <UniqueIdentifier>{622324f9-57f3-4831-8014-589eae42dbcb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Pot\Animation\animation.h">
@@ -501,6 +504,33 @@
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\bitmap.h">
       <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\cameraComponent.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\component.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\componentSystem.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\game.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\gameObject.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\lightComponent.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\renderer.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\unique.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\updater.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.cpp">
@@ -614,6 +644,24 @@
     <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\gzread.c">
       <Filter>Source\Pot\ThirdParty\Zlib</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\cameraComponent.cpp">
+      <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\component.cpp">
+      <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\gameObject.cpp">
+      <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\lightComponent.cpp">
+      <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\renderer.cpp">
+      <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\updater.cpp">
+      <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\Source\Pot\Windows\Resource\Icon.rc">
@@ -621,10 +669,16 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Env\test.frag">
+    <None Include="..\..\Env\toonLine.frag">
       <Filter>Shader</Filter>
     </None>
-    <None Include="..\..\Env\test.vert">
+    <None Include="..\..\Env\toonLine.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="..\..\Env\toon.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="..\..\Env\toon.frag">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>

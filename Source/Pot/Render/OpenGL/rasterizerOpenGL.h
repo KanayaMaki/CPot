@@ -28,7 +28,7 @@ public:
 			lFrontFace = GL_CCW;
 		}
 
-		mCull.Load(lCullFace, GL_CCW);
+		mCull.Load(lCullFace, lFrontFace);
 	}
 
 public:
