@@ -533,8 +533,8 @@ void MyGame::Update() {
 	model->mesh.vertex->Write(&lNow[0]);
 
 	//トランスフォーム
-	//mikuRotAnim.ForwardTime(DeltaTime());
-	//mikuLocAnim.ForwardTime(DeltaTime());
+	mikuRotAnim.ForwardTime(DeltaTime());
+	mikuLocAnim.ForwardTime(DeltaTime());
 	
 	#pragma endregion
 

@@ -52,7 +52,7 @@ struct PS_OUTPUT {
 
 float Lambert(float3 aNormal, float3 aToLight) {
 	float3 normalN = normalize(aNormal);
-	float3 toLightN = normalize(-LightDirection);
+	float3 toLightN = normalize(aToLight);
 
 	float lambert = dot(toLightN, normalN);
 	return lambert;
@@ -69,7 +69,7 @@ PS_OUTPUT PS_MAIN(PS_INPUT input) {
 	PS_OUTPUT output;
 
 	float lighting = HalfLambert(input.NorWor, -LightDirection);
-	float4 toonTexel = ToonTexture.Sample(ToonSampler, float2(lighting, lighting));
+	float4 toonTexel = ToonTexture.Sample(ToonSampler, float2(lighting, 1.0f - lighting));
 
 	float4 diffuseTexel = DiffuseTexture.Sample(DiffuseSampler, input.Tex);
 	
@@ -77,6 +77,7 @@ PS_OUTPUT PS_MAIN(PS_INPUT input) {
 	color *= Diffuse;
 	color *= diffuseTexel;
 	color.xyz *= toonTexel.xyz;
+	
 	output.Diffuse = color;
 
 	return output;

@@ -29,7 +29,7 @@ layout(binding = 1) uniform sampler2D ToonTexture;
 
 float Lambert(vec3 aNormal, vec3 aToLight) {
 	vec3 normalN = normalize(aNormal);
-	vec3 toLightN = normalize(-LightDirection);
+	vec3 toLightN = normalize(aToLight);
 
 	float lambert = dot(toLightN, normalN);
 	return lambert;
@@ -45,7 +45,7 @@ float HalfLambert(vec3 aNormal, vec3 aToLight) {
 void main() {
 
 	float lighting = HalfLambert(NorWor, -LightDirection);
-	vec4 toonTexel = texture(ToonTexture, vec2(lighting, lighting));
+	vec4 toonTexel = texture(ToonTexture, vec2(lighting, 1.0f - lighting));
 
 	vec4 diffuseTexel = texture(DiffuseTexture, UV);
 	
