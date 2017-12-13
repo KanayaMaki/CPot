@@ -8,6 +8,7 @@ namespace cpot {
 
 struct Material {
 	std::shared_ptr<Texture2D> texture;
+	std::shared_ptr<Texture2D> toonTexture;
 	Color diffuse;
 	Vector3 specular;
 	f32 specularPower;

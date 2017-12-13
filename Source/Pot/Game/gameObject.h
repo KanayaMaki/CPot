@@ -86,11 +86,31 @@ private:
 public:
 	template <typename T>
 	T* GetComponent() {
-		for (u32 i = 0; i < GetComponentNum(); i++) {
+		for (u32 i = 0; i < GetAnyComponentNum(); i++) {
 			Component* lC = mComponents[i];
 			if (lC->CanCast(T::SGetTypeName())) {
 				return (T*)lC;
 			}
+		}
+		return nullptr;
+	}
+	template <typename T>
+	T* GetComponent(u32 aNum) {
+		u32 lNum = 0;
+		for (u32 i = 0; i < GetAnyComponentNum(); i++) {
+			Component* lC = mComponents[i];
+			if (lC->CanCast(T::SGetTypeName())) {
+				if (lNum == aNum) {
+					return (T*)lC;
+				}
+				lNum++;
+			}
+		}
+		return nullptr;
+	}
+	Component* GetAnyComponent(u32 aNum) {
+		if (aNum < GetAnyComponentNum()) {
+			return mComponents[aNum];
 		}
 		return nullptr;
 	}
@@ -103,6 +123,7 @@ public:
 	}
 
 	void AddComponent(Component* aComponent) {
+		aComponent->InitComponent(this);
 		mComponents.PushBack(aComponent);
 	}
 
@@ -111,7 +132,18 @@ public:
 		aComponent->SetDelete();
 	}
 	
-	u32 GetComponentNum() const {
+	template <typename T>
+	u32 GetComponentNum() {
+		u32 lNum = 0;
+		for (u32 i = 0; i < GetAnyComponentNum(); i++) {
+			Component* lC = mComponents[i];
+			if (lC->CanCast(T::SGetTypeName())) {
+				lNum++;
+			}
+		}
+		lNum;
+	}
+	u32 GetAnyComponentNum() const {
 		return mComponents.GetSize();
 	}
 	
@@ -140,6 +172,10 @@ public:
 	}
 	void SetDelete() {
 		mFlags.Stand(cDelete);
+		//所持しているコンポーネントに削除を伝える
+		for (u32 i = 0; i < GetAnyComponentNum(); i++) {
+			GetAnyComponent(i)->SetDelete();
+		}
 	}
 
 	#pragma endregion
@@ -154,6 +190,10 @@ public:
 	}
 	void SetActive(BOOL aIsActive) {
 		mFlags.Flag(cActive, aIsActive);
+		//所持しているコンポーネントにアクティブ状態を伝える
+		for (u32 i = 0; i < GetAnyComponentNum(); i++) {
+			GetAnyComponent(i)->SetGameObjectActive(aIsActive);
+		}
 	}
 
 	#pragma endregion
@@ -213,8 +253,48 @@ public:
 		return nullptr;
 	}
 
+public:
+	void Update() {
+		DeleteGameObject();
+		ToDeleteList();
+	}
+private:
+	void DeleteGameObject() {
+		for (u32 i = 0; i < mDeleteGameObjects.GetSize(); i++) {
+			delete mDeleteGameObjects[i];
+		}
+		mDeleteGameObjects.Clear();
+	}
+	void ToDeleteList() {
+		for (u32 i = 0; i < mGameObjects.GetSize();) {
+			GameObject* lG = mGameObjects[i];
+			if (lG->GetDelete()) {
+				mDeleteGameObjects.PushBack(lG);
+				mGameObjects.Remove(lG);
+			}
+			else {
+				i++;
+			}
+		}
+	}
+
+
+private:
 	Vector<GameObject*> mGameObjects;
+	Vector<GameObject*> mDeleteGameObjects;
 };
 
+
+template <typename T>
+inline T* Component::GetComponent() {
+	return mGameObject->GetComponent<T>();
+}
+template <typename T>
+inline u32 Component::GetComponentNum() {
+	return mGameObject->GetComponentNum<T>();
+}
+inline Transform& Component::GetTransform() {
+	return mGameObject->GetTransform();
+}
 
 }

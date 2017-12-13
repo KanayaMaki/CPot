@@ -201,7 +201,7 @@ BOOL PmxLoader::Load(Buffer& aData) {
 		aData.Read(&mData.materials[i].unionToonFlag, sizeof(u8));
 
 		if (mData.materials[i].unionToonFlag == 0) {
-			aData.Read(&mData.materials[i].toonTexture, TextureIndexByteNum());
+			mData.materials[i].toonTexture = ReadChangeValue(aData, TextureIndexByteNum());
 		}
 		else if (mData.materials[i].unionToonFlag == 1) {
 			aData.Read(&mData.materials[i].toonTexture, sizeof(u8));

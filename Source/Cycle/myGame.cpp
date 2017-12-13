@@ -29,6 +29,11 @@
 
 #include "./Pot/Usefull/path.h"
 
+#include "./Pot/Game/componentSystem.h"
+#include "./Cycle/skywalk.h"
+#include "./Pot/Game/cameraComponent.h"
+#include "./Pot/Game/lightComponent.h"
+
 
 namespace cpot {
 
@@ -140,36 +145,48 @@ struct WVPBuffer {
 	ShaderMatrix4x4 mProjection;
 	ShaderMatrix4x4 mNormalWorld;
 };
-struct DiffuseBuffer {
+struct MaterialBuffer {
 	Color mDiffuse;
 };
-struct TimerBuffer {
+struct OtherBuffer {
+	Vector3 mLightDirection;
+	f32 mDummy0;
 	f32 mTimer;
+	f32 mDummy1[3];
+};
+struct ToonLineBuffer {
+	f32 mLineWidth;
+	f32 mDummy0[3];
 };
 
 VectorSimple<StaticMeshVertex> lBefore;
 VectorSimple<StaticMeshVertex> lAfter;
 VectorSimple<StaticMeshVertex> lNow;
 
-std::shared_ptr<Texture2D> texture;
+std::shared_ptr<Texture2D> whiteTexture;
+std::shared_ptr<Texture2D> diffuseTexture;
+std::shared_ptr<Sampler> diffuseSampler;
+std::shared_ptr<Sampler> toonSampler;
+
 std::shared_ptr<Texture2D> renderTarget;
 std::shared_ptr<Texture2D> depthTexture;
-std::shared_ptr<Sampler> sampler;
 std::shared_ptr<Blend> blend;
 std::shared_ptr<DepthStencil> depthStencil;
+std::shared_ptr<DepthStencil> depthStencilNoWrite;
 std::shared_ptr<ConstantBuffer> wvpBuffer;
-std::shared_ptr<ConstantBuffer> diffuseBuffer;
-std::shared_ptr<ConstantBuffer> timerBuffer;
+std::shared_ptr<ConstantBuffer> materialBuffer;
+std::shared_ptr<ConstantBuffer> otherBuffer;
+std::shared_ptr<ConstantBuffer> toonLineBuffer;
 std::shared_ptr<Viewport> viewport;
 std::shared_ptr<VertexBuffer> vertexBuffer;
 std::shared_ptr<IndexBuffer> indexBuffer;
-std::shared_ptr<Shader> shader;
+std::shared_ptr<Shader> lambertShader;
+std::shared_ptr<Shader> toonShader;
+std::shared_ptr<Shader> toonLineShader;
 std::shared_ptr<Rasterizer> rasterizer;
+std::shared_ptr<Rasterizer> toonLineRasterizer;
 std::shared_ptr<StaticMeshModel> model;
 std::shared_ptr<StaticMeshModel> loadModel;
-PersCamera camera;
-Vector3 cameraLoc;
-Quaternion cameraRot;
 
 Transform planeTransform;
 
@@ -190,6 +207,7 @@ void MyGame::Setting() {
 void MyGame::Init() {
 	//CPOT_LOG("Init!");
 
+	
 	//Loaderのスタート
 	LoaderManager::S().Start(2);
 
@@ -263,14 +281,31 @@ void MyGame::Init() {
 	depthTexture.reset(new Texture2D);
 
 	#ifdef CPOT_ON_DIRECTX11
-	directX11::Texture2DDirectX11Data::S().Regist("test", "./test.png");
 
-	directX11::ShaderDirectX11Data::S().Regist("test",
+	directX11::Texture2DDirectX11Data::S().Regist("test", "./test.png");
+	directX11::Texture2DDirectX11Data::S().Regist("white", "./white.png");
+
+	directX11::ShaderDirectX11Data::S().Regist("Lambert",
 	{
-		{ "test.fx", "VS_TEST" },
-		{ "test.fx", "GS_TEST" },
-		{ "test.fx", "PS_TEST" },
+		{ "./lambert.fx", "VS_MAIN" },
+		{ "./lambert.fx", "GS_MAIN" },
+		{ "./lambert.fx", "PS_MAIN" },
 	});
+
+	directX11::ShaderDirectX11Data::S().Regist("Toon",
+	{
+		{ "./toon.fx", "VS_MAIN" },
+		{ "./toon.fx", "GS_MAIN" },
+		{ "./toon.fx", "PS_MAIN" },
+	});
+
+	directX11::ShaderDirectX11Data::S().Regist("ToonLine",
+	{
+		{ "./toonLine.fx", "VS_MAIN" },
+		{ "./toonLine.fx", "GS_MAIN" },
+		{ "./toonLine.fx", "PS_MAIN" },
+	});
+
 
 	renderTarget->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
 	depthTexture->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, true, true);
@@ -299,38 +334,59 @@ void MyGame::Init() {
 	depthTexture->LoadPlatform();
 	#endif
 
+	whiteTexture.reset(new Texture2D);
+	whiteTexture->Load("white");
 
-	texture.reset(new Texture2D);
-	texture->Load("test");
+	diffuseTexture.reset(new Texture2D);
+	diffuseTexture->Load("test");
 
-	sampler.reset(new Sampler);
-	sampler->Load(Sampler::cClamp);
-	
+	diffuseSampler.reset(new Sampler);
+	diffuseSampler->Load(Sampler::cClamp);
+
+	toonSampler.reset(new Sampler);
+	toonSampler->Load(Sampler::cClamp);
+
 	blend.reset(new Blend);
 	blend->Load(Blend::cNormal);
 
 	depthStencil.reset(new DepthStencil);
 	depthStencil->Load(DepthStencil::cTest);
 
+	depthStencilNoWrite.reset(new DepthStencil);
+	depthStencilNoWrite->Load(DepthStencil::cNoWrite);
+
 	viewport.reset(new Viewport);
 	viewport->Load(Vector2(0.0f, 0.0f), Config::S().GetScreenSize());
 
-	shader.reset(new Shader);
-	shader->Load("test");
+	lambertShader.reset(new Shader);
+	lambertShader->Load("Lambert");
+
+	toonShader.reset(new Shader);
+	toonShader->Load("Toon");
+
+	toonLineShader.reset(new Shader);
+	toonLineShader->Load("ToonLine");
 
 	rasterizer.reset(new Rasterizer);
-	rasterizer->Load(Rasterizer::cSolid, Rasterizer::cCullNone);
+	rasterizer->Load(Rasterizer::cSolid, Rasterizer::cCullCCW);
+
+	toonLineRasterizer.reset(new Rasterizer);
+	toonLineRasterizer->Load(Rasterizer::cSolid, Rasterizer::cCullCW);
 
 	wvpBuffer.reset(new ConstantBuffer);
 	wvpBuffer->Load(new WVPBuffer);
 
-	diffuseBuffer.reset(new ConstantBuffer);
-	diffuseBuffer->Load(new DiffuseBuffer);
-	diffuseBuffer->GetCPUBuffer<DiffuseBuffer>()->mDiffuse = Color::White();
+	materialBuffer.reset(new ConstantBuffer);
+	materialBuffer->Load(new MaterialBuffer);
+	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
 
-	timerBuffer.reset(new ConstantBuffer);
-	timerBuffer->Load(new TimerBuffer);
-	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = 0.0f;
+	otherBuffer.reset(new ConstantBuffer);
+	otherBuffer->Load(new OtherBuffer);
+	otherBuffer->GetCPUBuffer<OtherBuffer>()->mTimer = 0.0f;
+
+	toonLineBuffer.reset(new ConstantBuffer);
+	toonLineBuffer->Load(new ToonLineBuffer);
+	toonLineBuffer->GetCPUBuffer<ToonLineBuffer>()->mLineWidth = 2.0f;
 
 	StaticMeshVertex lVertex[]{
 		{ { -0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 2.0f } },
@@ -344,21 +400,6 @@ void MyGame::Init() {
 	u16 lIndex[]{ 0, 1, 2, 2, 1, 3 };
 	indexBuffer.reset(new IndexBuffer);
 	indexBuffer->Load(IndexBuffer::cU16, 6, IndexBuffer::cTriangleList, lIndex);
-
-	Render::S().SetBlend(blend);
-	Render::S().SetRasterizer(rasterizer);
-	Render::S().SetDepthStencil(depthStencil);
-	Render::S().SetIndexBuffer(indexBuffer);
-	Render::S().SetVertexBuffer(vertexBuffer);
-	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(depthTexture);
-	Render::S().SetTexture2D(texture, 0);
-	Render::S().SetSampler(sampler, 0);
-	Render::S().SetConstantBuffer(wvpBuffer, 0);
-	Render::S().SetConstantBuffer(diffuseBuffer, 1);
-	Render::S().SetConstantBuffer(timerBuffer, 2);
-	Render::S().SetRenderTexture(renderTarget, 0);
-	Render::S().SetShader(shader);
 
 
 	PmxLoader lPmx;
@@ -380,10 +421,22 @@ void MyGame::Init() {
 
 	planeTransform.mScale = Vector3::One() * 10.0f;
 
-	camera.mProjection.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
-	cameraLoc = Vector3(30.0f, 45.0f, -30.0f);
-	cameraRot = Quaternion::FromAxis(cameraRot.Up(), ToRad(-45.0f));
-	cameraRot *= Quaternion::FromAxis(cameraRot.Right(), ToRad(45.0f));
+	{
+		GameObject* lCamera = new GameObject;
+		lCamera->AddComponent<SkyWalk>();
+		lCamera->AddComponent<PersCameraComponent>();
+
+		lCamera->GetComponent<PersCameraComponent>()->mPersCamera.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
+		lCamera->GetTransform().mPosition = Vector3(30.0f, 45.0f, -30.0f);
+		lCamera->GetTransform().mRotation = Quaternion::FromAxis(lCamera->GetTransform().mRotation.Up(), ToRad(-45.0f));
+		lCamera->GetTransform().mRotation *= Quaternion::FromAxis(lCamera->GetTransform().mRotation.Right(), ToRad(45.0f));
+	}
+
+	{
+		GameObject* lLight = new GameObject;
+		lLight->AddComponent<DirectionalLightComponent>();
+		lLight->GetComponent<DirectionalLightComponent>()->mDirectionalLight.SetDirection(-Vector3::One());
+	}
 	
 	#ifdef CPOT_ON_WINDOWS
 	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
@@ -398,6 +451,8 @@ void MyGame::Init() {
 //ゲームの更新
 void MyGame::Update() {
 	
+	ComponentSystem::S().Update();
+
 	//ゲーム終了
 	#pragma region GameEnd
 
@@ -465,124 +520,110 @@ void MyGame::Update() {
 	model->mesh.vertex->Write(&lNow[0]);
 
 	//トランスフォーム
-	mikuRotAnim.ForwardTime(DeltaTime());
-	mikuLocAnim.ForwardTime(DeltaTime());
+	//mikuRotAnim.ForwardTime(DeltaTime());
+	//mikuLocAnim.ForwardTime(DeltaTime());
 	
 	#pragma endregion
 
 
+	auto lCamera = CameraManager::S().GetCamera();
+	if (lCamera) {
+		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = lCamera->GetProjectionMatrix();
+		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = lCamera->GetViewMatrix();
+	}
+	auto lLight = LightManager::S().GetDirectionalLight();
+	if (lLight) {
+		otherBuffer->GetCPUBuffer<OtherBuffer>()->mLightDirection = lLight->GetDirection();
+	}
+	
+	otherBuffer->GetCPUBuffer<OtherBuffer>()->mTimer += DeltaTime() / 4.0f;
+	otherBuffer->GetCPUBuffer<OtherBuffer>()->mTimer = Wrap(otherBuffer->GetCPUBuffer<OtherBuffer>()->mTimer, 1.0f);
 
-
-	const f32 rotSpeed = 50.0f;
-	if (Input::GetButton(windows::cLeft)) {
-		cameraRot *= Quaternion::FromAxis(Vector3::Up(), -ToRad(rotSpeed * DeltaTime()));
-	}
-	if (Input::GetButton(windows::cRight)) {
-		cameraRot *= Quaternion::FromAxis(Vector3::Up(), ToRad(rotSpeed * DeltaTime()));
-	}
-	if (Input::GetButton(windows::cUp)) {
-		cameraRot *= Quaternion::FromAxis(cameraRot.Right(), -ToRad(rotSpeed * DeltaTime()));
-	}
-	if (Input::GetButton(windows::cDown)) {
-		cameraRot *= Quaternion::FromAxis(cameraRot.Right(), ToRad(rotSpeed * DeltaTime()));
-	}
-
-	f32 moveSpeed;
-	if (Input::GetButton(windows::cLeftShift)) {
-		moveSpeed = 20.0f;
-	}
-	else {
-		moveSpeed = 10.0f;
-	}
-
-	if (Input::GetButton(windows::cA)) {
-		cameraLoc += cameraRot.Left() * moveSpeed * DeltaTime();
-	}
-	if (Input::GetButton(windows::cD)) {
-		cameraLoc += cameraRot.Right() * moveSpeed * DeltaTime();
-	}
-	if (Input::GetButton(windows::cW)) {
-		cameraLoc += cameraRot.Forward() * moveSpeed * DeltaTime();
-	}
-	if (Input::GetButton(windows::cS)) {
-		cameraLoc += cameraRot.Back() * moveSpeed * DeltaTime();
-	}
-	if (Input::GetButton(windows::cE)) {
-		cameraLoc += cameraRot.Up() * moveSpeed * DeltaTime();
-	}
-	if (Input::GetButton(windows::cQ)) {
-		cameraLoc += cameraRot.Down() * moveSpeed * DeltaTime();
-	}
-
-	if (Input::GetButton(windows::cT)) {
-		planeTransform.mPosition += Vector3::Up() * moveSpeed * DeltaTime();
-	}
-	if (Input::GetButton(windows::cY)) {
-		planeTransform.mPosition += Vector3::Down() * moveSpeed * DeltaTime();
-	}
-	if (Input::GetButton(windows::cG)) {
-		planeTransform.mRotation *= Quaternion::FromAxis(Vector3::Right(), ToRad(rotSpeed * DeltaTime()));
-	}
-	if (Input::GetButton(windows::cH)) {
-		planeTransform.mRotation *= Quaternion::FromAxis(Vector3::Right(), -ToRad(rotSpeed * DeltaTime()));
-	}
-
-
-	camera.mView.SetLocation(cameraLoc);
-	camera.mView.SetRotation(cameraRot);
-	camera.Update();
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = camera.mProjection.GetMatrix();
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = camera.mView.GetMatrix();
-
-	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer += DeltaTime() / 4.0f;
-	timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer = Wrap(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer, 1.0f);
-	//CPOT_LOG(timerBuffer->GetCPUBuffer<TimerBuffer>()->mTimer);
-
-	diffuseBuffer->Write();
-	timerBuffer->Write();
+	materialBuffer->Write();
+	otherBuffer->Write();
 
 	depthTexture->ClearDepth(1.0f);
 	renderTarget->ClearColor(Color::Blue());
 
-	///*
+	/*
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = planeTransform.GetMatrix();
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(planeTransform.mRotation);
 	wvpBuffer->Write();
+	Render::S().SetShader(lambertShader);
 	Render::S().SetVertexBuffer(vertexBuffer);
 	Render::S().SetIndexBuffer(indexBuffer);
-	Render::S().SetTexture2D(texture, 0);
+	Render::S().SetTexture2D(diffuseTexture, 0);
 	Render::S().SetToDevice();
 	Render::S().DrawIndexed(6, 0);
 	//*/
 
+
+	//PMXの描画
 	///*
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get());
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(mikuRotAnim.Get());
 	wvpBuffer->Write();
+	
+	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::Black();
+	materialBuffer->Write();
+
+	toonLineBuffer->GetCPUBuffer<ToonLineBuffer>()->mLineWidth = 0.1f;
+	toonLineBuffer->Write();
+
+	Render::S().SetBlend(blend);
+	Render::S().SetRasterizer(toonLineRasterizer);
+	Render::S().SetDepthStencil(depthStencilNoWrite);
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
-	
+	Render::S().SetViewPort(viewport, 0);
+	Render::S().SetDepthTexture(depthTexture);
+	Render::S().SetConstantBuffer(wvpBuffer, 0);
+	Render::S().SetConstantBuffer(materialBuffer, 1);
+	Render::S().SetConstantBuffer(otherBuffer, 2);
+	Render::S().SetConstantBuffer(toonLineBuffer, 3);
+	Render::S().SetRenderTexture(renderTarget, 0);
+	Render::S().SetShader(toonLineShader);
+
 	for (u32 i = 0; i < model->submeshNum; i++) {
-		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
 		Render::S().SetToDevice();
 		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
 	}
-	//*/
 
 
-	///*
-	if (loadModel) {
-		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(Quaternion::FromAxis(Vector3::Up(), ToRad(45.0f)), Vector3(20.0f, 0.0f, 0.0f));
-		wvpBuffer->Write();
-		Render::S().SetVertexBuffer(loadModel->mesh.vertex);
-		Render::S().SetIndexBuffer(loadModel->mesh.index);
+	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
+	materialBuffer->Write();
 
-		for (u32 i = 0; i < loadModel->submeshNum; i++) {
-			Render::S().SetTexture2D(loadModel->submesh[i].material.texture, 0);
-			Render::S().SetToDevice();
-			Render::S().DrawIndexed(loadModel->submesh[i].indexCount, loadModel->submesh[i].indexStartCount);
+	Render::S().SetBlend(blend);
+	Render::S().SetRasterizer(rasterizer);
+	Render::S().SetDepthStencil(depthStencil);
+	Render::S().SetVertexBuffer(model->mesh.vertex);
+	Render::S().SetIndexBuffer(model->mesh.index);
+	Render::S().SetViewPort(viewport, 0);
+	Render::S().SetDepthTexture(depthTexture);
+	Render::S().SetSampler(diffuseSampler, 0);
+	Render::S().SetSampler(toonSampler, 1);
+	Render::S().SetConstantBuffer(wvpBuffer, 0);
+	Render::S().SetConstantBuffer(materialBuffer, 1);
+	Render::S().SetConstantBuffer(otherBuffer, 2);
+	Render::S().SetRenderTexture(renderTarget, 0);
+	Render::S().SetShader(toonShader);
+
+	for (u32 i = 0; i < model->submeshNum; i++) {
+		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
+		if (model->submesh[i].material.toonTexture->mTexture.GetTexture()->IsLoaded()) {
+			Render::S().SetTexture2D(model->submesh[i].material.toonTexture, 1);
 		}
+		else {
+			Render::S().SetTexture2D(whiteTexture, 1);
+		}
+		Render::S().SetToDevice();
+		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
 	}
+
 	//*/
 
+
+	ComponentSystem::S().Render();
 
 	Render::S().Present();
 }

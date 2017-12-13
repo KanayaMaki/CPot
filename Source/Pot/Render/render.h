@@ -20,6 +20,7 @@
 #include "./Pot/Render/rasterizer.h"
 #include "./Pot/Render/viewport.h"
 #include "./Pot/Render/camera.h"
+#include "./Pot/Render/light.h"
 
 namespace cpot {
 

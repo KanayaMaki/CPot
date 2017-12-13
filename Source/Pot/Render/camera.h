@@ -39,6 +39,20 @@ inline Matrix4x4 CreateViewMatrix(const Vector3& aLoc, const Quaternion& aRot) {
 }
 
 
+class Camera {
+public:
+	virtual ~Camera() {}
+
+	virtual Matrix4x4 GetViewMatrix() const = 0;
+	virtual Matrix4x4 GetProjectionMatrix() const = 0;
+
+	virtual void SetLocation(const Vector3& aLocation) = 0;
+	virtual void SetRotation(const Quaternion& aRotation) = 0;
+
+	virtual Vector3 GetLocation() const = 0;
+	virtual Quaternion GetRotation() const = 0;
+};
+
 class CameraView {
 public:
 	CameraView() {
@@ -48,20 +62,14 @@ public:
 	void Reset() {
 		mLocation = Vector3::Zero();
 		mRotation = Quaternion::Unit();
-		CalculateMatrix();
-	}
-
-	void Update() {
-		if (IsChanged()) {
-			CalculateMatrix();
-		}
+		Change();
 	}
 
 public:
 	BOOL IsChanged() const { return mChanged; }
 	void Change() { mChanged = true; }
 private:
-	void UnChange() { mChanged = false; }
+	void UnChange() const { mChanged = false; }
 
 public:
 	void SetLocation(const Vector3& aLocation) {
@@ -77,23 +85,33 @@ public:
 		}
 	}
 
+	Vector3 GetLocation() const {
+		return mLocation;
+	}
+	Quaternion GetRotation() const {
+		return mRotation;
+	}
+
 	Matrix4x4 GetMatrix() const {
+		if (IsChanged()) {
+			CalculateMatrix();
+		}
 		return mMatrix;
 	}
 
 public:
-	void CalculateMatrix() {
+	void CalculateMatrix() const {
 		mMatrix = CreateViewMatrix(mLocation, mRotation);
 		UnChange();
 	}
 
 
 private:
-	Matrix4x4 mMatrix;
+	mutable Matrix4x4 mMatrix;
 	Vector3 mLocation;
 	Quaternion mRotation;
 
-	BOOL mChanged;	//行列を更新する必要があるか
+	mutable BOOL mChanged;	//行列を更新する必要があるか
 };
 
 class CameraProjection {
@@ -113,7 +131,7 @@ public:
 	BOOL IsChanged() const { return mChanged; }
 	void Change() { mChanged = true; }
 protected:
-	void UnChange() { mChanged = false; }
+	void UnChange() const { mChanged = false; }
 
 public:
 	f32 GetAspectRatio() const { return mAspectRatio; }
@@ -143,12 +161,12 @@ public:
 
 
 protected:
-	Matrix4x4 mMatrix;
+	mutable Matrix4x4 mMatrix;
 	f32 mAspectRatio;	//アスペクト比
 	f32 mNearClipLen;	//近いクリップ面までの距離
 	f32 mFarClipLen;	//遠いクリップ面までの距離
 
-	BOOL mChanged;	//行列を更新する必要があるか
+	mutable BOOL mChanged;	//行列を更新する必要があるか
 };
 
 class CameraPersProjection : public CameraProjection {
@@ -163,27 +181,23 @@ public:
 		Change();
 	}
 
-	void Update() {
+public:
+	Matrix4x4 GetMatrix() const {
 		if (IsChanged()) {
 			CalculateMatrix();
 		}
-	}
-
-public:
-	Matrix4x4 GetMatrix() const {
 		return mMatrix;
 	}
 
 public:
-	void CalculateMatrix() {
+	void CalculateMatrix() const {
 		mMatrix = CreatePerspectiveProjectionMatrix(mViewAngle, GetAspectRatio(), GetNearClipLen(), GetFarClipLen());
 		UnChange();
 	}
 
-
 public:
-	f32 ViewAngle() { return mViewAngle; }
-	void ViewAngle(f32 aViewAngle) {
+	f32 GetViewAngle() { return mViewAngle; }
+	void SetViewAngle(f32 aViewAngle) {
 		if (mViewAngle != aViewAngle) {
 			mViewAngle = aViewAngle;
 			Change();
@@ -195,7 +209,7 @@ private:
 
 };
 
-class PersCamera {
+class PersCamera : public Camera {
 public:
 	PersCamera() {
 		Reset();
@@ -207,20 +221,97 @@ public:
 		mView.Reset();
 	}
 
-	void Update() {
-		mProjection.Update();
-		mView.Update();
+
+	#pragma region Setter
+public:
+	void SetLocation(const Vector3& aLocation) {
+		mView.SetLocation(aLocation);
+	}
+	void SetRotation(const Quaternion& aRotation) {
+		mView.SetRotation(aRotation);
+	}
+
+	void SetAspectRatio(f32 aWidth, f32 aHeight) {
+		mProjection.SetAspectRatio(aWidth, aHeight);
+	}
+	void SetViewAngle(f32 aViewAngle) {
+		mProjection.SetViewAngle(aViewAngle);
+	}
+
+	#pragma endregion
+
+
+	#pragma region Getter
+public:
+	Matrix4x4 GetViewMatrix() const override {
+		return mView.GetMatrix();
+	}
+	Matrix4x4 GetProjectionMatrix() const override {
+		return mProjection.GetMatrix();
+	}
+
+	Vector3 GetLocation() const override {
+		return mView.GetLocation();
+	}
+	Quaternion GetRotation() const override {
+		return mView.GetRotation();
+	}
+
+	f32 GetAspectRatio() const { return mProjection.GetAspectRatio(); }
+	f32 GetViewAngle() { return mProjection.GetViewAngle(); }
+
+	#pragma endregion
+
+
+	//フィールド
+	#pragma region Field
+public:
+	CameraPersProjection mProjection;
+	CameraView mView;
+
+	#pragma endregion
+};
+
+
+class CameraManager : public Singleton<CameraManager> {
+	friend class Singleton<CameraManager>;
+
+private:
+	CameraManager() {
+		Reset();
 	}
 
 public:
-	Vector3 ProjectionLocation(const Vector3& aLocation) const {
-		Vector4 proj = Vector4::FromVector3(aLocation) * mView.GetMatrix() * mProjection.GetMatrix();
-		Vector3 projLoc = proj.XYZ() / proj.w;
-		return projLoc;
+	void Reset() {
+		for (u32 i = 0; i < cCameraMaxNum; i++) {
+			mCamera[i] = nullptr;
+		}
 	}
 
-	CameraPersProjection mProjection;
-	CameraView mView;
+public:
+	static const u32 cCameraMaxNum = 16;
+
+	Camera* GetCamera() const {
+		for (u32 i = 0; i < cCameraMaxNum; i++) {
+			if (mCamera[i] != nullptr) {
+				return mCamera[i];
+			}
+		}
+		return nullptr;
+	}
+	Camera* GetCamera(u32 aIndex) const {
+		CPOT_ASSERT(aIndex < cCameraMaxNum);
+		return mCamera[aIndex];
+	}
+
+	void SetCamera(Camera* aCamera, u32 aIndex) {
+		CPOT_ASSERT(aIndex < cCameraMaxNum);
+		mCamera[aIndex] = aCamera;
+	}
+
+
+private:
+	Camera* mCamera[cCameraMaxNum];
 };
 
 

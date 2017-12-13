@@ -11,6 +11,7 @@ struct TextureCPU {
 
 struct MaterialCPU {
 	TextureCPU texture;
+	TextureCPU toonTexture;
 	Color diffuse;
 	Vector3 specular;
 	f32 specularPower;

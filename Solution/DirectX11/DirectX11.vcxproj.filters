@@ -552,6 +552,24 @@
     <ClInclude Include="..\..\Source\Pot\Game\renderer.h">
       <Filter>Source\Pot\Game</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\componentSystem.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cycle\skywalk.h">
+      <Filter>Source\Cycle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\cameraComponent.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\light.h">
+      <Filter>Source\Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\type.h">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\lightComponent.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">
@@ -635,6 +653,12 @@
     <ClCompile Include="..\..\Source\Pot\Game\renderer.cpp">
       <Filter>Source\Pot\Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\cameraComponent.cpp">
+      <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\lightComponent.cpp">
+      <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\Source\Pot\Windows\Resource\Icon.rc">
@@ -647,7 +671,16 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\Env\test.fx">
+    <FxCompile Include="..\..\Env\toon.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Env\lambert.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Env\union.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Env\toonLine.fx">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

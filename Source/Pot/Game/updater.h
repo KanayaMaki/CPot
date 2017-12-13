@@ -58,6 +58,8 @@ private:
 		mUpdaterNowFrame.Remove(aUpdater);
 		mUpdater.Remove(aUpdater);
 	}
+
+public:
 	void Clear() {
 		mUpdater.Clear();
 		mUpdaterNowFrame.Clear();
@@ -65,7 +67,7 @@ private:
 
 	#pragma endregion
 
-
+public:
 	void Update() {
 		Merge();	//前のフレームに追加されたアップデータを統合する
 		Sort();	//優先度順に並び替える

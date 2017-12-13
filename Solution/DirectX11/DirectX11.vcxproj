@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Cycle\myGame.h" />
+    <ClInclude Include="..\..\Source\Cycle\skywalk.h" />
     <ClInclude Include="..\..\Source\Pot\Animation\animation.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\atom.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\bitflag.h" />
@@ -43,6 +44,7 @@
     <ClInclude Include="..\..\Source\Pot\Atom\Standard\toStringStandard.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\string.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\transform.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\type.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\typedef.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\vector.h" />
     <ClInclude Include="..\..\Source\Pot\Audio\audio.h" />
@@ -58,9 +60,12 @@
     <ClInclude Include="..\..\Source\Pot\File\file.h" />
     <ClInclude Include="..\..\Source\Pot\File\Standard\fileStandard.h" />
     <ClInclude Include="..\..\Source\Pot\Fps\fps.h" />
+    <ClInclude Include="..\..\Source\Pot\Game\cameraComponent.h" />
     <ClInclude Include="..\..\Source\Pot\Game\component.h" />
+    <ClInclude Include="..\..\Source\Pot\Game\componentSystem.h" />
     <ClInclude Include="..\..\Source\Pot\Game\game.h" />
     <ClInclude Include="..\..\Source\Pot\Game\gameObject.h" />
+    <ClInclude Include="..\..\Source\Pot\Game\lightComponent.h" />
     <ClInclude Include="..\..\Source\Pot\Game\renderer.h" />
     <ClInclude Include="..\..\Source\Pot\Game\unique.h" />
     <ClInclude Include="..\..\Source\Pot\Game\updater.h" />
@@ -131,6 +136,7 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\vertexBufferDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\viewportDirectX11.h" />
     <ClInclude Include="..\..\Source\Pot\Render\indexBuffer.h" />
+    <ClInclude Include="..\..\Source\Pot\Render\light.h" />
     <ClInclude Include="..\..\Source\Pot\Render\rasterizer.h" />
     <ClInclude Include="..\..\Source\Pot\Render\render.h" />
     <ClInclude Include="..\..\Source\Pot\Render\sampler.h" />
@@ -171,8 +177,10 @@
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.cpp" />
     <ClCompile Include="..\..\Source\Pot\Config\Windows\configWindows.cpp" />
     <ClCompile Include="..\..\Source\Pot\Fps\fps.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Game\cameraComponent.cpp" />
     <ClCompile Include="..\..\Source\Pot\Game\component.cpp" />
     <ClCompile Include="..\..\Source\Pot\Game\gameObject.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Game\lightComponent.cpp" />
     <ClCompile Include="..\..\Source\Pot\Game\renderer.cpp" />
     <ClCompile Include="..\..\Source\Pot\Game\updater.cpp" />
     <ClCompile Include="..\..\Source\Pot\Input\Windows\inputWindows.cpp" />
@@ -200,7 +208,31 @@
     <Image Include="..\..\Source\Pot\Windows\Resource\icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\Env\test.fx">
+    <FxCompile Include="..\..\Env\lambert.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\..\Env\toon.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\..\Env\toonLine.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\..\Env\union.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

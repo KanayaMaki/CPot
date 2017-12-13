@@ -208,18 +208,6 @@ public:
 		return mM.T();
 	}
 
-	const ShaderMatrix4x4& operator *=(const Matrix4x4& aM) {
-		Matrix4x4 lRes = (*this);
-		lRes *= aM;
-		*this = lRes;
-		return *this;
-	}
-	ShaderMatrix4x4 operator *(const Matrix4x4& aM) {
-		ShaderMatrix4x4 lRes = *this;
-		lRes *= aM;
-		return lRes;
-	}
-
 private:
 	Matrix4x4 mM;
 };

@@ -42,6 +42,15 @@ public:
 				PathString lPath = Path::FromRelative(aPmx.fileName, lTextureFileName);
 				aMesh.submesh[i].material.texture.name = lPath.Get();
 			}
+
+			//トゥーンテクスチャ名の読み込み
+			s32 lToonTextureIndex = aPmx.materials[i].toonTexture;
+			if (lToonTextureIndex != -1) {
+				const CHAR* lToonTextureFileName = &(aPmx.textures[lToonTextureIndex].fileName.buf[0]);
+				PathString lPath = Path::FromRelative(aPmx.fileName, lToonTextureFileName);
+				aMesh.submesh[i].material.toonTexture.name = lPath.Get();
+			}
+
 			
 			//インデックスカウントの読み込み
 			aMesh.submesh[i].indexCount = aPmx.materials[i].indexNum;

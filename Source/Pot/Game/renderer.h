@@ -21,6 +21,9 @@ public:
 	#pragma region Event
 public:
 	//描画処理
+	virtual void OnStart() {}
+
+	//描画処理
 	virtual void OnRender() {}
 
 	#pragma endregion
@@ -52,6 +55,8 @@ private:
 		mRendererNowFrame.Remove(aRenderer);
 		mRenderer.Remove(aRenderer);
 	}
+
+public:
 	void Clear() {
 		mRenderer.Clear();
 		mRendererNowFrame.Clear();
@@ -60,14 +65,22 @@ private:
 	#pragma endregion
 
 
+public:
 	void Update() {
 		Merge();	//前のフレームに追加されたレンダラを統合する
 		Sort();	//優先度順に並び替える
+	}
+
+	void Render() {
 		RenderRenderer();	//レンダラを描画する
 	}
 
 private:
 	void Merge() {
+		for (u32 i = 0; i < mRendererNowFrame.GetSize(); i++) {
+			mRenderer[i]->OnStart();
+		}
+
 		//統合
 		while(mRendererNowFrame.GetSize() != 0) {
 			mRenderer.PushBack(mRendererNowFrame.PopBack());
@@ -86,7 +99,7 @@ private:
 
 
 private:
-	Vector<Renderer*> mRendererNowFrame;	//新しく追加されたアップデーター
+	Vector<Renderer*> mRendererNowFrame;	//新しく追加されたレンダラー
 	Vector<Renderer*> mRenderer;
 };
 
