@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ModelLoader">
+      <UniqueIdentifier>{3acdb49d-000c-4b99-a563-588475f83a8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Atom">
+      <UniqueIdentifier>{19c5d501-c74b-4a50-bd68-40417a7f7af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File">
+      <UniqueIdentifier>{d089a6f0-d647-4cea-8ce1-710d0fde53fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Out">
+      <UniqueIdentifier>{8ac4490b-9d0e-49b6-8c27-a1796ee74db2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\CharCode.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\Material.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmdData.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxData.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxLoader.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxToMesh.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\SkinMeshModel.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\StaticMeshModel.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\SubMesh.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\Windows\CharCodeWindows.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\File\Android\fileAndroid.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\File\file.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\File\Standard\fileStandard.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\atom.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\bitflag.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\color.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\defines.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\function.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\hash.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\hashString.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\math.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\matrix4x4.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\quaternion.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\Standard\mathStandard.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\Standard\toStringStandard.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\string.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\transform.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\type.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\typedef.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\vector.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Out\Android\outLogAndroid.h">
+      <Filter>Out</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Out\out.h">
+      <Filter>Out</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.h">
+      <Filter>Out</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.h">
+      <Filter>Out</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Pot\ModelLoader\PmxLoader.cpp">
+      <Filter>ModelLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Atom\hash.cpp">
+      <Filter>Atom</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.cpp">
+      <Filter>Out</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.cpp">
+      <Filter>Out</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -54,6 +54,7 @@ public:
 			lRes.Pop(1);
 		}
 
+		if (lRes.GetLength() == 0) return lRes;
 		return lRes + aNewEx;
 	}
 };

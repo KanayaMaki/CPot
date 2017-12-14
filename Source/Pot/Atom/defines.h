@@ -16,6 +16,8 @@ namespace cpot {
 
 #ifdef _WINDOWS
 #define CPOT_ON_WINDOWS
+#elif defined _CONSOLE
+#define CPOT_ON_WINDOWS
 #elif defined CPOT_ANDROID
 #define CPOT_ON_ANDROID
 #endif
