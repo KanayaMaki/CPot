@@ -450,7 +450,7 @@ void MyGame::Init() {
 	{
 		GameObject* lPlayer = new GameObject;
 		lPlayer->SetName("Player");
-		lPlayer->AddComponent<PlayerComponent>();
+		//lPlayer->AddComponent<PlayerComponent>();
 	}
 
 	{
@@ -461,7 +461,7 @@ void MyGame::Init() {
 		lCamera->AddComponent<PersCameraComponent>();
 
 		lCamera->GetComponent<PersCameraComponent>()->mPersCamera.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
-		lCamera->GetTransform().mPosition = Vector3(30.0f, 45.0f, -30.0f);
+		lCamera->GetTransform().mPosition = Vector3(1.0f, 1.0f, -1.0f) * 10.0f + Vector3::Zero().Y(20.0f);
 		lCamera->GetTransform().mRotation = Quaternion::FromAxis(lCamera->GetTransform().mRotation.Up(), ToRad(-45.0f));
 		lCamera->GetTransform().mRotation *= Quaternion::FromAxis(lCamera->GetTransform().mRotation.Right(), ToRad(45.0f));
 	}
@@ -545,7 +545,7 @@ void MyGame::Update() {
 		f32 t = mikuMorphAnim.Get();
 		lNow[i].position = Lerp(lBefore[i].position, lAfter[i].position, t);
 	}
-	//model->mesh.vertex->Write(&lNow[0]);
+	model->mesh.vertex->Write(&lNow[0]);
 
 	//トランスフォーム
 	mikuRotAnim.ForwardTime(DeltaTime());

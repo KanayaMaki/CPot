@@ -240,6 +240,11 @@ public:
 	//ƒwƒ‹ƒpŠÖ”
 	#pragma region Helper
 
+	friend f32 BetweenAngle(const Quaternion& aFrom, const Quaternion& aTo) {
+		f32 lCosTheta = aFrom.Dot(aTo);
+		return Acos(Clamp(lCosTheta, -1.0f, 1.0f));
+	}
+
 	//Š„‡‚Å•âŠ®‚·‚éB‹…–Ê•âŠÔ
 	friend Quaternion SLerp(const Quaternion& aFrom, const Quaternion& aTo, f32 aRate) {
 
