@@ -545,7 +545,7 @@ void MyGame::Update() {
 		f32 t = mikuMorphAnim.Get();
 		lNow[i].position = Lerp(lBefore[i].position, lAfter[i].position, t);
 	}
-	model->mesh.vertex->Write(&lNow[0]);
+	//model->mesh.vertex->Write(&lNow[0]);
 
 	//トランスフォーム
 	mikuRotAnim.ForwardTime(DeltaTime());

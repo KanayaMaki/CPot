@@ -59,6 +59,13 @@ public:
 		v[3][3] = 1.0f;
 	}
 
+	Matrix4x4(const Vector4& aV0, const Vector4& aV1, const Vector4& aV2, const Vector4& aV3) {
+		vec[0] = aV0;
+		vec[1] = aV1;
+		vec[2] = aV2;
+		vec[3] = aV3;
+	}
+
 	Matrix4x4(const Quaternion& aRotation) {
 		*this = FromRotate(aRotation);
 	}
@@ -158,6 +165,20 @@ public:
 		return tRes;
 	}
 
+	const Matrix4x4& operator *=(f32 aV) {
+		for (s32 i = 0; i < 4; i++) {
+			for (s32 j = 0; j < 4; j++) {
+				v[i][j] *= aV;
+			}
+		}
+		return *this;
+	}
+	Matrix4x4 operator *(f32 aV) {
+		Matrix4x4 lResult = *this;
+		lResult *= aV;
+		return lResult;
+	}
+
 	#pragma endregion
 
 
@@ -167,23 +188,77 @@ public:
 public:
 	//“]’us—ñ‚ðŽæ“¾
 	Matrix4x4 T() const {
-		Matrix4x4 tRes(-1);
+		Matrix4x4 lResult(-1);
 		for (s32 i = 0; i < 4; i++) {
 			for (s32 j = 0; j < 4; j++) {
-				tRes.v[i][j] = v[j][i];
+				lResult.v[i][j] = v[j][i];
 			}
 		}
-		return tRes;
+		return lResult;
 	}
 
 
 	//‹ts—ñ‚ðŽæ“¾
 	Matrix4x4 Inverse() const {
-		Matrix4x4 tRes;
 		
-		//	TODOF‹ts—ñ‚ÌŒvŽZ
+		f32 coef00 = v[2][2] * v[3][3] - v[3][2] * v[2][3];
+		f32 coef02 = v[1][2] * v[3][3] - v[3][2] * v[1][3];
+		f32 coef03 = v[1][2] * v[2][3] - v[2][2] * v[1][3];
 
-		return tRes;
+		f32 coef04 = v[2][1] * v[3][3] - v[3][1] * v[2][3];
+		f32 coef06 = v[1][1] * v[3][3] - v[3][1] * v[1][3];
+		f32 coef07 = v[1][1] * v[2][3] - v[2][1] * v[1][3];
+
+		f32 coef08 = v[2][1] * v[3][2] - v[3][1] * v[2][2];
+		f32 coef10 = v[1][1] * v[3][2] - v[3][1] * v[1][2];
+		f32 coef11 = v[1][1] * v[2][2] - v[2][1] * v[1][2];
+
+		f32 coef12 = v[2][0] * v[3][3] - v[3][0] * v[2][3];
+		f32 coef14 = v[1][0] * v[3][3] - v[3][0] * v[1][3];
+		f32 coef15 = v[1][0] * v[2][3] - v[2][0] * v[1][3];
+
+		f32 coef16 = v[2][0] * v[3][2] - v[3][0] * v[2][2];
+		f32 coef18 = v[1][0] * v[3][2] - v[3][0] * v[1][2];
+		f32 coef19 = v[1][0] * v[2][2] - v[2][0] * v[1][2];
+
+		f32 coef20 = v[2][0] * v[3][1] - v[3][0] * v[2][1];
+		f32 coef22 = v[1][0] * v[3][1] - v[3][0] * v[1][1];
+		f32 coef23 = v[1][0] * v[2][1] - v[2][0] * v[1][1];
+
+
+		Vector4 fac0(coef00, coef00, coef02, coef03);
+		Vector4 fac1(coef04, coef04, coef06, coef07);
+		Vector4 fac2(coef08, coef08, coef10, coef11);
+		Vector4 fac3(coef12, coef12, coef14, coef15);
+		Vector4 fac4(coef16, coef16, coef18, coef19);
+		Vector4 fac5(coef20, coef20, coef22, coef23);
+
+		Vector4 vec0(v[1][0], v[0][0], v[0][0], v[0][0]);
+		Vector4 vec1(v[1][1], v[0][1], v[0][1], v[0][1]);
+		Vector4 vec2(v[1][2], v[0][2], v[0][2], v[0][2]);
+		Vector4 vec3(v[1][3], v[0][3], v[0][3], v[0][3]);
+
+
+		Vector4 inv0(vec1 * fac0 - vec2 * fac1 + vec3 * fac2);
+		Vector4 inv1(vec0 * fac0 - vec2 * fac3 + vec3 * fac4);
+		Vector4 inv2(vec0 * fac1 - vec1 * fac3 + vec3 * fac5);
+		Vector4 inv3(vec0 * fac2 - vec1 * fac4 + vec2 * fac5);
+
+		Vector4 signA(1.0f, -1.0f, 1.0f, -1.0f);
+		Vector4 signB(-1.0f, 1.0f, -1.0f, 1.0f);
+
+		Matrix4x4 inverse(inv0 * signA, inv1 * signB, inv2 * signA, inv3 * signB);
+		Vector4 dot0(v[0][0] * inverse.v[0][0], v[0][1] * inverse.v[1][0], v[0][2] * inverse.v[2][0], v[0][3] * inverse.v[3][0]);
+
+		f32 dot = dot0.x + dot0.y + dot0.z + dot0.w;
+
+		if (IsZero(dot)) {
+			return Unit();
+		}
+
+		f32 oneOverDeterminant = 1.0f / dot;
+
+		return inverse * oneOverDeterminant;
 	}
 
 	#pragma endregion

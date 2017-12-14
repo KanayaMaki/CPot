@@ -67,7 +67,8 @@ public:
 			GetTransform().mPosition += lSpeed;
 			if (NotZero(lSpeed.Len())) {
 				//TODO ˆÚ“®•ûŒü‚É‰ñ“]‚·‚é
-				//GetTransform().mRotation = Quaternion::
+				Quaternion lTargetRotation = Quaternion::BetweenVector(Vector3::Forward(), lSpeed);
+				GetTransform().mRotation = SLerpLimit(GetTransform().mRotation, lTargetRotation, ToRad(90.0f) * DeltaTime());
 			}
 		}
 	}

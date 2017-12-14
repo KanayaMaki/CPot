@@ -123,6 +123,10 @@ public:
 		return tRes;
 	}
 
+	f32 Dot(const Quaternion& aOther) const {
+		return v.x * aOther.v.x + v.y * aOther.v.y + v.z * aOther.v.z + w * aOther.w;
+	}
+
 	#pragma endregion
 
 
@@ -132,9 +136,9 @@ public:
 	//軸と回転量から作成する
 	static Quaternion FromAxis(const Vector3& aV, f32 aRad) {
 		Quaternion tRes;
-		f32 tHalfRad = -aRad / 2.0f;
+		f32 tHalfRad = aRad / 2.0f;
 		tRes.w = Cos(tHalfRad);
-		tRes.v = aV.Normal() * Sin(tHalfRad);
+		tRes.v = -aV.Normal() * Sin(tHalfRad);	//左手系で計算するため、軸を逆向きにする？こうするとうまくいく
 		return tRes;
 	}
 
@@ -147,7 +151,31 @@ public:
 	}
 
 	//ベクター同士の差から作成
-	
+	static Quaternion BetweenVector(const Vector3& aFrom, const Vector3& aTo) {
+		Vector3 lFrom = aFrom.Normal();
+		Vector3 lTo = aTo.Normal();
+
+		f32 lCosTheta = lFrom.Dot(lTo);
+		Vector3 lRotateAxis;
+
+		//ベクトルが反対方向を向いている場合
+		if (lCosTheta < -1 + 0.001f) {
+			lRotateAxis = Vector3(0.0f, 0.0f, 1.0f).Cross(lFrom);
+			if (lRotateAxis.LenQuad() < 0.01f) {
+				lRotateAxis = Vector3(1.0f, 0.0f, 0.0f).Cross(lFrom);
+			}
+			lRotateAxis = lRotateAxis.Normal();
+			return FromAxis(lRotateAxis, ToRad(180.0f));
+		}
+
+		lRotateAxis = lFrom.Cross(lTo);
+
+		f32 lAngle = Acos(lCosTheta);	//二つの回転の間の角度
+
+		return FromAxis(lRotateAxis, lAngle);
+	}
+
+
 	#pragma endregion
 
 
@@ -212,6 +240,7 @@ public:
 	//ヘルパ関数
 	#pragma region Helper
 
+	//割合で補完する。球面補間
 	friend Quaternion SLerp(const Quaternion& aFrom, const Quaternion& aTo, f32 aRate) {
 
 		f64 cosom = aFrom.v.x * aTo.v.x + aFrom.v.y * aTo.v.y +
@@ -254,6 +283,42 @@ public:
 		tRes.v.z = f32( scale0 * aFrom.v.z + scale1 * aTo1[2] );
 		tRes.w = f32( scale0 * aFrom.w + scale1 * aTo1[3] );
 		return tRes.Normal();
+	}
+
+	//最大角度まで補完する。球面補間
+	friend Quaternion SLerpLimit(const Quaternion& aFrom, const Quaternion& aTo, f32 aMaxRadian) {
+
+		Quaternion lFrom = aFrom;
+		Quaternion lTo = aTo;
+
+		//
+		if (aMaxRadian < 0.001f) {
+			return lFrom;
+		}
+
+		f32 lCosTheta = lFrom.Dot(lTo);
+
+		//二つの回転がほぼ同じ場合
+		if (lCosTheta > 0.9999f) {
+			return lTo;
+		}
+
+		//短いほうの経路を補完するようにする
+		if (lCosTheta < 0.0f) {
+			lFrom = -lFrom;
+			lCosTheta *= -1.0f;
+		}
+
+		f32 lBetweenRadian = Acos(lCosTheta);	//二つの回転の間の角度
+
+		//到着する場合
+		if (lBetweenRadian < aMaxRadian) {
+			return lTo;
+		}
+
+		f32 lT = aMaxRadian / lBetweenRadian;
+
+		return SLerp(aFrom, aTo, lT);
 	}
 
 	#pragma endregion

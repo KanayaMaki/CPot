@@ -942,6 +942,19 @@ public:
 		return tResult;
 	}
 
+	const Vector4& operator *=(const Vector4& aVal) {
+		x *= aVal.x;
+		y *= aVal.y;
+		z *= aVal.z;
+		w *= aVal.w;
+		return *this;
+	}
+	Vector4 operator *(const Vector4& aVal) const {
+		Vector4 tResult = *this;
+		tResult *= aVal;
+		return tResult;
+	}
+
 	#pragma endregion
 
 	
