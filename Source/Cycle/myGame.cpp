@@ -340,9 +340,9 @@ void MyGame::Init() {
 
 	openGL::ShaderData::S().Regist("ToonLine",
 	{
-		{ "toon.vert" },
+		{ "toonLine.vert" },
 		{ "" },
-		{ "toon.frag" },
+		{ "toonLine.frag" },
 		lInputLayout
 	});
 
@@ -528,13 +528,13 @@ void MyGame::Update() {
 	mikuMorphAnim.ForwardTime(DeltaTime());
 	for (u32 i = 0; i < lNow.GetSize(); i++) {
 		f32 t = mikuMorphAnim.Get();
-		lNow[i].position = lBefore[i].position * (1.0f - t) + lAfter[i].position * t;
+		lNow[i].position = Lerp(lBefore[i].position, lAfter[i].position, t);
 	}
-	model->mesh.vertex->Write(&lNow[0]);
+	//model->mesh.vertex->Write(&lNow[0]);
 
 	//トランスフォーム
-	mikuRotAnim.ForwardTime(DeltaTime());
-	mikuLocAnim.ForwardTime(DeltaTime());
+	//mikuRotAnim.ForwardTime(DeltaTime());
+	//mikuLocAnim.ForwardTime(DeltaTime());
 	
 	#pragma endregion
 
@@ -595,7 +595,7 @@ void MyGame::Update() {
 	wvpBuffer->Write();
 	
 
-	/*
+	///*
 	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::Black();
 	materialBuffer->Write();
 

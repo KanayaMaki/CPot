@@ -5,11 +5,9 @@ vec4 mul(vec4 v, mat4x4 m) {
 }
 
 
-layout(location = 0) in vec3 vertexPosition_MS;
-layout(location = 1) in vec3 vertexNormal_MS;
-layout(location = 2) in vec2 vertexUV;
-
-out vec2 UV;
+layout(location = 0) in vec3 PosMod;
+layout(location = 1) in vec3 NorMod;
+layout(location = 2) in vec2 UVMod;
 
 layout(binding = 0, column_major) uniform Data {
     mat4x4  World;
@@ -21,13 +19,22 @@ layout(binding = 1) uniform Material {
     vec4 Diffuse;
 };
 layout(binding = 2) uniform Other {
+	vec3 LightDirection;
+	float _Other_Dummy0;
     float Timer;
+};
+layout(binding = 3) uniform Toon {
+    float LineWidth;
+	vec3 _Toon_Dummy0;
 };
 
 void main() {
-	vec4 pos = mul(vec4(vertexPosition_MS, 1), World);
-	pos = mul(pos, View);
-	gl_Position =  mul(pos, Proj);
-	//gl_Position = vec4(vertexPosition_MS, 1);
-	UV = vertexUV;
+
+	vec3 lPosModAdd = PosMod + normalize(NorMod) * LineWidth;
+
+	vec4 lPosWor = mul(vec4(lPosModAdd, 1), World);
+	vec4 lPosView = mul(lPosWor, View);
+	vec4 lPosProj = mul(lPosView, Proj);
+
+	gl_Position =  lPosProj;
 }
