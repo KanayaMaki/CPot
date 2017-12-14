@@ -20,9 +20,6 @@ public:
 	//呼び出される関数
 	#pragma region Event
 public:
-	//OnStartの前に呼び出される
-	virtual void OnAwake() {}
-
 	//最初の更新の前に呼び出される
 	virtual void OnStart() {}
 
@@ -76,11 +73,6 @@ public:
 
 private:
 	void Merge() {
-
-		//OnAwakeの呼び出し
-		for (u32 i = 0; i < mUpdaterNowFrame.GetSize(); i++) {
-			mUpdaterNowFrame[i]->OnAwake();
-		}
 
 		//OnStartの呼び出し
 		for (u32 i = 0; i < mUpdaterNowFrame.GetSize(); i++) {

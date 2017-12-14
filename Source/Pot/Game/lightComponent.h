@@ -21,8 +21,13 @@ class DirectionalLightComponent : public LightComponent {
 	CPOT_TYPE(DirectionalLightComponent, LightComponent)
 
 public:
+	void OnStart() override {
+		mDirection = -Vector3::One();
+	}
+
+public:
 	void OnUpdate() override {
-		
+		mDirectionalLight.SetDirection(GetTransform().mRotation.Rotate(mDirection));
 	}
 
 	Light* GetLight() const override {
@@ -30,6 +35,15 @@ public:
 	}
 
 public:
+	Vector3 GetDirection() const {
+		return mDirection;
+	}
+	void SetDirection(const Vector3& aDirection) {
+		mDirection = aDirection;
+	}
+
+private:
+	Vector3 mDirection;
 	DirectionalLight mDirectionalLight;
 };
 

@@ -555,9 +555,6 @@
     <ClInclude Include="..\..\Source\Pot\Game\componentSystem.h">
       <Filter>Source\Pot\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Cycle\skywalk.h">
-      <Filter>Source\Cycle</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Game\cameraComponent.h">
       <Filter>Source\Pot\Game</Filter>
     </ClInclude>
@@ -569,6 +566,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Game\lightComponent.h">
       <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cycle\autoRotateComponent.h">
+      <Filter>Source\Cycle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cycle\skyWalkComponent.h">
+      <Filter>Source\Cycle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

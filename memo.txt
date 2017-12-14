@@ -551,4 +551,8 @@ m->Load("");
 	Component
 		初期化時、Listへの追加
 		Delete時、Listからの削除
-		
+
+	Updater
+		OnUpdate→アップデート
+		デフォルトコンストラクタで初期化
+		OnStartで、他のオブジェクトへの参照をもらってもいい

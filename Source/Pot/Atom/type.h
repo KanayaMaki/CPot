@@ -25,6 +25,7 @@ using Type = HashString<28>;
 #pragma region Base
 
 #define CPOT_TYPE_BASE(THIS)									\
+	using This = THIS;											\
 public:															\
 	static const Type& SGetTypeName() {							\
 		static Type t(CPOT_NAME_EXTEND(THIS));					\
@@ -54,6 +55,8 @@ private:
 
 
 #define CPOT_TYPE(THIS, SUPER)									\
+	using This = THIS;											\
+	using Super = SUPER;										\
 public:															\
 	static const Type& SGetTypeName() {							\
 		static Type t(CPOT_NAME_EXTEND(THIS));					\
@@ -84,6 +87,7 @@ private:
 
 
 #define CPOT_TYPE_DOUBLE(THIS, SUPER1, SUPER2)					\
+	using This = THIS;											\
 public:															\
 	static const Type& SGetTypeName() {							\
 		static Type t(CPOT_NAME_EXTEND(THIS));					\

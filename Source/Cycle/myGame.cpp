@@ -30,7 +30,8 @@
 #include "./Pot/Usefull/path.h"
 
 #include "./Pot/Game/componentSystem.h"
-#include "./Cycle/skywalk.h"
+#include "./Cycle/skyWalkComponent.h"
+#include "./Cycle/autoRotateComponent.h"
 #include "./Pot/Game/cameraComponent.h"
 #include "./Pot/Game/lightComponent.h"
 
@@ -436,7 +437,7 @@ void MyGame::Init() {
 
 	{
 		GameObject* lCamera = new GameObject;
-		lCamera->AddComponent<SkyWalk>();
+		lCamera->AddComponent<SkyWalkComponent>();
 		lCamera->AddComponent<PersCameraComponent>();
 
 		lCamera->GetComponent<PersCameraComponent>()->mPersCamera.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
@@ -448,7 +449,10 @@ void MyGame::Init() {
 	{
 		GameObject* lLight = new GameObject;
 		lLight->AddComponent<DirectionalLightComponent>();
-		lLight->GetComponent<DirectionalLightComponent>()->mDirectionalLight.SetDirection(-Vector3::One());
+		lLight->GetComponent<DirectionalLightComponent>()->SetDirection(-Vector3::One());
+
+		lLight->AddComponent<AutoRotateComponent>();
+		lLight->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(90.0f)));
 	}
 	
 	#ifdef CPOT_ON_WINDOWS
