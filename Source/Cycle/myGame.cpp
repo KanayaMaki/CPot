@@ -32,6 +32,7 @@
 #include "./Pot/Game/componentSystem.h"
 #include "./Cycle/skyWalkComponent.h"
 #include "./Cycle/autoRotateComponent.h"
+#include "./Cycle/playerComponent.h"
 #include "./Pot/Game/cameraComponent.h"
 #include "./Pot/Game/lightComponent.h"
 
@@ -435,9 +436,28 @@ void MyGame::Init() {
 
 	planeTransform.mScale = Vector3::One() * 10.0f;
 
+	
+	{
+		GameObject* lLight = new GameObject;
+		lLight->SetName("Light");
+		lLight->AddComponent<DirectionalLightComponent>();
+		lLight->GetComponent<DirectionalLightComponent>()->SetDirection(-Vector3::One());
+
+		lLight->AddComponent<AutoRotateComponent>();
+		lLight->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(90.0f)));
+	}
+	
+	{
+		GameObject* lPlayer = new GameObject;
+		lPlayer->SetName("Player");
+		lPlayer->AddComponent<PlayerComponent>();
+	}
+
 	{
 		GameObject* lCamera = new GameObject;
+		lCamera->SetName("Camera");
 		lCamera->AddComponent<SkyWalkComponent>();
+
 		lCamera->AddComponent<PersCameraComponent>();
 
 		lCamera->GetComponent<PersCameraComponent>()->mPersCamera.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
@@ -446,15 +466,6 @@ void MyGame::Init() {
 		lCamera->GetTransform().mRotation *= Quaternion::FromAxis(lCamera->GetTransform().mRotation.Right(), ToRad(45.0f));
 	}
 
-	{
-		GameObject* lLight = new GameObject;
-		lLight->AddComponent<DirectionalLightComponent>();
-		lLight->GetComponent<DirectionalLightComponent>()->SetDirection(-Vector3::One());
-
-		lLight->AddComponent<AutoRotateComponent>();
-		lLight->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(90.0f)));
-	}
-	
 	#ifdef CPOT_ON_WINDOWS
 	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
 	#else defined CPOT_ON_ANDROID
@@ -534,11 +545,11 @@ void MyGame::Update() {
 		f32 t = mikuMorphAnim.Get();
 		lNow[i].position = Lerp(lBefore[i].position, lAfter[i].position, t);
 	}
-	//model->mesh.vertex->Write(&lNow[0]);
+	model->mesh.vertex->Write(&lNow[0]);
 
 	//トランスフォーム
-	//mikuRotAnim.ForwardTime(DeltaTime());
-	//mikuLocAnim.ForwardTime(DeltaTime());
+	mikuRotAnim.ForwardTime(DeltaTime());
+	mikuLocAnim.ForwardTime(DeltaTime());
 	
 	#pragma endregion
 
@@ -594,8 +605,11 @@ void MyGame::Update() {
 
 	//PMXの描画
 	///*
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get());
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(mikuRotAnim.Get());
+	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get());
+	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(mikuRotAnim.Get());
+	GameObject* lPlayer = GameObject::Find("Player");
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(lPlayer->GetTransform().mRotation, lPlayer->GetTransform().mPosition);
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(lPlayer->GetTransform().mRotation);
 	wvpBuffer->Write();
 	
 

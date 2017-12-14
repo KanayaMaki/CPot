@@ -192,6 +192,14 @@ public:
 		mPosition += lReadSize;
 	}
 
+	template<typename T>
+	T Read() {
+		T t;
+		Read(&t, sizeof(T));
+		return t;
+	}
+
+
 	void Add(const BYTE* aBuffer, BufferSize aSize) {
 
 		//新しいバッファのサイズの計算

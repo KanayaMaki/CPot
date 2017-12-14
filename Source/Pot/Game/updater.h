@@ -24,7 +24,9 @@ public:
 	virtual void OnStart() {}
 
 	//çXêVèàóù
+	virtual void OnBeforeUpdate() {}
 	virtual void OnUpdate() {}
+	virtual void OnAfterUpdate() {}
 
 	#pragma endregion
 
@@ -90,8 +92,17 @@ private:
 	}
 
 	void UpdateUpdater() {
+		
+		for (u32 i = 0; i < mUpdater.GetSize(); i++) {
+			mUpdater[i]->OnBeforeUpdate();
+		}
+
 		for (u32 i = 0; i < mUpdater.GetSize(); i++) {
 			mUpdater[i]->OnUpdate();
+		}
+
+		for (u32 i = 0; i < mUpdater.GetSize(); i++) {
+			mUpdater[i]->OnAfterUpdate();
 		}
 	}
 

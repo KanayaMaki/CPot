@@ -79,14 +79,17 @@
     <Filter Include="Source\Pot\ThirdParty">
       <UniqueIdentifier>{53f40c00-2170-4e62-98aa-4ce86f92cbb7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Pot\ThirdParty\Zlib">
-      <UniqueIdentifier>{cfb8ca5b-a327-4322-b13a-065d8aee9d74}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shader">
       <UniqueIdentifier>{89c548d4-14f1-4498-b919-8fc547bf8bf0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Pot\Game">
       <UniqueIdentifier>{622324f9-57f3-4831-8014-589eae42dbcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\ThirdParty\Include">
+      <UniqueIdentifier>{d08dfb60-1e2f-4a7e-ad4d-3f4c7318a7d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\ThirdParty\Include\Zlib">
+      <UniqueIdentifier>{cfb8ca5b-a327-4322-b13a-065d8aee9d74}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -462,39 +465,6 @@
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\viewportOpenGLPlatform.h">
       <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\inffast.h">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\inffixed.h">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\inflate.h">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\inftrees.h">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\trees.h">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\zconf.h">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\zlib.h">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\zutil.h">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\crc32.h">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\deflate.h">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\gzguts.h">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\loadBmp.h">
       <Filter>Source\Pot\Render\OpenGL\Platform</Filter>
     </ClInclude>
@@ -530,6 +500,39 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Game\updater.h">
       <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inftrees.h">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\trees.h">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zconf.h">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zlib.h">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zutil.h">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\crc32.h">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\deflate.h">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzguts.h">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inffast.h">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inffixed.h">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inflate.h">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -599,51 +602,6 @@
     <ClCompile Include="..\..\Source\Cycle\myGame.cpp">
       <Filter>Source\Cycle</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\gzwrite.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\infback.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\inffast.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\inflate.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\inftrees.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\trees.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\uncompr.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\zutil.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\adler32.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\compress.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\crc32.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\deflate.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\gzclose.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\gzlib.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\gzread.c">
-      <Filter>Source\Pot\ThirdParty\Zlib</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Game\cameraComponent.cpp">
       <Filter>Source\Pot\Game</Filter>
     </ClCompile>
@@ -661,6 +619,51 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Game\updater.cpp">
       <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\trees.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\uncompr.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zutil.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\adler32.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\compress.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\crc32.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\deflate.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzclose.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzlib.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzread.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzwrite.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\infback.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inffast.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inflate.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inftrees.c">
+      <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

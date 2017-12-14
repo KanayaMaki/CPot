@@ -40,6 +40,7 @@
     <ClInclude Include="..\..\Source\Pot\File\file.h" />
     <ClInclude Include="..\..\Source\Pot\File\Standard\fileStandard.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\CharCode.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\ConvertBufferMesh.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\Material.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\PmdData.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxData.h" />

@@ -136,7 +136,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>CPOT_OPENGL;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Include\Zlib\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
@@ -155,7 +155,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>CPOT_OPENGL;CPOT_MASTER;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Include\Zlib\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
@@ -172,7 +172,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>CPOT_OPENGL;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Include\Zlib\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
@@ -187,7 +187,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>CPOT_OPENGL;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Include\Zlib\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
@@ -204,7 +204,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>CPOT_OPENGL;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Include\Zlib\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
@@ -223,7 +223,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>CPOT_OPENGL;CPOT_MASTER;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Zlib\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Source\;$(SolutionDir)..\Source\Pot\ThirdParty\Include\Zlib\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
@@ -351,17 +351,17 @@
     <ClInclude Include="..\..\Source\Pot\Render\viewport.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\sleep.h" />
     <ClInclude Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.h" />
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\crc32.h" />
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\deflate.h" />
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\gzguts.h" />
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\inffast.h" />
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\inffixed.h" />
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\inflate.h" />
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\inftrees.h" />
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\trees.h" />
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\zconf.h" />
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\zlib.h" />
-    <ClInclude Include="..\..\Source\Pot\ThirdParty\Zlib\zutil.h" />
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\crc32.h" />
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\deflate.h" />
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzguts.h" />
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inffast.h" />
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inffixed.h" />
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inflate.h" />
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inftrees.h" />
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\trees.h" />
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zconf.h" />
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zlib.h" />
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zutil.h" />
     <ClInclude Include="..\..\Source\Pot\Thread\mutex.h" />
     <ClInclude Include="..\..\Source\Pot\Thread\mutexLocker.h" />
     <ClInclude Include="..\..\Source\Pot\Thread\Standard\mutexStandard.h" />
@@ -425,21 +425,21 @@
     <ClCompile Include="..\..\Source\Pot\Rand\rand.cpp" />
     <ClCompile Include="..\..\Source\Pot\Rand\Standard\randStandard.cpp" />
     <ClCompile Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.cpp" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\adler32.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\compress.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\crc32.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\deflate.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\gzclose.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\gzlib.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\gzread.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\gzwrite.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\infback.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\inffast.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\inflate.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\inftrees.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\trees.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\uncompr.c" />
-    <ClCompile Include="..\..\Source\Pot\ThirdParty\Zlib\zutil.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\adler32.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\compress.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\crc32.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\deflate.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzclose.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzlib.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzread.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzwrite.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\infback.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inffast.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inflate.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inftrees.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\trees.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\uncompr.c" />
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zutil.c" />
     <ClCompile Include="..\..\Source\Pot\Time\Standard\timeStandard.cpp" />
     <ClCompile Include="..\..\Source\Pot\Time\time.cpp" />
     <ClCompile Include="..\..\Source\Pot\Time\Windows\timeWindows.cpp" />

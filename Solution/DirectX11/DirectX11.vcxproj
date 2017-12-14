@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\Cycle\autoRotateComponent.h" />
     <ClInclude Include="..\..\Source\Cycle\myGame.h" />
+    <ClInclude Include="..\..\Source\Cycle\playerComponent.h" />
     <ClInclude Include="..\..\Source\Cycle\skyWalkComponent.h" />
     <ClInclude Include="..\..\Source\Pot\Animation\animation.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\atom.h" />

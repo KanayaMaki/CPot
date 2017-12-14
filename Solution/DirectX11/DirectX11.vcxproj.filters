@@ -19,9 +19,6 @@
     <Filter Include="Source\Pot\File">
       <UniqueIdentifier>{802fdefa-517f-4f10-9fb0-e50009b20309}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Pot\Game">
-      <UniqueIdentifier>{bedb3c7f-a3a6-4f42-9e03-bf56c677ce25}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Pot\Input">
       <UniqueIdentifier>{a862f937-fbef-47f2-ba6d-92a4d3354ee6}</UniqueIdentifier>
     </Filter>
@@ -142,6 +139,15 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{03d0d46c-60da-4877-ac73-55859374140c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Pot\ThirdParty">
+      <UniqueIdentifier>{cd492a42-4b47-4ff6-b74f-26d75154ecf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\ThirdParty\Assimp">
+      <UniqueIdentifier>{35c232fa-09f0-4a5c-bc7e-2613d907f8d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Game">
+      <UniqueIdentifier>{70d87719-a7d2-4ed2-b1c7-c921822160d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Pot\Atom\defines.h">
@@ -212,9 +218,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\File\Standard\fileStandard.h">
       <Filter>Source\Pot\File\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Game\game.h">
-      <Filter>Source\Pot\Game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Input\input.h">
       <Filter>Source\Pot\Input</Filter>
@@ -326,15 +329,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Config\config.h">
       <Filter>Source\Pot\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Game\component.h">
-      <Filter>Source\Pot\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Game\unique.h">
-      <Filter>Source\Pot\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Game\gameObject.h">
-      <Filter>Source\Pot\Game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Animation\animation.h">
       <Filter>Source\Pot\Animation</Filter>
@@ -546,32 +540,47 @@
     <ClInclude Include="..\..\Source\Pot\Render\camera.h">
       <Filter>Source\Pot\Render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Game\updater.h">
-      <Filter>Source\Pot\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Game\renderer.h">
-      <Filter>Source\Pot\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Game\componentSystem.h">
-      <Filter>Source\Pot\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Game\cameraComponent.h">
-      <Filter>Source\Pot\Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Render\light.h">
       <Filter>Source\Pot\Render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Atom\type.h">
       <Filter>Source\Pot\Atom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\Game\lightComponent.h">
-      <Filter>Source\Pot\Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Cycle\autoRotateComponent.h">
       <Filter>Source\Cycle</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Cycle\skyWalkComponent.h">
       <Filter>Source\Cycle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cycle\playerComponent.h">
+      <Filter>Source\Cycle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\cameraComponent.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\component.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\componentSystem.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\game.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\gameObject.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\lightComponent.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\renderer.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\unique.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\updater.h">
+      <Filter>Source\Pot\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -626,9 +635,6 @@
     <ClCompile Include="..\..\Source\Pot\Config\Windows\configWindows.cpp">
       <Filter>Source\Pot\Config\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\Game\component.cpp">
-      <Filter>Source\Pot\Game</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.cpp">
       <Filter>Source\Pot\Audio\XAudio\Platform</Filter>
     </ClCompile>
@@ -647,19 +653,22 @@
     <ClCompile Include="..\..\Source\Pot\ModelLoader\PmxLoader.cpp">
       <Filter>Source\Pot\ModelLoader</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\cameraComponent.cpp">
+      <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\component.cpp">
+      <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Game\gameObject.cpp">
       <Filter>Source\Pot\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\Game\updater.cpp">
+    <ClCompile Include="..\..\Source\Pot\Game\lightComponent.cpp">
       <Filter>Source\Pot\Game</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Game\renderer.cpp">
       <Filter>Source\Pot\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\Game\cameraComponent.cpp">
-      <Filter>Source\Pot\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pot\Game\lightComponent.cpp">
+    <ClCompile Include="..\..\Source\Pot\Game\updater.cpp">
       <Filter>Source\Pot\Game</Filter>
     </ClCompile>
   </ItemGroup>

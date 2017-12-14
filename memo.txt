@@ -552,7 +552,14 @@ m->Load("");
 		初期化時、Listへの追加
 		Delete時、Listからの削除
 
-	Updater
-		OnUpdate→アップデート
-		デフォルトコンストラクタで初期化
-		OnStartで、他のオブジェクトへの参照をもらってもいい
+	StaticMeshModelCPU
+		u32 VertexType
+		u32 VertexNum
+		u8* VertexData
+
+		u32 IndexSize
+		u32 IndexNum
+		u8* IndexData
+
+		u32 MaterialNum
+			

@@ -59,6 +59,10 @@ public:
 			if (Input::GetButton(windows::cDown)) {
 				GetTransform().mRotation *= Quaternion::FromAxis(GetTransform().mRotation.Right(), ToRad(mRotateSpeed * DeltaTime()));
 			}
+
+
+			GetTransform().mRotation *= Quaternion::FromAxis(Vector3::Up(), ToRad(mRotateSpeed * DeltaTime() * Input::GetValue(windows::cMouseCursorXDelta) / 10.0f));
+			GetTransform().mRotation *= Quaternion::FromAxis(GetTransform().mRotation.Right(), -ToRad(mRotateSpeed * DeltaTime() * Input::GetValue(windows::cMouseCursorYDelta) / 10.0f));
 		}
 
 		//ˆÚ“®‚ª‰Â”\‚È‚ç

@@ -86,6 +86,8 @@ enum CInputCode {
 	cF12,
 	cMouseCursorX,
 	cMouseCursorY,
+	cMouseCursorXDelta,
+	cMouseCursorYDelta,
 	cMouseWheel,
 	cMouseButton1,
 	cMouseButton2,
@@ -236,10 +238,16 @@ public:
 			return mData.mKey.IsStand(TransList[aCode]) ? 1.0f : 0.0f;
 		}
 		else if (aCode == CInputCode::cMouseCursorX) {
-			return mData.mMouseX;
+			return GetMouseLocX();
 		}
 		else if (aCode == CInputCode::cMouseCursorY) {
-			return Config::S().GetScreenSize().y - mData.mMouseY;
+			return GetMouseLocY();
+		}
+		else if (aCode == CInputCode::cMouseCursorXDelta) {
+			return GetMouseMove().x;
+		}
+		else if (aCode == CInputCode::cMouseCursorYDelta) {
+			return GetMouseMove().y;
 		}
 		else if (aCode == CInputCode::cMouseWheel) {
 			return mData.mMouseWheel;
@@ -256,10 +264,10 @@ public:
 			return mBeforeData.mKey.IsStand(TransList[aCode]) ? 1.0f : 0.0f;
 		}
 		else if (aCode == CInputCode::cMouseCursorX) {
-			return mBeforeData.mMouseX;
+			return GetBeforeMouseLocX();
 		}
 		else if (aCode == CInputCode::cMouseCursorY) {
-			return Config::S().GetScreenSize().y - mBeforeData.mMouseY;
+			return  GetBeforeMouseLocY();
 		}
 		else if (aCode == CInputCode::cMouseWheel) {
 			return mBeforeData.mMouseWheel;
@@ -277,10 +285,10 @@ public:
 			return mData.mKey.IsStand(TransList[aCode]);
 		}
 		else if (aCode == CInputCode::cMouseCursorX) {
-			return mData.mMouseX;
+			return GetMouseLocX();
 		}
 		else if (aCode == CInputCode::cMouseCursorY) {
-			return mData.mMouseY;
+			return GetMouseLocY();
 		}
 		else if (aCode == CInputCode::cMouseWheel) {
 			return mData.mMouseWheel;
@@ -297,10 +305,10 @@ public:
 			return mBeforeData.mKey.IsStand(TransList[aCode]);
 		}
 		else if (aCode == CInputCode::cMouseCursorX) {
-			return mBeforeData.mMouseX;
+			return GetBeforeMouseLocX();
 		}
 		else if (aCode == CInputCode::cMouseCursorY) {
-			return mBeforeData.mMouseY;
+			return GetBeforeMouseLocY();
 		}
 		else if (aCode == CInputCode::cMouseWheel) {
 			return mBeforeData.mMouseWheel;
@@ -350,13 +358,24 @@ public:
 		return mData.mMouseX;
 	}
 	f32 GetMouseLocY() const {
-		return mData.mMouseY;
+		return Config::S().GetScreenSize().y - mData.mMouseY;
 	}
 	Vector2 GetMouseLoc() const {
-		return Vector2(mData.mMouseX, mData.mMouseY);
+		return Vector2(GetMouseLocX(), GetMouseLocY());
 	}
+
+	f32 GetBeforeMouseLocX() const {
+		return mBeforeData.mMouseX;
+	}
+	f32 GetBeforeMouseLocY() const {
+		return Config::S().GetScreenSize().y - mBeforeData.mMouseY;
+	}
+	Vector2 GetBeforeMouseLoc() const {
+		return Vector2(GetBeforeMouseLocX(), GetBeforeMouseLocY());
+	}
+
 	Vector2 GetMouseMove() const {
-		return GetMouseLoc() - Vector2(mBeforeData.mMouseX, mBeforeData.mMouseY);
+		return GetMouseLoc() - GetBeforeMouseLoc();
 	}
 	f32 GetMouseWheel() const {
 		return mData.mMouseWheel;

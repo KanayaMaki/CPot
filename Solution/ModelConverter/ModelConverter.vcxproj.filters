@@ -117,6 +117,9 @@
     <ClInclude Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.h">
       <Filter>Out</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\ConvertBufferMesh.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\ModelLoader\PmxLoader.cpp">
