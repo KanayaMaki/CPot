@@ -89,12 +89,12 @@ public:
 	}
 	void AttachmentDepth(GLuint aTexture) {
 		glBindFramebuffer(GL_FRAMEBUFFER, mGLNum);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, aTexture, 0);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, aTexture);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 	void AttachmentStencil(GLuint aTexture) {
 		glBindFramebuffer(GL_FRAMEBUFFER, mGLNum);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_TEXTURE_2D, aTexture, 0);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, aTexture);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
