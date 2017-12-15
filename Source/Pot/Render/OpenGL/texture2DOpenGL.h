@@ -123,6 +123,9 @@ public:
 		return mTexture.GetHeight();
 	}
 
+	BOOL GetIsBackBuffer() CPOT_OR {
+		return aIsBackBuffer;
+	}
 
 	//フィールド
 	#pragma region Field

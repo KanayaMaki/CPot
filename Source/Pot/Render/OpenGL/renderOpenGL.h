@@ -58,7 +58,15 @@ public:
 		platform::Render::S().GetRenderTextureManager().SetDepthBuffer(&(aDepthTexture->mDepthBuffer));
 	}
 	void SetRenderTexture(std::shared_ptr<Texture2D> aRenderTexture, u32 aSlotNum) CPOT_OR {
-		platform::Render::S().GetRenderTextureManager().SetTexture(&(aRenderTexture->mTexture), aSlotNum);
+		if (aRenderTexture) {
+			if (aRenderTexture->GetIsBackBuffer()) {
+				platform::Render::S().GetRenderTextureManager().SetBackBuffer();
+			}
+			else {
+				platform::Render::S().GetRenderTextureManager().SetTexture(&(aRenderTexture->mTexture), aSlotNum);
+			}
+		}
+		
 	}
 
 	void SetIndexBuffer(std::shared_ptr<IndexBuffer> aIndexBuffer) CPOT_OR {

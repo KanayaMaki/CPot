@@ -491,6 +491,7 @@ class RenderTextureManager {
 public:
 	RenderTextureManager() {
 		mFrameBuffer.Load();
+		mIsSetBackBuffer = true;	//最初はバックバッファーがセットされた状態に
 	}
 
 public:
@@ -500,6 +501,7 @@ public:
 	void SetTexture(Texture* aTexture, u32 aIndex) {
 		CPOT_ASSERT(aIndex <= 8);
 		mTexture[aIndex] = aTexture;
+		UnSetBackBuffer();
 	}
 
 	DepthBuffer* GetDepthBuffer() const {
@@ -509,17 +511,34 @@ public:
 		mDepthBuffer = aDepthBuffer;
 	}
 
-	void SetToDevice() {
-		for (u32 i = 0; i < 8; i++) {
-			GLuint lTex = 0;
-			if (mTexture[i]) lTex = mTexture[i]->GetGLNum();
-			mFrameBuffer.AttachmentColor(lTex, i);
-		}
-		GLuint lDepth = 0;
-		if (mDepthBuffer) lDepth = mDepthBuffer->Num();
-		mFrameBuffer.AttachmentDepth(lDepth);
+	void SetBackBuffer() {
+		mIsSetBackBuffer = true;
+	}
+	void UnSetBackBuffer() {
+		mIsSetBackBuffer = false;
+	}
+	BOOL IsSetBackBuffer() const {
+		return mIsSetBackBuffer;
+	}
 
-		mFrameBuffer.SetDrawBuffer(8);
+	void SetToDevice() {
+
+		//バックバッファがセットされている場合
+		if (mIsSetBackBuffer) {
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);	//フレームバッファを外す
+		}
+		//セットされていない場合
+		else {
+			for (u32 i = 0; i < 8; i++) {
+				GLuint lTex = 0;
+				if (mTexture[i]) lTex = mTexture[i]->GetGLNum();
+				mFrameBuffer.AttachmentColor(lTex, i);
+			}
+			GLuint lDepth = 0;
+			if (mDepthBuffer) lDepth = mDepthBuffer->Num();
+			mFrameBuffer.AttachmentDepth(lDepth);
+			mFrameBuffer.SetDrawBuffer(8);
+		}
 	}
 
 	void ClearColor(GLuint aNum, const Color& c) {
@@ -562,6 +581,7 @@ private:
 	DepthBuffer* mDepthBuffer;
 
 	FrameBuffer mFrameBuffer;
+	BOOL mIsSetBackBuffer;
 };
 
 #pragma endregion

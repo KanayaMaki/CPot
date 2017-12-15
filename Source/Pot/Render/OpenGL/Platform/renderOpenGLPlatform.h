@@ -100,7 +100,7 @@ public:
 		mStencilManager.SetToDevice();
 		mVertexArrayObjectManager.SetToDevice();
 		mElementArrayBufferManager.SetToDevice();
-		//mRenderTextureManager.SetToDevice();
+		mRenderTextureManager.SetToDevice();
 		mInputLayoutManager.SetToDevice(mArrayBufferManager);
 		mViewportManager.SetToDevice();
 	}

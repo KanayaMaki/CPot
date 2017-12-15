@@ -169,8 +169,8 @@ std::shared_ptr<Texture2D> whiteTexture;
 std::shared_ptr<Texture2D> diffuseTexture;
 std::shared_ptr<Sampler> diffuseSampler;
 
-std::shared_ptr<Texture2D> renderTarget;
-std::shared_ptr<Texture2D> depthTexture;
+std::shared_ptr<Texture2D> backBuffer;
+std::shared_ptr<Texture2D> backBufferDepth;
 std::shared_ptr<Blend> blend;
 std::shared_ptr<DepthStencil> depthStencil;
 std::shared_ptr<DepthStencil> depthStencilNoWrite;
@@ -278,8 +278,8 @@ void MyGame::Init() {
 	lTime += lRotating;
 	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(360.0f)));
 
-	renderTarget.reset(new Texture2D);
-	depthTexture.reset(new Texture2D);
+	backBuffer.reset(new Texture2D);
+	backBufferDepth.reset(new Texture2D);
 
 	#ifdef CPOT_ON_DIRECTX11
 
@@ -308,8 +308,8 @@ void MyGame::Init() {
 	});
 
 
-	renderTarget->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
-	depthTexture->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, true, true);
+	backBuffer->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
+	backBufferDepth->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, true, true);
 
 	#elif defined CPOT_ON_OPENGL
 
@@ -348,8 +348,8 @@ void MyGame::Init() {
 		lInputLayout
 	});
 
-	renderTarget->LoadPlatform();
-	depthTexture->LoadPlatform();
+	backBuffer->LoadPlatform();
+	backBufferDepth->LoadPlatform();
 	#endif
 
 	whiteTexture.reset(new Texture2D);
@@ -418,8 +418,8 @@ void MyGame::Init() {
 
 
 	PmxLoader lPmx;
-	//lPmx.Load("./Miku/miku.pmx");
-	lPmx.Load("./Alicia/Alicia_solid.pmx");
+	lPmx.Load("./Miku/miku.pmx");
+	//lPmx.Load("./Alicia/Alicia_solid.pmx");
 
 	StaticMeshModelCPU lSkinMeshCPU;
 	PmxToMesh::Load(lSkinMeshCPU, lPmx.Get());
@@ -571,8 +571,8 @@ void MyGame::Update() {
 	materialBuffer->Write();
 	otherBuffer->Write();
 
-	depthTexture->ClearDepth(1.0f);
-	renderTarget->ClearColor(Color::Blue());
+	backBufferDepth->ClearDepth(1.0f);
+	backBuffer->ClearColor(Color::Blue());
 
 	///*
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = planeTransform.GetMatrix();
@@ -588,11 +588,11 @@ void MyGame::Update() {
 	Render::S().SetVertexBuffer(vertexBuffer);
 	Render::S().SetIndexBuffer(indexBuffer);
 	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(depthTexture);
+	Render::S().SetDepthTexture(backBufferDepth);
 	Render::S().SetConstantBuffer(wvpBuffer, 0);
 	Render::S().SetConstantBuffer(materialBuffer, 1);
 	Render::S().SetConstantBuffer(otherBuffer, 2);
-	Render::S().SetRenderTexture(renderTarget, 0);
+	Render::S().SetRenderTexture(backBuffer, 0);
 	Render::S().SetShader(toonShader);
 
 	Render::S().SetSampler(diffuseSampler, 0);
@@ -627,12 +627,12 @@ void MyGame::Update() {
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
 	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(depthTexture);
+	Render::S().SetDepthTexture(backBufferDepth);
 	Render::S().SetConstantBuffer(wvpBuffer, 0);
 	Render::S().SetConstantBuffer(materialBuffer, 1);
 	Render::S().SetConstantBuffer(otherBuffer, 2);
 	Render::S().SetConstantBuffer(toonLineBuffer, 3);
-	Render::S().SetRenderTexture(renderTarget, 0);
+	Render::S().SetRenderTexture(backBuffer, 0);
 	Render::S().SetShader(toonLineShader);
 
 	for (u32 i = 0; i < model->submeshNum; i++) {
@@ -650,13 +650,13 @@ void MyGame::Update() {
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
 	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(depthTexture);
+	Render::S().SetDepthTexture(backBufferDepth);
 	Render::S().SetSampler(diffuseSampler, 0);
 	Render::S().SetSampler(diffuseSampler, 1);
 	Render::S().SetConstantBuffer(wvpBuffer, 0);
 	Render::S().SetConstantBuffer(materialBuffer, 1);
 	Render::S().SetConstantBuffer(otherBuffer, 2);
-	Render::S().SetRenderTexture(renderTarget, 0);
+	Render::S().SetRenderTexture(backBuffer, 0);
 	Render::S().SetShader(toonShader);
 
 	for (u32 i = 0; i < model->submeshNum; i++) {
