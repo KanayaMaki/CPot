@@ -280,12 +280,12 @@ void SaveScreenShot(ID3D11Resource* aResource, const CHAR* aName) {
 		DateTime lDateTime;
 		DateTimeData lNowDateTime = lDateTime.Get();
 
-		lFileName += ToString::Do((s32)lNowDateTime.month).Padding('0', 2);
-		lFileName += ToString::Do((s32)lNowDateTime.day).Padding('0', 2);
+		lFileName += ToString::Do((s32)lNowDateTime.month).PaddingLeft('0', 2);
+		lFileName += ToString::Do((s32)lNowDateTime.day).PaddingLeft('0', 2);
 		lFileName += "_";
-		lFileName += ToString::Do((s32)lNowDateTime.hour).Padding('0', 2);
-		lFileName += ToString::Do((s32)lNowDateTime.minute).Padding('0', 2);
-		lFileName += ToString::Do((s32)lNowDateTime.second).Padding('0', 2);
+		lFileName += ToString::Do((s32)lNowDateTime.hour).PaddingLeft('0', 2);
+		lFileName += ToString::Do((s32)lNowDateTime.minute).PaddingLeft('0', 2);
+		lFileName += ToString::Do((s32)lNowDateTime.second).PaddingLeft('0', 2);
 	}
 	lFileName += ".png";
 

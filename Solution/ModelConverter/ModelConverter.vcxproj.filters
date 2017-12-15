@@ -33,12 +33,6 @@
     <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxToMesh.h">
       <Filter>ModelLoader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ModelLoader\SkinMeshModel.h">
-      <Filter>ModelLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ModelLoader\StaticMeshModel.h">
-      <Filter>ModelLoader</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Pot\ModelLoader\SubMesh.h">
       <Filter>ModelLoader</Filter>
     </ClInclude>
@@ -118,6 +112,9 @@
       <Filter>Out</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\ModelLoader\ConvertBufferMesh.h">
+      <Filter>ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\ModelCPU.h">
       <Filter>ModelLoader</Filter>
     </ClInclude>
   </ItemGroup>

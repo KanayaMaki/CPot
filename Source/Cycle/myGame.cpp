@@ -359,7 +359,7 @@ void MyGame::Init() {
 	diffuseTexture->Load("test");
 
 	diffuseSampler.reset(new Sampler);
-	diffuseSampler->Load(Sampler::cClamp);
+	diffuseSampler->Load(Sampler::cWrap);
 
 	blend.reset(new Blend);
 	blend->Load(Blend::cNormal);
@@ -418,7 +418,8 @@ void MyGame::Init() {
 
 
 	PmxLoader lPmx;
-	lPmx.Load("./Miku/miku.pmx");
+	//lPmx.Load("./Miku/miku.pmx");
+	lPmx.Load("./Alicia/Alicia_solid.pmx");
 
 	StaticMeshModelCPU lSkinMeshCPU;
 	PmxToMesh::Load(lSkinMeshCPU, lPmx.Get());
@@ -545,7 +546,7 @@ void MyGame::Update() {
 		f32 t = mikuMorphAnim.Get();
 		lNow[i].position = Lerp(lBefore[i].position, lAfter[i].position, t);
 	}
-	model->mesh.vertex->Write(&lNow[0]);
+	//model->mesh.vertex->Write(&lNow[0]);
 
 	//トランスフォーム
 	mikuRotAnim.ForwardTime(DeltaTime());

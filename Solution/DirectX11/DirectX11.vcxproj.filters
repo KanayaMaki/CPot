@@ -429,12 +429,6 @@
     <ClInclude Include="..\..\Source\Pot\Render\DirectX11\Platform\textureAllDirectX11Platform.h">
       <Filter>Source\Pot\Render\DirectX11\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ModelLoader\SkinMeshModel.h">
-      <Filter>Source\Pot\ModelLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ModelLoader\StaticMeshModel.h">
-      <Filter>Source\Pot\ModelLoader</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxLoader.h">
       <Filter>Source\Pot\ModelLoader</Filter>
     </ClInclude>
@@ -581,6 +575,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Game\updater.h">
       <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\ModelCPU.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

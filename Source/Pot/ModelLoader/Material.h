@@ -2,11 +2,12 @@
 
 #include "./Pot/Atom/atom.h"
 #include "./Pot/List/vector.h"
+#include "./Pot/Usefull/path.h"
 
 namespace cpot {
 
 struct TextureCPU {
-	String<256> name;
+	PathString name;
 };
 
 struct MaterialCPU {

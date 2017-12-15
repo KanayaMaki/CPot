@@ -85,8 +85,7 @@
     <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxLoader.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxData.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxToMesh.h" />
-    <ClInclude Include="..\..\Source\Pot\ModelLoader\SkinMeshModel.h" />
-    <ClInclude Include="..\..\Source\Pot\ModelLoader\StaticMeshModel.h" />
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\ModelCPU.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\SubMesh.h" />
     <ClInclude Include="..\..\Source\Pot\ModelLoader\Windows\CharCodeWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Model\ModelCPUToModel.h" />

@@ -5,8 +5,7 @@
 
 #include "./Pot/Usefull/buffer.h"
 
-#include "./Pot/ModelLoader/StaticMeshModel.h"
-#include "./Pot/ModelLoader/SkinMeshModel.h"
+#include "./Pot/ModelLoader/ModelCPU.h"
 
 #include "./Pot/Usefull/path.h"
 

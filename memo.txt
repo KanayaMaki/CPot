@@ -562,4 +562,3 @@ m->Load("");
 		u8* IndexData
 
 		u32 MaterialNum
-			

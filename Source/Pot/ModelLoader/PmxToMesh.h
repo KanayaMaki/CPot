@@ -4,8 +4,7 @@
 #include "./Pot/List/vector.h"
 
 #include "./Pot/ModelLoader/PmxData.h"
-#include "./Pot/ModelLoader/StaticMeshModel.h"
-#include "./Pot/ModelLoader/SkinMeshModel.h"
+#include "./Pot/ModelLoader/ModelCPU.h"
 
 #include "./Pot/Usefull/path.h"
 
@@ -57,13 +56,26 @@ public:
 
 			//トゥーンテクスチャ名の読み込み
 			s32 lToonTextureIndex = aPmx.materials[i].toonTexture;
-			if (lToonTextureIndex != -1) {
-				String<128> lToonTextureFileName = &(aPmx.textures[lToonTextureIndex].fileName.buf[0]);
-				if (Path::GetEx(lToonTextureFileName) == "tga") {
-					lToonTextureFileName = Path::ChangeEx(lToonTextureFileName, "png");
+
+			//汎用トゥーンを使う場合
+			if (aPmx.materials[i].unionToonFlag == 1) {
+				if (lToonTextureIndex != -1) {
+					aSubMesh[i].material.toonTexture.name = "./toon";
+					aSubMesh[i].material.toonTexture.name += ToString::Do(lToonTextureIndex).PaddingLeft('0', 2);
+					aSubMesh[i].material.toonTexture.name += ".bmp";
 				}
-				aSubMesh[i].material.toonTexture.name = lToonTextureFileName.Get();
 			}
+			//汎用トゥーンを使わない場合
+			else {
+				if (lToonTextureIndex != -1) {
+					String<128> lToonTextureFileName = &(aPmx.textures[lToonTextureIndex].fileName.buf[0]);
+					if (Path::GetEx(lToonTextureFileName) == "tga") {
+						lToonTextureFileName = Path::ChangeEx(lToonTextureFileName, "png");
+					}
+					aSubMesh[i].material.toonTexture.name = lToonTextureFileName.Get();
+				}
+			}
+			
 
 
 			//インデックスカウントの読み込み

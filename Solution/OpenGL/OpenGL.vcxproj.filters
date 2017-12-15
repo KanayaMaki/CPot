@@ -234,12 +234,6 @@
     <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxToMesh.h">
       <Filter>Source\Pot\ModelLoader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ModelLoader\SkinMeshModel.h">
-      <Filter>Source\Pot\ModelLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Pot\ModelLoader\StaticMeshModel.h">
-      <Filter>Source\Pot\ModelLoader</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Pot\ModelLoader\SubMesh.h">
       <Filter>Source\Pot\ModelLoader</Filter>
     </ClInclude>
@@ -533,6 +527,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inflate.h">
       <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\ModelCPU.h">
+      <Filter>Source\Pot\ModelLoader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

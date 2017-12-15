@@ -6,8 +6,7 @@
 
 #include "./Pot/Model/SkinMeshModel.h"
 #include "./Pot/Model/StaticMeshModel.h"
-#include "./Pot/ModelLoader/SkinMeshModel.h"
-#include "./Pot/ModelLoader/StaticMeshModel.h"
+#include "./Pot/ModelLoader/ModelCPU.h"
 
 namespace cpot {
 

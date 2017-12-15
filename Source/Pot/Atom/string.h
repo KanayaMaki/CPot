@@ -217,6 +217,20 @@ public:
 		return lRes;
 	}
 
+	//指定された長さになるまで、指定された文字で埋める（左側を）
+	String PaddingLeft(CHAR aC, u32 aLength) {
+		String lRes;
+
+		u32 lNowLength = GetLength();
+		for (u32 i = lNowLength; i < aLength; i++) {
+			lRes += ToString(aC);
+		}
+
+		lRes += *this;
+
+		return lRes;
+	}
+
 	BOOL Exist(const CHAR* aStr) const {
 
 		//ごり押しで行く
