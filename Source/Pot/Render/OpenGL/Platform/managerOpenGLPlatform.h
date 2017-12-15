@@ -529,15 +529,19 @@ public:
 		}
 		//セットされていない場合
 		else {
+			u32 lMaxSlot = 0;
 			for (u32 i = 0; i < 8; i++) {
 				GLuint lTex = 0;
-				if (mTexture[i]) lTex = mTexture[i]->GetGLNum();
+				if (mTexture[i]) {
+					lTex = mTexture[i]->GetGLNum();
+					lMaxSlot = i + 1;
+				}
 				mFrameBuffer.AttachmentColor(lTex, i);
 			}
 			GLuint lDepth = 0;
 			if (mDepthBuffer) lDepth = mDepthBuffer->Num();
 			mFrameBuffer.AttachmentDepth(lDepth);
-			mFrameBuffer.SetDrawBuffer(8);
+			mFrameBuffer.SetDrawBuffer(lMaxSlot);
 		}
 	}
 

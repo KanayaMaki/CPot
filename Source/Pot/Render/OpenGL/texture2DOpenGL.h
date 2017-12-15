@@ -123,7 +123,7 @@ public:
 		return mTexture.GetHeight();
 	}
 
-	BOOL GetIsBackBuffer() CPOT_OR {
+	BOOL GetIsBackBuffer() {
 		return aIsBackBuffer;
 	}
 

@@ -171,6 +171,10 @@ std::shared_ptr<Sampler> diffuseSampler;
 
 std::shared_ptr<Texture2D> backBuffer;
 std::shared_ptr<Texture2D> backBufferDepth;
+
+std::shared_ptr<Texture2D> renderTarget;
+std::shared_ptr<Texture2D> renderTargetDepth;
+
 std::shared_ptr<Blend> blend;
 std::shared_ptr<DepthStencil> depthStencil;
 std::shared_ptr<DepthStencil> depthStencilNoWrite;
@@ -350,7 +354,15 @@ void MyGame::Init() {
 
 	backBuffer->LoadPlatform();
 	backBufferDepth->LoadPlatform();
+
 	#endif
+
+	renderTarget.reset(new Texture2D);
+	renderTarget->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cRGBA32Float, true, true, false);
+
+	renderTargetDepth.reset(new Texture2D);
+	renderTargetDepth->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, false, true);
+
 
 	whiteTexture.reset(new Texture2D);
 	whiteTexture->Load("white");
@@ -571,38 +583,8 @@ void MyGame::Update() {
 	materialBuffer->Write();
 	otherBuffer->Write();
 
-	backBufferDepth->ClearDepth(1.0f);
-	backBuffer->ClearColor(Color::Blue());
-
-	///*
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = planeTransform.GetMatrix();
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(planeTransform.mRotation);
-	wvpBuffer->Write();
-
-	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
-	materialBuffer->Write();
-
-	Render::S().SetBlend(blend);
-	Render::S().SetRasterizer(rasterizer);
-	Render::S().SetDepthStencil(depthStencil);
-	Render::S().SetVertexBuffer(vertexBuffer);
-	Render::S().SetIndexBuffer(indexBuffer);
-	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(backBufferDepth);
-	Render::S().SetConstantBuffer(wvpBuffer, 0);
-	Render::S().SetConstantBuffer(materialBuffer, 1);
-	Render::S().SetConstantBuffer(otherBuffer, 2);
-	Render::S().SetRenderTexture(backBuffer, 0);
-	Render::S().SetShader(toonShader);
-
-	Render::S().SetSampler(diffuseSampler, 0);
-	Render::S().SetSampler(diffuseSampler, 1);
-	Render::S().SetTexture2D(diffuseTexture, 0);
-	Render::S().SetTexture2D(whiteTexture, 1);
-	Render::S().SetToDevice();
-	Render::S().DrawIndexed(6, 0);
-	//*/
-
+	renderTarget->ClearColor(Color::Red());
+	renderTargetDepth->ClearDepth(1.0f);
 
 	//PMX‚Ì•`‰æ
 	///*
@@ -627,12 +609,12 @@ void MyGame::Update() {
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
 	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(backBufferDepth);
+	Render::S().SetDepthTexture(renderTargetDepth);
 	Render::S().SetConstantBuffer(wvpBuffer, 0);
 	Render::S().SetConstantBuffer(materialBuffer, 1);
 	Render::S().SetConstantBuffer(otherBuffer, 2);
 	Render::S().SetConstantBuffer(toonLineBuffer, 3);
-	Render::S().SetRenderTexture(backBuffer, 0);
+	Render::S().SetRenderTexture(renderTarget, 0);
 	Render::S().SetShader(toonLineShader);
 
 	for (u32 i = 0; i < model->submeshNum; i++) {
@@ -650,13 +632,13 @@ void MyGame::Update() {
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
 	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(backBufferDepth);
+	Render::S().SetDepthTexture(renderTargetDepth);
 	Render::S().SetSampler(diffuseSampler, 0);
 	Render::S().SetSampler(diffuseSampler, 1);
 	Render::S().SetConstantBuffer(wvpBuffer, 0);
 	Render::S().SetConstantBuffer(materialBuffer, 1);
 	Render::S().SetConstantBuffer(otherBuffer, 2);
-	Render::S().SetRenderTexture(backBuffer, 0);
+	Render::S().SetRenderTexture(renderTarget, 0);
 	Render::S().SetShader(toonShader);
 
 	for (u32 i = 0; i < model->submeshNum; i++) {
@@ -671,6 +653,42 @@ void MyGame::Update() {
 		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
 	}
 
+	//*/
+
+	backBuffer->ClearColor(Color::Blue());
+	backBufferDepth->ClearDepth(1.0f);
+
+	///*
+	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = planeTransform.GetMatrix();
+	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(planeTransform.mRotation);
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::Unit() * Matrix4x4::FromScale(Vector3::One() * 1.9f);
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4::Unit();
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = Matrix4x4::Unit();
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = Matrix4x4::Unit();
+	wvpBuffer->Write();
+
+	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
+	materialBuffer->Write();
+
+	Render::S().SetBlend(blend);
+	Render::S().SetRasterizer(rasterizer);
+	Render::S().SetDepthStencil(depthStencil);
+	Render::S().SetVertexBuffer(vertexBuffer);
+	Render::S().SetIndexBuffer(indexBuffer);
+	Render::S().SetViewPort(viewport, 0);
+	Render::S().SetDepthTexture(backBufferDepth);
+	Render::S().SetConstantBuffer(wvpBuffer, 0);
+	Render::S().SetConstantBuffer(materialBuffer, 1);
+	Render::S().SetConstantBuffer(otherBuffer, 2);
+	Render::S().SetRenderTexture(backBuffer, 0);
+	Render::S().SetShader(toonShader);
+
+	Render::S().SetSampler(diffuseSampler, 0);
+	Render::S().SetSampler(diffuseSampler, 1);
+	Render::S().SetTexture2D(renderTarget, 0);
+	Render::S().SetTexture2D(whiteTexture, 1);
+	Render::S().SetToDevice();
+	Render::S().DrawIndexed(6, 0);
 	//*/
 
 
