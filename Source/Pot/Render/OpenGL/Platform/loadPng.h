@@ -231,7 +231,7 @@ public:
 		aResult.pixelBytes = pixelSize;
 		aResult.data.Reserve(height * width * pixelSize);
 
-		for (s32 i = 0; i < height; i++) {
+		for (s32 i = height - 1; i >= 0; i--) {
 			s32 start = BuildIndex(widthSize, i, 0, pixelSize);
 			s32 end = BuildIndex(widthSize, i + 1, 0, pixelSize) - 1;
 			aResult.data.Add((BYTE*)&(pngData[start]), end - start);

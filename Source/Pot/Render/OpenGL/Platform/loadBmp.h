@@ -68,7 +68,7 @@ public:
 		
 		//RGB値を変換して書き込み
 		for (s32 i = 0; i < lHeight; i++) {
-			u32 lReadBase = lDataPos + (lHeight - i - 1) * lLineSize;	//読み込む対象ピクセルの、最初のバイトのインデックス
+			u32 lReadBase = lDataPos + i * lLineSize;	//読み込む対象ピクセルの、最初のバイトのインデックス
 			u32 lWriteBase = i * lWidth * lBytePerPixel;	//書き込む対象ピクセルの、最初のバイトのインデックス
 			for (u32 j = 0; j < lWidth; j++) {
 				aResult.data[lWriteBase + 0] = aBMPData[lReadBase + 2]; //R
@@ -81,7 +81,7 @@ public:
 		//アルファ値の書き込み
 		if (lBytePerPixel == 4) {
 			for (s32 i = 0; i < lHeight; i++) {
-				u32 lReadBase = lDataPos + (lHeight - i - 1) * lLineSize;	//読み込む対象ピクセルの、最初のバイトのインデックス
+				u32 lReadBase = lDataPos + i * lLineSize;	//読み込む対象ピクセルの、最初のバイトのインデックス
 				u32 lWriteBase = i * lWidth * lBytePerPixel;	//書き込む対象ピクセルの、最初のバイトのインデックス
 				for (u32 j = 0; j < lWidth; j++) {
 					aResult.data[lWriteBase + 3] = aBMPData[lReadBase + 3]; //A

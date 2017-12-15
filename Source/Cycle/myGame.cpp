@@ -567,6 +567,16 @@ void MyGame::Update() {
 	#pragma endregion
 
 
+
+	if (Input::GetButtonDown(windows::cF)) {
+		GameObject::Find("Light")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(90.0f)));
+	}
+	else if (Input::GetButtonUp(windows::cF)) {
+		GameObject::Find("Light")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(0.0f)));
+	}
+	
+
+
 	auto lCamera = CameraManager::S().GetCamera();
 	if (lCamera) {
 		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = lCamera->GetProjectionMatrix();

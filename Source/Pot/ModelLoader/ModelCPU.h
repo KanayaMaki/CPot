@@ -20,13 +20,13 @@ public:
 struct StaticMeshVertex {
 	Vector3 position;
 	Vector3 normal;
-	Vector2 texCoord;
+	TexCoord texCoord;
 };
 
 struct SkinMeshVertex {
 	Vector3 position;
 	Vector3 normal;
-	Vector2 texCoord;
+	TexCoord texCoord;
 	Vector3 weight;
 	u16 weightIndex[4];
 };
