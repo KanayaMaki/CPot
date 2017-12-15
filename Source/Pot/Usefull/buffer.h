@@ -215,6 +215,11 @@ public:
 		Add(aBuffer.mBuffer, aBuffer.GetSize());
 	}
 
+	template<typename T>
+	void Add(const T* aBuffer) {
+		Add((const BYTE*)(aBuffer), sizeof(T));
+	}
+
 	void Reserve(BufferSize aCapacity) {
 		
 		BufferSize lNewCapacity = Max(32, mCapacity);

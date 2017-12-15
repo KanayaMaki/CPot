@@ -19,6 +19,7 @@ public:
 		LoadVertex(aMesh.vertex, aPmx);
 		LoadIndex(aMesh.index, aPmx);
 		LoadSubMesh(aMesh.submesh, aPmx);
+		aMesh.filePath = aPmx.fileName;
 	}
 	static void LoadVertex(VectorSimple<StaticMeshVertex>& aVertex, const PmxData& aPmx) {
 
@@ -47,23 +48,21 @@ public:
 			//テクスチャ名の読み込み
 			s32 lTextureIndex = aPmx.materials[i].textureRef;
 			if (lTextureIndex != -1) {
-				const CHAR* lTextureFileName = &(aPmx.textures[lTextureIndex].fileName.buf[0]);
-				PathString lPath = Path::FromRelative(aPmx.fileName, lTextureFileName);
-				if (Path::GetEx(lPath) == "tga") {
-					lPath = Path::ChangeEx(lPath, "png");
+				String<128> lTextureFileName = &(aPmx.textures[lTextureIndex].fileName.buf[0]);
+				if (Path::GetEx(lTextureFileName) == "tga") {
+					lTextureFileName = Path::ChangeEx(lTextureFileName, "png");
 				}
-				aSubMesh[i].material.texture.name = lPath.Get();
+				aSubMesh[i].material.texture.name = lTextureFileName.Get();
 			}
 
 			//トゥーンテクスチャ名の読み込み
 			s32 lToonTextureIndex = aPmx.materials[i].toonTexture;
 			if (lToonTextureIndex != -1) {
-				const CHAR* lToonTextureFileName = &(aPmx.textures[lToonTextureIndex].fileName.buf[0]);
-				PathString lPath = Path::FromRelative(aPmx.fileName, lToonTextureFileName);
-				if (Path::GetEx(lPath) == "tga") {
-					lPath = Path::ChangeEx(lPath, "png");
+				String<128> lToonTextureFileName = &(aPmx.textures[lToonTextureIndex].fileName.buf[0]);
+				if (Path::GetEx(lToonTextureFileName) == "tga") {
+					lToonTextureFileName = Path::ChangeEx(lToonTextureFileName, "png");
 				}
-				aSubMesh[i].material.toonTexture.name = lPath.Get();
+				aSubMesh[i].material.toonTexture.name = lToonTextureFileName.Get();
 			}
 
 
@@ -82,6 +81,7 @@ public:
 		LoadVertex(aMesh.vertex, aPmx);
 		LoadIndex(aMesh.index, aPmx);
 		LoadSubMesh(aMesh.submesh, aPmx);
+		aMesh.filePath = aPmx.fileName;
 	}
 
 	static void LoadVertex(VectorSimple<SkinMeshVertex>& aVertex, const PmxData& aPmx) {

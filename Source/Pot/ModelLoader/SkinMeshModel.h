@@ -21,6 +21,7 @@ public:
 	VectorSimple<SkinMeshVertex> vertex;
 	VectorSimple<u32> index;
 	VectorSimple<SubMeshCPU> submesh;
+	String<128> filePath;
 };
 
 }
