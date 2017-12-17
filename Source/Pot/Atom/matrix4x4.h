@@ -75,6 +75,9 @@ public:
 	Matrix4x4(const Quaternion& aRotation, const Vector3& aTransform) {
 		*this = FromRotate(aRotation) * FromTransform(aTransform);
 	}
+	Matrix4x4(const Quaternion& aRotation, const Vector3& aTransform, const Vector3& aScale) {
+		*this = FromScale(aScale) * FromRotate(aRotation) * FromTransform(aTransform);
+	}
 
 private:
 	//‰Šú‰»‚ğs‚í‚È‚¢AŒø—¦‰»—p

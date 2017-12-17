@@ -488,8 +488,8 @@ void MyGame::Init() {
 		lCamera->AddComponent<PersCameraComponent>();
 
 		lCamera->GetComponent<PersCameraComponent>()->mPersCamera.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
-		lCamera->GetTransform().mPosition = Vector3(1.0f, 1.0f, -1.0f) * 10.0f + Vector3::Zero().Y(20.0f);
-		lCamera->GetTransform().mRotation = Quaternion::FromAxis(lCamera->GetTransform().mRotation.Up(), ToRad(-45.0f));
+		lCamera->GetTransform().mPosition = Vector3(1.0f, 1.0f, 0.0f) * 40.0f + Vector3::Zero().Y(0.0f);
+		lCamera->GetTransform().mRotation = Quaternion::FromAxis(lCamera->GetTransform().mRotation.Up(), ToRad(-90.0f));
 		lCamera->GetTransform().mRotation *= Quaternion::FromAxis(lCamera->GetTransform().mRotation.Right(), ToRad(45.0f));
 	}
 
@@ -614,7 +614,7 @@ void MyGame::Update() {
 
 	//PMX‚Ì•`‰æ
 	///*
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get());
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get(), Vector3().XYZ(10.0f));
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(mikuRotAnim.Get());
 	GameObject* lPlayer = GameObject::Find("Player");
 	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(lPlayer->GetTransform().mRotation, lPlayer->GetTransform().mPosition);
