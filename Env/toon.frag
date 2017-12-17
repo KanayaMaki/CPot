@@ -45,9 +45,9 @@ float HalfLambert(vec3 aNormal, vec3 aToLight) {
 void main() {
 
 	float lighting = HalfLambert(NorWor, -LightDirection);
-	vec4 toonTexel = texture(ToonTexture, vec2(lighting, 1.0f - lighting));
+	vec4 toonTexel = texture(ToonTexture, vec2(lighting, 1.0f - (1.0f - lighting)));
 
-	vec4 diffuseTexel = texture(DiffuseTexture, UV);
+	vec4 diffuseTexel = texture(DiffuseTexture, vec2(UV.x, 1.0f - UV.y));
 	
 	vec4 color = vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	color *= Diffuse;

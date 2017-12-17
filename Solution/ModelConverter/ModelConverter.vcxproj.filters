@@ -117,6 +117,7 @@
     <ClInclude Include="..\..\Source\Pot\ModelLoader\ModelCPU.h">
       <Filter>ModelLoader</Filter>
     </ClInclude>
+    <ClInclude Include="AssimpLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\ModelLoader\PmxLoader.cpp">
@@ -132,5 +133,6 @@
     <ClCompile Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.cpp">
       <Filter>Out</Filter>
     </ClCompile>
+    <ClCompile Include="AssimpLoader.cpp" />
   </ItemGroup>
 </Project>

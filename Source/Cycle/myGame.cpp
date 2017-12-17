@@ -23,6 +23,7 @@
 #include "./Pot/ModelLoader/PmxToMesh.h"
 #include "./Pot/Model/ModelCPUToModel.h"
 #include "./Pot/ModelLoader/PmxLoader.h"
+#include "./Pot/ModelLoader/ConvertBufferMesh.h"
 #include "./Pot/Render/render.h"
 
 #include "./Pot/Config/config.h"
@@ -211,6 +212,9 @@ void MyGame::Setting() {
 //ゲームの初期化
 void MyGame::Init() {
 	//CPOT_LOG("Init!");
+
+	Rand lRand;
+	lRand.SetSeed(Time().GetUnix());
 
 	
 	//Loaderのスタート
@@ -429,6 +433,7 @@ void MyGame::Init() {
 	indexBuffer->Load(IndexBuffer::cU16, 6, IndexBuffer::cTriangleList, lIndex);
 
 
+	/*
 	PmxLoader lPmx;
 	lPmx.Load("./Miku/miku.pmx");
 	//lPmx.Load("./Alicia/Alicia_solid.pmx");
@@ -436,15 +441,25 @@ void MyGame::Init() {
 	StaticMeshModelCPU lSkinMeshCPU;
 	PmxToMesh::Load(lSkinMeshCPU, lPmx.Get());
 
+	//*/
+
+	
+	///*
+	StaticMeshModelCPU lSkinMeshCPU;
+	BufferToMesh::Load(lSkinMeshCPU, PathString("./Box/box.pmo"));
+	//*/
+
+
 	model.reset(new StaticMeshModel);
 	ModelCPUToModel::Load(*model, lSkinMeshCPU, true);
 
-	PmxToMesh::LoadVertex(lBefore, lPmx.Get());
-	PmxToMesh::LoadVertex(lNow, lPmx.Get());
-	PmxToMesh::LoadVertex(lAfter, lPmx.Get());
+	lSkinMeshCPU.LoadVertex(lBefore);
+	lSkinMeshCPU.LoadVertex(lNow);
+	lSkinMeshCPU.LoadVertex(lAfter);
 
 	for (u32 i = 0; i < lSkinMeshCPU.vertex.GetSize(); i++) {
-		lAfter[i].position = ((lAfter[i].position - Vector3(0.0f, 10.0f, 0.0f)).NormalSafe() * 10.0f) * 0.9f + lAfter[i].position * 0.1f;
+		//lAfter[i].position = ((lAfter[i].position - Vector3(0.0f, 10.0f, 0.0f)).NormalSafe() * 10.0f) * 0.9f + lAfter[i].position * 0.1f;
+		lAfter[i].position = ((lAfter[i].position - Vector3(0.0f, 0.0f, 0.0f)).NormalSafe() * 1.0f);
 	}
 
 	planeTransform.mScale = Vector3::One() * 10.0f;
@@ -455,15 +470,14 @@ void MyGame::Init() {
 		lLight->SetName("Light");
 		lLight->AddComponent<DirectionalLightComponent>();
 		lLight->GetComponent<DirectionalLightComponent>()->SetDirection(-Vector3::One());
-
-		lLight->AddComponent<AutoRotateComponent>();
-		lLight->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(90.0f)));
 	}
 	
 	{
 		GameObject* lPlayer = new GameObject;
 		lPlayer->SetName("Player");
 		//lPlayer->AddComponent<PlayerComponent>();
+
+		lPlayer->AddComponent<AutoRotateComponent>();
 	}
 
 	{
@@ -558,7 +572,7 @@ void MyGame::Update() {
 		f32 t = mikuMorphAnim.Get();
 		lNow[i].position = Lerp(lBefore[i].position, lAfter[i].position, t);
 	}
-	//model->mesh.vertex->Write(&lNow[0]);
+	model->mesh.vertex->Write(&lNow[0]);
 
 	//トランスフォーム
 	mikuRotAnim.ForwardTime(DeltaTime());
@@ -566,16 +580,16 @@ void MyGame::Update() {
 	
 	#pragma endregion
 
-
-
+	if (Input::GetButton(windows::cL)) {
+		windows::Window::S().SetCursorPos(Vector2(100.0f, 100.0f));
+	}
+	                                                                                                                                                                                                         
 	if (Input::GetButtonDown(windows::cF)) {
-		GameObject::Find("Light")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(90.0f)));
+		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(90.0f)));
 	}
 	else if (Input::GetButtonUp(windows::cF)) {
-		GameObject::Find("Light")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(0.0f)));
+		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(0.0f)));
 	}
-	
-
 
 	auto lCamera = CameraManager::S().GetCamera();
 	if (lCamera) {
@@ -593,20 +607,22 @@ void MyGame::Update() {
 	materialBuffer->Write();
 	otherBuffer->Write();
 
-	renderTarget->ClearColor(Color::Red());
+	renderTarget->ClearColor(Color::White());
 	renderTargetDepth->ClearDepth(1.0f);
+	backBuffer->ClearColor(Color::White());
+	backBufferDepth->ClearDepth(1.0f);
 
 	//PMXの描画
 	///*
-	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get());
-	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(mikuRotAnim.Get());
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get());
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(mikuRotAnim.Get());
 	GameObject* lPlayer = GameObject::Find("Player");
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(lPlayer->GetTransform().mRotation, lPlayer->GetTransform().mPosition);
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(lPlayer->GetTransform().mRotation);
+	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(lPlayer->GetTransform().mRotation, lPlayer->GetTransform().mPosition);
+	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(lPlayer->GetTransform().mRotation);
 	wvpBuffer->Write();
 	
 
-	///*
+	/*
 	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::Black();
 	materialBuffer->Write();
 
@@ -619,12 +635,12 @@ void MyGame::Update() {
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
 	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(renderTargetDepth);
+	Render::S().SetDepthTexture(backBufferDepth);
 	Render::S().SetConstantBuffer(wvpBuffer, 0);
 	Render::S().SetConstantBuffer(materialBuffer, 1);
 	Render::S().SetConstantBuffer(otherBuffer, 2);
 	Render::S().SetConstantBuffer(toonLineBuffer, 3);
-	Render::S().SetRenderTexture(renderTarget, 0);
+	Render::S().SetRenderTexture(backBuffer, 0);
 	Render::S().SetShader(toonLineShader);
 
 	for (u32 i = 0; i < model->submeshNum; i++) {
@@ -642,13 +658,13 @@ void MyGame::Update() {
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
 	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(renderTargetDepth);
+	Render::S().SetDepthTexture(backBufferDepth);
 	Render::S().SetSampler(diffuseSampler, 0);
 	Render::S().SetSampler(diffuseSampler, 1);
 	Render::S().SetConstantBuffer(wvpBuffer, 0);
 	Render::S().SetConstantBuffer(materialBuffer, 1);
 	Render::S().SetConstantBuffer(otherBuffer, 2);
-	Render::S().SetRenderTexture(renderTarget, 0);
+	Render::S().SetRenderTexture(backBuffer, 0);
 	Render::S().SetShader(toonShader);
 
 	for (u32 i = 0; i < model->submeshNum; i++) {
@@ -665,10 +681,8 @@ void MyGame::Update() {
 
 	//*/
 
-	backBuffer->ClearColor(Color::Blue());
-	backBufferDepth->ClearDepth(1.0f);
 
-	///*
+	/*
 	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = planeTransform.GetMatrix();
 	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(planeTransform.mRotation);
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::Unit() * Matrix4x4::FromScale(Vector3::One() * 1.9f);

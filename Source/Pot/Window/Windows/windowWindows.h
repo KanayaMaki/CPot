@@ -90,6 +90,13 @@ public:
 		Cursor::S().IsShow();
 	}
 
+	void SetCursorPos(const Vector2& aCursorPos) {
+		Cursor::S().SetClientPos(GetHwnd(), aCursorPos);
+	}
+	Vector2 GetCursorPos() {
+		return Cursor::S().GetClientPos(GetHwnd());
+	}
+
 	#pragma endregion
 
 

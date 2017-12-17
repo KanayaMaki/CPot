@@ -15,6 +15,14 @@ public:
 	VectorSimple<u32> index;
 	VectorSimple<SubMeshCPU> submesh;
 	PathString filePath;
+
+public:
+	void LoadVertex(VectorSimple<VertexType>& lVertex) {
+		lVertex.SetSize(vertex.GetSize());
+		for (u32 i = 0; i < vertex.GetSize(); i++) {
+			lVertex[i] = vertex[i];
+		}
+	}
 };
 
 struct StaticMeshVertex {

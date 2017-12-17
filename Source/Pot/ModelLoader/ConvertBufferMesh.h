@@ -15,16 +15,25 @@ namespace cpot {
 class BufferToMesh {
 
 public:
-	static void Load(StaticMeshModelCPU& aMesh, Buffer& aData) {
+	template<typename VertexType>
+	static void Load(ModelCPU<VertexType>& aMesh, Buffer& aData, PathString& aFilePath) {
 		LoadVertex(aMesh.vertex, aData);
 		LoadIndex(aMesh.index, aData);
 		LoadSubMesh(aMesh.submesh, aData);
+		aMesh.filePath = aFilePath;
 	}
-	static void Load(SkinMeshModelCPU& aMesh, Buffer& aData) {
-		LoadVertex(aMesh.vertex, aData);
-		LoadIndex(aMesh.index, aData);
-		LoadSubMesh(aMesh.submesh, aData);
+
+	template<typename VertexType>
+	static void Load(ModelCPU<VertexType>& aMesh, PathString& aFilePath) {
+		FileIn lFile;
+		lFile.Open(aFilePath.Get(), true);
+
+		Buffer lData;
+		lFile.Read(lData);
+
+		Load<VertexType>(aMesh, lData, aFilePath);
 	}
+
 
 private:
 	static void LoadVertex(VectorSimple<StaticMeshVertex>& aVertex, Buffer& aData) {

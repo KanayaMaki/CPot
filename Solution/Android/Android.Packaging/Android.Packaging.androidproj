@@ -196,6 +196,9 @@
       <Project>{0b89d5a7-1f1f-4bca-94fe-31901992c73c}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Asset\" />
+  </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

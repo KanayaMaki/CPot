@@ -9,6 +9,7 @@
 
 #include "./Pot/Thread/mutex.h"
 
+#include "./Pot/Window/Windows/windowWindows.h"
 
 namespace cpot {
 

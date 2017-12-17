@@ -54,6 +54,20 @@ private:
 	BOOL IsShow() const {
 		return mCursorState == cShow;
 	}
+
+	Vector2 GetClientPos(HWND aHwnd) const {
+		POINT p;
+		::GetCursorPos(&p);
+		::ScreenToClient(aHwnd, &p);
+		return Vector2(p.x, p.y);
+	}
+	void SetClientPos(HWND aHwnd, const Vector2& aClientPos) {
+		POINT p;
+		p.x = aClientPos.x;
+		p.y = aClientPos.y;
+		::ClientToScreen(aHwnd, &p);
+		::SetCursorPos(p.x, p.y);
+	}
 };
 
 }

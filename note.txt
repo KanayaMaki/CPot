@@ -23,3 +23,32 @@ inlineを使うと、defineのようにコードに埋め込まれる
 ・
 ・テキストファイルを読み込んで、コンポーネントを追加する
 ・ライブラリを読み込むことで、コンポーネントの型を追加する
+
+cbuffer Data : register(b0) {
+	matrix World;
+	matrix View;
+	matrix Projection;
+	matrix NorWorld;
+}
+
+layout(binding = 0, column_major) uniform Data {
+  mat4x4  World;
+	mat4x4  View;
+	mat4x4  Proj;
+	mat4x4  NorWorld;
+};
+
+Texture2D ToonTexture : register(t1);
+SamplerState ToonSampler : register(s1);
+→layout(binding = 1) uniform sampler2D ToonTexture;
+
+ToonTexture.Sample(ToonSampler, float2(lighting, 1.0f - lighting));
+→texture(ToonTexture, vec2(lighting, lighting));
+
+
+matrix → mat4x4
+float2 → vec2
+float3 → vec3
+float4 → vec4
+
+#includeなら読み込まないといけない
