@@ -9,6 +9,7 @@
 #include "./Pot/Usefull/singleton.h"
 #include "./Pot/Usefull/buffer.h"
 #include "./Pot/List/vector.h"
+#include "./Pot/Game/type.h"
 
 namespace cpot {
 

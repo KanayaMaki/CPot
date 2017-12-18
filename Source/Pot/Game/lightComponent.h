@@ -46,6 +46,7 @@ private:
 	Vector3 mDirection;
 	DirectionalLight mDirectionalLight;
 };
+CPOT_REGIST_TYPE(DirectionalLightComponent);
 
 
 class LightComponentManager : public Updater, public Singleton<LightComponentManager> {

@@ -433,10 +433,10 @@ void MyGame::Init() {
 	indexBuffer->Load(IndexBuffer::cU16, 6, IndexBuffer::cTriangleList, lIndex);
 
 
-	/*
+	///*
 	PmxLoader lPmx;
-	lPmx.Load("./Miku/miku.pmx");
-	//lPmx.Load("./Alicia/Alicia_solid.pmx");
+	//lPmx.Load("./Miku/miku.pmx");
+	lPmx.Load("./Alicia/Alicia_solid.pmx");
 
 	StaticMeshModelCPU lSkinMeshCPU;
 	PmxToMesh::Load(lSkinMeshCPU, lPmx.Get());
@@ -444,7 +444,7 @@ void MyGame::Init() {
 	//*/
 
 	
-	///*
+	/*
 	StaticMeshModelCPU lSkinMeshCPU;
 	BufferToMesh::Load(lSkinMeshCPU, PathString("./Box/box.pmo"));
 	//*/
@@ -483,7 +483,7 @@ void MyGame::Init() {
 	{
 		GameObject* lCamera = new GameObject;
 		lCamera->SetName("Camera");
-		lCamera->AddComponent<SkyWalkComponent>();
+		//lCamera->AddComponent<SkyWalkComponent>();
 
 		lCamera->AddComponent<PersCameraComponent>();
 
@@ -491,6 +491,8 @@ void MyGame::Init() {
 		lCamera->GetTransform().mPosition = Vector3(1.0f, 1.0f, 0.0f) * 40.0f + Vector3::Zero().Y(0.0f);
 		lCamera->GetTransform().mRotation = Quaternion::FromAxis(lCamera->GetTransform().mRotation.Up(), ToRad(-90.0f));
 		lCamera->GetTransform().mRotation *= Quaternion::FromAxis(lCamera->GetTransform().mRotation.Right(), ToRad(45.0f));
+
+		lCamera->AddComponent("SkyWalkComponent");
 	}
 
 	#ifdef CPOT_ON_WINDOWS
@@ -572,7 +574,7 @@ void MyGame::Update() {
 		f32 t = mikuMorphAnim.Get();
 		lNow[i].position = Lerp(lBefore[i].position, lAfter[i].position, t);
 	}
-	model->mesh.vertex->Write(&lNow[0]);
+	//model->mesh.vertex->Write(&lNow[0]);
 
 	//トランスフォーム
 	mikuRotAnim.ForwardTime(DeltaTime());
@@ -614,15 +616,15 @@ void MyGame::Update() {
 
 	//PMXの描画
 	///*
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get(), Vector3().XYZ(10.0f));
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(mikuRotAnim.Get());
+	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get(), Vector3().XYZ(10.0f));
+	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(mikuRotAnim.Get());
 	GameObject* lPlayer = GameObject::Find("Player");
-	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(lPlayer->GetTransform().mRotation, lPlayer->GetTransform().mPosition);
-	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(lPlayer->GetTransform().mRotation);
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(lPlayer->GetTransform().mRotation, lPlayer->GetTransform().mPosition);
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(lPlayer->GetTransform().mRotation);
 	wvpBuffer->Write();
 	
 
-	/*
+	///*
 	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::Black();
 	materialBuffer->Write();
 

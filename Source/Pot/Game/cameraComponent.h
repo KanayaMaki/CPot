@@ -43,6 +43,7 @@ public:
 public:
 	PersCamera mPersCamera;
 };
+CPOT_REGIST_TYPE(PersCameraComponent);
 
 
 class CameraComponentManager : public Updater, public Singleton<CameraComponentManager> {

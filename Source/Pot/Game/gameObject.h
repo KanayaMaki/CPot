@@ -122,10 +122,20 @@ public:
 		return lC;
 	}
 
+	Component* AddComponent(const Type& aTypeName) {
+		Component* lC = TypeFactoryManager::S().Create(aTypeName);
+		AddComponent(lC);
+		return lC;
+	}
+
 	void AddComponent(Component* aComponent) {
+		if (aComponent == nullptr) {
+			return;
+		}
 		aComponent->InitComponent(this);
 		mComponents.PushBack(aComponent);
 	}
+	
 
 	void RemoveComponent(Component* aComponent) {
 		mComponents.Remove(aComponent);

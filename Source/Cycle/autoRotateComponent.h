@@ -51,5 +51,6 @@ public:
 private:
 	Quaternion mRotateSpeed;
 };
+CPOT_REGIST_TYPE(AutoRotateComponent);
 
 }

@@ -552,13 +552,46 @@ m->Load("");
 		初期化時、Listへの追加
 		Delete時、Listからの削除
 
-	StaticMeshModelCPU
-		u32 VertexType
-		u32 VertexNum
-		u8* VertexData
+	class TypeFactoryBase {
+	public:
+		virtual const Type& GetTypeName() = 0;
+		virtual Component* Create() = 0;
+	}
 
-		u32 IndexSize
-		u32 IndexNum
-		u8* IndexData
+	template <typename T>
+	class TypeFactory : public TypeFactoryBase {
+		virtual const Type& GetTypeName() {
+			return T::SGetTypeName();
+		}
+		virtual Component* Create() {
+			return new T;
+		}
+	}
 
-		u32 MaterialNum
+	class TypeFactoryManager : public Singleton<TypeFactoryManager> {
+		public:
+			TypeFactoryManager() {
+				mFactoryNum = 0;
+			}
+
+			void Regsit(TypeFactoryBase* aFactory) {}
+			Component* Create(const Type& aTypeName) {}
+
+			u32 mFactoryNum;
+			TypeFactoryBase* mFactory[1024];
+	}
+
+	template <typename T>
+	class TypeFactoryRegister : Singleton<TypeFactoryRegister<T>> {
+		public:
+			TypeFactoryRegister() {
+				TypeFactoryManager::S().Regist(&mFactory);
+			}
+
+		private:
+			static TypeFactory<T> mFactory;
+	}
+	template <typename T>
+	TypeFactory<T> TypeFactoryRegister<T>::mFactory;
+
+	CPOT_REGIST_TYPE(THIS);

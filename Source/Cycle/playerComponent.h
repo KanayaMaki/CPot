@@ -128,5 +128,6 @@ private:
 	#pragma endregion
 
 };
+CPOT_REGIST_TYPE(PlayerComponent);
 
 }
