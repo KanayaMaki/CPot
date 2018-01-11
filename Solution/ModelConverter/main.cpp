@@ -21,7 +21,7 @@ void main(int aArgNum, const char** aArgs) {
 		Convert(aArgs[i]);
 	}
 
-	Convert("./Box/box.fbx");
+	Convert("./BoneModel/boneModel.fbx");
 
 	while (true) {
 		std::cout << "変換するファイル名を入力してください（Eで終了）\n　：";

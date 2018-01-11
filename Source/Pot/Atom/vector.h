@@ -1,5 +1,5 @@
 //
-//	content	:	Vector2, Vector3などの実装
+//	content	:	Vector2, Point2などの実装
 //	author	:	SaitoYoshiki
 //
 
@@ -1137,5 +1137,211 @@ private:
 	Vector2 mUV;
 };
 
+
+
+//2つのs32を持つクラス
+#pragma region Point2
+
+class Point2 {
+public:
+	s32 x, y;
+
+
+	//コンストラクタ
+	#pragma region Constructor
+
+public:
+	Point2() : x(0), y(0) {}
+	Point2(s32 aX, s32 aY) : x(aX), y(aY) {}
+
+	#pragma endregion
+
+
+	//値を設定する
+	#pragma region Setter
+
+	Point2 X(s32 aV) const {
+		return Point2(aV, y);
+	}
+	Point2 Y(s32 aV) const {
+		return Point2(x, aV);
+	}
+
+	static Point2 XY(s32 aV) {
+		return Point2(aV, aV);
+	}
+	static Point2 XY(s32 aX, s32 aY) {
+		return Point2(aX, aY);
+	}
+
+	#pragma endregion
+
+	//値を取得する
+	#pragma region Getter
+
+	//s32
+	#pragma region s32
+
+	s32 X() const {
+		return x;
+	}
+	s32 Y() const {
+		return y;
+	}
+
+	#pragma endregion
+
+
+	//Point2
+	#pragma region Point2
+
+	Point2 XX() const {
+		return Point2(x, x);
+	}
+	Point2 XY() const {
+		return Point2(x, y);
+	}
+
+	Point2 YX() const {
+		return Point2(y, x);
+	}
+	Point2 YY() const {
+		return Point2(y, y);
+	}
+
+	Vector2 ToVector2() const {
+		return Vector2((f32)x, (f32)y);
+	}
+
+	#pragma endregion
+
+
+	#pragma endregion
+
+
+	//計算のオペレータ
+	#pragma region Calculate
+
+	//Plus
+	#pragma region
+
+	const Point2& operator +=(const Point2& aVal) {
+		x += aVal.x;
+		y += aVal.y;
+		return *this;
+	}
+	Point2 operator +(const Point2& aVal) const {
+		Point2 tRes = *this;
+		tRes += aVal;
+		return tRes;
+	}
+
+	const Point2& operator +=(s32 aVal) {
+		x += aVal;
+		y += aVal;
+		return *this;
+	}
+
+	Point2 operator +(s32 aVal) const {
+		Point2 tRes = *this;
+		tRes += aVal;
+		return tRes;
+	}
+
+	#pragma endregion
+
+	//Sub
+	#pragma region
+
+	const Point2& operator -=(const Point2& aVal) {
+		x -= aVal.x;
+		y -= aVal.y;
+		return *this;
+	}
+	Point2 operator -(const Point2& aVal) const {
+		Point2 tRes = *this;
+		tRes -= aVal;
+		return tRes;
+	}
+	const Point2& operator -=(s32 aVal) {
+		x -= aVal;
+		y -= aVal;
+		return *this;
+	}
+	Point2 operator -(s32 aVal) const {
+		Point2 tRes = *this;
+		tRes -= aVal;
+		return tRes;
+	}
+
+	#pragma endregion
+
+	//Multi
+	#pragma region Multi
+
+	const Point2& operator *=(s32 aVal) {
+		x *= aVal;
+		y *= aVal;
+		return *this;
+	}
+	Point2 operator *(s32 aVal) const {
+		Point2 tRes = *this;
+		tRes *= aVal;
+		return tRes;
+	}
+
+	#pragma endregion
+
+
+	Point2 operator -() const {
+		Point2 tRes(-x, -y);
+		return tRes;
+	}
+
+	#pragma endregion
+
+
+	//その他計算
+	#pragma region Other
+
+
+	#pragma endregion
+
+
+	//文字列に変換する
+	#pragma region ToString
+
+public:
+	String<64> ToString() const {
+		String<64> lRes;
+		lRes += "(";
+		lRes += cpot::ToString::Do(x);
+		lRes += ", ";
+		lRes += cpot::ToString::Do(y);
+		lRes += ")";
+		return lRes;
+	}
+
+	#pragma endregion
+
+
+	//ヘルパ関数
+	#pragma region Helper
+
+	//それぞれの最大の要素を選ぶ
+	friend Point2 MaxElement(const Point2& aVal1, const Point2& aVal2) {
+		Point2 tRes(Max(aVal1.x, aVal2.x), Max(aVal1.y, aVal2.y));
+		return tRes;
+	}
+	friend Point2 MinElement(const Point2& aVal1, const Point2& aVal2) {
+		Point2 tRes(Min(aVal1.x, aVal2.x), Min(aVal1.y, aVal2.y));
+		return tRes;
+	}
+
+	#pragma endregion
+
+};
+
+#pragma endregion
 
 }

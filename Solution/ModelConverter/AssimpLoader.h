@@ -45,6 +45,49 @@ public:
 	u32 mDelta;
 };
 
+
+struct VectorKey {
+	f32 time;
+	Vector3 value;
+};
+
+struct QuaternionKey {
+	f32 time;
+	Quaternion value;
+};
+
+struct NodeAnimation {
+	String<32> nodeName;
+	std::vector<VectorKey> translate;
+	std::vector<VectorKey> scale;
+	std::vector<QuaternionKey> rotation;
+};
+
+struct Animation {
+	f32 duration;
+	std::vector<NodeAnimation> body;
+};
+
+inline Vector3 FromAssimp(const aiVector3D& value) {
+	return Vector3(value.x, value.y, value.z);
+}
+
+inline VectorKey FromAssimp(const aiVectorKey& key) {
+
+	VectorKey v;
+	v.time = key.mTime;
+	v.value = FromAssimp(key.mValue);
+	return v;
+}
+
+inline QuaternionKey FromAssimp(const aiQuatKey& key) {
+
+	QuaternionKey v;
+	v.time = key.mTime;
+	v.value = Quaternion(key.mValue.x, key.mValue.y, key.mValue.z, key.mValue.w);
+	return v;
+}
+
 class AssimpLoader {
 private:
 	template<typename VertexType>
@@ -91,6 +134,45 @@ private:
 		}
 	}
 
+
+	static void LoadNodeAnimation(Animation& aAnimation, const aiNodeAnim* aNode) {
+
+		//
+		//ノード情報の取得
+		//
+		NodeAnimation lNodeAnim;
+
+		//ノード名の取得
+		lNodeAnim.nodeName = aNode->mNodeName.C_Str();
+
+		//ポジションのキーの取得
+		for (unsigned int i = 0; i < aNode->mNumPositionKeys; i++) {
+			lNodeAnim.translate.push_back(FromAssimp(aNode->mPositionKeys[i]));
+		}
+
+		//スケールのキーの取得
+		for (unsigned int i = 0; i < aNode->mNumScalingKeys; i++) {
+			lNodeAnim.scale.push_back(FromAssimp(aNode->mScalingKeys[i]));
+		}
+
+		//回転のキーの取得
+		for (unsigned int i = 0; i < aNode->mNumRotationKeys; i++) {
+			lNodeAnim.rotation.push_back(FromAssimp(aNode->mRotationKeys[i]));
+		}
+
+		aAnimation.body.push_back(lNodeAnim);
+	}
+
+	static void LoadAnimation(Animation& aAnimation, const aiAnimation* aAnim) {
+
+		//
+		//ノード情報の取得
+		//
+		for (unsigned int i = 0; i < aAnim->mNumChannels; i++) {
+			LoadNodeAnimation(aAnimation, aAnim->mChannels[i]);
+		}
+		aAnimation.duration = aAnim->mDuration;
+	}
 
 public:
 	template<typename VertexType>
@@ -205,6 +287,12 @@ public:
 		}
 
 		aMesh.filePath = aFileName;
+
+
+		Animation lAnimation[10];
+		for (unsigned int i = 0; i < scene->mNumAnimations; i++) {
+			LoadAnimation(lAnimation[i], scene->mAnimations[i]);
+		}
 
 		return true;
 		

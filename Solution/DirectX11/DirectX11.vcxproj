@@ -94,6 +94,7 @@
     <ClInclude Include="..\..\Source\Pot\Model\SkinMeshModel.h" />
     <ClInclude Include="..\..\Source\Pot\Model\StaticMeshModel.h" />
     <ClInclude Include="..\..\Source\Pot\Model\Submesh.h" />
+    <ClInclude Include="..\..\Source\Pot\Network\Windows\networkWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Out\out.h" />
     <ClInclude Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.h" />

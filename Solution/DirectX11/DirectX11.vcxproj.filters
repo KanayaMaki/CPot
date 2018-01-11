@@ -148,6 +148,12 @@
     <Filter Include="Source\Pot\Game">
       <UniqueIdentifier>{70d87719-a7d2-4ed2-b1c7-c921822160d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Pot\Network">
+      <UniqueIdentifier>{a2f6fc41-3a53-419c-83c2-d66b8abe4060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pot\Network\Windows">
+      <UniqueIdentifier>{d41560d3-4d51-48bd-8ece-719f94ecf949}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Pot\Atom\defines.h">
@@ -581,6 +587,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Pot\Game\type.h">
       <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Network\Windows\networkWindows.h">
+      <Filter>Source\Pot\Network\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
