@@ -22,6 +22,9 @@ public:
 	}
 
 public:
+	void Load(const HashTableKey& aUnionName) CPOT_OR {
+		//将来は、名前からデータを検索して、ロードできるようにしたい
+	};
 	void Load(CDepthMode aMode) CPOT_OR {
 
 		switch (aMode)

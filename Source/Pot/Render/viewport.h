@@ -13,6 +13,7 @@ namespace cpot {
 class ViewportBase {
 
 public:
+	CPOT_VI void Load(const HashTableKey& aUnionName) CPOT_ZR;
 	CPOT_VI void Load(const Vector2& aLeftTop, const Vector2& aSize) CPOT_ZR;
 
 public:

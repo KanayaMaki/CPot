@@ -51,12 +51,18 @@ public:
 		}
 		std::shared_ptr<T> lT(new T);
 		lT->Load(aUnionName);
+		//“Ç‚İ‚İ‚É¸”s‚µ‚Ä‚¢‚½‚ç
+		if (lT->IsLoad() == false) {
+			//null‚ğ•Ô‚·BlT‚Í‰ğ•ú‚³‚ê‚é
+			return std::shared_ptr<T>(nullptr);
+		}
+		lT->SetName(aUnionName);
 		mResourceList.PushBack(lT);
 		return lT;
 	}
 
 public:
-	void Regist(T* aResource) {
+	void Regist(std::shared_ptr<T> aResource) {
 		mResourceList.PushBack(aResource);
 	}
 	void Remove(const std::shared_ptr<T>& aResource) {
@@ -84,7 +90,6 @@ void ResourceListUpdater<T>::Update() {
 			ResourceList<T>::S().mResourceList.Remove(lT);
 		}
 	}
-	CPOT_LOG("ResourceUpdate!");
 }
 
 template<typename T>

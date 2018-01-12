@@ -23,6 +23,7 @@ public:
 	};
 
 public:
+	CPOT_VI void Load(const HashTableKey& aUnionName) CPOT_ZR;
 	CPOT_VI void Load(CFillMode aFillMode, CCullMode aCullMode) CPOT_ZR;
 
 public:

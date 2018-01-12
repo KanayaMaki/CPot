@@ -39,6 +39,10 @@ Game
 		ゲームの描画をする
 
 
+std::shared_ptr<Texture2D> backBuffer;
+backBuffer = ResourceList<>
+
+
 class GameMain
 	static GameBase* mGame
 
@@ -551,5 +555,3 @@ m->Load("");
 	Component
 		初期化時、Listへの追加
 		Delete時、Listからの削除
-
-	

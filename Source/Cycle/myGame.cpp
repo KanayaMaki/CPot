@@ -183,12 +183,13 @@ std::shared_ptr<ConstantBuffer> wvpBuffer;
 std::shared_ptr<ConstantBuffer> materialBuffer;
 std::shared_ptr<ConstantBuffer> otherBuffer;
 std::shared_ptr<ConstantBuffer> toonLineBuffer;
-std::shared_ptr<Viewport> viewport;
-std::shared_ptr<VertexBuffer> vertexBuffer;
-std::shared_ptr<IndexBuffer> indexBuffer;
 std::shared_ptr<Shader> lambertShader;
 std::shared_ptr<Shader> toonShader;
 std::shared_ptr<Shader> toonLineShader;
+
+std::shared_ptr<Viewport> viewport;
+std::shared_ptr<VertexBuffer> vertexBuffer;
+std::shared_ptr<IndexBuffer> indexBuffer;
 std::shared_ptr<Rasterizer> rasterizer;
 std::shared_ptr<Rasterizer> toonLineRasterizer;
 std::shared_ptr<StaticMeshModel> model;
@@ -287,12 +288,14 @@ void MyGame::Init() {
 	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(360.0f)));
 
 	backBuffer.reset(new Texture2D);
+	backBuffer->SetName("BackBuffer");
 	backBufferDepth.reset(new Texture2D);
+	backBufferDepth->SetName("BackBufferDepth");
 
 	#ifdef CPOT_ON_DIRECTX11
 
-	directX11::Texture2DDirectX11Data::S().Regist("test", "./test.png");
-	directX11::Texture2DDirectX11Data::S().Regist("white", "./white.png");
+	directX11::Texture2DDirectX11Data::S().Regist("Test", "./test.png");
+	directX11::Texture2DDirectX11Data::S().Regist("White", "./white.png");
 
 	directX11::ShaderDirectX11Data::S().Regist("Lambert",
 	{
@@ -321,8 +324,8 @@ void MyGame::Init() {
 
 	#elif defined CPOT_ON_OPENGL
 
-	openGL::Texture2DData::S().Regist("test", "./test.png");
-	openGL::Texture2DData::S().Regist("white", "./white.png");
+	openGL::Texture2DData::S().Regist("Test", "./test.png");
+	openGL::Texture2DData::S().Regist("White", "./white.png");
 
 	openGL::platform::InputLayout lInputLayout;
 	openGL::platform::InputLayoutElement element[] = {
@@ -361,69 +364,88 @@ void MyGame::Init() {
 
 	#endif
 
+	ResourceList<Texture2D>::S().Regist(backBuffer);
+	ResourceList<Texture2D>::S().Regist(backBufferDepth);
+
+
 	renderTarget.reset(new Texture2D);
 	renderTarget->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cRGBA32Float, true, true, false);
+	renderTarget->SetName("RenderTarget");
+	ResourceList<Texture2D>::S().Regist(renderTarget);
 
 	renderTargetDepth.reset(new Texture2D);
 	renderTargetDepth->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, false, true);
+	renderTargetDepth->SetName("RenderTargetDepth");
+	ResourceList<Texture2D>::S().Regist(renderTargetDepth);
 
-
-	whiteTexture.reset(new Texture2D);
-	whiteTexture->Load("white");
-
-	diffuseTexture.reset(new Texture2D);
-	diffuseTexture->Load("test");
+	whiteTexture = ResourceList<Texture2D>::S().Find("White");
+	diffuseTexture = ResourceList<Texture2D>::S().Find("Test");
 
 	diffuseSampler.reset(new Sampler);
 	diffuseSampler->Load(Sampler::cWrap);
+	diffuseSampler->SetName("Diffuse");
+	ResourceList<Sampler>::S().Regist(diffuseSampler);
 
 	blend.reset(new Blend);
 	blend->Load(Blend::cNormal);
+	blend->SetName("Normal");
+	ResourceList<Blend>::S().Regist(blend);
 
 	depthStencil.reset(new DepthStencil);
 	depthStencil->Load(DepthStencil::cTest);
+	depthStencil->SetName("Test");
+	ResourceList<DepthStencil>::S().Regist(depthStencil);
 
 	depthStencilNoWrite.reset(new DepthStencil);
 	depthStencilNoWrite->Load(DepthStencil::cNoWrite);
+	depthStencilNoWrite->SetName("NoWrite");
+	ResourceList<DepthStencil>::S().Regist(depthStencilNoWrite);
 
 	viewport.reset(new Viewport);
 	viewport->Load(Vector2(0.0f, 0.0f), Config::S().GetScreenSize());
 
-	lambertShader.reset(new Shader);
-	lambertShader->Load("Lambert");
-
-	toonShader.reset(new Shader);
-	toonShader->Load("Toon");
-
-	toonLineShader.reset(new Shader);
-	toonLineShader->Load("ToonLine");
+	lambertShader = ResourceList<Shader>::S().Find("Lambert");
+	toonShader = ResourceList<Shader>::S().Find("Toon");
+	toonLineShader = ResourceList<Shader>::S().Find("ToonLine");
 
 	rasterizer.reset(new Rasterizer);
 	rasterizer->Load(Rasterizer::cSolid, Rasterizer::cCullCCW);
+	rasterizer->SetName("CullCCW");
+	ResourceList<Rasterizer>::S().Regist(rasterizer);
 
 	toonLineRasterizer.reset(new Rasterizer);
 	toonLineRasterizer->Load(Rasterizer::cSolid, Rasterizer::cCullCW);
+	toonLineRasterizer->SetName("CullCW");
+	ResourceList<Rasterizer>::S().Regist(toonLineRasterizer);
 
 	wvpBuffer.reset(new ConstantBuffer);
 	wvpBuffer->Load(new WVPBuffer);
+	wvpBuffer->SetName("WVP");
+	ResourceList<ConstantBuffer>::S().Regist(wvpBuffer);
 
 	materialBuffer.reset(new ConstantBuffer);
 	materialBuffer->Load(new MaterialBuffer);
+	materialBuffer->SetName("Material");
+	ResourceList<ConstantBuffer>::S().Regist(materialBuffer);
 	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
 
 	otherBuffer.reset(new ConstantBuffer);
 	otherBuffer->Load(new OtherBuffer);
+	otherBuffer->SetName("Other");
+	ResourceList<ConstantBuffer>::S().Regist(otherBuffer);
 	otherBuffer->GetCPUBuffer<OtherBuffer>()->mTimer = 0.0f;
 
 	toonLineBuffer.reset(new ConstantBuffer);
 	toonLineBuffer->Load(new ToonLineBuffer);
+	toonLineBuffer->SetName("ToonLine");
+	ResourceList<ConstantBuffer>::S().Regist(toonLineBuffer);
 	toonLineBuffer->GetCPUBuffer<ToonLineBuffer>()->mLineWidth = 2.0f;
 
-	StaticMeshVertex lVertex[]{
-		{ { -0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 2.0f } },
+	StaticMeshVertex lVertex[] {
+		{ { -0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
 		{ { -0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
-		{ { 0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 2.0f, 2.0f } },
-		{ { 0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 2.0f, 0.0f } },
+		{ { 0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
+		{ { 0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
 	};
 	vertexBuffer.reset(new VertexBuffer);
 	vertexBuffer->Load(sizeof(StaticMeshVertex), 4, lVertex, true);
@@ -435,8 +457,8 @@ void MyGame::Init() {
 
 	///*
 	PmxLoader lPmx;
-	//lPmx.Load("./Miku/miku.pmx");
-	lPmx.Load("./Alicia/Alicia_solid.pmx");
+	lPmx.Load("./Miku/miku.pmx");
+	//lPmx.Load("./Alicia/Alicia_solid.pmx");
 
 	StaticMeshModelCPU lSkinMeshCPU;
 	PmxToMesh::Load(lSkinMeshCPU, lPmx.Get());
@@ -609,10 +631,11 @@ void MyGame::Update() {
 	materialBuffer->Write();
 	otherBuffer->Write();
 
-	renderTarget->ClearColor(Color::White());
-	renderTargetDepth->ClearDepth(1.0f);
-	backBuffer->ClearColor(Color::White());
-	backBufferDepth->ClearDepth(1.0f);
+	ResourceList<Texture2D>::S().Find("RenderTarget")->ClearColor(Color::White());
+	ResourceList<Texture2D>::S().Find("RenderTargetDepth")->ClearDepth(1.0f);
+
+	ResourceList<Texture2D>::S().Find("BackBuffer")->ClearColor(Color::White());
+	ResourceList<Texture2D>::S().Find("BackBufferDepth")->ClearDepth(1.0f);
 
 	//PMX‚Ì•`‰æ
 	///*
@@ -631,19 +654,19 @@ void MyGame::Update() {
 	toonLineBuffer->GetCPUBuffer<ToonLineBuffer>()->mLineWidth = 0.1f;
 	toonLineBuffer->Write();
 
-	Render::S().SetBlend(blend);
-	Render::S().SetRasterizer(toonLineRasterizer);
-	Render::S().SetDepthStencil(depthStencilNoWrite);
+	Render::S().SetBlend(ResourceList<Blend>::S().Find("Normal"));
+	Render::S().SetRasterizer(ResourceList<Rasterizer>::S().Find("CullCW"));
+	Render::S().SetDepthStencil(ResourceList<DepthStencil>::S().Find("NoWrite"));
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
 	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(backBufferDepth);
-	Render::S().SetConstantBuffer(wvpBuffer, 0);
-	Render::S().SetConstantBuffer(materialBuffer, 1);
-	Render::S().SetConstantBuffer(otherBuffer, 2);
-	Render::S().SetConstantBuffer(toonLineBuffer, 3);
-	Render::S().SetRenderTexture(backBuffer, 0);
-	Render::S().SetShader(toonLineShader);
+	Render::S().SetDepthTexture(ResourceList<Texture2D>::S().Find("RenderTargetDepth"));
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("WVP"), 0);
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Material"), 1);
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Other"), 2);
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("ToonLine"), 3);
+	Render::S().SetRenderTexture(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
+	Render::S().SetShader(ResourceList<Shader>::S().Find("ToonLine"));
 
 	for (u32 i = 0; i < model->submeshNum; i++) {
 		Render::S().SetToDevice();
@@ -654,20 +677,20 @@ void MyGame::Update() {
 	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
 	materialBuffer->Write();
 
-	Render::S().SetBlend(blend);
-	Render::S().SetRasterizer(rasterizer);
-	Render::S().SetDepthStencil(depthStencil);
+	Render::S().SetBlend(ResourceList<Blend>::S().Find("Normal"));
+	Render::S().SetRasterizer(ResourceList<Rasterizer>::S().Find("CullCCW"));
+	Render::S().SetDepthStencil(ResourceList<DepthStencil>::S().Find("Test"));
 	Render::S().SetVertexBuffer(model->mesh.vertex);
 	Render::S().SetIndexBuffer(model->mesh.index);
 	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(backBufferDepth);
-	Render::S().SetSampler(diffuseSampler, 0);
-	Render::S().SetSampler(diffuseSampler, 1);
-	Render::S().SetConstantBuffer(wvpBuffer, 0);
-	Render::S().SetConstantBuffer(materialBuffer, 1);
-	Render::S().SetConstantBuffer(otherBuffer, 2);
-	Render::S().SetRenderTexture(backBuffer, 0);
-	Render::S().SetShader(toonShader);
+	Render::S().SetDepthTexture(ResourceList<Texture2D>::S().Find("RenderTargetDepth"));
+	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 0);
+	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 1);
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("WVP"), 0);
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Material"), 1);
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Other"), 2);
+	Render::S().SetRenderTexture(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
+	Render::S().SetShader(ResourceList<Shader>::S().Find("Toon"));
 
 	for (u32 i = 0; i < model->submeshNum; i++) {
 		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
@@ -684,10 +707,10 @@ void MyGame::Update() {
 	//*/
 
 
-	/*
+	///*
 	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = planeTransform.GetMatrix();
 	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(planeTransform.mRotation);
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::Unit() * Matrix4x4::FromScale(Vector3::One() * 1.9f);
+	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::Unit() * Matrix4x4::FromScale(Vector3::One() * 2.0f);
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4::Unit();
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = Matrix4x4::Unit();
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = Matrix4x4::Unit();
@@ -696,23 +719,23 @@ void MyGame::Update() {
 	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
 	materialBuffer->Write();
 
-	Render::S().SetBlend(blend);
-	Render::S().SetRasterizer(rasterizer);
-	Render::S().SetDepthStencil(depthStencil);
+	Render::S().SetBlend(ResourceList<Blend>::S().Find("Normal"));
+	Render::S().SetRasterizer(ResourceList<Rasterizer>::S().Find("CullCCW"));
+	Render::S().SetDepthStencil(ResourceList<DepthStencil>::S().Find("Test"));
 	Render::S().SetVertexBuffer(vertexBuffer);
 	Render::S().SetIndexBuffer(indexBuffer);
 	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(backBufferDepth);
-	Render::S().SetConstantBuffer(wvpBuffer, 0);
-	Render::S().SetConstantBuffer(materialBuffer, 1);
-	Render::S().SetConstantBuffer(otherBuffer, 2);
-	Render::S().SetRenderTexture(backBuffer, 0);
-	Render::S().SetShader(toonShader);
+	Render::S().SetDepthTexture(ResourceList<Texture2D>::S().Find("BackBufferDepth"));
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("WVP"), 0);
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Material"), 1);
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Other"), 2);
+	Render::S().SetRenderTexture(ResourceList<Texture2D>::S().Find("BackBuffer"), 0);
+	Render::S().SetShader(ResourceList<Shader>::S().Find("Toon"));
 
-	Render::S().SetSampler(diffuseSampler, 0);
-	Render::S().SetSampler(diffuseSampler, 1);
-	Render::S().SetTexture2D(renderTarget, 0);
-	Render::S().SetTexture2D(whiteTexture, 1);
+	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 0);
+	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 1);
+	Render::S().SetTexture2D(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
+	Render::S().SetTexture2D(ResourceList<Texture2D>::S().Find("White"), 1);
 	Render::S().SetToDevice();
 	Render::S().DrawIndexed(6, 0);
 	//*/

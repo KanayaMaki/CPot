@@ -22,6 +22,9 @@ public:
 	}
 
 public:
+	void Load(const HashTableKey& aUnionName) CPOT_OR {
+		//将来は、名前からデータを検索して、ロードできるようにしたい
+	};
 	void Load(const Vector2& aLeftTop, const Vector2& aSize) CPOT_OR {
 		mViewport.mMinDepth = 0.0f;
 		mViewport.mMaxDepth = 1.0f;

@@ -16,6 +16,8 @@ class ConstantBufferBase : public NamedResource {
 	#pragma region Load
 
 public:
+	CPOT_VI void Load(const HashTableKey& aUnionName) CPOT_ZR;
+
 	template<typename T>
 	BOOL Load(T* aInitData);
 

@@ -24,6 +24,9 @@ public:
 	#pragma region Load
 
 public:
+	void Load(const HashTableKey& aUnionName) CPOT_OR {
+		//将来は、名前からデータを検索して、ロードできるようにしたい
+	};
 	template<typename T>
 	BOOL Load(T* aInitData) {
 		return mConstantBuffer->Load(platform::ConstantBuffer::CreateBufferDesc(sizeof(T)), aInitData);

@@ -17,6 +17,9 @@ namespace openGL {
 class Rasterizer : public RasterizerBase {
 
 public:
+	void Load(const HashTableKey& aUnionName) CPOT_OR {
+		//将来は、名前からデータを検索して、ロードできるようにしたい
+	};
 	void Load(CFillMode aFillMode, CCullMode aCullMode) CPOT_OR {
 		BOOL lIsSolid = aFillMode == cSolid;
 

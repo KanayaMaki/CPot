@@ -17,6 +17,9 @@ namespace openGL {
 class Blend : public BlendBase {
 
 public:
+	void Load(const HashTableKey& aUnionName) CPOT_OR {
+		//将来は、名前からデータを検索して、ロードできるようにしたい
+	};
 	void Load(CBlendMode aMode) CPOT_OR {
 
 		if (aMode == cNormal) {
