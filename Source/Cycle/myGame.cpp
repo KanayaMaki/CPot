@@ -515,7 +515,6 @@ void MyGame::Init() {
 	{
 		GameObject* lCamera = new GameObject;
 		lCamera->SetName("Camera");
-		//lCamera->AddComponent<SkyWalkComponent>();
 
 		lCamera->AddComponent<PersCameraComponent>();
 
@@ -613,15 +612,24 @@ void MyGame::Update() {
 	
 	#pragma endregion
 
+	//カーソル移動
 	if (Input::GetButton(windows::cL)) {
 		windows::Window::S().SetCursorPos(Vector2(100.0f, 100.0f));
 	}
-	                                                                                                                                                                                                         
-	if (Input::GetButtonDown(windows::cF)) {
-		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(90.0f)));
+	
+	//プレイヤーを回転させる
+	const f32 cRotateSpeed = ToRad(45.0f);
+	if (Input::GetButtonDown(windows::cU)) {
+		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), cRotateSpeed));
 	}
-	else if (Input::GetButtonUp(windows::cF)) {
-		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(0.0f)));
+	if (Input::GetButtonDown(windows::cI)) {
+		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Right(), cRotateSpeed));
+	}
+	if (Input::GetButtonDown(windows::cO)) {
+		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Forward(), cRotateSpeed));
+	}
+	if (Input::GetButtonDown(windows::cP)) {
+		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), 0.0f));
 	}
 
 	auto lCamera = CameraManager::S().GetCamera();
@@ -631,7 +639,7 @@ void MyGame::Update() {
 	}
 	auto lLight = LightManager::S().GetDirectionalLight();
 	if (lLight) {
-		otherBuffer->GetCPUBuffer<OtherBuffer>()->mLightDirection = lLight->GetDirection();
+		otherBuffer->GetCPUBuffer<OtherBuffer>()->mLightDirection = lLight->GetDirection().Normal();
 	}
 	
 	otherBuffer->GetCPUBuffer<OtherBuffer>()->mTimer += DeltaTime() / 4.0f;

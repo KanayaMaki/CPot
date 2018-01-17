@@ -44,7 +44,7 @@ public:
 public:
 	static D3D11_SAMPLER_DESC CreateDescClamp() {
 		D3D11_SAMPLER_DESC lSamplerDesc;
-		lSamplerDesc.Filter = D3D11_FILTER_ANISOTROPIC;
+		lSamplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 		lSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
 		lSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
 		lSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
@@ -61,7 +61,7 @@ public:
 	}
 	static D3D11_SAMPLER_DESC CreateDescWrap() {
 		D3D11_SAMPLER_DESC lSamplerDesc;
-		lSamplerDesc.Filter = D3D11_FILTER_ANISOTROPIC;
+		lSamplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 		lSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 		lSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 		lSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;

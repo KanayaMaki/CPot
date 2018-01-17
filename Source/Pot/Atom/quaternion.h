@@ -158,14 +158,19 @@ public:
 		f32 lCosTheta = lFrom.Dot(lTo);
 		Vector3 lRotateAxis;
 
+		f32 lErrorPermit = 0.001f;
 		//ベクトルが反対方向を向いている場合
-		if (lCosTheta < -1 + 0.001f) {
+		if (lCosTheta < -1 + lErrorPermit) {
 			lRotateAxis = Vector3(0.0f, 0.0f, 1.0f).Cross(lFrom);
 			if (lRotateAxis.LenQuad() < 0.01f) {
 				lRotateAxis = Vector3(1.0f, 0.0f, 0.0f).Cross(lFrom);
 			}
 			lRotateAxis = lRotateAxis.Normal();
 			return FromAxis(lRotateAxis, ToRad(180.0f));
+		}
+		//ベクトルがほぼ同じ方向を向いている場合
+		else if (lCosTheta > 1 - lErrorPermit) {
+			return Quaternion::Unit();	//回転しない
 		}
 
 		lRotateAxis = lFrom.Cross(lTo);

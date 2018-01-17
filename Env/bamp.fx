@@ -15,9 +15,9 @@ struct VS_BAMP_INPUT {
 struct PS_INPUT {
 	float4 PosProj	: SV_POSITION; //頂点座標（プロジェクション）
 	float3 PosWor	: POS_WOR; //頂点座標（ワールド）
-	float3 NorWor	: NORMAL;	//法線ベクトル（ワールド）
-	float3 TanWor	: TANGENT;	//接線ベクトル（ワールド）
-	float3 BiNorWor	: BINORMAL;	//従法線ベクトル（ワールド）
+	float3 Nor	: NORMAL;	//法線ベクトル（ワールド）
+	float3 Tan	: TANGENT;	//接線ベクトル（ワールド）
+	float3 BiNor	: BINORMAL;	//従法線ベクトル（ワールド）
 	float2 Tex	: TEXTURE;	//テクスチャ座標
 };
 
@@ -46,17 +46,9 @@ void GS_MAIN(triangle VS_BAMP_INPUT input[3],
 		float4 lPosProj = mul(lPosView, Projection);
 		output.PosProj = lPosProj;
 
-		//ワールド座標での法線
-		float4 lNorWor = mul(float4(input[i].Nor, 1.0f), NorWorld);
-		output.NorWor = lNorWor.xyz / lNorWor.w;
-
-		//ワールド座標での接線
-		float4 lTanWor = mul(float4(input[i].Tan, 1.0f), NorWorld);
-		output.TanWor = lTanWor.xyz / lTanWor.w;
-
-		//ワールド座標での従法線
-		float4 lBiNorWor = mul(float4(input[i].BiNor, 1.0f), NorWorld);
-		output.BiNorWor = lBiNorWor.xyz / lBiNorWor.w;
+		output.Nor = input[i].Nor;
+		output.BiNor = input[i].BiNor;
+		output.Tan = input[i].Tan;
 
 		output.Tex = input[i].Tex;
 
@@ -89,26 +81,27 @@ float HalfLambert(float aLighting) {
 	return halfLambert;
 }
 
-float3 Transform(float3 aVector, matrix aMatrix) {
+float3 Mul(float3 aVector, matrix aMatrix) {
 	float4 lVector = mul(float4(aVector, 1.0f), aMatrix);
 	return lVector.xyz / lVector.w;
 }
 
-float3 BampNormal(float2 aTexCoord, float3 aNormalWor, float3 aTangentWor, float3 aBiNormalWor) {
+float3 BampNormal(float2 aTexCoord, float3 aNormal, float3 aTangent, float3 aBiNormal) {
 
 	float3 lBampNormalTan = BampTexture.Sample(BampSampler, aTexCoord).xyz;
 	lBampNormalTan.xy = lBampNormalTan.xy * 2.0f - 1.0f;
+	lBampNormalTan.xy *= -1.0f;
 
-	matrix lTanToWor = matrix(
-		float4(aTangentWor.x, aTangentWor.y, aTangentWor.z, 0.0f),
-		float4(aBiNormalWor.x, aBiNormalWor.y, aBiNormalWor.z, 0.0f),
-		float4(aNormalWor.x, aNormalWor.y, aNormalWor.z, 0.0f),
+	matrix lTanToLoc = matrix(
+		float4(aTangent.x, aTangent.y, aTangent.z, 0.0f),
+		float4(aBiNormal.x, aBiNormal.y, aBiNormal.z, 0.0f),
+		float4(aNormal.x, aNormal.y, aNormal.z, 0.0f),
 		float4(0.0f, 0.0f, 0.0f, 1.0f)
 		);
 
-	float3 lBampNorWor = Transform(lBampNormalTan, lTanToWor);
+	float3 lBampNor = Mul(lBampNormalTan, lTanToLoc);
 
-	return normalize(lBampNorWor);
+	return lBampNor;
 }
 
 
@@ -118,7 +111,8 @@ PS_OUTPUT PS_MAIN(PS_INPUT input) {
 	PS_OUTPUT output;
 
 	//バンプを適用させた法線の取得
-	float3 bampNormalWor = BampNormal(input.Tex, normalize(input.NorWor), normalize(input.TanWor), normalize(input.BiNorWor));
+	float3 bampNormal = BampNormal(input.Tex, normalize(input.Nor), normalize(input.Tan), normalize(input.BiNor));
+	float3 bampNormalWor = Mul(normalize(bampNormal), NorWorld);
 	float lighting = Lambert(bampNormalWor, -LightDirection);
 
 	//テクスチャ
