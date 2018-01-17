@@ -38,7 +38,7 @@ public:
 			aIndex[i] = aPmx.indexs[i];
 		}
 	}
-	static void LoadSubMesh(VectorSimple<SubMeshCPU>& aSubMesh, const PmxData& aPmx) {
+	static void LoadSubMesh(VectorSimple<SubMeshCPU<MaterialCPU>>& aSubMesh, const PmxData& aPmx) {
 
 		//マテリアルデータの読み込み
 		aSubMesh.SetSize(aPmx.materials.GetSize());

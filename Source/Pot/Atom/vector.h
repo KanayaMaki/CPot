@@ -517,6 +517,18 @@ public:
 		return tRes;
 	}
 
+	const Vector3& operator *=(const Vector3 aVal) {
+		x *= aVal.x;
+		y *= aVal.y;
+		z *= aVal.z;
+		return *this;
+	}
+	Vector3 operator *(const Vector3& aVal) const {
+		Vector3 tRes = *this;
+		tRes *= aVal;
+		return tRes;
+	}
+
 	#pragma endregion
 
 	//Div

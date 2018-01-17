@@ -39,10 +39,6 @@ Game
 		ゲームの描画をする
 
 
-std::shared_ptr<Texture2D> backBuffer;
-backBuffer = ResourceList<>
-
-
 class GameMain
 	static GameBase* mGame
 

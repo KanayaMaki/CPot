@@ -93,6 +93,7 @@
     <ClInclude Include="..\..\Source\Pot\Model\Material.h" />
     <ClInclude Include="..\..\Source\Pot\Model\SkinMeshModel.h" />
     <ClInclude Include="..\..\Source\Pot\Model\StaticMeshModel.h" />
+    <ClInclude Include="..\..\Source\Pot\Model\StaticTangentMeshModel.h" />
     <ClInclude Include="..\..\Source\Pot\Model\Submesh.h" />
     <ClInclude Include="..\..\Source\Pot\Network\Windows\networkWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Out\out.h" />
@@ -211,6 +212,14 @@
     <Image Include="..\..\Source\Pot\Windows\Resource\icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Env\bamp.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
     <FxCompile Include="..\..\Env\lambert.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>

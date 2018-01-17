@@ -186,14 +186,17 @@ std::shared_ptr<ConstantBuffer> toonLineBuffer;
 std::shared_ptr<Shader> lambertShader;
 std::shared_ptr<Shader> toonShader;
 std::shared_ptr<Shader> toonLineShader;
+std::shared_ptr<Shader> bampShader;
 
 std::shared_ptr<Viewport> viewport;
 std::shared_ptr<VertexBuffer> vertexBuffer;
 std::shared_ptr<IndexBuffer> indexBuffer;
 std::shared_ptr<Rasterizer> rasterizer;
 std::shared_ptr<Rasterizer> toonLineRasterizer;
-std::shared_ptr<StaticMeshModel> model;
+std::shared_ptr<StaticTangentMeshModel> model;
 std::shared_ptr<StaticMeshModel> loadModel;
+
+std::shared_ptr<StaticTangentMeshModel> tangentModel;
 
 Transform planeTransform;
 
@@ -318,6 +321,13 @@ void MyGame::Init() {
 		{ "./toonLine.fx", "PS_MAIN" },
 	});
 
+	directX11::ShaderDirectX11Data::S().Regist("Bamp",
+	{
+		{ "./bamp.fx", "VS_MAIN" },
+		{ "./bamp.fx", "GS_MAIN" },
+		{ "./bamp.fx", "PS_MAIN" },
+	});
+
 
 	backBuffer->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
 	backBufferDepth->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, true, true);
@@ -407,6 +417,7 @@ void MyGame::Init() {
 	lambertShader = ResourceList<Shader>::S().Find("Lambert");
 	toonShader = ResourceList<Shader>::S().Find("Toon");
 	toonLineShader = ResourceList<Shader>::S().Find("ToonLine");
+	bampShader = ResourceList<Shader>::S().Find("Bamp");
 
 	rasterizer.reset(new Rasterizer);
 	rasterizer->Load(Rasterizer::cSolid, Rasterizer::cCullCCW);
@@ -455,10 +466,10 @@ void MyGame::Init() {
 	indexBuffer->Load(IndexBuffer::cU16, 6, IndexBuffer::cTriangleList, lIndex);
 
 
-	///*
+	/*
 	PmxLoader lPmx;
 	lPmx.Load("./Miku/miku.pmx");
-	//lPmx.Load("./Alicia/Alicia_solid.pmx");
+	lPmx.Load("./Alicia/Alicia_solid.pmx");
 
 	StaticMeshModelCPU lSkinMeshCPU;
 	PmxToMesh::Load(lSkinMeshCPU, lPmx.Get());
@@ -466,25 +477,24 @@ void MyGame::Init() {
 	//*/
 
 	
-	/*
-	StaticMeshModelCPU lSkinMeshCPU;
+	///*
+	StaticTangentMeshModelCPU lSkinMeshCPU;
 	BufferToMesh::Load(lSkinMeshCPU, PathString("./Box/box.pmo"));
 	//*/
 
+	model.reset(new StaticTangentMeshModel);
+	ModelCPUToModel::Load(*model, lSkinMeshCPU);
 
-	model.reset(new StaticMeshModel);
-	ModelCPUToModel::Load(*model, lSkinMeshCPU, true);
 
-	lSkinMeshCPU.LoadVertex(lBefore);
-	lSkinMeshCPU.LoadVertex(lNow);
-	lSkinMeshCPU.LoadVertex(lAfter);
-
-	for (u32 i = 0; i < lSkinMeshCPU.vertex.GetSize(); i++) {
-		//lAfter[i].position = ((lAfter[i].position - Vector3(0.0f, 10.0f, 0.0f)).NormalSafe() * 10.0f) * 0.9f + lAfter[i].position * 0.1f;
-		lAfter[i].position = ((lAfter[i].position - Vector3(0.0f, 0.0f, 0.0f)).NormalSafe() * 1.0f);
-	}
 
 	planeTransform.mScale = Vector3::One() * 10.0f;
+
+
+	//StaticTangentMeshModelCPU lTangentMeshCPU;
+	//BufferToMesh::Load(lTangentMeshCPU, PathString("./Box/box.pmo"));
+
+	//tangentModel.reset(new StaticTangentMeshModel);
+	//ModelCPUToModel::Load(*tangentModel, lTangentMeshCPU);
 
 	
 	{
@@ -510,8 +520,7 @@ void MyGame::Init() {
 		lCamera->AddComponent<PersCameraComponent>();
 
 		lCamera->GetComponent<PersCameraComponent>()->mPersCamera.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
-		lCamera->GetTransform().mPosition = Vector3(1.0f, 1.0f, 0.0f) * 40.0f + Vector3::Zero().Y(0.0f);
-		lCamera->GetTransform().mRotation = Quaternion::FromAxis(lCamera->GetTransform().mRotation.Up(), ToRad(-90.0f));
+		lCamera->GetTransform().mPosition = Vector3(0.0f, 1.0f, -1.0f) * 40.0f;
 		lCamera->GetTransform().mRotation *= Quaternion::FromAxis(lCamera->GetTransform().mRotation.Right(), ToRad(45.0f));
 
 		lCamera->AddComponent("SkyWalkComponent");
@@ -631,7 +640,7 @@ void MyGame::Update() {
 	materialBuffer->Write();
 	otherBuffer->Write();
 
-	ResourceList<Texture2D>::S().Find("RenderTarget")->ClearColor(Color::White());
+	ResourceList<Texture2D>::S().Find("RenderTarget")->ClearColor(Color::Blue());
 	ResourceList<Texture2D>::S().Find("RenderTargetDepth")->ClearDepth(1.0f);
 
 	ResourceList<Texture2D>::S().Find("BackBuffer")->ClearColor(Color::White());
@@ -647,7 +656,7 @@ void MyGame::Update() {
 	wvpBuffer->Write();
 	
 
-	///*
+	/*
 	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::Black();
 	materialBuffer->Write();
 
@@ -690,12 +699,12 @@ void MyGame::Update() {
 	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Material"), 1);
 	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Other"), 2);
 	Render::S().SetRenderTexture(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
-	Render::S().SetShader(ResourceList<Shader>::S().Find("Toon"));
+	Render::S().SetShader(ResourceList<Shader>::S().Find("Bamp"));
 
 	for (u32 i = 0; i < model->submeshNum; i++) {
 		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
-		if (model->submesh[i].material.toonTexture->IsLoad()) {
-			Render::S().SetTexture2D(model->submesh[i].material.toonTexture, 1);
+		if (model->submesh[i].material.bampTexture->IsLoad()) {
+			Render::S().SetTexture2D(model->submesh[i].material.bampTexture, 1);
 		}
 		else {
 			Render::S().SetTexture2D(whiteTexture, 1);

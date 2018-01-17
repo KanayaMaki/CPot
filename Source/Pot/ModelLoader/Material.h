@@ -19,5 +19,14 @@ struct MaterialCPU {
 	Vector3 ambient;
 };
 
+struct BampMaterialCPU {
+	TextureCPU texture;
+	TextureCPU bampTexture;
+	Color diffuse;
+	Vector3 specular;
+	f32 specularPower;
+	Vector3 ambient;
+};
+
 
 }

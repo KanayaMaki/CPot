@@ -90,12 +90,6 @@ inline QuaternionKey FromAssimp(const aiQuatKey& key) {
 
 class AssimpLoader {
 private:
-	template<typename VertexType>
-	static void LoadVertex(std::vector<VertexType>& aVertex, const aiMesh* aMesh) {
-		
-	}
-
-	template<>
 	static void LoadVertex(std::vector<StaticMeshVertex>& aVertex, const aiMesh* aMesh) {
 
 		BOOL lHasPosition = aMesh->HasPositions();
@@ -123,7 +117,7 @@ private:
 
 		for (s32 j = 0; j < aMesh->mNumVertices; j++) {
 			StaticMeshVertex v;
-			v.position = Vector3(lVertices[lPosCur.Position()].x, lVertices[lPosCur.Position()].y, lVertices[lPosCur.Position()].z) * 0.01f;
+			v.position = Vector3(lVertices[lPosCur.Position()].x, lVertices[lPosCur.Position()].y, lVertices[lPosCur.Position()].z);
 			v.normal = Vector3(lNormal[lNorCur.Position()].x, lNormal[lNorCur.Position()].y, lNormal[lNorCur.Position()].z).Normal();
 			v.texCoord = TexCoord(lTex[lUVCur.Position()].x, 1.0f - lTex[lUVCur.Position()].y);
 			aVertex.push_back(v);
@@ -133,6 +127,133 @@ private:
 			lUVCur++;
 		}
 	}
+
+	static void LoadVertex(std::vector<StaticTangentMeshVertex>& aVertex, const aiMesh* aMesh) {
+
+		BOOL lHasPosition = aMesh->HasPositions();
+		VectorCursor lPosCur;
+		aiVector3D* lVertices = aMesh->mVertices;
+
+
+		BOOL lHasNormal = aMesh->HasNormals();
+		VectorCursor lNorCur;
+		aiVector3D* lNormal = aMesh->mNormals;
+		aiVector3D* lTangent = aMesh->mTangents;
+		aiVector3D* lBiTangent = aMesh->mBitangents;
+
+
+		BOOL lHasTex = aMesh->HasTextureCoords(0);
+		VectorCursor lUVCur;
+		aiVector3D* lTex;
+		aiVector3D tTex(0.0f, 0.0f, 0.0f);
+		if (lHasTex) {
+			lTex = aMesh->mTextureCoords[0];
+		}
+		else {
+			lTex = &tTex;
+			lUVCur.mDelta = 0;
+		}
+
+
+		for (s32 j = 0; j < aMesh->mNumVertices; j++) {
+			StaticTangentMeshVertex v;
+			v.position = Vector3(lVertices[lPosCur.Position()].x, lVertices[lPosCur.Position()].y, lVertices[lPosCur.Position()].z);
+			v.normal = Vector3(lNormal[lNorCur.Position()].x, lNormal[lNorCur.Position()].y, lNormal[lNorCur.Position()].z).Normal();
+			v.tangent = Vector3(lTangent[lNorCur.Position()].x, lTangent[lNorCur.Position()].y, lTangent[lNorCur.Position()].z).Normal();
+			v.biNormal = Vector3(lBiTangent[lNorCur.Position()].x, lBiTangent[lNorCur.Position()].y, lBiTangent[lNorCur.Position()].z).Normal();
+			v.texCoord = TexCoord(lTex[lUVCur.Position()].x, 1.0f - lTex[lUVCur.Position()].y);
+			aVertex.push_back(v);
+
+			lPosCur++;
+			lNorCur++;
+			lUVCur++;
+		}
+	}
+
+	//
+	//	マテリアルの読み込み
+	//
+	#pragma region Material
+
+	//ディフューズの取得
+	static Color LoadDiffuse(const aiMaterial* aAiMat) {
+		aiColor4D lColor;
+
+		aAiMat->Get(AI_MATKEY_COLOR_DIFFUSE, lColor);
+		return Color(lColor.r, lColor.g, lColor.b, lColor.a);
+	}
+
+	//スペキュラーの取得
+	static Vector3 LoadSpecular(const aiMaterial* aAiMat) {
+		aiColor4D lColor;
+
+		aAiMat->Get(AI_MATKEY_COLOR_SPECULAR, lColor);
+		return Vector3(lColor.r, lColor.g, lColor.b);
+	}
+
+	//スペキュラーパワーの取得
+	static float LoadSpecularPower(const aiMaterial* aAiMat) {
+		float lSpecularPow;
+		aAiMat->Get(AI_MATKEY_SHININESS, lSpecularPow);
+		return lSpecularPow;
+	}
+
+	//アンビエントの取得
+	static Vector3 LoadAmbient(const aiMaterial* aAiMat) {
+		aiColor4D lColor;
+
+		aAiMat->Get(AI_MATKEY_COLOR_AMBIENT, lColor);
+		return Vector3(lColor.r, lColor.g, lColor.b);
+	}
+
+	//ディフューズテクスチャの取得
+	static void LoadDiffuseTexture(TextureCPU& aTexture, const aiMaterial* aAiMat) {
+		aiString tex_name;
+
+		if (aAiMat->Get(AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), tex_name) == AI_SUCCESS) {
+			aTexture.name = tex_name.C_Str();
+		}
+	}
+
+	//ノーマルテクスチャの取得
+	static void LoadNormalTexture(TextureCPU& aTexture, const aiMaterial* aAiMat) {
+		aiString tex_name;
+
+		if (aAiMat->Get(AI_MATKEY_TEXTURE(aiTextureType_NORMALS, 0), tex_name) == AI_SUCCESS) {
+			aTexture.name = tex_name.C_Str();
+		}
+	}
+
+	//
+	//通常マテリアル
+	static void LoadMaterial(MaterialCPU& aMaterial, const aiMaterial* aAiMat) {
+
+		//色などの取得
+		aMaterial.diffuse = LoadDiffuse(aAiMat);
+		aMaterial.specular = LoadSpecular(aAiMat);
+		aMaterial.specularPower = LoadSpecularPower(aAiMat);
+		aMaterial.ambient = LoadAmbient(aAiMat);
+
+		//テクスチャの取得
+		LoadDiffuseTexture(aMaterial.texture, aAiMat);	//ディフューズテクスチャの取得
+	}
+
+	//
+	//バンプのマテリアル
+	static void LoadMaterial(BampMaterialCPU& aMaterial, const aiMaterial* aAiMat) {
+
+		//色などの取得
+		aMaterial.diffuse = LoadDiffuse(aAiMat);
+		aMaterial.specular = LoadSpecular(aAiMat);
+		aMaterial.specularPower = LoadSpecularPower(aAiMat);
+		aMaterial.ambient = LoadAmbient(aAiMat);
+
+		//テクスチャの取得
+		LoadDiffuseTexture(aMaterial.texture, aAiMat);	//ディフューズテクスチャの取得
+		LoadNormalTexture(aMaterial.bampTexture, aAiMat);	//ノーマルテクスチャの取得
+	}
+
+	#pragma endregion
 
 
 	static void LoadNodeAnimation(Animation& aAnimation, const aiNodeAnim* aNode) {
@@ -175,8 +296,8 @@ private:
 	}
 
 public:
-	template<typename VertexType>
-	static BOOL Load(ModelCPU<VertexType>& aMesh, const CHAR* aFileName) {
+	template<typename VertexType, typename MaterialType>
+	static BOOL Load(ModelCPU<VertexType, MaterialType>& aMesh, const CHAR* aFileName) {
 
 		Assimp::Importer importer;
 
@@ -196,7 +317,7 @@ public:
 
 		u32 lIndexBase = 0;	//複数のメッシュをまとめるため、インデックス値をずらす必要がある
 
-		//頂点情報とインデックス情報の取得
+							//頂点情報とインデックス情報の取得
 		for (s32 i = 0; i < scene->mNumMeshes; i++) {
 
 			const aiMesh* lMesh = scene->mMeshes[i];
@@ -205,17 +326,17 @@ public:
 				aiFace* lFace = lMesh->mFaces;
 				for (s32 j = 0; j < lMesh->mNumFaces; j++) {
 					for (s32 k = 0; k < lFace[j].mNumIndices; k++) {
-						u32 v = lFace[j].mIndices[k] + lIndexBase;
+						s32 index = k;	//面の回る方向を時計回りにする
+						u32 v = lFace[j].mIndices[index] + lIndexBase;
 						lIndex[lMesh->mMaterialIndex].push_back(v);
 					}
 				}
 			}
 
-			LoadVertex<VertexType>(lVertex, lMesh);
+			LoadVertex(lVertex, lMesh);
 
 			lIndexBase += lMesh->mNumVertices;
 		}
-
 
 		//
 		//取得した情報を、MeshCPUに変換する
@@ -254,33 +375,9 @@ public:
 		int lIndexStart = 0;
 		for (s32 i = 0; i < scene->mNumMaterials; i++) {
 			aiMaterial* lMaterial = scene->mMaterials[i];
-			SubMeshCPU& lSubMesh = aMesh.submesh[i];
+			SubMeshCPU<MaterialType>& lSubMesh = aMesh.submesh[i];
 
-			aiColor4D lColor;
-
-			//ディフューズの取得
-			lMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, lColor);
-			lSubMesh.material.diffuse = Color(lColor.r, lColor.g, lColor.b, lColor.a);
-
-			//スペキュラーの取得
-			lMaterial->Get(AI_MATKEY_COLOR_SPECULAR, lColor);
-			lSubMesh.material.specular = Vector3(lColor.r, lColor.g, lColor.b);
-
-			//スペキュラーパワーの取得
-			float lSpecularPow;
-			lMaterial->Get(AI_MATKEY_SHININESS, lSpecularPow);
-			lSubMesh.material.specularPower = lSpecularPow;
-
-			//アンビエントの取得
-			lMaterial->Get(AI_MATKEY_COLOR_AMBIENT, lColor);
-			lSubMesh.material.ambient = Vector3(lColor.r, lColor.g, lColor.b);
-
-			//テクスチャ名の取得
-			aiString tex_name;
-
-			if (lMaterial->Get(AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), tex_name) == AI_SUCCESS) {
-				lSubMesh.material.texture.name = tex_name.C_Str();
-			}
+			LoadMaterial(aMesh.submesh[i].material, lMaterial);
 
 			//サブメッシュの対象となるインデックスの範囲の設定
 			lSubMesh.indexCount = lIndex[i].size();
@@ -289,15 +386,14 @@ public:
 		aMesh.filePath = aFileName;
 
 
-		Animation lAnimation[10];
+		Animation lAnimation[16];
 		for (unsigned int i = 0; i < scene->mNumAnimations; i++) {
 			LoadAnimation(lAnimation[i], scene->mAnimations[i]);
 		}
 
 		return true;
-		
-	}
 
+	}
 };
 
 }

@@ -2,13 +2,14 @@
 
 #include "./Pot/Atom/atom.h"
 #include "./Pot/List/vector.h"
-#include "./Pot/ModelLoader/Material.h"
 
 namespace cpot {
 
+template <typename MaterialType>
 struct SubMeshCPU {
 	u32 indexCount;
-	MaterialCPU material;
+	MaterialType material;
 };
+
 
 }

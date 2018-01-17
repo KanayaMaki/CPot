@@ -4,6 +4,7 @@
 
 #include "./Pot/Render/render.h"
 #include "./Pot/Model/Submesh.h"
+#include "./Pot/Model/Material.h"
 
 namespace cpot {
 
@@ -15,7 +16,7 @@ struct StaticMesh {
 struct StaticMeshModel {
 	StaticMesh mesh;
 	u32 submeshNum;
-	Submesh submesh[32];
+	Submesh<Material> submesh[32];
 };
 
 }

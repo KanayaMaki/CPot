@@ -591,6 +591,9 @@
     <ClInclude Include="..\..\Source\Pot\Network\Windows\networkWindows.h">
       <Filter>Source\Pot\Network\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\StaticTangentMeshModel.h">
+      <Filter>Source\Pot\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">
@@ -702,6 +705,9 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Env\toonLine.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Env\bamp.fx">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>
