@@ -89,8 +89,8 @@ float3 Mul(float3 aVector, matrix aMatrix) {
 float3 BampNormal(float2 aTexCoord, float3 aNormal, float3 aTangent, float3 aBiNormal) {
 
 	float3 lBampNormalTan = BampTexture.Sample(BampSampler, aTexCoord).xyz;
+	lBampNormalTan.xy = 1.0f - lBampNormalTan.xy;
 	lBampNormalTan.xy = lBampNormalTan.xy * 2.0f - 1.0f;
-	lBampNormalTan.xy *= -1.0f;
 
 	matrix lTanToLoc = matrix(
 		float4(aTangent.x, aTangent.y, aTangent.z, 0.0f),
