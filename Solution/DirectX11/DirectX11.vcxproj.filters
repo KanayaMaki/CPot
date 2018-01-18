@@ -710,5 +710,8 @@
     <FxCompile Include="..\..\Env\bamp.fx">
       <Filter>Shader</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Env\sprite.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

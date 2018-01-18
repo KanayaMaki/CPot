@@ -451,6 +451,10 @@
     <ResourceCompile Include="..\..\Source\Pot\Windows\Resource\Icon.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Env\bamp.frag" />
+    <None Include="..\..\Env\bamp.vert" />
+    <None Include="..\..\Env\sprite.frag" />
+    <None Include="..\..\Env\sprite.vert" />
     <None Include="..\..\Env\toon.frag" />
     <None Include="..\..\Env\toon.vert" />
     <None Include="..\..\Env\toonLine.frag" />

@@ -157,8 +157,6 @@ public:
 };
 
 
-
-
 class Program {
 public:
 	Program() {
@@ -179,7 +177,10 @@ public:
 		v.Load(aVertexFileName);
 
 		GeometryShader g;
-		g.Load(aGeometryFileName);
+		//ジオメトリシェーダを使用する場合
+		if (!StringSame(aGeometryFileName, "")) {
+			g.Load(aGeometryFileName);
+		}
 
 		FragmentShader f;
 		f.Load(aFragmentFileName);

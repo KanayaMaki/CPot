@@ -1,6 +1,6 @@
 #version 430 core
 
-layout(location = 0) out vec4 outColor;
+layout(location = 0) out vec4 OutColor;
 
 layout(binding = 0, column_major) uniform Data {
     mat4x4  World;
@@ -27,5 +27,5 @@ void main() {
 	vec4 color = vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	color *= Diffuse;
 	
-	outColor = color;
+	OutColor = color;
 }

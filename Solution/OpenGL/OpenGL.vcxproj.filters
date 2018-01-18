@@ -681,5 +681,17 @@
     <None Include="..\..\Env\toon.frag">
       <Filter>Shader</Filter>
     </None>
+    <None Include="..\..\Env\bamp.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="..\..\Env\bamp.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="..\..\Env\sprite.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="..\..\Env\sprite.frag">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

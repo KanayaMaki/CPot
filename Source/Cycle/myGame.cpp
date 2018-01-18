@@ -193,10 +193,9 @@ std::shared_ptr<VertexBuffer> vertexBuffer;
 std::shared_ptr<IndexBuffer> indexBuffer;
 std::shared_ptr<Rasterizer> rasterizer;
 std::shared_ptr<Rasterizer> toonLineRasterizer;
-std::shared_ptr<StaticTangentMeshModel> model;
-std::shared_ptr<StaticMeshModel> loadModel;
 
-std::shared_ptr<StaticTangentMeshModel> tangentModel;
+std::shared_ptr<StaticTangentMeshModel> bampModel;
+std::shared_ptr<StaticMeshModel> mikuModel;
 
 Transform planeTransform;
 
@@ -328,6 +327,13 @@ void MyGame::Init() {
 		{ "./bamp.fx", "PS_MAIN" },
 	});
 
+	directX11::ShaderDirectX11Data::S().Regist("Sprite",
+	{
+		{ "./sprite.fx", "VS_MAIN" },
+		{ "./sprite.fx", "GS_MAIN" },
+		{ "./sprite.fx", "PS_MAIN" },
+	});
+
 
 	backBuffer->LoadPlatform(directX11::platform::Device::S().GetBackBuffer());
 	backBufferDepth->Load(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y, Texture2D::cR32Float, false, true, true);
@@ -343,7 +349,7 @@ void MyGame::Init() {
 		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 3, sizeof(StaticMeshVertex), sizeof(f32) * 3),
 		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 2, sizeof(StaticMeshVertex), sizeof(f32) * 6),
 	};
-	lInputLayout.Load(element, 3);
+	lInputLayout.Load(element, sizeof(element) / sizeof(element[0]));
 
 	openGL::ShaderData::S().Regist("Lambert",
 	{
@@ -367,6 +373,32 @@ void MyGame::Init() {
 		{ "" },
 		{ "toonLine.frag" },
 		lInputLayout
+	});
+
+	openGL::ShaderData::S().Regist("Sprite",
+	{
+		{ "sprite.vert" },
+		{ "" },
+		{ "sprite.frag" },
+		lInputLayout
+	});
+
+	openGL::platform::InputLayout lBampInputLayout;
+	openGL::platform::InputLayoutElement lBampElement[] = {
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 3, sizeof(StaticTangentMeshVertex), sizeof(f32) * 0),	//InPos
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 3, sizeof(StaticTangentMeshVertex), sizeof(f32) * 3),	//InNor
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 3, sizeof(StaticTangentMeshVertex), sizeof(f32) * 6),	//InTan
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 3, sizeof(StaticTangentMeshVertex), sizeof(f32) * 9),	//InBiNor
+		openGL::platform::CreateInputLayoutElement(0, GL_FLOAT, 2, sizeof(StaticTangentMeshVertex), sizeof(f32) * 12),	//InTexCoord
+	};
+	lBampInputLayout.Load(lBampElement, sizeof(lBampElement) / sizeof(lBampElement[0]));
+
+	openGL::ShaderData::S().Regist("Bamp",
+	{
+		{ "bamp.vert" },
+		{ "" },
+		{ "bamp.frag" },
+		lBampInputLayout
 	});
 
 	backBuffer->LoadPlatform();
@@ -466,35 +498,34 @@ void MyGame::Init() {
 	indexBuffer->Load(IndexBuffer::cU16, 6, IndexBuffer::cTriangleList, lIndex);
 
 
-	/*
+	//	PMXの読み込み
+	//
+	///*
 	PmxLoader lPmx;
-	lPmx.Load("./Miku/miku.pmx");
+	//lPmx.Load("./Miku/miku.pmx");
 	lPmx.Load("./Alicia/Alicia_solid.pmx");
 
-	StaticMeshModelCPU lSkinMeshCPU;
-	PmxToMesh::Load(lSkinMeshCPU, lPmx.Get());
+	StaticMeshModelCPU lMikuModelCPU;
+	PmxToMesh::Load(lMikuModelCPU, lPmx.Get());
+
+	mikuModel.reset(new StaticMeshModel);
+	ModelCPUToModel::Load(*mikuModel, lMikuModelCPU);
 
 	//*/
 
 	
+	//	箱の読み込み
+	//
 	///*
-	StaticTangentMeshModelCPU lSkinMeshCPU;
-	BufferToMesh::Load(lSkinMeshCPU, PathString("./Box/box.pmo"));
+	StaticTangentMeshModelCPU lBampMeshCPU;
+	BufferToMesh::Load(lBampMeshCPU, PathString("./Box/box.pmo"));
 	//*/
 
-	model.reset(new StaticTangentMeshModel);
-	ModelCPUToModel::Load(*model, lSkinMeshCPU);
-
+	bampModel.reset(new StaticTangentMeshModel);
+	ModelCPUToModel::Load(*bampModel, lBampMeshCPU);
 
 
 	planeTransform.mScale = Vector3::One() * 10.0f;
-
-
-	//StaticTangentMeshModelCPU lTangentMeshCPU;
-	//BufferToMesh::Load(lTangentMeshCPU, PathString("./Box/box.pmo"));
-
-	//tangentModel.reset(new StaticTangentMeshModel);
-	//ModelCPUToModel::Load(*tangentModel, lTangentMeshCPU);
 
 	
 	{
@@ -691,6 +722,49 @@ void MyGame::Update() {
 	}
 	//*/
 
+
+	//PMXの描画
+	//
+	/*
+	auto model = mikuModel;
+
+	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
+	materialBuffer->Write();
+
+	Render::S().SetBlend(ResourceList<Blend>::S().Find("Normal"));
+	Render::S().SetRasterizer(ResourceList<Rasterizer>::S().Find("CullCCW"));
+	Render::S().SetDepthStencil(ResourceList<DepthStencil>::S().Find("Test"));
+	Render::S().SetVertexBuffer(model->mesh.vertex);
+	Render::S().SetIndexBuffer(model->mesh.index);
+	Render::S().SetViewPort(viewport, 0);
+	Render::S().SetDepthTexture(ResourceList<Texture2D>::S().Find("RenderTargetDepth"));
+	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 0);
+	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 1);
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("WVP"), 0);
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Material"), 1);
+	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Other"), 2);
+	Render::S().SetRenderTexture(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
+	Render::S().SetShader(ResourceList<Shader>::S().Find("Toon"));
+
+	for (u32 i = 0; i < model->submeshNum; i++) {
+		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
+		if (model->submesh[i].material.toonTexture->IsLoad()) {
+			Render::S().SetTexture2D(model->submesh[i].material.toonTexture, 1);
+		}
+		else {
+			Render::S().SetTexture2D(whiteTexture, 1);
+		}
+		Render::S().SetToDevice();
+		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
+	}
+	//*/
+
+
+	//箱の描画
+	//
+	///*
+	auto model = bampModel;
+
 	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
 	materialBuffer->Write();
 
@@ -710,23 +784,22 @@ void MyGame::Update() {
 	Render::S().SetShader(ResourceList<Shader>::S().Find("Bamp"));
 
 	for (u32 i = 0; i < model->submeshNum; i++) {
-		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
-		if (model->submesh[i].material.bampTexture->IsLoad()) {
-			Render::S().SetTexture2D(model->submesh[i].material.bampTexture, 1);
-		}
-		else {
-			Render::S().SetTexture2D(whiteTexture, 1);
-		}
-		Render::S().SetToDevice();
-		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
+	Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
+	if (model->submesh[i].material.bampTexture->IsLoad()) {
+	Render::S().SetTexture2D(model->submesh[i].material.bampTexture, 1);
 	}
-
+	else {
+	Render::S().SetTexture2D(whiteTexture, 1);
+	}
+	Render::S().SetToDevice();
+	Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
+	}
 	//*/
 
 
+	//	バックバッファに、今までのレンダリング結果を描画する
+	//
 	///*
-	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = planeTransform.GetMatrix();
-	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(planeTransform.mRotation);
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::Unit() * Matrix4x4::FromScale(Vector3::One() * 2.0f);
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4::Unit();
 	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = Matrix4x4::Unit();
@@ -745,14 +818,11 @@ void MyGame::Update() {
 	Render::S().SetDepthTexture(ResourceList<Texture2D>::S().Find("BackBufferDepth"));
 	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("WVP"), 0);
 	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Material"), 1);
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Other"), 2);
 	Render::S().SetRenderTexture(ResourceList<Texture2D>::S().Find("BackBuffer"), 0);
-	Render::S().SetShader(ResourceList<Shader>::S().Find("Toon"));
+	Render::S().SetShader(ResourceList<Shader>::S().Find("Sprite"));
 
 	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 0);
-	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 1);
 	Render::S().SetTexture2D(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
-	Render::S().SetTexture2D(ResourceList<Texture2D>::S().Find("White"), 1);
 	Render::S().SetToDevice();
 	Render::S().DrawIndexed(6, 0);
 	//*/

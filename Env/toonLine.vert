@@ -5,9 +5,9 @@ vec4 mul(vec4 v, mat4x4 m) {
 }
 
 
-layout(location = 0) in vec3 PosMod;
-layout(location = 1) in vec3 NorMod;
-layout(location = 2) in vec2 UVMod;
+layout(location = 0) in vec3 InPosLoc;
+layout(location = 1) in vec3 InNorLoc;
+layout(location = 2) in vec2 InTexCoord;
 
 layout(binding = 0, column_major) uniform Data {
     mat4x4  World;
@@ -30,9 +30,9 @@ layout(binding = 3) uniform Toon {
 
 void main() {
 
-	vec3 lPosModAdd = PosMod + normalize(NorMod) * LineWidth;
+	vec3 lPosLocExtend = InPosLoc + normalize(InNorLoc) * LineWidth;
 
-	vec4 lPosWor = mul(vec4(lPosModAdd, 1), World);
+	vec4 lPosWor = mul(vec4(lPosLocExtend, 1), World);
 	vec4 lPosView = mul(lPosWor, View);
 	vec4 lPosProj = mul(lPosView, Proj);
 

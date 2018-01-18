@@ -1,10 +1,10 @@
 #version 430 core
 
-in vec3 PosWor;
-in vec3 NorWor;
-in vec2 UV;
+layout(location = 0) in vec3 InPosWor;
+layout(location = 1) in vec3 InNorWor;
+layout(location = 2) in vec2 InTexCoord;
 
-layout(location = 0) out vec4 outColor;
+layout(location = 0) out vec4 OutColor;
 
 layout(binding = 0, column_major) uniform Data {
     mat4x4  World;
@@ -44,15 +44,15 @@ float HalfLambert(vec3 aNormal, vec3 aToLight) {
 
 void main() {
 
-	float lighting = HalfLambert(NorWor, -LightDirection);
+	float lighting = HalfLambert(InNorWor, -LightDirection);
 	vec4 toonTexel = texture(ToonTexture, vec2(lighting, 1.0f - (1.0f - lighting)));
 
-	vec4 diffuseTexel = texture(DiffuseTexture, vec2(UV.x, 1.0f - UV.y));
+	vec4 diffuseTexel = texture(DiffuseTexture, vec2(InTexCoord.x, 1.0f - InTexCoord.y));
 	
 	vec4 color = vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	color *= Diffuse;
 	color *= diffuseTexel;
 	color.xyz *= toonTexel.xyz;
 
-	outColor = color;
+	OutColor = color;
 }

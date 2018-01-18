@@ -5,13 +5,13 @@ vec4 mul(vec4 v, mat4x4 m) {
 }
 
 
-layout(location = 0) in vec3 PosMod;
-layout(location = 1) in vec3 NorMod;
-layout(location = 2) in vec2 UVMod;
+layout(location = 0) in vec3 InPosLoc;
+layout(location = 1) in vec3 InNorLoc;
+layout(location = 2) in vec2 InTexCoord;
 
-out vec3 PosWor;
-out vec3 NorWor;
-out vec2 UV;
+layout(location = 0) out vec3 OutPosWor;
+layout(location = 1) out vec3 OutNorWor;
+layout(location = 2) out vec2 OutTexCoord;
 
 layout(binding = 0, column_major) uniform Data {
     mat4x4  World;
@@ -29,15 +29,15 @@ layout(binding = 2) uniform Other {
 };
 
 void main() {
-	vec4 lPosWor = mul(vec4(PosMod, 1), World);
-	PosWor = lPosWor.xyz / lPosWor.w;
+	vec4 lPosWor = mul(vec4(InPosLoc, 1), World);
+	OutPosWor = lPosWor.xyz / lPosWor.w;
 
 	vec4 lPosView = mul(lPosWor, View);
 	vec4 lPosProj = mul(lPosView, Proj);
 	gl_Position =  lPosProj;
 
-	vec4 lNorWor = mul(vec4(NorMod, 1), NorWorld);
-	NorWor = lNorWor.xyz / lNorWor.w;
+	vec4 lNorWor = mul(vec4(InNorLoc, 1), NorWorld);
+	OutNorWor = lNorWor.xyz / lNorWor.w;
 
-	UV = UVMod;
+	OutTexCoord = InTexCoord;
 }
