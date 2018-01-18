@@ -12,8 +12,10 @@ layout(location = 3) in vec3 InBiNorLoc;
 layout(location = 4) in vec2 InTexCoord;
 
 layout(location = 0) out vec3 OutPosWor;
-layout(location = 1) out vec3 OutNorWor;
-layout(location = 2) out vec2 OutTexCoord;
+layout(location = 1) out vec3 OutNorLoc;
+layout(location = 2) out vec3 OutTanLoc;
+layout(location = 3) out vec3 OutBiNorLoc;
+layout(location = 4) out vec2 OutTexCoord;
 
 layout(binding = 0, column_major) uniform Data {
     mat4x4  World;
@@ -38,8 +40,9 @@ void main() {
 	vec4 lPosProj = mul(lPosView, Proj);
 	gl_Position =  lPosProj;
 
-	vec4 lNorWor = mul(vec4(InNorLoc, 1), NorWorld);
-	OutNorWor = lNorWor.xyz / lNorWor.w;
+	OutNorLoc = InNorLoc;
+	OutTanLoc = InTanLoc;
+	OutBiNorLoc = InBiNorLoc;
 
 	OutTexCoord = InTexCoord;
 }

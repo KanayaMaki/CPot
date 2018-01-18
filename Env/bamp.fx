@@ -15,9 +15,9 @@ struct VS_BAMP_INPUT {
 struct PS_INPUT {
 	float4 PosProj	: SV_POSITION; //頂点座標（プロジェクション）
 	float3 PosWor	: POS_WOR; //頂点座標（ワールド）
-	float3 Nor	: NORMAL;	//法線ベクトル（ワールド）
-	float3 Tan	: TANGENT;	//接線ベクトル（ワールド）
-	float3 BiNor	: BINORMAL;	//従法線ベクトル（ワールド）
+	float3 Nor	: NORMAL;	//法線ベクトル（モデル）
+	float3 Tan	: TANGENT;	//接線ベクトル（モデル）
+	float3 BiNor	: BINORMAL;	//従法線ベクトル（モデル）
 	float2 Tex	: TEXTURE;	//テクスチャ座標
 };
 
@@ -63,28 +63,6 @@ struct PS_OUTPUT {
 };
 
 
-float Lambert(float3 aNormal, float3 aToLight) {
-	float3 normalN = normalize(aNormal);
-	float3 toLightN = normalize(aToLight);
-
-	float lambert = dot(toLightN, normalN);
-	return lambert;
-}
-
-float HalfLambert(float3 aNormal, float3 aToLight) {
-	float lambert = Lambert(aNormal, aToLight);
-	float halfLambert = pow((lambert * 0.5f + 0.5f), 2);
-	return halfLambert;
-}
-float HalfLambert(float aLighting) {
-	float halfLambert = pow((aLighting * 0.5f + 0.5f), 2);
-	return halfLambert;
-}
-
-float3 Mul(float3 aVector, matrix aMatrix) {
-	float4 lVector = mul(float4(aVector, 1.0f), aMatrix);
-	return lVector.xyz / lVector.w;
-}
 
 float3 BampNormal(float2 aTexCoord, float3 aNormal, float3 aTangent, float3 aBiNormal) {
 

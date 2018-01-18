@@ -89,14 +89,23 @@ public:
 		cpot::Buffer lFileBuffer;
 		lFile.Read(lFileBuffer);
 
+
+		//ソースを読み込ませる
+		//
 		GLint lSize = lFileBuffer.GetSize();
 		const GLchar* lBuffer = (const GLchar*)lFileBuffer.Get();
 		glShaderSource(mGLNum, 1, &lBuffer, &lSize);
 
+
+		//コンパイル
+		//
 		GLint tCompiled;
-		glCompileShader(mGLNum);									//バーテックスシェーダのソースプログラムのコンパイル
+		glCompileShader(mGLNum);
 		glGetShaderiv(mGLNum, GL_COMPILE_STATUS, &tCompiled);
+
 		if (tCompiled == GL_FALSE) {
+			//ログの表示
+			CPOT_LOG("ファイル：", aFileName, "のコンパイルに失敗しました");
 			GetShaderInfoLog(mGLNum);
 			Release();
 			return;

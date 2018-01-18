@@ -25,3 +25,29 @@ struct VS_INPUT {
 	float3 Nor : NORMAL;	// 法線ベクトル(モデル座標系)
 	float2 Tex : TEXTURE;	//テクスチャ座標
 };
+
+
+
+
+float Lambert(float3 aNormal, float3 aToLight) {
+	float3 normalN = normalize(aNormal);
+	float3 toLightN = normalize(aToLight);
+
+	float lambert = dot(toLightN, normalN);
+	return lambert;
+}
+
+float HalfLambert(float3 aNormal, float3 aToLight) {
+	float lambert = Lambert(aNormal, aToLight);
+	float halfLambert = pow((lambert * 0.5f + 0.5f), 2);
+	return halfLambert;
+}
+float HalfLambert(float aLighting) {
+	float halfLambert = pow((aLighting * 0.5f + 0.5f), 2);
+	return halfLambert;
+}
+
+float3 Mul(float3 aVector, matrix aMatrix) {
+	float4 lVector = mul(float4(aVector, 1.0f), aMatrix);
+	return lVector.xyz / lVector.w;
+}

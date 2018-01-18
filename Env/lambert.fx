@@ -43,19 +43,6 @@ struct PS_OUTPUT {
 };
 
 
-float Lambert(float3 aNormal, float3 aToLight) {
-	float3 normalN = normalize(aNormal);
-	float3 toLightN = normalize(-LightDirection);
-
-	float lambert = dot(toLightN, normalN);
-	return lambert;
-}
-
-float HalfLambert(float3 aNormal, float3 aToLight) {
-	float lambert = Lambert(aNormal, aToLight);
-	float halfLambert = pow((lambert * 0.5f + 0.5f), 2);
-	return halfLambert;
-}
 
 PS_OUTPUT PS_MAIN(PS_PHONG_INPUT input) {
 
