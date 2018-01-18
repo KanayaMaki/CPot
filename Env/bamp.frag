@@ -54,6 +54,7 @@ vec3 BampNormal(vec2 aTexCoord, vec3 aNormal, vec3 aTangent, vec3 aBiNormal) {
 		vec4(aNormal.x, aNormal.y, aNormal.z, 0.0f),
 		vec4(0.0f, 0.0f, 0.0f, 1.0f)
 	);
+	lTanToLoc = transpose(lTanToLoc);
 
 	vec3 lBampNor = mul(lBampNormalTan, lTanToLoc);
 

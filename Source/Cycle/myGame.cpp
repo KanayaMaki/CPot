@@ -189,13 +189,64 @@ std::shared_ptr<Shader> toonLineShader;
 std::shared_ptr<Shader> bampShader;
 
 std::shared_ptr<Viewport> viewport;
-std::shared_ptr<VertexBuffer> vertexBuffer;
-std::shared_ptr<IndexBuffer> indexBuffer;
 std::shared_ptr<Rasterizer> rasterizer;
 std::shared_ptr<Rasterizer> toonLineRasterizer;
 
 std::shared_ptr<StaticTangentMeshModel> bampModel;
 std::shared_ptr<StaticMeshModel> mikuModel;
+
+
+//
+//	スプライトを張り付けられるクラス
+//
+class SpriteMesh {
+public:
+	void Load() {
+		LoadVertexBuffer();
+		LoadIndexBuffer();
+	}
+
+	void WriteVertexBuffer() {
+		
+		//プロジェクション座標での頂点位置に変換
+		Quad2D lProjQuad = quad * (Vector2::One() / Config::S().GetScreenSize()) * Vector2().XY(2.0f) - Vector2().XY(1.0f);
+		const f32 lProjZLoc = 0.0f;
+
+		//書き込むデータの作成
+		StaticMeshVertex lVertex[] {
+				{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cLeftBottom)).Z(lProjZLoc), { 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
+				{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cLeftTop)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
+				{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cRightBottom)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
+				{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cRightTop)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
+		};
+		//書き込み
+		vertexBuffer->Write(lVertex);
+	}
+
+private:
+	void LoadVertexBuffer() {
+		//頂点座標の初期化
+		quad.SetRect(Vector2::Zero(), Config::S().GetScreenSize());
+
+		vertexBuffer = std::make_shared<VertexBuffer>();
+		vertexBuffer->Load(sizeof(StaticMeshVertex), 4, nullptr, true);
+		WriteVertexBuffer();
+	}
+	void LoadIndexBuffer() {
+		u16 lIndex[]{ 0, 1, 2, 2, 1, 3 };
+
+		indexBuffer = std::make_shared<IndexBuffer>();
+		indexBuffer->Load(IndexBuffer::cU16, 6, IndexBuffer::cTriangleList, lIndex);
+	}
+
+public:
+	std::shared_ptr<VertexBuffer> vertexBuffer;
+	std::shared_ptr<IndexBuffer> indexBuffer;
+
+	Quad2D quad;
+};
+SpriteMesh sprite;
+
 
 Transform planeTransform;
 
@@ -484,18 +535,11 @@ void MyGame::Init() {
 	ResourceList<ConstantBuffer>::S().Regist(toonLineBuffer);
 	toonLineBuffer->GetCPUBuffer<ToonLineBuffer>()->mLineWidth = 2.0f;
 
-	StaticMeshVertex lVertex[] {
-		{ { -0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
-		{ { -0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
-		{ { 0.5f, -0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
-		{ { 0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
-	};
-	vertexBuffer.reset(new VertexBuffer);
-	vertexBuffer->Load(sizeof(StaticMeshVertex), 4, lVertex, true);
 
-	u16 lIndex[]{ 0, 1, 2, 2, 1, 3 };
-	indexBuffer.reset(new IndexBuffer);
-	indexBuffer->Load(IndexBuffer::cU16, 6, IndexBuffer::cTriangleList, lIndex);
+	//スプライトデータの作成
+	//
+
+	sprite.Load();
 
 
 	//	PMXの読み込み
@@ -783,16 +827,17 @@ void MyGame::Update() {
 	Render::S().SetRenderTexture(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
 	Render::S().SetShader(ResourceList<Shader>::S().Find("Bamp"));
 
+	//マテリアルごとに描画
 	for (u32 i = 0; i < model->submeshNum; i++) {
-	Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
-	if (model->submesh[i].material.bampTexture->IsLoad()) {
-	Render::S().SetTexture2D(model->submesh[i].material.bampTexture, 1);
-	}
-	else {
-	Render::S().SetTexture2D(whiteTexture, 1);
-	}
-	Render::S().SetToDevice();
-	Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
+		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
+		if (model->submesh[i].material.bampTexture->IsLoad()) {
+			Render::S().SetTexture2D(model->submesh[i].material.bampTexture, 1);
+		}
+		else {
+			Render::S().SetTexture2D(whiteTexture, 1);
+		}
+		Render::S().SetToDevice();
+		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
 	}
 	//*/
 
@@ -812,8 +857,10 @@ void MyGame::Update() {
 	Render::S().SetBlend(ResourceList<Blend>::S().Find("Normal"));
 	Render::S().SetRasterizer(ResourceList<Rasterizer>::S().Find("CullCCW"));
 	Render::S().SetDepthStencil(ResourceList<DepthStencil>::S().Find("Test"));
-	Render::S().SetVertexBuffer(vertexBuffer);
-	Render::S().SetIndexBuffer(indexBuffer);
+	sprite.quad.SetRectFromCenter(Config::S().GetScreenSize() / 2.0f, Config::S().GetScreenSize() / 2.0f);
+	sprite.WriteVertexBuffer();
+	Render::S().SetVertexBuffer(sprite.vertexBuffer);
+	Render::S().SetIndexBuffer(sprite.indexBuffer);
 	Render::S().SetViewPort(viewport, 0);
 	Render::S().SetDepthTexture(ResourceList<Texture2D>::S().Find("BackBufferDepth"));
 	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("WVP"), 0);
@@ -823,6 +870,7 @@ void MyGame::Update() {
 
 	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 0);
 	Render::S().SetTexture2D(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
+	//Render::S().SetTexture2D(ResourceList<Texture2D>::S().Find("Test"), 0);
 	Render::S().SetToDevice();
 	Render::S().DrawIndexed(6, 0);
 	//*/

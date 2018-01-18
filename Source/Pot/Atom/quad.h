@@ -29,10 +29,16 @@ struct Quad2D {
 		point[aIndex] = aPoint;
 	}
 	void SetRect(const Vector2& aBase, const Vector2& aSize) {
-		point[cLeftBottom] = aBase + Vector2(aSize.x, 0.0f);
+		point[cLeftBottom] = aBase + Vector2(0.0f, 0.0f);
 		point[cLeftTop] = aBase + Vector2(0.0f, aSize.y);
 		point[cRightBottom] = aBase + Vector2(aSize.x, 0.0f);
 		point[cRightTop] = aBase + Vector2(aSize.x, aSize.y);
+	}
+	void SetRectFromCenter(const Vector2& aBase, const Vector2& aSize) {
+		point[cLeftBottom] = aBase + Vector2(-aSize.x, -aSize.y) / 2.0f;
+		point[cLeftTop] = aBase + Vector2(-aSize.x, aSize.y) / 2.0f;
+		point[cRightBottom] = aBase + Vector2(aSize.x, -aSize.y) / 2.0f;
+		point[cRightTop] = aBase + Vector2(aSize.x, aSize.y) / 2.0f;
 	}
 	
 	Quad2D operator *(const Vector2& aValue) const {
@@ -43,6 +49,7 @@ struct Quad2D {
 		for (u32 i = 0; i < cPointIndexMax; i++) {
 			point[i] *= aValue;
 		}
+		return *this;
 	}
 
 	Quad2D operator -(const Vector2& aValue) const {
@@ -53,6 +60,7 @@ struct Quad2D {
 		for (u32 i = 0; i < cPointIndexMax; i++) {
 			point[i] -= aValue;
 		}
+		return *this;
 	}
 
 	Vector2 point[4];

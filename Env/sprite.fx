@@ -21,10 +21,10 @@ void GS_MAIN(triangle VS_INPUT input[3],
 
 	for (int i = 0; i < 3; ++i) {
 		
-		float4 lPosWor = mul(float4(input[i].Pos, 1.0f), World);
-		float4 lPosView = mul(lPosWor, View);
-		float4 lPosProj = mul(lPosView, Projection);
-		output.PosProj = lPosProj;
+		//float4 lPosWor = mul(float4(input[i].Pos, 1.0f), World);
+		//float4 lPosView = mul(lPosWor, View);
+		//float4 lPosProj = mul(lPosView, Projection);
+		output.PosProj = float4(input[i].Pos, 1.0f);
 
 		output.Tex = input[i].Tex;
 
