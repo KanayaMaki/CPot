@@ -28,6 +28,7 @@
     <ClInclude Include="..\..\Source\Pot\Atom\hashString.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\math.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\matrix4x4.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\quad.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\quaternion.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\Standard\mathStandard.h" />
     <ClInclude Include="..\..\Source\Pot\Atom\Standard\toStringStandard.h" />

@@ -118,6 +118,9 @@
       <Filter>ModelLoader</Filter>
     </ClInclude>
     <ClInclude Include="AssimpLoader.h" />
+    <ClInclude Include="..\..\Source\Pot\Atom\quad.h">
+      <Filter>Atom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\ModelLoader\PmxLoader.cpp">
