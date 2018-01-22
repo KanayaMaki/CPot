@@ -857,7 +857,7 @@ void MyGame::Update() {
 	Render::S().SetBlend(ResourceList<Blend>::S().Find("Normal"));
 	Render::S().SetRasterizer(ResourceList<Rasterizer>::S().Find("CullCCW"));
 	Render::S().SetDepthStencil(ResourceList<DepthStencil>::S().Find("Test"));
-	sprite.quad.SetRectFromCenter(Config::S().GetScreenSize() / 2.0f, Config::S().GetScreenSize() / 2.0f);
+	sprite.quad.SetRectFromCenter(Config::S().GetScreenSize() / 2.0f, Config::S().GetScreenSize());
 	sprite.WriteVertexBuffer();
 	Render::S().SetVertexBuffer(sprite.vertexBuffer);
 	Render::S().SetIndexBuffer(sprite.indexBuffer);
@@ -870,7 +870,6 @@ void MyGame::Update() {
 
 	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 0);
 	Render::S().SetTexture2D(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
-	//Render::S().SetTexture2D(ResourceList<Texture2D>::S().Find("Test"), 0);
 	Render::S().SetToDevice();
 	Render::S().DrawIndexed(6, 0);
 	//*/
