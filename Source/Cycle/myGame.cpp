@@ -138,19 +138,11 @@ using namespace cpot;
 
 namespace myspc {
 
-Animation<f32> mikuMorphAnim;
-Animation<Vector3> mikuLocAnim;
-Animation<Quaternion> mikuRotAnim;
 
 std::shared_ptr<AudioVoice> voice;
 
-
-VectorSimple<StaticMeshVertex> lBefore;
-VectorSimple<StaticMeshVertex> lAfter;
-VectorSimple<StaticMeshVertex> lNow;
-
 std::shared_ptr<Texture2D> whiteTexture;
-std::shared_ptr<Texture2D> diffuseTexture;
+std::shared_ptr<Texture2D> testTexture;
 std::shared_ptr<Sampler> diffuseSampler;
 
 std::shared_ptr<Texture2D> backBuffer;
@@ -257,76 +249,13 @@ void MyGame::Init() {
 	//Loaderのスタート
 	LoaderManager::S().Start(2);
 
-	const f32 lBeforeBalling = 0.5f;
-	const f32 lBalling = 0.5f;
-	const f32 lAfterBalling = 0.5f;
-	const f32 lRolling = 2.0f;
-	const f32 lBeforeUnBalling = 0.5f;
-	const f32 lUnBalling = 0.5f;
-	const f32 lAfterUnBalling = 0.5f;
-	const f32 lRotating = 1.0f;
-	f32 lTime;
-
-	//ミクのモーフィングのアニメーション
-	mikuMorphAnim.SetIsLoop(true);
-	lTime = 0.0f;
-	mikuMorphAnim.Add(lTime, 0.0f);
-	lTime += lBeforeBalling;
-	mikuMorphAnim.Add(lTime, 0.0f);
-	lTime += lBalling;
-	mikuMorphAnim.Add(lTime, 1.0f);
-	lTime += lAfterBalling + lRolling + lBeforeBalling;
-	mikuMorphAnim.Add(lTime, 1.0f);
-	lTime += lUnBalling;
-	mikuMorphAnim.Add(lTime, 0.0f);
-	lTime += lAfterUnBalling + lRotating;
-	mikuMorphAnim.Add(lTime, 0.0f);
-
-
-	//ミクの移動アニメーション
-	mikuLocAnim.SetIsLoop(true);
-	lTime = 0.0f;
-	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, 20.0f));
-	lTime += lBeforeBalling + lBalling + lAfterBalling;
-	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, 20.0f));
-	lTime += lRolling;
-	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, -20.0f));
-	lTime += lBeforeUnBalling + lUnBalling + lAfterUnBalling + lRotating + lBeforeBalling + lBalling + lAfterBalling;
-	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, -20.0f));
-	lTime += lRolling;
-	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, 20.0f));
-	lTime += lBeforeUnBalling + lUnBalling + lAfterUnBalling + lRotating;
-	mikuLocAnim.Add(lTime, Vector3(0.0f, 0.0f, 20.0f));
-
-	//ミクの回転アニメーション
-	mikuRotAnim.SetIsLoop(true);
-	lTime = 0.0f;
-	mikuRotAnim.Add(lTime, Quaternion::XAxis(ToRad(0.0f)));
-	lTime += lBeforeBalling + lBalling + lAfterBalling;
-	mikuRotAnim.Add(lTime, Quaternion::XAxis(ToRad(0.0f)));
-	lTime += lRolling / 2.0f;
-	mikuRotAnim.Add(lTime, Quaternion::XAxis(ToRad(180.0f)));
-	lTime += lRolling / 2.0f;
-	mikuRotAnim.Add(lTime, Quaternion::XAxis(ToRad(360.0f)));
-	lTime += lBeforeUnBalling + lUnBalling + lAfterUnBalling;
-	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(0.0f)));
-	lTime += lRotating;
-	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(180.0f)));
-	lTime += lBeforeBalling + lBalling + lAfterBalling;
-	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(180.0f)));
-	lTime += lRolling / 2.0f;
-	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(180.0f)) * Quaternion::XAxis(ToRad(-180.0f)));
-	lTime += lRolling / 2.0f;
-	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(180.0f)) * Quaternion::XAxis(ToRad(-360.0f)));
-	lTime += lBeforeUnBalling + lUnBalling + lAfterUnBalling;
-	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(180.0f)));
-	lTime += lRotating;
-	mikuRotAnim.Add(lTime, Quaternion::YAxis(ToRad(360.0f)));
-
+	
+	//バックバッファの初期化
 	backBuffer.reset(new Texture2D);
 	backBuffer->SetName("BackBuffer");
 	backBufferDepth.reset(new Texture2D);
 	backBufferDepth->SetName("BackBufferDepth");
+
 
 	#ifdef CPOT_ON_DIRECTX11
 
@@ -455,7 +384,7 @@ void MyGame::Init() {
 	ResourceList<Texture2D>::S().Regist(renderTargetDepth);
 
 	whiteTexture = ResourceList<Texture2D>::S().Find("White");
-	diffuseTexture = ResourceList<Texture2D>::S().Find("Test");
+	testTexture = ResourceList<Texture2D>::S().Find("Test");
 
 	diffuseSampler.reset(new Sampler);
 	diffuseSampler->Load(Sampler::cWrap);
@@ -654,22 +583,6 @@ void MyGame::Update() {
 	#pragma endregion
 
 
-	//アニメーション
-	#pragma region Animation
-
-	//モーフ
-	mikuMorphAnim.ForwardTime(DeltaTime());
-	for (u32 i = 0; i < lNow.GetSize(); i++) {
-		f32 t = mikuMorphAnim.Get();
-		lNow[i].position = Lerp(lBefore[i].position, lAfter[i].position, t);
-	}
-	//model->mesh.vertex->Write(&lNow[0]);
-
-	//トランスフォーム
-	mikuRotAnim.ForwardTime(DeltaTime());
-	mikuLocAnim.ForwardTime(DeltaTime());
-	
-	#pragma endregion
 
 	//カーソル移動
 	if (Input::GetButton(windows::cL)) {
@@ -692,6 +605,7 @@ void MyGame::Update() {
 	}
 
 
+	//描画するテクスチャのクリア
 	ResourceList<Texture2D>::S().Find("RenderTarget")->ClearColor(Color::Blue());
 	ResourceList<Texture2D>::S().Find("RenderTargetDepth")->ClearDepth(1.0f);
 
