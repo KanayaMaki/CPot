@@ -33,7 +33,7 @@ public:
 	//—Dæ“x
 	#pragma region Priority
 public:
-	u32 GetPriority() override {
+	s32 GetPriority() override {
 		return 0;
 	}
 

@@ -37,6 +37,7 @@
 #include "./Pot/Game/cameraComponent.h"
 #include "./Pot/Game/lightComponent.h"
 
+#include "./Pot/Game/spriteRenderer.h"
 #include "./Pot/Game/staticTangentModelRenderer.h"
 
 
@@ -152,7 +153,8 @@ std::shared_ptr<Texture2D> renderTarget;
 std::shared_ptr<Texture2D> renderTargetDepth;
 
 std::shared_ptr<Blend> blend;
-std::shared_ptr<DepthStencil> depthStencil;
+std::shared_ptr<DepthStencil> depthStencilTest;
+std::shared_ptr<DepthStencil> depthStencilNoTest;
 std::shared_ptr<DepthStencil> depthStencilNoWrite;
 std::shared_ptr<ConstantBuffer> wvpBuffer;
 std::shared_ptr<ConstantBuffer> materialBuffer;
@@ -170,57 +172,6 @@ std::shared_ptr<Rasterizer> toonLineRasterizer;
 std::shared_ptr<StaticTangentMeshModel> bampModel;
 std::shared_ptr<StaticMeshModel> mikuModel;
 
-
-//
-//	スプライトを張り付けられるクラス
-//
-class SpriteMesh {
-public:
-	void Load() {
-		LoadVertexBuffer();
-		LoadIndexBuffer();
-	}
-
-	void WriteVertexBuffer() {
-		
-		//プロジェクション座標での頂点位置に変換
-		Quad2D lProjQuad = quad * (Vector2::One() / Config::S().GetScreenSize()) * Vector2().XY(2.0f) - Vector2().XY(1.0f);
-		const f32 lProjZLoc = 0.0f;
-
-		//書き込むデータの作成
-		StaticMeshVertex lVertex[] {
-				{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cLeftBottom)).Z(lProjZLoc), { 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
-				{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cLeftTop)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
-				{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cRightBottom)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
-				{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cRightTop)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
-		};
-		//書き込み
-		vertexBuffer->Write(lVertex);
-	}
-
-private:
-	void LoadVertexBuffer() {
-		//頂点座標の初期化
-		quad.SetRect(Vector2::Zero(), Config::S().GetScreenSize());
-
-		vertexBuffer = std::make_shared<VertexBuffer>();
-		vertexBuffer->Load(sizeof(StaticMeshVertex), 4, nullptr, true);
-		WriteVertexBuffer();
-	}
-	void LoadIndexBuffer() {
-		u16 lIndex[]{ 0, 1, 2, 2, 1, 3 };
-
-		indexBuffer = std::make_shared<IndexBuffer>();
-		indexBuffer->Load(IndexBuffer::cU16, 6, IndexBuffer::cTriangleList, lIndex);
-	}
-
-public:
-	std::shared_ptr<VertexBuffer> vertexBuffer;
-	std::shared_ptr<IndexBuffer> indexBuffer;
-
-	Quad2D quad;
-};
-SpriteMesh sprite;
 
 
 Transform planeTransform;
@@ -396,10 +347,15 @@ void MyGame::Init() {
 	blend->SetName("Normal");
 	ResourceList<Blend>::S().Regist(blend);
 
-	depthStencil.reset(new DepthStencil);
-	depthStencil->Load(DepthStencil::cTest);
-	depthStencil->SetName("Test");
-	ResourceList<DepthStencil>::S().Regist(depthStencil);
+	depthStencilTest.reset(new DepthStencil);
+	depthStencilTest->Load(DepthStencil::cTest);
+	depthStencilTest->SetName("Test");
+	ResourceList<DepthStencil>::S().Regist(depthStencilTest);
+
+	depthStencilNoTest.reset(new DepthStencil);
+	depthStencilNoTest->Load(DepthStencil::cTest);
+	depthStencilNoTest->SetName("NoTest");
+	ResourceList<DepthStencil>::S().Regist(depthStencilNoTest);
 
 	depthStencilNoWrite.reset(new DepthStencil);
 	depthStencilNoWrite->Load(DepthStencil::cNoWrite);
@@ -448,12 +404,6 @@ void MyGame::Init() {
 	toonLineBuffer->GetCPUBuffer<ToonLineBuffer>()->mLineWidth = 2.0f;
 
 
-	//スプライトデータの作成
-	//
-
-	sprite.Load();
-
-
 	//	PMXの読み込み
 	//
 	///*
@@ -494,11 +444,29 @@ void MyGame::Init() {
 	{
 		GameObject* lPlayer = new GameObject;
 		lPlayer->SetName("Player");
-		lPlayer->AddComponent<PlayerComponent>();
+		//lPlayer->AddComponent<PlayerComponent>();
 		lPlayer->AddComponent<StaticTangentModelRenderer>();
 		lPlayer->GetComponent<StaticTangentModelRenderer>()->model = bampModel;
 		lPlayer->AddComponent<AutoRotateComponent>();
 	}
+
+	{
+		GameObject* lObject = new GameObject;
+		lObject->SetName("Sprite");
+		lObject->AddComponent<SpriteRenderer>();
+		lObject->GetComponent<SpriteRenderer>()->renderTarget = ResourceList<Texture2D>::S().Find("BackBuffer");
+		lObject->GetComponent<SpriteRenderer>()->renderTargetDepth = ResourceList<Texture2D>::S().Find("BackBufferDepth");
+		lObject->GetComponent<SpriteRenderer>()->texture = ResourceList<Texture2D>::S().Find("RenderTarget");
+	}//*/
+
+	{
+		GameObject* lObject = new GameObject;
+		lObject->SetName("SkySprite");
+		lObject->AddComponent<SpriteRenderer>();
+		lObject->GetComponent<SpriteRenderer>()->priority = -5;
+		lObject->GetComponent<SpriteRenderer>()->texture = ResourceList<Texture2D>::S().Find("Test");
+		lObject->GetComponent<SpriteRenderer>()->sprite.quad.SetRect(Vector2(), Config::S().GetScreenSize() / 2);
+	}//*/
 
 	{
 		GameObject* lCamera = new GameObject;
@@ -510,7 +478,7 @@ void MyGame::Init() {
 		lCamera->GetTransform().mPosition = Vector3(0.0f, 1.0f, -1.0f) * 40.0f;
 		lCamera->GetTransform().mRotation *= Quaternion::FromAxis(lCamera->GetTransform().mRotation.Right(), ToRad(45.0f));
 
-		//lCamera->AddComponent("SkyWalkComponent");
+		lCamera->AddComponent("SkyWalkComponent");
 	}
 
 	#ifdef CPOT_ON_WINDOWS
@@ -617,38 +585,6 @@ void MyGame::Update() {
 
 	ComponentSystem::S().Render();
 
-
-	//	バックバッファに、今までのレンダリング結果を描画する
-	//
-	///*
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::Unit() * Matrix4x4::FromScale(Vector3::One() * 2.0f);
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4::Unit();
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = Matrix4x4::Unit();
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = Matrix4x4::Unit();
-	wvpBuffer->Write();
-
-	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
-	materialBuffer->Write();
-
-	Render::S().SetBlend(ResourceList<Blend>::S().Find("Normal"));
-	Render::S().SetRasterizer(ResourceList<Rasterizer>::S().Find("CullCCW"));
-	Render::S().SetDepthStencil(ResourceList<DepthStencil>::S().Find("Test"));
-	sprite.quad.SetRectFromCenter(Config::S().GetScreenSize() / 2.0f, Config::S().GetScreenSize());
-	sprite.WriteVertexBuffer();
-	Render::S().SetVertexBuffer(sprite.vertexBuffer);
-	Render::S().SetIndexBuffer(sprite.indexBuffer);
-	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(ResourceList<Texture2D>::S().Find("BackBufferDepth"));
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("WVP"), 0);
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Material"), 1);
-	Render::S().SetRenderTexture(ResourceList<Texture2D>::S().Find("BackBuffer"), 0);
-	Render::S().SetShader(ResourceList<Shader>::S().Find("Sprite"));
-
-	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 0);
-	Render::S().SetTexture2D(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
-	Render::S().SetToDevice();
-	Render::S().DrawIndexed(6, 0);
-	//*/
 
 	Render::S().Present();
 }

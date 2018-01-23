@@ -45,7 +45,7 @@ public:
 		Load(true, GL_LEQUAL, false);
 	}
 	void LoadNoTest() {
-		Load(false, GL_LEQUAL, false);
+		Load(false, GL_ALWAYS, false);
 	}
 	enum CZTestMode {
 		cTest,

@@ -9,7 +9,7 @@
 #include "./Pot/Game/cameraComponent.h"
 #include "./Pot/Game/lightComponent.h"
 #include "./Pot/Render/constantBuffer.h"
-#include "./Pot/Model/StaticTangentMeshModel.h"
+#include "./Pot/ModelLoader/ModelCPU.h"
 
 namespace cpot {
 
@@ -21,14 +21,32 @@ class StaticTangentModelRenderer : public Renderer {
 public:
 	//ï`âÊèàóù
 	virtual void OnStart() {
-		blend = ResourceList<Blend>::S().Find("Normal");
-		rasterizer = ResourceList<Rasterizer>::S().Find("CullCCW");
-		depthStencil = ResourceList<DepthStencil>::S().Find("Test");
-		renderTarget = ResourceList<Texture2D>::S().Find("RenderTarget");
-		renderTargetDepth = ResourceList<Texture2D>::S().Find("RenderTargetDepth");
-		sampler = ResourceList<Sampler>::S().Find("Diffuse");
-		bampSampler = ResourceList<Sampler>::S().Find("Diffuse");
-		shader = ResourceList<Shader>::S().Find("Bamp");
+		if (blend == nullptr) {
+			blend = ResourceList<Blend>::S().Find("Normal");
+		}
+		if (rasterizer == nullptr) {
+			rasterizer = ResourceList<Rasterizer>::S().Find("CullCCW");
+		}
+		if (depthStencil == nullptr) {
+			depthStencil = ResourceList<DepthStencil>::S().Find("Test");
+		}
+		if (renderTarget == nullptr) {
+			renderTarget = ResourceList<Texture2D>::S().Find("RenderTarget");
+		}
+		if (renderTargetDepth == nullptr) {
+			renderTargetDepth = ResourceList<Texture2D>::S().Find("RenderTargetDepth");
+		}
+
+		if (sampler == nullptr) {
+			sampler = ResourceList<Sampler>::S().Find("Diffuse");
+		}
+		if (bampSampler == nullptr) {
+			bampSampler = ResourceList<Sampler>::S().Find("Diffuse");
+		}
+		if (shader == nullptr) {
+			shader = ResourceList<Shader>::S().Find("Bamp");
+		}
+		
 	}
 
 	//ï`âÊèàóù
@@ -102,7 +120,7 @@ public:
 	//óDêÊìx
 	#pragma region Priority
 public:
-	virtual u32 GetPriority() {
+	virtual s32 GetPriority() {
 		return 0;
 	}
 

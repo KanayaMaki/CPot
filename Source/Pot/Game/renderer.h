@@ -32,7 +32,7 @@ public:
 	//優先度
 	#pragma region Priority
 public:
-	virtual u32 GetPriority() {
+	virtual s32 GetPriority() {
 		return 0;
 	}
 
@@ -88,7 +88,22 @@ private:
 	}
 
 	void Sort() {
-		mRenderer.Sort();
+		//優先度によってソートする。
+		//本当ならstd::sortでラムダ式を渡してソートしたいが、マルチプラットフォームの為std空間を直接触れないので、自分でバブルソートを実装
+		//mRenderer.Sort();
+
+		//降順にソート
+		for (u32 i = 0; i < mRenderer.GetSize(); i++) {
+			for (u32 j = 0; j < mRenderer.GetSize() - 1; j++) {
+				//奥に大きいのがあれば
+				if (mRenderer[j]->GetPriority() < mRenderer[j + 1]->GetPriority()) {
+					//交換して、大きいのが手前に来るように
+					auto tmp = mRenderer[j];
+					mRenderer[j] = mRenderer[j + 1];
+					mRenderer[j + 1] = tmp;
+				}
+			}
+		}
 	}
 
 	void RenderRenderer() {

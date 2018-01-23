@@ -94,7 +94,7 @@ public:
 	}
 	void AttachmentStencil(GLuint aTexture) {
 		glBindFramebuffer(GL_FRAMEBUFFER, mGLNum);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, aTexture);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, aTexture);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 

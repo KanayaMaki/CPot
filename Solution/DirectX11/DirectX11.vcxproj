@@ -68,6 +68,7 @@
     <ClInclude Include="..\..\Source\Pot\Game\game.h" />
     <ClInclude Include="..\..\Source\Pot\Game\gameObject.h" />
     <ClInclude Include="..\..\Source\Pot\Game\lightComponent.h" />
+    <ClInclude Include="..\..\Source\Pot\Game\spriteRenderer.h" />
     <ClInclude Include="..\..\Source\Pot\Game\staticTangentModelRenderer.h" />
     <ClInclude Include="..\..\Source\Pot\Game\renderer.h" />
     <ClInclude Include="..\..\Source\Pot\Game\type.h" />
