@@ -78,7 +78,7 @@ void main() {
 	vec3 bampNormalWor = mul(normalize(bampNormalLoc), NorWorld);
 	
 	
-	
+	//ディフューズの計算
 	vec4 diffuse = vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	diffuse *= Diffuse;
 	vec4 diffuseTexel = texture(DiffuseTexture, vec2(InTexCoord.x, 1.0f - InTexCoord.y));
@@ -86,7 +86,9 @@ void main() {
 	float diffuseLighting = Lambert(bampNormalWor, -LightDirection);
 	diffuse.xyz *= diffuseLighting;
 
+	//スペキュラーの計算
 	vec3 specular = vec3(1.0f, 1.0f, 1.0f);
+	//specular *= Specular;
 	float specularLighting = SpecularPhong(normalize(CameraPosition - InPosWor), bampNormalWor, normalize(-LightDirection), 250);
 	specular *= specularLighting;
 
