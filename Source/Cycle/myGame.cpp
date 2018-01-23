@@ -37,6 +37,8 @@
 #include "./Pot/Game/cameraComponent.h"
 #include "./Pot/Game/lightComponent.h"
 
+#include "./Pot/Game/staticTangentModelRenderer.h"
+
 
 namespace cpot {
 
@@ -142,25 +144,6 @@ Animation<Quaternion> mikuRotAnim;
 
 std::shared_ptr<AudioVoice> voice;
 
-struct WVPBuffer {
-	ShaderMatrix4x4 mWorld;
-	ShaderMatrix4x4 mView;
-	ShaderMatrix4x4 mProjection;
-	ShaderMatrix4x4 mNormalWorld;
-};
-struct MaterialBuffer {
-	Color mDiffuse;
-};
-struct OtherBuffer {
-	Vector3 mLightDirection;
-	f32 mDummy0;
-	f32 mTimer;
-	f32 mDummy1[3];
-};
-struct ToonLineBuffer {
-	f32 mLineWidth;
-	f32 mDummy0[3];
-};
 
 VectorSimple<StaticMeshVertex> lBefore;
 VectorSimple<StaticMeshVertex> lAfter;
@@ -582,8 +565,9 @@ void MyGame::Init() {
 	{
 		GameObject* lPlayer = new GameObject;
 		lPlayer->SetName("Player");
-		//lPlayer->AddComponent<PlayerComponent>();
-
+		lPlayer->AddComponent<PlayerComponent>();
+		lPlayer->AddComponent<StaticTangentModelRenderer>();
+		lPlayer->GetComponent<StaticTangentModelRenderer>()->model = bampModel;
 		lPlayer->AddComponent<AutoRotateComponent>();
 	}
 
@@ -597,7 +581,7 @@ void MyGame::Init() {
 		lCamera->GetTransform().mPosition = Vector3(0.0f, 1.0f, -1.0f) * 40.0f;
 		lCamera->GetTransform().mRotation *= Quaternion::FromAxis(lCamera->GetTransform().mRotation.Right(), ToRad(45.0f));
 
-		lCamera->AddComponent("SkyWalkComponent");
+		//lCamera->AddComponent("SkyWalkComponent");
 	}
 
 	#ifdef CPOT_ON_WINDOWS
@@ -707,21 +691,6 @@ void MyGame::Update() {
 		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), 0.0f));
 	}
 
-	auto lCamera = CameraManager::S().GetCamera();
-	if (lCamera) {
-		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = lCamera->GetProjectionMatrix();
-		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = lCamera->GetViewMatrix();
-	}
-	auto lLight = LightManager::S().GetDirectionalLight();
-	if (lLight) {
-		otherBuffer->GetCPUBuffer<OtherBuffer>()->mLightDirection = lLight->GetDirection().Normal();
-	}
-	
-	otherBuffer->GetCPUBuffer<OtherBuffer>()->mTimer += DeltaTime() / 4.0f;
-	otherBuffer->GetCPUBuffer<OtherBuffer>()->mTimer = Wrap(otherBuffer->GetCPUBuffer<OtherBuffer>()->mTimer, 1.0f);
-
-	materialBuffer->Write();
-	otherBuffer->Write();
 
 	ResourceList<Texture2D>::S().Find("RenderTarget")->ClearColor(Color::Blue());
 	ResourceList<Texture2D>::S().Find("RenderTargetDepth")->ClearDepth(1.0f);
@@ -729,117 +698,10 @@ void MyGame::Update() {
 	ResourceList<Texture2D>::S().Find("BackBuffer")->ClearColor(Color::White());
 	ResourceList<Texture2D>::S().Find("BackBufferDepth")->ClearDepth(1.0f);
 
-	//PMXの描画
-	///*
-	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(mikuRotAnim.Get(), mikuLocAnim.Get(), Vector3().XYZ(10.0f));
-	//wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(mikuRotAnim.Get());
-	GameObject* lPlayer = GameObject::Find("Player");
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4(lPlayer->GetTransform().mRotation, lPlayer->GetTransform().mPosition);
-	wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4(lPlayer->GetTransform().mRotation);
-	wvpBuffer->Write();
-	
-
-	/*
-	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::Black();
-	materialBuffer->Write();
-
-	toonLineBuffer->GetCPUBuffer<ToonLineBuffer>()->mLineWidth = 0.1f;
-	toonLineBuffer->Write();
-
-	Render::S().SetBlend(ResourceList<Blend>::S().Find("Normal"));
-	Render::S().SetRasterizer(ResourceList<Rasterizer>::S().Find("CullCW"));
-	Render::S().SetDepthStencil(ResourceList<DepthStencil>::S().Find("NoWrite"));
-	Render::S().SetVertexBuffer(model->mesh.vertex);
-	Render::S().SetIndexBuffer(model->mesh.index);
 	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(ResourceList<Texture2D>::S().Find("RenderTargetDepth"));
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("WVP"), 0);
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Material"), 1);
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Other"), 2);
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("ToonLine"), 3);
-	Render::S().SetRenderTexture(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
-	Render::S().SetShader(ResourceList<Shader>::S().Find("ToonLine"));
-
-	for (u32 i = 0; i < model->submeshNum; i++) {
-		Render::S().SetToDevice();
-		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
-	}
-	//*/
 
 
-	//PMXの描画
-	//
-	/*
-	auto model = mikuModel;
-
-	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
-	materialBuffer->Write();
-
-	Render::S().SetBlend(ResourceList<Blend>::S().Find("Normal"));
-	Render::S().SetRasterizer(ResourceList<Rasterizer>::S().Find("CullCCW"));
-	Render::S().SetDepthStencil(ResourceList<DepthStencil>::S().Find("Test"));
-	Render::S().SetVertexBuffer(model->mesh.vertex);
-	Render::S().SetIndexBuffer(model->mesh.index);
-	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(ResourceList<Texture2D>::S().Find("RenderTargetDepth"));
-	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 0);
-	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 1);
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("WVP"), 0);
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Material"), 1);
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Other"), 2);
-	Render::S().SetRenderTexture(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
-	Render::S().SetShader(ResourceList<Shader>::S().Find("Toon"));
-
-	for (u32 i = 0; i < model->submeshNum; i++) {
-		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
-		if (model->submesh[i].material.toonTexture->IsLoad()) {
-			Render::S().SetTexture2D(model->submesh[i].material.toonTexture, 1);
-		}
-		else {
-			Render::S().SetTexture2D(whiteTexture, 1);
-		}
-		Render::S().SetToDevice();
-		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
-	}
-	//*/
-
-
-	//箱の描画
-	//
-	///*
-	auto model = bampModel;
-
-	materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
-	materialBuffer->Write();
-
-	Render::S().SetBlend(ResourceList<Blend>::S().Find("Normal"));
-	Render::S().SetRasterizer(ResourceList<Rasterizer>::S().Find("CullCCW"));
-	Render::S().SetDepthStencil(ResourceList<DepthStencil>::S().Find("Test"));
-	Render::S().SetVertexBuffer(model->mesh.vertex);
-	Render::S().SetIndexBuffer(model->mesh.index);
-	Render::S().SetViewPort(viewport, 0);
-	Render::S().SetDepthTexture(ResourceList<Texture2D>::S().Find("RenderTargetDepth"));
-	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 0);
-	Render::S().SetSampler(ResourceList<Sampler>::S().Find("Diffuse"), 1);
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("WVP"), 0);
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Material"), 1);
-	Render::S().SetConstantBuffer(ResourceList<ConstantBuffer>::S().Find("Other"), 2);
-	Render::S().SetRenderTexture(ResourceList<Texture2D>::S().Find("RenderTarget"), 0);
-	Render::S().SetShader(ResourceList<Shader>::S().Find("Bamp"));
-
-	//マテリアルごとに描画
-	for (u32 i = 0; i < model->submeshNum; i++) {
-		Render::S().SetTexture2D(model->submesh[i].material.texture, 0);
-		if (model->submesh[i].material.bampTexture->IsLoad()) {
-			Render::S().SetTexture2D(model->submesh[i].material.bampTexture, 1);
-		}
-		else {
-			Render::S().SetTexture2D(whiteTexture, 1);
-		}
-		Render::S().SetToDevice();
-		Render::S().DrawIndexed(model->submesh[i].indexCount, model->submesh[i].indexStartCount);
-	}
-	//*/
+	ComponentSystem::S().Render();
 
 
 	//	バックバッファに、今までのレンダリング結果を描画する
@@ -873,9 +735,6 @@ void MyGame::Update() {
 	Render::S().SetToDevice();
 	Render::S().DrawIndexed(6, 0);
 	//*/
-
-
-	ComponentSystem::S().Render();
 
 	Render::S().Present();
 }

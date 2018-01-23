@@ -594,6 +594,9 @@
     <ClInclude Include="..\..\Source\Pot\Model\StaticTangentMeshModel.h">
       <Filter>Source\Pot\Model</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\staticTangentModelRenderer.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">

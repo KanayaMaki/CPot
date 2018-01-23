@@ -78,7 +78,7 @@ public:
 private:
 	void Merge() {
 		for (u32 i = 0; i < mRendererNowFrame.GetSize(); i++) {
-			mRenderer[i]->OnStart();
+			mRendererNowFrame[i]->OnStart();
 		}
 
 		//ìùçá
@@ -88,7 +88,7 @@ private:
 	}
 
 	void Sort() {
-		//mRenderer.Sort();
+		mRenderer.Sort();
 	}
 
 	void RenderRenderer() {
@@ -101,6 +101,28 @@ private:
 private:
 	Vector<Renderer*> mRendererNowFrame;	//êVÇµÇ≠í«â¡Ç≥ÇÍÇΩÉåÉìÉ_ÉâÅ[
 	Vector<Renderer*> mRenderer;
+};
+
+
+
+struct WVPBuffer {
+	ShaderMatrix4x4 mWorld;
+	ShaderMatrix4x4 mView;
+	ShaderMatrix4x4 mProjection;
+	ShaderMatrix4x4 mNormalWorld;
+};
+struct MaterialBuffer {
+	Color mDiffuse;
+};
+struct OtherBuffer {
+	Vector3 mLightDirection;
+	f32 mDummy0;
+	f32 mTimer;
+	f32 mDummy1[3];
+};
+struct ToonLineBuffer {
+	f32 mLineWidth;
+	f32 mDummy0[3];
 };
 
 
