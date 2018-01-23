@@ -443,18 +443,19 @@ void MyGame::Init() {
 	}
 	
 	{
-		GameObject* lPlayer = new GameObject;
-		lPlayer->SetName("Player");
-		/*
-		lPlayer->AddComponent<StaticTangentModelRenderer>();
-		lPlayer->GetComponent<StaticTangentModelRenderer>()->model = bampModel;
-		//*/
-		///*
-		lPlayer->AddComponent<ToonModelRenderer>();
-		lPlayer->GetComponent<ToonModelRenderer>()->model = mikuModel;
-		//*/
+		GameObject* lObject = new GameObject;
+		lObject->SetName("Player");
+		lObject->AddComponent<ToonModelRenderer>();
+		lObject->GetComponent<ToonModelRenderer>()->model = mikuModel;
+		lObject->GetTransform().mPosition = Vector3(10.0f, 0.0f, 0.0f);
+	}
 
-		lPlayer->AddComponent<AutoRotateComponent>();
+	{
+		GameObject* lObject = new GameObject;
+		lObject->SetName("Box");
+		lObject->AddComponent<StaticTangentModelRenderer>();
+		lObject->GetComponent<StaticTangentModelRenderer>()->model = bampModel;
+		lObject->AddComponent<AutoRotateComponent>();
 	}
 
 	{
@@ -567,16 +568,16 @@ void MyGame::Update() {
 	//ƒvƒŒƒCƒ„[‚ð‰ñ“]‚³‚¹‚é
 	const f32 cRotateSpeed = ToRad(45.0f);
 	if (Input::GetButtonDown(windows::cU)) {
-		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), cRotateSpeed));
+		GameObject::Find("Box")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), cRotateSpeed));
 	}
 	if (Input::GetButtonDown(windows::cI)) {
-		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Right(), cRotateSpeed));
+		GameObject::Find("Box")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Right(), cRotateSpeed));
 	}
 	if (Input::GetButtonDown(windows::cO)) {
-		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Forward(), cRotateSpeed));
+		GameObject::Find("Box")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Forward(), cRotateSpeed));
 	}
 	if (Input::GetButtonDown(windows::cP)) {
-		GameObject::Find("Player")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), 0.0f));
+		GameObject::Find("Box")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), 0.0f));
 	}
 
 
