@@ -71,6 +71,7 @@
     <ClInclude Include="..\..\Source\Pot\Game\spriteRenderer.h" />
     <ClInclude Include="..\..\Source\Pot\Game\staticTangentModelRenderer.h" />
     <ClInclude Include="..\..\Source\Pot\Game\renderer.h" />
+    <ClInclude Include="..\..\Source\Pot\Game\toonModelRenderer.h" />
     <ClInclude Include="..\..\Source\Pot\Game\type.h" />
     <ClInclude Include="..\..\Source\Pot\Game\unique.h" />
     <ClInclude Include="..\..\Source\Pot\Game\updater.h" />

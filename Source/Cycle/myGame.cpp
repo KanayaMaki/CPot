@@ -39,6 +39,7 @@
 
 #include "./Pot/Game/spriteRenderer.h"
 #include "./Pot/Game/staticTangentModelRenderer.h"
+#include "./Pot/Game/toonModelRenderer.h"
 
 
 namespace cpot {
@@ -408,8 +409,8 @@ void MyGame::Init() {
 	//
 	///*
 	PmxLoader lPmx;
-	//lPmx.Load("./Miku/miku.pmx");
-	lPmx.Load("./Alicia/Alicia_solid.pmx");
+	lPmx.Load("./Miku/miku.pmx");
+	//lPmx.Load("./Alicia/Alicia_solid.pmx");
 
 	StaticMeshModelCPU lMikuModelCPU;
 	PmxToMesh::Load(lMikuModelCPU, lPmx.Get());
@@ -444,9 +445,15 @@ void MyGame::Init() {
 	{
 		GameObject* lPlayer = new GameObject;
 		lPlayer->SetName("Player");
-		//lPlayer->AddComponent<PlayerComponent>();
+		/*
 		lPlayer->AddComponent<StaticTangentModelRenderer>();
 		lPlayer->GetComponent<StaticTangentModelRenderer>()->model = bampModel;
+		//*/
+		///*
+		lPlayer->AddComponent<ToonModelRenderer>();
+		lPlayer->GetComponent<ToonModelRenderer>()->model = mikuModel;
+		//*/
+
 		lPlayer->AddComponent<AutoRotateComponent>();
 	}
 
