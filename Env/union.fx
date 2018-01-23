@@ -12,6 +12,8 @@ cbuffer cDiffuseBuffer : register(b1) { // 常にスロット「0」を使う
 cbuffer cTimerBuffer : register(b2) { // 常にスロット「0」を使う
 	float3 LightDirection;
 	float _Dummy0;
+	float3 CameraPosition;
+	float _Dummy1;
 	float Timer;
 };
 

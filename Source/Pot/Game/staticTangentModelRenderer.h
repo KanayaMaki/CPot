@@ -67,6 +67,7 @@ public:
 		if (lCamera) {
 			wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = lCamera->GetProjectionMatrix();
 			wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = lCamera->GetViewMatrix();
+			otherBuffer->GetCPUBuffer<OtherBuffer>()->mCameraPosition = lCamera->GetLocation();
 		}
 
 		//ƒ‰ƒCƒgs—ñ‚Ìİ’è

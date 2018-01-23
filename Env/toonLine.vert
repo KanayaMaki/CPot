@@ -21,6 +21,8 @@ layout(binding = 1) uniform Material {
 layout(binding = 2) uniform Other {
 	vec3 LightDirection;
 	float _Other_Dummy0;
+	vec3 CameraPosition;
+	float _Dummy1;
     float Timer;
 };
 layout(binding = 3) uniform Toon {

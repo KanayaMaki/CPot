@@ -132,8 +132,10 @@ struct MaterialBuffer {
 struct OtherBuffer {
 	Vector3 mLightDirection;
 	f32 mDummy0;
+	Vector3 mCameraPosition;
+	f32 mDummy1;
 	f32 mTimer;
-	f32 mDummy1[3];
+	f32 mDummy2[3];
 };
 struct ToonLineBuffer {
 	f32 mLineWidth;

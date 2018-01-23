@@ -457,9 +457,9 @@ void MyGame::Init() {
 		lObject->GetComponent<SpriteRenderer>()->renderTarget = ResourceList<Texture2D>::S().Find("BackBuffer");
 		lObject->GetComponent<SpriteRenderer>()->renderTargetDepth = ResourceList<Texture2D>::S().Find("BackBufferDepth");
 		lObject->GetComponent<SpriteRenderer>()->texture = ResourceList<Texture2D>::S().Find("RenderTarget");
-	}//*/
+	}
 
-	{
+	/*{
 		GameObject* lObject = new GameObject;
 		lObject->SetName("SkySprite");
 		lObject->AddComponent<SpriteRenderer>();
