@@ -46,6 +46,12 @@ float Lambert(vec3 aNormal, vec3 aToLight) {
 	return lambert;
 }
 
+float SpecularPhong(vec3 aToViewWor, vec3 aNorWor, vec3 aToLightWor, int aSpecularPow) {
+	vec3 refToView = -aToViewWor + 2.0f * dot(aNorWor, aToViewWor) * aNorWor;
+	float specular = pow(max(dot(refToView, normalize(aToLightWor)), 0), aSpecularPow);
+	return specular;
+}
+
 vec3 BampNormal(vec2 aTexCoord, vec3 aNormal, vec3 aTangent, vec3 aBiNormal) {
 	vec3 lBampNormalTan = texture(BampTexture, vec2(aTexCoord.x, 1.0f - aTexCoord.y)).xyz * 2.0f - 1.0f;
 	lBampNormalTan.xy = -lBampNormalTan.xy;
@@ -70,14 +76,25 @@ void main() {
 	//バンプを適用させた法線の取得
 	vec3 bampNormalLoc = BampNormal(InTexCoord, normalize(InNorLoc), normalize(InTanLoc), normalize(InBiNorLoc));
 	vec3 bampNormalWor = mul(normalize(bampNormalLoc), NorWorld);
-	float lighting = Lambert(bampNormalWor, -LightDirection);
 	
+	
+	
+	vec4 diffuse = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	diffuse *= Diffuse;
 	vec4 diffuseTexel = texture(DiffuseTexture, vec2(InTexCoord.x, 1.0f - InTexCoord.y));
-	
-	vec4 color = vec4(1.0f, 1.0f, 1.0f, 1.0f);
-	color *= Diffuse;
-	color *= diffuseTexel;
-	color.xyz *= lighting;
+	diffuse *= diffuseTexel;	//ディフューズテクスチャの適用
+	float diffuseLighting = Lambert(bampNormalWor, -LightDirection);
+	diffuse.xyz *= diffuseLighting;
+
+	vec3 specular = vec3(1.0f, 1.0f, 1.0f);
+	float specularLighting = SpecularPhong(normalize(CameraPosition - InPosWor), bampNormalWor, normalize(-LightDirection), 250);
+	specular *= specularLighting;
+
+	vec4 color = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	color += diffuse;
+	color += vec4(specular.xyz, 0.0f);
+
+	color.a = min(color.a, 1.0f);
 
 	OutColor = color;
 }

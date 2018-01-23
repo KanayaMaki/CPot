@@ -90,16 +90,31 @@ PS_OUTPUT PS_MAIN(PS_INPUT input) {
 	//バンプを適用させた法線の取得
 	float3 bampNormal = BampNormal(input.Tex, normalize(input.Nor), normalize(input.Tan), normalize(input.BiNor));
 	float3 bampNormalWor = Mul(normalize(bampNormal), NorWorld);
-	float lighting = Lambert(bampNormalWor, -LightDirection);
-
-	//テクスチャ
+	
+	//
+	//ディフューズの計算
+	float4 diffuse = float4(1.0f, 1.0f, 1.0f, 1.0f);
+	diffuse *= Diffuse;	//マテリアル色の適用
 	float4 diffuseTexel = DiffuseTexture.Sample(DiffuseSampler, input.Tex);
+	diffuse *= diffuseTexel;	//テクスチャの適用
+	float diffuseLighting = Lambert(bampNormalWor, -LightDirection);
+	diffuse.xyz *= diffuseLighting;	//ライティングの適用
 	
-	float4 color = float4(1.0f, 1.0f, 1.0f, 1.0f);
-	color *= Diffuse;	//マテリアル色の適用
-	color *= diffuseTexel;	//テクスチャの適用
-	color.xyz *= lighting;	//ライティングの適用
-	
+	//
+	//スペキュラーの計算
+	float3 specular = float3(1.0f, 1.0f, 1.0f);
+	//specular.xyz *= Specular;	//スペキュラ色の適用
+	float specularLighting = SpecularPhong(normalize(CameraPosition - input.PosWor), bampNormalWor, normalize(-LightDirection), 250);
+	specular *= specularLighting;	//ライティングの適用
+
+	//計算した色を足し合わせる
+	float4 color = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	color += diffuse;
+	color += float4(specular.xyz, 0.0f);
+
+	//アルファは1.0を超えない
+	color.a = min(color.a, 1.0f);
+
 	output.Diffuse = color;
 
 	return output;

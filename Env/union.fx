@@ -53,3 +53,9 @@ float3 Mul(float3 aVector, matrix aMatrix) {
 	float4 lVector = mul(float4(aVector, 1.0f), aMatrix);
 	return lVector.xyz / lVector.w;
 }
+
+float SpecularPhong(float3 aToViewWor, float3 aNorWor, float3 aToLightWor, int aSpecularPow) {
+	float3 refToView = -aToViewWor + 2.0f * dot(aNorWor, aToViewWor) * aNorWor;
+	float specular = pow(max(dot(refToView, normalize(aToLightWor)), 0), int(aSpecularPow));
+	return specular;
+}
