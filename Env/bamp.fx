@@ -70,7 +70,7 @@ void GS_MAIN(triangle VS_BAMP_INPUT input[3],
 		output.ToLightTan = TransformToTangentSpace(ToLight, input[i].Nor, input[i].Tan, input[i].BiNor);
 
 		float3 lToCamera = CameraPositionLoc - input[i].Pos;
-		output.ToCameraTan = TransformToTangentSpace(lToCamera, input[i].Nor, input[i].Tan, input[i].BiNor);
+		output.ToCameraTan = TransformToTangentSpace(normalize(lToCamera), input[i].Nor, input[i].Tan, input[i].BiNor);
 
 		output.Tex = input[i].Tex;
 

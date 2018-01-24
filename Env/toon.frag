@@ -21,6 +21,11 @@ layout(binding = 2) uniform Other {
 	vec3 CameraPosition;
 	float _Dummy1;
     float Timer;
+	vec3 _Dummy2;
+	vec3 ToLight;
+	float _Dummy3;
+	vec3 CameraPositionLoc;
+	float _Dummy4;
 };
 
 

@@ -1,10 +1,9 @@
 #version 430 core
 
 layout(location = 0) in vec3 InPosWor;
-layout(location = 1) in vec3 InNorLoc;
-layout(location = 2) in vec3 InTanLoc;
-layout(location = 3) in vec3 InBiNorLoc;
-layout(location = 4) in vec2 InTexCoord;
+layout(location = 1) in vec3 InToLightTan;
+layout(location = 2) in vec3 InToCameraTan;
+layout(location = 3) in vec2 InTexCoord;
 
 layout(location = 0) out vec4 OutColor;
 
@@ -23,6 +22,11 @@ layout(binding = 2) uniform Other {
 	vec3 CameraPosition;
 	float _Dummy1;
     float Timer;
+	vec3 _Dummy2;
+	vec3 ToLight;
+	float _Dummy3;
+	vec3 CameraPositionLoc;
+	float _Dummy4;
 };
 
 
@@ -46,50 +50,38 @@ float Lambert(vec3 aNormal, vec3 aToLight) {
 	return lambert;
 }
 
-float SpecularPhong(vec3 aToViewWor, vec3 aNorWor, vec3 aToLightWor, int aSpecularPow) {
-	vec3 refToView = -aToViewWor + 2.0f * dot(aNorWor, aToViewWor) * aNorWor;
-	float specular = pow(max(dot(refToView, normalize(aToLightWor)), 0), aSpecularPow);
+float SpecularPhong(vec3 aToView, vec3 aNor, vec3 aToLight, int aSpecularPow) {
+	vec3 refToView = -aToView + 2.0f * dot(aNor, aToView) * aNor;
+	float specular = pow(max(dot(refToView, normalize(aToLight)), 0), aSpecularPow);
 	return specular;
 }
 
-vec3 BampNormal(vec2 aTexCoord, vec3 aNormal, vec3 aTangent, vec3 aBiNormal) {
+vec3 GetBampNormalTan(vec2 aTexCoord) {
 	vec3 lBampNormalTan = texture(BampTexture, vec2(aTexCoord.x, 1.0f - aTexCoord.y)).xyz * 2.0f - 1.0f;
-	lBampNormalTan.xy = -lBampNormalTan.xy;
-
-	mat4x4 lTanToLoc = mat4x4(
-		vec4(aTangent.x, aTangent.y, aTangent.z, 0.0f),
-		vec4(aBiNormal.x, aBiNormal.y, aBiNormal.z, 0.0f),
-		vec4(aNormal.x, aNormal.y, aNormal.z, 0.0f),
-		vec4(0.0f, 0.0f, 0.0f, 1.0f)
-	);
-	lTanToLoc = transpose(lTanToLoc);
-
-	vec3 lBampNor = mul(lBampNormalTan, lTanToLoc);
-
-	return lBampNor;
+	lBampNormalTan.xy *= -1.0f;	//右手系座標から左手系座標への変換
+	return lBampNormalTan;
 }
 
 
 
 void main() {
 
-	//バンプを適用させた法線の取得
-	vec3 bampNormalLoc = BampNormal(InTexCoord, normalize(InNorLoc), normalize(InTanLoc), normalize(InBiNorLoc));
-	vec3 bampNormalWor = mul(normalize(bampNormalLoc), NorWorld);
-	
-	
+	//タンジェント空間での法線ベクトルの取得
+	vec3 bampNormalTan = GetBampNormalTan(InTexCoord);
+
 	//ディフューズの計算
+	//
 	vec4 diffuse = vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	diffuse *= Diffuse;
 	vec4 diffuseTexel = texture(DiffuseTexture, vec2(InTexCoord.x, 1.0f - InTexCoord.y));
 	diffuse *= diffuseTexel;	//ディフューズテクスチャの適用
-	float diffuseLighting = Lambert(bampNormalWor, -LightDirection);
+	float diffuseLighting = Lambert(bampNormalTan, normalize(InToLightTan));
 	diffuse.xyz *= diffuseLighting;
 
 	//スペキュラーの計算
 	vec3 specular = vec3(1.0f, 1.0f, 1.0f);
 	//specular *= Specular;
-	float specularLighting = SpecularPhong(normalize(CameraPosition - InPosWor), bampNormalWor, normalize(-LightDirection), 250);
+	float specularLighting = SpecularPhong(normalize(InToCameraTan), bampNormalTan, normalize(InToLightTan), 20);
 	specular *= specularLighting;
 
 	vec4 color = vec4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -97,6 +89,8 @@ void main() {
 	color += vec4(specular.xyz, 0.0f);
 
 	color.a = min(color.a, 1.0f);
+
+	color.rgb = InToLightTan;
 
 	OutColor = color;
 }

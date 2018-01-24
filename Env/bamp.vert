@@ -3,6 +3,10 @@
 vec4 mul(vec4 v, mat4x4 m) {
 	return v * m;
 }
+vec3 mul(vec3 aVector, mat4x4 aMatrix) {
+	vec4 lVector = mul(vec4(aVector, 1.0f), aMatrix);
+	return lVector.xyz / lVector.w;
+}
 
 
 layout(location = 0) in vec3 InPosLoc;
@@ -12,10 +16,27 @@ layout(location = 3) in vec3 InBiNorLoc;
 layout(location = 4) in vec2 InTexCoord;
 
 layout(location = 0) out vec3 OutPosWor;
-layout(location = 1) out vec3 OutNorLoc;
-layout(location = 2) out vec3 OutTanLoc;
-layout(location = 3) out vec3 OutBiNorLoc;
-layout(location = 4) out vec2 OutTexCoord;
+layout(location = 1) out vec3 OutToLightTan;
+layout(location = 2) out vec3 OutToCameraTan;
+layout(location = 3) out vec2 OutTexCoord;
+
+
+vec3 TransformToTangentSpace(vec3 aVec, vec3 aNormal, vec3 aTangent, vec3 aBiNormal) {
+
+	mat4x4 lTanToLoc = mat4x4(
+		vec4(aTangent.x, aTangent.y, aTangent.z, 0.0f),
+		vec4(aBiNormal.x, aBiNormal.y, aBiNormal.z, 0.0f),
+		vec4(aNormal.x, aNormal.y, aNormal.z, 0.0f),
+		vec4(0.0f, 0.0f, 0.0f, 1.0f)
+		);
+	lTanToLoc = transpose(lTanToLoc);
+	mat4x4 lLocToTan = transpose(lTanToLoc);
+
+	vec3 lVecTan = mul(aVec, lLocToTan);
+
+	return lVecTan;
+}
+
 
 layout(binding = 0, column_major) uniform Data {
     mat4x4  World;
@@ -32,6 +53,11 @@ layout(binding = 2) uniform Other {
 	vec3 CameraPosition;
 	float _Dummy1;
     float Timer;
+	vec3 _Dummy2;
+	vec3 ToLight;
+	float _Dummy3;
+	vec3 CameraPositionLoc;
+	float _Dummy4;
 };
 
 void main() {
@@ -42,9 +68,10 @@ void main() {
 	vec4 lPosProj = mul(lPosView, Proj);
 	gl_Position =  lPosProj;
 
-	OutNorLoc = InNorLoc;
-	OutTanLoc = InTanLoc;
-	OutBiNorLoc = InBiNorLoc;
+	OutToLightTan = TransformToTangentSpace(normalize(ToLight), InNorLoc, InTanLoc, InBiNorLoc);
+
+	vec3 lToCamera = CameraPositionLoc - InPosLoc;
+	OutToCameraTan = TransformToTangentSpace(normalize(lToCamera), InNorLoc, InTanLoc, InBiNorLoc);
 
 	OutTexCoord = InTexCoord;
 }
