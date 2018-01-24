@@ -15,9 +15,8 @@ struct VS_BAMP_INPUT {
 struct PS_INPUT {
 	float4 PosProj	: SV_POSITION; //頂点座標（プロジェクション）
 	float3 PosWor	: POS_WOR; //頂点座標（ワールド）
-	float3 Nor	: NORMAL;	//法線ベクトル（モデル）
-	float3 Tan	: TANGENT;	//接線ベクトル（モデル）
-	float3 BiNor	: BINORMAL;	//従法線ベクトル（モデル）
+	float3 ToLightTan : TOLIGHT_TAN;	//光へのベクトル（タンジェント）
+	float3 ToCameraTan : TOCAMERA_TAN;	//視点へのベクトル（タンジェント）
 	float2 Tex	: TEXTURE;	//テクスチャ座標
 };
 
@@ -26,6 +25,28 @@ VS_BAMP_INPUT VS_MAIN(VS_BAMP_INPUT input) {
 	VS_BAMP_INPUT output;
 	output = input;
 	return output;
+}
+
+
+float3 TransformToTangentSpace(float3 aVec, float3 aNormal, float3 aTangent, float3 aBiNormal) {
+
+	matrix lTanToLoc = matrix(
+		float4(aTangent.x, aTangent.y, aTangent.z, 0.0f),
+		float4(aBiNormal.x, aBiNormal.y, aBiNormal.z, 0.0f),
+		float4(aNormal.x, aNormal.y, aNormal.z, 0.0f),
+		float4(0.0f, 0.0f, 0.0f, 1.0f)
+		);
+	matrix lLocToTan = transpose(lTanToLoc);
+
+	float3 lVecTan = Mul(aVec, lLocToTan);
+
+	return lVecTan;
+}
+
+float3 GetBampNormalTan(float2 aTexCoord) {
+	float3 lBampNormalTan = BampTexture.Sample(BampSampler, aTexCoord).xyz * 2.0f - 1.0f;
+	lBampNormalTan.xy *= -1.0f;	//右手系座標から左手系座標への変換
+	return lBampNormalTan;
 }
 
 // ジオメトリ シェーダの関数
@@ -46,9 +67,10 @@ void GS_MAIN(triangle VS_BAMP_INPUT input[3],
 		float4 lPosProj = mul(lPosView, Projection);
 		output.PosProj = lPosProj;
 
-		output.Nor = input[i].Nor;
-		output.BiNor = input[i].BiNor;
-		output.Tan = input[i].Tan;
+		output.ToLightTan = TransformToTangentSpace(ToLight, input[i].Nor, input[i].Tan, input[i].BiNor);
+
+		float3 lToCamera = CameraPositionLoc - input[i].Pos;
+		output.ToCameraTan = TransformToTangentSpace(lToCamera, input[i].Nor, input[i].Tan, input[i].BiNor);
 
 		output.Tex = input[i].Tex;
 
@@ -63,33 +85,12 @@ struct PS_OUTPUT {
 };
 
 
-
-float3 BampNormal(float2 aTexCoord, float3 aNormal, float3 aTangent, float3 aBiNormal) {
-
-	float3 lBampNormalTan = BampTexture.Sample(BampSampler, aTexCoord).xyz * 2.0f - 1.0f;
-	lBampNormalTan.xy = -lBampNormalTan.xy;
-	
-	matrix lTanToLoc = matrix(
-		float4(aTangent.x, aTangent.y, aTangent.z, 0.0f),
-		float4(aBiNormal.x, aBiNormal.y, aBiNormal.z, 0.0f),
-		float4(aNormal.x, aNormal.y, aNormal.z, 0.0f),
-		float4(0.0f, 0.0f, 0.0f, 1.0f)
-		);
-
-	float3 lBampNor = Mul(lBampNormalTan, lTanToLoc);
-
-	return lBampNor;
-}
-
-
-
 PS_OUTPUT PS_MAIN(PS_INPUT input) {
 
 	PS_OUTPUT output;
 
-	//バンプを適用させた法線の取得
-	float3 bampNormal = BampNormal(input.Tex, normalize(input.Nor), normalize(input.Tan), normalize(input.BiNor));
-	float3 bampNormalWor = Mul(normalize(bampNormal), NorWorld);
+	//タンジェント空間での法線ベクトルの取得
+	float3 bampNormalTan = GetBampNormalTan(input.Tex);
 	
 	//
 	//ディフューズの計算
@@ -97,14 +98,14 @@ PS_OUTPUT PS_MAIN(PS_INPUT input) {
 	diffuse *= Diffuse;	//マテリアル色の適用
 	float4 diffuseTexel = DiffuseTexture.Sample(DiffuseSampler, input.Tex);
 	diffuse *= diffuseTexel;	//テクスチャの適用
-	float diffuseLighting = Lambert(bampNormalWor, -LightDirection);
+	float diffuseLighting = Lambert(bampNormalTan, normalize(input.ToLightTan));
 	diffuse.xyz *= diffuseLighting;	//ライティングの適用
 	
 	//
 	//スペキュラーの計算
 	float3 specular = float3(1.0f, 1.0f, 1.0f);
 	//specular.xyz *= Specular;	//スペキュラ色の適用
-	float specularLighting = SpecularPhong(normalize(CameraPosition - input.PosWor), bampNormalWor, normalize(-LightDirection), 250);
+	float specularLighting = SpecularPhong(normalize(input.ToCameraTan), bampNormalTan, normalize(input.ToLightTan), 20);
 	specular *= specularLighting;	//ライティングの適用
 
 	//計算した色を足し合わせる

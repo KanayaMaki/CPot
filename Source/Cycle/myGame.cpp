@@ -161,19 +161,10 @@ std::shared_ptr<ConstantBuffer> wvpBuffer;
 std::shared_ptr<ConstantBuffer> materialBuffer;
 std::shared_ptr<ConstantBuffer> otherBuffer;
 std::shared_ptr<ConstantBuffer> toonLineBuffer;
-std::shared_ptr<Shader> lambertShader;
-std::shared_ptr<Shader> toonShader;
-std::shared_ptr<Shader> toonLineShader;
-std::shared_ptr<Shader> bampShader;
 
 std::shared_ptr<Viewport> viewport;
 std::shared_ptr<Rasterizer> rasterizer;
 std::shared_ptr<Rasterizer> toonLineRasterizer;
-
-std::shared_ptr<StaticTangentMeshModel> bampModel;
-std::shared_ptr<StaticMeshModel> mikuModel;
-
-
 
 Transform planeTransform;
 
@@ -366,11 +357,6 @@ void MyGame::Init() {
 	viewport.reset(new Viewport);
 	viewport->Load(Vector2(0.0f, 0.0f), Config::S().GetScreenSize());
 
-	lambertShader = ResourceList<Shader>::S().Find("Lambert");
-	toonShader = ResourceList<Shader>::S().Find("Toon");
-	toonLineShader = ResourceList<Shader>::S().Find("ToonLine");
-	bampShader = ResourceList<Shader>::S().Find("Bamp");
-
 	rasterizer.reset(new Rasterizer);
 	rasterizer->Load(Rasterizer::cSolid, Rasterizer::cCullCCW);
 	rasterizer->SetName("CullCCW");
@@ -405,33 +391,11 @@ void MyGame::Init() {
 	toonLineBuffer->GetCPUBuffer<ToonLineBuffer>()->mLineWidth = 2.0f;
 
 
-	//	PMXの読み込み
-	//
-	///*
-	PmxLoader lPmx;
-	lPmx.Load("./Miku/miku.pmx");
-	//lPmx.Load("./Alicia/Alicia_solid.pmx");
-
-	StaticMeshModelCPU lMikuModelCPU;
-	PmxToMesh::Load(lMikuModelCPU, lPmx.Get());
-
-	mikuModel.reset(new StaticMeshModel);
-	ModelCPUToModel::Load(*mikuModel, lMikuModelCPU);
+	
 
 	//*/
 
 	
-	//	箱の読み込み
-	//
-	///*
-	StaticTangentMeshModelCPU lBampMeshCPU;
-	BufferToMesh::Load(lBampMeshCPU, PathString("./Box/box.pmo"));
-	//*/
-
-	bampModel.reset(new StaticTangentMeshModel);
-	ModelCPUToModel::Load(*bampModel, lBampMeshCPU);
-
-
 	planeTransform.mScale = Vector3::One() * 10.0f;
 
 	
@@ -443,6 +407,21 @@ void MyGame::Init() {
 	}
 	
 	{
+		//	PMXの読み込み
+		//
+		PmxLoader lPmx;
+		lPmx.Load("./Miku/miku.pmx");
+		//lPmx.Load("./Alicia/Alicia_solid.pmx");
+
+		StaticMeshModelCPU lMikuModelCPU;
+		PmxToMesh::Load(lMikuModelCPU, lPmx.Get());
+
+		auto mikuModel = std::make_shared<StaticMeshModel>();
+		ModelCPUToModel::Load(*mikuModel, lMikuModelCPU);
+
+
+		//　ゲームオブジェクトの作成
+		//
 		GameObject* lObject = new GameObject;
 		lObject->SetName("Player");
 		lObject->AddComponent<ToonModelRenderer>();
@@ -451,6 +430,18 @@ void MyGame::Init() {
 	}
 
 	{
+		//	箱の読み込み
+		//
+		StaticTangentMeshModelCPU lBampMeshCPU;
+		//BufferToMesh::Load(lBampMeshCPU, PathString("./Box/box.pmo"));
+		BufferToMesh::Load(lBampMeshCPU, PathString("./Cube/cube.pmo"));
+
+		auto bampModel = std::make_shared<StaticTangentMeshModel>();
+		ModelCPUToModel::Load(*bampModel, lBampMeshCPU);
+
+
+		//	ゲームオブジェクトの作成
+		//
 		GameObject* lObject = new GameObject;
 		lObject->SetName("Box");
 		lObject->AddComponent<StaticTangentModelRenderer>();

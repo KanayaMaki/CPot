@@ -136,6 +136,10 @@ struct OtherBuffer {
 	f32 mDummy1;
 	f32 mTimer;
 	f32 mDummy2[3];
+	Vector3 mToLight;
+	f32 mDummy3;
+	Vector3 mCameraPositionLoc;
+	f32 mDummy4;
 };
 struct ToonLineBuffer {
 	f32 mLineWidth;

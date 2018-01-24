@@ -68,12 +68,14 @@ public:
 			wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = lCamera->GetProjectionMatrix();
 			wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = lCamera->GetViewMatrix();
 			otherBuffer->GetCPUBuffer<OtherBuffer>()->mCameraPosition = lCamera->GetLocation();
+			otherBuffer->GetCPUBuffer<OtherBuffer>()->mCameraPositionLoc = lCamera->GetLocation() * GetTransform().GetMatrix().Inverse();
 		}
 
 		//ƒ‰ƒCƒgs—ñ‚ÌÝ’è
 		auto lLight = LightManager::S().GetDirectionalLight();
 		if (lLight) {
 			otherBuffer->GetCPUBuffer<OtherBuffer>()->mLightDirection = lLight->GetDirection().Normal();
+			otherBuffer->GetCPUBuffer<OtherBuffer>()->mToLight = -lLight->GetDirection().Normal() * Matrix4x4(GetTransform().mRotation).Inverse();
 		}
 		otherBuffer->Write();
 		
