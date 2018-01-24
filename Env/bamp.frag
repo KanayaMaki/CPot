@@ -21,8 +21,6 @@ layout(binding = 2) uniform Other {
 	float _Dummy0;
 	vec3 CameraPosition;
 	float _Dummy1;
-    float Timer;
-	vec3 _Dummy2;
 	vec3 ToLight;
 	float _Dummy3;
 	vec3 CameraPositionLoc;
@@ -51,8 +49,8 @@ float Lambert(vec3 aNormal, vec3 aToLight) {
 }
 
 float SpecularPhong(vec3 aToView, vec3 aNor, vec3 aToLight, int aSpecularPow) {
-	vec3 refToView = -aToView + 2.0f * dot(aNor, aToView) * aNor;
-	float specular = pow(max(dot(refToView, normalize(aToLight)), 0), aSpecularPow);
+	vec3 halfVector = normalize(aToView + aToLight);
+	float specular = pow(max(dot(aNor, halfVector), 0.0f), int(aSpecularPow));
 	return specular;
 }
 
@@ -87,10 +85,9 @@ void main() {
 	vec4 color = vec4(0.0f, 0.0f, 0.0f, 0.0f);
 	color += diffuse;
 	color += vec4(specular.xyz, 0.0f);
-
+	
 	color.a = min(color.a, 1.0f);
-
-	color.rgb = InToLightTan;
+	color.rgb = InToCameraTan.rgb / 2.0f + 1.0f;
 
 	OutColor = color;
 }

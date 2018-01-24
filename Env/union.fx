@@ -14,8 +14,6 @@ cbuffer cTimerBuffer : register(b2) { // 常にスロット「0」を使う
 	float _Dummy0;
 	float3 CameraPosition;
 	float _Dummy1;
-	float Timer;
-	float3 _Dummy2;
 	float3 ToLight;	//ライトへのベクトル（ローカル）
 	float _Dummy3;
 	float3 CameraPositionLoc;	//カメラ座標（ローカル）

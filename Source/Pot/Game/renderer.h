@@ -134,8 +134,6 @@ struct OtherBuffer {
 	f32 mDummy0;
 	Vector3 mCameraPosition;
 	f32 mDummy1;
-	f32 mTimer;
-	f32 mDummy2[3];
 	Vector3 mToLight;
 	f32 mDummy3;
 	Vector3 mCameraPositionLoc;

@@ -48,6 +48,13 @@ public:
 		lM *= Matrix4x4::FromTransform(mPosition);
 		return lM;
 	}
+	Matrix4x4 GetInverseMatrix() const {
+		Matrix4x4 lM;
+		lM *= Matrix4x4::FromTransform(mPosition);
+		lM *= Matrix4x4::FromRotate(mRotation);
+		lM *= Matrix4x4::FromScale(mScale);
+		return lM;
+	}
 
 	BOOL operator ==(const Transform& aT) const {
 		if (mRotation != aT.mRotation) return false;

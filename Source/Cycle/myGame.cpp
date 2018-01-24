@@ -382,7 +382,6 @@ void MyGame::Init() {
 	otherBuffer->Load(new OtherBuffer);
 	otherBuffer->SetName("Other");
 	ResourceList<ConstantBuffer>::S().Regist(otherBuffer);
-	otherBuffer->GetCPUBuffer<OtherBuffer>()->mTimer = 0.0f;
 
 	toonLineBuffer.reset(new ConstantBuffer);
 	toonLineBuffer->Load(new ToonLineBuffer);

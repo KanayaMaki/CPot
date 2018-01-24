@@ -31,6 +31,7 @@ class UniformBuffer : public Buffer {
 public:
 	void Load(GLsizei aSize, void* aInitData, GLenum aUsage) {
 		mCPUBuffer = aInitData;
+		aSize = Align<u32>(aSize, 256UL);
 		Buffer::Load(GL_UNIFORM_BUFFER, aSize, aInitData, aUsage);
 	}
 	void Load(GLsizei aSize, void* aInitData) {
