@@ -70,7 +70,6 @@ void main() {
 
 	vec3 lToCamera = CameraPositionLoc - InPosLoc;
 	OutToCameraTan = TransformToTangentSpace(normalize(lToCamera), InNorLoc, InTanLoc, InBiNorLoc);
-	OutToCameraTan = mul(normalize(lToCamera), World);
 	
 	OutTexCoord = InTexCoord;
 }

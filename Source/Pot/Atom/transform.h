@@ -50,9 +50,9 @@ public:
 	}
 	Matrix4x4 GetInverseMatrix() const {
 		Matrix4x4 lM;
-		lM *= Matrix4x4::FromTransform(mPosition);
-		lM *= Matrix4x4::FromRotate(mRotation);
-		lM *= Matrix4x4::FromScale(mScale);
+		lM *= Matrix4x4::FromTransform(-mPosition);
+		lM *= Matrix4x4::FromRotate(-mRotation);
+		lM *= Matrix4x4::FromScale(Vector3::One() / mScale);
 		return lM;
 	}
 

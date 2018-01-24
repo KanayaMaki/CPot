@@ -87,7 +87,6 @@ void main() {
 	color += vec4(specular.xyz, 0.0f);
 	
 	color.a = min(color.a, 1.0f);
-	color.rgb = InToCameraTan.rgb / 2.0f + 1.0f;
 
 	OutColor = color;
 }
