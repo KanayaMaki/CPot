@@ -166,8 +166,6 @@ std::shared_ptr<Viewport> viewport;
 std::shared_ptr<Rasterizer> rasterizer;
 std::shared_ptr<Rasterizer> toonLineRasterizer;
 
-Transform planeTransform;
-
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
 void MyGame::Setting() {
@@ -391,12 +389,6 @@ void MyGame::Init() {
 
 
 	
-
-	//*/
-
-	
-	planeTransform.mScale = Vector3::One() * 10.0f;
-
 	
 	{
 		GameObject* lLight = new GameObject;
@@ -525,6 +517,7 @@ void MyGame::Update() {
 	#pragma endregion
 
 
+
 	///*
 	//ローダ
 	#pragma region Loader
@@ -572,7 +565,7 @@ void MyGame::Update() {
 
 
 	//描画するテクスチャのクリア
-	ResourceList<Texture2D>::S().Find("RenderTarget")->ClearColor(Color::Blue());
+	ResourceList<Texture2D>::S().Find("RenderTarget")->ClearColor(Color::Red());
 	ResourceList<Texture2D>::S().Find("RenderTargetDepth")->ClearDepth(1.0f);
 
 	ResourceList<Texture2D>::S().Find("BackBuffer")->ClearColor(Color::White());
