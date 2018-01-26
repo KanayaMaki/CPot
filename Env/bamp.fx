@@ -43,8 +43,8 @@ float3 TransformToTangentSpace(float3 aVec, float3 aNormal, float3 aTangent, flo
 	return lVecTan;
 }
 
-float3 GetBampNormalTan(float2 aTexCoord) {
-	float3 lBampNormalTan = BampTexture.Sample(BampSampler, aTexCoord).xyz * 2.0f - 1.0f;
+float3 GetBampNormalTan(Texture2D lBampTexture, SamplerState lBampSampler, float2 aTexCoord) {
+	float3 lBampNormalTan = lBampTexture.Sample(lBampSampler, aTexCoord).xyz * 2.0f - 1.0f;
 	lBampNormalTan.xy *= -1.0f;	//右手系座標から左手系座標への変換
 	return lBampNormalTan;
 }
@@ -90,7 +90,7 @@ PS_OUTPUT PS_MAIN(PS_INPUT input) {
 	PS_OUTPUT output;
 
 	//タンジェント空間での法線ベクトルの取得
-	float3 bampNormalTan = GetBampNormalTan(input.Tex);
+	float3 bampNormalTan = GetBampNormalTan(BampTexture, BampSampler, input.Tex);
 	
 	//
 	//ディフューズの計算

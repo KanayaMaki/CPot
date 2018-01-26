@@ -564,8 +564,17 @@ void MyGame::Update() {
 	}
 
 
+
+
 	//描画するテクスチャのクリア
-	ResourceList<Texture2D>::S().Find("RenderTarget")->ClearColor(Color::Red());
+	#ifdef CPOT_ON_DIRECTX11
+	Color lResetColor = Color::Red();
+	#elif defined CPOT_ON_OPENGL
+	Color lResetColor = Color::Blue();
+	#else
+	Color lResetColor = Color::White();
+	#endif
+	ResourceList<Texture2D>::S().Find("RenderTarget")->ClearColor(lResetColor);
 	ResourceList<Texture2D>::S().Find("RenderTargetDepth")->ClearDepth(1.0f);
 
 	ResourceList<Texture2D>::S().Find("BackBuffer")->ClearColor(Color::White());

@@ -11,6 +11,7 @@
 
 namespace cpot {
 
+
 class SkyWalkComponent : public Updater {
 	CPOT_TYPE(SkyWalkComponent, Updater)
 
@@ -174,5 +175,38 @@ private:
 
 };
 CPOT_REGIST_TYPE(SkyWalkComponent);
+
+
+
+
+
+
+
+//これでコンポーネントを定義
+class PresenComponent : public Updater {
+	CPOT_TYPE(PresenComponent, Updater)
+
+public:
+	void OnUpdate() override {}
+};
+CPOT_REGIST_TYPE(PresenComponent);
+
+
+void PresenFunc() {
+
+	GameObject* lObject = new GameObject;
+	lObject->SetName("Saito");	//ゲームオブジェクトに名前を付ける
+
+	lObject->AddComponent<PresenComponent>();	//コンポーネントを追加
+	lObject->GetComponent<PresenComponent>();	//コンポーネントを取得
+	lObject->AddComponent("PresenComponent");	//文字列からでもコンポーネントを追加できる
+}
+
+
+	
+
+
+
+
 
 }
