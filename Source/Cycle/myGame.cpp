@@ -166,6 +166,10 @@ std::shared_ptr<Viewport> viewport;
 std::shared_ptr<Rasterizer> rasterizer;
 std::shared_ptr<Rasterizer> toonLineRasterizer;
 
+Animation<Vector3> positionAnimation;
+Animation<Quaternion> rotationAnimation;
+bool isAnimation = false;
+
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
 void MyGame::Setting() {
@@ -182,6 +186,31 @@ void MyGame::Setting() {
 //ゲームの初期化
 void MyGame::Init() {
 	//CPOT_LOG("Init!");
+
+	//アニメーションの設定
+	rotationAnimation.Add(0.0f, Quaternion::YAxis(ToRad(0.0f)));
+	rotationAnimation.Add(3.0f, Quaternion::YAxis(ToRad(0.0f)));
+	rotationAnimation.Add(4.0f, Quaternion::YAxis(ToRad(90.0f)));
+	rotationAnimation.Add(7.0f, Quaternion::YAxis(ToRad(90.0f)));
+	rotationAnimation.Add(8.0f, Quaternion::YAxis(ToRad(180.0f)));
+	rotationAnimation.Add(11.0f, Quaternion::YAxis(ToRad(180.0f)));
+	rotationAnimation.Add(12.0f, Quaternion::YAxis(ToRad(270.0f)));
+	rotationAnimation.Add(15.0f, Quaternion::YAxis(ToRad(270.0f)));
+	rotationAnimation.Add(16.0f, Quaternion::YAxis(ToRad(360.0f)));
+	rotationAnimation.SetIsLoop(true);
+
+	const f32 cEdgeHalfLen = 15.0f;
+	positionAnimation.Add(0.0f, Vector3(cEdgeHalfLen, 0.0f, cEdgeHalfLen));
+	positionAnimation.Add(3.0f, Vector3(cEdgeHalfLen, 0.0f, -cEdgeHalfLen));
+	positionAnimation.Add(4.0f, Vector3(cEdgeHalfLen, 0.0f, -cEdgeHalfLen));
+	positionAnimation.Add(7.0f, Vector3(-cEdgeHalfLen, 0.0f, -cEdgeHalfLen));
+	positionAnimation.Add(8.0f, Vector3(-cEdgeHalfLen, 0.0f, -cEdgeHalfLen));
+	positionAnimation.Add(11.0f, Vector3(-cEdgeHalfLen, 0.0f, cEdgeHalfLen));
+	positionAnimation.Add(12.0f, Vector3(-cEdgeHalfLen, 0.0f, cEdgeHalfLen));
+	positionAnimation.Add(15.0f, Vector3(cEdgeHalfLen, 0.0f, cEdgeHalfLen));
+	positionAnimation.Add(16.0f, Vector3(cEdgeHalfLen, 0.0f, cEdgeHalfLen));
+	positionAnimation.SetIsLoop(true);
+
 
 	Rand lRand;
 	lRand.SetSeed(Time().GetUnix());
@@ -439,6 +468,7 @@ void MyGame::Init() {
 		lObject->AddComponent<StaticTangentModelRenderer>();
 		lObject->GetComponent<StaticTangentModelRenderer>()->model = bampModel;
 		lObject->AddComponent<AutoRotateComponent>();
+		lObject->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(-45.0f)));
 	}
 
 	{
@@ -565,6 +595,30 @@ void MyGame::Update() {
 	}
 
 
+	//ミクのモデルの移動
+	GameObject::Find("Player")->GetTransform().mPosition = positionAnimation.Get();
+	GameObject::Find("Player")->GetTransform().mRotation = rotationAnimation.Get();
+
+	if (isAnimation) {
+		positionAnimation.ForwardTime(DeltaTime());
+		rotationAnimation.ForwardTime(DeltaTime());
+	}
+
+	//スペースキーが押されたら
+	if (Input::GetButton(windows::cSpace)) {
+		//アニメーションを止める
+		isAnimation = false;
+		positionAnimation.SetTime(0.0f);
+		rotationAnimation.SetTime(0.0f);
+	}
+
+	//もし10秒の倍数の時間なら、アニメーションをスタート
+	DateTimeData d = DateTime().Get();
+	if (d.second % 10 == 0) {
+		if (isAnimation == false) {
+			isAnimation = true;
+		}
+	}
 
 
 	//描画するテクスチャのクリア
