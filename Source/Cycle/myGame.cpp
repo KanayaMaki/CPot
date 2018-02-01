@@ -418,9 +418,6 @@ void MyGame::Init() {
 	ResourceList<ConstantBuffer>::S().Regist(toonLineBuffer);
 	toonLineBuffer->GetCPUBuffer<ToonLineBuffer>()->mLineWidth = 2.0f;
 
-
-	
-	
 	{
 		GameObject* lLight = new GameObject;
 		lLight->SetName("Light");
@@ -496,7 +493,7 @@ void MyGame::Init() {
 		lCamera->AddComponent<PersCameraComponent>();
 
 		lCamera->GetComponent<PersCameraComponent>()->mPersCamera.SetAspectRatio(Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
-		lCamera->GetTransform().mPosition = Vector3(0.0f, 1.0f, -1.0f) * 40.0f;
+		lCamera->GetTransform().mPosition = Vector3(0.0f, 1.0f, -1.0f) * 40.0f + Vector3(0.0f, 10.0f, 0.0f);
 		lCamera->GetTransform().mRotation *= Quaternion::FromAxis(lCamera->GetTransform().mRotation.Right(), ToRad(45.0f));
 
 		lCamera->AddComponent("SkyWalkComponent");
@@ -617,6 +614,7 @@ void MyGame::Update() {
 	if (d.second % 10 == 0) {
 		if (isAnimation == false) {
 			isAnimation = true;
+			GameObject::Find("Box")->GetTransform().mRotation = Quaternion();
 		}
 	}
 
