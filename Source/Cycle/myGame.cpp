@@ -169,7 +169,7 @@ std::shared_ptr<Rasterizer> toonLineRasterizer;
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
 void MyGame::Setting() {
-	Vector2 lScreenSize = Vector2(960.0f, 540.0f);
+	Vector2 lScreenSize = Vector2(1920.0f, 1080.0f) / 3.0f;
 	cpot::Config::S().SetScreenSize(lScreenSize);
 
 	#ifdef CPOT_ON_DIRECTX11
@@ -310,6 +310,8 @@ void MyGame::Init() {
 
 	#endif
 
+
+
 	ResourceList<Texture2D>::S().Regist(backBuffer);
 	ResourceList<Texture2D>::S().Regist(backBufferDepth);
 
@@ -424,7 +426,6 @@ void MyGame::Init() {
 		//	箱の読み込み
 		//
 		StaticTangentMeshModelCPU lBampMeshCPU;
-		//BufferToMesh::Load(lBampMeshCPU, PathString("./Box/box.pmo"));
 		BufferToMesh::Load(lBampMeshCPU, PathString("./Cube/cube.pmo"));
 
 		auto bampModel = std::make_shared<StaticTangentMeshModel>();
