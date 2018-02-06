@@ -29,4 +29,6 @@ public:
 #include "./Pot/Audio/XAudio/audioClipXAudio.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Audio/Android/audioClipAndroid.h"
+#elif defined CPOT_ON_LINUX
+#include "./Pot/Audio/Linux/audioClipLinux.h"
 #endif

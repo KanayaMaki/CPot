@@ -603,6 +603,9 @@
     <ClInclude Include="..\..\Source\Pot\Game\toonModelRenderer.h">
       <Filter>Source\Pot\Game</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Out\Standard\outStandard.h">
+      <Filter>Source\Pot\Out\Standard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">
@@ -691,6 +694,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Game\updater.cpp">
       <Filter>Source\Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Atom\hash.cpp">
+      <Filter>Source\Pot\Atom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -80,4 +80,6 @@ f32 Exp(f32 val);
 #include "Standard/mathStandard.h"
 #elif defined CPOT_ON_ANDROID
 #include "Standard/mathStandard.h"
+#elif defined CPOT_ON_LINUX
+#include "Standard/mathStandard.h"
 #endif

@@ -23,7 +23,8 @@ void main(int aArgNum, const char** aArgs) {
 
 	//Convert("./BoneModel/boneModel.fbx");
 	//Convert("./Box/box.fbx");
-	Convert("./Cube/cube.fbx");
+	//Convert("./Cube/cube.fbx");
+	Convert("./Miku/miku.pmx");
 
 	while (true) {
 		std::cout << "変換するファイル名を入力してください（Eで終了）\n　：";
@@ -51,15 +52,15 @@ void Convert(const char* aFileName) {
 
 	PathString lInFilePath = aFileName;
 
+	StaticMeshModelCPU lStaticModel;
 	//StaticMeshModelCPU lStaticModel;
-	StaticTangentMeshModelCPU lStaticModel;
 
 	if (Path::GetEx(lInFilePath) == "pmx") {
 
 		PmxLoader lPmx;
 		lPmx.Load(lInFilePath.Get());
 
-		//PmxToMesh::Load(lStaticModel, lPmx.Get());
+		PmxToMesh::Load(lStaticModel, lPmx.Get());
 
 	}
 	else {
@@ -76,12 +77,4 @@ void Convert(const char* aFileName) {
 	lOutFile.Open(lOutFilePath.Get(), false, true);
 	lOutFile.Write(b);
 	lOutFile.Close();
-
-	{
-		StaticTangentMeshModelCPU lTangentModel;
-		BufferToMesh::Load(lTangentModel, lOutFilePath);
-
-		s32 i = 0;
-		i++;
-	}
 }

@@ -178,7 +178,7 @@ void MyGame::Setting() {
 
 	#ifdef CPOT_ON_DIRECTX11
 	Config::S().SetTitle("DirectX11 Game!");
-	#else ifdef CPOT_ON_OPENGL
+	#elif defined CPOT_ON_OPENGL
 	Config::S().SetTitle("OpenGL Game!");
 	#endif
 }
@@ -428,16 +428,14 @@ void MyGame::Init() {
 	{
 		//	PMXの読み込み
 		//
-		PmxLoader lPmx;
-		lPmx.Load("./Miku/miku.pmx");
-		//lPmx.Load("./Alicia/Alicia_solid.pmx");
+		StaticMeshModelCPU lMikuMeshCPU;
+		PathString lFilePath("./Miku/miku.pmo");
+		//PathString lFilePath("./Alicia/Alicia_solid.pmx");
+		BufferToMesh::Load(lMikuMeshCPU, lFilePath);
 
-		StaticMeshModelCPU lMikuModelCPU;
-		PmxToMesh::Load(lMikuModelCPU, lPmx.Get());
 
 		auto mikuModel = std::make_shared<StaticMeshModel>();
-		ModelCPUToModel::Load(*mikuModel, lMikuModelCPU);
-
+		ModelCPUToModel::Load(*mikuModel, lMikuMeshCPU);
 
 		//　ゲームオブジェクトの作成
 		//
@@ -452,7 +450,8 @@ void MyGame::Init() {
 		//	箱の読み込み
 		//
 		StaticTangentMeshModelCPU lBampMeshCPU;
-		BufferToMesh::Load(lBampMeshCPU, PathString("./Cube/cube.pmo"));
+		PathString lFilePath("./Cube/cube.pmo");
+		BufferToMesh::Load(lBampMeshCPU, lFilePath);
 
 		auto bampModel = std::make_shared<StaticTangentMeshModel>();
 		ModelCPUToModel::Load(*bampModel, lBampMeshCPU);
@@ -501,7 +500,7 @@ void MyGame::Init() {
 
 	#ifdef CPOT_ON_WINDOWS
 	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
-	#else defined CPOT_ON_ANDROID
+	#elif defined CPOT_ON_ANDROID
 
 	#endif
 
@@ -573,7 +572,7 @@ void MyGame::Update() {
 
 	//カーソル移動
 	if (Input::GetButton(windows::cL)) {
-		windows::Window::S().SetCursorPos(Vector2(100.0f, 100.0f));
+		//windows::Window::S().SetCursorPos(Vector2(100.0f, 100.0f));
 	}
 	
 	//プレイヤーを回転させる

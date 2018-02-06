@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "./Pot/Game/component.h"
+#include "./Pot/Game/gameObject.h"
 
 namespace cpot {
 

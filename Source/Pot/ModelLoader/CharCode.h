@@ -31,4 +31,6 @@ public:
 #include "./Pot/ModelLoader/Windows/CharCodeWindows.h"
 #elif defined CPOT_ON_ANDROID
 
+#elif defined CPOT_ON_LINUX
+#include "./Pot/ModelLoader/Linux/CharCodeLinux.h"
 #endif

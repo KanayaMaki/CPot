@@ -110,4 +110,6 @@ public:
 #include "./Pot/Time/Windows/timeWindows.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Time/Android/timeAndroid.h"
+#elif defined CPOT_ON_LINUX
+#include "./Pot/Time/Linux/timeLinux.h"
 #endif

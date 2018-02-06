@@ -20,6 +20,8 @@ namespace cpot {
 #define CPOT_ON_WINDOWS
 #elif defined CPOT_ANDROID
 #define CPOT_ON_ANDROID
+#elif defined CPOT_LINUX
+#define CPOT_ON_LINUX
 #endif
 
 #pragma endregion
@@ -44,6 +46,14 @@ namespace cpot {
 #define CPOT_ON_64BIT
 #endif
 
+#elif defined CPOT_ON_LINUX
+
+#ifdef CPOT_32BIT
+#define CPOT_ON_32BIT
+#else
+#define CPOT_ON_64BIT
+#endif
+
 #endif
 
 #pragma endregion
@@ -59,6 +69,10 @@ namespace cpot {
 #define CPOT_ON_DIRECTX11
 #endif
 #ifdef CPOT_OPENGL
+#define CPOT_ON_OPENGL
+#endif
+
+#ifdef CPOT_ON_LINUX
 #define CPOT_ON_OPENGL
 #endif
 

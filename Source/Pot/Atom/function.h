@@ -398,7 +398,7 @@ inline BOOL StringSame(const CHAR* aStr1, const CHAR* aStr2) {
 
 
 //	•¶Žš—ñ‚Ì’·‚³‚ðŒvŽZ‚·‚é
-inline constexpr u32 StringLen(const CHAR* aStr) {
+inline const u32 StringLen(const CHAR* aStr) {
 	u32 i = 0;
 	while (aStr[i] != '\0') {
 		i++;

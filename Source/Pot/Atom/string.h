@@ -178,7 +178,7 @@ public:
 	const String& Pop(u32 aNum) {
 		CPOT_ASSERT(0 <= aNum);
 		s32 lNewLen = (s32)GetLength() - aNum;
-		lNewLen = Clamp(lNewLen, 0L, lNewLen);
+		lNewLen = Clamp(lNewLen, (s32)0, lNewLen);
 		mStr[lNewLen] = '\0';
 		mLength = lNewLen;
 		return (*this);
@@ -288,5 +288,7 @@ public:
 #ifdef CPOT_ON_WINDOWS
 #include "Standard/toStringStandard.h"
 #elif defined CPOT_ON_ANDROID
+#include "Standard/toStringStandard.h"
+#elif defined CPOT_ON_LINUX
 #include "Standard/toStringStandard.h"
 #endif

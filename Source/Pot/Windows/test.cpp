@@ -478,7 +478,7 @@ void TestTick() {
 	CPOT_LOG("TestTick");
 
 	CPOT_LOG(2.0f, "=", (u64)(ToTick(2.0f)), "Tick");
-	CPOT_LOG(12000000UL, "=", ToSecond(12000000), "Second");
+	CPOT_LOG((u64)12000000, "=", ToSecond(12000000), "Second");
 }
 
 void TestDetailTime() {

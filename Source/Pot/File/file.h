@@ -141,4 +141,6 @@ public:
 #include "./Pot/File/Standard/fileStandard.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/File/Android/fileAndroid.h"
+#elif defined CPOT_ON_LINUX
+#include "./Pot/File/Standard/fileStandard.h"
 #endif

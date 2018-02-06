@@ -127,7 +127,7 @@ public:
 	//ハッシュ値を得る関数
 	#pragma region Hash
 
-	static constexpr HashCode Hash(const CHAR* aStr) {
+	static const HashCode Hash(const CHAR* aStr) {
 		return Hasher::Hash(aStr);
 	}
 
@@ -259,7 +259,7 @@ public:
 	//ハッシュ値を得る関数
 	#pragma region Hash
 
-	static constexpr HashCode Hash(const CHAR* aStr) {
+	static const HashCode Hash(const CHAR* aStr) {
 		return Hasher::Hash(aStr);
 	}
 

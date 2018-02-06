@@ -662,6 +662,9 @@
     <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inftrees.c">
       <Filter>Source\Pot\ThirdParty\Include\Zlib</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Atom\hash.cpp">
+      <Filter>Source\Pot\Atom</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\Source\Pot\Windows\Resource\Icon.rc">

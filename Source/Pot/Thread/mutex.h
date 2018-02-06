@@ -27,4 +27,6 @@ public:
 #include "./Pot/Thread/Standard/mutexStandard.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Thread/Android/mutexAndroid.h"
+#elif defined CPOT_ON_LINUX
+#include "./Pot/Thread/Standard/mutexStandard.h"
 #endif

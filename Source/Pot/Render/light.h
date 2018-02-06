@@ -13,7 +13,7 @@ public:
 };
 
 class DirectionalLight : public Light {
-	CPOT_TYPE_BASE(DirectionalLight, Light)
+	CPOT_TYPE(DirectionalLight, Light)
 
 public:
 	DirectionalLight() {

@@ -15,7 +15,7 @@ class AutoRotateComponent : public Updater {
 	CPOT_TYPE(AutoRotateComponent, Updater)
 
 public:
-	This() {
+	AutoRotateComponent() {
 		mRotateSpeed = Quaternion::Unit();
 	}
 

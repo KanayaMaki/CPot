@@ -8,15 +8,8 @@
 #include "../defines.h"
 #include "../typedef.h"
 
-#ifdef CPOT_ON_ANDROID
-namespace std {
-#include <math.h>
-#include <float.h>
-}
-#else
 #include <cmath>
 #include <cfloat>
-#endif
 
 
 namespace cpot {
@@ -29,53 +22,53 @@ const f32 cFloatEpsilon = FLT_EPSILON;
 
 
 inline s32 Round(f32 aVal) {
-	return s32(std::roundf(aVal));
+	return s32(std::round(aVal));
 }
 
 inline s32 Ceil(f32 aVal) {
-	return s32(std::ceilf(aVal));
+	return s32(std::ceil(aVal));
 }
 
 inline s32 Floor(f32 aVal) {
-	return s32(std::floorf(aVal));
+	return s32(std::floor(aVal));
 }
 
 inline f32 Mod(f32 aVal, f32 aM) {
-	return std::fmodf(aVal, aM);
+	return std::fmod(aVal, aM);
 }
 
 
 inline f32 Sin(f32 aRad) {
-	return std::sinf(aRad);
+	return std::sin(aRad);
 }
 
 inline f32 Cos(f32 aRad) {
-	return std::cosf(aRad);
+	return std::cos(aRad);
 }
 
 inline f32 Tan(f32 aRad) {
-	return std::tanf(aRad);
+	return std::tan(aRad);
 }
 
 inline f32 Asin(f32 aVal) {
-	return std::asinf(aVal);
+	return std::asin(aVal);
 }
 
 inline f32 Acos(f32 aVal) {
-	return std::acosf(aVal);
+	return std::acos(aVal);
 }
 
 inline f32 Atan(f32 aVal) {
-	return std::atanf(aVal);
+	return std::atan(aVal);
 }
 
 
 inline f32 Sqrt(f32 val) {
-	return std::sqrtf(val);
+	return std::sqrt(val);
 }
 
 inline f32 Exp(f32 val) {
-	return std::expf(val);
+	return std::exp(val);
 }
 
 

@@ -342,7 +342,7 @@ BOOL PmxLoader::Load(Buffer& aData) {
 				mData.showFrames[i].elements[j].data = ReadChangeValue(aData, MorphIndexByteNum());
 			}
 			else {
-				CPOT_ERROR("•\¦˜g‚ÌElementType‚ª•s³‚Å‚·");
+				CPOT_ERROR("ElementType‚ª•s³‚Å‚·");
 			}
 		}
 	}

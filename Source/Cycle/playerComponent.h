@@ -16,7 +16,7 @@ class PlayerComponent : public Updater {
 	CPOT_TYPE(PlayerComponent, Updater)
 
 public:
-	This() {
+	PlayerComponent() {
 		mFastMoveSpeed = 20.0f;
 		mNormalMoveSpeed = 10.0f;
 

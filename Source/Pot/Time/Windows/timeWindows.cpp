@@ -53,20 +53,4 @@ UnixTimeType Time::GetUnix() const {
 }
 
 
-//DateTime‚ÌÀ‘•
-#pragma region DateTime
-
-//Œ»İ‚Ì“ú‚ğæ“¾‚·‚é
-DateTimeData DateTime::Get() {
-	UnixTimeType lNowTime = standard::UnixTimeDevice::Get();
-	return standard::DateTimeDevice::ToDateTime(lNowTime);
-}
-
-//UnixTime‚ğŒ»İ‚Ì“ú‚É•ÏŠ·‚·‚é
-DateTimeData DateTime::ToDateTime(UnixTimeType aUnixTime) {
-	return standard::DateTimeDevice::ToDateTime(aUnixTime);
-}
-
-#pragma endregion
-
 }

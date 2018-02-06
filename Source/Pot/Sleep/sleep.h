@@ -24,4 +24,6 @@ public:
 #include "./Pot/Sleep/Windows/sleepWindows.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Sleep/Android/sleepAndroid.h"
+#elif defined CPOT_ON_LINUX
+#include "./Pot/Sleep/Linux/sleepLinux.h"
 #endif

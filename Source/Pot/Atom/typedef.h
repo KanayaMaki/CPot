@@ -24,8 +24,15 @@ using s8 = signed char;	//•„†•t8bit®”
 using u8 = unsigned char;	//•„†–³8bit®”
 using s16 = signed short int;
 using u16 = unsigned short int;
+
+#ifdef CPOT_ON_LINUX
+using s32 = signed int;
+using u32 = unsigned int;
+#else
 using s32 = signed long int;
 using u32 = unsigned long int;
+#endif
+
 using s64 = signed long long int;
 using u64 = unsigned long long int;
 

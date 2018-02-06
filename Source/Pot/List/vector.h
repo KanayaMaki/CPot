@@ -153,4 +153,6 @@ public:
 #include "./Pot/List/Standard/vectorStandard.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/List/Android/vectorAndroid.h"
+#elif defined CPOT_ON_LINUX
+#include "./Pot/List/Standard/vectorStandard.h"
 #endif

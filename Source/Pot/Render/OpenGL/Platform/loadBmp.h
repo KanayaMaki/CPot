@@ -55,7 +55,7 @@ public:
 			lBytePerPixel = 4;
 		}
 
-		lLineSize = Align(lWidth * lBytePerPixel, 4UL);
+		lLineSize = Align(lWidth * lBytePerPixel, (u32)4);
 		lImageSize = lLineSize * lHeight;
 
 

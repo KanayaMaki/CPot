@@ -130,4 +130,6 @@ protected:
 #include "./Pot/Rand/Standard/randStandard.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Rand/Android/randAndroid.h"
+#elif defined CPOT_ON_LINUX
+#include "./Pot/Rand/Standard/randStandard.h"
 #endif

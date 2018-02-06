@@ -99,4 +99,6 @@ protected:
 #include "./Pot/Config/Windows/configWindows.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Config/Android/configAndroid.h"
+#elif defined CPOT_ON_LINUX
+#include "./Pot/Config/Linux/configLinux.h"
 #endif

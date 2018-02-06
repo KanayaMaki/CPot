@@ -16,7 +16,7 @@ class SkyWalkComponent : public Updater {
 	CPOT_TYPE(SkyWalkComponent, Updater)
 
 public:
-	This() {
+	SkyWalkComponent() {
 		mFastMoveSpeed = 20.0f;
 		mNormalMoveSpeed = 10.0f;
 

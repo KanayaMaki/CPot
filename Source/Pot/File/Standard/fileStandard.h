@@ -50,7 +50,7 @@ public:
 
 public:
 	BOOL Open(const CHAR* aFileName, BOOL aIsAdd = false, BOOL aBinary = false) CPOT_OR {
-		unsigned int lOpenMode = std::ios::out;
+		std::ios_base::openmode lOpenMode = std::ios::out;
 		if (aIsAdd) {
 			lOpenMode |= std::ios::app;
 		}
@@ -107,7 +107,7 @@ public:
 public:
 	//ファイルが開かれているか
 	BOOL IsOpen() const CPOT_OR {
-		return mOfs.is_open();
+		return (!mOfs) == false;
 	}
 
 	//ファイルのオープン設定
@@ -166,7 +166,7 @@ public:
 
 public:
 	BOOL Open(const CHAR* aFileName, BOOL aBinary = false) CPOT_OR {
-		unsigned int lOpenMode = std::ios::in;
+		std::ios_base::openmode lOpenMode= std::ios::in;
 		if (aBinary) {
 			lOpenMode |= std::ios::binary;
 			mIsBinary = true;
@@ -217,7 +217,7 @@ public:
 public:
 	//ファイルが開かれているか
 	BOOL IsOpen() const CPOT_OR {
-		return mIfs.is_open();
+		return (!mIfs.fail());
 	}
 
 	//ファイルのオープン設定

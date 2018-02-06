@@ -34,4 +34,6 @@ public:
 #include "./Pot/Thread/Standard/threadStandard.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Thread/Android/threadAndroid.h"
+#elif defined CPOT_ON_LINUX
+#include "./Pot/Thread/Standard/threadStandard.h"
 #endif

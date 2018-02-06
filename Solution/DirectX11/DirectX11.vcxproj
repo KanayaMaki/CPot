@@ -100,6 +100,7 @@
     <ClInclude Include="..\..\Source\Pot\Model\Submesh.h" />
     <ClInclude Include="..\..\Source\Pot\Network\Windows\networkWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Out\out.h" />
+    <ClInclude Include="..\..\Source\Pot\Out\Standard\outStandard.h" />
     <ClInclude Include="..\..\Source\Pot\Out\Windows\outConsoleWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Out\Windows\outDebugWindowWindows.h" />
     <ClInclude Include="..\..\Source\Pot\Rand\rand.h" />
@@ -179,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Cycle\myGame.cpp" />
+    <ClCompile Include="..\..\Source\Pot\Atom\hash.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.cpp" />

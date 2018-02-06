@@ -54,4 +54,6 @@ public:
 #include "./Pot/Audio/XAudio/audioVoiceXAudio.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Audio/Android/audioVoiceAndroid.h"
+#elif defined CPOT_ON_LINUX
+#include "./Pot/Audio/Linux/audioVoiceLinux.h"
 #endif
