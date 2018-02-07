@@ -73,7 +73,6 @@ public:
 		//GLEWの初期化
 		glewInit();
 
-
 		//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);	// PC画像メモリーアライメント = Byte単位
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);	//RGBしかないなら1を設定するしかない。RGBAなら4アラインメントでいい。多いほうが高速
 		glDepthRange(0.0, 1.0);

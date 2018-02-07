@@ -5,9 +5,8 @@
 #include "./Pot/Config/config.h"
 #include "./Pot/Out/out.h"
 
+#include <GL/glfw.h>
 #include <GL/glew.h>
-#include <GL/glut.h>
-#include <GL/freeglut.h>
 
 
 namespace cpot {
@@ -28,8 +27,6 @@ private:
 public:
 	void Init() {
 		
-		glewInit();
-
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);	//RGBしかないなら1を設定するしかない。RGBAなら4アラインメントでいい。多いほうが高速
 		glDepthRange(0.0, 1.0);
 		glClearDepth(1.0);
@@ -49,7 +46,7 @@ public:
 public:
 	void SwapBuffer() {
 		glFlush();
-		glutSwapBuffers();
+		glfwSwapBuffers();
 	}
 };
 

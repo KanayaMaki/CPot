@@ -6,12 +6,12 @@
 #pragma once
 
 #include "./Pot/Atom/atom.h"
+#include "./Pot/Out/out.h"
 #include "./Pot/Usefull/singleton.h"
 #include "./Pot/Thread/mutex.h"
 
 #include <GL/glew.h>
-#include <GL/glut.h>
-#include <GL/freeglut.h>
+#include <GL/glfw.h>
 
 namespace cpot {
 
@@ -41,16 +41,54 @@ private:
 	#pragma region Load
 
 public:
-	void Init(int* argc, char ** argvconst, Vector2& aWindowSize, const CHAR* aCaption) {
-		glutInit(argc, argvconst);
+	void Init(Vector2& aWindowSize, const CHAR* aCaption) {
+		
+		int lResult;	//戻り値用
 
-		glutInitWindowPosition(100, 50);
-		glutInitWindowSize(aWindowSize.x, aWindowSize.y);
-		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-		glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+		//GLFWの初期化
+		lResult = glfwInit();
+		if (lResult == GL_FALSE) {
+			CPOT_LOG("GLFWの初期化に失敗しました");
+			return;
+		}
 
-		glutCreateWindow(aCaption);
+
+		//使用するOpenGLのバージョンの設定
+		glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 4);
+		glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 5);
+		glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwOpenWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
+
+		//ウィンドウの作成
+		mWindow = glfwOpenWindow(
+			aWindowSize.x, aWindowSize.y,
+			8, 8, 8,
+			8,
+			0,
+			0,
+			GLFW_WINDOW);
+
+		if (mWindow == GL_FALSE) {
+			CPOT_LOG("ウィンドウの作成に失敗しました");
+			return;
+		}
+
+
+		//変更
+		glfwSwapInterval(1);
+		glfwSetWindowTitle(aCaption);
+
+		//コンテキストを有効化
+		glfwMakeContextCurrent(mWindow);
+
+
+		//GLEWの初期化
 		glewInit();
+	}
+
+	void Final() {
+		glfwTerminate();
 	}
 
 	#pragma endregion
@@ -67,7 +105,9 @@ public:
 		SetSize(Vector2(aWidth, aHeight));
 	}
 
-	void SetTitle(const CHAR* aTitle) {}
+	void SetTitle(const CHAR* aCaption) {
+		glfwSetWindowTitle(aCaption);
+	}
 
 
 	//カーソルの表示・非表示
@@ -118,6 +158,7 @@ public:
 
 private:
 	Vector2 mSize;
+	int mWindow;
 
 	#pragma endregion
 };

@@ -13,6 +13,7 @@
 #include "./Pot/Input/Windows/inputWindows.h"
 #include "./Pot/Input/XInput/inputXInput.h"
 #include "./Pot/Input/Android/inputAndroid.h"
+#include "./Pot/Input/Linux/inputLinux.h"
 
 
 namespace cpot {
@@ -133,6 +134,53 @@ public:
 
 	#pragma endregion
 
+
+	//Linuxの入力を担当する
+	#pragma region Linux
+
+	//Linuxの入力が有効なら
+	#ifdef CPOT_VALID_INPUT_LINUX
+
+public:
+	static f32 GetValue(linux::CInputCode aCode) {
+		return linux::Input::S().GetValue(aCode);
+	}
+	static BOOL GetButton(linux::CInputCode aCode) {
+		return linux::Input::S().GetButton(aCode);
+	}
+	static BOOL GetButtonDown(linux::CInputCode aCode) {
+		return linux::Input::S().GetButtonDown(aCode);
+	}
+	static BOOL GetButtonUp(linux::CInputCode aCode) {
+		return linux::Input::S().GetButtonUp(aCode);
+	}
+	static f32 GetAxis(linux::CInputAxisCode aCode) {
+		return linux::Input::S().GetAxis(aCode);
+	}
+
+	//Linuxの入力が無効なら、入力無し
+	#else
+
+public:
+	static f32 GetValue(linux::CInputCode aCode) {
+		return 0.0f;
+	}
+	static BOOL GetButton(linux::CInputCode aCode) {
+		return false;
+	}
+	static BOOL GetButtonDown(linux::CInputCode aCode) {
+		return false;
+	}
+	static BOOL GetButtonUp(linux::CInputCode aCode) {
+		return false;
+	}
+	static f32 GetAxis(linux::CInputAxisCode aCode) {
+		return 0.0f;
+	}
+
+	#endif
+
+	#pragma endregion
 
 
 	//Androidの入力を担当する
