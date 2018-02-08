@@ -510,7 +510,7 @@ void MyGame::Init() {
 
 //ゲームの更新
 void MyGame::Update() {
-	
+
 	ComponentSystem::S().Update();
 
 	//ゲーム終了
@@ -540,7 +540,7 @@ void MyGame::Update() {
 		voice = nullptr;
 	}
 
-	
+
 	#pragma endregion
 
 
@@ -574,7 +574,7 @@ void MyGame::Update() {
 	if (Input::GetButton(windows::cL)) {
 		//windows::Window::S().SetCursorPos(Vector2(100.0f, 100.0f));
 	}
-	
+
 	//プレイヤーを回転させる
 	const f32 cRotateSpeed = ToRad(45.0f);
 	if (Input::GetButtonDown(windows::cU)) {
@@ -616,7 +616,9 @@ void MyGame::Update() {
 			GameObject::Find("Box")->GetTransform().mRotation = Quaternion();
 		}
 	}
+}
 
+void MyGame::Render() {
 
 	//描画するテクスチャのクリア
 	#ifdef CPOT_ON_DIRECTX11

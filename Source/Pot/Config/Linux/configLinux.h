@@ -9,7 +9,7 @@
 
 #include "./Pot/Thread/mutex.h"
 
-#include "./Pot/Window/Linux/windowLinux.h"
+#include "./Pot/Window/GLFW/windowGLFW.h"
 
 namespace cpot {
 

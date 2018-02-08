@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Pot">
+      <UniqueIdentifier>{403572f3-bf53-4bec-bc28-dfd9e4ae2af9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cycle">
+      <UniqueIdentifier>{aade8bef-11eb-4f14-be8c-551647b161c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Atom">
+      <UniqueIdentifier>{bb38b2b1-68dc-4bd3-a11b-289041353070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Animation">
+      <UniqueIdentifier>{66a67da2-6230-4dcc-9c9a-0473ad58f385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Audio">
+      <UniqueIdentifier>{1870f97c-c064-4743-8d9b-c376825fe454}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Config">
+      <UniqueIdentifier>{cec0aa4a-3e97-4cee-b887-d8391d499788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\File">
+      <UniqueIdentifier>{ce2178dc-c73a-4546-a89f-9f832e582579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Game">
+      <UniqueIdentifier>{b103b25b-b4da-4545-8303-1803dd709407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Input">
+      <UniqueIdentifier>{c4251fce-c9fc-401b-b192-d92453bba5b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\List">
+      <UniqueIdentifier>{47accdc5-656b-49d3-a051-81d23a07d9e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Loader">
+      <UniqueIdentifier>{82be19db-d22c-476a-b427-f750ac4d4b37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Model">
+      <UniqueIdentifier>{3a15f480-398c-452c-a397-35cb968bb37b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\ModelLoader">
+      <UniqueIdentifier>{2f8a5da8-fd47-4769-b708-1bb62590588b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Out">
+      <UniqueIdentifier>{9175914a-269d-4cc3-8aa6-1aec38f83667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Rand">
+      <UniqueIdentifier>{61f9c2ff-99cd-4d16-8f6d-e5385a40161e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Render">
+      <UniqueIdentifier>{2a672f7b-1fef-49d2-86da-f65aac33f934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Sleep">
+      <UniqueIdentifier>{a3cb8bb8-1340-4574-bd6f-b06e64580895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\ThirdParty">
+      <UniqueIdentifier>{07b9a37a-43ec-4aa8-8703-301b5be7dfe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Thread">
+      <UniqueIdentifier>{454d6de8-250b-470c-946d-41af5b42c0b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Time">
+      <UniqueIdentifier>{aca755a0-cd97-4728-b765-ee9252a15a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Usefull">
+      <UniqueIdentifier>{02576f6f-409a-4c98-9b28-7e5fa4d7d79f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\Fps">
+      <UniqueIdentifier>{0d3b9069-4ef0-4e40-bd7e-0a525c87f02c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\ThirdParty\Zlib">
+      <UniqueIdentifier>{cdfd386c-0637-4296-8bb8-9b49bd2f6448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pot\GLFW">
+      <UniqueIdentifier>{936eb0b9-1e2d-44d9-a7b9-0826b98e0015}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Cycle\myGame.cpp">
+      <Filter>Cycle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Atom\hash.cpp">
+      <Filter>Pot\Atom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Config\Linux\configLinux.cpp">
+      <Filter>Pot\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Fps\fps.cpp">
+      <Filter>Pot\Fps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\cameraComponent.cpp">
+      <Filter>Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\component.cpp">
+      <Filter>Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\gameObject.cpp">
+      <Filter>Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\lightComponent.cpp">
+      <Filter>Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\renderer.cpp">
+      <Filter>Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Game\updater.cpp">
+      <Filter>Pot\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ModelLoader\PmxLoader.cpp">
+      <Filter>Pot\ModelLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Rand\rand.cpp">
+      <Filter>Pot\Rand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Rand\Standard\randStandard.cpp">
+      <Filter>Pot\Rand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Input\GLFW\inputGLFW.cpp">
+      <Filter>Pot\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.cpp">
+      <Filter>Pot\Sleep</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\adler32.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\compress.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\crc32.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\deflate.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzclose.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzlib.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzread.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzwrite.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\infback.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inffast.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inflate.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inftrees.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\trees.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\uncompr.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zutil.c">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Time\Windows\timeWindows.cpp">
+      <Filter>Pot\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Time\time.cpp">
+      <Filter>Pot\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Time\Standard\timeStandard.cpp">
+      <Filter>Pot\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\GLFW\main.cpp">
+      <Filter>Pot\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\GLFW\gameMain.cpp">
+      <Filter>Pot\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.cpp">
+      <Filter>Pot\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.cpp">
+      <Filter>Pot\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.cpp">
+      <Filter>Pot\Audio</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Cycle\playerComponent.h">
+      <Filter>Cycle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cycle\skyWalkComponent.h">
+      <Filter>Cycle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cycle\autoRotateComponent.h">
+      <Filter>Cycle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cycle\myGame.h">
+      <Filter>Cycle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Animation\animation.h">
+      <Filter>Pot\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Audio\audioClip.h">
+      <Filter>Pot\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Audio\audioVoice.h">
+      <Filter>Pot\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Audio\audio.h">
+      <Filter>Pot\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\hash.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\hashString.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\math.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\matrix4x4.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\quad.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\quaternion.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\string.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\transform.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\type.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\typedef.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\vector.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\Standard\mathStandard.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\Standard\toStringStandard.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\atom.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\bitflag.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\color.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\defines.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Atom\function.h">
+      <Filter>Pot\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Config\config.h">
+      <Filter>Pot\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Config\Linux\configLinux.h">
+      <Filter>Pot\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\File\Standard\fileStandard.h">
+      <Filter>Pot\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\File\file.h">
+      <Filter>Pot\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Fps\fps.h">
+      <Filter>Pot\Fps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\cameraComponent.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\component.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\componentSystem.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\game.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\gameObject.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\lightComponent.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\renderer.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\spriteRenderer.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\staticTangentModelRenderer.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\toonModelRenderer.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\type.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\unique.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\updater.h">
+      <Filter>Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Input\input.h">
+      <Filter>Pot\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\List\hashTable.h">
+      <Filter>Pot\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\List\vector.h">
+      <Filter>Pot\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\List\Standard\hashTableStandard.h">
+      <Filter>Pot\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\List\Standard\vectorStandard.h">
+      <Filter>Pot\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Loader\loader.h">
+      <Filter>Pot\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\StaticMeshModel.h">
+      <Filter>Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\StaticTangentMeshModel.h">
+      <Filter>Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\Submesh.h">
+      <Filter>Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\Material.h">
+      <Filter>Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\ModelCPUToModel.h">
+      <Filter>Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Model\SkinMeshModel.h">
+      <Filter>Pot\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\ModelCPU.h">
+      <Filter>Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmdData.h">
+      <Filter>Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxData.h">
+      <Filter>Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxLoader.h">
+      <Filter>Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\PmxToMesh.h">
+      <Filter>Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\SubMesh.h">
+      <Filter>Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\Linux\CharCodeLinux.h">
+      <Filter>Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\CharCode.h">
+      <Filter>Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\ConvertBufferMesh.h">
+      <Filter>Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ModelLoader\Material.h">
+      <Filter>Pot\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Out\out.h">
+      <Filter>Pot\Out</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Out\Standard\outStandard.h">
+      <Filter>Pot\Out</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Rand\rand.h">
+      <Filter>Pot\Rand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Rand\Standard\randStandard.h">
+      <Filter>Pot\Rand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Input\GLFW\inputGLFW.h">
+      <Filter>Pot\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\depthStencil.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\indexBuffer.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\light.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\rasterizer.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\render.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\sampler.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\shader.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\texture2D.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\vertexBuffer.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\viewport.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\blendOpenGL.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\constantBufferOpenGL.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\depthStencilOpenGL.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\indexBufferOpenGL.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\arrayBufferOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\bitmap.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\blendOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\bufferOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\cullOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\depthBufferOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\depthOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLPlatformAndroid.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLPlatformLinux.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\deviceOpenGLPlatformWindows.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\elementArrayBufferOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\frameBufferOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\inputLayoutOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\loadBmp.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\loadPng.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\managerOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\renderOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\samplerOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\shaderOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\stencilOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\textureOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\uniformBufferOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\vertexArrayObjectOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\Platform\viewportOpenGLPlatform.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\rasterizerOpenGL.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\renderOpenGL.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\samplerOpenGL.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\shaderOpenGL.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\texture2DOpenGL.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\vertexBufferOpenGL.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\OpenGL\viewportOpenGL.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\blend.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\camera.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Render\constantBuffer.h">
+      <Filter>Pot\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Sleep\sleep.h">
+      <Filter>Pot\Sleep</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Sleep\Windows\sleepWindows.h">
+      <Filter>Pot\Sleep</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\crc32.h">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\deflate.h">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\gzguts.h">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inffast.h">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inffixed.h">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inflate.h">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\inftrees.h">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\trees.h">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zconf.h">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zlib.h">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\ThirdParty\Include\Zlib\zutil.h">
+      <Filter>Pot\ThirdParty\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Thread\mutex.h">
+      <Filter>Pot\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Thread\mutexLocker.h">
+      <Filter>Pot\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Thread\thread.h">
+      <Filter>Pot\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Thread\Standard\mutexStandard.h">
+      <Filter>Pot\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Thread\Standard\threadStandard.h">
+      <Filter>Pot\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Time\Windows\timeWindows.h">
+      <Filter>Pot\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Time\time.h">
+      <Filter>Pot\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Time\Standard\timeStandard.h">
+      <Filter>Pot\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceList.h">
+      <Filter>Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceLoadList.h">
+      <Filter>Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Usefull\resourceUpdaterList.h">
+      <Filter>Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Usefull\singleton.h">
+      <Filter>Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Usefull\buffer.h">
+      <Filter>Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Usefull\namedResource.h">
+      <Filter>Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Usefull\path.h">
+      <Filter>Pot\Usefull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\GLFW\gameMain.h">
+      <Filter>Pot\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\audioClipXAudio.h">
+      <Filter>Pot\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\audioVoiceXAudio.h">
+      <Filter>Pot\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.h">
+      <Filter>Pot\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.h">
+      <Filter>Pot\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Audio\XAudio\Platform\voiceXAudioPlatform.h">
+      <Filter>Pot\Audio</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -95,10 +95,10 @@ protected:
 }
 
 
-#ifdef CPOT_ON_WINDOWS
-#include "./Pot/Config/Windows/configWindows.h"
+#ifdef CPOT_ON_GLFW
+#include "./Pot/Config/Linux/configLinux.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Config/Android/configAndroid.h"
-#elif defined CPOT_ON_LINUX
-#include "./Pot/Config/Linux/configLinux.h"
+#elif defined CPOT_ON_WINDOWS
+#include "./Pot/Config/Windows/configWindows.h"
 #endif

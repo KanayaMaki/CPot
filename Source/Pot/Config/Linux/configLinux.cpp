@@ -5,7 +5,6 @@
 
 #include "./Pot/Config/Linux/configLinux.h"
 
-#include "./Pot/Window/Linux/windowLinux.h"
 
 namespace cpot {
 

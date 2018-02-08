@@ -72,6 +72,10 @@ namespace cpot {
 #define CPOT_ON_OPENGL
 #endif
 
+#ifdef CPOT_GLFW
+#define CPOT_ON_GLFW
+#define CPOT_ON_OPENGL
+#endif
 #ifdef CPOT_ON_LINUX
 #define CPOT_ON_OPENGL
 #endif

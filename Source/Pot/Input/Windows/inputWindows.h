@@ -11,7 +11,11 @@
 
 #ifdef CPOT_ON_WINDOWS
 
+#ifndef CPOT_ON_GLFW
+
 #define CPOT_VALID_INPUT_WINDOWS
+
+#endif
 
 #endif
 

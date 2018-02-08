@@ -24,7 +24,7 @@ public:
 	void Update() override;
 
 	//ƒQ[ƒ€‚Ì•`‰æ
-	void Render() override {}
+	void Render() override;
 };
 
 

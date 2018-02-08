@@ -5,8 +5,11 @@
 #include "./Pot/Config/config.h"
 #include "./Pot/Out/out.h"
 
-#include <GL/glfw.h>
+#include "./Pot/Window/GLFW/windowGLFW.h"
+
+#define GLEW_STATIC
 #include <GL/glew.h>
+#include <GL/glfw3.h>
 
 
 namespace cpot {
@@ -46,7 +49,7 @@ public:
 public:
 	void SwapBuffer() {
 		glFlush();
-		glfwSwapBuffers();
+		glfwSwapBuffers(cpot::glfw::Window::S().GetWindow());
 	}
 };
 
