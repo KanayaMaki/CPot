@@ -29,7 +29,7 @@ file(GLOB SOURCES
 	${CPOT_SRC_ROOT}/Pot/Rand/*.cpp
 	${CPOT_SRC_ROOT}/Pot/RandStandard/*.cpp
 	${CPOT_SRC_ROOT}/Pot/Time/*.cpp
-	${CPOT_SRC_ROOT}/Pot/TimeStandard/*.cpp
+	${CPOT_SRC_ROOT}/Pot/Time/Standard/*.cpp
 	${CPOT_SRC_ROOT}/Pot/ThirdParty/Include/Zlib/*.c)
 
 add_definitions(-DCPOT_LINUX)
