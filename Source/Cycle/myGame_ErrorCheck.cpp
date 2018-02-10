@@ -72,6 +72,7 @@ GLuint VertexArrayID;
 
 GLuint vertexbuffer;
 
+openGL::platform::Program program;
 
 
 //ゲームの初期化
@@ -100,6 +101,9 @@ void MyGame::Init() {
 
 	// 頂点をOpenGLに渡します。
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+
+	program.Load("./simple.vert", "", "./simple.frag");
 }
 
 
@@ -110,6 +114,8 @@ void MyGame::Render() {
 	
 	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
+
+	glUseProgram(program.GetGLNum());
 
 	// 最初の属性バッファ：頂点
 	glEnableVertexAttribArray(0);
