@@ -1,4 +1,4 @@
-#version 430 core
+#version 450 core
 
 layout(location = 0) in vec3 InPosWor;
 layout(location = 1) in vec3 InToLightTan;
@@ -85,7 +85,7 @@ void main() {
 	vec4 color = vec4(0.0f, 0.0f, 0.0f, 0.0f);
 	color += diffuse;
 	color += vec4(specular.xyz, 0.0f);
-	
+
 	color.a = min(color.a, 1.0f);
 
 	OutColor = color;

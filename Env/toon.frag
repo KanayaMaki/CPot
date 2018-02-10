@@ -1,4 +1,4 @@
-#version 430 core
+#version 450 core
 
 layout(location = 0) in vec3 InPosWor;
 layout(location = 1) in vec3 InNorWor;
@@ -53,7 +53,7 @@ void main() {
 	vec4 toonTexel = texture(ToonTexture, vec2(lighting, 1.0f - (1.0f - lighting)));
 
 	vec4 diffuseTexel = texture(DiffuseTexture, vec2(InTexCoord.x, 1.0f - InTexCoord.y));
-	
+
 	vec4 color = vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	color *= Diffuse;
 	color *= diffuseTexel;

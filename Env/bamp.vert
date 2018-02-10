@@ -1,4 +1,4 @@
-#version 430 core
+#version 450 core
 
 vec4 mul(vec4 v, mat4x4 m) {
 	return v * m;
@@ -70,6 +70,6 @@ void main() {
 
 	vec3 lToCamera = CameraPositionLoc - InPosLoc;
 	OutToCameraTan = TransformToTangentSpace(normalize(lToCamera), InNorLoc, InTanLoc, InBiNorLoc);
-	
+
 	OutTexCoord = InTexCoord;
 }

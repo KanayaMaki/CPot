@@ -70,6 +70,23 @@ public:
 		wglMakeCurrent(mHDC, mHRC);
 
 
+		PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribs = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
+
+		static const int  att[] = {
+			WGL_CONTEXT_MAJOR_VERSION_ARB,   4,
+			WGL_CONTEXT_MINOR_VERSION_ARB,   3,
+			WGL_CONTEXT_FLAGS_ARB,           0,
+			WGL_CONTEXT_PROFILE_MASK_ARB,    WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
+			0,
+		};
+
+		// 新しい HGLRC の作成
+		HGLRC newHRC = wglCreateContextAttribs(mHDC, NULL, att);
+		wglMakeCurrent(mHDC, newHRC);
+
+		wglDeleteContext(mHRC);
+		mHRC = newHRC;
+
 		//GLEWの初期化
 		glewInit();
 

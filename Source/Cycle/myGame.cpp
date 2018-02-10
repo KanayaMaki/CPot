@@ -187,6 +187,11 @@ void MyGame::Setting() {
 void MyGame::Init() {
 	//CPOT_LOG("Init!");
 
+	#ifdef CPOT_ON_OPENGL
+	CPOT_LOG((const CHAR*)glGetString(GL_VERSION));
+	CPOT_LOG((const CHAR*)glGetString(GL_SHADING_LANGUAGE_VERSION));
+	#endif
+
 	//アニメーションの設定
 	rotationAnimation.Add(0.0f, Quaternion::YAxis(ToRad(0.0f)));
 	rotationAnimation.Add(3.0f, Quaternion::YAxis(ToRad(0.0f)));
@@ -497,6 +502,7 @@ void MyGame::Init() {
 
 		lCamera->AddComponent("SkyWalkComponent");
 	}
+
 
 	#ifdef CPOT_ON_WINDOWS
 	xaudio::AudioLoadData::S().Regist("test", "./test.wav");
