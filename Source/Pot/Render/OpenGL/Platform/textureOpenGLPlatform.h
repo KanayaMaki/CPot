@@ -76,16 +76,13 @@ public:
 
 		PathString lFileName(aFileName);
 
-		//ファイル名の長さが0なら
-		if (lFileName.GetLength() == 0) {
-			return;	//読み込まない
+		if(lFileName.GetLength() == 0) {
+			return;
 		}
-		//ファイルパスの最後が/なら
-		if (lFileName[lFileName.GetLength() - 1] == '/') {
-			return;	//ファイルではないので読み込まない
+		if(lFileName[lFileName.GetLength() - 1] == '/') {
+			return;
 		}
 
-		
 		//ファイルから読み込む
 		FileIn lFile;
 		lFile.Open(lFileName.Get(), true);

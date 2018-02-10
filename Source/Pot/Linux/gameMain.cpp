@@ -3,7 +3,7 @@
 //	author	:	SaitoYoshiki
 //
 
-#include "./Pot/GLFW/gameMain.h"
+#include "./Pot/Linux/gameMain.h"
 #include "./Pot/Game/game.h"
 
 #include "./Pot/Render/OpenGL/Platform/deviceOpenGLPlatform.h"
@@ -21,6 +21,7 @@ namespace cpot {
 
 GameBase* GameMain::mGame;
 Time gTime;
+f64 gBeforeTime;
 
 void GameMain::Setting() {
 	mGame = cpot::CreateGame();
@@ -36,21 +37,19 @@ void GameMain::GameInit() {
 
 
 	//ウィンドウズの入力の初期化
-	
-	//ログの出力先の初期化
-	#ifdef CPOT_VALID_LOG
-	auto o = new standard::OutStandard();
-	Log::S().Set(o);
-	#endif
 
 	//ゲームの初期化
 	mGame->Init();
+
+	gBeforeTime = gTime.GetDetail();
 }
 
 void GameMain::GameUpdate() {
 
 	//InputUpdate
-	
+	f64 lNowTime = gTime.GetDetail();
+	SetDeltaTime(lNowTime - gBeforeTime);
+	gBeforeTime = lNowTime;
 
 	//ローダのアップデート
 	LoaderManager::S().Update();
@@ -64,7 +63,10 @@ void GameMain::GameUpdate() {
 	//ゲームの終了
 	if (Config::S().GetApplicationEnd() || Config::S().GetGameEnd()) {
 		LoaderManager::S().Join();
+		glutLeaveMainLoop();
 	}
+
+	glutPostRedisplay();
 }
 
 void GameMain::GameRender() {

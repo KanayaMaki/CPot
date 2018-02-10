@@ -476,7 +476,7 @@ void MyGame::Init() {
 		lObject->GetComponent<SpriteRenderer>()->texture = ResourceList<Texture2D>::S().Find("RenderTarget");
 	}
 
-	/*{
+	{
 		GameObject* lObject = new GameObject;
 		lObject->SetName("SkySprite");
 		lObject->AddComponent<SpriteRenderer>();
@@ -510,7 +510,7 @@ void MyGame::Init() {
 
 //ゲームの更新
 void MyGame::Update() {
-
+	
 	ComponentSystem::S().Update();
 
 	//ゲーム終了
@@ -540,7 +540,7 @@ void MyGame::Update() {
 		voice = nullptr;
 	}
 
-
+	
 	#pragma endregion
 
 
@@ -574,7 +574,7 @@ void MyGame::Update() {
 	if (Input::GetButton(windows::cL)) {
 		//windows::Window::S().SetCursorPos(Vector2(100.0f, 100.0f));
 	}
-
+	
 	//プレイヤーを回転させる
 	const f32 cRotateSpeed = ToRad(45.0f);
 	if (Input::GetButtonDown(windows::cU)) {
@@ -619,7 +619,6 @@ void MyGame::Update() {
 }
 
 void MyGame::Render() {
-
 	//描画するテクスチャのクリア
 	#ifdef CPOT_ON_DIRECTX11
 	Color lResetColor = Color::Red();
@@ -635,7 +634,6 @@ void MyGame::Render() {
 	ResourceList<Texture2D>::S().Find("BackBufferDepth")->ClearDepth(1.0f);
 
 	Render::S().SetViewPort(viewport, 0);
-
 
 	ComponentSystem::S().Render();
 

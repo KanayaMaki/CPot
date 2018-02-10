@@ -13,7 +13,6 @@
 #include "./Pot/Input/Windows/inputWindows.h"
 #include "./Pot/Input/XInput/inputXInput.h"
 #include "./Pot/Input/Android/inputAndroid.h"
-#include "./Pot/Input/GLFW/inputGLFW.h"
 
 
 namespace cpot {
@@ -127,54 +126,6 @@ public:
 		return false;
 	}
 	static f32 GetAxis(u32 aControllerNum, xInput::CInputAxisCode aCode) {
-		return 0.0f;
-	}
-
-	#endif
-
-	#pragma endregion
-
-
-	//GLFWの入力を担当する
-	#pragma region GLFW
-
-	//GLFWの入力が有効なら
-	#ifdef CPOT_VALID_INPUT_GLFW
-
-public:
-	static f32 GetValue(glfw::CInputCode aCode) {
-		return glfw::Input::S().GetValue(aCode);
-	}
-	static BOOL GetButton(glfw::CInputCode aCode) {
-		return glfw::Input::S().GetButton(aCode);
-	}
-	static BOOL GetButtonDown(glfw::CInputCode aCode) {
-		return glfw::Input::S().GetButtonDown(aCode);
-	}
-	static BOOL GetButtonUp(glfw::CInputCode aCode) {
-		return glfw::Input::S().GetButtonUp(aCode);
-	}
-	static f32 GetAxis(glfw::CInputAxisCode aCode) {
-		return glfw::Input::S().GetAxis(aCode);
-	}
-
-	//Linuxの入力が無効なら、入力無し
-	#else
-
-public:
-	static f32 GetValue(glfw::CInputCode aCode) {
-		return 0.0f;
-	}
-	static BOOL GetButton(glfw::CInputCode aCode) {
-		return false;
-	}
-	static BOOL GetButtonDown(glfw::CInputCode aCode) {
-		return false;
-	}
-	static BOOL GetButtonUp(glfw::CInputCode aCode) {
-		return false;
-	}
-	static f32 GetAxis(glfw::CInputAxisCode aCode) {
 		return 0.0f;
 	}
 

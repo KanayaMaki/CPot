@@ -6,17 +6,17 @@
 #pragma once
 
 #include "./Pot/Atom/atom.h"
-#include "./Pot/Out/out.h"
 #include "./Pot/Usefull/singleton.h"
 #include "./Pot/Thread/mutex.h"
+#include "./Pot/Out/out.h"
 
-#define GLEW_STATIC
 #include <GL/glew.h>
-#include <GL/glfw3.h>
+#include <GL/glut.h>
+#include <GL/freeglut.h>
 
 namespace cpot {
 
-namespace glfw {
+namespace linux {
 
 
 class Window : public Singleton<Window> {
@@ -42,62 +42,27 @@ private:
 	#pragma region Load
 
 public:
-	void Init(Vector2& aWindowSize, const CHAR* aCaption) {
+	void Init(int* argc, char ** argvconst, Vector2& aWindowSize, const CHAR* aCaption) {
 		
-		int lResult;	//戻り値用
+		glutInitContextVersion(4, 5);
+		glutInit(argc, argvconst);
 
-		//GLFWの初期化
-		lResult = glfwInit();
-		if (lResult == GL_FALSE) {
-			CPOT_LOG("GLFWの初期化に失敗しました");
-			return;
-		}
+		glutInitWindowPosition(100, 50);
+		glutInitWindowSize(aWindowSize.x, aWindowSize.y);
+		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+		glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
+		glutCreateWindow(aCaption);
 
-		//使用するOpenGLのバージョンの設定
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 5);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
-
-		//ウィンドウの作成
-		mWindow = glfwCreateWindow(
-			aWindowSize.x, aWindowSize.y,
-			aCaption, nullptr, nullptr);
-
-		if (mWindow == GL_FALSE) {
-			CPOT_LOG("ウィンドウの作成に失敗しました");
-			return;
-		}
-
-
-		//変更
-		glfwSwapInterval(1);
-
-		//コンテキストを有効化
-		glfwMakeContextCurrent(mWindow);
-
-
-		//GLEWの初期化
+		glewExperimental = GL_TRUE;
 		glewInit();
-	}
 
-	void Final() {
-		glfwTerminate();
+		CPOT_LOG((const CHAR*)glGetString(GL_VERSION));
 	}
 
 	#pragma endregion
 
 
-public:
-	BOOL IsClose() {
-		return glfwWindowShouldClose(mWindow);
-	}
-
-	GLFWwindow* GetWindow() {
-		return mWindow;
-	}
 
 	//操作する
 	#pragma region Operate
@@ -109,9 +74,7 @@ public:
 		SetSize(Vector2(aWidth, aHeight));
 	}
 
-	void SetTitle(const CHAR* aCaption) {
-		glfwSetWindowTitle(mWindow, aCaption);
-	}
+	void SetTitle(const CHAR* aTitle) {}
 
 
 	//カーソルの表示・非表示
@@ -157,13 +120,11 @@ public:
 	#pragma endregion
 
 
-
 	//フィールド
 	#pragma region Field
 
 private:
 	Vector2 mSize;
-	GLFWwindow* mWindow;
 
 	#pragma endregion
 };
