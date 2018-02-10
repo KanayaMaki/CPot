@@ -4,6 +4,7 @@ Windowsの初期化
 グラフィックAPIの初期化
 インプットの初期化
 サウンドの初期化
+fkfkfkffk
 
 WinMain
 	Game* g = CreateGame();
