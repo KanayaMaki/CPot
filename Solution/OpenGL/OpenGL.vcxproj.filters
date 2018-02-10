@@ -593,12 +593,6 @@
     <ClCompile Include="..\..\Source\Pot\Windows\gameMain.cpp">
       <Filter>Source\Pot\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Cycle\myGameDummy.cpp">
-      <Filter>Source\Cycle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Cycle\myGame.cpp">
-      <Filter>Source\Cycle</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Game\cameraComponent.cpp">
       <Filter>Source\Pot\Game</Filter>
     </ClCompile>
@@ -664,6 +658,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Pot\Atom\hash.cpp">
       <Filter>Source\Pot\Atom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cycle\myGame.cpp">
+      <Filter>Source\Cycle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cycle\myGame_ErrorCheck.cpp">
+      <Filter>Source\Cycle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

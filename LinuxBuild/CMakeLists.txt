@@ -16,7 +16,7 @@ find_package(OpenGL)
 set(CPOT_SRC_ROOT "../Source")
 
 file(GLOB_RECURSE SOURCES_RECURSE
-	${CPOT_SRC_ROOT}/Cycle/*.cpp)
+	${CPOT_SRC_ROOT}/Cycle/myGame_ErrorCheck.cpp)
 
 file(GLOB SOURCES
 	${CPOT_SRC_ROOT}/Pot/Atom/*.cpp
