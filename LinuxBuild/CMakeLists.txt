@@ -19,6 +19,7 @@ file(GLOB_RECURSE SOURCES_RECURSE
 	${CPOT_SRC_ROOT}/Cycle/*.cpp)
 
 file(GLOB SOURCES
+	${CPOT_SRC_ROOT}/Pot/Atom/*.cpp
 	${CPOT_SRC_ROOT}/Pot/Config/Linux/*.cpp
 	${CPOT_SRC_ROOT}/Pot/Audio/Linux/*.cpp
 	${CPOT_SRC_ROOT}/Pot/Fps/*.cpp
