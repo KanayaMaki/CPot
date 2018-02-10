@@ -95,7 +95,7 @@ protected:
 }
 
 
-#ifdef CPOT_ON_GLFW
+#ifdef CPOT_ON_LINUX
 #include "./Pot/Config/Linux/configLinux.h"
 #elif defined CPOT_ON_ANDROID
 #include "./Pot/Config/Android/configAndroid.h"
