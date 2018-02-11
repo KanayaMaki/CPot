@@ -22,10 +22,12 @@ layout(binding = 1) uniform Material {
 };
 
 void main() {
-	//vec4 lPosWor = mul(vec4(InPosLoc, 1), World);
-	//vec4 lPosView = mul(lPosWor, View);
-	//vec4 lPosProj = mul(lPosView, Proj);
-	gl_Position =  vec4(InPosLoc, 1);
+	vec4 lPosWor = mul(vec4(InPosLoc, 1), World);
+	vec4 lPosView = mul(lPosWor, View);
+	vec4 lPosProj = mul(lPosView, Proj);
+	gl_Position = lPosProj;
+	//gl_Position =  vec4(InPosLoc, 1);
+	//gl_Position =  mul(vec4(InPosLoc, 1), Proj);
 
 	OutTexCoord = InTexCoord;
 }

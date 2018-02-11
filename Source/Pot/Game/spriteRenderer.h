@@ -113,10 +113,10 @@ public:
 		auto toonLineBuffer = ResourceList<ConstantBuffer>::S().Find("ToonLine");
 
 
-		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::Unit() * Matrix4x4::FromScale(Vector3::One() * 2.0f);
+		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::Unit();
 		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4::Unit();
 		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = Matrix4x4::Unit();
-		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = Matrix4x4::Unit();
+		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = Matrix4x4::FromTransform(Vector3(0.2f, 0.0f, 0.0f));
 		wvpBuffer->Write();
 
 		materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
