@@ -26,8 +26,6 @@ void main() {
 	vec4 lPosView = mul(lPosWor, View);
 	vec4 lPosProj = mul(lPosView, Proj);
 	gl_Position = lPosProj;
-	//gl_Position =  vec4(InPosLoc, 1);
-	//gl_Position =  mul(vec4(InPosLoc, 1), Proj);
-
+	
 	OutTexCoord = InTexCoord;
 }

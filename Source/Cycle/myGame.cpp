@@ -484,7 +484,7 @@ void MyGame::Init() {
 	}
 	//*/
 
-	///*
+	/*
 	{
 		GameObject* lObject = new GameObject;
 		lObject->SetName("SkySprite");
