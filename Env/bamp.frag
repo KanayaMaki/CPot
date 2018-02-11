@@ -40,6 +40,22 @@ vec3 mul(vec3 aVector, mat4x4 aMatrix) {
 	return lVector.xyz / lVector.w;
 }
 
+float Clamp(float aValue, float aMin, float aMax) {
+	if(aValue < aMin) aValue = aMin;
+	if(aValue > aMax) aValue = aMax;
+	return aValue;
+}
+
+vec4 Clamp(vec4 aVector, float aMin, float aMax) {
+	return vec4(
+		Clamp(aVector.x, aMin, aMax),
+		Clamp(aVector.y, aMin, aMax),
+		Clamp(aVector.z, aMin, aMax),
+		Clamp(aVector.w, aMin, aMax)
+	);
+}
+
+
 float Lambert(vec3 aNormal, vec3 aToLight) {
 	vec3 normalN = normalize(aNormal);
 	vec3 toLightN = normalize(aToLight);
@@ -88,5 +104,5 @@ void main() {
 
 	color.a = min(color.a, 1.0f);
 
-	OutColor = color;
+	OutColor = Clamp(color, 0.0f, 1.0f);
 }

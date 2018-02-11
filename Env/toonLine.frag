@@ -27,10 +27,26 @@ layout(binding = 3) uniform Toon {
 };
 
 
+float Clamp(float aValue, float aMin, float aMax) {
+	if(aValue < aMin) aValue = aMin;
+	if(aValue > aMax) aValue = aMax;
+	return aValue;
+}
+
+vec4 Clamp(vec4 aVector, float aMin, float aMax) {
+	return vec4(
+		Clamp(aVector.x, aMin, aMax),
+		Clamp(aVector.y, aMin, aMax),
+		Clamp(aVector.z, aMin, aMax),
+		Clamp(aVector.w, aMin, aMax)
+	);
+}
+
+
 void main() {
 
 	vec4 color = vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	color *= Diffuse;
 
-	OutColor = color;
+	OutColor = Clamp(color, 0.0f, 1.0f);
 }

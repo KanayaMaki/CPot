@@ -46,6 +46,21 @@ float HalfLambert(vec3 aNormal, vec3 aToLight) {
 	return halfLambert;
 }
 
+float Clamp(float aValue, float aMin, float aMax) {
+	if(aValue < aMin) aValue = aMin;
+	if(aValue > aMax) aValue = aMax;
+	return aValue;
+}
+
+vec4 Clamp(vec4 aVector, float aMin, float aMax) {
+	return vec4(
+		Clamp(aVector.x, aMin, aMax),
+		Clamp(aVector.y, aMin, aMax),
+		Clamp(aVector.z, aMin, aMax),
+		Clamp(aVector.w, aMin, aMax)
+	);
+}
+
 
 void main() {
 
@@ -59,5 +74,5 @@ void main() {
 	color *= diffuseTexel;
 	color.xyz *= toonTexel.xyz;
 
-	OutColor = color;
+	OutColor = Clamp(color, 0.0f, 1.0f);
 }
