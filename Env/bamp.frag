@@ -80,7 +80,6 @@ vec3 GetBampNormalTan(vec2 aTexCoord) {
 
 void main() {
 
-/*
 	//タンジェント空間での法線ベクトルの取得
 	vec3 bampNormalTan = GetBampNormalTan(InTexCoord);
 
@@ -104,8 +103,6 @@ void main() {
 	color += vec4(specular.xyz, 0.0f);
 
 	color.a = min(color.a, 1.0f);
-*/
-	vec4 color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
 
 	OutColor = Clamp(color, 0.0f, 1.0f);
 }
