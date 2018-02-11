@@ -342,7 +342,6 @@ void MyGame::Init() {
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-	glDebugMessageCallbackARB(cpot::openGL::platform::OutputGLDebugMessage, nullptr);
 
 	#endif
 
