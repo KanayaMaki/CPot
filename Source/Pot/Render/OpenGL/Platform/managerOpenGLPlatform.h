@@ -424,7 +424,7 @@ public:
 	void SetToDevice(Program* aProgram) {
 		for (u32 i = 0; i < SlotMaxNum(); i++) {
 			if (IsChanged(i)) {
-				glUniformBlockBinding(aProgram->GetGLNum(), i, i);
+				//glUniformBlockBinding(aProgram->GetGLNum(), i, i);
 				if (mElement[i]) {
 					mElement[i]->Bind(i);
 				}
