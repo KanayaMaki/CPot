@@ -19,6 +19,50 @@ namespace cpot {
 namespace linux {
 
 
+
+inline void OutputGLDebugMessage(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam) {
+
+	static const CHAR* kSourceStrings[] = {
+		"OpenGL API",
+		"Window System",
+		"Shader Compiler",
+		"Third Party",
+		"Application",
+		"Other",
+	};
+	s32 sourceNo = (GL_DEBUG_SOURCE_API_ARB <= source && source <= GL_DEBUG_SOURCE_OTHER_ARB)
+		? (source - GL_DEBUG_SOURCE_API_ARB)
+		: (GL_DEBUG_SOURCE_OTHER_ARB - GL_DEBUG_SOURCE_API_ARB);
+
+	static const CHAR* kTypeStrings[] = {
+		"Error",
+		"Deprecated behavior",
+		"Undefined behavior",
+		"Portability",
+		"Performance",
+		"Other",
+	};
+	s32 typeNo = (GL_DEBUG_TYPE_ERROR_ARB <= type && type <= GL_DEBUG_TYPE_OTHER_ARB)
+		? (type - GL_DEBUG_TYPE_ERROR_ARB)
+		: (GL_DEBUG_TYPE_OTHER_ARB - GL_DEBUG_TYPE_ERROR_ARB);
+
+	static const CHAR* kSeverityStrings[] = {
+		"High",
+		"Medium",
+		"Low",
+	};
+	s32 severityNo = (GL_DEBUG_SEVERITY_HIGH_ARB <= type && type <= GL_DEBUG_SEVERITY_LOW_ARB)
+		? (type - GL_DEBUG_SEVERITY_HIGH_ARB)
+		: (GL_DEBUG_SEVERITY_LOW_ARB - GL_DEBUG_SEVERITY_HIGH_ARB);
+
+
+
+	if (typeNo == 0) {
+		CPOT_LOG("Source : ", kSourceStrings[sourceNo], "    Type : ", kTypeStrings[typeNo], "    ID : ", (s64)id, "    Security : ", kSeverityStrings[severityNo], "    Message : ", (const CHAR*)message);
+	}
+}
+
+
 class Window : public Singleton<Window> {
 	friend class Singleton<Window>;
 
@@ -52,12 +96,13 @@ public:
 		glutInitWindowSize(aWindowSize.x, aWindowSize.y);
 		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 		glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
-		glutSetOption()
 
 		glutCreateWindow(aCaption);
 
 		glewExperimental = GL_TRUE;
 		glewInit();
+
+		glDebugMessageCallbackARB(cpot::linux::OutputGLDebugMessage, nullptr);
 
 		CPOT_LOG((const CHAR*)glGetString(GL_VERSION));
 	}
