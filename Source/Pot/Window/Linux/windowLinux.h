@@ -49,7 +49,7 @@ public:
 
 		glutInitWindowPosition(100, 50);
 		glutInitWindowSize(aWindowSize.x, aWindowSize.y);
-		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 		glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
 		glutCreateWindow(aCaption);

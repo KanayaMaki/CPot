@@ -481,7 +481,7 @@ void MyGame::Init() {
 		lObject->GetComponent<SpriteRenderer>()->texture = ResourceList<Texture2D>::S().Find("RenderTarget");
 	}
 
-	/*
+	///*
 	{
 		GameObject* lObject = new GameObject;
 		lObject->SetName("SkySprite");
