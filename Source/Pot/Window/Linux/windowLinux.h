@@ -45,12 +45,14 @@ public:
 	void Init(int* argc, char ** argvconst, Vector2& aWindowSize, const CHAR* aCaption) {
 		
 		glutInitContextVersion(4, 5);
+		glutInitContextFlags(GLUT_DEBUG);
 		glutInit(argc, argvconst);
 
 		glutInitWindowPosition(100, 50);
 		glutInitWindowSize(aWindowSize.x, aWindowSize.y);
 		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 		glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+		glutSetOption()
 
 		glutCreateWindow(aCaption);
 

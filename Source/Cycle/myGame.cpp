@@ -342,6 +342,8 @@ void MyGame::Init() {
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
+	glDebugMessageCallbackARB(cpot::openGL::platform::OutputGLDebugMessage, nullptr);
+
 	#endif
 
 
@@ -519,7 +521,7 @@ void MyGame::Init() {
 
 //ゲームの更新
 void MyGame::Update() {
-	
+
 	ComponentSystem::S().Update();
 
 	//ゲーム終了
@@ -636,6 +638,7 @@ void MyGame::Render() {
 	#else
 	Color lResetColor = Color::White();
 	#endif
+
 	ResourceList<Texture2D>::S().Find("RenderTarget")->ClearColor(lResetColor);
 	ResourceList<Texture2D>::S().Find("RenderTargetDepth")->ClearDepth(1.0f);
 
@@ -645,7 +648,6 @@ void MyGame::Render() {
 	Render::S().SetViewPort(viewport, 0);
 
 	ComponentSystem::S().Render();
-
 
 	Render::S().Present();
 }

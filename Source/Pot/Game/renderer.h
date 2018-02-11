@@ -6,6 +6,7 @@
 #pragma once
 
 #include "./Pot/Game/component.h"
+#include "./Pot/Render/render.h"
 
 namespace cpot {
 
