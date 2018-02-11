@@ -65,6 +65,7 @@ void main() {
 	vec4 lPosView = mul(lPosWor, View);
 	vec4 lPosProj = mul(lPosView, Proj);
 	gl_Position =  lPosProj;
+	gl_Position =  vec4(InPosLoc.x / 20.0, InPosLoc.y / 20.0, 0.0, 1.0);
 
 	OutToLightTan = TransformToTangentSpace(normalize(ToLight), InNorLoc, InTanLoc, InBiNorLoc);
 
