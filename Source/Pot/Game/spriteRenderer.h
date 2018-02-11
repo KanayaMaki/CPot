@@ -116,7 +116,7 @@ public:
 		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mWorld = Matrix4x4::Unit();
 		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mNormalWorld = Matrix4x4::Unit();
 		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mView = Matrix4x4::Unit();
-		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = Matrix4x4::FromTransform(Vector3(0.2f, 0.0f, 0.0f));
+		wvpBuffer->GetCPUBuffer<WVPBuffer>()->mProjection = Matrix4x4::FromRotate(Quaternion::ZAxis(ToRad(20.0f))) * Matrix4x4::FromTransform(Vector3(0.2f, 0.0f, 0.0f));
 		wvpBuffer->Write();
 
 		materialBuffer->GetCPUBuffer<MaterialBuffer>()->mDiffuse = Color::White();
