@@ -107,6 +107,7 @@ public:
 public:
 	void SetToDevice() {
 		glEnable(GL_BLEND);
+		glEnable(GL_ALPHA_TEST);
 		glBlendFunc(mSrc, mDst);
 	}
 

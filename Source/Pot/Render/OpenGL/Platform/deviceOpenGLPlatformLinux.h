@@ -28,7 +28,7 @@ private:
 public:
 	void Init() {
 
-		//glPixelStorei(GL_UNPACK_ALIGNMENT, 4);	//RGBしかないなら1を設定するしかない。RGBAなら4アラインメントでいい。多いほうが高速
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);	//RGBしかないなら1を設定するしかない。RGBAなら4アラインメントでいい。多いほうが高速
 		glDepthRange(0.0, 1.0);
 		glClearDepth(1.0);
 
@@ -39,6 +39,7 @@ public:
 		glViewport(0, 0, Config::S().GetScreenSize().x, Config::S().GetScreenSize().y);
 
 		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+
 	}
 	void Final() {
 		
