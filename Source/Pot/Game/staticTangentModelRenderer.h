@@ -31,10 +31,10 @@ public:
 			depthStencil = ResourceList<DepthStencil>::S().Find("Test");
 		}
 		if (renderTarget == nullptr) {
-			renderTarget = ResourceList<Texture2D>::S().Find("RenderTarget");
+			renderTarget = ResourceList<Texture2D>::S().Find("BackBuffer");
 		}
 		if (renderTargetDepth == nullptr) {
-			renderTargetDepth = ResourceList<Texture2D>::S().Find("RenderTargetDepth");
+			renderTargetDepth = ResourceList<Texture2D>::S().Find("BackBuffer");
 		}
 
 		if (sampler == nullptr) {
