@@ -384,6 +384,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Cycle\myGame.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cycle\myGame_ErrorCheck.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -391,7 +399,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Master|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Cycle\myGame_ErrorCheck.cpp" />
     <ClCompile Include="..\..\Source\Pot\Atom\hash.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\clipXAudioPlatform.cpp" />
     <ClCompile Include="..\..\Source\Pot\Audio\XAudio\Platform\deviceXAudioPlatform.cpp" />
@@ -441,6 +448,8 @@
   <ItemGroup>
     <None Include="..\..\Env\bamp.frag" />
     <None Include="..\..\Env\bamp.vert" />
+    <None Include="..\..\Env\simple.frag" />
+    <None Include="..\..\Env\simple.vert" />
     <None Include="..\..\Env\sprite.frag" />
     <None Include="..\..\Env\sprite.vert" />
     <None Include="..\..\Env\toon.frag" />

@@ -70,8 +70,7 @@ void MyGame::Setting() {
 
 GLuint VertexArrayID;
 
-GLuint vertexbuffer;
-
+openGL::platform::ArrayBuffer arrayBuffer;
 openGL::platform::Program program;
 
 
@@ -93,14 +92,7 @@ void MyGame::Init() {
 		0.0f,  1.0f, 0.0f,
 	};
 
-	// バッファを1つ作り、vertexbufferに結果IDを入れます。
-	glGenBuffers(1, &vertexbuffer);
-
-	// 次のコマンドは'vertexbuffer'バッファについてです。
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-
-	// 頂点をOpenGLに渡します。
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	arrayBuffer.Load(sizeof(g_vertex_buffer_data[0]), sizeof(g_vertex_buffer_data) / sizeof(g_vertex_buffer_data[0]), g_vertex_buffer_data);
 
 
 	program.Load("./simple.vert", "", "./simple.frag");
@@ -119,7 +111,7 @@ void MyGame::Render() {
 
 	// 最初の属性バッファ：頂点
 	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, arrayBuffer.GetGLNum());
 	glVertexAttribPointer(
 		0,                  // 属性0：0に特に理由はありません。しかし、シェーダ内のlayoutとあわせないといけません。
 		3,                  // サイズ

@@ -183,14 +183,10 @@ void MyGame::Setting() {
 	#endif
 }
 
+
 //ゲームの初期化
 void MyGame::Init() {
 	//CPOT_LOG("Init!");
-
-	#ifdef CPOT_ON_OPENGL
-	CPOT_LOG((const CHAR*)glGetString(GL_VERSION));
-	CPOT_LOG((const CHAR*)glGetString(GL_SHADING_LANGUAGE_VERSION));
-	#endif
 
 	//アニメーションの設定
 	rotationAnimation.Add(0.0f, Quaternion::YAxis(ToRad(0.0f)));
@@ -224,7 +220,6 @@ void MyGame::Init() {
 	//Loaderのスタート
 	LoaderManager::S().Start(2);
 
-	
 	//バックバッファの初期化
 	backBuffer.reset(new Texture2D);
 	backBuffer->SetName("BackBuffer");
@@ -341,6 +336,11 @@ void MyGame::Init() {
 
 	backBuffer->LoadPlatform();
 	backBufferDepth->LoadPlatform();
+
+
+	GLuint VertexArrayID;
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
 
 	#endif
 
@@ -481,6 +481,7 @@ void MyGame::Init() {
 		lObject->GetComponent<SpriteRenderer>()->texture = ResourceList<Texture2D>::S().Find("RenderTarget");
 	}
 
+	/*
 	{
 		GameObject* lObject = new GameObject;
 		lObject->SetName("SkySprite");

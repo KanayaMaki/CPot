@@ -696,5 +696,11 @@
     <None Include="..\..\Env\sprite.frag">
       <Filter>Shader</Filter>
     </None>
+    <None Include="..\..\Env\simple.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="..\..\Env\simple.vert">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
