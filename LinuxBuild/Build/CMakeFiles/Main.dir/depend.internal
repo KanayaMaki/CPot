@@ -91,7 +91,7 @@ CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Inc
  /home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/zlib.h
  /home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/zutil.c
  /home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/zutil.h
-CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o
+CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o
  ../../Source/./Cycle/autoRotateComponent.h
  ../../Source/./Cycle/myGame.h
  ../../Source/./Cycle/playerComponent.h
@@ -289,7 +289,7 @@ CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_Error
  ../../Source/./Pot/Window/Windows/windowWindows.h
  ../../Source/Pot/ThirdParty/Include/Zlib/zconf.h
  ../../Source/Pot/ThirdParty/Include/Zlib/zlib.h
- /home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp
+ /home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp
 CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/Atom/hash.cpp.o
  ../../Source/./Pot/Atom/Standard/mathStandard.h
  ../../Source/./Pot/Atom/defines.h

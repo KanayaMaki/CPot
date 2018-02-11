@@ -777,28 +777,28 @@ CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Inc
 CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/zutil.c.o.provides.build: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/zutil.c.o
 
 
-CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o: CMakeFiles/Main.dir/flags.make
-CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o: /home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/saito/デスクトップ/CPot/LinuxBuild/Build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o -c /home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp
+CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o: CMakeFiles/Main.dir/flags.make
+CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o: /home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/saito/デスクトップ/CPot/LinuxBuild/Build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o -c /home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp
 
-CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp > CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.i
+CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp > CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.i
 
-CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp -o CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.s
+CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp -o CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.s
 
-CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o.requires:
+CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o.requires:
 
-.PHONY : CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o.requires
+.PHONY : CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o.requires
 
-CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o.provides: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o.provides.build
-.PHONY : CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o.provides
+CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o.provides: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o.provides.build
+.PHONY : CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o.provides
 
-CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o.provides.build: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o
+CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o.provides.build: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o
 
 
 # Object files for target Main
@@ -833,7 +833,7 @@ Main_OBJECTS = \
 "CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/trees.c.o" \
 "CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/uncompr.c.o" \
 "CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/zutil.c.o" \
-"CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o"
+"CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o"
 
 # External object files for target Main
 Main_EXTERNAL_OBJECTS =
@@ -868,7 +868,7 @@ Main: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdPar
 Main: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/trees.c.o
 Main: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/uncompr.c.o
 Main: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/zutil.c.o
-Main: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o
+Main: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o
 Main: CMakeFiles/Main.dir/build.make
 Main: /usr/lib64/libglut.so
 Main: /usr/lib64/libXmu.so
@@ -915,7 +915,7 @@ CMakeFiles/Main.dir/requires: CMakeFiles/Main.dir/home/saito/デスクトップ/
 CMakeFiles/Main.dir/requires: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/trees.c.o.requires
 CMakeFiles/Main.dir/requires: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/uncompr.c.o.requires
 CMakeFiles/Main.dir/requires: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/zutil.c.o.requires
-CMakeFiles/Main.dir/requires: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o.requires
+CMakeFiles/Main.dir/requires: CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o.requires
 
 .PHONY : CMakeFiles/Main.dir/requires
 

@@ -1876,7 +1876,7 @@ GL/glut.h
 GL/freeglut.h
 -
 
-/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp
+/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp
 ./Cycle/myGame.h
 /home/saito/デスクトップ/CPot/Source/Cycle/./Cycle/myGame.h
 ./Pot/Out/out.h

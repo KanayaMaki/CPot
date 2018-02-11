@@ -29,7 +29,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/trees.c.o"
   "CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/uncompr.c.o"
   "CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/ThirdParty/Include/Zlib/zutil.c.o"
-  "CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o"
+  "CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o"
   "Main.pdb"
   "Main"
 )

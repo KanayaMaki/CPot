@@ -123,32 +123,32 @@ Main/fast:
 	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/build
 .PHONY : Main/fast
 
-home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.o: home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o
+home/saito/デスクトップ/CPot/Source/Cycle/myGame.o: home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o
 
-.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.o
+.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame.o
 
 # target to build an object file
-home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o:
-	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o
-.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.o
+home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o
+.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o
 
-home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.i: home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.i
+home/saito/デスクトップ/CPot/Source/Cycle/myGame.i: home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.i
 
-.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.i
+.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame.i
 
 # target to preprocess a source file
-home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.i:
-	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.i
-.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.i
+home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.i:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.i
+.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.i
 
-home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.s: home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.s
+home/saito/デスクトップ/CPot/Source/Cycle/myGame.s: home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.s
 
-.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.s
+.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame.s
 
 # target to generate assembly for a file
-home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.s:
-	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.s
-.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.cpp.s
+home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.s:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.s
+.PHONY : home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.s
 
 home/saito/デスクトップ/CPot/Source/Pot/Atom/hash.o: home/saito/デスクトップ/CPot/Source/Pot/Atom/hash.cpp.o
 
@@ -969,9 +969,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Main"
-	@echo "... home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.o"
-	@echo "... home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.i"
-	@echo "... home/saito/デスクトップ/CPot/Source/Cycle/myGame_ErrorCheck.s"
+	@echo "... home/saito/デスクトップ/CPot/Source/Cycle/myGame.o"
+	@echo "... home/saito/デスクトップ/CPot/Source/Cycle/myGame.i"
+	@echo "... home/saito/デスクトップ/CPot/Source/Cycle/myGame.s"
 	@echo "... home/saito/デスクトップ/CPot/Source/Pot/Atom/hash.o"
 	@echo "... home/saito/デスクトップ/CPot/Source/Pot/Atom/hash.i"
 	@echo "... home/saito/デスクトップ/CPot/Source/Pot/Atom/hash.s"
