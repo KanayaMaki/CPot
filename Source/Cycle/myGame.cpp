@@ -472,7 +472,7 @@ void MyGame::Init() {
 		lObject->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(-45.0f)));
 	}
 
-	/*
+	///*
 	{
 		GameObject* lObject = new GameObject;
 		lObject->SetName("Sprite");
@@ -483,7 +483,7 @@ void MyGame::Init() {
 	}
 	//*/
 
-	/*
+	///*
 	{
 		GameObject* lObject = new GameObject;
 		lObject->SetName("SkySprite");
