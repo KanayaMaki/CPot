@@ -48,16 +48,16 @@ public:
 			}
 
 			//âÒì]
-			if (Input::GetButton(windows::cLeft)) {
+			if (Input::GetButton(windows::cLeft) || Input::GetButton(glut::cLeft)) {
 				GetTransform().mRotation *= Quaternion::FromAxis(Vector3::Up(), -ToRad(mRotateSpeed * DeltaTime()));
 			}
-			if (Input::GetButton(windows::cRight)) {
+			if (Input::GetButton(windows::cRight) || Input::GetButton(glut::cRight)) {
 				GetTransform().mRotation *= Quaternion::FromAxis(Vector3::Up(), ToRad(mRotateSpeed * DeltaTime()));
 			}
-			if (Input::GetButton(windows::cUp)) {
+			if (Input::GetButton(windows::cUp) || Input::GetButton(glut::cUp)) {
 				GetTransform().mRotation *= Quaternion::FromAxis(GetTransform().mRotation.Right(), -ToRad(mRotateSpeed * DeltaTime()));
 			}
-			if (Input::GetButton(windows::cDown)) {
+			if (Input::GetButton(windows::cDown) || Input::GetButton(glut::cDown)) {
 				GetTransform().mRotation *= Quaternion::FromAxis(GetTransform().mRotation.Right(), ToRad(mRotateSpeed * DeltaTime()));
 			}
 		}
@@ -66,7 +66,7 @@ public:
 		if (mCanMove) {
 
 			//à⁄ìÆë¨ìxÇÃïœçX
-			if (Input::GetButton(windows::cLeftShift)) {
+			if (Input::GetButton(windows::cLeftShift) || Input::GetButton(glut::cMouseButtonLeft)) {
 				mMoveSpeed = mFastMoveSpeed;
 			}
 			else {
@@ -74,22 +74,22 @@ public:
 			}
 
 			//à⁄ìÆ
-			if (Input::GetButton(windows::cA)) {
+			if (Input::GetButton(windows::cA) || Input::GetButton(glut::cA)) {
 				GetTransform().mPosition += GetTransform().mRotation.Left() * mMoveSpeed * DeltaTime();
 			}
-			if (Input::GetButton(windows::cD)) {
+			if (Input::GetButton(windows::cD) || Input::GetButton(glut::cD)) {
 				GetTransform().mPosition += GetTransform().mRotation.Right() * mMoveSpeed * DeltaTime();
 			}
-			if (Input::GetButton(windows::cW)) {
+			if (Input::GetButton(windows::cW) || Input::GetButton(glut::cW)) {
 				GetTransform().mPosition += GetTransform().mRotation.Forward() * mMoveSpeed * DeltaTime();
 			}
-			if (Input::GetButton(windows::cS)) {
+			if (Input::GetButton(windows::cS) || Input::GetButton(glut::cS)) {
 				GetTransform().mPosition += GetTransform().mRotation.Back() * mMoveSpeed * DeltaTime();
 			}
-			if (Input::GetButton(windows::cE)) {
+			if (Input::GetButton(windows::cE) || Input::GetButton(glut::cE)) {
 				GetTransform().mPosition += GetTransform().mRotation.Up() * mMoveSpeed * DeltaTime();
 			}
-			if (Input::GetButton(windows::cQ)) {
+			if (Input::GetButton(windows::cQ) || Input::GetButton(glut::cQ)) {
 				GetTransform().mPosition += GetTransform().mRotation.Down() * mMoveSpeed * DeltaTime();
 			}
 		}

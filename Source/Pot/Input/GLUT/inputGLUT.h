@@ -225,11 +225,14 @@ private:
 		switch (key) {
 			case ' ':
 				return CInputCode::cSpace;
-			case 'W':
-				return CInputCode::cW;
-			case 's':
-				return CInputCode::cS;
 		}
+		if ('a' <= key && key <= 'z') {
+			return CInputCode(CInputCode::cA + (key - 'a'));
+		}
+		if ('0' <= key && key <= '9') {
+			return CInputCode(CInputCode::c0 + (key - '0'));
+		}
+
 		return CInputCode::cNull;
 	}
 
