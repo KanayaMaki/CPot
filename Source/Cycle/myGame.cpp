@@ -611,7 +611,7 @@ void MyGame::Update() {
 	}
 
 	//スペースキーが押されたら
-	if (Input::GetButton(windows::cSpace)) {
+	if (Input::GetButton(windows::cSpace) || Input::GetButton(glut::cSpace)) {
 		//アニメーションを止める
 		isAnimation = false;
 		positionAnimation.SetTime(0.0f);

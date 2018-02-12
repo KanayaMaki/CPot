@@ -9,6 +9,8 @@
 #include "./Pot/Render/OpenGL/Platform/deviceOpenGLPlatform.h"
 #include "./Pot/Out/Standard/outStandard.h"
 
+#include "./Pot/Input/GLUT/inputGLUT.h"
+
 #include "./Pot/Config/config.h"
 
 #include "./Pot/Time/time.h"
@@ -36,7 +38,8 @@ void GameMain::GameInit() {
 	openGL::platform::Device::S().Init();
 
 
-	//ウィンドウズの入力の初期化
+	//入力の初期化
+	glut::Input::S().Init();
 
 	//ゲームの初期化
 	mGame->Init();
@@ -47,6 +50,9 @@ void GameMain::GameInit() {
 void GameMain::GameUpdate() {
 
 	//InputUpdate
+	glut::Input::S().Update();
+
+	//デルタタイムの計算（FPS制御はglutがやる為、デルタタイムだけを計算する必要がある）
 	f64 lNowTime = gTime.GetDetail();
 	SetDeltaTime(lNowTime - gBeforeTime);
 	gBeforeTime = lNowTime;

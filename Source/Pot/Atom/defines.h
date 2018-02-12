@@ -62,6 +62,8 @@ namespace cpot {
 
 #pragma region 使用するグラフィックAPIを定義
 
+#ifdef CPOT_ON_WINDOWS
+
 #ifdef CPOT_DIRECTX9
 #define CPOT_ON_DIRECTX9
 #endif
@@ -72,12 +74,10 @@ namespace cpot {
 #define CPOT_ON_OPENGL
 #endif
 
-#ifdef CPOT_GLFW
-#define CPOT_ON_GLFW
+#elif define CPOT_ON_LINUX
+
 #define CPOT_ON_OPENGL
-#endif
-#ifdef CPOT_ON_LINUX
-#define CPOT_ON_OPENGL
+
 #endif
 
 #pragma endregion

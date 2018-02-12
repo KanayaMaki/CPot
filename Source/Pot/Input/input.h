@@ -13,6 +13,7 @@
 #include "./Pot/Input/Windows/inputWindows.h"
 #include "./Pot/Input/XInput/inputXInput.h"
 #include "./Pot/Input/Android/inputAndroid.h"
+#include "./Pot/Input/GLUT/inputGLUT.h"
 
 
 namespace cpot {
@@ -126,6 +127,54 @@ public:
 		return false;
 	}
 	static f32 GetAxis(u32 aControllerNum, xInput::CInputAxisCode aCode) {
+		return 0.0f;
+	}
+
+	#endif
+
+	#pragma endregion
+
+
+	//GLUTの入力を担当する
+	#pragma region GLUT
+
+	//Windowsの入力が有効なら
+	#ifdef CPOT_VALID_INPUT_GLUT
+
+public:
+	static f32 GetValue(glut::CInputCode aCode) {
+		return glut::Input::S().GetValue(aCode);
+	}
+	static BOOL GetButton(glut::CInputCode aCode) {
+		return glut::Input::S().GetButton(aCode);
+	}
+	static BOOL GetButtonDown(glut::CInputCode aCode) {
+		return glut::Input::S().GetButtonDown(aCode);
+	}
+	static BOOL GetButtonUp(glut::CInputCode aCode) {
+		return glut::Input::S().GetButtonUp(aCode);
+	}
+	static f32 GetAxis(glut::CInputAxisCode aCode) {
+		return glut::Input::S().GetAxis(aCode);
+	}
+
+	//GLUTの入力が無効なら、入力無し
+	#else
+
+public:
+	static f32 GetValue(glut::CInputCode aCode) {
+		return 0.0f;
+	}
+	static BOOL GetButton(glut::CInputCode aCode) {
+		return false;
+	}
+	static BOOL GetButtonDown(glut::CInputCode aCode) {
+		return false;
+	}
+	static BOOL GetButtonUp(glut::CInputCode aCode) {
+		return false;
+	}
+	static f32 GetAxis(glut::CInputAxisCode aCode) {
 		return 0.0f;
 	}
 
