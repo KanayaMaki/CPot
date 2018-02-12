@@ -9,6 +9,8 @@
 ../../Source/././Pot/Game/renderer.h
 ./Pot/Game/component.h
 ../../Source/././Pot/Game/./Pot/Game/component.h
+./Pot/Render/render.h
+../../Source/././Pot/Game/./Pot/Render/render.h
 
 ../../Source/././Pot/Game/updater.h
 ./Pot/Game/gameObject.h
@@ -569,6 +571,8 @@ vector
 ../../Source/./Pot/Game/renderer.h
 ./Pot/Game/component.h
 ../../Source/./Pot/Game/./Pot/Game/component.h
+./Pot/Render/render.h
+../../Source/./Pot/Game/./Pot/Render/render.h
 
 ../../Source/./Pot/Game/spriteRenderer.h
 ./Pot/Game/renderer.h
@@ -630,6 +634,18 @@ vector
 ./Pot/Application/Android/applicationAndroid.h
 ../../Source/./Pot/Input/Android/./Pot/Application/Android/applicationAndroid.h
 
+../../Source/./Pot/Input/GLUT/inputGLUT.h
+./Pot/Atom/atom.h
+../../Source/./Pot/Input/GLUT/./Pot/Atom/atom.h
+./Pot/Usefull/singleton.h
+../../Source/./Pot/Input/GLUT/./Pot/Usefull/singleton.h
+GL/glew.h
+-
+GL/freeglut.h
+-
+./Pot/Config/config.h
+../../Source/./Pot/Input/GLUT/./Pot/Config/config.h
+
 ../../Source/./Pot/Input/Windows/inputWindows.h
 ./Pot/Atom/atom.h
 ../../Source/./Pot/Input/Windows/./Pot/Atom/atom.h
@@ -659,6 +675,8 @@ dinput.h
 ../../Source/./Pot/Input/./Pot/Input/XInput/inputXInput.h
 ./Pot/Input/Android/inputAndroid.h
 ../../Source/./Pot/Input/./Pot/Input/Android/inputAndroid.h
+./Pot/Input/GLUT/inputGLUT.h
+../../Source/./Pot/Input/./Pot/Input/GLUT/inputGLUT.h
 
 ../../Source/./Pot/Linux/gameMain.h
 ./Pot/Atom/atom.h
@@ -1262,8 +1280,6 @@ xnamath.h
 ./Pot/Out/out.h
 ../../Source/./Pot/Render/OpenGL/Platform/./Pot/Out/out.h
 GL/glew.h
--
-GL/glut.h
 -
 GL/freeglut.h
 -
@@ -1979,6 +1995,8 @@ GL/freeglut.h
 /home/saito/デスクトップ/CPot/Source/Pot/Linux/./Pot/Render/OpenGL/Platform/deviceOpenGLPlatform.h
 ./Pot/Out/Standard/outStandard.h
 /home/saito/デスクトップ/CPot/Source/Pot/Linux/./Pot/Out/Standard/outStandard.h
+./Pot/Input/GLUT/inputGLUT.h
+/home/saito/デスクトップ/CPot/Source/Pot/Linux/./Pot/Input/GLUT/inputGLUT.h
 ./Pot/Config/config.h
 /home/saito/デスクトップ/CPot/Source/Pot/Linux/./Pot/Config/config.h
 ./Pot/Time/time.h

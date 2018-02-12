@@ -152,6 +152,7 @@ CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Cycle/myGame.cpp.o
  ../../Source/./Pot/Game/unique.h
  ../../Source/./Pot/Game/updater.h
  ../../Source/./Pot/Input/Android/inputAndroid.h
+ ../../Source/./Pot/Input/GLUT/inputGLUT.h
  ../../Source/./Pot/Input/Windows/inputWindows.h
  ../../Source/./Pot/Input/XInput/inputXInput.h
  ../../Source/./Pot/Input/input.h
@@ -483,6 +484,7 @@ CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/Game/lightComp
  /home/saito/デスクトップ/CPot/Source/Pot/Game/lightComponent.cpp
 CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/Game/renderer.cpp.o
  ../../Source/././Pot/Game/renderer.h
+ ../../Source/./Pot/Application/Android/android_native_app_glue.h
  ../../Source/./Pot/Atom/Standard/mathStandard.h
  ../../Source/./Pot/Atom/Standard/toStringStandard.h
  ../../Source/./Pot/Atom/atom.h
@@ -501,13 +503,118 @@ CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/Game/renderer.
  ../../Source/./Pot/Atom/type.h
  ../../Source/./Pot/Atom/typedef.h
  ../../Source/./Pot/Atom/vector.h
+ ../../Source/./Pot/Config/Android/configAndroid.h
+ ../../Source/./Pot/Config/Linux/configLinux.h
+ ../../Source/./Pot/Config/Windows/configWindows.h
+ ../../Source/./Pot/Config/config.h
+ ../../Source/./Pot/File/Android/fileAndroid.h
+ ../../Source/./Pot/File/Standard/fileStandard.h
+ ../../Source/./Pot/File/file.h
  ../../Source/./Pot/Game/component.h
  ../../Source/./Pot/Game/type.h
+ ../../Source/./Pot/List/Android/hashTableAndroid.h
  ../../Source/./Pot/List/Android/vectorAndroid.h
+ ../../Source/./Pot/List/Standard/hashTableStandard.h
  ../../Source/./Pot/List/Standard/vectorStandard.h
+ ../../Source/./Pot/List/hashTable.h
  ../../Source/./Pot/List/vector.h
+ ../../Source/./Pot/Out/out.h
+ ../../Source/./Pot/Render/DirectX11/Platform/blendStateDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/bufferDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/constantBufferDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/depthStencilStateDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/depthStencilViewDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/deviceDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/elementManagerDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/indexBufferDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/rasterizerStateDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/renderDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/renderTargetViewDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/samplerStateDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/shaderDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/shaderManagerDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/shaderResourceViewDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/stateDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/textureAllDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/textureDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/unorderedAccessViewDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/usefullDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/vertexBufferDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/viewDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/Platform/viewportDirectX11Platform.h
+ ../../Source/./Pot/Render/DirectX11/blendDirectX11.h
+ ../../Source/./Pot/Render/DirectX11/constantBufferDirectX11.h
+ ../../Source/./Pot/Render/DirectX11/depthStencilDirectX11.h
+ ../../Source/./Pot/Render/DirectX11/indexBufferDirectX11.h
+ ../../Source/./Pot/Render/DirectX11/rasterizerDirectX11.h
+ ../../Source/./Pot/Render/DirectX11/renderDirectX11.h
+ ../../Source/./Pot/Render/DirectX11/samplerDirectX11.h
+ ../../Source/./Pot/Render/DirectX11/shaderDirectX11.h
+ ../../Source/./Pot/Render/DirectX11/texture2DDirectX11.h
+ ../../Source/./Pot/Render/DirectX11/vertexBufferDirectX11.h
+ ../../Source/./Pot/Render/DirectX11/viewportDirectX11.h
+ ../../Source/./Pot/Render/OpenGL/Platform/arrayBufferOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/bitmap.h
+ ../../Source/./Pot/Render/OpenGL/Platform/blendOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/bufferOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/cullOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/depthBufferOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/depthOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/deviceOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/deviceOpenGLPlatformAndroid.h
+ ../../Source/./Pot/Render/OpenGL/Platform/deviceOpenGLPlatformLinux.h
+ ../../Source/./Pot/Render/OpenGL/Platform/deviceOpenGLPlatformWindows.h
+ ../../Source/./Pot/Render/OpenGL/Platform/elementArrayBufferOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/frameBufferOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/inputLayoutOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/loadBmp.h
+ ../../Source/./Pot/Render/OpenGL/Platform/loadPng.h
+ ../../Source/./Pot/Render/OpenGL/Platform/managerOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/renderOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/samplerOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/shaderOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/stencilOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/textureOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/uniformBufferOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/vertexArrayObjectOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/Platform/viewportOpenGLPlatform.h
+ ../../Source/./Pot/Render/OpenGL/blendOpenGL.h
+ ../../Source/./Pot/Render/OpenGL/constantBufferOpenGL.h
+ ../../Source/./Pot/Render/OpenGL/depthStencilOpenGL.h
+ ../../Source/./Pot/Render/OpenGL/indexBufferOpenGL.h
+ ../../Source/./Pot/Render/OpenGL/rasterizerOpenGL.h
+ ../../Source/./Pot/Render/OpenGL/renderOpenGL.h
+ ../../Source/./Pot/Render/OpenGL/samplerOpenGL.h
+ ../../Source/./Pot/Render/OpenGL/shaderOpenGL.h
+ ../../Source/./Pot/Render/OpenGL/texture2DOpenGL.h
+ ../../Source/./Pot/Render/OpenGL/vertexBufferOpenGL.h
+ ../../Source/./Pot/Render/OpenGL/viewportOpenGL.h
+ ../../Source/./Pot/Render/blend.h
+ ../../Source/./Pot/Render/camera.h
+ ../../Source/./Pot/Render/constantBuffer.h
+ ../../Source/./Pot/Render/depthStencil.h
+ ../../Source/./Pot/Render/indexBuffer.h
+ ../../Source/./Pot/Render/light.h
+ ../../Source/./Pot/Render/rasterizer.h
+ ../../Source/./Pot/Render/render.h
+ ../../Source/./Pot/Render/sampler.h
+ ../../Source/./Pot/Render/shader.h
+ ../../Source/./Pot/Render/texture2D.h
+ ../../Source/./Pot/Render/vertexBuffer.h
+ ../../Source/./Pot/Render/viewport.h
+ ../../Source/./Pot/Thread/Android/mutexAndroid.h
+ ../../Source/./Pot/Thread/Standard/mutexStandard.h
+ ../../Source/./Pot/Thread/mutex.h
+ ../../Source/./Pot/Thread/mutexLocker.h
  ../../Source/./Pot/Usefull/buffer.h
+ ../../Source/./Pot/Usefull/namedResource.h
+ ../../Source/./Pot/Usefull/path.h
+ ../../Source/./Pot/Usefull/resourceLoadList.h
  ../../Source/./Pot/Usefull/singleton.h
+ ../../Source/./Pot/Window/Windows/cursorWindows.h
+ ../../Source/./Pot/Window/Windows/windowWindows.h
+ ../../Source/Pot/ThirdParty/Include/Zlib/zconf.h
+ ../../Source/Pot/ThirdParty/Include/Zlib/zlib.h
  /home/saito/デスクトップ/CPot/Source/Pot/Game/renderer.cpp
 CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/Game/updater.cpp.o
  ../../Source/././Pot/Game/updater.h
@@ -564,6 +671,7 @@ CMakeFiles/Main.dir/home/saito/デスクトップ/CPot/Source/Pot/Linux/gameMain
  ../../Source/./Pot/Config/Windows/configWindows.h
  ../../Source/./Pot/Config/config.h
  ../../Source/./Pot/Game/game.h
+ ../../Source/./Pot/Input/GLUT/inputGLUT.h
  ../../Source/./Pot/Linux/gameMain.h
  ../../Source/./Pot/List/Android/vectorAndroid.h
  ../../Source/./Pot/List/Standard/vectorStandard.h

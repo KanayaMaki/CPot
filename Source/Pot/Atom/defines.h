@@ -74,7 +74,7 @@ namespace cpot {
 #define CPOT_ON_OPENGL
 #endif
 
-#elif define CPOT_ON_LINUX
+#elif defined CPOT_ON_LINUX
 
 #define CPOT_ON_OPENGL
 

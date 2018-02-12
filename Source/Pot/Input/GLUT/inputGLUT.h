@@ -115,7 +115,8 @@ enum CInputAxisCode {
 //Windowsでの入力が有効なら
 #ifdef CPOT_VALID_INPUT_GLUT
 
-#include <GL/glut.h>
+#include <GL/glew.h>
+#include <GL/freeglut.h>
 #include "./Pot/Config/config.h"
 
 namespace cpot {
@@ -291,7 +292,7 @@ public:
 	//入力された値
 	f32 GetValue(CInputCode aCode) const {
 		if (aCode <= CInputCode::cF12) {
-			return mData.mKey.IsStand(TransList[aCode]) ? 1.0f : 0.0f;
+			return mData.mKey.IsStand(aCode) ? 1.0f : 0.0f;
 		}
 		else if (aCode == CInputCode::cMouseCursorX) {
 			return GetMouseLocX();
@@ -308,8 +309,8 @@ public:
 		else if (aCode == CInputCode::cMouseWheel) {
 			return mData.mMouseWheel;
 		}
-		else if (aCode <= CInputCode::cMouseButton4) {
-			return mData.mMouseButton.IsStand(aCode - cMouseButton1) ? 1.0f : 0.0f;
+		else if (aCode <= CInputCode::cMouseButtonRight) {
+			return mData.mMouseButton.IsStand(aCode - cMouseButtonLeft) ? 1.0f : 0.0f;
 		}
 		else {
 			return 0.0f;
@@ -317,7 +318,7 @@ public:
 	}
 	f32 GetValueBefore(CInputCode aCode) const {
 		if (aCode <= CInputCode::cF12) {
-			return mBeforeData.mKey.IsStand(TransList[aCode]) ? 1.0f : 0.0f;
+			return mBeforeData.mKey.IsStand(aCode) ? 1.0f : 0.0f;
 		}
 		else if (aCode == CInputCode::cMouseCursorX) {
 			return GetBeforeMouseLocX();
@@ -328,8 +329,8 @@ public:
 		else if (aCode == CInputCode::cMouseWheel) {
 			return mBeforeData.mMouseWheel;
 		}
-		else if (aCode <= CInputCode::cMouseButton4) {
-			return mBeforeData.mMouseButton.IsStand(aCode - cMouseButton1) ? 1.0f : 0.0f;
+		else if (aCode <= CInputCode::cMouseButtonRight) {
+			return mBeforeData.mMouseButton.IsStand(aCode - cMouseButtonLeft) ? 1.0f : 0.0f;
 		}
 		else {
 			return 0.0f;
@@ -338,7 +339,7 @@ public:
 
 	BOOL GetButton(CInputCode aCode) const {
 		if (aCode <= CInputCode::cF12) {
-			return mData.mKey.IsStand(TransList[aCode]);
+			return mData.mKey.IsStand(aCode);
 		}
 		else if (aCode == CInputCode::cMouseCursorX) {
 			return GetMouseLocX();
@@ -349,8 +350,8 @@ public:
 		else if (aCode == CInputCode::cMouseWheel) {
 			return mData.mMouseWheel;
 		}
-		else if (aCode <= CInputCode::cMouseButton4) {
-			return mData.mMouseButton.IsStand(aCode - cMouseButton1);
+		else if (aCode <= CInputCode::cMouseButtonRight) {
+			return mData.mMouseButton.IsStand(aCode - cMouseButtonLeft);
 		}
 		else {
 			return false;
@@ -358,7 +359,7 @@ public:
 	}
 	BOOL GetButtonBefore(CInputCode aCode) const {
 		if (aCode <= CInputCode::cF12) {
-			return mBeforeData.mKey.IsStand(TransList[aCode]);
+			return mBeforeData.mKey.IsStand(aCode);
 		}
 		else if (aCode == CInputCode::cMouseCursorX) {
 			return GetBeforeMouseLocX();
@@ -369,8 +370,8 @@ public:
 		else if (aCode == CInputCode::cMouseWheel) {
 			return mBeforeData.mMouseWheel;
 		}
-		else if (aCode <= CInputCode::cMouseButton4) {
-			return mBeforeData.mMouseButton.IsStand(aCode - cMouseButton1);
+		else if (aCode <= CInputCode::cMouseButtonRight) {
+			return mBeforeData.mMouseButton.IsStand(aCode - cMouseButtonLeft);
 		}
 		else {
 			return false;
