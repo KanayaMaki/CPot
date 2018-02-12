@@ -271,6 +271,12 @@ private:
 				return CInputCode::cF8;
 			case GLUT_KEY_F9:
 				return CInputCode::cF9;
+			case GLUT_KEY_F10:
+				return CInputCode::cF10;
+			case GLUT_KEY_F11:
+				return CInputCode::cF11;
+			case GLUT_KEY_F12:
+				return CInputCode::cF12;
 			case GLUT_KEY_LEFT:
 				return CInputCode::cLeft;
 			case GLUT_KEY_UP:

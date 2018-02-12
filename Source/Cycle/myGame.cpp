@@ -584,21 +584,6 @@ void MyGame::Update() {
 	if (Input::GetButton(windows::cL)) {
 		//windows::Window::S().SetCursorPos(Vector2(100.0f, 100.0f));
 	}
-	
-	//プレイヤーを回転させる
-	const f32 cRotateSpeed = ToRad(45.0f);
-	if (Input::GetButtonDown(windows::cU)) {
-		GameObject::Find("Box")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), cRotateSpeed));
-	}
-	if (Input::GetButtonDown(windows::cI)) {
-		GameObject::Find("Box")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Right(), cRotateSpeed));
-	}
-	if (Input::GetButtonDown(windows::cO)) {
-		GameObject::Find("Box")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Forward(), cRotateSpeed));
-	}
-	if (Input::GetButtonDown(windows::cP)) {
-		GameObject::Find("Box")->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), 0.0f));
-	}
 
 
 	//ミクのモデルの移動
@@ -611,7 +596,7 @@ void MyGame::Update() {
 	}
 
 	//スペースキーが押されたら
-	if (Input::GetButton(windows::cSpace) || Input::GetButton(glut::cSpace)) {
+	if (Input::GetButton(cSpace)) {
 		//アニメーションを止める
 		isAnimation = false;
 		positionAnimation.SetTime(0.0f);
