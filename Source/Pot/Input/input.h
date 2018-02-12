@@ -72,6 +72,7 @@ enum CKeyCode {
 	cRight,
 	cDown,
 	cSpace,
+	cEsc,
 };
 
 inline windows::CInputCode ConvertKeyCodeToWindowsInputCode(CKeyCode aCode) {
@@ -95,6 +96,8 @@ inline windows::CInputCode ConvertKeyCodeToWindowsInputCode(CKeyCode aCode) {
 			return windows::CInputCode::cDown;
 		case CKeyCode::cSpace:
 			return windows::CInputCode::cSpace;
+		case CKeyCode::cEsc:
+			return windows::CInputCode::cEsc;
 	}
 
 
@@ -121,6 +124,8 @@ inline glut::CInputCode ConvertKeyCodeToGLUTInputCode(CKeyCode aCode) {
 			return glut::CInputCode::cDown;
 		case CKeyCode::cSpace:
 			return glut::CInputCode::cSpace;
+		case CKeyCode::cEsc:
+			return glut::CInputCode::cEsc;
 	}
 
 	return glut::cNull;

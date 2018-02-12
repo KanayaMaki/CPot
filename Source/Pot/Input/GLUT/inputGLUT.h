@@ -225,6 +225,8 @@ private:
 		switch (key) {
 			case ' ':
 				return CInputCode::cSpace;
+			case 0x1b:
+				return CInputCode::cEsc;
 		}
 		if ('a' <= key && key <= 'z') {
 			return CInputCode(CInputCode::cA + (key - 'a'));
