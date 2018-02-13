@@ -388,7 +388,7 @@ void MyGame::Init() {
 	ResourceList<DepthStencil>::S().Regist(depthStencilTest);
 
 	depthStencilNoTest.reset(new DepthStencil);
-	depthStencilNoTest->Load(DepthStencil::cTest);
+	depthStencilNoTest->Load(DepthStencil::cNoTest);
 	depthStencilNoTest->SetName("NoTest");
 	ResourceList<DepthStencil>::S().Regist(depthStencilNoTest);
 
@@ -539,6 +539,16 @@ void MyGame::Init() {
 		lObject->GetComponent<SpriteRenderer>()->texture = ResourceList<Texture2D>::S().Find("RenderTarget");
 	}
 	//*/
+
+	{
+		GameObject* lObject = new GameObject;
+		lObject->SetName("lSprite");
+		lObject->AddComponent<SpriteRenderer>();
+		lObject->GetComponent<SpriteRenderer>()->renderTarget = ResourceList<Texture2D>::S().Find("BackBuffer");
+		lObject->GetComponent<SpriteRenderer>()->renderTargetDepth = ResourceList<Texture2D>::S().Find("BackBufferDepth");
+		lObject->GetComponent<SpriteRenderer>()->texture = ResourceList<Texture2D>::S().Find("RenderTarget");
+		lObject->GetComponent<SpriteRenderer>()->sprite.quad.SetRect(Vector2(0.0f, 0.0f), Config::S().GetScreenSize() / 4.0f);
+	}
 
 	/*
 	{

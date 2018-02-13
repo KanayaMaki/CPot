@@ -159,6 +159,7 @@ public:
 	s32 priority;
 	SpriteMesh sprite;
 	std::shared_ptr<Blend> blend;
+	
 	std::shared_ptr<Texture2D> renderTarget;
 	std::shared_ptr<Texture2D> renderTargetDepth;
 

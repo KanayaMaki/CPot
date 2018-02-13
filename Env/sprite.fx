@@ -10,7 +10,11 @@ PS_INPUT VS_MAIN(VS_INPUT input) {
 
 	PS_INPUT output;
 
-	output.PosProj = float4(input.Pos, 1.0f);
+	float4 lPosProj = MultiP(float4(input.Pos, 1.0f), World);
+	lPosProj = MultiP(lPosProj, View);
+	lPosProj = MultiP(lPosProj, Projection);
+
+	output.PosProj = lPosProj;
 	output.Tex = input.Tex;
 
 	return output;
