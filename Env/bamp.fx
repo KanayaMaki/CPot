@@ -5,78 +5,59 @@ SamplerState BampSampler : register(s1);
 
 
 struct VS_BAMP_INPUT {
-	float3 Pos : POSITION;   // ’¸“_À•W(ƒ‚ƒfƒ‹À•WŒn)
-	float3 Nor : NORMAL;	// –@üƒxƒNƒgƒ‹(ƒ‚ƒfƒ‹À•WŒn)
-	float3 Tan : TANGENT;	// ÚüƒxƒNƒgƒ‹(ƒ‚ƒfƒ‹À•WŒn)
-	float3 BiNor : BINORMAL;	// ]–@üƒxƒNƒgƒ‹(ƒ‚ƒfƒ‹À•WŒn)
-	float2 Tex : TEXTURE;	//ƒeƒNƒXƒ`ƒƒÀ•W
+	float3 Pos : POSITION;   // é ‚ç‚¹åº§æ¨™(ãƒ¢ãƒ‡ãƒ«åº§æ¨™ç³»)
+	float3 Nor : NORMAL;	// æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«(ãƒ¢ãƒ‡ãƒ«åº§æ¨™ç³»)
+	float3 Tan : TANGENT;	// æ¥ç·šãƒ™ã‚¯ãƒˆãƒ«(ãƒ¢ãƒ‡ãƒ«åº§æ¨™ç³»)
+	float3 BiNor : BINORMAL;	// å¾“æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«(ãƒ¢ãƒ‡ãƒ«åº§æ¨™ç³»)
+	float2 Tex : TEXTURE;	//ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
 };
 
 struct PS_INPUT {
-	float4 PosProj	: SV_POSITION; //’¸“_À•WiƒvƒƒWƒFƒNƒVƒ‡ƒ“j
-	float3 PosWor	: POS_WOR; //’¸“_À•Wiƒ[ƒ‹ƒhj
-	float3 ToLightTan : TOLIGHT_TAN;	//Œõ‚Ö‚ÌƒxƒNƒgƒ‹iƒ^ƒ“ƒWƒFƒ“ƒgj
-	float3 ToCameraTan : TOCAMERA_TAN;	//‹“_‚Ö‚ÌƒxƒNƒgƒ‹iƒ^ƒ“ƒWƒFƒ“ƒgj
-	float2 Tex	: TEXTURE;	//ƒeƒNƒXƒ`ƒƒÀ•W
+	float4 PosProj	: SV_POSITION; //é ‚ç‚¹åº§æ¨™ï¼ˆãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³ï¼‰
+	float3 PosWor	: POS_WOR; //é ‚ç‚¹åº§æ¨™ï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰ï¼‰
+	float3 ToLightTan : TOLIGHT_TAN;	//å…‰ã¸ã®ãƒ™ã‚¯ãƒˆãƒ«ï¼ˆã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆï¼‰
+	float3 ToCameraTan : TOCAMERA_TAN;	//è¦–ç‚¹ã¸ã®ãƒ™ã‚¯ãƒˆãƒ«ï¼ˆã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆï¼‰
+	float2 Tex	: TEXTURE;	//ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
 };
-
-
-VS_BAMP_INPUT VS_MAIN(VS_BAMP_INPUT input) {
-	VS_BAMP_INPUT output;
-	output = input;
-	return output;
-}
-
 
 float3 TransformToTangentSpace(float3 aVec, float3 aNormal, float3 aTangent, float3 aBiNormal) {
 
-	matrix lTanToLoc = matrix(
-		float4(aTangent.x, aTangent.y, aTangent.z, 0.0f),
-		float4(aBiNormal.x, aBiNormal.y, aBiNormal.z, 0.0f),
-		float4(aNormal.x, aNormal.y, aNormal.z, 0.0f),
-		float4(0.0f, 0.0f, 0.0f, 1.0f)
-		);
+	matrix lTanToLoc = CreateMatrixP(aTangent, aBiNormal, aNormal);
 	matrix lLocToTan = transpose(lTanToLoc);
 
-	float3 lVecTan = Mul(aVec, lLocToTan);
+	float3 lVecTan = MultiP(aVec, lLocToTan);
 
 	return lVecTan;
 }
 
-float3 GetBampNormalTan(Texture2D lBampTexture, SamplerState lBampSampler, float2 aTexCoord) {
-	float3 lBampNormalTan = lBampTexture.Sample(lBampSampler, aTexCoord).xyz * 2.0f - 1.0f;
-	lBampNormalTan.xy *= -1.0f;	//‰EèŒnÀ•W‚©‚ç¶èŒnÀ•W‚Ö‚Ì•ÏŠ·
+float3 GetBampNormalTan(float2 aTexCoord) {
+	float3 lBampNormalTan = BampTexture.Sample(BampSampler, float2(aTexCoord.x, aTexCoord.y)).xyz * 2.0f - 1.0f;
+	lBampNormalTan.xy *= -1.0f;	//å³æ‰‹ç³»åº§æ¨™ã‹ã‚‰å·¦æ‰‹ç³»åº§æ¨™ã¸ã®å¤‰æ›
 	return lBampNormalTan;
 }
 
-// ƒWƒIƒƒgƒŠ ƒVƒF[ƒ_‚ÌŠÖ”
-[maxvertexcount(3)]
-void GS_MAIN(triangle VS_BAMP_INPUT input[3],
-	inout TriangleStream<PS_INPUT> TriStream) {
+
+PS_INPUT VS_MAIN(VS_BAMP_INPUT input) {
 
 	PS_INPUT output;
 
-	for (int i = 0; i < 3; ++i) {
-		
-		//ƒ[ƒ‹ƒhÀ•W‚Å‚ÌˆÊ’u
-		float4 lPosWor = mul(float4(input[i].Pos, 1.0f), World);
-		output.PosWor = lPosWor.xyz / lPosWor.w;
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã§ã®ä½ç½®
+	float4 lPosWor = MultiP(float4(input.Pos, 1.0f), World);
+	output.PosWor = lPosWor.xyz / lPosWor.w;
 
-		//ƒvƒƒWƒFƒNƒVƒ‡ƒ“À•W‚Å‚ÌˆÊ’u
-		float4 lPosView = mul(lPosWor, View);
-		float4 lPosProj = mul(lPosView, Projection);
-		output.PosProj = lPosProj;
+	//ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³åº§æ¨™ã§ã®ä½ç½®
+	float4 lPosView = MultiP(lPosWor, View);
+	float4 lPosProj = MultiP(lPosView, Projection);
+	output.PosProj = lPosProj;
 
-		output.ToLightTan = TransformToTangentSpace(ToLight, input[i].Nor, input[i].Tan, input[i].BiNor);
+	output.ToLightTan = TransformToTangentSpace(ToLight, input.Nor, input.Tan, input.BiNor);
 
-		float3 lToCamera = CameraPositionLoc - input[i].Pos;
-		output.ToCameraTan = TransformToTangentSpace(normalize(lToCamera), input[i].Nor, input[i].Tan, input[i].BiNor);
+	float3 lToCamera = CameraPositionLoc - input.Pos;
+	output.ToCameraTan = TransformToTangentSpace(normalize(lToCamera), input.Nor, input.Tan, input.BiNor);
 
-		output.Tex = input[i].Tex;
+	output.Tex = input.Tex;
 
-		TriStream.Append(output);
-	}
-	TriStream.RestartStrip();
+	return output;
 }
 
 
@@ -89,31 +70,31 @@ PS_OUTPUT PS_MAIN(PS_INPUT input) {
 
 	PS_OUTPUT output;
 
-	//ƒ^ƒ“ƒWƒFƒ“ƒg‹óŠÔ‚Å‚Ì–@üƒxƒNƒgƒ‹‚Ìæ“¾
-	float3 bampNormalTan = GetBampNormalTan(BampTexture, BampSampler, input.Tex);
-	
-	//
-	//ƒfƒBƒtƒ…[ƒY‚ÌŒvZ
-	float4 diffuse = float4(1.0f, 1.0f, 1.0f, 1.0f);
-	diffuse *= Diffuse;	//ƒ}ƒeƒŠƒAƒ‹F‚Ì“K—p
-	float4 diffuseTexel = DiffuseTexture.Sample(DiffuseSampler, input.Tex);
-	diffuse *= diffuseTexel;	//ƒeƒNƒXƒ`ƒƒ‚Ì“K—p
-	float diffuseLighting = Lambert(bampNormalTan, normalize(input.ToLightTan));
-	diffuse.xyz *= diffuseLighting;	//ƒ‰ƒCƒeƒBƒ“ƒO‚Ì“K—p
-	
-	//
-	//ƒXƒyƒLƒ…ƒ‰[‚ÌŒvZ
-	float3 specular = float3(1.0f, 1.0f, 1.0f);
-	//specular.xyz *= Specular;	//ƒXƒyƒLƒ…ƒ‰F‚Ì“K—p
-	float specularLighting = SpecularPhong(normalize(input.ToCameraTan), bampNormalTan, normalize(input.ToLightTan), 20);
-	specular *= specularLighting;	//ƒ‰ƒCƒeƒBƒ“ƒO‚Ì“K—p
+	//ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆç©ºé–“ã§ã®æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ã®å–å¾—
+	float3 bampNormalTan = GetBampNormalTan(input.Tex);
 
-	//ŒvZ‚µ‚½F‚ğ‘«‚µ‡‚í‚¹‚é
+	//
+	//ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚ºã®è¨ˆç®—
+	float4 diffuse = float4(1.0f, 1.0f, 1.0f, 1.0f);
+	diffuse *= Diffuse;	//ãƒãƒ†ãƒªã‚¢ãƒ«è‰²ã®é©ç”¨
+	float4 diffuseTexel = DiffuseTexture.Sample(DiffuseSampler, float2(input.Tex.x, input.Tex.y));
+	diffuse *= diffuseTexel;	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®é©ç”¨
+	float diffuseLighting = Lambert(bampNormalTan, normalize(input.ToLightTan));
+	diffuse.xyz *= diffuseLighting;	//ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã®é©ç”¨
+
+	//
+	//ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒ¼ã®è¨ˆç®—
+	float3 specular = float3(1.0f, 1.0f, 1.0f);
+	//specular.xyz *= Specular;	//ã‚¹ãƒšã‚­ãƒ¥ãƒ©è‰²ã®é©ç”¨
+	float specularLighting = SpecularPhong(normalize(input.ToCameraTan), bampNormalTan, normalize(input.ToLightTan), 20);
+	specular *= specularLighting;	//ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã®é©ç”¨
+
+	//è¨ˆç®—ã—ãŸè‰²ã‚’è¶³ã—åˆã‚ã›ã‚‹
 	float4 color = float4(0.0f, 0.0f, 0.0f, 0.0f);
 	color += diffuse;
 	color += float4(specular.xyz, 0.0f);
 
-	//ƒAƒ‹ƒtƒ@‚Í1.0‚ğ’´‚¦‚È‚¢
+	//ã‚¢ãƒ«ãƒ•ã‚¡ã¯1.0ã‚’è¶…ãˆãªã„
 	color.a = min(color.a, 1.0f);
 
 	output.Diffuse = color;

@@ -235,35 +235,35 @@ void MyGame::Init() {
 	directX11::ShaderDirectX11Data::S().Regist("Lambert",
 	{
 		{ "./lambert.fx", "VS_MAIN" },
-		{ "./lambert.fx", "GS_MAIN" },
+		{ "", "" },
 		{ "./lambert.fx", "PS_MAIN" },
 	});
 
 	directX11::ShaderDirectX11Data::S().Regist("Toon",
 	{
 		{ "./toon.fx", "VS_MAIN" },
-		{ "./toon.fx", "GS_MAIN" },
+		{ "", "" },
 		{ "./toon.fx", "PS_MAIN" },
 	});
 
 	directX11::ShaderDirectX11Data::S().Regist("ToonLine",
 	{
 		{ "./toonLine.fx", "VS_MAIN" },
-		{ "./toonLine.fx", "GS_MAIN" },
+		{ "", "" },
 		{ "./toonLine.fx", "PS_MAIN" },
 	});
 
 	directX11::ShaderDirectX11Data::S().Regist("Bamp",
 	{
 		{ "./bamp.fx", "VS_MAIN" },
-		{ "./bamp.fx", "GS_MAIN" },
+		{ "", "" },
 		{ "./bamp.fx", "PS_MAIN" },
 	});
 
 	directX11::ShaderDirectX11Data::S().Regist("Sprite",
 	{
 		{ "./sprite.fx", "VS_MAIN" },
-		{ "./sprite.fx", "GS_MAIN" },
+		{ "", "" },
 		{ "./sprite.fx", "PS_MAIN" },
 	});
 

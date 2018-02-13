@@ -1,39 +1,25 @@
 #include "./union.fx"
 
-cbuffer cToonLineBuffer : register(b3) { // í‚ÉƒXƒƒbƒgu0v‚ğg‚¤
-	float LineWidth;	//’¸“_‚ğ–@ü•ûŒü‚ÉL‚Î‚·’·‚³
+cbuffer cToonLineBuffer : register(b3) { // å¸¸ã«ã‚¹ãƒ­ãƒƒãƒˆã€Œ0ã€ã‚’ä½¿ã†
+	float LineWidth;	//é ‚ç‚¹ã‚’æ³•ç·šæ–¹å‘ã«ä¼¸ã°ã™é•·ã•
 };
 
 struct PS_INPUT {
-	float4 PosProj	: SV_POSITION; //’¸“_À•WiƒvƒƒWƒFƒNƒVƒ‡ƒ“j
+	float4 PosProj	: SV_POSITION; //é ‚ç‚¹åº§æ¨™ï¼ˆãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³ï¼‰
 };
 
 
 VS_INPUT VS_MAIN(VS_INPUT input) {
-	VS_INPUT output;
-	output = input;
-	return output;
-}
-
-// ƒWƒIƒƒgƒŠ ƒVƒF[ƒ_‚ÌŠÖ”
-[maxvertexcount(3)]
-void GS_MAIN(triangle VS_INPUT input[3],
-	inout TriangleStream<PS_INPUT> TriStream) {
-
 	PS_INPUT output;
 
-	for (int i = 0; i < 3; ++i) {
+	float3 lModelPos = input.Pos + input.Nor * LineWidth;
 
-		float3 lModelPos = input[i].Pos + input[i].Nor * LineWidth;
+	float4 lWorldPos = MultiP(float4(lModelPos, 1.0f), World);
 
-		float4 lWorldPos = mul(float4(lModelPos, 1.0f), World);
+	float4 lViewPos = MultiP(lWorldPos, View);
+	output.PosProj = MultiP(lViewPos, Projection);
 
-		float4 lViewPos = mul(lWorldPos, View);
-		output.PosProj = mul(lViewPos, Projection);
-
-		TriStream.Append(output);
-	}
-	TriStream.RestartStrip();
+	return output;
 }
 
 

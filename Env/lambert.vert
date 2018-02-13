@@ -1,9 +1,11 @@
 #version 450 core
-layout(location = 0) in vec3 InPosWor;
-layout(location = 1) in vec3 InNorWor;
+layout(location = 0) in vec3 InPos;
+layout(location = 1) in vec3 InNor;
 layout(location = 2) in vec2 InTex;
 
-layout(location = 0) out vec4 OutDiffuse;
+layout(location = 0) out vec4 OutPosWor;
+layout(location = 1) out vec4 OutNorWor;
+layout(location = 2) out vec2 OutTex;
 
 layout(binding = 0, column_major) uniform cWVPBuffer {
 	mat4x4 World;
@@ -28,7 +30,6 @@ layout(binding = 2, column_major) uniform cTimerBuffer {
 };
 
 layout(binding = 0) uniform sampler2D DiffuseTexture;
-layout(binding = 1) uniform sampler2D ToonTexture;
 
 
 vec4 MultiP(vec4 aVector, mat4x4 aMatrix) {
@@ -60,20 +61,16 @@ float SpecularPhong(vec3 aToView, vec3 aNor, vec3 aToLight, int aSpecularPow) {
 	return specular;
 }
 void main() {
-
 	
 
-	float lighting = HalfLambert(InNorWor, -LightDirection);
-	vec4 toonTexel = texture(ToonTexture, vec2(lighting, 1.0 - (1.0 - lighting)));
+	OutPosWor = MultiP(vec4(InPos, 1.0), World);
 
-	vec4 diffuseTexel = texture(DiffuseTexture, vec2(InTex.x, 1.0 - (InTex.y)));
+	gl_Position = MultiP(OutPosWor, View);
+	gl_Position = MultiP(gl_Position, Projection);
 
-	vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
-	color *= Diffuse;
-	color *= diffuseTexel;
-	color.xyz *= toonTexel.xyz;
+	OutNorWor = MultiP(vec4(InNor, 1.0), NorWorld);
 
-	OutDiffuse = color;
+	OutTex = InTex;
 
 	return;
 }

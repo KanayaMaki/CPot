@@ -1,6 +1,6 @@
 #version 450 core
-layout(location = 0) in vec3 InPosWor;
-layout(location = 1) in vec3 InNorWor;
+layout(location = 0) in vec4 InPosWor;
+layout(location = 1) in vec4 InNorWor;
 layout(location = 2) in vec2 InTex;
 
 layout(location = 0) out vec4 OutDiffuse;
@@ -28,7 +28,6 @@ layout(binding = 2, column_major) uniform cTimerBuffer {
 };
 
 layout(binding = 0) uniform sampler2D DiffuseTexture;
-layout(binding = 1) uniform sampler2D ToonTexture;
 
 
 vec4 MultiP(vec4 aVector, mat4x4 aMatrix) {
@@ -63,16 +62,13 @@ void main() {
 
 	
 
-	float lighting = HalfLambert(InNorWor, -LightDirection);
-	vec4 toonTexel = texture(ToonTexture, vec2(lighting, 1.0 - (1.0 - lighting)));
-
+	float lighting = HalfLambert(InNorWor.xyz / InNorWor.w , -LightDirection);
 	vec4 diffuseTexel = texture(DiffuseTexture, vec2(InTex.x, 1.0 - (InTex.y)));
 
 	vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
 	color *= Diffuse;
 	color *= diffuseTexel;
-	color.xyz *= toonTexel.xyz;
-
+	color.xyz *= lighting;
 	OutDiffuse = color;
 
 	return;

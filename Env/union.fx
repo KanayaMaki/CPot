@@ -1,22 +1,22 @@
-// ’è”ƒoƒbƒtƒ@‚Ìƒf[ƒ^’è‹`
-cbuffer cWVPBuffer : register(b0) { // í‚ÉƒXƒƒbƒgu0v‚ğg‚¤
-	matrix World;      // ƒ[ƒ‹ƒh•ÏŠ·s—ñ
-	matrix View;   // ƒrƒ…[•ÏŠ·s—ñ
-	matrix Projection;   // “§‹•ÏŠ·s—ñ
-	matrix NorWorld;      // ƒ[ƒ‹ƒh•ÏŠ·s—ñ
+// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ãƒ‡ãƒ¼ã‚¿å®šç¾©
+cbuffer cWVPBuffer : register(b0) { // å¸¸ã«ã‚¹ãƒ­ãƒƒãƒˆã€Œ0ã€ã‚’ä½¿ã†
+	matrix World;      // ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—
+	matrix View;   // ãƒ“ãƒ¥ãƒ¼å¤‰æ›è¡Œåˆ—
+	matrix Projection;   // é€è¦–å¤‰æ›è¡Œåˆ—
+	matrix NorWorld;      // ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—
 };
-// ’è”ƒoƒbƒtƒ@‚Ìƒf[ƒ^’è‹`
-cbuffer cDiffuseBuffer : register(b1) { // í‚ÉƒXƒƒbƒgu0v‚ğg‚¤
+// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ãƒ‡ãƒ¼ã‚¿å®šç¾©
+cbuffer cDiffuseBuffer : register(b1) { // å¸¸ã«ã‚¹ãƒ­ãƒƒãƒˆã€Œ0ã€ã‚’ä½¿ã†
 	float4 Diffuse;
 };
-cbuffer cTimerBuffer : register(b2) { // í‚ÉƒXƒƒbƒgu0v‚ğg‚¤
+cbuffer cTimerBuffer : register(b2) { // å¸¸ã«ã‚¹ãƒ­ãƒƒãƒˆã€Œ0ã€ã‚’ä½¿ã†
 	float3 LightDirection;
 	float _Dummy0;
 	float3 CameraPosition;
 	float _Dummy1;
-	float3 ToLight;	//ƒ‰ƒCƒg‚Ö‚ÌƒxƒNƒgƒ‹iƒ[ƒJƒ‹j
+	float3 ToLight;	//ãƒ©ã‚¤ãƒˆã¸ã®ãƒ™ã‚¯ãƒˆãƒ«ï¼ˆãƒ­ãƒ¼ã‚«ãƒ«ï¼‰
 	float _Dummy3;
-	float3 CameraPositionLoc;	//ƒJƒƒ‰À•Wiƒ[ƒJƒ‹j
+	float3 CameraPositionLoc;	//ã‚«ãƒ¡ãƒ©åº§æ¨™ï¼ˆãƒ­ãƒ¼ã‚«ãƒ«ï¼‰
 	float _Dummy4;
 };
 
@@ -26,11 +26,45 @@ SamplerState DiffuseSampler : register(s0);
 
 
 struct VS_INPUT {
-	float3 Pos : POSITION;   // ’¸“_À•W(ƒ‚ƒfƒ‹À•WŒn)
-	float3 Nor : NORMAL;	// –@üƒxƒNƒgƒ‹(ƒ‚ƒfƒ‹À•WŒn)
-	float2 Tex : TEXTURE;	//ƒeƒNƒXƒ`ƒƒÀ•W
+	float3 Pos : POSITION;   // é ‚ç‚¹åº§æ¨™(ãƒ¢ãƒ‡ãƒ«åº§æ¨™ç³»)
+	float3 Nor : NORMAL;	// æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«(ãƒ¢ãƒ‡ãƒ«åº§æ¨™ç³»)
+	float2 Tex : TEXTURE;	//ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
 };
 
+
+//<HLSLRegion>
+float4 MultiP(float4 aVector, matrix aMatrix) {
+	return mul(aVector, aMatrix);
+}
+
+//ä¸‰è»¸ã§ç¤ºã•ã‚Œã‚‹ç©ºé–“ã‹ã‚‰ã€ä¸‰è»¸ãŒå­˜åœ¨ã™ã‚‹ç©ºé–“ã«ç§»å‹•ã™ã‚‹è¡Œåˆ—ã‚’ä½œæˆ
+matrix CreateMatrixP(float3 aVecX, float3 aVecY, float3 aVecZ) {
+	matrix lMatrix = matrix(
+		float4(aVecX.x, aVecX.y, aVecX.z, 0.0f),
+		float4(aVecY.x, aVecY.y, aVecY.z, 0.0f),
+		float4(aVecZ.x, aVecZ.y, aVecZ.z, 0.0f),
+		float4(0.0f, 0.0f, 0.0f, 1.0f)
+		);
+	return lMatrix;
+}
+
+//</HLSLRegion>
+
+/*<GLSLRegion>
+vec4 MultiP(vec4 aVector, mat4x4 aMatrix) {
+	return aVector * aMatrix;
+}
+mat4x4 CreateMatrixP(vec3 aVecX, vec3 aVecY, vec3 aVecZ) {
+	matrix lMatrix = matrix(
+		vec4(aVecX.x, aVecX.y, aVecX.z, 0.0),
+		vec4(aVecY.x, aVecY.y, aVecY.z, 0.0),
+		vec4(aVecZ.x, aVecZ.y, aVecZ.z, 0.0),
+		vec4(0.0f, 0.0f, 0.0f, 1.0f)
+	);
+	return transpose(lMatrix);
+}
+
+*///</GLSLRegion>
 
 
 
@@ -52,8 +86,8 @@ float HalfLambert(float aLighting) {
 	return halfLambert;
 }
 
-float3 Mul(float3 aVector, matrix aMatrix) {
-	float4 lVector = mul(float4(aVector, 1.0f), aMatrix);
+float3 MultiP(float3 aVector, matrix aMatrix) {
+	float4 lVector = MultiP(float4(aVector, 1.0f), aMatrix);
 	return lVector.xyz / lVector.w;
 }
 

@@ -157,14 +157,14 @@ public:
 		return !((*this) == aStr);
 	}
 
-	BOOL operator ==(const CHAR* aStr) {
+	BOOL operator ==(const CHAR* aStr) const {
 		if (StringSame(Get(), aStr)) {
 			return true;
 		}
 		return false;
 	}
 
-	BOOL operator !=(const CHAR* aStr) {
+	BOOL operator !=(const CHAR* aStr) const {
 		return !((*this) == aStr);
 	}
 

@@ -1,40 +1,26 @@
 #include "./union.fx"
 
 struct PS_PHONG_INPUT {
-	float4 PosProj	: SV_POSITION; //’¸“_À•WiƒvƒƒWƒFƒNƒVƒ‡ƒ“j
-	float4 PosWor	: POS_WOR; //’¸“_À•Wiƒ[ƒ‹ƒhj
-	float4 NorWor	: NORMAL;	//–@üƒxƒNƒgƒ‹iƒ[ƒ‹ƒhj
-	float2 Tex	: TEXTURE;	//ƒeƒNƒXƒ`ƒƒÀ•W
+	float4 PosProj	: SV_POSITION; //é ‚ç‚¹åº§æ¨™ï¼ˆãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³ï¼‰
+	float4 PosWor	: POS_WOR; //é ‚ç‚¹åº§æ¨™ï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰ï¼‰
+	float4 NorWor	: NORMAL;	//æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰ï¼‰
+	float2 Tex	: TEXTURE;	//ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
 };
 
 
-VS_INPUT VS_MAIN(VS_INPUT input) {
-	VS_INPUT output;
-	output = input;
-	return output;
-}
-
-// ƒWƒIƒƒgƒŠ ƒVƒF[ƒ_‚ÌŠÖ”
-[maxvertexcount(3)]
-void GS_MAIN(triangle VS_INPUT input[3],
-	inout TriangleStream<PS_PHONG_INPUT> TriStream) {
-
+PS_PHONG_INPUT VS_MAIN(VS_INPUT input) {
 	PS_PHONG_INPUT output;
 
-	for (int i = 0; i < 3; ++i) {
+	output.PosWor = MultiP(float4(input.Pos, 1.0f), World);
 
-		output.PosWor = mul(float4(input[i].Pos, 1.0f), World);
+	output.PosProj = MultiP(output.PosWor, View);
+	output.PosProj = MultiP(output.PosProj, Projection);
 
-		output.PosProj = mul(output.PosWor, View);
-		output.PosProj = mul(output.PosProj, Projection);
+	output.NorWor = MultiP(float4(input.Nor, 1.0f), NorWorld);
 
-		output.NorWor = mul(float4(input[i].Nor, 1.0f), NorWorld);
+	output.Tex = input.Tex;
 
-		output.Tex = input[i].Tex;
-
-		TriStream.Append(output);
-	}
-	TriStream.RestartStrip();
+	return output;
 }
 
 
@@ -49,11 +35,11 @@ PS_OUTPUT PS_MAIN(PS_PHONG_INPUT input) {
 	PS_OUTPUT output;
 
 	float lighting = HalfLambert(input.NorWor.xyz / input.NorWor.w , -LightDirection);
-	float4 diffuseTexel = DiffuseTexture.Sample(DiffuseSampler, input.Tex);
-	
+	float4 diffuseTexel = DiffuseTexture.Sample(DiffuseSampler, float2(input.Tex.x, input.Tex.y));
+
 	float4 color = float4(1.0f, 1.0f, 1.0f, 1.0f);
-	//color *= Diffuse;
-	//color *= diffuseTexel;
+	color *= Diffuse;
+	color *= diffuseTexel;
 	color.xyz *= lighting;
 	output.Diffuse = color;
 

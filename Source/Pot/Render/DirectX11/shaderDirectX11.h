@@ -43,18 +43,38 @@ public:
 
 public:
 	void Load(const HashTableKey& aUnionName) CPOT_OR {
-		mVertexShader->CompileFromFile(
-			ShaderDirectX11Data::S().Get(aUnionName).vertexShader.filePath.Get(),
-			ShaderDirectX11Data::S().Get(aUnionName).vertexShader.entryPoint.Get(),
-			"vs_4_0");
-		mGeometryShader->CompileFromFile(
-			ShaderDirectX11Data::S().Get(aUnionName).geometryShader.filePath.Get(),
-			ShaderDirectX11Data::S().Get(aUnionName).geometryShader.entryPoint.Get(),
-			"gs_4_0");
-		mPixelShader->CompileFromFile(
-			ShaderDirectX11Data::S().Get(aUnionName).pixelShader.filePath.Get(),
-			ShaderDirectX11Data::S().Get(aUnionName).pixelShader.entryPoint.Get(),
-			"ps_4_0");
+		{
+			const cpot::directX11::ShaderLoadDataElement& e = ShaderDirectX11Data::S().Get(aUnionName).vertexShader;
+
+			if (e.filePath != "" && e.entryPoint != "") {
+				mVertexShader->CompileFromFile(
+					e.filePath.Get(),
+					e.entryPoint.Get(),
+					"vs_4_0");
+			}
+		}
+		
+		{
+			const cpot::directX11::ShaderLoadDataElement& e = ShaderDirectX11Data::S().Get(aUnionName).geometryShader;
+
+			if (e.filePath != "" && e.entryPoint != "") {
+				mGeometryShader->CompileFromFile(
+					e.filePath.Get(),
+					e.entryPoint.Get(),
+					"gs_4_0");
+			}
+		}
+
+		{
+			const cpot::directX11::ShaderLoadDataElement& e = ShaderDirectX11Data::S().Get(aUnionName).pixelShader;
+
+			if (e.filePath != "" && e.entryPoint != "") {
+				mPixelShader->CompileFromFile(
+					e.filePath.Get(),
+					e.entryPoint.Get(),
+					"ps_4_0");
+			}
+		}
 	};
 
 public:
