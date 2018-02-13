@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Cycle\autoRotateComponent.h" />
+    <ClInclude Include="..\..\Source\Cycle\morphComponent.h" />
     <ClInclude Include="..\..\Source\Cycle\myGame.h" />
     <ClInclude Include="..\..\Source\Cycle\playerComponent.h" />
     <ClInclude Include="..\..\Source\Cycle\skyWalkComponent.h" />
@@ -69,6 +70,7 @@
     <ClInclude Include="..\..\Source\Pot\Game\gameObject.h" />
     <ClInclude Include="..\..\Source\Pot\Game\lightComponent.h" />
     <ClInclude Include="..\..\Source\Pot\Game\spriteRenderer.h" />
+    <ClInclude Include="..\..\Source\Pot\Game\staticModelRenderer.h" />
     <ClInclude Include="..\..\Source\Pot\Game\staticTangentModelRenderer.h" />
     <ClInclude Include="..\..\Source\Pot\Game\renderer.h" />
     <ClInclude Include="..\..\Source\Pot\Game\toonModelRenderer.h" />

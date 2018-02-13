@@ -73,17 +73,16 @@ float Lambert(float3 aNormal, float3 aToLight) {
 	float3 toLightN = normalize(aToLight);
 
 	float lambert = dot(toLightN, normalN);
-	return lambert;
+	return clamp(lambert, 0.0f, 1.0f);
 }
 
-float HalfLambert(float3 aNormal, float3 aToLight) {
-	float lambert = Lambert(aNormal, aToLight);
-	float halfLambert = pow((lambert * 0.5f + 0.5f), 2);
-	return halfLambert;
-}
 float HalfLambert(float aLighting) {
 	float halfLambert = pow((aLighting * 0.5f + 0.5f), 2);
 	return halfLambert;
+}
+float HalfLambert(float3 aNormal, float3 aToLight) {
+	float lambert = Lambert(aNormal, aToLight);
+	return HalfLambert(lambert);
 }
 
 float3 MultiP(float3 aVector, matrix aMatrix) {

@@ -33,21 +33,29 @@ layout(binding = 0) uniform sampler2D DiffuseTexture;
 vec4 MultiP(vec4 aVector, mat4x4 aMatrix) {
 	return aVector * aMatrix;
 }
+mat4x4 CreateMatrixP(vec3 aVecX, vec3 aVecY, vec3 aVecZ) {
+	mat4x4 lMatrix = mat4x4(
+		vec4(aVecX.x, aVecX.y, aVecX.z, 0.0),
+		vec4(aVecY.x, aVecY.y, aVecY.z, 0.0),
+		vec4(aVecZ.x, aVecZ.y, aVecZ.z, 0.0),
+		vec4(0.0, 0.0, 0.0, 1.0)
+	);
+	return transpose(lMatrix);
+}
 float Lambert(vec3 aNormal, vec3 aToLight) {
 	vec3 normalN = normalize(aNormal);
 	vec3 toLightN = normalize(aToLight);
 
 	float lambert = dot(toLightN, normalN);
-	return lambert;
-}
-float HalfLambert(vec3 aNormal, vec3 aToLight) {
-	float lambert = Lambert(aNormal, aToLight);
-	float halfLambert = pow((lambert * 0.5 + 0.5), 2);
-	return halfLambert;
+	return clamp(lambert, 0.0, 1.0);
 }
 float HalfLambert(float aLighting) {
 	float halfLambert = pow((aLighting * 0.5 + 0.5), 2);
 	return halfLambert;
+}
+float HalfLambert(vec3 aNormal, vec3 aToLight) {
+	float lambert = Lambert(aNormal, aToLight);
+	return HalfLambert(lambert);
 }
 vec3 MultiP(vec3 aVector, mat4x4 aMatrix) {
 	vec4 lVector = MultiP(vec4(aVector, 1.0), aMatrix);

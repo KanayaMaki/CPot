@@ -448,6 +448,8 @@
   <ItemGroup>
     <None Include="..\..\Env\bamp.frag" />
     <None Include="..\..\Env\bamp.vert" />
+    <None Include="..\..\Env\lambert.frag" />
+    <None Include="..\..\Env\lambert.vert" />
     <None Include="..\..\Env\simple.frag" />
     <None Include="..\..\Env\simple.vert" />
     <None Include="..\..\Env\sprite.frag" />

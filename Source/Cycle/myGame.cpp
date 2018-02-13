@@ -34,13 +34,14 @@
 #include "./Cycle/skyWalkComponent.h"
 #include "./Cycle/autoRotateComponent.h"
 #include "./Cycle/playerComponent.h"
+#include "./Cycle/morphComponent.h"
 #include "./Pot/Game/cameraComponent.h"
 #include "./Pot/Game/lightComponent.h"
 
 #include "./Pot/Game/spriteRenderer.h"
+#include "./Pot/Game/staticModelRenderer.h"
 #include "./Pot/Game/staticTangentModelRenderer.h"
 #include "./Pot/Game/toonModelRenderer.h"
-
 
 namespace cpot {
 
@@ -206,16 +207,17 @@ void MyGame::Init() {
 	rotationAnimation.Add(16.0f, Quaternion::YAxis(ToRad(360.0f)));
 	rotationAnimation.SetIsLoop(true);
 
-	const f32 cEdgeHalfLen = 15.0f;
-	positionAnimation.Add(0.0f, Vector3(cEdgeHalfLen, 0.0f, cEdgeHalfLen));
-	positionAnimation.Add(3.0f, Vector3(cEdgeHalfLen, 0.0f, -cEdgeHalfLen));
-	positionAnimation.Add(4.0f, Vector3(cEdgeHalfLen, 0.0f, -cEdgeHalfLen));
-	positionAnimation.Add(7.0f, Vector3(-cEdgeHalfLen, 0.0f, -cEdgeHalfLen));
-	positionAnimation.Add(8.0f, Vector3(-cEdgeHalfLen, 0.0f, -cEdgeHalfLen));
-	positionAnimation.Add(11.0f, Vector3(-cEdgeHalfLen, 0.0f, cEdgeHalfLen));
-	positionAnimation.Add(12.0f, Vector3(-cEdgeHalfLen, 0.0f, cEdgeHalfLen));
-	positionAnimation.Add(15.0f, Vector3(cEdgeHalfLen, 0.0f, cEdgeHalfLen));
-	positionAnimation.Add(16.0f, Vector3(cEdgeHalfLen, 0.0f, cEdgeHalfLen));
+	const f32 cEdgeHalfXLen = 20.0f;
+	const f32 cEdgeHalfZLen = 15.0f;
+	positionAnimation.Add(0.0f, Vector3(cEdgeHalfXLen, 0.0f, cEdgeHalfZLen));
+	positionAnimation.Add(3.0f, Vector3(cEdgeHalfXLen, 0.0f, -cEdgeHalfZLen));
+	positionAnimation.Add(4.0f, Vector3(cEdgeHalfXLen, 0.0f, -cEdgeHalfZLen));
+	positionAnimation.Add(7.0f, Vector3(-cEdgeHalfXLen, 0.0f, -cEdgeHalfZLen));
+	positionAnimation.Add(8.0f, Vector3(-cEdgeHalfXLen, 0.0f, -cEdgeHalfZLen));
+	positionAnimation.Add(11.0f, Vector3(-cEdgeHalfXLen, 0.0f, cEdgeHalfZLen));
+	positionAnimation.Add(12.0f, Vector3(-cEdgeHalfXLen, 0.0f, cEdgeHalfZLen));
+	positionAnimation.Add(15.0f, Vector3(cEdgeHalfXLen, 0.0f, cEdgeHalfZLen));
+	positionAnimation.Add(16.0f, Vector3(cEdgeHalfXLen, 0.0f, cEdgeHalfZLen));
 	positionAnimation.SetIsLoop(true);
 
 
@@ -461,6 +463,49 @@ void MyGame::Init() {
 	{
 		//	箱の読み込み
 		//
+		StaticMeshModelCPU lMeshCPU;
+		PathString lFilePath("./Box/box.pmo");
+		BufferToMesh::Load(lMeshCPU, lFilePath);
+
+		auto model = std::make_shared<StaticMeshModel>();
+		ModelCPUToModel::Load(*model, lMeshCPU, true);
+
+
+		//	ゲームオブジェクトの作成
+		//
+		GameObject* lObject = new GameObject;
+		lObject->SetName("Box");
+		lObject->AddComponent<StaticModelRenderer>();
+		lObject->GetComponent<StaticModelRenderer>()->model = model;
+
+
+		//Morph
+		auto morph = lObject->AddComponent<MorphComponent>();
+		morph->mBefore;
+
+		lMeshCPU.LoadVertex(morph->mBefore);
+		lMeshCPU.LoadVertex(morph->mAfter);
+		lMeshCPU.LoadVertex(morph->mNow);
+
+		for (u32 i = 0; i < lMeshCPU.vertex.GetSize(); i++) {
+			morph->mAfter[i].position = ((morph->mAfter[i].position - Vector3(0.0f, 0.0f, 0.0f)).NormalSafe() * 10.0f);
+		}
+
+		morph->mMorphTime.SetIsLoop(true);
+		morph->mMorphTime.Add(0.0f, 0.0f);
+		morph->mMorphTime.Add(1.0f, 1.0f);
+		morph->mMorphTime.Add(2.0f, 1.0f);
+		morph->mMorphTime.Add(3.0f, 0.0f);
+		morph->mMorphTime.Add(4.0f, 0.0f);
+
+
+		//Transform
+		lObject->GetTransform().mPosition = Vector3(10.0f, 0.0f, 0.0f);
+	}
+
+	{
+		//	球の読み込み
+		//
 		StaticTangentMeshModelCPU lBampMeshCPU;
 		PathString lFilePath("./Cube/cube.pmo");
 		BufferToMesh::Load(lBampMeshCPU, lFilePath);
@@ -472,12 +517,16 @@ void MyGame::Init() {
 		//	ゲームオブジェクトの作成
 		//
 		GameObject* lObject = new GameObject;
-		lObject->SetName("Box");
+		lObject->SetName("Cube");
 		lObject->AddComponent<StaticTangentModelRenderer>();
 		lObject->GetComponent<StaticTangentModelRenderer>()->model = bampModel;
 		lObject->AddComponent<AutoRotateComponent>();
 		lObject->GetComponent<AutoRotateComponent>()->SetRotateSpeed(Quaternion::FromAxis(Vector3::Up(), ToRad(-45.0f)));
+
+		lObject->GetTransform().mPosition = Vector3(-10.0f, 0.0f, 0.0f);
 	}
+
+
 
 	///*
 	{
@@ -614,7 +663,7 @@ void MyGame::Update() {
 	if (d.second % 10 == 0) {
 		if (isAnimation == false) {
 			isAnimation = true;
-			GameObject::Find("Box")->GetTransform().mRotation = Quaternion();
+			GameObject::Find("Cube")->GetTransform().mRotation = Quaternion();
 		}
 	}
 }

@@ -606,6 +606,12 @@
     <ClInclude Include="..\..\Source\Pot\Out\Standard\outStandard.h">
       <Filter>Source\Pot\Out\Standard</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Pot\Game\staticModelRenderer.h">
+      <Filter>Source\Pot\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cycle\morphComponent.h">
+      <Filter>Source\Cycle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Pot\Input\XInput\inputXInput.cpp">

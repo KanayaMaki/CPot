@@ -702,5 +702,11 @@
     <None Include="..\..\Env\simple.vert">
       <Filter>Shader</Filter>
     </None>
+    <None Include="..\..\Env\lambert.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="..\..\Env\lambert.vert">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
