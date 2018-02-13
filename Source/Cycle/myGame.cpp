@@ -294,9 +294,9 @@ void MyGame::Init() {
 
 	openGL::ShaderData::S().Regist("Lambert",
 	{
-		{ "toon.vert" },
+		{ "lambert.vert" },
 		{ "" },
-		{ "toon.frag" },
+		{ "lambert.frag" },
 		lInputLayout
 	});
 
@@ -663,7 +663,6 @@ void MyGame::Update() {
 	if (d.second % 10 == 0) {
 		if (isAnimation == false) {
 			isAnimation = true;
-			GameObject::Find("Cube")->GetTransform().mRotation = Quaternion();
 		}
 	}
 }
