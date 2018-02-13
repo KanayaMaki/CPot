@@ -176,10 +176,16 @@ void MyGame::Setting() {
 	Vector2 lScreenSize = Vector2(1920.0f, 1080.0f) / 3.0f;
 	cpot::Config::S().SetScreenSize(lScreenSize);
 
+	#ifdef CPOT_ON_WINDOWS
+
 	#ifdef CPOT_ON_DIRECTX11
-	Config::S().SetTitle("DirectX11 Game!");
+	Config::S().SetTitle("Windows + DirectX11 Game!");
 	#elif defined CPOT_ON_OPENGL
-	Config::S().SetTitle("OpenGL Game!");
+	Config::S().SetTitle("Windows + OpenGL Game!");
+	#endif
+
+	#elif defined CPOT_ON_LINUX
+	Config::S().SetTitle("Linux + OpenGL Game!");
 	#endif
 }
 
