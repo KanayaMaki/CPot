@@ -489,6 +489,7 @@ void MyGame::Init() {
 
 		for (u32 i = 0; i < lMeshCPU.vertex.GetSize(); i++) {
 			morph->mAfter[i].position = ((morph->mAfter[i].position - Vector3(0.0f, 0.0f, 0.0f)).NormalSafe() * 10.0f);
+			morph->mAfter[i].normal = morph->mAfter[i].position.NormalSafe();
 		}
 
 		morph->mMorphTime.SetIsLoop(true);

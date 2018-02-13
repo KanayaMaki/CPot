@@ -28,6 +28,7 @@ public:
 		for (u32 i = 0; i < mNow.GetSize(); i++) {
 			f32 t = mMorphTime.Get();
 			mNow[i].position = Lerp(mBefore[i].position, mAfter[i].position, t);
+			mNow[i].normal = Lerp(mBefore[i].normal, mAfter[i].normal, t).NormalSafe();
 		}
 
 		GetComponent<StaticModelRenderer>()->model->mesh.vertex->Write(&mNow[0]);
