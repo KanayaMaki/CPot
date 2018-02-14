@@ -582,7 +582,7 @@ void MyGame::Update() {
 	//ゲーム終了
 	#pragma region GameEnd
 
-	if (Input::GetButtonDown(windows::cEsc)) {
+	if (Input::GetButtonDown(cEsc)) {
 		Config::S().SetGameEnd();
 	}
 
@@ -592,17 +592,17 @@ void MyGame::Update() {
 	//サウンド
 	#pragma region Audio
 
-	if (Input::GetButtonDown(windows::c1)) {
+	if (Input::GetButtonDown(c1)) {
 		if (!voice) {
 			voice = ResourceList<AudioVoice>::S().Find("test");
 		}
 		voice->Play();
 	}
-	if (Input::GetButtonDown(windows::c6)) {
+	if (Input::GetButtonDown(c6)) {
 		voice->Stop();
 	}
 
-	if (Input::GetButtonDown(windows::c7)) {
+	if (Input::GetButtonDown(c7)) {
 		voice = nullptr;
 	}
 
@@ -617,7 +617,7 @@ void MyGame::Update() {
 
 	static cpot::BOOL lLoading = false;
 
-	if (Input::GetButtonDown(windows::c2)) {
+	if (Input::GetButtonDown(c2)) {
 		lLoading = true;
 
 		for (u32 i = 0; i < 5; i++) {
