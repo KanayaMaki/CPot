@@ -169,7 +169,7 @@ std::shared_ptr<Rasterizer> toonLineRasterizer;
 
 Animation<Vector3> positionAnimation;
 Animation<Quaternion> rotationAnimation;
-bool isAnimation = false;
+bool isAnimation = true;
 
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
@@ -495,9 +495,9 @@ void MyGame::Init() {
 		morph->mMorphTime.SetIsLoop(true);
 		morph->mMorphTime.Add(0.0f, 0.0f);
 		morph->mMorphTime.Add(1.0f, 1.0f);
-		morph->mMorphTime.Add(2.0f, 1.0f);
+		morph->mMorphTime.Add(1.5f, 1.0f);
+		morph->mMorphTime.Add(2.5f, 0.0f);
 		morph->mMorphTime.Add(3.0f, 0.0f);
-		morph->mMorphTime.Add(4.0f, 0.0f);
 
 
 		//Transform
