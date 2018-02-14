@@ -638,7 +638,7 @@ void MyGame::Update() {
 
 
 	//カーソル移動
-	if (Input::GetButton(windows::cL)) {
+	if (Input::GetButton(cL)) {
 		//windows::Window::S().SetCursorPos(Vector2(100.0f, 100.0f));
 	}
 
@@ -674,9 +674,9 @@ void MyGame::Update() {
 	}
 
 	//もし10秒の倍数の時間なら、アニメーションをスタート
-	DateTimeData d = DateTime().Get();
-	if (d.second % 10 == 0) {
-		if (isAnimation == false) {
+	if (isAnimation == false) {
+		DateTimeData d = DateTime().Get();
+		if (d.second % 10 == 0) {
 			isAnimation = true;
 		}
 	}
