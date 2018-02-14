@@ -10,16 +10,89 @@
 
 namespace cpot {
 
+enum CPointIndex {
+	cLeftBottom,
+	cLeftTop,
+	cRightBottom,
+	cRightTop,
+	cPointIndexMax,
+};
+
+struct Rect2D {
+
+	Rect2D() {
+		mCenter = Vector2(0.0f, 0.0f);
+		mSize = Vector2(0.0f, 0.0f);
+		mRotRad = 0.0f;
+	}
+
+	Rect2D(const Vector2& aCenter, const Vector2& aSize) {
+		*this = FromCenter(aCenter, aSize);
+	}
+	Rect2D(const Vector2& aCenter, const Vector2& aSize, f32 aRotDeg) {
+		*this = FromCenter(aCenter, aSize, aRotDeg);
+	}
+
+	static Rect2D FromCenter(const Vector2& aCenter, const Vector2& aSize) {
+		return FromCenter(aCenter, aSize, 0.0f);
+	}
+	static Rect2D FromCenter(const Vector2& aCenter, const Vector2& aSize, f32 aRotDeg) {
+		Rect2D lRes;
+		lRes.mCenter = aCenter;
+		lRes.mSize = aSize;
+		lRes.mRotRad = ToRad(aRotDeg);
+		return lRes;
+	}
+
+	static Rect2D FromLeftBottom(const Vector2& aLeftBottom, const Vector2& aSize) {
+		return FromCenter(aLeftBottom + aSize / 2.0f, aSize, 0.0f);
+	}
+
+
+	Rect2D operator *(const Vector2& aScale) const {
+		Rect2D lRes = *this;
+		lRes *= aScale;
+		return lRes;
+	}
+	Rect2D& operator *=(const Vector2& aScale) {
+		mSize *= aScale;
+	}
+
+	Rect2D operator +(const Vector2& aValue) const {
+		Rect2D lRes = *this;
+		lRes += aValue;
+		return lRes;
+	}
+	Rect2D& operator +=(const Vector2& aValue) {
+		mCenter += aValue;
+	}
+
+	Vector2 GetPoint(CPointIndex aIndex) const {
+		CPOT_ASSERT(0 <= aIndex && aIndex < cPointIndexMax);
+		Vector2 lOffset;
+		switch (aIndex) {
+			case cLeftBottom:
+				lOffset = Vector2(-0.5f, -0.5f);
+				break;
+			case cLeftTop:
+				lOffset = Vector2(-0.5f, 0.5f);
+				break;
+			case cRightBottom:
+				lOffset = Vector2(0.5f, -0.5f);
+				break;
+			case cRightTop:
+				lOffset = Vector2(0.5f, 0.5f);
+				break;
+		}
+		return mCenter + Quaternion::ZAxis(mRotRad).Rotate(mSize * lOffset);
+	}
+
+	Vector2 mCenter;
+	Vector2 mSize;
+	f32 mRotRad;
+};
 
 struct Quad2D {
-	enum CPointIndex {
-		cLeftBottom,
-		cLeftTop,
-		cRightBottom,
-		cRightTop,
-		cPointIndexMax,
-	};
-
 	Vector2 GetPoint(CPointIndex aIndex) const {
 		CPOT_ASSERT(0 <= aIndex && aIndex < cPointIndexMax);
 		return point[aIndex];
@@ -28,17 +101,11 @@ struct Quad2D {
 		CPOT_ASSERT(0 <= aIndex && aIndex < cPointIndexMax);
 		point[aIndex] = aPoint;
 	}
-	void SetRect(const Vector2& aBase, const Vector2& aSize) {
-		point[cLeftBottom] = aBase + Vector2(0.0f, 0.0f);
-		point[cLeftTop] = aBase + Vector2(0.0f, aSize.y);
-		point[cRightBottom] = aBase + Vector2(aSize.x, 0.0f);
-		point[cRightTop] = aBase + Vector2(aSize.x, aSize.y);
-	}
-	void SetRectFromCenter(const Vector2& aBase, const Vector2& aSize) {
-		point[cLeftBottom] = aBase + Vector2(-aSize.x, -aSize.y) / 2.0f;
-		point[cLeftTop] = aBase + Vector2(-aSize.x, aSize.y) / 2.0f;
-		point[cRightBottom] = aBase + Vector2(aSize.x, -aSize.y) / 2.0f;
-		point[cRightTop] = aBase + Vector2(aSize.x, aSize.y) / 2.0f;
+	void SetRect(const Rect2D& aRect) {
+		point[cLeftBottom] = aRect.GetPoint(cLeftBottom);
+		point[cLeftTop] = aRect.GetPoint(cLeftTop);
+		point[cRightBottom] = aRect.GetPoint(cRightBottom);
+		point[cRightTop] = aRect.GetPoint(cRightTop);
 	}
 	
 	Quad2D operator *(const Vector2& aValue) const {
@@ -52,13 +119,13 @@ struct Quad2D {
 		return *this;
 	}
 
-	Quad2D operator -(const Vector2& aValue) const {
+	Quad2D operator +(const Vector2& aValue) const {
 		Quad2D q(*this);
-		return q -= aValue;
+		return q += aValue;
 	}
-	Quad2D operator -=(const Vector2& aValue) {
+	Quad2D operator +=(const Vector2& aValue) {
 		for (u32 i = 0; i < cPointIndexMax; i++) {
-			point[i] -= aValue;
+			point[i] += aValue;
 		}
 		return *this;
 	}

@@ -28,15 +28,15 @@ public:
 	void WriteVertexBuffer() {
 
 		//プロジェクション座標での頂点位置に変換
-		Quad2D lProjQuad = quad * (Vector2::One() / Config::S().GetScreenSize()) * Vector2().XY(2.0f) - Vector2().XY(1.0f);
+		Quad2D lProjQuad = quad * (Vector2::One() / Config::S().GetScreenSize()) * Vector2().XY(2.0f) + -Vector2().XY(1.0f);
 		const f32 lProjZLoc = 0.0f;
 
 		//書き込むデータの作成
 		StaticMeshVertex lVertex[]{
-			{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cLeftBottom)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
-			{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cLeftTop)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
-			{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cRightBottom)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
-			{ Vector3().XY(lProjQuad.GetPoint(Quad2D::cRightTop)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
+			{ Vector3().XY(lProjQuad.GetPoint(cLeftBottom)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 0.0f, 1.0f } },
+			{ Vector3().XY(lProjQuad.GetPoint(cLeftTop)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 0.0f, 0.0f } },
+			{ Vector3().XY(lProjQuad.GetPoint(cRightBottom)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 1.0f, 1.0f } },
+			{ Vector3().XY(lProjQuad.GetPoint(cRightTop)).Z(lProjZLoc),{ 0.0f, 0.0f, -1.0f },{ 1.0f, 0.0f } },
 		};
 		//書き込み
 		vertexBuffer->Write(lVertex);
@@ -45,7 +45,8 @@ public:
 private:
 	void LoadVertexBuffer() {
 		//頂点座標の初期化
-		quad.SetRect(Vector2::Zero(), Config::S().GetScreenSize());
+		Rect2D lRect = Rect2D::FromLeftBottom(Vector2::Zero(), Config::S().GetScreenSize());
+		quad.SetRect(lRect);
 
 		vertexBuffer = std::make_shared<VertexBuffer>();
 		vertexBuffer->Load(sizeof(StaticMeshVertex), 4, nullptr, true);

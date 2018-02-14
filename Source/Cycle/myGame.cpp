@@ -170,6 +170,7 @@ std::shared_ptr<Rasterizer> toonLineRasterizer;
 Animation<Vector3> positionAnimation;
 Animation<Quaternion> rotationAnimation;
 bool isAnimation = true;
+f32 spriteRotDeg = 0.0f;
 
 
 //CPOTを初期化する前の段階で呼ばれる。画面サイズなどの設定を行う
@@ -640,6 +641,19 @@ void MyGame::Update() {
 	if (Input::GetButton(windows::cL)) {
 		//windows::Window::S().SetCursorPos(Vector2(100.0f, 100.0f));
 	}
+
+
+	//スプライトの回転
+	if (Input::GetButton(c5)) {
+		spriteRotDeg += DeltaTime() * 360.0f / 5.0f;
+	}
+	else {
+		spriteRotDeg = 0.0f;
+	}
+
+	GameObject::Find("Sprite")->GetComponent<SpriteRenderer>()->sprite.quad.SetRect(
+		Rect2D::FromCenter(Config::S().GetScreenSize() / 2.0f, Config::S().GetScreenSize(), spriteRotDeg));
+	
 
 
 	//ミクのモデルの移動
